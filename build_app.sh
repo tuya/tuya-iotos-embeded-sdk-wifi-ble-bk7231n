@@ -38,6 +38,7 @@ ROOT_DIR=$(pwd)
 if [ ! -d platforms/$TARGET_PLATFORM ]; then
     if [ -n "$TARGET_PLATFORM_REPO" ]; then
         # download toolchain
+        mkdir -p platforms
         cd platforms
         wget $TARGET_PLATFORM_REPO 
         unzip -o ${TARGET_PLATFORM}_${TARGET_PLATFORM_VERSION}.zip
