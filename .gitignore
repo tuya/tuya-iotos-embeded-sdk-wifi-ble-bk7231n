@@ -1,0 +1,15 @@
+*.o
+*.d
+*.map
+*.nmap
+*.asm
+*.axf
+*.bin
+platforms/bk7231n/bk7231n_os/Debug
+platforms/bk7231n/bk7231n_os/tools/generate/config.json
+platforms/bk7231n/bk7231n_os/tools/generate/*.cpr
+platforms/bk7231n/bk7231n_os/tools/generate/*.out
+platforms/bk7231n/bk7231n_os/tools/generate/*.bin
+!platforms/bk7231n/bk7231n_os/tools/generate/bootloader.bin
+!platforms/bk7231n/bk7231n_os/tools/generate/bootloader_enc.bin
+!platforms/bk7231n/bk7231n_os/tools/generate/package.bin
