@@ -129,6 +129,8 @@ STATIC VOID wifi_key_process(TY_GPIO_PORT_E port,PUSH_KEY_TYPE_E type,INT_T cnt)
 STATIC VOID wifi_config_init(VOID)
 {
     OPERATE_RET op_ret = OPRT_OK;
+    
+    PR_DEBUG("WIFI INIT TEST");
 
     /* LED 相关初始化 */ 
     op_ret = tuya_create_led_handle(WIFI_LED_PIN, TRUE, &wifi_led_handle);
