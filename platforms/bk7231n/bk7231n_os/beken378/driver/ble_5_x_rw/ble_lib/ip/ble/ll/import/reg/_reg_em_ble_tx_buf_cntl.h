@@ -1,0 +1,10 @@
+#ifndef __REG_EM_BLE_TX_BUF_CNTL_H_
+#define __REG_EM_BLE_TX_BUF_CNTL_H_
+
+#define REG_EM_BLE_TX_BUF_CNTL_SIZE 38
+
+#define REG_EM_BLE_TX_BUF_CNTL_BASE_ADDR 0x00910000
+
+
+#endif // __REG_EM_BLE_TX_BUF_CNTL_H_
+

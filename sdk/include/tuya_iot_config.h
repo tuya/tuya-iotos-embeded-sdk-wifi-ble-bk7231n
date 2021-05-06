@@ -51,11 +51,11 @@ extern "C" {
 #define GW_ROKIDK18     6
 
 /* custom settings */
-#define BUILD_DATE    "2021_04_10"
-#define BUILD_TIME    "19_40_07"
+#define BUILD_DATE    "2021_04_22"
+#define BUILD_TIME    "21_52_24"
 #define GIT_USER    "embed"
 #define IOT_SDK_VER    "2.3.1"
-#define SDK_BETA_VER    "beta.158"
+#define SDK_BETA_VER    "2.3.1"
 #define PROJECT_NAME    "ty_iot_sdk"
 #define TARGET_PLATFORM    "bk7231n"
 #define KV_KEY_SEED    "8710_2M"
