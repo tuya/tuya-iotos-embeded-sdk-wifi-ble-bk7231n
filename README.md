@@ -23,7 +23,7 @@ Features of Tuya IoTOS embedded SDK
 Some package dependencies need to be installed before compiling.
 #### Debian/Ubuntu
 ``` bash
-$ sudo apt-get install wget git python libc6-i386 
+$ sudo apt-get install build-essential wget git python libc6-i386 
 ```
 
 

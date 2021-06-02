@@ -23,7 +23,7 @@ Tuya IoTOS Embeded SDK WiFi & BLE for BK7231N
 在编译前需要安装部分软件包依赖:
 #### Debian/Ubuntu
 ``` bash
-$ sudo apt-get install wget git python libc6-i386 
+$ sudo apt-get install build-essential wget git python libc6-i386 
 ```
 
 
