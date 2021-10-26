@@ -125,6 +125,8 @@ extern int  ty_cJSON_IsObject( const ty_cJSON * object );
 extern int  ty_cJSON_IsArray( const ty_cJSON * object );
 extern int  ty_cJSON_IsString( const ty_cJSON * object );
 extern int  ty_cJSON_IsNumber( const ty_cJSON * object );
+extern int  ty_cJSON_IsBool( const ty_cJSON * object );
+
 
 
 /* Macros for creating things quickly. */

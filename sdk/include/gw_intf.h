@@ -365,6 +365,8 @@ typedef struct {
     BOOL_T is_oem; // is oem?
     BOOL_T is_init; // has inited?
     BOOL_T is_stride;  //stride pid or key
+    /** Is need recovery or not */
+    BOOL_T is_need_recovery;
 
 #if TY_SECURITY_CHIP
     GW_AUTH_INFO_S secu_auth_info;
@@ -397,6 +399,7 @@ typedef struct {
     #endif
     TM_MSG_S *tmm_gw_register;
     TM_MSG_S *tmm_gw_actv;
+    TM_MSG_S *tmm_gw_update_info;
 	TM_MSG_S *tmm_gw_pskkey_get;
     TM_MSG_S *tmm_gw_if_sync;
     TM_MSG_S *tmm_dev_bind;

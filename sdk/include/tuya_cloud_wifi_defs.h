@@ -30,6 +30,7 @@ typedef BYTE_T GW_WF_START_MODE;
 #define WF_START_AP_FIRST       2   // have both ap-cfg and smart-cfg. default is ap-cfg mode
 #define WF_START_SMART_FIRST    3   // have both ap-cfg and smart-cfg. default is smart-cfg mode
 #define WF_START_SMART_AP_CONCURRENT    4   //  ap-cfg and smart-cfg is concurrent
+#define WF_START_MODE_NULL      15   //  no wifi start mode
 
 /* tuya sdk definition of wifi-config status */
 typedef BYTE_T GW_WF_NWC_STAT_T;

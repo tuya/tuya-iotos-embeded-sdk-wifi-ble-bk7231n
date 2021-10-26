@@ -1,8 +1,13 @@
-/***********************************************************
-*  File: uni_slist.h
-*  Author: nzy
-*  Date: 180803
-***********************************************************/
+/**
+ * @file uni_slist.h
+ * @brief tuya sigle list module
+ * @version 1.0
+ * @date 2019-10-30
+ * 
+ * @copyright Copyright (c) tuya.inc 2019
+ * 
+ */
+
 #ifndef _UNI_SLIST_H
 #define _UNI_SLIST_H
 
@@ -12,55 +17,83 @@
 extern "C" {
 #endif
 
-#ifdef _UNI_SLIST_GLOBAL
-    #define _UNI_SLIST_EXT 
-#else
-    #define _UNI_SLIST_EXT extern
-#endif
-
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
+/**
+ * @brief sigle list head
+ * 
+ */
 typedef struct slist_head {
     struct slist_head *next;
 }SLIST_HEAD;
 
-// 定义LIST并静态初始化一个空的通用双向链表
+/**
+ * @brief define a sigle list head and initialize to empty
+ * 
+ */
 #define SLIST_HEAD(name) \
 SLIST_HEAD name = {NULL}
 
-// 动态初始化一个空的通用双向链表
+/**
+ * @brief sigle list head initialization
+ * 
+ */
 #define INIT_SLIST_HEAD(ptr) do { \
     (ptr)->next = NULL; \
 } while (0)
 
+/**
+ * @brief new a sigle list head, will call Malloc
+ * 
+ */
 #define NEW_SLIST_NODE(type,node) \
 {\
     node = (type *)Malloc(sizeof(type));\
 }
 
+/**
+ * @brief cast the slist entry to special type 
+ * 
+ */
 #define SLIST_ENTRY(ptr, type, member) CNTR_OF(ptr,type,member)
 
-// 遍历链表
+/**
+ * @brief traverse each object of the sigle list, cannot change the sigle list
+ * 
+ */
 #define SLIST_FOR_EACH_ENTRY(tpos, type, pos, list, member) \
     for (pos = (list)->next;                     \
          pos && (tpos = SLIST_ENTRY(pos, type, member), 1); \
          pos = pos->next)
 
+/**
+ * @brief traverse each object of the sigle list, you can add or del the object during traverse
+ * 
+ */
 #define SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member) \
     for (pos = (list)->next; \
          pos && (n = pos->next, 1) && \
         (tpos = SLIST_ENTRY(pos, type, member), 1); \
          pos = n)
 
+/**
+ * @brief traverse each node of the sigle list, cannot change the sigle list
+ * 
+ */
 #define SLIST_FOR_EACH(pos, list) \
     for (pos = (list)->next; pos ; \
          pos = pos->next)
 
+/**
+ * @brief traverse each node of the sigle list, you can add or del the object during traverse
+ * 
+ */
 #define SLIST_FOR_EACH_SAFE(pos, n, list) \
     for (pos = (list)->next; pos && ({ n = pos->next; 1; }); \
          pos = n)
 
+/**
+ * @brief traverse and free each object of the sigle list
+ * 
+ */
 #define FREE_SLIST_SAFE(tpos, type, pos, n, list, member) \
 {\
     type *posnode; \
@@ -71,23 +104,35 @@ SLIST_HEAD name = {NULL}
     } \
 }
 
-/***********************************************************
-*************************variable define********************
-***********************************************************/
-
-/***********************************************************
-*************************function define********************
-***********************************************************/
+/**
+ * @brief sigle list head initialization
+ * 
+ * @param[in] node the sigle list head
+ * @return VOID 
+ */
 STATIC INLINE VOID tuya_init_slist_node(INOUT SLIST_HEAD *node) 
 {
     node->next = NULL;
 } 
 
+/**
+ * @brief check if the sigle list is empty
+ * 
+ * @param[in] list the sigle list head
+ * @return 0 means not empty, others means empty 
+ */
 STATIC INLINE INT_T tuya_slist_empty(IN CONST SLIST_HEAD *list) 
 {
     return !(list->next);
 }
 
+/**
+ * @brief delete the special sigle list node
+ * 
+ * @param[in] list the sigle list head
+ * @param[in] node the node need delete
+ * @return VOID 
+ */
 STATIC INLINE VOID tuya_slist_del(INOUT SLIST_HEAD *list,INOUT SLIST_HEAD *node) 
 {
     SLIST_HEAD *pos = NULL;
@@ -106,14 +151,26 @@ STATIC INLINE VOID tuya_slist_del(INOUT SLIST_HEAD *list,INOUT SLIST_HEAD *node)
     }
 }
 
+/**
+ * @brief add node at head of the sigle list
+ * 
+ * @param[in] list the sigle list head
+ * @param[in] n the new node
+ * @return VOID 
+ */
 STATIC INLINE VOID tuya_slist_add_head(INOUT SLIST_HEAD *list,INOUT SLIST_HEAD *n) 
 {
     n->next = list->next;
     list->next = n;
 }
 
-/* next must be != NULL */
-// insert n before next
+/**
+ * @brief add node at the tail of the sigle list
+ * 
+ * @param[in] list the sigle list head
+ * @param[in] n the new node
+ * @return VOID
+ */
 STATIC INLINE VOID tuya_slist_add_tail(INOUT SLIST_HEAD *list,INOUT SLIST_HEAD *n) 
 {
     SLIST_HEAD *pos = NULL;

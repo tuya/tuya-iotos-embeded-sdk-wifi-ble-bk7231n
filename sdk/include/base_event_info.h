@@ -40,6 +40,7 @@ typedef struct {
 #define EVENT_RESET         "dev.reset"
 #define EVENT_REBOOT_REQ     "dev.reboot.req"
 #define EVENT_REBOOT_ACK     "dev.reboot.ack"
+#define EVENT_RECOVER_DB     "dev.recover.db"    // db is lost, device need recover from cloud
 
 // http
 #define EVENT_HTTP_FAILED   "http.failed"

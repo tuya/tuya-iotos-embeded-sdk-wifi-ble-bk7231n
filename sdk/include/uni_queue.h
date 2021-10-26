@@ -1,175 +1,138 @@
-/***********************************************************
-*  File: uni_queue.h // 通用队列实现
-*  Author: nzy
-*  Date: 121126
-***********************************************************/
+/**
+ * @file uni_queue.h
+ * @brief tuya common queue module
+ * @version 1.0
+ * @date 2019-10-30
+ * 
+ * @copyright Copyright (c) tuya.inc 2019
+ * 
+ */
 #ifndef _UNI_QUEUE_H
 #define _UNI_QUEUE_H
+
 #ifdef __cplusplus
 	extern "C" {
 #endif
 
-
+#include "tuya_error_code.h"
 #include "tuya_os_adapter.h"
 
 
+/**
+ * @brief support reentry prevent
+ * 
+ */
+#define QUEUE_SAFE_FUNC
 
-#define QUEUE_SAFE_FUNC // 是否需要安全版本
-
-#ifdef  __UNI_QUEUE_GLOBALS
-    #define __UNI_QUEUE_EXT
-#else
-    #define __UNI_QUEUE_EXT extern
-#endif
-
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
+/**
+ * @brief queue data structure define
+ * 
+ */
 typedef struct{
-    unsigned int queUnitSize; // 队列队员尺寸
-    unsigned int queTolNum; // 队列可容纳的总的队员
-    unsigned int queCurNum; // 当前队列中队员数
+    unsigned int queUnitSize;   // queue unit size 
+    unsigned int queTolNum;     // queue total unit number
+    unsigned int queCurNum;     // queue current unit number
     
-    unsigned char *queData; // 队列缓冲
-    unsigned char *queIn; // 入队位置
-    unsigned char *queOut; // 出对位置
+    unsigned char *queData;     // queue buffer
+    unsigned char *queIn;       // in queue position
+    unsigned char *queOut;      // out queue position
 
     #ifdef QUEUE_SAFE_FUNC
-    MUTEX_HANDLE mutex;
+    MUTEX_HANDLE mutex;         // safity access prevent reentry
     #endif
 }QUEUE_CLASS,*P_QUEUE_CLASS;
 
+/**
+ * @brief create and initialize a queue 
+ * 
+ * @param[in] queTolNum the total number of the queue
+ * @param[in] queUnitSize the unit size of the queue
+ * @return the queue handle 
+ */
+P_QUEUE_CLASS CreateQueueObj(const unsigned int queTolNum, const unsigned int queUnitSize);
 
-/***********************************************************
-*************************variable define********************
-***********************************************************/
+/**
+ * @brief register a queue, the queue handle and queue buffer malloc from other place
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] pQueData the queue unit buffer
+ * @param[in] queTolNum the total number of queue
+ * @param[in] queUnitSize the unit size of queue
+ * @return 1 on success, 0 on failed
+ * 
+ * @warning this API was NOT USED!!!
+ */
+unsigned char RegisterQueueObj(P_QUEUE_CLASS pQueObj, const unsigned char *pQueData, const unsigned int queTolNum, const unsigned int queUnitSize);
 
-/***********************************************************
-*************************function define********************
-***********************************************************/
-/***********************************************************
-*  Function: CreateQueueObj初始化
-*  Input: queTolNum:队列可容纳的队员数
-*         queUnitSize:队员尺寸
-*  Output: none
-*  Return: NULL:失败
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
-P_QUEUE_CLASS CreateQueueObj(const unsigned int queTolNum,\
-                                    const unsigned int queUnitSize);
+/**
+ * @brief unit inqueue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] pQueUnit the inqueue unit buffer
+ * @param[in] queNum the inqueue unit counts
+ * @return 1 on success, 0 on failed
+ */
+unsigned char InQueue(P_QUEUE_CLASS pQueObj, const unsigned char *pQueUnit, const unsigned int queNum);
 
+/**
+ * @brief unit outqueue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] pQueUnit the outqueue unit buffer
+ * @param[in] queNum the outqueue unit counts
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h 
+ */
+unsigned char OutQueue(P_QUEUE_CLASS pQueObj,unsigned char *pQueUnit, const unsigned int queNum);
 
-/***********************************************************
-*  Function:RegisterQueueObj 队列数据缓冲以及队列管理对象缓冲来自外部注册
-*  Input: pQueObj
-*         queData
-*         queTolNum:队列可容纳的队员数
-*         queUnitSize:队员尺寸
-*  Output: pQueObj
-*  Return: 0:失败
-*  Date: 121127
+/**
+ * @brief get the unit from start postion, not outqueue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] start the outqueue start postion
+ * @param[in] pQueUnit the outqueue unit buffer
+ * @param[in] queNum the outqueue unit counts
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
+ */
+unsigned char GetQueueMember(P_QUEUE_CLASS pQueObj, const unsigned int start, unsigned char *pQueUnit, const unsigned int queNum);
 
-NOT USED !!!
-
-***********************************************************/
-__UNI_QUEUE_EXT \
-unsigned char RegisterQueueObj(P_QUEUE_CLASS pQueObj,\
-                               const unsigned char *pQueData,\
-                               const unsigned int queTolNum,\
-                               const unsigned int queUnitSize);
-
-/***********************************************************
-*  Function: InQueue 入队
-*  Input: pQueObj:队列对象
-*         pQueUnit:队员缓冲 queNum:队员数
-*  Output: none
-*  Return: 0:失败
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
-unsigned char InQueue(P_QUEUE_CLASS pQueObj, const unsigned char *pQueUnit,\
-                         const unsigned int queNum);
-
-/***********************************************************
-*  Function:OutQueue 出队
-*  Input: pQueObj:队列对象
-*         queNum:出队员数
-*  Output: pQueUnit:队员缓冲
-*  Return: 0:失败
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
-unsigned char OutQueue(P_QUEUE_CLASS pQueObj,unsigned char *pQueUnit,\
-                           const unsigned int queNum);
-
-/***********************************************************
-*  Function:GetCurFreeQueNum
-*  Input: none
-*  Output: none
-*  Return: 当前队列可入队数
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
-unsigned int GetCurFreeQueNum(P_QUEUE_CLASS pQueObj);
-
-/***********************************************************
-*  Function:GetCurQueNum
-*  Input: pQueObj
-*  Output: none
-*  Return: 当前入队成员数
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
-unsigned int GetCurQueNum(P_QUEUE_CLASS pQueObj);
-
-/***********************************************************
-*  Function:GetQueueMember 成员出队，但不删除成员
-*  Input: pQueObj:队列对象 
-*         start:从第几个成员开始获取 从一开始(包括获取自身)
-*         pQueUnit:出队成员缓冲
-*         queNum:出队员数
-*  Output: pQueUnit:队员缓冲
-*  Return: 0:失败
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
-unsigned char GetQueueMember(P_QUEUE_CLASS pQueObj,\
-                                    const unsigned int start,\
-                                    unsigned char *pQueUnit,\
-                                    const unsigned int queNum);
-
-/***********************************************************
-*  Function:ClearQueue 清空队列
-*  Input: pQueObj:队列对象
-*         queNum:删除成员数目
-*  Output: none
-*  Return: 0:失败
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
+/**
+ * @brief clear all unit of the queue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h   
+ */
 unsigned char ClearQueue(P_QUEUE_CLASS pQueObj);
 
-/***********************************************************
-*  Function:DelQueueMember 删除队列成员
-*  Input: pQueObj:队列对象
-*         queNum:删除成员数目
-*  Output: none
-*  Return: 0:失败
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
+/**
+ * @brief delete the unit from the queue out position
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] queNum the delete unit counts
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
+ */
 unsigned char DelQueueMember(P_QUEUE_CLASS pQueObj,const unsigned int queNum);
 
-/***********************************************************
-*  Function: ReleaseQueueObj 释放
-*  Input: pQueObj
-*         
-*  Output: none
-*  Return: none
-*  Date: 121127
-***********************************************************/
-__UNI_QUEUE_EXT \
+/**
+ * @brief get the free queue unit number
+ * 
+ * @param[in] pQueObj the queue handle
+ * @return the current free unit counts
+ */
+unsigned int GetCurFreeQueNum(P_QUEUE_CLASS pQueObj);
+
+/**
+ * @brief get the queue unit number 
+ * 
+ * @param[in] pQueObj the queue handle
+ * @return the current unit counts 
+ */
+unsigned int GetCurQueNum(P_QUEUE_CLASS pQueObj);
+
+/**
+ * @brief release the queue
+ * 
+ * @param[in] pQueObj the queue handle
+ */
 void ReleaseQueueObj(P_QUEUE_CLASS pQueObj);
 
 

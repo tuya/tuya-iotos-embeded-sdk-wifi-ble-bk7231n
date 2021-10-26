@@ -72,6 +72,36 @@ OPERATE_RET wd_common_delete(IN CONST CHAR_T *key);
 ***********************************************************/
 OPERATE_RET wd_common_fuzzy_delete(IN CONST CHAR_T *key);
 
+/**
+ * @brief tuya protected storage write entry
+ * 
+ * @param[in] key key of the entry you want to write
+ * @param[in] value value buffer you want to write 
+ * @param[in] len the numbers of byte you want to write
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */
+OPERATE_RET wd_protected_write(IN CONST CHAR_T *key, IN CONST BYTE_T *value, IN CONST UINT_T len);
+
+/**
+ * @brief tuya protected storage read entry
+ * 
+ * @param[in] key  key of the entry you want to read
+ * @param[out] value buffer of the value
+ * @param[out] p_len length of the buffer
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note must free the value buffer with wd_common_free_data when you nolonger need the buffer
+ */
+OPERATE_RET wd_protected_read(IN CONST CHAR_T *key, OUT BYTE_T **value, OUT UINT_T *p_len);
+
+/**
+ * @brief delete the entry from protected storage
+ * 
+ * @param[in] key key of the entry you want to delete
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */
+OPERATE_RET wd_protected_delete(IN CONST CHAR_T *key);
+
 /***********************************************************
 *  Function: wd_user_param_write
 *  Input: data len

@@ -30,8 +30,8 @@ fi
 cd `dirname $0`
 
 TARGET_PLATFORM=bk7231n
-TARGET_PLATFORM_REPO=https://airtake-public-data-1254153901.cos.ap-shanghai.myqcloud.com/smart/embed/pruduct/bk7231n_0.0.3.zip
-TARGET_PLATFORM_VERSION=0.0.3
+TARGET_PLATFORM_REPO=https://airtake-public-data-1254153901.cos.ap-shanghai.myqcloud.com/smart/embed/pruduct/bk7231n_0.0.10.zip
+TARGET_PLATFORM_VERSION=0.0.10
 ROOT_DIR=$(pwd)
 
 # 下载编译环境

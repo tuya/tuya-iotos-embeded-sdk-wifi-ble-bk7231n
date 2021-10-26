@@ -58,6 +58,7 @@ typedef enum {
     TUYA_DRV_ADC,          
     TUYA_DRV_I2C,
     TUYA_DRV_RTC,
+    TUYA_DRV_SPI,
     TUYA_DRV_CUSTOM,
 } tuya_drv_type_t;
 

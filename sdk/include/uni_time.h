@@ -1,7 +1,12 @@
-/*
-uni_time.h
-Copyright(C),2018-2020, 涂鸦科技 www.tuya.comm
-*/
+/**
+ * @file uni_time.h
+ * @brief tuya time module
+ * @version 1.0
+ * @date 2019-10-30
+ * 
+ * @copyright Copyright (c) tuya.inc 2019
+ * 
+ */
 
 #ifndef _UNI_TIME_H
 #define _UNI_TIME_H
@@ -14,13 +19,11 @@ Copyright(C),2018-2020, 涂鸦科技 www.tuya.comm
 extern "C" {
 #endif
 
-#ifdef  __UNI_TIME_GLOBALS
-    #define __UNI_TIME_EXT
-#else
-    #define __UNI_TIME_EXT extern
-#endif
 
-/* tuya sdk definition of struct tm */
+/**
+ * @brief posix time
+ * 
+ */
 typedef struct {
     INT_T tm_sec;     /* seconds [0-59] */
     INT_T tm_min;     /* minutes [0-59] */
@@ -31,186 +34,224 @@ typedef struct {
     INT_T tm_wday;    /* day of the week [0-6] 0-Sunday...6-Saturday */
 }POSIX_TM_S;
 
-/* summer time zone function */
-#define SUM_ZONE_TAB_LMT 6
+/**
+ * @brief summer time zone
+ * 
+ */
 typedef struct {
-    TIME_T posix_min;
-    TIME_T posix_max;
+    TIME_T posix_min;   // summer time start
+    TIME_T posix_max;   // summer time end
 }SUM_ZONE_S;
 
-/***********************************************************
-*  Function: uni_time_init
-*  Desc:     init time-management module
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief number of time zone table
+ * 
+ */
+#define SUM_ZONE_TAB_LMT 6
+
+/**
+ * @brief sum zone info
+ * 
+ */
+typedef struct {
+    UINT_T cnt; //sum zone count
+    SUM_ZONE_S zone[SUM_ZONE_TAB_LMT];//zone info
+}SUM_ZONE_TBL_S;
+
+/**
+ * @brief time-management module initialization
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */
 OPERATE_RET uni_time_init(VOID);
 
-/***********************************************************
-*  Function: uni_mktime
-*  Desc:     change tm to time_t, redefine the std C func mktime
-*  Input:    tm
-*  Return:   the changed time_t
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief change posix time to TIME_T, redefine the std C func mktime
+ * 
+ * @param[in] tm the time in posix time format
+ * @return the time in TIME_T format 
+ */
 TIME_T uni_mktime(IN CONST POSIX_TM_S *tm);
 
-/***********************************************************
-*  Function: uni_gmtime_r
-*  Desc:     change tm_t to tm, redefine the std C func gmtime_r
-*  Input:    tm_t
-*  Output && Return: the changed tm
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief change TIME_T to posix time, redefine the std C func gmtime_r
+ * 
+ * @param[in] tm the time in TIME_T format
+ * @param[out] result the time in posix time format
+ * @return the time in posix time format
+ */
 POSIX_TM_S *uni_gmtime_r(IN CONST TIME_T *tm, OUT POSIX_TM_S *result);
 
-/***********************************************************
-*  Function: uni_time_set
-*  Desc:     update tuya-sdk inside time, tm format
-*  Input:    tm
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_time_set(IN CONST POSIX_TM_S *tm);
-
-/***********************************************************
-*  Function: uni_time_get
-*  Desc:     get tuya-sdk inside time, tm format
-*  Output:   tm
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_time_get(OUT POSIX_TM_S *tm);
-
-/***********************************************************
-*  Function: uni_http_date_to_time
-*  Desc:     change http-GMT format time to time_t
-*  Input:    date: http-GMT format time
-*  Return:   time_t
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief change http-GMT format time to TIME_T
+ * 
+ * @param[in] date http-GMT format time
+ * @return the time in TIME_T format
+ */
 TIME_T uni_http_date_to_time(IN CONST CHAR_T *date);
 
-/***********************************************************
-*  Function: uni_time_set_posix
-*  Desc:     update tuya-sdk inside time, time_t format
-*  Input:    time
-*  Input:    update_source(0:rtc 1:cloud 2:other)
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_time_set_posix(IN CONST TIME_T time, IN CONST INT_T update_source);
-
-__UNI_TIME_EXT \
-TIME_T uni_time_get_cur_posix(VOID);
-
-/***********************************************************
-*  Function: uni_time_check_time_sync
-*  Desc:     check tuya-sdk inside time is synced with tuya-cloud
-*  Return:   OPRT_OK: synced  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief check IoTOS time synchronize status
+ * 
+ * @return OPRT_OK on synchronized. Others on not
+ */
 OPERATE_RET uni_time_check_time_sync(VOID);
 
-/***********************************************************
-*  Function: uni_time_check_time_zone_sync
-*  Desc:     check tuya-sdk inside time zone is synced with tuya-cloud
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief check IoTOS time zone synchronized status
+ * 
+ * @return OPRT_OK on synchronized. Others on not 
+ */
 OPERATE_RET uni_time_check_time_zone_sync(VOID);
 
+/**
+ * @brief set IoTOS UTC time
+ * 
+ * @param[in] tm the new time in posix time format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ */
+OPERATE_RET uni_time_set(IN CONST POSIX_TM_S *tm);
 
-/***********************************************************
-*  Function: uni_time_get_posix
-*  Desc:     get tuya-sdk inside time, time_t format
-*  Return:   time_t
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief set IoTOS UTC time in time_t format
+ * 
+ * @param[in] time the new time in time_t format
+ * @param[in] update_source the source of time (0:rtc 1:cloud 2:other)
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */
+OPERATE_RET uni_time_set_posix(IN CONST TIME_T time, IN CONST INT_T update_source);
+
+/**
+ * @brief get IoTOS UTC time in posix time format
+ * 
+ * @param[out] tm the IoTOS UTC time in posix time format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ */
+OPERATE_RET uni_time_get(OUT POSIX_TM_S *tm);
+
+/**
+ * @brief get IoTOS UTC time in TIME_T format
+ * 
+ * @return the current second time in TIME_T format 
+ */
 TIME_T uni_time_get_posix(VOID);
 
-__UNI_TIME_EXT \
+/**
+ * @brief get IoTOS UTC time in SYS_TICK_T format
+ * 
+ * @return the current micro-second time in SYS_TICK_T format 
+ */
 SYS_TICK_T uni_time_get_posix_ms(VOID);
-__UNI_TIME_EXT uint32_t uni_time_get_posix_ms_remain_tick(VOID);
 
-/***********************************************************
-*  Function: uni_get_system_time
-*  Desc:     get the system running time
-*  Output:   pSecTime: s pMsTime: ms
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief get IoTOS last synchronized UTC time in TIME_T format
+ * 
+ * @return the time in TIME_T format 
+ */
+TIME_T uni_time_get_cur_posix(VOID);
+
+/**
+ * @brief get IoTOS UTC time remain micro-second time
+ * 
+ * @return the remain micro-second time
+ * 
+ * @note in 32bit process, cannot return 8byte, because the high 4byte will be cut by cpu, we should use:
+ * "uint64_t ms = uni_time_get_posix()*1000ULL + uni_time_get_posix_ms_remain_tick()" to get the micro-seconds
+ */
+uint32_t uni_time_get_posix_ms_remain_tick(VOID);
+
+/**
+ * @brief get IoTOS UTC time, both second and micro-second
+ * 
+ * @param[out] pSecTime the current time in second
+ * @param[out] pMsTime the current time in micro-second
+ * @return VOID 
+ */
 VOID uni_get_system_time(OUT TIME_S *pSecTime,OUT TIME_MS *pMsTime);
 
-/***********************************************************
-*  Function: uni_set_time_zone
-*  Desc:     set tuya-sdk inside timezone
-*  Input:    time_zone: "+/-hh:mm"
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief set IoTOS time zone in "+/-hh:mm" format
+ * 
+ * @param[in] time_zone the new time zone in "+/-hh:mm" format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */
 OPERATE_RET uni_set_time_zone(IN CONST CHAR_T *time_zone);
 
-/***********************************************************
-*  Function: uni_get_time_zone_seconds
-*  Desc:     get tuya-sdk inside timezone, in second format
-*  Output:   time_zone: timezone in second format
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_get_time_zone_seconds(OUT INT_T *time_zone);
-
-
-__UNI_TIME_EXT \
+/**
+ * @brief set IoTOS time zone in second format
+ * 
+ * @param[in] time_zone the new time zone in second format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */
 OPERATE_RET uni_set_time_zone_seconds(IN INT_T time_zone_sec);
 
-/***********************************************************
-*  Function: uni_local_time_get
-*  Desc:     change the current time to tm_s,including the
-*            timezone and the summer time zone info
-*  Output:   tm
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_local_time_get(OUT POSIX_TM_S *tm);
+/**
+ * @brief get IoTOS time zone in second format
+ * 
+ * @param[out] time_zone the current time zone in second format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */
+OPERATE_RET uni_get_time_zone_seconds(OUT INT_T *time_zone);
 
-/***********************************************************
-*  Function: uni_local_time_get_custom
-*  Desc:     change the time_t to tm_s,including the timezone and the summer time zone info
-*  Input:    in_time: if in_time is 0, then in_time = uni_time_get_posix()
-*  Output:   tm
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_local_time_get_custom(IN TIME_T in_time, OUT POSIX_TM_S *tm);
-
-/***********************************************************
-*  Function: uni_sum_time_get
-*  Desc:     change tuya-sdk inside time to tm_s,including the summer time zone info
-*  Output:   tm
-*  Return:   OPRT_OK: success  Other: fail
-***********************************************************/
-__UNI_TIME_EXT \
-OPERATE_RET uni_sum_time_get(OUT POSIX_TM_S *tm);
-
-/***********************************************************
-*  Function: uni_set_sum_zone_tbl
-*  Desc:     update tuya-sdk summer time zone info
-*  Input:    zone cnt
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief set IoTOS summer time zone
+ * 
+ * @param[in] zone the summer time zone table
+ * @param[in] cnt the summer time counts
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 VOID uni_set_sum_zone_tbl(IN CONST SUM_ZONE_S *zone,IN CONST UINT_T cnt);
 
-/***********************************************************
-*  Function: uni_sum_time_get_posix
-*  Input: none
-*  Output: none
-*  Return: TIME_T
-***********************************************************/
-__UNI_TIME_EXT \
+/**
+ * @brief get IoTOS UTC summer time in posix time format
+ * 
+ * @param[out] tm the summer time in posix format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET uni_sum_time_get(OUT POSIX_TM_S *tm);
+
+/**
+ * @brief get IoTOS UTC summer time int TIME_T format 
+ * 
+ * @return the summer time in TIME_T format
+ */
 TIME_T uni_sum_time_get_posix(VOID);
 
-__UNI_TIME_EXT \
+/**
+ * @brief get IoTOS UTC summer time int TIME_T format 
+ * 
+ * @return the summer time in TIME_T format
+ */
 BOOL_T uni_is_in_sum_zone(TIME_T time);
+
+
+/**
+ * @brief get IoTOS local time (local, contains the time zone and summer time zone)
+ * 
+ * @param[out] tm the current local time in posix format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */
+OPERATE_RET uni_local_time_get(OUT POSIX_TM_S *tm);
+
+/**
+ * @brief get IoTOS local time (local, contains the time zone and summer time zone)
+ * 
+ * @param[in] in_time the time need translate
+ * @param[out] tm the local time in posix format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ *
+ * @note if in_time is 0, return the IoTOS local time, otherwise, translate the in_time to
+ * local time
+ */
+OPERATE_RET uni_local_time_get_custom(IN TIME_T in_time, OUT POSIX_TM_S *tm);
+
+/**
+ * @brief get sum zone info
+ * 
+ * @param[out] sum zone info
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */
+OPERATE_RET tuya_uni_get_sum_zone(OUT SUM_ZONE_TBL_S *sum_zone);
 
 #ifdef __cplusplus
 }

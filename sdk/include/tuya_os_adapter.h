@@ -695,6 +695,10 @@ typedef struct {
 
     /// for restore factor of flash encryption key 
     unsigned int key_restore_addr;
+
+    // for protected data
+    unsigned int protected_addr;
+    unsigned int flash_physical_block_sz;
 } UNI_STORAGE_DESC_S;
 
 

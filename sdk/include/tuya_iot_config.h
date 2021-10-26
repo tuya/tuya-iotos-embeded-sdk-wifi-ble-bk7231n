@@ -51,11 +51,11 @@ extern "C" {
 #define GW_ROKIDK18     6
 
 /* custom settings */
-#define BUILD_DATE    "2021_04_22"
-#define BUILD_TIME    "21_52_24"
+#define BUILD_DATE    "2021_09_14"
+#define BUILD_TIME    "13_24_21"
 #define GIT_USER    "embed"
 #define IOT_SDK_VER    "2.3.1"
-#define SDK_BETA_VER    "2.3.1"
+#define SDK_BETA_VER    "beta.54"
 #define PROJECT_NAME    "ty_iot_sdk"
 #define TARGET_PLATFORM    "bk7231n"
 #define KV_KEY_SEED    "8710_2M"
@@ -89,6 +89,8 @@ extern "C" {
 #define TY_FFS_NETCFG 0
 
 #define TY_PEGASUS_NETCFG 0
+
+// CONFIG_ENABLE_PRODUCT_AUTOTEST is not set
 
 
 //
@@ -145,7 +147,13 @@ extern "C" {
 
 #define ENABLE_AP_FAST_CONNECT 0
 
-// CONFIG_ENABLE_WIFI_PROTECT is not set
+#define ENABLE_WIFI_PROTECT 0
+
+#define KV_PROTECTED_ENABLE 1
+
+// CONFIG_ENABLE_HOMEKIT_ADK is not set
+
+// CONFIG_ENABLE_LWIP is not set
 
 
 

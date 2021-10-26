@@ -79,6 +79,30 @@ OPERATE_RET kvs_fuzzy_delete(IN CONST CHAR_T *fuzzy_name);
  */
 OPERATE_RET kvs_format(VOID);
 
+/**
+ * @brief kvs_protected_write 新建/更新key-value
+ * @param name 要新建/更新的key值
+ * @param data 要写入的value
+ * @param len  value的长度
+ * @return
+ */
+OPERATE_RET kvs_protected_write(IN CONST CHAR_T *name,IN CONST BYTE_T *data,IN CONST UINT_T len);
+
+/**
+ * @brief kvs_protected_read 读取key-value, key要完全匹配
+ * @param name 要读取的key
+ * @param data 要读取的value
+ * @param len  value的长度
+ * @return
+ */
+OPERATE_RET kvs_protected_read(IN CONST CHAR_T *name,OUT BYTE_T **data,OUT UINT_T *len);
+
+/**
+ * @brief kvs_protected_delete 删除一个key-value, key要完全匹配
+ * @param name 要删除的key
+ * @return
+ */
+OPERATE_RET kvs_protected_delete(IN CONST CHAR_T *name);
 
 #ifdef __cplusplus
 }

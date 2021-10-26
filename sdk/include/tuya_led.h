@@ -1,30 +1,29 @@
-/***********************************************************
-*  File: tuya_led.h
-*  Author: nzy
-*  Date: 20171117
-***********************************************************/
-#ifndef __TUYA_LED_H
-    #define __TUYA_LED_H
+/**
+* @file tuya_led.h
+* @brief TUYA LED interface
+* @version 0.1
+* @date 2017-11-17
+*
+* @copyright Copyright 2019-2021 Tuya Inc. All Rights Reserved.
+*/
 
-    #include "tuya_cloud_types.h"
-    #include "tuya_pin.h"
+#ifndef __TUYA_LED_H
+#define __TUYA_LED_H
+
+#include "tuya_cloud_types.h"
+#include "tuya_pin.h"
 
 #ifdef __cplusplus
-	extern "C" {
-#endif
-
-#ifdef  __TUYA_LED_GLOBALS
-    #define __TUYA_LED_EXT
-#else
-    #define __TUYA_LED_EXT extern
+extern "C" {
 #endif
 
 #define LED_TIMER_UNINIT 0xffff
 
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
 typedef PVOID_T LED_HANDLE; // led handle
+
+/**
+ * @brief Definition of LED output level
+ */
 typedef enum {
     OL_LOW = 0,    // output level low
     OL_HIGH,       // output level high
@@ -34,49 +33,44 @@ typedef enum {
                    // when led flash end,the the level output high.
 }LED_LT_E;
 
-/***********************************************************
-*************************variable define********************
-***********************************************************/
-
-/***********************************************************
-*************************function define********************
-***********************************************************/
-/***********************************************************
-*  Function: tuya_create_led_handle
-*  Input: port
-*         high->default output port high/low
-*  Output: handle
-*  Return: OPERATE_RET
-***********************************************************/
-__TUYA_LED_EXT \
+/**
+ * @brief Create LED instance
+ * 
+ * @param[in] pinname Work state info, see GW_WORK_STAT_MAG_S
+ * @param[in] high Default is high
+ * @param[out] handle Handler of LED instance
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
  OPERATE_RET tuya_create_led_handle(IN CONST tuya_pin_name_t pinname,IN CONST BOOL_T high,OUT LED_HANDLE *handle);
 
- /***********************************************************
-*  Function: tuya_create_led_handle_select
-*  Input: port
-*         high->default output port high/low
-*  Output: handle
-*  Return: OPERATE_RET
-***********************************************************/
-__TUYA_LED_EXT \
+/**
+ * @brief Create LED instance
+ * 
+ * @param[in] pinname Work state info, see GW_WORK_STAT_MAG_S
+ * @param[in] high Default is high
+ * @param[out] handle Handler of LED instance
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_create_led_handle_select(IN CONST tuya_pin_name_t pinname,IN CONST BOOL_T high,OUT LED_HANDLE *handle);
 
-/***********************************************************
-*  Function: tuya_set_led_light_type
-*  Input: handle type flh_mstime 
-*         flh_ms_sumtime->led flash lasttime if(0xffff == flh_ms_sumtime) then flash forever
-*  Output: none
-*  Return: OPERATE_RET
-*  note: if(OL_FLASH_XXX == type) then flh_mstime and flh_ms_sumtime is valid
-***********************************************************/
-__TUYA_LED_EXT \
-VOID tuya_set_led_light_type(IN CONST LED_HANDLE handle,IN CONST LED_LT_E type,\
-                                        IN CONST USHORT_T flh_mstime,IN CONST flh_ms_sumtime);
-
-
+/**
+ * @brief Config LED light flash params
+ * 
+ * @param[in] handle LED handle created by tuya_create_led_handle
+ * @param[in] type LED output type, see LED_LT_E
+ * @param[in] flh_mstime Flash duration (unit ms)
+ * @param[in] flh_ms_sumtime Total flash time (unit ms), 0xFFff indicate forever
+ * 
+ * @note if(OL_FLASH_XXX == type) then flh_mstime and flh_ms_sumtime is valid
+ */
+VOID tuya_set_led_light_type(IN CONST LED_HANDLE handle,IN CONST LED_LT_E type,
+                            IN CONST USHORT_T flh_mstime,IN CONST USHORT_T flh_ms_sumtime);
 
 #ifdef __cplusplus
 }
 #endif
+
 #endif
 

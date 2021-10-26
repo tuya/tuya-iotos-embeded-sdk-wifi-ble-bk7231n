@@ -176,6 +176,14 @@ OPERATE_RET http_gw_custom_cfg_get(IN CONST INT_T biztype, OUT ty_cJSON **result
 
 OPERATE_RET http_gw_location_info_get(OUT ty_cJSON **result);
 
+/**
+ * @brief Register and active a device on TUYA cloud
+ * 
+ * @param[out] result Json encoded result
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET http_gw_get_active_info(OUT ty_cJSON **result);
 
 OPERATE_RET http_dns_by_tuya(IN CONST CHAR_T *p_host_arr[], IN CONST UINT_T arr_size, OUT ty_cJSON **result);
 

@@ -86,7 +86,7 @@ typedef struct {
  */
 int tuya_devos_health_init_and_start(const int watch_dog_interval, const int monitor_detect_interval);
 
-
+int tuya_devos_health_disable(VOID);
 #ifdef __cplusplus
 }
 #endif

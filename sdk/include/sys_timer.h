@@ -129,6 +129,7 @@ extern \
 INT_T sys_get_timer_num(void);
 
 
+OPERATE_RET system_timer_cfg_stack_size(UINT_T stack_size);
 
 #ifdef __cplusplus
 }

@@ -1,3 +1,13 @@
+/**
+ * @file uni_fs.h
+ * @brief tuya file system module
+ * @version 1.0
+ * @date 2019-10-30
+ * 
+ * @copyright Copyright (c) tuya.inc 2019
+ * 
+ */
+
 #ifndef __TUYA_UNI_FS_H__
 #define __TUYA_UNI_FS_H__
 
@@ -11,60 +21,60 @@ extern "C" {
 
 
 /**
- * @brief 创建目录，如果目录存在则忽略错误
+ * @brief create directory, ignore if existed
  * 
- * @param[in]       path        目录的路径
- * @return  0=成功，非0=失败
+ * @param[in]       path        path of the directory 
+ * @return  OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
  */
-int uni_mkdir(const char* path);
+OPERATE_RET uni_mkdir(const char* path);
 
 /**
- * @brief 创建多级目录
+ * @brief create multi-level directory
  * 
- * @param[in]       path        目录的路径
- * @return  0=成功，非0=失败
+ * @param[in]       path        path of the directory 
+ * @return  OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
  */
-int uni_mkdir_all(const char* path);
+OPERATE_RET uni_mkdir_all(const char* path);
 
 /**
- * @brief 删除文件或目录，如果不存在则忽略错误
+ * @brief remove file or directory, ignore if not existed
  * 
- * @param[in]       path        文件或目录的路径
- * @return  0=成功，非0=失败
+ * @param[in]       path        the path of the file or directory
+ * @return  OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
  */
-int uni_remove(const char* path);
+OPERATE_RET uni_remove(const char* path);
 
 /**
- * @brief 判断文件或目录是否存在
+ * @brief check if the file or directory existed
  * 
- * @param[in]       path        文件或目录的路径
- * @return  是否存在
+ * @param[in]       path        the path of the file or directory
+ * @return  TRUE on existed, others on not existed
  */
-bool uni_is_exist(const char* path);
+BOOL_T uni_is_exist(const char* path);
 
 /**
- * @brief 判断文件是否可读
+ * @brief check if the file readable
  * 
- * @param[in]       path        文件的路径
- * @return  是否可读
+ * @param[in]       path        the path of the file
+ * @return  TRUE on readable, others on un-readable
  */
-bool uni_is_readable(const char* path);
+BOOL_T uni_is_readable(const char* path);
 
 /**
- * @brief 判断文件是否可写
+ * @brief check if the file writeable
  * 
- * @param[in]       path        文件的路径
- * @return  是否可写
+ * @param[in]       path        the path of the file
+ * @return  TRUE on writable, others on un-writable
  */
-bool uni_is_writable(const char* path);
+BOOL_T uni_is_writable(const char* path);
 
 /**
- * @brief 判断文件是否可执行
+ * @brief check if the file excuteable
  * 
- * @param[in]       path        文件的路径
- * @return  是否可执行
+ * @param[in]       path        the path of the file
+ * @return  TRUE on excutable, others on un-excutable
  */
-bool uni_is_executable(const char* path);
+BOOL_T uni_is_executable(const char* path);
 
 
 #ifdef __cplusplus

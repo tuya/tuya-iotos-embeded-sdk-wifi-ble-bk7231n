@@ -75,6 +75,10 @@ typedef struct ty_cJSON_Hooks cJSON_Hooks;
 #define cJSON_IsObject ty_cJSON_IsObject
 #define cJSON_GetObjectItemCaseSensitive ty_cJSON_GetObjectItemCaseSensitive
 #define cJSON_IsString ty_cJSON_IsString
+#define cJSON_IsNumber ty_cJSON_IsNumber
+#define cJSON_IsBool ty_cJSON_IsBool
+
+
 
 #define cJSON_AddNullToObject(object,name)		ty_cJSON_AddItemToObject(object, name, ty_cJSON_CreateNull())
 #define cJSON_AddTrueToObject(object,name)		ty_cJSON_AddItemToObject(object, name, ty_cJSON_CreateTrue())

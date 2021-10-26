@@ -1,8 +1,12 @@
-/***********************************************************
-*  File: uni_pointer.h
-*  Author: nzy
-*  Date: 120427
-***********************************************************/
+/**
+ * @file uni_pointer.h
+ * @brief tuya bidirection list module
+ * @version 1.0
+ * @date 2019-10-30
+ * 
+ * @copyright Copyright (c) tuya.inc 2019
+ * 
+ */
 #ifndef _UNI_POINTER_H
 #define _UNI_POINTER_H
 
@@ -13,38 +17,44 @@
 extern "C" {
 #endif
 
-#ifdef _UNI_POINTER_GLOBAL
-    #define _UNI_POINTER_EXT 
-#else
-    #define _UNI_POINTER_EXT extern
-#endif
-
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
+/**
+ * @brief bidirection list head
+ * 
+ */
 typedef struct tuya_list_head 
 {
     struct tuya_list_head *next, *prev;
 }LIST_HEAD,*P_LIST_HEAD;
 
+/**
+ * @brief define and initialize bidirection list head
+ * 
+ */
 #define LIST_HEAD_INIT(name) { &(name), &(name) }
-
-// 定义LIST并静态初始化一个空的通用双向链表
 #define LIST_HEAD(name) \
 LIST_HEAD name = LIST_HEAD_INIT(name)
 
-// 动态初始化一个空的通用双向链表
+/**
+ * @brief bidirection list initialization
+ * 
+ */
 #define INIT_LIST_HEAD(ptr) do { \
 (ptr)->next = (ptr); (ptr)->prev = (ptr); \
 } while (0)
 
-// 动态分配一个包含通用双向链表的结构体
+/**
+ * @brief create a new bidirection list, will call malloc
+ * 
+ */
 #define NEW_LIST_NODE(type, node) \
 {\
     node = (type *)Malloc(sizeof(type));\
 }
 
-// 释放链表中的所有节点，使该链表成为空链表
+/**
+ * @brief free all objects in the bidirection list
+ * 
+ */
 #define FREE_LIST(type, p, list_name)\
 {\
     type *posnode;\
@@ -55,7 +65,10 @@ LIST_HEAD name = LIST_HEAD_INIT(name)
     }\
 }
 
-// 获取链表中第一个节点地址(该地址指向其主结构)
+/**
+ * @brief get the first object of the bidirection list
+ * 
+ */
 #define GetFirstNode(type,p,list_name,pGetNode)\
 {\
     pGetNode = NULL;\
@@ -65,63 +78,105 @@ LIST_HEAD name = LIST_HEAD_INIT(name)
     }\
 }
 
-// 从链中删除某节点，并释放该节点所在结构占用的内存
+/**
+ * @brief remove the object from bidirection list and free the memory
+ * 
+ * @note the pDelNode must be the object pointer
+ */
 #define DeleteNodeAndFree(pDelNode,list_name)\
 {\
     tuya_list_del(&(pDelNode->list_name));\
     Free(pDelNode);\
 }
 
-// 仅从链中删除某节点
+/**
+ * @brief remove the object from the bidirection list
+ * 
+ */
 #define DeleteNode(pDelNode,list_name)\
 {\
     tuya_list_del(&(pDelNode->list_name));\
 }
 
-// 释放链表内存
+/**
+ * @brief free the object in bidirection list
+ * 
+ */
 #define FreeNode(pDelNode)\
 {\
     Free(pDelNode);\
 }
 
-
-// 获取包含该通用链表节点的结构体的首址
+/**
+ * @brief cast the bidirection list node to object
+ * 
+ */
 #define tuya_list_entry(ptr, type, member) \
 ((type *)((char *)(ptr)-(size_t)(&((type *)0)->member)))
 
-// 遍历链表
+/**
+ * @brief traverse the bidirection list, cannot change the bidiretion list during traverse
+ * 
+ */
 #define tuya_list_for_each(pos, head) \
 for (pos = (head)->next; (pos != NULL) && (pos != (head)); pos = pos->next)
 
-// 遍历链表，可以在遍历的过程中修改
+/**
+ * @brief traverse the bidirection list, can change the bidiretion list during traverse
+ * 
+ */
 #define tuya_list_for_each_safe(p, n, head) \
 for (p = (head)->next; n = p->next, p != (head); p = n)
 
-
-
-/***********************************************************
-*************************variable define********************
-***********************************************************/
-
-/***********************************************************
-*************************function define********************
-***********************************************************/
-_UNI_POINTER_EXT \
+/**
+ * @brief check if the bidirection list is empty
+ * 
+ * @param[in] pHead the bidirection list
+ * @return 0 means empty, others means empty
+ */
 INT_T tuya_list_empty(IN CONST P_LIST_HEAD pHead);
 
-_UNI_POINTER_EXT \
+/**
+ * @brief add new list node into bidirection list
+ * 
+ * @param[in] pNew the new list node
+ * @param[in] pHead the bidirection list
+ * @return VOID 
+ */
 VOID tuya_list_add(IN CONST P_LIST_HEAD pNew, IN CONST P_LIST_HEAD pHead);
 
-_UNI_POINTER_EXT \
+/**
+ * @brief add new list node to the tail of the bidirection list
+ * 
+ * @param[in] pNew the new list node
+ * @param[in] pHead the bidirection list
+ * @return VOID 
+ */
 VOID tuya_list_add_tail(IN CONST P_LIST_HEAD pNew, IN CONST P_LIST_HEAD pHead);
 
-_UNI_POINTER_EXT \
+/**
+ * @brief splice two dibrection list
+ * 
+ * @param[in] pList the bidirection list need to splice
+ * @param[in] pHead the bidirection list
+ * @return VOID 
+ */
 VOID tuya_list_splice(IN CONST P_LIST_HEAD pList, IN CONST P_LIST_HEAD pHead);
 
-_UNI_POINTER_EXT \
+/**
+ * @brief remove a list node from bidirection list
+ * 
+ * @param[in] pEntry the list node need to remove
+ * @return VOID 
+ */
 VOID tuya_list_del(IN CONST P_LIST_HEAD pEntry);
 
-_UNI_POINTER_EXT \
+/**
+ * @brief remove a list node from bidirection list and initialize it
+ * 
+ * @param[in] pEntry the list node need to remove and initialize
+ * @return VOID 
+ */
 VOID tuya_list_del_init(IN CONST P_LIST_HEAD pEntry);
 
 #ifdef __cplusplus

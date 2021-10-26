@@ -37,6 +37,8 @@ typedef enum {
     LOGSEQ_HTTP_RECV_DECODE         = 34,   // 类型：错误码，值：HTTP解密失败，位置：__httpc_gw_common_cb
     LOGSEQ_HTTP_RECV_CONTENT        = 35,   // 类型：错误码，值：HTTP内容错误，位置：NULL
     LOGSEQ_HTTP_RECV_DATA           = 36,   // 类型：错误码，值：HTTP错误数据，位置：NULL
+
+    LOGSEQ_HTTP_DB_RECOVERY         = 100,  // 类型：错误码，值：KV被破坏并恢复，位置：NULL
 }HTTP_LOG_SEQ_E;
 
 #endif
