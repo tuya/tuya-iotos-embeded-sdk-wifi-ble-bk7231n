@@ -22,6 +22,7 @@ enum
     CMD_PWM_GROUP_ENABLE,
     CMD_PWM_GROUP_DISABLE,
     CMD_PWM_UPDATA_PARAM,
+    CMD_PWM_SINGLE_UPDATA_PARAM,
     CMD_PWM_UPDATA_PARAM_ENABLE,
     CMD_PWM_INIT_LEVL_SET_LOW,
     CMD_PWM_INIT_LEVL_SET_HIGH
@@ -159,3 +160,5 @@ extern void pwm_exit(void);
 extern void pwm_isr(void);
 
 #endif //_PWM_PUB_H_
+// eof
+

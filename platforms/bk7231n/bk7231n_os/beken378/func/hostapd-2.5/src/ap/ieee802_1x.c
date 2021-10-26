@@ -25,7 +25,7 @@
 #include "ieee802_1x.h"
 
 
-static void ieee802_1x_finished(struct hostapd_data *hapd,
+void ieee802_1x_finished(struct hostapd_data *hapd,
 				struct sta_info *sta, int success,
 				int remediation);
 
@@ -125,7 +125,7 @@ void ieee802_1x_receive(struct hostapd_data *hapd, const u8 *sa, const u8 *buf,
 	(void)pmksa;
 }
 
-static void ieee802_1x_set_port_authorized(void *ctx, void *sta_ctx,
+void ieee802_1x_set_port_authorized(void *ctx, void *sta_ctx,
 					   int authorized)
 {
 	struct hostapd_data *hapd = ctx;

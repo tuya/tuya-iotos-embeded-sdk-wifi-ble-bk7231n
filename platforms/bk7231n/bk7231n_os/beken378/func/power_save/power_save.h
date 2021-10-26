@@ -122,8 +122,6 @@ extern void ps_fake_data_rx_check(void);
 extern bool ps_sleep_check(void);
 extern u8 rwn_mgmt_is_only_sta_role_add(void);
 
-//#define  PS_NEXT_DATA_CK_TM    2500 //5s
-
 #define PS_STA_DTIM_SWITCH (power_save_if_ps_rf_dtim_enabled() \
                             && net_if_is_up()                   \
                             &&g_wlan_general_param->role == CONFIG_ROLE_STA)

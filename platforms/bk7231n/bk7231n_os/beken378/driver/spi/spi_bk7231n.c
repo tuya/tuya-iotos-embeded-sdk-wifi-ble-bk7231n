@@ -13,7 +13,7 @@
 #include "spi_bk7231n.h"
 
 #define SPI_PERI_CLK_26M		(26 * 1000 * 1000)
-#define SPI_PERI_CLK_DCO		(80 * 1000 * 1000)
+#define SPI_PERI_CLK_DCO		(120 * 1000 * 1000)
 
 static SDD_OPERATIONS spi_op = {
 	spi_ctrl
@@ -266,6 +266,16 @@ static void spi_gpio_configuration(void)
 
 	sddev_control(GPIO_DEV_NAME, CMD_GPIO_ENABLE_SECOND, &val);
 }
+static void spi_3_line_gpio_configuration(void)
+{
+	uint32_t val;
+ 
+	val = GFUNC_MODE_SPI_USE_GPIO_14;
+	sddev_control(GPIO_DEV_NAME, CMD_GPIO_ENABLE_SECOND, &val);
+
+	val = GFUNC_MODE_SPI_USE_GPIO_16_17;
+ 	sddev_control(GPIO_DEV_NAME, CMD_GPIO_ENABLE_SECOND, &val);
+ }
 
 static void spi_icu_configuration(UINT32 enable)
 {
@@ -453,6 +463,8 @@ UINT32 spi_write_txfifo(UINT8 data)
 static struct spi_callback_des spi_receive_callback = {NULL, NULL};
 static struct spi_callback_des spi_txfifo_needwr_callback = {NULL, NULL};
 static struct spi_callback_des spi_tx_end_callback = {NULL, NULL};
+static void (*spi_tx_finish_callback)(UINT32)=NULL;
+static void (*spi_rx_finish_callback)(UINT32)=NULL;
 
 static void spi_rx_callback_set(spi_callback callback, void *param)
 {
@@ -471,6 +483,15 @@ static void spi_tx_end_callback_set(spi_callback callback, void *param)
 	spi_tx_end_callback.callback = callback;
 	spi_tx_end_callback.param = param;
 }
+void spi_rx_finnsh_int_callback_set(void (*func)(UINT32))
+{
+	spi_rx_finish_callback = func;
+}
+void spi_tx_finnsh_int_callback_set(void (*func)(UINT32))
+{
+	spi_tx_finish_callback = func;
+}
+
 
 void spi_init(void)
 {
@@ -576,11 +597,23 @@ UINT32 spi_ctrl(UINT32 cmd, void *param)
 		set_txtrans_len(*(UINT32 *)param);
 		break;
 	case CMD_SPI_RXTRANS_EN:
-		set_txtrans_len(*(UINT32 *)param);
+		set_rxtrans_len(*(UINT32 *)param);
 		break;
 	case CMD_SPI_CS_EN:
 		spi_slave_set_cs_finish_interrupt(*(UINT32 *)param);
 		break;
+	case CMD_SPI_SET_TX_FINISH_INT_CALLBACK:
+		spi_tx_finnsh_int_callback_set((void (*)(UINT32))(param));
+		break;
+	case CMD_SPI_SET_RX_FINISH_INT_CALLBACK:
+		spi_rx_finnsh_int_callback_set((void (*)(UINT32))(param));
+		break;
+	case CMD_SPI_SET_3_LINE:
+		spi_3_line_gpio_configuration();
+    break;
+
+    
+
 	default:
 		ret = SPI_FAILURE;
 		break;
@@ -602,7 +635,7 @@ void spi_isr(void)
 	status = REG_READ(SPI_STAT);
 	REG_WRITE(SPI_STAT, status);
 
-	os_printf("0x%08x\r\n", status);
+//	os_printf("0x%08x\r\n", status);
 	//REG_WRITE((0x00802800+(19*4)), 0x00);
 
 	if ((status & RXINT) || (status & SPI_S_CS_UP_INT_STATUS)) {
@@ -646,9 +679,23 @@ void spi_isr(void)
 	if (status & RXOVR)
 		os_printf("rxovr\r\n");
 
+	if (status & TX_FINISH_INT)
+    {
+        if(spi_tx_finish_callback)
+        {
+            spi_tx_enbale(0);
+            spi_tx_finish_callback(0);
+        }
+    }   
 	if (status & RX_FINISH_INT)
-		os_printf("rx finish int \r\n");
+    {
+        if(spi_rx_finish_callback)
+        {
+            spi_rx_enbale(0);
+            spi_rx_finish_callback(0);
+        }
 
+    }   
 	if (status & TXFIFO_WR_READ) {
 		if (spi_tx_end_callback.callback != 0) {
 			void *param = spi_tx_end_callback.param;

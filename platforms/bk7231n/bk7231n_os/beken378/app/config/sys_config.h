@@ -39,6 +39,12 @@
 #define CFG_ENABLE_BUTTON                          0
 #define CFG_UDISK_MP3                              0
 
+#define ENC_METHOD_NULL           1
+#define ENC_METHOD_XOR            2
+#define ENC_METHOD_AES            3
+
+#define FAST_CONNECT_INFO_ENC_METHOD               ENC_METHOD_XOR
+
 /*section 3-----driver macro config-----*/
 #define CFG_MAC_PHY_BAPASS                         1
 

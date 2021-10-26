@@ -33,6 +33,8 @@
 #include "port/net.h"
 #include "txu_cntrl.h"
 #include "rw_msdu.h"
+#include "ate_app.h"
+#include "bk7011_cal_pub.h"
 
 #if CFG_ROLE_LAUNCH
 #include "role_launch.h"
@@ -177,14 +179,12 @@ void bk_wlan_ap_set_channel_config(uint8_t channel)
 
 uint8_t bk_wlan_has_role(uint8_t role)
 {
-    struct netif *lwip_if;
     VIF_INF_PTR vif_entry;
     uint32_t role_count = 0;
 
     vif_entry = (VIF_INF_PTR)rwm_mgmt_is_vif_first_used();
     while(vif_entry)
     {
-        lwip_if = (struct netif *)vif_entry->priv;
         if(vif_entry->type == role)
         {
             role_count ++ ;
@@ -574,6 +574,13 @@ OSStatus bk_wlan_start_sta(network_InitTypeDef_st *inNetworkInitPara)
 	
     bk_wlan_stop(STATION);
 
+#if (CFG_SOC_NAME == SOC_BK7231N)
+    if (get_ate_mode_state())
+    {
+        // cunliang20210407 set blk_standby_cfg with blk_txen_cfg like txevm, qunshan confirmed
+        rwnx_cal_en_extra_txpa();
+    }
+#endif
     bk_wlan_sta_init(inNetworkInitPara);
 
     supplicant_main_entry(inNetworkInitPara->wifi_ssid);
@@ -845,6 +852,13 @@ OSStatus bk_wlan_start_sta_adv(network_InitTypeDef_adv_st *inNetworkInitParaAdv)
     }
 #endif
 
+#if (CFG_SOC_NAME == SOC_BK7231N)
+    if (get_ate_mode_state())
+    {
+        // cunliang20210407 set blk_standby_cfg with blk_txen_cfg like txevm, qunshan confirmed
+        rwnx_cal_en_extra_txpa();
+    }
+#endif
     bk_wlan_sta_init_adv(inNetworkInitParaAdv);
 
     supplicant_main_entry(inNetworkInitParaAdv->ap_info.ssid);
@@ -932,6 +946,13 @@ int bk_wlan_stop(char mode)
         break;
 
     case STATION:
+#if (CFG_SOC_NAME == SOC_BK7231N)
+        if (get_ate_mode_state())
+        {
+            // cunliang20210407 recovery blk_standby_cfg like txevm -e 0, qunshan confirmed
+            rwnx_cal_dis_extra_txpa();
+        }
+#endif
         sta_ip_down();
         net_wlan_remove_netif(&g_sta_param_ptr->own_mac);
         supplicant_main_exit();

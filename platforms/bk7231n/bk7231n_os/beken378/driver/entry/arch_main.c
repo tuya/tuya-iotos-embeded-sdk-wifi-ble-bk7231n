@@ -95,6 +95,7 @@ void entry_main(void)
     
     /* step 1: driver layer initialization*/
     driver_init();
+	bk_misc_check_start_type();
 	func_init_basic();
 
 #if ATE_APP_FUN

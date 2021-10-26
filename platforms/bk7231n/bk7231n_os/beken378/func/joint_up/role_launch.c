@@ -14,6 +14,10 @@
 #include "param_config.h"
 #endif
 
+#if (FAST_CONNECT_INFO_ENC_METHOD != ENC_METHOD_NULL)
+#include "soft_encrypt.h"
+#endif
+
 #if CFG_ROLE_LAUNCH
 RL_T g_role_launch = {{0}};
 RL_SOCKET_T g_rl_socket = {0};
@@ -23,6 +27,72 @@ extern u8* wpas_get_sta_psk(void);
 
 #if RL_SUPPORT_FAST_CONNECT
 extern void user_connected_callback(FUNCPTR fn);
+#endif
+
+#if (FAST_CONNECT_INFO_ENC_METHOD == ENC_METHOD_XOR)
+void bssid_info_enc(RL_BSSID_INFO_PTR bssid_info)
+{
+	RL_BSSID_INFO_T tmp_out;
+	GLOBAL_INT_DECLARATION();
+
+	GLOBAL_INT_DISABLE();
+	xor_enc(bssid_info, &tmp_out, sizeof(tmp_out));
+	os_memcpy(bssid_info, &tmp_out, sizeof(tmp_out));
+	GLOBAL_INT_RESTORE();
+}
+
+void bssid_info_dec(RL_BSSID_INFO_PTR bssid_info)
+{
+	RL_BSSID_INFO_T tmp_out;
+	GLOBAL_INT_DECLARATION();
+
+	GLOBAL_INT_DISABLE();
+	xor_dec(bssid_info, &tmp_out, sizeof(tmp_out));
+	os_memcpy(bssid_info, &tmp_out, sizeof(tmp_out));
+	GLOBAL_INT_RESTORE();
+}
+#elif (FAST_CONNECT_INFO_ENC_METHOD == ENC_METHOD_AES)
+void bssid_info_enc(RL_BSSID_INFO_PTR bssid_info)
+{
+	RL_BSSID_INFO_T tmp_out;
+    weeny_aes_context ctx;
+    uint8_t iv[BK_AES_IV_LEN + 1];
+    uint8_t private_key[BK_AES_KEY_LEN + 1];
+	GLOBAL_INT_DECLARATION();
+
+	GLOBAL_INT_DISABLE();
+    memcpy(iv, BK_TINY_AES_IV, strlen(BK_TINY_AES_IV));
+    iv[sizeof(iv) - 1] = '\0';
+    memcpy(private_key, BK_TINY_AES_KEY, strlen(BK_TINY_AES_KEY));
+    private_key[sizeof(private_key) - 1] = '\0';
+
+    memset(&tmp_out, 0x0, sizeof(tmp_out));
+    weeny_aes_setkey_enc(&ctx, (uint8_t *) private_key, 256);
+    weeny_aes_crypt_cbc(&ctx, AES_ENCRYPT, sizeof(tmp_out), iv, (unsigned char *)bssid_info, (unsigned char *)&tmp_out);
+	os_memcpy(bssid_info, &tmp_out, sizeof(tmp_out));
+	GLOBAL_INT_RESTORE();
+}
+
+void bssid_info_dec(RL_BSSID_INFO_PTR bssid_info)
+{
+	RL_BSSID_INFO_T tmp_out;
+	weeny_aes_context ctx;
+	uint8_t iv[BK_AES_IV_LEN + 1];
+	uint8_t private_key[BK_AES_KEY_LEN + 1];
+	GLOBAL_INT_DECLARATION();
+
+	GLOBAL_INT_DISABLE();
+	memcpy(iv, BK_TINY_AES_IV, strlen(BK_TINY_AES_IV));
+	iv[sizeof(iv) - 1] = '\0';
+	memcpy(private_key, BK_TINY_AES_KEY, strlen(BK_TINY_AES_KEY));
+	private_key[sizeof(private_key) - 1] = '\0';
+
+	memset(&tmp_out, 0x0, sizeof(tmp_out));
+	weeny_aes_setkey_dec(&ctx, (uint8_t *) private_key, 256);
+	weeny_aes_crypt_cbc(&ctx, AES_DECRYPT, sizeof(tmp_out), iv, (unsigned char *)bssid_info, (unsigned char *)&tmp_out);
+	os_memcpy(bssid_info, &tmp_out, sizeof(tmp_out));
+	GLOBAL_INT_RESTORE();
+}
 #endif
 
 #if RL_SUPPORT_FAST_CONNECT
@@ -46,6 +116,10 @@ void rl_read_bssid_info(RL_BSSID_INFO_PTR bssid_info)
 	{
 		os_null_printf("DRV_FAILURE\r\n");
 	}
+
+#if (FAST_CONNECT_INFO_ENC_METHOD != ENC_METHOD_NULL)
+	bssid_info_dec(bssid_info);
+#endif
 	
 	ddev_close(flash_hdl);
 }
@@ -85,7 +159,7 @@ static void rl_write_bssid_info(void)
 	}
 	if (g_sta_param_ptr)
 	{
-		os_strcpy((char*)bssid_info.pwd, g_sta_param_ptr->orig_key);
+		os_strcpy((char*)bssid_info.pwd, (char *)g_sta_param_ptr->orig_key);
 	}
 
 	/*obtain the previous bssid-info*/
@@ -104,6 +178,11 @@ static void rl_write_bssid_info(void)
 	ddev_control(flash_hdl, CMD_FLASH_SET_PROTECT, (void *)&protect_param);
 	addr = BSSID_INFO_ADDR;
 	ddev_control(flash_hdl, CMD_FLASH_ERASE_SECTOR, (void *)&addr);
+	
+#if (FAST_CONNECT_INFO_ENC_METHOD != ENC_METHOD_NULL)
+	bssid_info_enc(&bssid_info);
+#endif
+	
 	ddev_write(flash_hdl, (char*)&bssid_info, sizeof(bssid_info), addr);
 	ddev_control(flash_hdl, CMD_FLASH_SET_PROTECT, (void *)&protect_flag);
 	ddev_close(flash_hdl);

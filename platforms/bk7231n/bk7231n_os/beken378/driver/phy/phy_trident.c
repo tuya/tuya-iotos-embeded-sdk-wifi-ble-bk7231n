@@ -5,16 +5,8 @@
  *
  * @brief File containing the nX Trident-based physical layer driver API.
  *
- * Copyright (C) RivieraWaves 2011-2016
+ * Copyright (C) Beken 2011-2016
  *
- ****************************************************************************************
- */
-
-
-/**
- ****************************************************************************************
- * @addtogroup PHY
- * @{
  ****************************************************************************************
  */
 
@@ -40,6 +32,7 @@
 #include "uart_pub.h"
 #include "intc_pub.h"
 #include "power_save_pub.h"
+#include "bk7011_cal_pub.h"
 
 /*
  * STRUCTURES
@@ -1382,7 +1375,8 @@ static void phy_agc_init(void)
     agc_rwnxagcevt2_set(0x3955b004);
 #else
 #if (CFG_SOC_NAME == SOC_BK7231N)
-    REG_PL_WR(REG_AGC_BASE_ADDR + 0x890, 0x806);  // Enable AGC OPT
+    /* qunshan20210325 change from 0x806 to 0x506,aim to increase RSSI +3 */
+    REG_PL_WR(REG_AGC_BASE_ADDR + 0x890, 0x506);  // Enable AGC OPT
     agc_rwnxagcevtsat_set(0x05044804);
     agc_rwnxagcevtdet_set(0x3D401008);
     agc_rwnxagcevtdis_set(0x3955B00B);
@@ -1390,9 +1384,6 @@ static void phy_agc_init(void)
 
     // ADC sat thd
     agc_rwnxagcsat_set(0x8373335);
-
-    // RSSI +4
-    agc_rwnxagcdsp1_set(0x3000000C);
 #else
     REG_PL_WR(REG_AGC_BASE_ADDR + 0x890, (REG_PL_RD(REG_AGC_BASE_ADDR + 0x890) | 0x2));  // Enable AGC OPT
     agc_rwnxagcevtsat_set(0x05044804);
@@ -2351,6 +2342,9 @@ void phy_wakeup_rf_reinit(void)
     // recover trx setting
     rwnx_cal_recover_rf_setting();
 
+    //MODEM - contains AGC?
+    phy_mdm_init(0);
+
     // recover channel setting
     phy_set_channel(phy_env_sleep.band, phy_env_sleep.chnl_type, phy_env_sleep.chnl_prim20_freq,
                         phy_env_sleep.chnl_center1_freq, phy_env_sleep.chnl_center2_freq, PHY_PRIM);
@@ -2359,8 +2353,6 @@ void phy_wakeup_rf_reinit(void)
 
 void phy_wakeup_wifi_reinit(void)
 {
-    //MODEM - contains AGC?
-    phy_mdm_init(0);
 
     //AGC - separate or in MDM?
     phy_agc_init();

@@ -4919,6 +4919,18 @@ __INLINE void ble_radiotxrxtim3_set(uint32_t value)
     REG_BLE_WR(BLE_RADIOTXRXTIM3_ADDR, value);
 }
 
+#define BK_BLE_ADDREG0_ADDR      0x00900990
+
+__INLINE uint32_t bk_ble_addtion_reg0_get(void)
+{
+    return REG_BLE_RD(BK_BLE_ADDREG0_ADDR);
+}
+
+__INLINE void bk_ble_addtion_reg0_set(uint32_t value)
+{
+    REG_BLE_WR(BK_BLE_ADDREG0_ADDR, value);
+}
+
 // field definitions
 #define BLE_RXFLUSHPATHDLY3_MASK   ((uint32_t)0xFF000000)
 #define BLE_RXFLUSHPATHDLY3_LSB    24

@@ -48,7 +48,6 @@ uint8 is_rf_switch_to_ble(void)
     UINT32 param;
     
     sddev_control(SCTRL_DEV_NAME, CMD_BLE_RF_BIT_GET, &param);
-	///((*(volatile unsigned int *)(0x800008)) & 0x00008000)
 	
     return (param > 0 ) ? 1 : 0;
 }

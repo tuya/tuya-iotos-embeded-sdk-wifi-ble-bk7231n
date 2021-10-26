@@ -986,7 +986,7 @@ static void wpa_supplicant_set_rekey_offload(void *ctx,
 }
 #endif /* CONFIG_NO_WPA */
 
-
+#ifndef CONFIG_NO_WPA
 static int wpa_supplicant_key_mgmt_set_pmk(void *ctx, const u8 *pmk,
 					   size_t pmk_len)
 {
@@ -1001,7 +1001,7 @@ static int wpa_supplicant_key_mgmt_set_pmk(void *ctx, const u8 *pmk,
 	else
 		return 0;
 }
-
+#endif
 
 int wpa_supplicant_init_wpa(struct wpa_supplicant *wpa_s)
 {

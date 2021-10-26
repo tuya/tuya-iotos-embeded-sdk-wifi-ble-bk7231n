@@ -301,8 +301,7 @@ void wpa_supplicant_mark_disassoc(struct wpa_supplicant *wpa_s)
 	wpas_rrm_reset(wpa_s);
 }
 
-
-static void wpa_find_assoc_pmkid(struct wpa_supplicant *wpa_s)
+void wpa_find_assoc_pmkid(struct wpa_supplicant *wpa_s)
 {
 	struct wpa_ie_data ie;
 	int pmksa_set = -1;
@@ -326,7 +325,7 @@ static void wpa_find_assoc_pmkid(struct wpa_supplicant *wpa_s)
 		"PMKSA cache", pmksa_set == 0 ? "" : "not ");
 }
 
-
+#ifdef CONFIG_FULL_SUPPLICANT
 static void wpa_supplicant_event_pmkid_candidate(struct wpa_supplicant *wpa_s,
 						 union wpa_event_data *data)
 {
@@ -345,7 +344,7 @@ static void wpa_supplicant_event_pmkid_candidate(struct wpa_supplicant *wpa_s,
 			    data->pmkid_candidate.index,
 			    data->pmkid_candidate.preauth);
 }
-
+#endif
 
 static int wpa_supplicant_dynamic_keys(struct wpa_supplicant *wpa_s)
 {
@@ -1858,7 +1857,7 @@ static void interworking_process_assoc_resp(struct wpa_supplicant *wpa_s,
 }
 #endif /* CONFIG_INTERWORKING */
 
-static int wpa_supplicant_event_associnfo(struct wpa_supplicant *wpa_s,
+int wpa_supplicant_event_associnfo(struct wpa_supplicant *wpa_s,
 					  union wpa_event_data *data)
 {
 	int l, len, found = 0, wpa_found, rsn_found;
@@ -2065,7 +2064,6 @@ static int wpa_supplicant_event_associnfo(struct wpa_supplicant *wpa_s,
 
 	return 0;
 }
-
 
 static int wpa_supplicant_assoc_update_ie(struct wpa_supplicant *wpa_s)
 {
@@ -2481,7 +2479,7 @@ void wpa_supplicant_delayed_mic_error_report(void *eloop_ctx, void *sock_ctx)
 }
 #endif /* CONFIG_DELAYED_MIC_ERROR_REPORT */
 
-
+#ifdef CONFIG_FULL_SUPPLICANT
 static void
 wpa_supplicant_event_michael_mic_failure(struct wpa_supplicant *wpa_s,
 					 union wpa_event_data *data)
@@ -2574,7 +2572,7 @@ wpa_supplicant_event_michael_mic_failure(struct wpa_supplicant *wpa_s,
 	wpa_s->last_michael_mic_error = t;
 	wpa_s->mic_errors_seen++;
 }
-
+#endif
 
 #ifdef CONFIG_TERMINATE_ONLASTIF
 static int any_interfaces(struct wpa_supplicant *head)
@@ -2588,7 +2586,7 @@ static int any_interfaces(struct wpa_supplicant *head)
 }
 #endif /* CONFIG_TERMINATE_ONLASTIF */
 
-
+#ifdef CONFIG_FULL_SUPPLICANT
 static void
 wpa_supplicant_event_interface_status(struct wpa_supplicant *wpa_s,
 				      union wpa_event_data *data)
@@ -2652,7 +2650,7 @@ wpa_supplicant_event_interface_status(struct wpa_supplicant *wpa_s,
 		break;
 	}
 }
-
+#endif
 
 #ifdef CONFIG_PEERKEY
 static void
@@ -2846,7 +2844,7 @@ static void ft_rx_action(struct wpa_supplicant *wpa_s, const u8 *data,
 #endif /* CONFIG_IEEE80211R */
 
 
-static void wpa_supplicant_event_unprot_deauth(struct wpa_supplicant *wpa_s,
+void wpa_supplicant_event_unprot_deauth(struct wpa_supplicant *wpa_s,
 					       struct unprot_deauth *e)
 {
 #ifdef CONFIG_IEEE80211W
@@ -2859,7 +2857,7 @@ static void wpa_supplicant_event_unprot_deauth(struct wpa_supplicant *wpa_s,
 }
 
 
-static void wpa_supplicant_event_unprot_disassoc(struct wpa_supplicant *wpa_s,
+void wpa_supplicant_event_unprot_disassoc(struct wpa_supplicant *wpa_s,
 						 struct unprot_disassoc *e)
 {
 #ifdef CONFIG_IEEE80211W
@@ -3006,9 +3004,7 @@ static void wpas_event_deauth(struct wpa_supplicant *wpa_s,
 			      locally_generated, ie, ie_len, 1);
 }
 
-
-
-static void wpa_supplicant_update_channel_list(
+void wpa_supplicant_update_channel_list(
 	struct wpa_supplicant *wpa_s, struct channel_list_changed *info)
 {
 	struct wpa_supplicant *ifs;
@@ -3148,7 +3144,7 @@ static void wpas_event_rx_mgmt_action(struct wpa_supplicant *wpa_s,
 		mesh_mpm_action_rx(wpa_s, mgmt, len);
 }
 
-
+#ifdef CONFIG_FULL_SUPPLICANT
 static void wpa_supplicant_notify_avoid_freq(struct wpa_supplicant *wpa_s,
 					     union wpa_event_data *event)
 {
@@ -3180,7 +3176,7 @@ static void wpa_supplicant_notify_avoid_freq(struct wpa_supplicant *wpa_s,
 
 	os_free(str);
 }
-
+#endif
 
 static void wpa_supplicant_event_assoc_auth(struct wpa_supplicant *wpa_s,
 					    union wpa_event_data *data)

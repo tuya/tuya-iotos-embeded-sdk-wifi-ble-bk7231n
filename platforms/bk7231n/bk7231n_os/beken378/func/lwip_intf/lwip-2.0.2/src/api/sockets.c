@@ -524,6 +524,16 @@ tryget_socket(int s)
   return &sockets[s];
 }
 
+static struct lwip_sock *
+tryget_socket1(int s)
+{
+  s -= LWIP_SOCKET_OFFSET;
+  if ((s < 0) || (s >= NUM_SOCKETS)) {
+    return NULL;
+  }
+  return &sockets[s];
+}
+
 /**
  * Allocate a new socket for a given netconn.
  *
@@ -1640,7 +1650,7 @@ lwip_select(int maxfdp1, fd_set *readset, fd_set *writeset, fd_set *exceptset,
           (exceptset && FD_ISSET(i, exceptset))) {
         struct lwip_sock *sock;
         SYS_ARCH_PROTECT(lev);
-        sock = tryget_socket(i);
+        sock = tryget_socket1(i);
         if (sock != NULL) {
           /* for now, handle select_waiting==0... */
           LWIP_ASSERT("sock->select_waiting > 0", sock->select_waiting > 0);

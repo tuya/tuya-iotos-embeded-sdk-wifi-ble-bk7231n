@@ -3053,7 +3053,7 @@ int wpa_supplicant_update_mac_addr(struct wpa_supplicant *wpa_s)
 	return 0;
 }
 
-
+#ifdef CONFIG_FULL_SUPPLICANT
 static void wpa_supplicant_rx_eapol_bridge(void *ctx, const u8 *src_addr,
 					   const u8 *buf, size_t len)
 {
@@ -3077,7 +3077,7 @@ static void wpa_supplicant_rx_eapol_bridge(void *ctx, const u8 *src_addr,
 	wpa_supplicant_rx_eapol(wpa_s, src_addr, buf + sizeof(*eth),
 				len - sizeof(*eth));
 }
-
+#endif
 
 /**
  * wpa_supplicant_driver_init - Initialize driver interface parameters

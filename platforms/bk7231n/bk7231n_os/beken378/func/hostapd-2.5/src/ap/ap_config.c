@@ -16,8 +16,7 @@
 #include "ap/sta_info.h"
 #include "ap_config.h"
 
-
-static void hostapd_config_free_vlan(struct hostapd_bss_config *bss)
+void hostapd_config_free_vlan(struct hostapd_bss_config *bss)
 {
 	struct hostapd_vlan *vlan, *prev;
 
@@ -31,7 +30,6 @@ static void hostapd_config_free_vlan(struct hostapd_bss_config *bss)
 
 	bss->vlan = NULL;
 }
-
 
 void hostapd_config_defaults_bss(struct hostapd_bss_config *bss)
 {

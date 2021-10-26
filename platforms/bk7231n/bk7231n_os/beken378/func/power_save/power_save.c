@@ -1508,8 +1508,6 @@ UINT32 power_save_get_sleep_count(void)
     return bk_ps_info.sleep_count;
 }
 
-
-
 UINT8 power_save_if_ps_rf_dtim_enabled(void)
 {
     return (bk_ps_mode == PS_DTIM_PS_MODE);

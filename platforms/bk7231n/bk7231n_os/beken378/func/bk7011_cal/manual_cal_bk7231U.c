@@ -27,6 +27,7 @@
 #endif
 #include "power_save_pub.h"
 #include "cmd_evm.h"
+#include "ate_app.h"
 
 #define TXPWR_DEFAULT_TAB                 1
 
@@ -66,7 +67,7 @@
 #else
 #define MCAL_PRT      null_prf
 #define MCAL_WARN     null_prf
-#define MCAL_FATAL    null_prf
+#define MCAL_FATAL    fatal_prf
 #endif
 
 /* bit[7]: TXPWR flag 
@@ -2480,6 +2481,9 @@ void manual_cal_set_lpf_iq(UINT32 lpf_i, UINT32 lpf_q)
 
 void manual_cal_load_lpf_iq_tag_flash(void)
 {
+    bk7011_get_tx_filter_corner((INT32 *)&g_lpf_cal_i, (INT32 *)&g_lpf_cal_q);
+
+#if (CFG_SOC_NAME != SOC_BK7231N)
     UINT32 status, addr, addr_start;
     DD_HANDLE flash_handle;
 	#if CFG_SUPPORT_ALIOS
@@ -2488,10 +2492,7 @@ void manual_cal_load_lpf_iq_tag_flash(void)
 	bk_logic_partition_t *pt = bk_flash_get_info(BK_PARTITION_RF_FIRMWARE);
 	#endif
     TAG_LPF_IQ_ST lpf;
-
-    bk7011_get_tx_filter_corner((INT32 *)&g_lpf_cal_i, (INT32 *)&g_lpf_cal_q);
-
-#if (CFG_SOC_NAME != SOC_BK7231N)
+	
     addr_start = manual_cal_search_txpwr_tab(TXID, pt->partition_start_addr);//TXPWR_TAB_FLASH_ADDR); 
     if(!addr_start) {
         MCAL_FATAL("NO TXID found in flash, use lpf i&q:%d, %d\r\n",
@@ -2991,7 +2992,7 @@ int manual_cal_load_calimain_tag_from_flash(UINT32 tag, int *tag_addr, int tag_s
     status = manual_cal_search_opt_tab(&addr);
     if(!status) {
         // no tlv in flash
-        MCAL_PRT("NO TLV tag in flash \r\n");
+        MCAL_FATAL("NO TLV tag in flash \r\n");
         return -1;
     }
     
@@ -3005,18 +3006,18 @@ int manual_cal_load_calimain_tag_from_flash(UINT32 tag, int *tag_addr, int tag_s
     }
     else
     {
-        MCAL_PRT("not a CALI_MAIN_tag \r\n");
+        MCAL_FATAL("not a CALI_MAIN_tag \r\n");
         return 0;
     }
     
     if(!addr_start) {
-        MCAL_PRT("NO CALI_MAIN_tag in flash \r\n");
+        MCAL_FATAL("NO CALI_MAIN_tag in flash \r\n");
         return -2;
     }
     
     addr = manual_cal_search_txpwr_tab(tag, addr_start);  
     if(!addr) {
-        MCAL_PRT("NO %x tag in flash\r\n", tag);
+        MCAL_FATAL("NO %x tag in flash\r\n", tag);
         return -3; 
     } else {
         flash_handle = ddev_open(FLASH_DEV_NAME, &status, 0);
@@ -3028,7 +3029,6 @@ int manual_cal_load_calimain_tag_from_flash(UINT32 tag, int *tag_addr, int tag_s
         return 1; 
     }
 }
-
 
 UINT32 manual_cal_txpwr_tab_ready_in_flash(void)
 {
@@ -3591,6 +3591,7 @@ TMP_PWR_PTR manual_cal_set_tmp_pwr(UINT16 cur_val, UINT16 thre, UINT16 *last)
     {
         UINT8 last_idx = g_tmp_pwr.indx;
         temperature_type new_temperature_type;
+        INT16 temp_code;
 
         if (g_cur_temp_flash >= 7 * thre + cur_val)
         {
@@ -3617,21 +3618,24 @@ TMP_PWR_PTR manual_cal_set_tmp_pwr(UINT16 cur_val, UINT16 thre, UINT16 *last)
 #ifdef ATE_PRINT_DEBUG
         if (!get_ate_mode_state())
         {
-            bk_printf("do td cur_t:%d--last:idx:%d,t:%d -- new:idx:%d,t:%d \r\n",
-                cur_val,
+            if (g_cur_temp_flash >= cur_val)
+            {
+                temp_code = 25 + (g_cur_temp_flash - cur_val) * 10 / thre;
+            }
+            else
+            {
+                temp_code = 25 - (cur_val - g_cur_temp_flash) * 10 / thre;
+            }
+            bk_printf("temp_code:%d - adc_code:%d - adc_trend:[%d]:%d->[%d]:%d\r\n",
+                temp_code, cur_val,
                 last_idx, g_tmp_pwr.temp_tab[last_idx],
                 g_tmp_pwr.indx, g_tmp_pwr.temp_tab[g_tmp_pwr.indx]);
-
-            bk_printf("--0xc:%02x, shift_b:%d, shift_g:%d, X:%d\n",
-                g_tmp_pwr.pwr_ptr->trx0x0c_12_15,
-                g_tmp_pwr.pwr_ptr->p_index_delta,
-                g_tmp_pwr.pwr_ptr->p_index_delta_g,
-                g_tmp_pwr.pwr_ptr->xtal_c_dlta);
         }
 #endif
 
         return g_tmp_pwr.pwr_ptr;
 		(void)last_idx;
+		(void)temp_code;
     }
     else
     {
@@ -3822,7 +3826,7 @@ void manual_cal_do_xtal_cali(UINT16 cur_val, UINT16 *last, UINT16 thre, UINT16 i
     if(g_xcali.last_xtal != param) 
     {
 #ifdef ATE_PRINT_DEBUG
-		os_printf("init_xtal:%d, delta:%d, last_xtal:%d\r\n",
+		os_null_printf("init_xtal:%d, delta:%d, last_xtal:%d\r\n",
                         g_xcali.init_xtal,
                         g_xcali.xtal_c_delta,
                         g_xcali.last_xtal);

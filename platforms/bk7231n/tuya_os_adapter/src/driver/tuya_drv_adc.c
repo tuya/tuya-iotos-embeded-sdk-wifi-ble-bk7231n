@@ -7,6 +7,7 @@
 
 
 /*============================ INCLUDES ======================================*/
+#include <string.h> 
 #include "tuya_adc.h"
 #include "tuya_os_adapt_output.h"
 

@@ -2,7 +2,6 @@
 #define _TYPEDEF_H_
 
 #include <stdint.h>
-//#include <stddef.h>
 
 typedef unsigned char  		  uint8;          /* unsigned  8 bit quantity        */
 typedef signed   char  		  int8;           /* signed    8 bit quantity        */

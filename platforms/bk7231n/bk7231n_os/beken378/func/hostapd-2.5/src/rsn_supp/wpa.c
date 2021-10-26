@@ -160,8 +160,7 @@ void wpa_sm_key_request(struct wpa_sm *sm, int error, int pairwise)
 			   ETH_P_EAPOL, rbuf, rlen, key_mic);
 }
 
-
-static void wpa_supplicant_key_mgmt_set_pmk(struct wpa_sm *sm)
+void wpa_supplicant_key_mgmt_set_pmk(struct wpa_sm *sm)
 {
 	if (wpa_sm_key_mgmt_set_pmk(sm, sm->pmk, sm->pmk_len))
 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
@@ -177,8 +176,6 @@ static int wpa_supplicant_get_pmk(struct wpa_sm *sm,
 	else
 		return 1;
 }
-
-
 
 /**
  * wpa_supplicant_send_2_of_4 - Send message 2 of WPA/RSN 4-Way Handshake

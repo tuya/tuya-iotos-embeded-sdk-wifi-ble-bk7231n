@@ -186,6 +186,7 @@ static int pin_dev_control(tuya_pin_name_t pin, uint8_t cmd, void *arg)
 
     case TUYA_DRV_SET_INT_CMD:
         PIN_DEV_CHECK_ERROR_RETURN(pin, OPRT_OS_ADAPTER_INVALID_PARM);
+        result = pin_dev_irq_config(pin, (tuya_pin_irq_t *)arg);
         break;
 
     case TUYA_DRV_CLR_INT_CMD:

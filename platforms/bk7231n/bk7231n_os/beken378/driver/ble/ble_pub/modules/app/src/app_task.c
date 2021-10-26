@@ -959,7 +959,6 @@ static int gapm_profile_added_ind_handler(kernel_msg_id_t const msgid,
                                           kernel_task_id_t const dest_id,
                                           kernel_task_id_t const src_id)
 {
-    // Current State
     uint8_t state = kernel_state_get(dest_id);
 
     if (state == APPM_CREATE_DB)
@@ -1210,13 +1209,7 @@ static int gapc_le_pkt_size_ind_handler (kernel_msg_id_t const msgid,
 static int gapc_param_updated_ind_handler (kernel_msg_id_t const msgid, 
 									const struct gapc_param_updated_ind  *param,
                  					kernel_task_id_t const dest_id, kernel_task_id_t const src_id)
-{
-   // UART_PRINTF("%s \r\n", __func__);
-	
-	//UART_PRINTF("con_interval = %d\r\n",param->con_interval);
-	//UART_PRINTF("con_latency = %d\r\n",param->con_latency);
-//	UART_PRINTF("sup_to = %d\r\n",param->sup_to);
-	
+{	
 	return KERNEL_MSG_CONSUMED;
 }
 
@@ -1331,6 +1324,7 @@ static int gapm_adv_report_ind_handler(kernel_msg_id_t const msgid,
     return (KERNEL_MSG_CONSUMED);
 }
 
+#if (SECURE_CONNECTIONS)
 static int gapm_gen_dh_key_ind_handler(kernel_msg_id_t const msgid,
                                             struct gapm_gen_dh_key_ind const *param,
                                             kernel_task_id_t const dest_id,
@@ -1372,6 +1366,7 @@ static int gapm_get_key_ind_handler(kernel_msg_id_t const msgid,
     
     return (msg_status);
 }
+#endif
 
 /**
  ****************************************************************************************

@@ -959,25 +959,23 @@ static void gdma_isr(void)
     for(i = 0; i < GDMA_CHANNEL_MAX; i++)
     {
         rev_len = gdma_get_transfer_length(i) - gdma_get_remain_len(i); 
-        rev_len = rev_len;
-        
-        cmp_bit = (1 << (i+GENER_DMA_HFIN_INT_STATUS_POSI));
-        if(status & cmp_bit)
-        {
-            if(p_dma_hfin_handler[i]){
-                p_dma_hfin_handler[i](0);
-                REG_WRITE(GENER_DMA_REG38_DMA_INT_STATUS, cmp_bit);
+            cmp_bit = (1 << (i+GENER_DMA_HFIN_INT_STATUS_POSI));
+            if(status & cmp_bit)
+            {
+                if(p_dma_hfin_handler[i]){
+                    p_dma_hfin_handler[i](0);
+                    REG_WRITE(GENER_DMA_REG38_DMA_INT_STATUS, cmp_bit);
+                }
             }
-        }
 
-        cmp_bit = (1 << (i+GENER_DMA_FIN_INT_STATUS_POSI));
-        if(status & cmp_bit) 
-        {
-            if(p_dma_fin_handler[i]){
-                p_dma_fin_handler[i](1);
-                REG_WRITE(GENER_DMA_REG38_DMA_INT_STATUS, cmp_bit);
+            cmp_bit = (1 << (i+GENER_DMA_FIN_INT_STATUS_POSI));
+            if(status & cmp_bit) 
+            {
+                if(p_dma_fin_handler[i]){
+                    p_dma_fin_handler[i](1);
+                    REG_WRITE(GENER_DMA_REG38_DMA_INT_STATUS, cmp_bit);
+                }
             }
-        }
     }
     #endif //  (CFG_SOC_NAME == SOC_BK7231)
 }

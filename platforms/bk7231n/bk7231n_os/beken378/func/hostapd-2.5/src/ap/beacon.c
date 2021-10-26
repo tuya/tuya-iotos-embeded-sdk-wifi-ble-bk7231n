@@ -130,7 +130,7 @@ static u8 * hostapd_eid_erp_info(struct hostapd_data *hapd, u8 *eid)
 	return eid;
 }
 
-
+#ifdef CONFIG_FULL_HOSTAPD
 static u8 * hostapd_eid_pwr_constraint(struct hostapd_data *hapd, u8 *eid)
 {
 	u8 *pos = eid;
@@ -199,7 +199,7 @@ static u8 * hostapd_eid_pwr_constraint(struct hostapd_data *hapd, u8 *eid)
 
 	return pos;
 }
-
+#endif
 
 static u8 * hostapd_eid_country_add(u8 *pos, u8 *end, int chan_spacing,
 				    struct hostapd_channel_data *start,

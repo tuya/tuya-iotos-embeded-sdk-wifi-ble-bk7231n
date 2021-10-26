@@ -652,22 +652,18 @@ void spi_dma_tx_enable(UINT8 enable)
 	int param;
 	GDMA_CFG_ST en_cfg;
 
-	//os_printf("dma enable\r\n");
 
+	//enable tx
+	param = enable;
+    spi_ctrl( CMD_SPI_TX_EN, (void *)&param);
 	en_cfg.channel = SPI_TX_DMA_CHANNEL;
 
 	if (enable)
 		en_cfg.param = 1;
 	else
 		en_cfg.param = 0;
-	sddev_control(GDMA_DEV_NAME, CMD_GDMA_SET_DMA_ENABLE, &en_cfg);
+    gdma_ctrl(CMD_GDMA_SET_DMA_ENABLE, &en_cfg);
 
-	param = 0;
-	sddev_control(SPI_DEV_NAME, CMD_SPI_RX_EN, (void *)&param);
-
-	//enable tx
-	param = enable;
-	sddev_control(SPI_DEV_NAME, CMD_SPI_TX_EN, (void *)&param);
 }
 
 void spi_dma_rx_enable(UINT8 enable)
@@ -676,19 +672,14 @@ void spi_dma_rx_enable(UINT8 enable)
 	GDMA_CFG_ST en_cfg;
 
 	en_cfg.channel = SPI_RX_DMA_CHANNEL;
-
 	if (enable)
 		en_cfg.param = 1;
 	else
 		en_cfg.param = 0;
-	sddev_control(GDMA_DEV_NAME, CMD_GDMA_SET_DMA_ENABLE, &en_cfg);
-
-	param = 0;
-	sddev_control(SPI_DEV_NAME, CMD_SPI_TX_EN, (void *)&param);
-
+    gdma_ctrl(CMD_GDMA_SET_DMA_ENABLE, &en_cfg);
 	//enable rx
 	param = enable;
-	sddev_control(SPI_DEV_NAME, CMD_SPI_RX_EN, (void *)&param);
+    spi_ctrl(CMD_SPI_RX_EN, (void *)&param);
 }
 
 void bk_spi_slave_dma_config(UINT32 mode, UINT32 rate)

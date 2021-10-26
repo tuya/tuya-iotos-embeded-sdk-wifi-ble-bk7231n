@@ -4,9 +4,7 @@
 #include "sys_ctrl_pub.h"
 #include "sys_ctrl.h"
 #include "target_util_pub.h"
-
 #include "drv_model_pub.h"
-
 #include "uart_pub.h"
 #include "flash_pub.h"
 #include "power_save_pub.h"
@@ -22,6 +20,7 @@
 #include "ble_pub.h"
 #include "start_type_pub.h"
 #include "bk7011_cal_pub.h"
+#include "phy_trident.h"
 
 #define DPLL_DIV                0x0
 #define DCO_CALIB_26M           0x1
@@ -127,9 +126,11 @@ void sctrl_cali_dpll(UINT8 flag)
 
 void sctrl_dpll_isr(void)
 {
-    os_printf("BIAS Cali\r\n");
-    bk7011_cal_bias();
-
+	if ((DEVICE_ID_BK7231N_P & DEVICE_ID_MASK) != (sctrl_ctrl(CMD_GET_DEVICE_ID, NULL) & DEVICE_ID_MASK))
+	{
+		os_printf("BIAS Cali\r\n");
+		bk7011_cal_bias();
+	}
     sddev_control(GPIO_DEV_NAME, CMD_GPIO_CLR_DPLL_UNLOOK_INT, NULL);    
     sctrl_cali_dpll(0);
 
@@ -210,6 +211,9 @@ void sctrl_dco_cali(UINT32 speed)
 
     reg_val = sctrl_analog_get(SCTRL_ANALOG_CTRL1);
     reg_val &= ~(SPI_RST_BIT);
+#if (CFG_SOC_NAME == SOC_BK7231N)
+    reg_val &= ~(DCO_AMSEL_BIT);
+#endif
     sctrl_analog_set(SCTRL_ANALOG_CTRL1, reg_val); 
 
     reg_val = sctrl_analog_get(SCTRL_ANALOG_CTRL1);
@@ -221,9 +225,6 @@ void sctrl_dco_cali(UINT32 speed)
     sctrl_analog_set(SCTRL_ANALOG_CTRL1, reg_val); 
     
     reg_val = sctrl_analog_get(SCTRL_ANALOG_CTRL1);
-#if (CFG_SOC_NAME == SOC_BK7231N)
-    reg_val &= ~(DCO_AMSEL_BIT);
-#endif
     reg_val &= ~(DCO_TRIG_BIT);
     sctrl_analog_set(SCTRL_ANALOG_CTRL1, reg_val); 
 }
@@ -303,40 +304,24 @@ void sctrl_init(void)
 
     sddev_register_dev(SCTRL_DEV_NAME, &sctrl_op);
 
+#if (CFG_SUPPORT_BOOTLOADER)
+    /* huaming20210729: system power up with 26MHZ, to fix bootup hung issue */
+    param = REG_READ(SCTRL_CONTROL);
+    param &= ~(MCLK_DIV_MASK << MCLK_DIV_POSI);
+    param &= ~(MCLK_MUX_MASK << MCLK_MUX_POSI);
+    param |= (MCLK_FIELD_26M_XTAL << MCLK_MUX_POSI);
+    REG_WRITE(SCTRL_CONTROL, param);
+#else
     /*enable blk clk
       Attention: ENABLE 26m xtal block(BLK_BIT_26M_XTAL), for protect 32k circuit
      */
     param = BLK_BIT_26M_XTAL | BLK_BIT_DPLL_480M | BLK_BIT_XTAL2RF | BLK_BIT_DCO;
     sctrl_ctrl(CMD_SCTRL_BLK_ENABLE, &param);
-
-    /*config main clk*/
-    #if !USE_DCO_CLK_POWON
-    param = REG_READ(SCTRL_CONTROL);
-    param &= ~(MCLK_DIV_MASK << MCLK_DIV_POSI);
-    param &= ~(MCLK_MUX_MASK << MCLK_MUX_POSI);
-    #if (CFG_SOC_NAME == SOC_BK7221U)  
-    /* BK7221U ahb bus max rate is 90MHZ, so ahb bus need div 2 from MCU clock */
-    /* AHB bus is very import to AUDIO and DMA */
-    param |= HCLK_DIV2_EN_BIT;
-    #endif // (CFG_SOC_NAME == SOC_BK7221U)
-    #if CFG_SYS_REDUCE_NORMAL_POWER
-    param |= ((MCLK_DIV_7 & MCLK_DIV_MASK) << MCLK_DIV_POSI);
-    #elif (CFG_SOC_NAME == SOC_BK7231N)
-    param |= ((MCLK_DIV_5 & MCLK_DIV_MASK) << MCLK_DIV_POSI);
-    #else // CFG_SYS_REDUCE_NORMAL_POWER 
-    param |= ((MCLK_DIV_3 & MCLK_DIV_MASK) << MCLK_DIV_POSI);
-    #endif // CFG_SYS_REDUCE_NORMAL_POWER
-    param |= ((MCLK_FIELD_DPLL & MCLK_MUX_MASK) << MCLK_MUX_POSI);
-    REG_WRITE(SCTRL_CONTROL, param);
-    #endif // (!USE_DCO_CLK_POWON)
+#endif
 
     /*sys_ctrl <0x4c> */
     param = 0x00171710;//0x00151510;    LDO BIAS CALIBRATION
     REG_WRITE(SCTRL_BIAS, param);
-
-    /*mac & modem power up */
-    sctrl_ctrl(CMD_SCTRL_MAC_POWERUP, NULL);
-    sctrl_ctrl(CMD_SCTRL_MODEM_POWERUP, NULL);
 
     /*sys_ctrl <0x16>, trig spi */
     //170209,from 0x819A54B to 0x819A55B for auto detect dpll unlock
@@ -365,14 +350,18 @@ void sctrl_init(void)
     sctrl_analog_set(SCTRL_ANALOG_CTRL1, param);
     /*do dco Calibration*/
     sctrl_dco_cali(DCO_CLK_SELECT);
-    #if USE_DCO_CLK_POWON
-    sctrl_set_cpu_clk_dco();
-    #endif
 
     #if (CFG_SOC_NAME == SOC_BK7231)
     param = 0x24006000;
 #elif (CFG_SOC_NAME == SOC_BK7231N)
-    param = 0x500020E2;//0x400020E0; //wangjian20200822 0x40032030->0x48032030->0x48022032//wangjian20200903<17:16>=0//qunshan20201127<28:23>=20
+	if ((DEVICE_ID_BK7231N_P & DEVICE_ID_MASK) == (sctrl_ctrl(CMD_GET_DEVICE_ID, NULL) & DEVICE_ID_MASK))
+	{
+		param = 0x580020E2;//wangjian20210422<28:23>=30 as default for BK7231P
+	}
+	else
+	{
+		param = 0x500020E2;//0x400020E0; //wangjian20200822 0x40032030->0x48032030->0x48022032//wangjian20200903<17:16>=0//qunshan20201127<28:23>=20
+	}
 #else
     param = 0x24006080;   // xtalh_ctune   // 24006080
     param &= ~(XTALH_CTUNE_MASK<< XTALH_CTUNE_POSI);
@@ -404,10 +393,16 @@ void sctrl_init(void)
     /*regist intteruppt handler for Dpll unlock*/
     intc_service_register(FIQ_DPLL_UNLOCK, PRI_FIQ_DPLL_UNLOCK, sctrl_dpll_isr);
 
+    /*mac & modem power up */
+    sctrl_ctrl(CMD_SCTRL_MAC_POWERUP, NULL);
+    sctrl_ctrl(CMD_SCTRL_MODEM_POWERUP, NULL);
+
     sctrl_sub_reset();
 
 #if (CFG_SOC_NAME == SOC_BK7231N)
-	sctrl_fix_dpll_div();
+	if ((DEVICE_ID_BK7231N_P & DEVICE_ID_MASK) != (sctrl_ctrl(CMD_GET_DEVICE_ID, NULL) & DEVICE_ID_MASK)) {
+		sctrl_fix_dpll_div();
+	}
 #endif
 	
 	/*sys ctrl clk gating, for rx dma dead*/
@@ -437,6 +432,29 @@ void sctrl_init(void)
 	#if (RHINO_CONFIG_CPU_PWR_MGMT & CFG_USE_STA_PS)
 	sctrl_mcu_init();
 	#endif
+
+    /*config main clk*/
+    #if USE_DCO_CLK_POWON
+    sctrl_set_cpu_clk_dco();
+    #else
+    param = REG_READ(SCTRL_CONTROL);
+    param &= ~(MCLK_DIV_MASK << MCLK_DIV_POSI);
+    param &= ~(MCLK_MUX_MASK << MCLK_MUX_POSI);
+    #if (CFG_SOC_NAME == SOC_BK7221U)
+    /* BK7221U ahb bus max rate is 90MHZ, so ahb bus need div 2 from MCU clock */
+    /* AHB bus is very import to AUDIO and DMA */
+    param |= HCLK_DIV2_EN_BIT;
+    #endif // (CFG_SOC_NAME == SOC_BK7221U)
+    #if CFG_SYS_REDUCE_NORMAL_POWER
+    param |= ((MCLK_DIV_7 & MCLK_DIV_MASK) << MCLK_DIV_POSI);
+    #elif (CFG_SOC_NAME == SOC_BK7231N)
+    param |= ((MCLK_DIV_5 & MCLK_DIV_MASK) << MCLK_DIV_POSI);
+    #else // CFG_SYS_REDUCE_NORMAL_POWER
+    param |= ((MCLK_DIV_3 & MCLK_DIV_MASK) << MCLK_DIV_POSI);
+    #endif // CFG_SYS_REDUCE_NORMAL_POWER
+    param |= ((MCLK_FIELD_DPLL & MCLK_MUX_MASK) << MCLK_MUX_POSI);
+    REG_WRITE(SCTRL_CONTROL, param);
+    #endif // (!USE_DCO_CLK_POWON)
 }
 
 void sctrl_exit(void)
@@ -714,7 +732,9 @@ void sctrl_rf_wakeup(void)
         PS_DEBUG_UP_TRIGER;
 
 #if (CFG_SOC_NAME == SOC_BK7231N)
-		sctrl_fix_dpll_div();
+		if ((DEVICE_ID_BK7231N_P & DEVICE_ID_MASK) != (sctrl_ctrl(CMD_GET_DEVICE_ID, NULL) & DEVICE_ID_MASK)) {
+			sctrl_fix_dpll_div();
+		}
 #endif
 
 		phy_wakeup_rf_reinit();
@@ -731,12 +751,8 @@ void sctrl_set_rf_sleep(void)
 
     if(power_save_if_rf_sleep() 
         && if_other_mode_rf_sleep()
-#if CFG_USE_BLE_PS
-    	&& if_ble_sleep()
-#else
 #if (CFG_SOC_NAME != SOC_BK7231)
         &&  (!(REG_READ(SCTRL_CONTROL) & BLE_RF_EN_BIT))
-#endif
 #endif
         )
         {

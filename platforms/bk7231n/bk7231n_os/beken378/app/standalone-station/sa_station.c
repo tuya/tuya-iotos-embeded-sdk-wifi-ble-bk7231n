@@ -44,15 +44,15 @@ extern struct mac_scan_result *scanu_search_by_ssid(struct mac_ssid const *ssid)
 /*---------------------------------------------------------------------------*/
 int sa_station_send_associate_cmd(CONNECT_PARAM_T *connect_param)
 {
+    int ret;
     struct mac_scan_result *desired_ap_ptr;
     struct sm_connect_cfm sm_connect_cfm;
-    int ret;
-
 
     if(g_sta_param_ptr->fast_connect_set)
     {
         g_sta_param_ptr->fast_connect_set = 0;
-        if ((g_sta_param_ptr->key_len != g_sta_param_ptr->orig_key_len) || !os_strncmp(g_sta_param_ptr->key, g_sta_param_ptr->orig_key, g_sta_param_ptr->key_len))
+        if ((g_sta_param_ptr->key_len != g_sta_param_ptr->orig_key_len) 
+			|| !os_strncmp((char *)g_sta_param_ptr->key, (char *)g_sta_param_ptr->orig_key, g_sta_param_ptr->key_len))
         {
             os_null_printf("%s:%d %d vs %d\n", __FUNCTION__, __LINE__, g_sta_param_ptr->key_len, g_sta_param_ptr->orig_key_len);
             g_sta_param_ptr->key_len = g_sta_param_ptr->orig_key_len;

@@ -44,6 +44,7 @@ typedef enum {
     TXEVM_G_GET_SW_VER,
     TXEVM_G_D0_SINGLE_TD,
     TXEVM_G_RFCALI_STATUS,
+    TXEVM_G_DEVICE_ID,
     TXEVM_G_MAX
 } TXEVM_G_TYPE;
 
@@ -51,11 +52,14 @@ extern void sctrl_cali_dpll(UINT8 flag);
 extern void sctrl_dpll_int_open(void);
 extern void mpb_set_txdelay(UINT32 delay_us);
 extern void mpb_set_txdelay_precision(float delay_us);
+extern UINT32 sctrl_ctrl(UINT32 cmd, void *param);
+extern void manual_cal_set_dif_ble(UINT32 diff);
 
 UINT32 g_rate = EVM_DEFUALT_RATE;
 UINT32 g_single_carrier = EVM_DEFUALT_SINGLE_CARRIER;
 #define RCB_POWER_TABLE_ADDR        0x01050200
-#define RC_BEKEN_BASE		0x01050000
+#define RC_BEKEN_BASE		        0x01050000
+
 #if CFG_TX_EVM_TEST
 static UINT32 evm_translate_tx_rate(UINT32 rate)
 {
@@ -175,7 +179,6 @@ int do_evm(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
     UINT32 reg;
     UINT32 txdelay = 125;
     SC_TYPE_T single_carrier_type = SINGLE_CARRIER_11G;
-///	int i;
 
     if(arg_cnt == 1)
         return 0;
@@ -298,6 +301,10 @@ int do_evm(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
                             index = 0;
                         }
                         os_printf("get rfcali status %d(%s)\r\n", reg, status[index]);
+                    }
+                    else if (op == TXEVM_G_DEVICE_ID)
+                    {
+                        os_printf("device_id=%08x\r\n", sctrl_ctrl(CMD_GET_DEVICE_ID, NULL));
                     }
                     #if (CFG_SOC_NAME != SOC_BK7231)
                     else if(op == TXEVM_G_XTAL_FLASH) {
@@ -425,6 +432,8 @@ int do_evm(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
 
                         manual_cal_save_cailmain_tx_tab_to_flash();
                         manual_cal_save_cailmain_rx_tab_to_flash();
+                        // g_xcali might mismatch with g_xtal, need reload from flash since iTest would send "txevm -g 7"
+                        manual_cal_load_xtal_tag_flash();
                     }
                     else if(op == TXEVM_E_CLR_OPT){
                         manual_cal_clear_otp_flash();
@@ -445,10 +454,6 @@ int do_evm(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
                     }
                     #endif
                     else {
-                        //FUNCPTR reboot = 0;
-                        //os_printf("reboot\r\n");
-                        //(*reboot)();
-
                         #if ATE_APP_FUN
                         if(get_ate_mode_state())
                             os_printf("RF ATE mode!!!\r\n");
@@ -775,6 +780,8 @@ int do_evm(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
     }
     
 #endif // CFG_TX_EVM_TEST 
+
+	(void)txdelay;
 
     return 0;
 }

@@ -1,6 +1,23 @@
 #ifndef _BK7231U_CAL_H_
 #define _BK7231U_CAL_H_
 
+#include "uart_pub.h"
+
+#define CAL_DEBUG          1
+#if CAL_DEBUG
+#define CAL_PRT       null_prf
+#define CAL_WARN      null_prf// warning_prf
+#define CAL_FATAL     null_prf
+#define CAL_TIM_PRT   null_prf
+#define CAL_FLASH_PRT os_printf
+#else
+#define CAL_PRT       null_prf
+#define CAL_WARN      null_prf
+#define CAL_FATAL     null_prf
+#define CAL_TIM_PRT   null_prf
+#define CAL_FLASH_PRT null_prf
+#endif
+
 #if (CFG_SOC_NAME != SOC_BK7231)
 
 #define INCLUDE_OS
@@ -13,9 +30,6 @@
 //#define _11MBPS_MAX_POWER
 
 void delay05us(INT32 num);
-
-
-
 
 #define trx_reg_is_write(st_trxreg)     while(BK7231N_RC_REG.REG0x1->value & st_trxreg) 	{cpu_delay(1);}
 
@@ -1402,6 +1416,7 @@ typedef struct
     INT16 ble_pwr_indx;
     INT16 ble_pwr_shift;
 #endif
+    UINT32 device_id;
 } BK7011_CALI_CONTEXT;
 
 typedef struct
@@ -1452,6 +1467,10 @@ typedef struct
 /*******************************************************************************
 * Function Declarations
 *******************************************************************************/
+void rwnx_cal_en_rx_filter_offset(void);
+void rwnx_cal_set_bw_i2v(int enable);
+void rwnx_cal_dis_rx_filter_offset(void);
+
 #endif // (CFG_SOC_NAME != SOC_BK7231)
 
 #endif // _BK7231U_CAL_H_

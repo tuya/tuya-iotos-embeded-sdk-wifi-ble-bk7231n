@@ -9,9 +9,7 @@
  * functions are actually implemented so this can be used as a simple
  * compilation test or a starting point for a new configuration backend.
  */
-
 #include "includes.h"
-
 #include "common.h"
 #include "config.h"
 #include "base64.h"
@@ -244,11 +242,11 @@ static void wpa_config_update_fast_psk(struct wpa_ssid *ssid)
 	rl_read_bssid_info(&bssid_info);	
 
 	if(os_memcmp(ssid->ssid, bssid_info.ssid, ssid->ssid_len) == 0
-		&& os_strcmp(ssid->passphrase, bssid_info.pwd) == 0)
+		&& os_strcmp(ssid->passphrase, (char*)bssid_info.pwd) == 0)
 	{
 		bk_printf("Skip PSK caculation if SSID and passphrase are same \n");
 		os_memset(&ssid->psk, 0, sizeof(ssid->psk));
-		os_strcpy(ssid->psk, bssid_info.psk);
+		os_strcpy((char *)ssid->psk, (char *)bssid_info.psk);
 		ssid->psk_set = 1;
 	}
 	else

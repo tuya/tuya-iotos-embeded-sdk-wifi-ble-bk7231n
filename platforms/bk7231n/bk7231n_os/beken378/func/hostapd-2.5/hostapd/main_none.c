@@ -693,7 +693,7 @@ static void hostapd_thread_main( void *arg )
     }
 }
 
-static void hostapd_thread_start(void)
+void hostapd_thread_start(void)
 {  
     OSStatus ret;
      
@@ -716,7 +716,7 @@ static void hostapd_thread_start(void)
     }
 }
 
-static void hostapd_thread_stop(void)
+void hostapd_thread_stop(void)
 {  
     OSStatus ret;
 	

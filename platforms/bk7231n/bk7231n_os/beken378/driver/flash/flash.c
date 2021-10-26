@@ -10,6 +10,7 @@
 #include "uart_pub.h"
 #include "sys_ctrl_pub.h"
 #include "mcu_ps_pub.h"
+#include "ate_app.h"
 
 static const flash_config_t flash_config[] =
 {
@@ -68,7 +69,7 @@ static void flash_set_clk(UINT8 clk_conf)
     REG_WRITE(REG_FLASH_CONF, value);
 }
 
-static void flash_enable_cpu_data_wr(void)
+void flash_enable_cpu_data_wr(void)
 {
     UINT32 value;
 

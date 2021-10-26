@@ -106,7 +106,7 @@ static void hostapd_wpa_auth_conf(struct hostapd_bss_config *conf,
 }
 
 
-static void hostapd_wpa_auth_logger(void *ctx, const u8 *addr,
+void hostapd_wpa_auth_logger(void *ctx, const u8 *addr,
 				    logger_level level, const char *txt)
 {
 #ifndef CONFIG_NO_HOSTAPD_LOGGER

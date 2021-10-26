@@ -87,6 +87,8 @@ LOCAL void uart_io_sim_pwm_cap_neg_init_for_rx(void);
 #ifdef INCLUDE_TX_MODE
 extern void uart_io_sim_send_string(char *);
 #endif
+
+#ifdef POLLING_METHOD
 static  void  uart_io_sim_delay(volatile unsigned long times)
 {
     while (times != 0)
@@ -94,6 +96,7 @@ static  void  uart_io_sim_delay(volatile unsigned long times)
         times --;
     }
 }
+#endif
 
 #ifdef INCLUDE_TX_MODE
 void uart_io_sim_tx_buf_init(void)

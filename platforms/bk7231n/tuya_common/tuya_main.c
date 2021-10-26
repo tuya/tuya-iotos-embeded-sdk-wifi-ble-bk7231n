@@ -34,6 +34,14 @@
 #include "Z32HUA_encrypt.h"
 #endif
 
+#if defined(ENABLE_PRODUCT_AUTOTEST) && (ENABLE_PRODUCT_AUTOTEST == 1)
+#include "prod_test.h"
+#endif
+
+
+#ifndef TUYA_WEAK_ATTRIBUTE
+#define TUYA_WEAK_ATTRIBUTE __attribute__((weak))
+#endif
 /***********************************************************
 *************************micro define***********************
 ***********************************************************/
@@ -67,16 +75,6 @@ STATIC APP_PROD_CB app_prod_test = NULL;
 ***********************************************************/
 
 /**
- * @brief 应用初始化前置准备工作
- *      
- * 
- * @return VOID_T 
- * 
- * @note 在此函数中，应用可以执行一些配置设置、事件关注等和具体功能操作无关的工作，应用必须对其进行实现，如果不需要，则实现空函数。
- */
-extern VOID_T pre_app_init(VOID_T);
-
-/**
  * @brief 应用初始化接口
  * 
  * @return VOID_T 
@@ -84,16 +82,6 @@ extern VOID_T pre_app_init(VOID_T);
  * @note 在此函数，应用进行自身的初始化工作，应用必须对其进行实现，如果不需要，则实现空函数。
  */
 extern VOID_T app_init(VOID_T);
-
-/**
- * @brief 设备初始化前置准备工作
- * 
- * @return VOID_T 
- * 
- * @note 应用必须对其进行实现，如果不需要，则实现空函数
- * 
- */
-extern VOID_T pre_device_init(VOID_T);
 
 /**
  * @brief 设备初始化接口
@@ -107,6 +95,32 @@ extern OPERATE_RET device_init(VOID_T);
 
 
 /**
+ * @brief 应用初始化前置准备工作
+ *      
+ * 
+ * @return VOID_T 
+ * 
+ * @note 在此函数中，应用可以执行一些配置设置、事件关注等和具体功能操作无关的工作，应用必须对其进行实现，如果不需要，则实现空函数。
+ */
+TUYA_WEAK_ATTRIBUTE VOID_T pre_app_init(VOID_T)
+{
+    return;
+}
+
+/**
+ * @brief 设备初始化前置准备工作
+ * 
+ * @return VOID_T 
+ * 
+ * @note 应用必须对其进行实现，如果不需要，则实现空函数
+ * 
+ */
+TUYA_WEAK_ATTRIBUTE VOID_T pre_device_init(VOID_T)
+{
+    return;
+}
+
+/**
  * @brief pre_gpio_test gpio测试前置接口，用于对gpio测试做准备工作，
  * 例如对gpio进行重新初始化，或者是关闭gpio test，关闭gpio test的时候，
  * gpio test会返回Ture
@@ -115,8 +129,10 @@ extern OPERATE_RET device_init(VOID_T);
  * 
  * @note 应用必须对其进行实现，如果不需要，则实现空函数
  */
-extern VOID_T mf_user_pre_gpio_test_cb(VOID_T);
-
+TUYA_WEAK_ATTRIBUTE VOID_T mf_user_pre_gpio_test_cb(VOID_T)
+{
+    return;
+}
 
 /**
  * @brief mf_user_enter_callback 是配置进入产测回调接口
@@ -125,7 +141,10 @@ extern VOID_T mf_user_pre_gpio_test_cb(VOID_T);
  * 
  * @note 应用必须对其进行实现，如果不需要，则实现空函数
  */
-extern VOID_T mf_user_enter_callback(VOID_T);
+TUYA_WEAK_ATTRIBUTE VOID_T mf_user_enter_callback(VOID_T)
+{
+    return;
+}
 
 /**
  * @brief mf_user_callback 是配置写入回调接口
@@ -134,7 +153,10 @@ extern VOID_T mf_user_enter_callback(VOID_T);
  * 
  * @note 应用必须对其进行实现，如果不需要，则实现空函数
  */
-extern VOID_T mf_user_callback(VOID_T);
+TUYA_WEAK_ATTRIBUTE VOID_T mf_user_callback(VOID_T)
+{
+    return;
+}
 
 /**
  * @brief mf_user_product_test_cb 是成品产测回调接口
@@ -144,7 +166,10 @@ extern VOID_T mf_user_callback(VOID_T);
  * @note 应用必须对其进行实现，如果不需要，则实现空函数
  * 
  */
-extern OPERATE_RET mf_user_product_test_cb(USHORT_T cmd,UCHAR_T *data, UINT_T len, OUT UCHAR_T **ret_data,OUT USHORT_T *ret_len);
+TUYA_WEAK_ATTRIBUTE OPERATE_RET mf_user_product_test_cb(USHORT_T cmd,UCHAR_T *data, UINT_T len, OUT UCHAR_T **ret_data,OUT USHORT_T *ret_len)
+{
+    return OPRT_OK;
+}
 
 
 /**
@@ -241,6 +266,17 @@ STATIC BOOL_T scan_test_ssid(VOID)
     #endif
 
     if(app_prod_test) {
+        PR_DEBUG("gw cfg flash info reset factory!");
+        GW_WORK_STAT_MAG_S *wsm = (GW_WORK_STAT_MAG_S *)Malloc(SIZEOF(GW_WORK_STAT_MAG_S));
+        if(NULL != wsm){
+            memset(wsm,0,SIZEOF(GW_WORK_STAT_MAG_S));
+            op_ret = wd_gw_wsm_write(wsm);
+            if(OPRT_OK != op_ret){
+                PR_ERR("wd_gw_wsm_write err:%d!", op_ret);
+            }
+            Free(wsm);
+        } 
+        
         app_prod_test(flag, ap->rssi);
     }
     
@@ -283,7 +319,15 @@ void user_main(void)
 
     // 应用初始化
     app_init();
-
+    
+    #if defined(ENABLE_PRODUCT_AUTOTEST) && (ENABLE_PRODUCT_AUTOTEST == 1)
+    if (prodtest_ssid_scan(500)) {
+       return;
+    }
+    // 初始化设备
+    PR_DEBUG("device_init in");
+    TUYA_CALL_ERR_LOG(device_init());
+#else 
     // 功能启动，其中 GWCM_OLD 模式特殊，在任意时刻都可以扫描SSID，进入产测模式。
     PR_DEBUG("gwcm_mode %d", gwcm_mode);//默认没有低功耗模式
     if(gwcm_mode != GWCM_OLD) {
@@ -304,7 +348,7 @@ void user_main(void)
         PR_DEBUG("device_init in");
         TUYA_CALL_ERR_LOG(device_init());
     }
-
+#endif
     return;
 }
 

@@ -10,10 +10,8 @@
 #include "sys_rtos.h"
 #include "rtos_pub.h"
 #include "rtos_error.h"
-
 #include "wlan_cli_pub.h"
 #include "stdarg.h"
-
 #include "include.h"
 #include "mem_pub.h"
 #include "str_pub.h"
@@ -35,6 +33,8 @@
 #include "bk7011_cal_pub.h"
 #include "flash_pub.h"
 #include "mcu_ps_pub.h"
+#include "ate_app.h"
+#include "BkDriverPwm.h"
 
 #if CFG_SUPPORT_BOOTLOADER
 #include "wdt_pub.h"
@@ -51,6 +51,7 @@
 #include "start_type_pub.h"
 
 #if CFG_ENABLE_ATE_FEATURE
+static void pwm_command(char *pcWriteBuffer, int xWriteBufferLen, int argc, char **argv);
 
 #ifndef MOC
 static void task_Command( char *pcWriteBuffer, int xWriteBufferLen, int argc, char **argv );
@@ -67,9 +68,13 @@ beken_semaphore_t log_rx_interrupt_sema = NULL;
 
 extern u8* wpas_get_sta_psk(void);
 extern int cli_putstr(const char *msg);
-static void bkreg_cmd_handle_input(char *inbuf, int len);
+
+#if CFG_SUPPORT_BKREG
+void bkreg_cmd_handle_input(char *inbuf, int len);
+#endif
+
 extern int hexstr2bin(const char *hex, u8 *buf, size_t len);
-//extern void make_tcp_server_command(char *pcWriteBuffer, int xWriteBufferLen, int argc, char **argv);
+
 #if CFG_SUPPORT_OTA_HTTP
 extern int httpclient_common(httpclient_t *client,
                              const char *url,
@@ -79,7 +84,6 @@ extern int httpclient_common(httpclient_t *client,
                              uint32_t timeout_ms,
                              httpclient_data_t *client_data);
 #endif
-//u32 airkiss_process(u8 start);
 
 #if CFG_SARADC_CALIBRATE
 static void adc_command(char *pcWriteBuffer, int xWriteBufferLen, int argc, char **argv);
@@ -312,7 +316,6 @@ static void tab_complete(char *inbuf, unsigned int *bp)
 /* Get an input line.
 *
 * Returns: 1 if there is input, 0 if the line should be ignored. */
-extern uint32_t get_ate_mode_state(void);
 static int get_input(char *inbuf, unsigned int *bp)
 {
     if (inbuf == NULL)
@@ -1588,6 +1591,9 @@ static const struct cli_command built_ins[] =
 #endif
 
 	{"cca", "cca open\\close\\show", phy_cca_test},
+
+	{"pwm_test", "pwm_test<>", pwm_command},
+
 };
 
 /* Built-in "help" command: prints all registered commands and their help
@@ -2223,6 +2229,122 @@ IDLE_CMD_ERR:
     os_printf("Usage:ps [func] [param]\r\n");
 }
 #endif
+
+static void pwm_command(char *pcWriteBuffer, int xWriteBufferLen, int argc, char **argv)
+{
+	UINT8 channel1;
+	UINT32 duty_cycle1, cycle, cap_value;
+#if (CFG_SOC_NAME == SOC_BK7231N) || (CFG_SOC_NAME == SOC_BK7236)
+	UINT8 channel2;
+	UINT32 duty_cycle2;
+	UINT32 dead_band;
+#endif
+
+	/*get the parameters from command line*/
+	channel1	= atoi(argv[2]);
+	duty_cycle1	= atoi(argv[3]);
+	cycle		= atoi(argv[4]);
+#if (CFG_SOC_NAME == SOC_BK7231N) || (CFG_SOC_NAME == SOC_BK7236)
+	channel2	= atoi(argv[5]);
+	duty_cycle2	= atoi(argv[6]);
+	dead_band	= atoi(argv[7]);
+#endif
+
+	if (cycle < duty_cycle1)
+	{
+		bk_printf("pwm param error: end < duty\r\n");
+		return;
+	}
+
+	if (os_strcmp(argv[1], "single") == 0)
+	{
+		if (5 != argc) {
+			bk_printf( "pwm single test usage: pwm [single][channel][duty_cycle][freq]\r\n");
+			return;
+		}
+		bk_printf( "pwm channel %d: duty_cycle: %d  freq:%d \r\n", channel1, duty_cycle1, cycle);
+		
+#if (CFG_SOC_NAME != SOC_BK7231N)
+		bk_pwm_initialize(channel1, cycle, duty_cycle1);
+		bk_pwm_start(channel1);				/*start single pwm channel once */
+#endif
+	} else if (os_strcmp(argv[1], "stop") == 0)
+		bk_pwm_stop(channel1);
+	
+#if ((CFG_SOC_NAME == SOC_BK7231N) || (CFG_SOC_NAME == SOC_BK7236) ||(CFG_SOC_NAME == SOC_BK7271))
+	else if (os_strcmp(argv[1], "update") == 0)
+	{
+		if (5 != argc) {
+			bk_printf("pwm update usage: pwm [update][channel1][duty_cycle][freq]\r\n");
+			return;
+		}
+
+		bk_printf("pwm api TODO\r\n");
+	} 
+	else if (os_strcmp(argv[1], "cap") == 0)
+	{
+		uint8_t cap_mode = duty_cycle1;
+
+		if (5 != argc) {
+			bk_printf("pwm cap usage: pwm [cap][channel1][mode][freq]\r\n");
+			return;
+		}
+
+		bk_pwm_capture_initialize(channel1, cap_mode);			/*capture pwm value */
+		bk_pwm_start(channel1);
+	} else if (os_strcmp(argv[1], "capvalue") == 0)
+	{
+		cap_value = bk_pwm_get_capvalue(channel1);
+		bk_printf("pwm : %d cap_value=%x \r\n", channel1, cap_value);
+	}
+	#if ((CFG_SOC_NAME == SOC_BK7231N) || (CFG_SOC_NAME == SOC_BK7236))
+	else if (os_strcmp(argv[1], "cw") == 0)
+	{
+
+		if (8 != argc) {
+			bk_printf( "pwm cw test usage: pwm [cw][channel1][duty_cycle1][freq][channel2][duty_cycle2][dead_band]\r\n");
+			return;
+		}
+
+		bk_printf("pwm : %d / %d cw pwm test \r\n", channel1, channel2);
+
+		bk_pwm_cw_initialize(channel1, channel2, cycle, duty_cycle1, duty_cycle2, dead_band);
+		bk_pwm_cw_start(channel1, channel2);
+	} else if (os_strcmp(argv[1], "updatecw") == 0)
+	{
+		if (8 != argc) {
+			bk_printf( "pwm cw test usage: pwm [cw][channel1][duty_cycle1][freq][channel2][duty_cycle2][dead_band]\r\n");
+			return;
+		}
+
+		bk_printf( "pwm : %d / %d cw updatw pwm test \r\n", channel1, channel2);
+
+		bk_pwm_cw_update_param(channel1, channel2, cycle, duty_cycle1, duty_cycle2, dead_band);
+	} else if (os_strcmp(argv[1],  "loop") == 0)
+	{
+		UINT16 cnt = 1000;
+
+		bk_printf("pwm : %d / %d pwm update loop test \r\n", channel1, channel2);
+
+		while (cnt--) {
+			duty_cycle1 = duty_cycle1 - 100;
+
+			bk_pwm_cw_update_param(channel1, channel2, cycle, duty_cycle1, duty_cycle2, dead_band);
+			rtos_delay_milliseconds(10);
+
+			if (duty_cycle1 == 0)
+				duty_cycle1 = cycle;
+		}
+	}else if (os_strcmp(argv[1], "cwstop") == 0)
+	{
+
+		bk_printf( "pwm : %d / %d cw updatw pwm stop \r\n", channel1, channel2);
+
+		bk_pwm_cw_stop(channel1, channel2);
+	} 
+	#endif
+	#endif
+}
 
 void cli_rx_callback(int uport, void *param)
 {

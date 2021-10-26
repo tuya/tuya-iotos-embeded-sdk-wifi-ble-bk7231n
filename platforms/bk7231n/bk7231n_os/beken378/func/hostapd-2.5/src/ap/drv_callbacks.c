@@ -645,7 +645,7 @@ static void hostapd_notify_auth_ft_finish(void *ctx, const u8 *dst,
 }
 #endif /* CONFIG_IEEE80211R */
 
-
+#ifdef CONFIG_FULL_HOSTAPD
 static void hostapd_notif_auth(struct hostapd_data *hapd,
 			       struct auth_info *rx_auth)
 {
@@ -687,20 +687,17 @@ fail:
 	hostapd_sta_auth(hapd, rx_auth->peer, rx_auth->auth_transaction + 1,
 			 status, resp_ies, resp_ies_len);
 }
-
+#endif
 
 static void hostapd_action_rx(struct hostapd_data *hapd,
 			      struct rx_mgmt *drv_mgmt)
 {
 	struct ieee80211_mgmt *mgmt;
 	struct sta_info *sta;
-	//size_t plen __maybe_unused;
 	u16 fc;
 
 	if (drv_mgmt->frame_len < 24 + 1)
 		return;
-
-	//plen = drv_mgmt->frame_len - 24 - 1;
 
 	mgmt = (struct ieee80211_mgmt *) drv_mgmt->frame;
 	fc = le_to_host16(mgmt->frame_control);
@@ -869,7 +866,7 @@ static void hostapd_mgmt_tx_cb(struct hostapd_data *hapd, const u8 *buf,
 
 #endif /* NEED_AP_MLME */
 
-
+#ifdef CONFIG_FULL_HOSTAPD
 static int hostapd_event_new_sta(struct hostapd_data *hapd, const u8 *addr)
 {
 	struct sta_info *sta = ap_get_sta(hapd, addr);
@@ -890,7 +887,7 @@ static int hostapd_event_new_sta(struct hostapd_data *hapd, const u8 *addr)
 
 	return 0;
 }
-
+#endif
 
 static void hostapd_event_eapol_rx(struct hostapd_data *hapd, const u8 *src,
 				   const u8 *data, size_t data_len)
@@ -910,7 +907,7 @@ static void hostapd_event_eapol_rx(struct hostapd_data *hapd, const u8 *src,
 	ieee802_1x_receive(hapd, src, data, data_len);
 }
 
-
+#ifdef CONFIG_FULL_HOSTAPD
 static struct hostapd_channel_data * hostapd_get_mode_channel(
 	struct hostapd_iface *iface, unsigned int freq)
 {
@@ -928,7 +925,6 @@ static struct hostapd_channel_data * hostapd_get_mode_channel(
 	return NULL;
 }
 
-
 static void hostapd_update_nf(struct hostapd_iface *iface,
 			      struct hostapd_channel_data *chan,
 			      struct freq_survey *survey)
@@ -945,7 +941,6 @@ static void hostapd_update_nf(struct hostapd_iface *iface,
 			iface->lowest_nf = survey->nf;
 	}
 }
-
 
 static void hostapd_single_channel_get_survey(struct hostapd_iface *iface,
 					      struct survey_results *survey_res)
@@ -983,7 +978,6 @@ static void hostapd_single_channel_get_survey(struct hostapd_iface *iface,
 	iface->last_channel_time_busy = survey->channel_time_busy;
 }
 
-
 static void hostapd_event_get_survey(struct hostapd_data *hapd,
 				     struct survey_results *survey_results)
 {
@@ -1017,10 +1011,10 @@ static void hostapd_event_get_survey(struct hostapd_data *hapd,
 		iface->chans_surveyed++;
 	}
 }
-
+#endif
 
 #ifdef NEED_AP_MLME
-
+#ifdef CONFIG_FULL_HOSTAPD
 static void hostapd_event_iface_unavailable(struct hostapd_data *hapd)
 {
 	wpa_printf(MSG_DEBUG, "Interface %s is unavailable -- stopped",
@@ -1033,6 +1027,7 @@ static void hostapd_event_iface_unavailable(struct hostapd_data *hapd)
 						&hapd->cs_freq_params);
 	}
 }
+#endif
 
 #ifdef CONFIG_DFS
 static void hostapd_event_dfs_radar_detected(struct hostapd_data *hapd,

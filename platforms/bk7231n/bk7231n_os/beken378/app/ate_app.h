@@ -22,13 +22,11 @@
 
 #define ATE_GPIO_ID            GPIO21   /* jtag tms pin*/
 
-void ate_gpio_init(void);
-uint32_t ate_mode_check(void);
-
-void ate_app_init(void);
-uint32_t get_ate_mode_state(void);
-void ate_start(void);
-
+extern void ate_gpio_init(void);
+extern uint32_t ate_mode_check(void);
+extern void ate_app_init(void);
+extern uint32_t get_ate_mode_state(void);
+extern void ate_start(void);
 #endif /*ATE_APP_FUN */
 #endif // _ATE_APP_H_
 // eof

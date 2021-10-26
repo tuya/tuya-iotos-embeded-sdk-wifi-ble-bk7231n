@@ -293,7 +293,8 @@ static void temp_detect_timer_poll(void)
     {
         err = rtos_reload_timer(&g_temp_detect_config.detect_timer);
         TMP_DETECT_PRT("temp_detect_enable failed, restart detect timer, \r\n");  
-    } 
+    }
+	(void)err;
 }
 
 static void temp_detect_polling_handler(void)
@@ -658,33 +659,45 @@ UINT32 temp_single_get_current_temperature(UINT32 *temp_value)
 {
     UINT32 ret;
     int result;
+    int retry_count = 3;
+
     *temp_value = 0;
 
-    if(tmp_single_semaphore == NULL) {
+    for (; retry_count > 0; retry_count--) {
+        if(tmp_single_semaphore == NULL) {
 #if CFG_SUPPORT_ALIOS
-        result = rtos_init_semaphore(&tmp_single_semaphore, 0);
+            result = rtos_init_semaphore(&tmp_single_semaphore, 0);
 #else
-        result = rtos_init_semaphore(&tmp_single_semaphore, 1);
+            result = rtos_init_semaphore(&tmp_single_semaphore, 1);
 #endif
-        ASSERT(kNoErr == result);
+            ASSERT(kNoErr == result);
+        }
+
+        ret = temp_single_get_enable();
+        if (SARADC_SUCCESS != ret)
+        {
+            continue;
+        }
+
+        ret = 1000; // 1s
+        result = rtos_get_semaphore(&tmp_single_semaphore, ret);
+        if(result == kNoErr) {
+            #if (CFG_SOC_NAME != SOC_BK7231)
+            *temp_value = tmp_single_desc.pData[0];
+            #else
+            *temp_value = tmp_single_desc.pData[4];
+            #endif
+            ret = 0;
+        }else {
+            TMP_DETECT_FATAL("temp_single timeout\r\n");
+            ret = 1;
+        }
+
+        if ((ADC_TEMP_VAL_MIN < *temp_value) && (*temp_value < ADC_TEMP_VAL_MAX)) {
+            break;
+        }
     }
-    
-    temp_single_get_enable();
-    
-    ret = 1000; // 1s
-    result = rtos_get_semaphore(&tmp_single_semaphore, ret);
-    if(result == kNoErr) {
-        #if (CFG_SOC_NAME != SOC_BK7231)
-        *temp_value = tmp_single_desc.pData[0];
-        #else
-        *temp_value = tmp_single_desc.pData[4];
-        #endif
-        ret = 0;        
-    }else {
-        TMP_DETECT_FATAL("temp_single timeout\r\n");
-        ret = 1;
-    }
-        
+
     return ret;
 }
 

@@ -171,9 +171,6 @@ void evm_init(UINT32 channel, UINT32 bandwidth)
     phy_init(&cfg);
 	
     phy_set_channel(PHY_BAND_2G4, bandwidth, channel, channel, 0, PHY_PRIM);
-    //if(bandwidth == PHY_CHNL_BW_40)
-    //   rs_set_trx_regs_extern();
-    
 	
 	/*add mm interface*/
 	EVM_PRT("[EVM]add_mm_interface\r\n");
@@ -270,7 +267,6 @@ void evm_bypass_mac_set_channel(UINT32 channel)
 
 void evm_set_bandwidth(UINT32 bandwidth)
 {
-    UINT32 ret;
 	UINT32 param;
 
     if(bandwidth >= PHY_CHNL_BW_80)
@@ -278,19 +274,18 @@ void evm_set_bandwidth(UINT32 bandwidth)
 
 	evm_bandwidth = bandwidth;
 	param = evm_bandwidth;
-	ret = sddev_control(MPB_DEV_NAME, MCMD_SET_BANDWIDTH, &param);
+	sddev_control(MPB_DEV_NAME, MCMD_SET_BANDWIDTH, &param);
 }
 
 void evm_bypass_mac_set_guard_i_type(UINT32 gi_tpye)
 {
-    UINT32 ret;
 	UINT32 param;
 
     if(gi_tpye > 2)
         return;
 
 	param = gi_tpye;
-	ret = sddev_control(MPB_DEV_NAME, MCMD_SET_GI, &param);
+	sddev_control(MPB_DEV_NAME, MCMD_SET_GI, &param);
 }
 
 

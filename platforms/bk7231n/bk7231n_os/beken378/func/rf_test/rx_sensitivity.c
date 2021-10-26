@@ -66,9 +66,6 @@ UINT32 rs_mode = PHY_CHNL_BW_20;
 
 void rs_init(UINT32 channel, UINT32 mode)
 {
-	//BOOL p2p = 0;
-	//UINT8 vif_idx;
-	//UINT8 vif_type = 2;
 	struct phy_cfg_tag cfg;
 	
 	/*reset mm*/
@@ -92,10 +89,6 @@ void rs_init(UINT32 channel, UINT32 mode)
     phy_init(&cfg);
 	
     phy_set_channel(PHY_BAND_2G4, mode, channel, channel, 0, PHY_PRIM);
-	
-	/*add mm interface*/
-	//RS_PRT("[RS]add_mm_interface\r\n");
-	//vif_mgmt_register(&rs_mac_addr, vif_type, p2p, &vif_idx);
 
 	/* Put the HW in active state*/
 	mm_active();
@@ -219,7 +212,6 @@ void rx_get_rx_result_end(void)
 	UINT32 txtot;
 
 	UINT32 txampducur;
-	UINT32 txoctectinampducur;
 	
 	UINT32 rxbw20cur;
 	UINT32 rxbw40cur;
@@ -227,7 +219,6 @@ void rx_get_rx_result_end(void)
 	UINT32 rxbw160cur;
 
 	UINT32 rxampducur;
-	UINT32 rxoctectinampducur;
 
 	UINT32 fcserrcur;
 	UINT32 phyerrcur;
@@ -267,7 +258,6 @@ void rx_get_rx_result_end(void)
 	txtot = ((txbw40cur + txbw20cur + txbw80cur + txbw160cur));
 
 	txampducur = ((txampdunew - g_txampdu));
-	txoctectinampducur = ((txoctectinampdunew - g_txoctectinampdu));
 
 	if(0 == txtot)
 	{
@@ -288,7 +278,6 @@ void rx_get_rx_result_end(void)
 	rxbw160cur =  (rxbw160new - g_rxbw160);
 
 	rxampducur =  (rxampdunew - g_rxampdu);
-	rxoctectinampducur =  (rxoctectinampdunew - g_rxoctectinampdu);
 
 	fcserrcur =  (fcserrornew - g_fcserror);
 	phyerrcur =  (phyerrornew - g_phyerror);
@@ -312,10 +301,13 @@ void rx_get_rx_result_end(void)
 	RS_PRT("fcserr : %0d (%0d %%), ",  fcserrcur, (100*fcserrcur/rxtot));
 	RS_PRT("phyerr : %0d (%0d %%), ",  phyerrcur, (100*phyerrcur/rxtot)); 
 	RS_PRT("rxflowerr: %0d (%0d %%)\r\n",  rxflowccur, (100*rxflowccur/rxtot));
+	
 	(void) ccapri;
 	(void) ccasec20;
 	(void) ccasec40;
 	(void) ccasec80;
+	(void) rxoctectinampdunew;
+	(void) txoctectinampdunew;
 }
 
 /* refer to txrx_stat.sh*/

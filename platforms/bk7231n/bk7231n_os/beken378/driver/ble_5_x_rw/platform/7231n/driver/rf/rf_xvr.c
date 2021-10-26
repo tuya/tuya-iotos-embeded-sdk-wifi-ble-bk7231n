@@ -47,6 +47,7 @@
 #include "ble_reg_access.h"			//// added
 #include "BK3633_RegList.h"           // Platform register
 #include "user_config.h"
+#include "sys_ctrl.h"
 /**
  ****************************************************************************************
  * DEFINES
@@ -520,7 +521,7 @@ void rf_init(struct rwip_rf_api *api)
 						   /*uint8_t rxpwrup1*/ 	 0x70,
 						   /*uint8_t txpwrdn0*/ 	 0x00,
 						   /*uint8_t txpwrup1*/ 	 0x65);
-	ble_radiopwrupdn1_set(0x00700065);
+	ble_radiopwrupdn1_set(0x00650065);
 	// uart_printf("BLE_RADIOPWRUPDN1 addr:0x%08x,val:0x%08x\r\n",BLE_RADIOPWRUPDN1_ADDR,ble_radiopwrupdn1_get());
 
 	/* BLE RADIOPWRUPDN2 */      
@@ -549,7 +550,7 @@ void rf_init(struct rwip_rf_api *api)
 	ble_radiotxrxtim1_pack(/*uint8_t rfrxtmda1*/ 0x00,
 						   /*uint8_t rxpathdly1*/	   0x04,
 						   /*uint8_t txpathdly1*/	   0x04);
-	ble_radiotxrxtim1_set(0x00000404);
+	ble_radiotxrxtim1_set(0x00050C04);
 	//uart_printf("BLE_RADIOTXRXTIM1 addr:0x%08x,val:0x%08x\r\n",BLE_RADIOTXRXTIM1_ADDR,ble_radiotxrxtim1_get());
 
 
@@ -568,6 +569,8 @@ void rf_init(struct rwip_rf_api *api)
 						   /*uint8_t txpathdly3*/	   0x03);
 	ble_radiotxrxtim3_set(0x00000020);                       
 	//uart_printf("BLE_RADIOTXRXTIM3 addr:0x%08x,val:0x%08x\r\n",BLE_RADIOTXRXTIM3_ADDR,ble_radiotxrxtim3_get());
+
+	bk_ble_addtion_reg0_set(0x00000007);
 
 #if (BLE_CON_CTE_REQ | BLE_CONLESS_CTE_RX)
 	// Init the DF CNTL

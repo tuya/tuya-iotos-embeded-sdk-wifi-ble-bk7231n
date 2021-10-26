@@ -156,7 +156,9 @@ INCLUDES += -I./beken378/driver/spi
 #INCLUDES += -I./beken378/driver/ble/ble_lib/modules/ke/src                                                         
 #INCLUDES += -I./beken378/driver/ble/ble_lib/modules/h4tl/api  
 INCLUDES += -I./beken378/func/include
+INCLUDES += -I./beken378/func/misc
 INCLUDES += -I./beken378/func/rf_test
+INCLUDES += -I./beken378/func/bk7011_cal
 INCLUDES += -I./beken378/func/user_driver
 INCLUDES += -I./beken378/func/power_save
 INCLUDES += -I./beken378/func/uart_debug
@@ -221,8 +223,6 @@ endif
 #INCLUDES += -I./beken378/driver/ble_5_x/zephyr/host/include
 #INCLUDES += -I./beken378/driver/ble_5_x/zephyr/port/include
 #zephyr head end
-
-
 
 # -------------------------------------------------------------------
 # Source file list
@@ -355,9 +355,11 @@ SRC_C += ./beken378/driver/wdt/wdt.c
 #SRC_C += ./beken378/driver/ble_5_x/zephyr/host/src/uuid.c
 #zephyr source end
 
-ifeq ("${CFG_BLE_5X_VERSION}", "1") && ("${CFG_BLE_5X_RW}", "1")
 ####################################################
 #rw head start
+#ifeq (${CFG_BLE_5X_VERSION}${CFG_BLE_5X_RW},11)
+ifeq ("${CFG_BLE_5X_VERSION}", "1")
+ifeq ("${CFG_BLE_5X_RW}", "1")
 INCLUDES += -I./beken378/driver/ble_5_x_rw/ble_lib/ip/ble/hl/api
 INCLUDES += -I./beken378/driver/ble_5_x_rw/ble_lib/ip/ble/hl/inc
 INCLUDES += -I./beken378/driver/ble_5_x_rw/ble_lib/ip/ble/hl/src/gap/gapc
@@ -546,10 +548,9 @@ SRC_C += ./beken378/driver/ble_5_x_rw/ble_pub/app/src/app_ble_task.c
 #rw source end
 else  ###ifeq ("${CFG_BLE_5X_VERSION}", "1") && ("${CFG_BLE_5X_RW}", "1")
 
-
+endif ##ifeq ("${CFG_BLE_5X_VERSION}", "1")
+endif ##ifeq ("${CFG_BLE_5X_RW}", "1")
 ####################################################
-endif ##ifeq ("${CFG_BLE_5X_VERSION}", "1") && ("${CFG_BLE_5X_RW}", "1")
-
 
 #function layer
 SRC_C += ./beken378/func/func.c
@@ -682,6 +683,7 @@ SRC_C += ./beken378/func/lwip_intf/dhcpd/dhcp-server-main.c
 SRC_C += ./beken378/func/misc/fake_clock.c
 SRC_C += ./beken378/func/misc/target_util.c
 SRC_C += ./beken378/func/misc/start_type.c
+SRC_C += ./beken378/func/misc/soft_encrypt.c
 SRC_C += ./beken378/func/power_save/power_save.c
 SRC_C += ./beken378/func/power_save/manual_ps.c
 SRC_C += ./beken378/func/power_save/mcu_ps.c
@@ -922,21 +924,61 @@ endif
 # -------------------------------------------------------------------
 # add tuya iot lib compile support
 # -------------------------------------------------------------------
-
 LIBFLAGS += -L $(TOP_DIR)/sdk/lib/ -ltuya_iot
 CFLAGS += -DUSER_SW_VER=\"$(USER_SW_VER)\" -DAPP_BIN_NAME=\"$(APP_BIN_NAME)\"
-
 
 # -------------------------------------------------------------------
 # add tuya application components.mk
 # -------------------------------------------------------------------
-
 APP_MK_NAME := $(TOP_DIR)/apps/$(APP_BIN_NAME)/components.mk
+COMP_SRCS =
 ifeq ($(APP_MK_NAME), $(wildcard $(APP_MK_NAME)))
 sinclude $(APP_MK_NAME)
-TY_SRC_DIRS += $(foreach n, $(COMPONENTS), $(shell find $(TOP_DIR)/components/$(n)/src -type d))
-TY_INC_DIRS += $(foreach n, $(COMPONENTS), $(shell find $(TOP_DIR)/components/$(n)/include -type d))
-endif
+
+ifneq ($(COMPONENTS),)
+
+TY_SRC_DIRS += $(foreach n, $(COMPONENTS), $(shell find $(TOP_DIR)/components/$(n) -type d))
+TY_INC_DIRS += $(foreach n, $(COMPONENTS), $(shell find $(TOP_DIR)/components/$(n) -type d))
+
+endif # COMPONENTS
+
+
+ifneq ($(COMPONENTS_LIB),)
+
+COMP_SRC_DIRS += $(foreach n, $(COMPONENTS_LIB), $(shell find $(TOP_DIR)/components/$(n) -type d))
+TY_INC_DIRS += $(foreach n, $(COMPONENTS_LIB), $(shell find $(TOP_DIR)/components/$(n) -type d))
+
+COMP_SRCS += $(foreach dir, $(COMP_SRC_DIRS), $(wildcard $(dir)/*.c))
+COMP_SRCS += $(foreach dir, $(COMP_SRC_DIRS), $(wildcard $(dir)/*.cpp))
+COMP_SRCS += $(foreach dir, $(COMP_SRC_DIRS), $(wildcard $(dir)/*.s))
+COMP_SRCS += $(foreach dir, $(COMP_SRC_DIRS), $(wildcard $(dir)/*.S))
+
+ifneq ($(COMP_SRCS),)
+TY_SRC_DIRS += $(COMP_SRC_DIRS)
+
+define COMPONENT_LIB_Temp
+$(1)_lib:
+	@ $(AR) rcs $(TOP_DIR)/components/$(1)/lib$(1).a -c $(shell find $(TOP_DIR)/components/$(1) -name "*.o")
+
+$(1)_lib_clean:
+	@ -rm -rf $(TOP_DIR)/components/$(1)/*.o
+
+endef # COMPONENT_LIB_Temp
+
+$(foreach comp, $(COMPONENTS_LIB), $(eval $(call COMPONENT_LIB_Temp,$(comp))))
+comp_libs: $(foreach comp, $(COMPONENTS_LIB), $(comp)_lib)
+comp_libs_clean: $(foreach comp, $(COMPONENTS_LIB), $(comp)_lib_clean)
+
+endif # COMP_SRCS
+
+define COMPONENT_LIB_FLAGS
+LIBFLAGS += -L$(TOP_DIR)/components/$(1)/ -l$(1)
+endef
+$(foreach comp, $(COMPONENTS_LIB), $(eval $(call COMPONENT_LIB_FLAGS,$(comp))))
+
+endif # COMPONENTS_LIB
+
+endif # APP_MK_NAME
 
 # -------------------------------------------------------------------
 # add tuya iot application compile support
@@ -952,9 +994,9 @@ SRC_C += $(foreach dir, $(TY_SRC_DIRS), $(wildcard $(dir)/*.cpp))
 SRC_C += $(foreach dir, $(TY_SRC_DIRS), $(wildcard $(dir)/*.s)) 
 SRC_C += $(foreach dir, $(TY_SRC_DIRS), $(wildcard $(dir)/*.S)) 
 
-#TY_INC_DIRS += $(shell find $(TOP_DIR)/sdk -type d)
-SDK_INCLUDE_DIRS := $(shell find $(TOP_DIR)/sdk -name include -type d)
-TY_INC_DIRS += $(foreach dir,$(SDK_INCLUDE_DIRS),$(shell find $(dir) -type d))
+TY_INC_DIRS += $(shell find $(TOP_DIR)/sdk/include -type d)
+#SDK_INCLUDE_DIRS := $(shell find $(TOP_DIR)/sdk -name include -type d)
+#TY_INC_DIRS += $(foreach dir,$(SDK_INCLUDE_DIRS),$(shell find $(dir) -type d))
 
 TY_INC_DIRS += $(shell find ../tuya_os_adapter/include -type d)
 TY_INC_DIRS += $(shell find $(TOP_DIR)/apps/$(APP_BIN_NAME)/include -type d)
@@ -972,7 +1014,15 @@ sinclude $(TY_DEPENDENCY_LIST)
 
 CUR_PATH = $(shell pwd)	
 .PHONY: application
-application: prerequirement $(SRC_O) $(SRC_S_O) $(SRC_OS_O) $(TY_IOT_LIB)
+
+test_target: prerequirement $(SRC_O) $(SRC_S_O) $(SRC_OS_O) $(TY_IOT_LIB)
+ifneq ($(COMPONENTS_LIB),)
+ifneq ($(COMP_SRCS),)
+	@$(MAKE) -f application.mk comp_libs
+endif # COMP_SRCS
+endif # COMPONENTS_LIB
+
+application: test_target
 ifeq ("${ota_idx}", "1")
 	$(LD) $(LFLAGS) -o $(TY_OUTPUT)/$(APP_BIN_NAME)_$(APP_VERSION).axf  $(OBJ_LIST) $(OBJ_S_LIST) $(OBJ_OS_LIST) $(LIBFLAGS) -T./beken378/build/bk7231n_ota.ld
 else ifeq ("${ota_idx}", "2")
@@ -1003,6 +1053,7 @@ prerequirement:
 	@mkdir -p $(TY_OUTPUT)
 
 $(SRC_O): %.o : %.c
+	@ echo "build $@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -MM -MT $@ -MF $(OBJ_DIR)/$(notdir $(patsubst %.o,%.d,$@))
 	@cp $@ $(OBJ_DIR)/$(notdir $@)
@@ -1045,6 +1096,11 @@ endif
 
 .PHONY: clean
 clean:
+ifneq ($(COMPONENTS_LIB),)
+ifneq ($(COMP_SRCS),)
+	@$(MAKE) -f application.mk comp_libs_clean
+endif # COMP_SRCS
+endif # COMPONENTS_LIB
 	rm -rf $(TARGET)
 	rm -f $(SRC_O)
 	rm -f $(SRC_S_O)

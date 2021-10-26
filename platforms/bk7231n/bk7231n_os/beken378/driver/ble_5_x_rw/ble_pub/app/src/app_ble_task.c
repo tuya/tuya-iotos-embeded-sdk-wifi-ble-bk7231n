@@ -1,9 +1,9 @@
 #include "app_ble_task.h"
 
-
 #if (BLE_APP_PRESENT)
 #include "rw_pub.h"
 
+#include "ble_rf_port.h"
 
 #define APP_SCNRSP_DATA         "\x09\xFF\x00\x60\x52\x57\x2D\x42\x4C\x45"
 #define APP_SCNRSP_DATA_LEN     (10)

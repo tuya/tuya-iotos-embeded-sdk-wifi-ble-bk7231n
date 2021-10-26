@@ -307,6 +307,22 @@ static void gpio_enable_second_function(UINT32 func_mode)
         modul_select = GPIO_SPI_MODULE;
         pmask = GPIO_SPI_MODULE_MASK;
         break;
+        
+   case GFUNC_MODE_SPI_USE_GPIO_14:
+       start_index = 14;
+       end_index = 14;
+       pmode = PERIAL_MODE_2;
+      modul_select = GPIO_SPI_DMA_MODULE;
+       pmask = GPIO_SPI_MODULE_MASK;
+       break;
+   
+   case GFUNC_MODE_SPI_USE_GPIO_16_17:
+       start_index = 16;
+       end_index = 17;
+       pmode = PERIAL_MODE_2;
+       modul_select = GPIO_SPI_MODULE;
+       pmask = GPIO_SPI_MODULE_MASK;
+       break;
 
     case GFUNC_MODE_PWM4:
 #if (CFG_SOC_NAME == SOC_BK7231)
@@ -614,9 +630,25 @@ void gpio_int_enable(UINT32 index, UINT32 mode, void (*p_Int_Handler)(unsigned c
     {
         *(volatile UINT32 *)REG_GPIO_INTLV1 = (*(volatile UINT32 *)REG_GPIO_INTLV1 & (~(0x03 << ((index - 16) << 1)))) | (mode << ((index - 16) << 1));
     }
-
-    p_gpio_intr_handler[index] = p_Int_Handler;
+    
     *(volatile UINT32 *)REG_GPIO_INTEN |= (0x01 << index);
+
+    param = 0;
+    //while(param < 500)
+    while(param < 250)
+    {
+        UINT32 ulIntStatus = 0;
+        ulIntStatus = *(volatile UINT32 *)REG_GPIO_INTSTA;
+        if(ulIntStatus & (0x1UL << index))
+        {
+            *(volatile UINT32 *)REG_GPIO_INTSTA |= (0x1UL << index);
+            // not break for mode=2 with pin high iput, case two intr
+            //break;   
+        }
+        param++;
+    }
+  
+     p_gpio_intr_handler[index] = p_Int_Handler;
 }
 
 /*******************************************************************/

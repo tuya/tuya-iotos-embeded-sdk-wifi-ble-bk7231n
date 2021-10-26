@@ -39,8 +39,10 @@ void tuya_os_adapt_output_log(const         char *str)
     if(str == NULL) {
         return;
     }
- 
-    OutputPrint((char *)str);
+    if(get_printf_port() == 1)
+        bk_send_string(UART1_PORT, (char *)str);
+    else
+        bk_send_string(UART2_PORT, (char *)str); 
 }
 
 

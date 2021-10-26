@@ -1317,8 +1317,11 @@ continue_processing:
 
 	os_memcpy(sm->SNonce, key->key_nonce, WPA_NONCE_LEN);
 	wpa_sm_step(sm);
-}
 
+	#if 0 == CFG_ENABLE_WPA_LOG
+	(void)msgtxt;
+	#endif
+}
 
 static int wpa_gmk_to_gtk(const u8 *gmk, const char *label, const u8 *addr,
 			  const u8 *gnonce, u8 *gtk, size_t gtk_len)
@@ -2991,7 +2994,7 @@ void wpa_gtk_rekey(struct wpa_authenticator *wpa_auth)
 }
 
 
-static const char * wpa_bool_txt(int val)
+const char * wpa_bool_txt(int val)
 {
 	return val ? "TRUE" : "FALSE";
 }

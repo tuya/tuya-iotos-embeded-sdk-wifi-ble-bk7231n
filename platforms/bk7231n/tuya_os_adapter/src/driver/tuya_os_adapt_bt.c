@@ -22,6 +22,9 @@
 #include "ble_api.h"
 #include "ble_pub.h"
 #include "app_task.h"
+#include "app_ble.h"
+#include "app_ble_task.h"
+#include "ble_ui.h"
 #include "mcu_ps_pub.h"
 //#include "application.h"
 
@@ -66,6 +69,7 @@ TY_BT_MSG_CB ty_bt_msg_cb;
 
 
 unsigned char ble_att_flag = 0;
+unsigned char ble_stack_init_ok = 0;
 bool if_start_adv_after_disconnect = true;
 
 /* add begin: by sunkz, interface regist */
@@ -222,7 +226,7 @@ static void ble_event_callback(ble_event_t event, void *param)
         case BLE_CREATE_DB_OK:
         {
             LOG_NOTICE("CREATE DB SUCCESS\r\n");
-
+            ble_stack_init_ok = 0x01;
             if(ty_bt_msg_cb!=NULL)
                 ty_bt_msg_cb(0, TY_BT_EVENT_ADV_READY ,NULL);
             
@@ -326,7 +330,7 @@ static void ble_recv_adv_callback(recv_adv_t *recv_adv)
     tuya_bt_assign_scan_decode(recv_adv);
 
 }
-
+extern void ble_entry(void);
 /**
  * @brief tuya_os_adapt_bt 蓝牙初始化
  * @return OPERATE_RET 
@@ -430,8 +434,10 @@ int tuya_os_adapt_bt_reset_adv(tuya_ble_data_buf_t *adv, tuya_ble_data_buf_t *sc
 
     memcpy(adv_info.respData, scan_resp->data, scan_resp->len);
     adv_info.respDataLen = scan_resp->len;
-
-    appm_update_adv_data(adv->data, adv->len, scan_resp->data, scan_resp->len);
+    if(0x01 == ble_stack_init_ok){
+        appm_update_adv_data(adv->data, adv->len, scan_resp->data, scan_resp->len);
+    }
+    
 
     return OPRT_OS_ADAPTER_OK;
 }
@@ -477,17 +483,12 @@ int tuya_os_adapt_bt_stop_adv(void)
             return OPRT_OS_ADAPTER_BT_ADV_STOP_FAILED;
         }
     }
-    if(9 == app_status)
-    {
-        if_start_adv_after_disconnect = false;
-        appm_disconnect(0x13);
-        LOG_DEBUG("!!!!!!!!!!tuya_os_adapt_bt_stop_adv 0x13 \r\n");
-    }
-    
+  
     return OPRT_OS_ADAPTER_OK;
 
 }
-
+extern ble_err_t appm_start_scaning(void);
+extern ble_err_t appm_stop_scaning(void);
 /**
  * @brief tuya_os_adapt_bt 主动扫描蓝牙广播包
  * @return OPERATE_RET 

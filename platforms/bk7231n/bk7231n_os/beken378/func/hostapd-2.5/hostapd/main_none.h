@@ -13,8 +13,8 @@ struct hapd_global {
 
 extern char *bss_iface;
 
-static void hostapd_thread_start(void);
-static void hostapd_thread_stop(void);
+void hostapd_thread_start(void);
+void hostapd_thread_stop(void);
 extern int hostapd_main_entry(int argc, char *argv[]);
 extern void hostapd_poll(void *param);
 extern int hostapd_channel_switch(int new_freq);

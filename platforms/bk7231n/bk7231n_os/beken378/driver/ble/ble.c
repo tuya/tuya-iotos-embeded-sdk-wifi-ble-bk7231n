@@ -10,8 +10,6 @@
 #include "rwble.h"
 #include "app_task.h"
 #include "udebug.h"
-//#include "bkDriverUart.h"
-
 #include "typedef.h"
 #include "sys_ctrl_pub.h"
 #include "icu_pub.h"
@@ -133,9 +131,9 @@ uint8 is_rf_switch_to_ble(void)
 
 void ble_switch_rf_to_wifi(void)
 {
-    // if in ble dut mode, no need change back to wifi any more.
-    // ble dut mode can not exit until power off
-  //  if (!is_rf_switch_to_ble() || power_save_if_rf_sleep())
+	// if in ble dut mode, no need change back to wifi any more.
+	// ble dut mode can not exit until power off
+	//  if (!is_rf_switch_to_ble() || power_save_if_rf_sleep())
   	if (!is_rf_switch_to_ble())
         return;
 
@@ -336,7 +334,7 @@ void ble_release_rf_by_isr(void)
 #if (CFG_DEFAULT_RF_USER == CFG_RF_USER_WIFI)
     if(!ble_dut_flag)
     {
-    ble_switch_rf_to_wifi();
+	    ble_switch_rf_to_wifi();
     }
 #else
     if (kernel_state_get(TASK_APP) == APPM_CONNECTED)

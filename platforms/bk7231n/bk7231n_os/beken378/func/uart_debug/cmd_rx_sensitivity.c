@@ -12,7 +12,7 @@
 #include "drv_model_pub.h"
 #include "bk7011_cal_pub.h"
 #include "reg_mdm_cfg.h"
-
+#include "bk7231N_cal.h"
 #include "arm_arch.h"
 
 #if CFG_RX_SENSITIVITY_TEST

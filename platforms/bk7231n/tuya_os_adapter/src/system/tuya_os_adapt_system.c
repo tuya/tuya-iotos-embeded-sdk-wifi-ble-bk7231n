@@ -255,7 +255,7 @@ int tuya_os_adapt_get_random_data(const unsigned int range)
  */
 unsigned char cpu_lp_flag = 0;
 
-int tuya_os_adapt_wifi_get_lp_mode(void)
+int tuya_os_adapt_cpu_get_lp_mode(void)
 {
     return cpu_lp_flag;
 }

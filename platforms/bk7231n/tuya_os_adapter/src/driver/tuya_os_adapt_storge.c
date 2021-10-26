@@ -1,8 +1,8 @@
 /**
  * @file tuya_os_adapt_storage.c
- * @brief STORAGEÉè±¸²Ù×÷½Ó¿Ú
+ * @brief STORAGEï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
  * 
- * @copyright Copyright(C),2018-2020, Í¿Ñ»¿Æ¼¼ www.tuya.com
+ * @copyright Copyright(C),2018-2020, Í¿Ñ»ï¿½Æ¼ï¿½ www.tuya.com
  * 
  */
 #include "tuya_os_adapt_storge.h"
@@ -29,8 +29,10 @@
 
 #define UF_PARTITION_START     (0x200000 - 0x3000 - 0xE000 - 0x1000) - 0x3000 - 0x1000 - 0x18000
 #define UF_PARTITION_SIZE      0x18000                                          //96k
-
-
+#if defined(KV_PROTECTED_ENABLE) && (KV_PROTECTED_ENABLE==1)
+    #define PROTECTED_DATA_ADDR (0x200000 - 0x3000 - 0xE000 - 0x1000 - 0x1000)// protected data (1 block)
+    #define PROTECTED_FLASH_HUGE_SZ 0x1000 // 4k  ä¸å…±åŸºçš„å—å¤§å°
+#endif
 /***********************************************************
 *************************variable define********************
 ***********************************************************/
@@ -43,13 +45,18 @@ static const TUYA_OS_STORAGE_INTF m_tuya_os_storage_intfs = {
     .get_uf_desc = tuya_os_adapt_uf_get_desc
 };
 
+
 static UNI_STORAGE_DESC_S storage = {
     SIMPLE_FLASH_START,
     SIMPLE_FLASH_SIZE,
     FLH_BLOCK_SZ,
     SIMPLE_FLASH_SWAP_START,
     SIMPLE_FLASH_SWAP_SIZE,
-    SIMPLE_FLASH_KEY_ADDR
+    SIMPLE_FLASH_KEY_ADDR,
+#if defined(KV_PROTECTED_ENABLE) && (KV_PROTECTED_ENABLE==1)    
+    PROTECTED_DATA_ADDR, // protected data (1 block)
+    PROTECTED_FLASH_HUGE_SZ // ä¸å…±åŸºçš„å—å¤§å°
+ #endif    
 };
 
 static UF_PARTITION_TABLE_S uf_file = {
@@ -72,7 +79,7 @@ extern int hal_flash_unlock(void);
  * @param[in]       addr        flash address
  * @param[out]      dst         pointer of buffer
  * @param[in]       size        size of buffer
- * @return int 0=³É¹¦£¬·Ç0=Ê§°Ü
+ * @return int 0=ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0=Ê§ï¿½ï¿½
  */
 int tuya_os_adapt_flash_read(const unsigned int addr, unsigned char *dst, const unsigned int size)
 {
@@ -113,7 +120,7 @@ static unsigned int __uni_flash_is_protect_all(void)
  * @param[in]       addr        flash address
  * @param[in]       src         pointer of buffer
  * @param[in]       size        size of buffer
- * @return int 0=³É¹¦£¬·Ç0=Ê§°Ü
+ * @return int 0=ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0=Ê§ï¿½ï¿½
  */
 int tuya_os_adapt_flash_write(const unsigned int addr, const unsigned char *src, const unsigned int size)
 {
@@ -159,7 +166,7 @@ int tuya_os_adapt_flash_write(const unsigned int addr, const unsigned char *src,
  * 
  * @param[in]       addr        flash block address
  * @param[in]       size        size of flash block
- * @return int 0=³É¹¦£¬·Ç0=Ê§°Ü
+ * @return int 0=ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0=Ê§ï¿½ï¿½
  */
 int tuya_os_adapt_flash_erase(const unsigned int addr, const unsigned int size)
 {
@@ -224,7 +231,7 @@ UNI_STORAGE_DESC_S *tuya_os_adapt_storage_get_desc(void)
 }
 
 /**
- * @brief flash ÉèÖÃ±£»¤,enable ÉèÖÃtureÎªÈ«±£»¤£¬falseÎª°ë±£»¤
+ * @brief flash ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½,enable ï¿½ï¿½ï¿½ï¿½tureÎªÈ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½falseÎªï¿½ë±£ï¿½ï¿½
  * 
  * @return OPRT_OS_ADAPTER_OK 
  */

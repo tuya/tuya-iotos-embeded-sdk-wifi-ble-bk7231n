@@ -195,7 +195,6 @@ void ble_exit(void)
 	sddev_unregister_dev( BLE_DEV_NAME );
 
 	return;
-
 }
 
 void ble_send_msg(UINT32 data)
@@ -207,6 +206,8 @@ void ble_send_msg(UINT32 data)
     	msg.data = data;    	
     	ret = rtos_push_to_queue(&ble_msg_que, &msg, BEKEN_NO_WAIT);
     }
+	
+	(void)ret;
 }
 
 extern int bk7011_reduce_vdddig_for_rx(int reduce);

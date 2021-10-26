@@ -2366,7 +2366,7 @@ static void handle_auth_cb(struct hostapd_data *hapd,
 	}
 }
 
-
+#ifdef CONFIG_FULL_HOSTAPD
 static void hostapd_set_wds_encryption(struct hostapd_data *hapd,
 				       struct sta_info *sta,
 				       char *ifname_wds)
@@ -2389,7 +2389,7 @@ static void hostapd_set_wds_encryption(struct hostapd_data *hapd,
 		}
 	}
 }
-
+#endif
 
 static void handle_assoc_cb(struct hostapd_data *hapd,
 			    const struct ieee80211_mgmt *mgmt,

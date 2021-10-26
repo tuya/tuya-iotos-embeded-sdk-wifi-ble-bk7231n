@@ -24,6 +24,8 @@
 #endif
 #include "rtos_error.h"
 #include "rtos_pub.h"
+#include "power_save_pub.h"
+#include "ble_pub.h"
 
 extern int bmsg_ioctl_sender(void *arg);
 uint32_t rw_tx_msg_timeout_count = 0;
@@ -38,6 +40,8 @@ int rw_msg_timeout_handler(uint32_t timeout_cnt)
 		bk_reboot();
 	}
 	#endif
+
+	return 0;
 }
 
 int rw_msg_send(const void *msg_params, uint16_t reqid, void *cfm)

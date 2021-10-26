@@ -107,7 +107,7 @@ extern void pwm_group_mode_enable(UINT8 ucChannel);
 extern UINT8 pwm_init_levl_set_low(UINT8 ucChannel);
 extern UINT8 pwm_init_levl_set_high(UINT8 ucChannel);
 extern void pwm_unit_enable(UINT8 ucChannel);
-extern UINT8 pwm_update_param_enable(UINT8 channel);
+extern UINT8 pwm_update_param_enable(UINT8 ucChannel);
 extern UINT8 pwm_group_update_param_enable(UINT8 channel1,UINT8 channel2,pwm_param_t *pwm_param);
 extern UINT8 pwm_nogroup_update_param_enable(UINT8 channel1,UINT8 channel2,pwm_param_t *pwm_param);
 

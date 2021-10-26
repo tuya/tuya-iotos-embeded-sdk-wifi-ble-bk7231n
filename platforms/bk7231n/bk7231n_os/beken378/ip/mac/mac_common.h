@@ -39,7 +39,7 @@
  ****************************************************************************************
  */
 ///Maximum number of scan results that can be stored.
-#define MAX_BSS_LIST            32
+#define MAX_BSS_LIST            64//32
 
 /// Error code for invalid TID.
 #define INVALID_TID_IDX         0xFF

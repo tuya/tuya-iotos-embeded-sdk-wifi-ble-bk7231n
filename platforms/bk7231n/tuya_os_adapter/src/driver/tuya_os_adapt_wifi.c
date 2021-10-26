@@ -75,8 +75,8 @@ static SEM_HANDLE scanHandle = NULL;
 
 static bool lp_mode = FALSE;
 
-static unsigned char lp_status = 1;  //不管应用是否设置，都是默认低功耗， dtim = 1
-
+static unsigned char wifi_lp_status = 0;  
+static unsigned char mgnt_cb_exist_flag = 0;
 static const TUYA_OS_WIFI_INTF m_tuya_os_wifi_intfs = {
     .all_ap_scan                  = tuya_os_adapt_wifi_all_ap_scan,
     .assign_ap_scan               = tuya_os_adapt_wifi_assign_ap_scan,
@@ -104,6 +104,12 @@ static const TUYA_OS_WIFI_INTF m_tuya_os_wifi_intfs = {
     .set_lp_mode                  = tuya_os_adapt_set_wifi_lp_mode,
     .rf_calibrated                = tuya_os_adapt_wifi_rf_calibrated,
 };
+
+
+static void ty_wifi_powersave_disable(void);
+static void ty_wifi_powersave_enable(void);
+
+
 
 /***********************************************************
 *************************function define********************
@@ -136,7 +142,7 @@ int tuya_os_adapt_wifi_all_ap_scan(AP_IF_S **ap_ary, unsigned int *num)
     AP_IF_S *item;
     AP_IF_S *array;
     int ret;
-    int i,index;
+    int i;  //,index
     int scan_cnt;
 	int ssid_len;
     struct scanu_rst_upload *scan_rst;
@@ -658,7 +664,7 @@ int tuya_os_adapt_wifi_get_bssid(unsigned char *mac)
     return ret;
 }
 
-extern int tuya_os_adapt_wifi_get_lp_mode(void);
+extern int tuya_os_adapt_cpu_get_lp_mode(void);
 /**
  * @brief get wifi station work status
  * 
@@ -686,11 +692,15 @@ int tuya_os_adapt_wifi_station_get_status(WF_STATION_STAT_E *stat)
     }
 
     if((!flag) && (*stat == WSS_GOT_IP)) {
-        if(lp_status) {
+        if(mgnt_recv_cb) {
+            ty_wifi_powersave_disable();
+            
+        } else {
             bk_wlan_dtim_rf_ps_mode_enable();
             bk_wlan_dtim_rf_ps_timer_start();
         }
-        if(tuya_os_adapt_wifi_get_lp_mode()) {
+
+        if(tuya_os_adapt_cpu_get_lp_mode() & wifi_lp_status) {
             bk_wlan_mcu_ps_mode_enable();
             lp_mode = TRUE;
         } else {
@@ -849,7 +859,7 @@ static void ty_wifi_powersave_enable(void)
     rtos_delay_milliseconds(50);
     bk_wlan_dtim_rf_ps_mode_enable();
     bk_wlan_dtim_rf_ps_timer_start();
-    lp_status = 1;
+    //lp_status = 1;
 }
 
 /**
@@ -864,7 +874,7 @@ static void ty_wifi_powersave_disable(void)
     bk_wlan_dtim_rf_ps_timer_pause();
     rtos_delay_milliseconds(50);
     bk_wlan_start_ez_of_sta();
-    lp_status = 0;
+    //lp_status = 0;
 }
 
 /**
@@ -1077,6 +1087,7 @@ int tuya_os_adapt_wifi_register_recv_mgnt_callback(const BOOL_T enable, const WI
             init_flag = TRUE;
         }
         mgnt_recv_cb = recv_cb; 
+        mgnt_cb_exist_flag = 1;
 
     }else {
         bk_wlan_reg_rx_mgmt_cb(NULL, 0);
@@ -1094,21 +1105,35 @@ int tuya_os_adapt_wifi_register_recv_mgnt_callback(const BOOL_T enable, const WI
  */
 int tuya_os_adapt_set_wifi_lp_mode(const BOOL_T en, const unsigned char dtim)
 {  
+
     if(TRUE == en) {
-        if(lp_status) {
+        if(wifi_lp_status) {
             LOG_ERR("bk wlan ps mode has enable\r\n");
-            return OPRT_OS_ADAPTER_COM_ERROR;
+            return OPRT_OS_ADAPTER_OK;
         }
 
-        ty_wifi_powersave_enable();
+        if(mgnt_recv_cb || mgnt_cb_exist_flag) {
+            ty_wifi_powersave_enable();
+            if(!mgnt_recv_cb) {
+                mgnt_cb_exist_flag = 0;
+            }
+        } else {
+            bk_wlan_dtim_rf_ps_mode_enable();
+            bk_wlan_dtim_rf_ps_timer_start();
+        }
         LOG_DEBUG("bk_wlan_ps_mode_enable\r\n");
     }else {
-
-        ty_wifi_powersave_disable();
-        bk_wlan_mcu_ps_mode_disable();
+        if(mgnt_recv_cb || mgnt_cb_exist_flag) {
+            ty_wifi_powersave_disable();
+            if(!mgnt_recv_cb) {
+                mgnt_cb_exist_flag = 0;
+            }
+        }
+       // bk_wlan_mcu_ps_mode_disable();
         LOG_DEBUG("bk_wlan_ps_mode_disable\r\n");
     }
-    
+
+    wifi_lp_status = en;
     return OPRT_OS_ADAPTER_OK;
 }
 

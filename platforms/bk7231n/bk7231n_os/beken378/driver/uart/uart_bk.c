@@ -484,6 +484,25 @@ void uart_set_tx_stop_end_int(UINT8 uport, UINT8 set)
 		REG_WRITE(REG_UART2_INTR_ENABLE, reg);
 }
 
+void uart_disable_rx(UINT8 uport)
+{
+	UINT32 reg;
+
+	if(UART1_PORT == uport)
+		reg = REG_READ(REG_UART1_CONFIG);
+	else
+		reg = REG_READ(REG_UART2_CONFIG);
+	
+	reg &= ~(UART_RX_ENABLE);
+	
+	if(UART1_PORT == uport){
+        //rt_kprintf("set_tx_fifo:%d\r\n", set);
+		REG_WRITE(REG_UART1_CONFIG, reg);
+	}
+	else
+		REG_WRITE(REG_UART2_CONFIG, reg);
+}
+
 /*******************************************************************/
 void uart1_isr(void)
 {
@@ -601,11 +620,15 @@ void uart1_exit(void)
 
 UINT32 uart1_open(UINT32 op_flag)
 {
-    return UART_SUCCESS;
+	uart1_init();
+
+	return UART_SUCCESS;
 }
 
 UINT32 uart1_close(void)
 {
+	uart1_exit();
+
     return UART_SUCCESS;
 }
 
@@ -706,7 +729,11 @@ UINT32 uart1_ctrl(UINT32 cmd, void *parm)
 	case CMD_SET_TX_FIFO_NEEDWR_INT:
 		uart_set_tx_fifo_needwr_int(UART1_PORT, *(UINT8 *)parm);
 		break;
-    default:
+
+	case CMD_DISABLE_UART_RX:
+		uart_disable_rx(UART1_PORT);
+
+	default:
         break;
     }
 
@@ -840,11 +867,15 @@ void uart2_exit(void)
 
 UINT32 uart2_open(UINT32 op_flag)
 {
-    return UART_SUCCESS;
+	uart2_init();
+
+	return UART_SUCCESS;
 }
 
 UINT32 uart2_close(void)
 {
+	uart2_exit();
+
     return UART_SUCCESS;
 }
 
@@ -946,7 +977,12 @@ UINT32 uart2_ctrl(UINT32 cmd, void *parm)
 	case CMD_SET_TX_FIFO_NEEDWR_INT:
 		uart_set_tx_fifo_needwr_int(UART2_PORT, *(UINT8 *)parm);
 		break;
-    default:
+
+	case CMD_DISABLE_UART_RX:
+		uart_disable_rx(UART2_PORT);
+		break;
+
+	default:
         break;
     }
     

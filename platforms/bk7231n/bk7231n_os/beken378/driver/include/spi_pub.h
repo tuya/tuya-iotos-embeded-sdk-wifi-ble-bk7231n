@@ -27,19 +27,22 @@ enum
     CMD_SPI_RXINT_MODE,
     CMD_SPI_TXINT_MODE,
     CMD_SPI_INIT_MSTEN,
-	CMD_SPI_GET_BUSY,
-	CMD_SPI_SET_RX_CALLBACK,
-	CMD_SPI_SET_TX_NEED_WRITE_CALLBACK,
-	CMD_SPI_SET_TX_FINISH_CALLBACK,
-	CMD_SPI_DEINIT_MSTEN,
-	CMD_SPI_LSB_EN,
-	CMD_SPI_TX_EN,
-	CMD_SPI_RX_EN,
-	CMD_SPI_TXFINISH_EN,
-	CMD_SPI_RXFINISH_EN,
-	CMD_SPI_TXTRANS_EN,
-	CMD_SPI_RXTRANS_EN,
-	CMD_SPI_CS_EN,
+    CMD_SPI_GET_BUSY,
+    CMD_SPI_SET_RX_CALLBACK,
+    CMD_SPI_SET_TX_NEED_WRITE_CALLBACK,
+    CMD_SPI_SET_TX_FINISH_CALLBACK,
+    CMD_SPI_DEINIT_MSTEN,
+    CMD_SPI_LSB_EN,
+    CMD_SPI_TX_EN,
+    CMD_SPI_RX_EN,
+    CMD_SPI_TXFINISH_EN,
+    CMD_SPI_RXFINISH_EN,
+    CMD_SPI_TXTRANS_EN,
+    CMD_SPI_RXTRANS_EN,
+    CMD_SPI_CS_EN,
+    CMD_SPI_SET_TX_FINISH_INT_CALLBACK,
+    CMD_SPI_SET_RX_FINISH_INT_CALLBACK,
+    CMD_SPI_SET_3_LINE,
 };
 
 #define BK_SPI_DEBUG                0
@@ -61,7 +64,9 @@ enum
 #define SPI_FLASH_HOLD_GPIO_NUM     (GPIO19)
 
 #define SPI_DEF_CLK_HZ              (10 * 1000 * 1000)
-#define TX_FINISH_FLAG              (1 << 31)
+#define TX_FINISH_FLAG              (1 << 0)
+#define RX_FINISH_FLAG              (1 << 1)
+
 
 #define BK_SPI_CPOL                 0x01
 #define BK_SPI_CPHA                 0x02
@@ -148,6 +153,7 @@ int bk_spi_master_xfer(struct spi_message *msg);
 int bk_spi_master_deinit(void);
 
 #if CFG_USE_SPI_DMA
+int bk_spi_master_dma_tx_rx_init(UINT32 mode, UINT32 rate, struct spi_message *spi_msg);
 int bk_spi_master_dma_rx_init(UINT32 mode , UINT32 rate, struct spi_message*spi_msg );
 int bk_spi_master_dma_tx_init(UINT32 mode , UINT32 rate, struct spi_message*spi_msg );
 int bk_spi_master_dma_recv(struct spi_message*spi_msg );
@@ -165,6 +171,7 @@ void bk_slave_dma_rx_disable(void);
 
 
 void bk_master_dma_tx_finshed_callback(void (*func)(void));
+void bk_master_dma_rx_finshed_callback(void (*func)(void));
 
 #endif
 #endif //_SPI_PUB_H_

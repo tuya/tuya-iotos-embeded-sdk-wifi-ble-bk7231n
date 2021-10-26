@@ -48,9 +48,21 @@ OSStatus bk_uart_initialize( bk_uart_t uart, const bk_uart_config_t *config, rin
     return ret;
 }
 
-OSStatus bk_uart_finalize( bk_uart_t uart )
+OSStatus bk_uart_finalize( bk_uart_t uart)
 {
-    return kNoErr;
+    UINT32 status;
+    DD_HANDLE uart_hdl;
+
+    if(BK_UART_1 == uart)
+        uart_hdl = ddev_open(UART1_DEV_NAME, &status, 0);
+    else
+        uart_hdl = ddev_open(UART2_DEV_NAME, &status, 0);
+
+    ASSERT(DRV_FAILURE != uart_hdl);
+
+	ddev_close(uart_hdl);
+
+	return kNoErr;
 }
 
 OSStatus bk_uart_send( bk_uart_t uart, const void *data, uint32_t size )
@@ -141,6 +153,25 @@ OSStatus bk_uart_set_rx_callback(bk_uart_t uart, uart_callback callback, void *p
     uart_callback_rx.callback = callback;
     uart_callback_rx.param = param;
     ret = ddev_control(uart_hdl, CMD_UART_SET_RX_CALLBACK, &uart_callback_rx);
+    ASSERT(UART_SUCCESS == ret);
+
+    return kNoErr;
+}
+
+OSStatus bk_uart_diable_rx(bk_uart_t uart)
+{
+    UINT32 ret;
+    UINT32 status;
+    DD_HANDLE uart_hdl;
+
+    if(BK_UART_1 == uart)
+        uart_hdl = ddev_open(UART1_DEV_NAME, &status, 0);
+    else
+        uart_hdl = ddev_open(UART2_DEV_NAME, &status, 0);
+
+    ASSERT(DRV_FAILURE != uart_hdl);
+
+    ret = ddev_control(uart_hdl, CMD_DISABLE_UART_RX, 0);
     ASSERT(UART_SUCCESS == ret);
 
     return kNoErr;

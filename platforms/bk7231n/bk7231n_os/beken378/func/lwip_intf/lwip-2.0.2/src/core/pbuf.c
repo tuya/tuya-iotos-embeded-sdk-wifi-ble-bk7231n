@@ -191,8 +191,7 @@ pbuf_free_ooseq_callback(void *arg)
 #endif /* !NO_SYS */
 
 /** Queue a call to pbuf_free_ooseq if not already queued. */
-static void
-pbuf_pool_is_empty(void)
+void pbuf_pool_is_empty(void)
 {
 #ifndef PBUF_POOL_FREE_OOSEQ_QUEUE_CALL
   SYS_ARCH_SET(pbuf_free_ooseq_pending, 1);

@@ -45,33 +45,30 @@ struct ble_session_env
 	uint8_t ble_init_over;
 };
 
-
 extern void set_ble_active_status(char active);
 extern int get_ble_active_status(void);
 extern void set_ble_dut_flag_status(char ble_dut_flag);
 extern uint8 is_rf_switch_to_ble(void);
-
 extern uint32_t rwip_get_current_time(void);
 extern uint32_t rwip_get_next_target_time(void);
-
-void ble_init(void);
-void ble_exit(void);
-void ble_dut_start(void);
+extern void ble_init(void);
+extern void ble_exit(void);
+extern void ble_dut_start(void);
 extern UINT8 ble_is_start(void);
-UINT8* ble_get_mac_addr(void);
-UINT8* ble_get_name(void);
-uint8_t if_ble_sleep(void);
-void rf_wifi_used_clr(void);
-void rf_wifi_used_set(void);
-UINT32 if_rf_wifi_used(void );
-void rf_not_share_for_ble(void);
-void rf_can_share_for_ble(void);
+extern UINT8* ble_get_mac_addr(void);
+extern UINT8* ble_get_name(void);
+extern uint8_t if_ble_sleep(void);
+extern void rf_wifi_used_clr(void);
+extern void rf_wifi_used_set(void);
+extern UINT32 if_rf_wifi_used(void );
+extern void rf_not_share_for_ble(void);
+extern void rf_can_share_for_ble(void);
 
 #if CFG_USE_BLE_PS
 extern void bk_ble_sleep_check(void);
 #endif
 
-
 extern struct ble_session_env ble_session_ctx;
-
 #endif /* _BLE_PUB_H_ */
+// eof
+

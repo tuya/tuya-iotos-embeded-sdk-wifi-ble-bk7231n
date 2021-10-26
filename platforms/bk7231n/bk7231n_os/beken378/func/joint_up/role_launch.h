@@ -88,6 +88,10 @@ typedef struct _rl_bssid_info_
 	uint8_t channel;
 	uint8_t psk[65];
 	uint8_t pwd[65];
+	
+	#if (FAST_CONNECT_INFO_ENC_METHOD == ENC_METHOD_AES)
+	uint8_t padding[5]; /* aes attention: sizeof(RL_BSSID_INFO_T) = 16 *n*/
+	#endif
 }RL_BSSID_INFO_T, *RL_BSSID_INFO_PTR;
 #endif
 
@@ -156,6 +160,7 @@ typedef struct _role_launch_
 /*******************************************************************************
 * Function Declarations
 *******************************************************************************/
+#if CFG_ROLE_LAUNCH
 extern void rl_init(void);
 extern void rl_uninit(void);
 extern void rl_start(void);
@@ -190,5 +195,12 @@ extern void rl_sta_request_enter(LAUNCH_REQ *param, FUNC_1PARAM_PTR completion);
 extern void rl_ap_request_enter(LAUNCH_REQ *param, FUNC_1PARAM_PTR completion);
 extern uint32_t rl_sta_cache_request_enter(void);
 extern uint32_t rl_sta_req_is_null(void);
+#endif
+
+#if RL_SUPPORT_FAST_CONNECT
+extern void rl_read_bssid_info(RL_BSSID_INFO_PTR bssid_info);
+extern void rl_clear_bssid_info(void);
+#endif
+
 #endif //_ROLE_LAUNCH_H_ 
 

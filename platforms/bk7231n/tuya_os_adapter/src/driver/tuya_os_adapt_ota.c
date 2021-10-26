@@ -5,6 +5,7 @@
  * @copyright Copyright (c) {2018-2020} 涂鸦科技 www.tuya.com
  * 
  */
+#include <string.h> 
 #include "tuya_os_adapt_ota.h"
 #include "tuya_os_adapter_error_code.h"
 #include "tuya_os_adapt_system.h"

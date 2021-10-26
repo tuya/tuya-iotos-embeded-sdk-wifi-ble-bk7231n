@@ -38,7 +38,7 @@ static const tuya_pwm_ops_t  s_pwm_dev_ops = {
     .deinit     = pwm_dev_deinit
 };
 
-static char polarity_init_cnt = 0;
+static unsigned char polarity_init_cnt = 0;
 static char polarity_channel[PWM_POLARITTY_INIT_CNT] = {-1};
 
 

@@ -55,6 +55,7 @@ OSStatus bk_pwm_initialize(bk_pwm_t pwm, uint32_t frequency, uint32_t duty_cycle
     ASSERT(PWM_SUCCESS == ret);
     return kNoErr;
 }
+
 OSStatus bk_pwm_update_param(bk_pwm_t pwm, uint32_t frequency, uint32_t duty_cycle)
 {
     UINT32 ret;
@@ -199,7 +200,6 @@ static UINT8 pwm2_set_low_flag=0;
 
 OSStatus bk_pwm_group_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency, uint32_t duty_cycle1,uint32_t duty_cycle2,uint32_t dead_band)
 {
-    UINT32 ret;
     pwm_param_t param;
 	if(pwm1 >= pwm2)
 	{
@@ -252,6 +252,7 @@ OSStatus bk_pwm_group_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency
 OSStatus bk_pwm_update_param(bk_pwm_t pwm, uint32_t frequency, uint32_t duty_cycle1, uint32_t duty_cycle2, uint32_t duty_cycle3)
 {
     UINT32 ret;
+	UINT32 init_level = 0;
     pwm_param_t param;
 
 	param.channel         = (uint8_t)pwm;
@@ -262,15 +263,16 @@ OSStatus bk_pwm_update_param(bk_pwm_t pwm, uint32_t frequency, uint32_t duty_cyc
 	
 
     if(!duty_cycle1) {
-        bk_pwm_initlevl_set_low(pwm);
+        init_level = 0;
     } else {
-        bk_pwm_initlevl_set_high(pwm);
+        init_level = 1;
 
     }
     
-    ret = sddev_control(PWM_DEV_NAME, CMD_PWM_UPDATA_PARAM, &param);
+    ret = sddev_control(PWM_DEV_NAME, CMD_PWM_SINGLE_UPDATA_PARAM, &param);
 
-	pwm_update_param_enable(pwm);
+	pwm_single_update_param_enable(pwm,init_level);
+	(void)ret;
 
     return kNoErr;
 }
@@ -339,7 +341,6 @@ UINT32 bk_pwm_get_capvalue(bk_pwm_t pwm)
 
 OSStatus bk_pwm_cw_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency, uint32_t duty_cycle1,uint32_t duty_cycle2,  uint32_t dead_band)
 {
-    UINT32 ret = 0;
     pwm_param_t param;
 
     memset(&param, 0, sizeof(pwm_param_t));
@@ -412,6 +413,8 @@ OSStatus bk_pwm_cw_start(bk_pwm_t pwm1, bk_pwm_t pwm2)
 		pwm_unit_enable(pwm1);
 		pwm_unit_enable(pwm2);
 	}
+	
+	return kNoErr;
 }
 
 OSStatus bk_pwm_cw_stop(bk_pwm_t pwm1, bk_pwm_t pwm2)
@@ -426,31 +429,30 @@ OSStatus bk_pwm_cw_stop(bk_pwm_t pwm1, bk_pwm_t pwm2)
 		pwm_unit_disable(pwm1);
 		pwm_unit_disable(pwm2);
 	}
+	
+	return kNoErr;
 }
 
 OSStatus bk_pwm_cw_update_param(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency, uint32_t duty_cycle1,uint32_t duty_cycle2,  uint32_t dead_band)
 {
-    UINT32 ret= 0;
+    UINT32 ret = 0;
     pwm_param_t param;
 	
 	if(frequency <(duty_cycle1 + duty_cycle2 + 2*dead_band))
 	{
 		bk_printf("pwm param set error:freq:%x ,cycle1:%x,cycle2:%x,dead_band:%x\r\n",frequency, duty_cycle1, duty_cycle2, dead_band);
-		return;
+		return -1;
 	}
 
 	if(duty_cycle2 <= 0)
 	{
 		duty_cycle2 = 0;
-		//dead_band = 0;
-		//bk_printf("pwm error dead_band > cycle2, cycle2:%x,dead_band:%x\r\n",duty_cycle2, dead_band);
 	}
 	
 	if(duty_cycle1 <= 0)
 	{
 		duty_cycle1 = 0;
 		dead_band = 0;
-		//bk_printf("pwm error dead_band > cycle1, cycle1:%x,dead_band:%x\r\n",duty_cycle1, dead_band);
 	}
 
 	//bk_printf("pwm channel :%d :freq:%x ,cycle1:%x,cycle2:%x,dead_band:%x\r\n",pwm1,frequency, duty_cycle1, duty_cycle2, dead_band);
@@ -486,8 +488,7 @@ OSStatus bk_pwm_cw_update_param(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency,
 			pwm1_set_high_flag = 0;
 			param.init_level0 = 0;
 		}
-	}
-	
+	}	
 
 	if(pwm2_set_low_flag == 1)
 	{

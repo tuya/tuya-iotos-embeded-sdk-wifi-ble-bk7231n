@@ -456,10 +456,11 @@ __INLINE void phy_get_config(uint8_t cfg)
 extern void phy_init_after_wakeup(void);
 extern void phy_disable_lsig_intr(void);
 extern void phy_enable_lsig_intr(void);
-
-void phy_open_cca(void);
-void phy_close_cca(void);
-void phy_show_cca(void);
+extern void phy_wakeup_rf_reinit(void);
+extern void phy_wakeup_wifi_reinit(void);
+extern void phy_open_cca(void);
+extern void phy_close_cca(void);
+extern void phy_show_cca(void);
 
 /// @}
 #endif /* PHY_TRIDENT_H_ */

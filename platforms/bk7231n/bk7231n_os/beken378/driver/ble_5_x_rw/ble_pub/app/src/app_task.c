@@ -168,9 +168,6 @@ static int gapm_profile_added_ind_handler(kernel_msg_id_t const msgid,
                                           kernel_task_id_t const dest_id,
                                           kernel_task_id_t const src_id)
 { 
-    // Current State
-    kernel_state_t state = kernel_state_get(dest_id);
-    uint8_t conidx = KERNEL_IDX_GET(dest_id);
 	uint16_t id = param->prf_task_id; 
 
 #if (BLE_SDP_CLIENT)
@@ -705,8 +702,6 @@ static int gapc_param_updated_ind_handler (kernel_msg_id_t const msgid,
 									const struct gapc_param_updated_ind  *param,
                  					kernel_task_id_t const dest_id, kernel_task_id_t const src_id)
 {
-    uint8_t conidx = KERNEL_IDX_GET(src_id);
-
     app_ble_ctx.conn_intv = param->con_interval;
 
 	return KERNEL_MSG_CONSUMED;
@@ -738,7 +733,6 @@ static int gapc_cmp_evt_handler(kernel_msg_id_t const msgid,
         {
             if (param->status != GAP_ERR_NO_ERROR)
             {
-//                appm_disconnect();
             }
         } break;
 
@@ -865,6 +859,7 @@ static int gapm_gen_rand_nb_ind_handler(kernel_msg_id_t const msgid, struct gapm
     return KERNEL_MSG_CONSUMED;
 }
 										
+#if (SECURE_CONNECTIONS)
 static int gapm_gen_dh_key_ind_handler(kernel_msg_id_t const msgid,
 											struct gapm_gen_dh_key_ind const *param,
 											kernel_task_id_t const dest_id,
@@ -898,14 +893,14 @@ static int gapm_get_key_ind_handler(kernel_msg_id_t const msgid,
 
 	return (msg_status);
 }
-
+#endif
 										
 #if (BLE_OBSERVER || BLE_CENTRAL )
 
 static int gapm_ext_adv_report_ind_handler(kernel_msg_id_t const msgid, struct gapm_ext_adv_report_ind *param,
                                         kernel_task_id_t const dest_id, kernel_task_id_t const src_id)
 {
-#if 0
+#if CFG_DEBUG_EXT_ADV
     bk_printf("%s\r\n",__func__);
     bk_printf("actv_idx:%x\r\n",param->actv_idx);
     bk_printf("info:%x\r\n",param->info);
@@ -960,7 +955,6 @@ static int app_gattc_mtu_changed_ind_handler(kernel_msg_id_t const msgid,
                                      kernel_task_id_t const dest_id,
                                      kernel_task_id_t const src_id)
 {
-    uint8_t conidx = KERNEL_IDX_GET(src_id);
 	ble_event_cb_handler(BLE_MTU_CHANGE, (void*)&(ind->mtu));
 	
  	return (KERNEL_MSG_CONSUMED);
@@ -971,9 +965,9 @@ static int gattc_cmp_evt_handler(kernel_msg_id_t const msgid,
                                  kernel_task_id_t const dest_id,
                                  kernel_task_id_t const src_id)
 {
-    uint8_t state = kernel_state_get(dest_id);
-    
+    uint8_t state = kernel_state_get(dest_id);    
     uint8_t conidx = KERNEL_IDX_GET(src_id);
+	
     bk_printf("app %s dest_id = %x,conidx:%d\r\n",__func__,dest_id,conidx);
     bk_printf("operation = 0x%x,status = 0x%x,seq_num = 0x%x\r\n",param->operation,param->status,param->seq_num);
     
@@ -1006,7 +1000,7 @@ static int gattc_cmp_evt_handler(kernel_msg_id_t const msgid,
 	(void)state;
 }
 
-static int app_deviation_clac_timer_handler(kernel_msg_id_t const msgid,
+int app_deviation_clac_timer_handler(kernel_msg_id_t const msgid,
                                      void const *ind,
                                      kernel_task_id_t const dest_id,
                                      kernel_task_id_t const src_id)
@@ -1014,9 +1008,7 @@ static int app_deviation_clac_timer_handler(kernel_msg_id_t const msgid,
 
     bk_printf("%s\r\n",__func__);
     uint8_t conidx = KERNEL_IDX_GET(dest_id);
-	
-    ///app_deviation_info_send_end(conidx);
-    
+   
     return (KERNEL_MSG_CONSUMED);
 	(void)conidx;
 }

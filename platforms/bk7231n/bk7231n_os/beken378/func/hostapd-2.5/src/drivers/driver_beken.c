@@ -29,6 +29,7 @@
 #include "eloop.h"
 #include "rw_pub.h"
 #include "wlan_ui_pub.h"
+#include "role_launch.h"
 
 static const u8 rfc1042_header[6] = { 0xaa, 0xaa, 0x03, 0x00, 0x00, 0x00 };
 
@@ -1342,9 +1343,22 @@ void wpa_driver_hostap_poll_client(void *priv, const u8 *own_addr,
     hostap_send_mlme(priv, (u8 *)&hdr, sizeof(hdr), 0, 0);
 }
 
+void wpa_driver_scan_timeout(void *eloop_data, void *user_ctx)
+{
+    rw_evt_type sta_status = mhdr_get_station_status();
+    uint32_t rl_status = rl_pre_sta_get_status();
+    os_printf("wpa_driver_scan_timeout sts_status=%d,rl_status=%d\r\n", sta_status, rl_status);
+    if ((RW_EVT_STA_SCANNING == sta_status) && (RL_STATUS_STA_SCANNING == rl_status))
+    {
+        wpa_supplicant_event_sta(eloop_data, EVENT_SCAN_RESULTS, NULL);
+        //rl_pre_sta_set_status(RL_STATUS_STA_LAUNCH_FAILED);
+    }
+}
+
 void wpa_driver_scan_sig_handler(int sig, void *signal_ctx)
 {
     os_printf("wpa_driver_scan_cb\r\n");
+    eloop_cancel_timeout(wpa_driver_scan_timeout, signal_ctx, NULL);
     wpa_supplicant_event_sta(signal_ctx, EVENT_SCAN_RESULTS, NULL);
 }
 
@@ -1488,6 +1502,8 @@ int wpa_driver_scan2(void *priv, struct wpa_driver_scan_params *params)
     }
 
     os_free(buf);
+
+    eloop_register_timeout(5, 0, wpa_driver_scan_timeout, drv->wpa_s, NULL);
 
     return ret;
 }

@@ -120,6 +120,7 @@ static int uart_dev_init(tuya_uart_t *uart, tuya_uart_cfg_t *cfg)
     return OPRT_OS_ADAPTER_OK;
 }
 
+extern OSStatus bk_uart_diable_rx(bk_uart_t uart);
 
 static int uart_dev_control(tuya_uart_t *uart, uint8_t cmd, void *arg)
 {
@@ -139,7 +140,8 @@ static int uart_dev_control(tuya_uart_t *uart, uint8_t cmd, void *arg)
         break;
     case TUYA_DRV_CLR_INT_CMD:
         if ((uint32_t)arg == TUYA_DRV_INT_RX_FLAG) {
-            //! TODO:
+            bk_uart_diable_rx(uart_dev->port); 
+            
         } else if ((uint32_t)arg == TUYA_DRV_INT_TX_FLAG) {
             //! TODO:
         } else {
@@ -161,7 +163,7 @@ static int uart_dev_control(tuya_uart_t *uart, uint8_t cmd, void *arg)
 
     return result;
 }
-
+extern void bk_send_byte(UINT8 uport, UINT8 data);
 /**
  * @brief 用于发送一个字节
  * 

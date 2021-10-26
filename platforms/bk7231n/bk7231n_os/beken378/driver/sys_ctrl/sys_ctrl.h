@@ -16,9 +16,18 @@
 
 #define SCTRL_CHIP_ID                         (SCTRL_BASE + 00 * 4)
 #define CHIP_ID_DEFAULT                          (0x7111)
+#define CHIP_ID_BK7231N                          (0x7231C)
 
 #define SCTRL_DEVICE_ID                       (SCTRL_BASE + 01 * 4)
+#define DEVICE_ID_MASK                           (0xFFFF0000) //as wangjian advised, only check high 16 bits
 #define DEVICE_ID_DEFAULT                        (0x20150414)
+#define DEVICE_ID_BK7231N_B                      (0x20521024)
+#define DEVICE_ID_BK7231N_C                      (0x20521025)
+#define DEVICE_ID_BK7231N_D                      (0x20521026)
+#define DEVICE_ID_BK7231N_E                      (0x20521027)
+#define DEVICE_ID_BK7231N_F                      (0x20521028)
+#define DEVICE_ID_BK7231N_N                      (0x20521010)
+#define DEVICE_ID_BK7231N_P                      (0x20A21020)
 
 #define SCTRL_CONTROL                         (SCTRL_BASE + 02 * 4)
 #if (CFG_SOC_NAME == SOC_BK7221U)

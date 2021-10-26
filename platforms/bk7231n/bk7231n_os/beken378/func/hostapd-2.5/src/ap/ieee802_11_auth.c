@@ -141,7 +141,7 @@ static int hostapd_acl_cache_get(struct hostapd_data *hapd, const u8 *addr,
 }
 #endif /* CONFIG_NO_RADIUS */
 
-
+#ifdef CONFIG_FULL_HOSTAPD
 static void hostapd_acl_query_free(struct hostapd_acl_query_data *query)
 {
 	if (query == NULL)
@@ -149,7 +149,7 @@ static void hostapd_acl_query_free(struct hostapd_acl_query_data *query)
 	os_free(query->auth_msg);
 	os_free(query);
 }
-
+#endif
 
 #ifndef CONFIG_NO_RADIUS
 static int hostapd_radius_acl_query(struct hostapd_data *hapd, const u8 *addr,
