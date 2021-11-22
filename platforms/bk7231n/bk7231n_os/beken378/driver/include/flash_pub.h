@@ -1,6 +1,8 @@
 #ifndef _FLASH_PUB_H
 #define _FLASH_PUB_H
 
+#include "typedef.h"
+
 #define FLASH_DEV_NAME                ("flash")
 
 #define FLASH_FAILURE                (1)
