@@ -2,7 +2,12 @@ TOP_DIR = ../../..
 
 # Initialize tool chain  /usr/bin/gcc-arm-none-eabi-4_9-2015q1/bin
 # -------------------------------------------------------------------
-ARM_GCC_TOOLCHAIN = ../toolchain/gcc-arm-none-eabi-4_9-2015q1/bin
+ifeq ($(shell uname), Linux)
+  TOOLCHAIN_DIR := ../toolchain
+else
+  TOOLCHAIN_DIR := ../toolchain/windows
+endif
+ARM_GCC_TOOLCHAIN = $(TOOLCHAIN_DIR)/gcc-arm-none-eabi-4_9-2015q1/bin
 
 CROSS_COMPILE = $(ARM_GCC_TOOLCHAIN)/arm-none-eabi-
 
