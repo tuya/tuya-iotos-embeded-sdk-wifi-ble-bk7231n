@@ -94,6 +94,15 @@ static UINT32 info_item_len(NET_INFO_ITEM item)
 		case IP_CONFIG_ITEM:
 			len = sizeof(ITEM_IP_CONFIG_ST);
 			break;
+		case NEW_PINS_CONFIG:
+			len = sizeof(ITEM_NEW_PINS_CONFIG);
+			break;
+		case NEW_WIFI_CONFIG:
+			len = sizeof(ITEM_NEW_WIFI_CONFIG);
+			break;
+		case NEW_MQTT_CONFIG:
+			len = sizeof(ITEM_NEW_MQTT_CONFIG);
+			break;
 		default:
 			len = sizeof(ITEM_COMM_ST);
 			break;
@@ -139,6 +148,9 @@ UINT32 get_info_item(NET_INFO_ITEM item,UINT8 *ptr0,UINT8 *ptr1, UINT8 *ptr2)
 		case RF_CFG_DIST_ITEM:
 		case RF_CFG_MODE_ITEM: 
 		case RF_CFG_TSSI_B_ITEM:
+		case NEW_PINS_CONFIG: 
+		case NEW_WIFI_CONFIG: 
+		case NEW_MQTT_CONFIG: 
 			if(ptr0 != NULL)
 			{
 				ddev_read(flash_handle, (char *)ptr0, head.len, addr_start);
@@ -256,6 +268,16 @@ UINT32 save_info_item(NET_INFO_ITEM item,UINT8 *ptr0,UINT8*ptr1,UINT8 *ptr2)
 			os_memcpy(item_buf+16,ptr1,16);
 			os_memcpy(item_buf+32,ptr2,16);
 			break;
+		case NEW_PINS_CONFIG:
+			os_memcpy(item_buf,ptr0,NEW_PINS_CONFIG_SIZE);
+			break;
+		case NEW_MQTT_CONFIG:
+			os_memcpy(item_buf,ptr0,(sizeof(ITEM_NEW_MQTT_CONFIG) - sizeof(INFO_ITEM_ST)));
+			break;
+		case NEW_WIFI_CONFIG:
+			os_memcpy(item_buf,ptr0,(sizeof(ITEM_NEW_WIFI_CONFIG) - sizeof(INFO_ITEM_ST)));
+			break;
+			
 			
 		default:
 			os_memcpy(item_buf,ptr0,4);

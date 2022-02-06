@@ -683,6 +683,9 @@ SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/core/tcp_out.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/core/timeouts.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/core/udp.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/netif/ethernet.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/apps/httpd/httpd.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/apps/httpd/fs.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/apps/mqtt/mqtt.c
 SRC_C += ./beken378/func/lwip_intf/dhcpd/dhcp-server.c
 SRC_C += ./beken378/func/lwip_intf/dhcpd/dhcp-server-main.c
 SRC_C += ./beken378/func/misc/fake_clock.c
@@ -720,6 +723,8 @@ SRC_C += ./beken378/func/wlan_ui/wlan_cli.c
 SRC_C += ./beken378/func/wlan_ui/wlan_ui.c
 SRC_C += ./beken378/func/bk_tuya_pwm/bk_tuya_pwm.c
 SRC_C += ./beken378/func/net_param_intf/net_param.c
+SRC_C += ./beken378/func/key/multi_button.c
+SRC_C += ./beken378/func/key/key_main.c
 
 #rwnx ip module
 #SRC_C += ./beken378/ip/common/co_dlist.c
@@ -895,6 +900,8 @@ DEPENDENCY_OS_LIST = $(addprefix $(OBJ_DIR)/,$(patsubst %.c,%.d,$(SRC_OS_LIST)))
 # -------------------------------------------------------------------
 CFLAGS =
 CFLAGS += -g -mthumb -mcpu=arm968e-s -march=armv5te -mthumb-interwork -mlittle-endian -Os -std=c99 -ffunction-sections -Wall -fsigned-char -fdata-sections -Wunknown-pragmas -nostdlib -Wno-unused-function -Wno-unused-but-set-variable
+
+CFLAGS += -DPLATFORM_BK7231N=1
 
 OSFLAGS =
 OSFLAGS += -g -marm -mcpu=arm968e-s -march=armv5te -mthumb-interwork -mlittle-endian -Os -std=c99 -ffunction-sections -Wall -fsigned-char -fdata-sections -Wunknown-pragmas

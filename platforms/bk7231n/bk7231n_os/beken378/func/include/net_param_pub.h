@@ -15,7 +15,14 @@ typedef enum{
     RF_CFG_DIST_ITEM    = 0x88888888,
     RF_CFG_MODE_ITEM    = 0x99999999,
     CHARGE_CONFIG_ITEM  = 0xaaaaaaaa,
-    RF_CFG_TSSI_B_ITEM  = 0xbbbbbbbb
+    RF_CFG_TSSI_B_ITEM  = 0xbbbbbbbb,
+
+	// added for OpenBK7231T
+	NEW_PINS_CONFIG     = 0x2CCCCCCC,
+	// added for OpenBK7231T
+	NEW_WIFI_CONFIG     = 0x2DDDDDDD,
+	// added for OpenBK7231T
+	NEW_MQTT_CONFIG     = 0x2EEEEEEE,
 }NET_INFO_ITEM;
 
 typedef struct info_item_st
@@ -51,6 +58,35 @@ typedef struct item_ip_config_st
 	char net_mask[16];
     char gateway_ip_addr[16];    
 }ITEM_IP_CONFIG_ST,*ITEM_IP_CONFIG_ST_PTR;
+
+// added for OpenBK7231T
+typedef struct item_new_wifi_config
+{
+	INFO_ITEM_ST head;
+	char ssid[32];
+	char pass[64];    
+}ITEM_NEW_WIFI_CONFIG,*ITEM_NEW_WIFI_CONFIG_PTR;
+
+// added for OpenBK7231T
+typedef struct item_new_mqtt_config
+{
+	INFO_ITEM_ST head;
+	char brokerName[64];
+	char userName[64];
+	int port;
+	char hostName[64];
+	// Home Assistant default password is 64 chars..
+	char pass[128];    
+}ITEM_NEW_MQTT_CONFIG,*ITEM_NEW_MQTT_CONFIG_PTR;
+
+// added for OpenBK7231T
+#define NEW_PINS_CONFIG_SIZE 64
+//NEW_PINS_CONFIG
+typedef struct item_new_pins_config
+{
+	INFO_ITEM_ST head;
+	u8 data[NEW_PINS_CONFIG_SIZE];    
+}ITEM_NEW_PINS_CONFIG,*ITEM_NEW_PINS_CONFIG_PTR;
 
 UINT32 test_get_whole_tbl(UINT8 *ptr);
 UINT32 save_info_item(NET_INFO_ITEM item,UINT8 *ptr0,UINT8*ptr1,UINT8 *ptr2);
