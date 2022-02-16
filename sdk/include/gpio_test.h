@@ -3,6 +3,9 @@
 *  Author: lql
 *  Date: 20180502
 ***********************************************************/
+#ifndef __TUYA_GPIO_TEST_H__
+#define __TUYA_GPIO_TEST_H__
+
 #include "tuya_pin.h"
 #include "tuya_iot_config.h"
 
@@ -31,3 +34,5 @@ BOOL_T gpio_test_all(IN CONST CHAR_T *in, OUT CHAR_T *out);
 #else
 BOOL_T gpio_test_all(VOID) ;
 #endif
+
+#endif 
