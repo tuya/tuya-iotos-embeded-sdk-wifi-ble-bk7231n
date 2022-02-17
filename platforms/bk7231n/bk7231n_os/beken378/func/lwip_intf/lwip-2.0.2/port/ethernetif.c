@@ -104,6 +104,20 @@ void ethernetif_input(int iface, struct pbuf *p);
  *        for this ethernetif
  */
 
+/**
+ * In this function, the hardware should be initialized.
+ * Called from ethernetif_init().
+ *
+ * @param netif the already initialized lwip network interface structure
+ *        for this ethernetif
+ */
+
+
+#define MY_OPENBK7231N_USE_MAC_AS_WLAN_NAME 1
+
+#if MY_OPENBK7231N_USE_MAC_AS_WLAN_NAME
+char g_customWlanName[32];
+#else
 const char wlan_name[][6] = 
 {
     "wlan0\0",
@@ -111,15 +125,21 @@ const char wlan_name[][6] =
     "wlan2\0",
     "wlan3\0",    
 };
+#endif
 static void low_level_init(struct netif *netif)
 {
     VIF_INF_PTR vif_entry = (VIF_INF_PTR)(netif->state);
     u8 *macptr = (u8*)&vif_entry->mac_addr;
     
 #if LWIP_NETIF_HOSTNAME
+#if MY_OPENBK7231N_USE_MAC_AS_WLAN_NAME
+	sprintf(g_customWlanName,"OpenBK7231N_%02X%02X%02X%02X",macptr[0],macptr[1],macptr[2],macptr[3]);
+    netif->hostname = g_customWlanName;
+#else
     /* Initialize interface hostname */
     netif->hostname = (char*)&wlan_name[vif_entry->index];
-#endif /* LWIP_NETIF_HOSTNAME */    
+#endif
+#endif /* LWIP_NETIF_HOSTNAME */ 
 
 	//wifi_get_mac_address((char *)wireless_mac, type);
 	
