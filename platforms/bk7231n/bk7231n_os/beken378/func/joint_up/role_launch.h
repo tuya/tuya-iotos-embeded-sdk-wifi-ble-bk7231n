@@ -18,7 +18,9 @@
 #define RL_LAUNCH_PERIOD           250   
 #define RL_ENTER_PERIOD            150   
 
-#define RL_SUPPORT_FAST_CONNECT    1
+// OpenBK7231N: it breaks our config because it writes to the very same flash area
+// No, we can't allow it
+// #define RL_SUPPORT_FAST_CONNECT    0
 
 typedef network_InitTypeDef_st LAUNCH_DESCR;
 

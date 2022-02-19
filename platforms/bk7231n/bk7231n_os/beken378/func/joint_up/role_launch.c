@@ -550,12 +550,14 @@ uint32_t rl_sta_cache_request_enter(void)
 	
 	do
 	{
+#if RL_SUPPORT_FAST_CONNECT
 		if(g_sta_param_ptr->retry_cnt)
 		{
 			os_printf("g_sta_param_ptr->retry_cnt:%d\r\n", g_sta_param_ptr->retry_cnt);
 			g_sta_param_ptr->retry_cnt--;
 		}
 		else
+#endif
 		{
 			mhdr_set_station_status_when_reconnect_over();
 

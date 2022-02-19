@@ -43,7 +43,7 @@
 #define ENC_METHOD_XOR            2
 #define ENC_METHOD_AES            3
 
-#define FAST_CONNECT_INFO_ENC_METHOD               ENC_METHOD_XOR
+#define FAST_CONNECT_INFO_ENC_METHOD               ENC_METHOD_NULL
 
 /*section 3-----driver macro config-----*/
 #define CFG_MAC_PHY_BAPASS                         1
