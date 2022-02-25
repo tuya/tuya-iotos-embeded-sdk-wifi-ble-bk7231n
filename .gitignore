@@ -10,6 +10,13 @@ platforms/bk7231n/bk7231n_os/tools/generate/config.json
 platforms/bk7231n/bk7231n_os/tools/generate/*.cpr
 platforms/bk7231n/bk7231n_os/tools/generate/*.out
 platforms/bk7231n/bk7231n_os/tools/generate/*.bin
+platforms/bk7231n/bk7231n_os/tools/generate/*.rbl
 !platforms/bk7231n/bk7231n_os/tools/generate/bk7231n_bootloader.bin
 !platforms/bk7231n/bk7231n_os/tools/generate/bk7231n_bootloader_enc.bin
 !platforms/bk7231n/bk7231n_os/tools/generate/package.bin
+
+apps/*
+!apps/obk*
+!apps/bk*
+!apps/template*
+!apps/tuya*
