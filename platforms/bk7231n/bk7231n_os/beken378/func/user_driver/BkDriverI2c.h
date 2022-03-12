@@ -48,30 +48,36 @@
 /******************************************************
  *                   Enumerations
  ******************************************************/
+typedef enum {
 
-// typedef enum
-// {
-//     I2C_ADDRESS_WIDTH_7BIT,     /**< I2C device has 7bit address */
-//     I2C_ADDRESS_WIDTH_10BIT,    /**< I2C device has 10bit address */
-//     I2C_ADDRESS_WIDTH_16BIT,    /**< I2C device has 16bit address */
-// } bk_i2c_bus_address_width_t;
+	BK_I2C_1,
+	BK_I2C_2,
 
-// typedef enum
-// {
-//     I2C_LOW_SPEED_MODE,         /**< I2C clock speed for 10Khz devices */
-//     I2C_STANDARD_SPEED_MODE,    /**< I2C clock speed for 100Khz devices */
-//     I2C_HIGH_SPEED_MODE         /**< I2C clock speed for 400Khz devices */
-// } bk_i2c_speed_mode_t;
+} bk_i2c_t;
+
+typedef enum
+{
+     I2C_ADDRESS_WIDTH_7BIT,     /**< I2C device has 7bit address */
+     I2C_ADDRESS_WIDTH_10BIT,    /**< I2C device has 10bit address */
+     I2C_ADDRESS_WIDTH_16BIT,    /**< I2C device has 16bit address */
+} bk_i2c_bus_address_width_t;
+
+typedef enum
+{
+     I2C_LOW_SPEED_MODE,         /**< I2C clock speed for 10Khz devices */
+     I2C_STANDARD_SPEED_MODE,    /**< I2C clock speed for 100Khz devices */
+     I2C_HIGH_SPEED_MODE         /**< I2C clock speed for 400Khz devices */
+} bk_i2c_speed_mode_t;
 
 /******************************************************
  *                    Structures
  ******************************************************/
 
-typedef platform_i2c_bus_address_width_t        bk_i2c_bus_address_width_t;
+//typedef platform_i2c_bus_address_width_t        bk_i2c_bus_address_width_t;
 
-typedef platform_i2c_speed_mode_t               bk_i2c_speed_mode_t;
+//typedef platform_i2c_speed_mode_t               bk_i2c_speed_mode_t;
 
-typedef platform_i2c_message_t                  bk_i2c_message_t;
+//typedef platform_i2c_message_t                  bk_i2c_message_t;
 
 typedef struct
 {
@@ -81,15 +87,15 @@ typedef struct
     bk_i2c_speed_mode_t         speed_mode;     /**< Speed mode the device operates in */
 } bk_i2c_device_t;
 
-// typedef struct
-// {
-//     const void*  tx_buffer;  /**< A pointer to the data to be transmitted. If NULL, the message is an RX message when 'combined' is FALSE */
-//     void*        rx_buffer;  /**< A pointer to the data to be transmitted. If NULL, the message is an TX message when 'combined' is FALSE */
-//     uint16_t     tx_length;  /**< Number of bytes to transmit */
-//     uint16_t     rx_length;  /**< Number of bytes to receive */
-//     uint16_t     retries;    /**< Number of times to retry the message */
-//     bool combined;           /**< If set, this message is used for both tx and rx. */
-// } bk_i2c_message_t;
+typedef struct
+{
+     const void*  tx_buffer;  /**< A pointer to the data to be transmitted. If NULL, the message is an RX message when 'combined' is FALSE */
+     void*        rx_buffer;  /**< A pointer to the data to be transmitted. If NULL, the message is an TX message when 'combined' is FALSE */
+     uint16_t     tx_length;  /**< Number of bytes to transmit */
+     uint16_t     rx_length;  /**< Number of bytes to receive */
+     uint16_t     retries;    /**< Number of times to retry the message */
+     bool combined;           /**< If set, this message is used for both tx and rx. */
+} bk_i2c_message_t;
 
 /******************************************************
  *                 Type Definitions

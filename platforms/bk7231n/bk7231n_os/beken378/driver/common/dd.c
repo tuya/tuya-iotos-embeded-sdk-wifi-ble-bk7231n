@@ -22,8 +22,8 @@
 
 #if CFG_USE_CAMERA_INTF
 #include "jpeg_encoder_pub.h"
-#include "i2c_pub.h"
 #endif
+#include "i2c_pub.h"
 
 #if CFG_USE_AUDIO
 #include "audio_pub.h"
@@ -76,10 +76,10 @@ static DD_INIT_S dd_init_tbl[] =
 #endif
 
 #if CFG_USE_CAMERA_INTF
-    {EJPEG_DEV_NAME,        ejpeg_init,                 ejpeg_exit},
-    {I2C1_DEV_NAME,         i2c1_init,                  i2c1_exit},        
-    {I2C2_DEV_NAME,         i2c2_init,                  i2c2_exit},            
+    {EJPEG_DEV_NAME,        ejpeg_init,                 ejpeg_exit},       
 #endif
+    {I2C1_DEV_NAME,         i2c1_init,                  i2c1_exit},        
+    {I2C2_DEV_NAME,         i2c2_init,                  i2c2_exit},     
 
 #if CFG_USE_AUDIO
     {AUD_DAC_DEV_NAME,      audio_init,                 audio_exit},        
