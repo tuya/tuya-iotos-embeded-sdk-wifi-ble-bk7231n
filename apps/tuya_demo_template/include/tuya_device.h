@@ -1,19 +1,19 @@
-﻿/**
+/**
 * @file tuya_device.h
 * @author www.tuya.com
-* @brief tuya_device module is used to 
-* @version 0.1
-* @date 2021-08-13
+* @brief template demo for SDK WiFi & BLE for BK7231N, hardware: BK7231N NANO SoC board
+* @version 0.2
+* @date 2022-03-14
 *
-* @copyright Copyright (c) tuya.inc 2021
+* @copyright Copyright (c) tuya.inc 2022
 *
 */
- 
+
 #ifndef __TUYA_DEVICE_H__
 #define __TUYA_DEVICE_H__
 
 #include "tuya_cloud_com_defs.h"
- 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,7 +29,7 @@ extern "C" {
 ***********************************************************/
 /* device information define */
 #define DEV_SW_VERSION USER_SW_VER
-#define PRODECT_ID "8cisxkqalq9jevn8"
+#define PRODUCT_ID "8cisxkqalq9jevn8"
 
 /***********************************************************
 ***********************typedef define***********************
@@ -49,4 +49,5 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+
 #endif /*__TUYA_DEVICE_H__*/
