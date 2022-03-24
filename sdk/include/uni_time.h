@@ -144,6 +144,17 @@ TIME_T uni_time_get_posix(VOID);
 SYS_TICK_T uni_time_get_posix_ms(VOID);
 
 /**
+ * @brief get IoTOS UTC time second/remain micro-second time
+ *
+ * @return the remain micro-second time in second/remain micro-second format
+ *
+ * @note in 32bit process, cannot return 8byte, because the high 4byte will be cut by cpu, we should use:
+ * "uint32_t time_s,remain_time_ms; uni_time_get_posix_ms_ext(&time_s, &remain_time_ms);
+ *  uint64_t time_ms = time_s*1000ULL + remain_time_ms" to get the micro-seconds
+ */
+OPERATE_RET uni_time_get_posix_ms_ext(uint32_t *time_s, uint32_t *remain_time_ms);
+
+/**
  * @brief get IoTOS last synchronized UTC time in TIME_T format
  * 
  * @return the time in TIME_T format 

@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_SNMP_H" class="nav-sub-label">LWIP_HDR_SNMP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_COPY_SYSUPTIME_TO(ptrToVal)" class="nav-sub-label">MIB2_COPY_SYSUPTIME_TO(ptrToVal)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_STATS_NETIF_INC(n, x)" class="nav-sub-label">MIB2_STATS_NETIF_INC(n, x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_STATS_NETIF_ADD(n, x, val)" class="nav-sub-label">MIB2_STATS_NETIF_ADD(n, x, val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_INIT_NETIF(netif, type, speed)" class="nav-sub-label">MIB2_INIT_NETIF(netif, type, speed)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_COPY_SYSUPTIME_TO" class="nav-sub-label">MIB2_COPY_SYSUPTIME_TO</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_INIT_NETIF" class="nav-sub-label">MIB2_INIT_NETIF</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_STATS_NETIF_INC" class="nav-sub-label">MIB2_STATS_NETIF_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_STATS_NETIF_ADD" class="nav-sub-label">MIB2_STATS_NETIF_ADD</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_arp_entry" class="nav-sub-label">mib2_add_arp_entry</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_arp_entry" class="nav-sub-label">mib2_remove_arp_entry</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_netif_added" class="nav-sub-label">mib2_netif_added</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_netif_removed" class="nav-sub-label">mib2_netif_removed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_arp_entry" class="nav-sub-label">mib2_add_arp_entry</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_arp_entry" class="nav-sub-label">mib2_remove_arp_entry</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_ip4" class="nav-sub-label">mib2_add_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_ip4" class="nav-sub-label">mib2_remove_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_route_ip4" class="nav-sub-label">mib2_add_route_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_route_ip4" class="nav-sub-label">mib2_remove_route_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_udp_bind" class="nav-sub-label">mib2_udp_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_udp_unbind" class="nav-sub-label">mib2_udp_unbind</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETIF_INIT_SNMP" class="nav-sub-label">NETIF_INIT_SNMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_add_ifinoctets(ni,value)" class="nav-sub-label">snmp_add_ifinoctets(ni,value)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifinucastpkts(ni)" class="nav-sub-label">snmp_inc_ifinucastpkts(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifinnucastpkts(ni)" class="nav-sub-label">snmp_inc_ifinnucastpkts(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifindiscards(ni)" class="nav-sub-label">snmp_inc_ifindiscards(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifinerrors(ni)" class="nav-sub-label">snmp_inc_ifinerrors(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifinunknownprotos(ni)" class="nav-sub-label">snmp_inc_ifinunknownprotos(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_add_ifoutoctets(ni,value)" class="nav-sub-label">snmp_add_ifoutoctets(ni,value)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifoutucastpkts(ni)" class="nav-sub-label">snmp_inc_ifoutucastpkts(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifoutnucastpkts(ni)" class="nav-sub-label">snmp_inc_ifoutnucastpkts(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifoutdiscards(ni)" class="nav-sub-label">snmp_inc_ifoutdiscards(ni)</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_inc_ifouterrors(ni)" class="nav-sub-label">snmp_inc_ifouterrors(ni)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mib2_netif_added" class="nav-sub-label">mib2_netif_added</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_netif_removed" class="nav-sub-label">mib2_netif_removed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_arp_entry" class="nav-sub-label">mib2_add_arp_entry</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_arp_entry" class="nav-sub-label">mib2_remove_arp_entry</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_ip4" class="nav-sub-label">mib2_add_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_ip4" class="nav-sub-label">mib2_remove_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_add_route_ip4" class="nav-sub-label">mib2_add_route_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_remove_route_ip4" class="nav-sub-label">mib2_remove_route_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_udp_bind" class="nav-sub-label">mib2_udp_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#mib2_udp_unbind" class="nav-sub-label">mib2_udp_unbind</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#udp_pcb" class="nav-sub-label">udp_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif" class="nav-sub-label">netif</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_SNMP_H">Marco <span>LWIP_HDR_SNMP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_SNMP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_COPY_SYSUPTIME_TO(ptrToVal)">Marco <span>MIB2_COPY_SYSUPTIME_TO(ptrToVal)</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_COPY_SYSUPTIME_TO(ptrToVal) (*(ptrToVal) = (sys_now() / 10))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_STATS_NETIF_INC(n, x)">Marco <span>MIB2_STATS_NETIF_INC(n, x)</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_STATS_NETIF_INC(n, x)     do { ++(n)->mib2_counters.x; } while(0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup netif_mib2
+ * Increment stats member for SNMP MIB2 stats (struct stats_mib2_netif_ctrs)
+ */</pre>
+
+      <h4 id="MIB2_STATS_NETIF_ADD(n, x, val)">Marco <span>MIB2_STATS_NETIF_ADD(n, x, val)</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_STATS_NETIF_ADD(n, x, val) do { (n)->mib2_counters.x += (val); } while(0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup netif_mib2
+ * Add value to stats member for SNMP MIB2 stats (struct stats_mib2_netif_ctrs)
+ */</pre>
+
+      <h4 id="MIB2_INIT_NETIF(netif, type, speed)">Marco <span>MIB2_INIT_NETIF(netif, type, speed)</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_INIT_NETIF(netif, type, speed) do { \
+ (netif)->link_type = (type); \
+ (netif)->link_speed = (speed);\
+ (netif)->ts = 0;             \
+ (netif)->mib2_counters.ifinoctets = 0;     \
+ (netif)->mib2_counters.ifinucastpkts = 0;  \
+ (netif)->mib2_counters.ifinnucastpkts = 0; \
+ (netif)->mib2_counters.ifindiscards = 0;   \
+ (netif)->mib2_counters.ifinerrors = 0;   \
+ (netif)->mib2_counters.ifinunknownprotos = 0;   \
+ (netif)->mib2_counters.ifoutoctets = 0;    \
+ (netif)->mib2_counters.ifoutucastpkts = 0; \
+ (netif)->mib2_counters.ifoutnucastpkts = 0; \
+ (netif)->mib2_counters.ifoutdiscards = 0; \
+ (netif)->mib2_counters.ifouterrors = 0; } while(0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup netif_mib2
+ * Init MIB2 statistic counters in netif
+ * @param netif Netif to init
+ * @param type one of enum @ref snmp_ifType
+ * @param speed your link speed here (units: bits per second)
+ */</pre>
+
+      <h4 id="MIB2_COPY_SYSUPTIME_TO">Marco <span>MIB2_COPY_SYSUPTIME_TO</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_COPY_SYSUPTIME_TO(ptrToVal)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_INIT_NETIF">Marco <span>MIB2_INIT_NETIF</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_INIT_NETIF(netif, type, speed)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_STATS_NETIF_INC">Marco <span>MIB2_STATS_NETIF_INC</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_STATS_NETIF_INC(n, x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_STATS_NETIF_ADD">Marco <span>MIB2_STATS_NETIF_ADD</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_STATS_NETIF_ADD(n, x, val)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_arp_entry">Marco <span>mib2_add_arp_entry</span></h4>
+      <pre class="doc-declare"><code>#define mib2_add_arp_entry(ni,ip)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_remove_arp_entry">Marco <span>mib2_remove_arp_entry</span></h4>
+      <pre class="doc-declare"><code>#define mib2_remove_arp_entry(ni,ip)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_netif_added">Marco <span>mib2_netif_added</span></h4>
+      <pre class="doc-declare"><code>#define mib2_netif_added(ni)
+</code></pre>
+      <pre class="doc-comment">/* network interface */</pre>
+
+      <h4 id="mib2_netif_removed">Marco <span>mib2_netif_removed</span></h4>
+      <pre class="doc-declare"><code>#define mib2_netif_removed(ni)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_arp_entry">Marco <span>mib2_add_arp_entry</span></h4>
+      <pre class="doc-declare"><code>#define mib2_add_arp_entry(ni,ip)
+</code></pre>
+      <pre class="doc-comment">/* ARP */</pre>
+
+      <h4 id="mib2_remove_arp_entry">Marco <span>mib2_remove_arp_entry</span></h4>
+      <pre class="doc-declare"><code>#define mib2_remove_arp_entry(ni,ip)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_ip4">Marco <span>mib2_add_ip4</span></h4>
+      <pre class="doc-declare"><code>#define mib2_add_ip4(ni)
+</code></pre>
+      <pre class="doc-comment">/* IP */</pre>
+
+      <h4 id="mib2_remove_ip4">Marco <span>mib2_remove_ip4</span></h4>
+      <pre class="doc-declare"><code>#define mib2_remove_ip4(ni)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_route_ip4">Marco <span>mib2_add_route_ip4</span></h4>
+      <pre class="doc-declare"><code>#define mib2_add_route_ip4(dflt, ni)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_remove_route_ip4">Marco <span>mib2_remove_route_ip4</span></h4>
+      <pre class="doc-declare"><code>#define mib2_remove_route_ip4(dflt, ni)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_udp_bind">Marco <span>mib2_udp_bind</span></h4>
+      <pre class="doc-declare"><code>#define mib2_udp_bind(pcb)
+</code></pre>
+      <pre class="doc-comment">/* UDP */</pre>
+
+      <h4 id="mib2_udp_unbind">Marco <span>mib2_udp_unbind</span></h4>
+      <pre class="doc-declare"><code>#define mib2_udp_unbind(pcb)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NETIF_INIT_SNMP">Marco <span>NETIF_INIT_SNMP</span></h4>
+      <pre class="doc-declare"><code>#define NETIF_INIT_SNMP               MIB2_INIT_NETIF
+</code></pre>
+      <pre class="doc-comment">/* for source-code compatibility reasons only, can be removed (not used internally) */</pre>
+
+      <h4 id="snmp_add_ifinoctets(ni,value)">Marco <span>snmp_add_ifinoctets(ni,value)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_add_ifinoctets(ni,value) MIB2_STATS_NETIF_ADD(ni, ifinoctets, value)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifinucastpkts(ni)">Marco <span>snmp_inc_ifinucastpkts(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifinucastpkts(ni)    MIB2_STATS_NETIF_INC(ni, ifinucastpkts)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifinnucastpkts(ni)">Marco <span>snmp_inc_ifinnucastpkts(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifinnucastpkts(ni)   MIB2_STATS_NETIF_INC(ni, ifinnucastpkts)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifindiscards(ni)">Marco <span>snmp_inc_ifindiscards(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifindiscards(ni)     MIB2_STATS_NETIF_INC(ni, ifindiscards)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifinerrors(ni)">Marco <span>snmp_inc_ifinerrors(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifinerrors(ni)       MIB2_STATS_NETIF_INC(ni, ifinerrors)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifinunknownprotos(ni)">Marco <span>snmp_inc_ifinunknownprotos(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifinunknownprotos(ni) MIB2_STATS_NETIF_INC(ni, ifinunknownprotos)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_add_ifoutoctets(ni,value)">Marco <span>snmp_add_ifoutoctets(ni,value)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_add_ifoutoctets(ni,value) MIB2_STATS_NETIF_ADD(ni, ifoutoctets, value)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifoutucastpkts(ni)">Marco <span>snmp_inc_ifoutucastpkts(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifoutucastpkts(ni)   MIB2_STATS_NETIF_INC(ni, ifoutucastpkts)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifoutnucastpkts(ni)">Marco <span>snmp_inc_ifoutnucastpkts(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifoutnucastpkts(ni)  MIB2_STATS_NETIF_INC(ni, ifoutnucastpkts)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifoutdiscards(ni)">Marco <span>snmp_inc_ifoutdiscards(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifoutdiscards(ni)    MIB2_STATS_NETIF_INC(ni, ifoutdiscards)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_inc_ifouterrors(ni)">Marco <span>snmp_inc_ifouterrors(ni)</span></h4>
+      <pre class="doc-declare"><code>#define snmp_inc_ifouterrors(ni)      MIB2_STATS_NETIF_INC(ni, ifouterrors)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mib2_netif_added">Func <span>mib2_netif_added</span></h4>
+      <pre class="doc-declare"><code>void mib2_netif_added(struct netif *ni);</code></pre>
+      <pre class="doc-comment">/* network interface */</pre>
+
+      <h4 id="mib2_netif_removed">Func <span>mib2_netif_removed</span></h4>
+      <pre class="doc-declare"><code>void mib2_netif_removed(struct netif *ni);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_arp_entry">Func <span>mib2_add_arp_entry</span></h4>
+      <pre class="doc-declare"><code>void mib2_add_arp_entry(struct netif *ni, ip4_addr_t *ip);</code></pre>
+      <pre class="doc-comment">/* ARP (for atTable and ipNetToMediaTable) */</pre>
+
+      <h4 id="mib2_remove_arp_entry">Func <span>mib2_remove_arp_entry</span></h4>
+      <pre class="doc-declare"><code>void mib2_remove_arp_entry(struct netif *ni, ip4_addr_t *ip);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_ip4">Func <span>mib2_add_ip4</span></h4>
+      <pre class="doc-declare"><code>void mib2_add_ip4(struct netif *ni);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_remove_ip4">Func <span>mib2_remove_ip4</span></h4>
+      <pre class="doc-declare"><code>void mib2_remove_ip4(struct netif *ni);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_add_route_ip4">Func <span>mib2_add_route_ip4</span></h4>
+      <pre class="doc-declare"><code>void mib2_add_route_ip4(u8_t dflt, struct netif *ni);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_remove_route_ip4">Func <span>mib2_remove_route_ip4</span></h4>
+      <pre class="doc-declare"><code>void mib2_remove_route_ip4(u8_t dflt, struct netif *ni);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_udp_bind">Func <span>mib2_udp_bind</span></h4>
+      <pre class="doc-declare"><code>void mib2_udp_bind(struct udp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mib2_udp_unbind">Func <span>mib2_udp_unbind</span></h4>
+      <pre class="doc-declare"><code>void mib2_udp_unbind(struct udp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="udp_pcb">Variable <span>udp_pcb</span></h4>
+      <pre class="doc-declare"><code>struct udp_pcb;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netif">Variable <span>netif</span></h4>
+      <pre class="doc-declare"><code>struct netif;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

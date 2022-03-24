@@ -1,0 +1,778 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_network.h" class="nav-sub-label">uni_network.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_cJSON.h" class="nav-sub-label">ty_cJSON.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_APP_AGENT_H" class="nav-sub-label">_APP_AGENT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_GRP_OPER_ENGR" class="nav-sub-label">FRM_GRP_OPER_ENGR</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_GRP_CMD" class="nav-sub-label">FRM_GRP_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_init(wechat)" class="nav-sub-label">lan_pro_cntl_init(wechat)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_exit()" class="nav-sub-label">lan_pro_cntl_exit()</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_disable()" class="nav-sub-label">lan_pro_cntl_disable()</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_enable()" class="nav-sub-label">lan_pro_cntl_enable()</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_dp_sata_report(data,len)" class="nav-sub-label">lan_dp_sata_report(data,len)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_data_report_cb(fr_type,ret_code,data,len)" class="nav-sub-label">lan_data_report_cb(fr_type,ret_code,data,len)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_disconnect_all_sockets()" class="nav-sub-label">lan_disconnect_all_sockets()</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_get_valid_connect_cnt()" class="nav-sub-label">lan_pro_cntl_get_valid_connect_cnt()</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_cfg(cfg,data)" class="nav-sub-label">lan_pro_cntl_cfg(cfg,data)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_unregister_cb(frame_type)" class="nav-sub-label">lan_pro_cntl_unregister_cb(frame_type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#is_lan_connected()" class="nav-sub-label">is_lan_connected()</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_register_cb(frame_type,handler)" class="nav-sub-label">lan_pro_cntl_register_cb(frame_type,handler)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_svc_lan_init" class="nav-sub-label">tuya_svc_lan_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_exit" class="nav-sub-label">tuya_svc_lan_exit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_disable" class="nav-sub-label">tuya_svc_lan_disable</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_enable" class="nav-sub-label">tuya_svc_lan_enable</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_dp_report" class="nav-sub-label">tuya_svc_lan_dp_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_data_report" class="nav-sub-label">tuya_svc_lan_data_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_disconnect_all" class="nav-sub-label">tuya_svc_lan_disconnect_all</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_get_valid_connections" class="nav-sub-label">tuya_svc_lan_get_valid_connections</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_cfg" class="nav-sub-label">tuya_svc_lan_cfg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_unregister_cb" class="nav-sub-label">tuya_svc_lan_unregister_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_get_valid_connections" class="nav-sub-label">tuya_svc_lan_get_valid_connections</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_register_cb" class="nav-sub-label">tuya_svc_lan_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_register_cb" class="nav-sub-label">lan_pro_cntl_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_pro_cntl_unregister_cb" class="nav-sub-label">lan_pro_cntl_unregister_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_get_client_num" class="nav-sub-label">tuya_svc_lan_get_client_num</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_ext_proto_reg" class="nav-sub-label">tuya_svc_lan_ext_proto_reg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_ext_proto_unreg" class="nav-sub-label">tuya_svc_lan_ext_proto_unreg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_ext_proto_uninit" class="nav-sub-label">tuya_svc_lan_ext_proto_uninit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_ext_proto_data_report" class="nav-sub-label">tuya_svc_lan_ext_proto_data_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_lan_register_cb" class="nav-sub-label">tuya_svc_lan_register_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#Lan_Cfg_e;
+" class="nav-sub-label">Lan_Cfg_e;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cmd_handler_cb" class="nav-sub-label">lan_cmd_handler_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_ext_protocol_handler_cb" class="nav-sub-label">lan_ext_protocol_handler_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="uni_network.h"><span>uni_network.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_network.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_network.h"
+</pre>
+
+      <h4 id="ty_cJSON.h"><span>ty_cJSON.h</span></h4>
+      <pre class="doc-declare"><code>#include "ty_cJSON.h"
+</code></pre>
+      <pre class="doc-comment">#include "ty_cJSON.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_APP_AGENT_H">Marco <span>_APP_AGENT_H</span></h4>
+      <pre class="doc-declare"><code>#define _APP_AGENT_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_GRP_OPER_ENGR">Marco <span>FRM_GRP_OPER_ENGR</span></h4>
+      <pre class="doc-declare"><code>#define FRM_GRP_OPER_ENGR 0xd0
+</code></pre>
+      <pre class="doc-comment">//group test</pre>
+
+      <h4 id="FRM_GRP_CMD">Marco <span>FRM_GRP_CMD</span></h4>
+      <pre class="doc-declare"><code>#define FRM_GRP_CMD 0xd1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_init(wechat)">Marco <span>lan_pro_cntl_init(wechat)</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_init(wechat) tuya_svc_lan_init()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_exit()">Marco <span>lan_pro_cntl_exit()</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_exit() tuya_svc_lan_exit()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_disable()">Marco <span>lan_pro_cntl_disable()</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_disable() tuya_svc_lan_disable()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_enable()">Marco <span>lan_pro_cntl_enable()</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_enable() tuya_svc_lan_enable()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_dp_sata_report(data,len)">Marco <span>lan_dp_sata_report(data,len)</span></h4>
+      <pre class="doc-declare"><code>#define lan_dp_sata_report(data,len) tuya_svc_lan_dp_report(data,len)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_data_report_cb(fr_type,ret_code,data,len)">Marco <span>lan_data_report_cb(fr_type,ret_code,data,len)</span></h4>
+      <pre class="doc-declare"><code>#define lan_data_report_cb(fr_type,ret_code,data,len) tuya_svc_lan_data_report(fr_type,ret_code,data,len)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_disconnect_all_sockets()">Marco <span>lan_disconnect_all_sockets()</span></h4>
+      <pre class="doc-declare"><code>#define lan_disconnect_all_sockets() tuya_svc_lan_disconnect_all()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_get_valid_connect_cnt()">Marco <span>lan_pro_cntl_get_valid_connect_cnt()</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_get_valid_connect_cnt() tuya_svc_lan_get_valid_connections()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_cfg(cfg,data)">Marco <span>lan_pro_cntl_cfg(cfg,data)</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_cfg(cfg,data) tuya_svc_lan_cfg(cfg,data)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_unregister_cb(frame_type)">Marco <span>lan_pro_cntl_unregister_cb(frame_type)</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_unregister_cb(frame_type) tuya_svc_lan_unregister_cb(frame_type)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="is_lan_connected()">Marco <span>is_lan_connected()</span></h4>
+      <pre class="doc-declare"><code>#define is_lan_connected() (tuya_svc_lan_get_valid_connections() != 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_pro_cntl_register_cb(frame_type,handler)">Marco <span>lan_pro_cntl_register_cb(frame_type,handler)</span></h4>
+      <pre class="doc-declare"><code>#define lan_pro_cntl_register_cb(frame_type,handler) tuya_svc_lan_register_cb(frame_type,handler)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_svc_lan_init">Func <span>tuya_svc_lan_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_init();</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol init
+ *
+ * @param[in] wechat true/false
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_exit">Func <span>tuya_svc_lan_exit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_exit(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol exit
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_disable">Func <span>tuya_svc_lan_disable</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_disable(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol diable
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_enable">Func <span>tuya_svc_lan_enable</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_enable(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol enable
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_dp_report">Func <span>tuya_svc_lan_dp_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_dp_report(IN CONST VOID *data, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan dp report
+ *
+ * @param[in] data data buf
+ * @param[in] len buf length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_data_report">Func <span>tuya_svc_lan_data_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_data_report(IN CONST UINT_T fr_type, IN CONST UINT_T ret_code,IN CONST BYTE_T *data, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan dp report callback
+ *
+ * @param[in] fr_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] ret_code refer to LAN_PRO_HEAD_APP_S
+ * @param[in] data refer to LAN_PRO_HEAD_APP_S
+ * @param[in] len refer to LAN_PRO_HEAD_APP_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_disconnect_all">Func <span>tuya_svc_lan_disconnect_all</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_disconnect_all(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief disconnect all sockets
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_get_valid_connections">Func <span>tuya_svc_lan_get_valid_connections</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_svc_lan_get_valid_connections(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get vaild connect count
+ *
+ * @return vaild count
+ */</pre>
+
+      <h4 id="tuya_svc_lan_cfg">Func <span>tuya_svc_lan_cfg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_cfg(IN CONST Lan_Cfg_e cfg, IN CONST VOID * data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan configure
+ *
+ * @param[in] cfg refer to Lan_Cfg_e
+ * @param[in] data buf
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_unregister_cb">Func <span>tuya_svc_lan_unregister_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_unregister_cb(IN UINT_T frame_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unregister callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_get_valid_connections">Func <span>tuya_svc_lan_get_valid_connections</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_svc_lan_get_valid_connections(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief judge if lan connect
+ *
+ * @return TRUE/FALSE
+ */</pre>
+
+      <h4 id="tuya_svc_lan_register_cb">Func <span>tuya_svc_lan_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_register_cb(IN UINT_T frame_type, IN lan_cmd_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief register callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] frame_type refer to lan_cmd_handler_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_pro_cntl_register_cb">Func <span>lan_pro_cntl_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_pro_cntl_register_cb(UINT_T frame_type, lan_cmd_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief register callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] frame_type refer to lan_cmd_handler_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_pro_cntl_unregister_cb">Func <span>lan_pro_cntl_unregister_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_pro_cntl_unregister_cb(UINT_T frame_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unregister callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_get_client_num">Func <span>tuya_svc_lan_get_client_num</span></h4>
+      <pre class="doc-declare"><code>UINT_T tuya_svc_lan_get_client_num(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get lan client number
+ *
+ * @return client number
+ */</pre>
+
+      <h4 id="tuya_svc_lan_ext_proto_reg">Func <span>tuya_svc_lan_ext_proto_reg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_ext_proto_reg(CONST CHAR_T *ext_lan_pro, lan_ext_protocol_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register extend lan protocol
+ *
+ * @param[in] ext_lan_pro Protocol string
+ * @param[in] handler Protocol handler
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_ext_proto_unreg">Func <span>tuya_svc_lan_ext_proto_unreg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_ext_proto_unreg(CONST CHAR_T *ext_lan_pro);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Unregister extend lan protocol
+ *
+ * @param[in] ext_lan_pro Protocol string
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_ext_proto_uninit">Func <span>tuya_svc_lan_ext_proto_uninit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_ext_proto_uninit(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uninit extend lan protocol
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_ext_proto_data_report">Func <span>tuya_svc_lan_ext_proto_data_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_ext_proto_data_report(IN CONST VOID *data, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief extend lan protocol data report
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_lan_register_cb">Func <span>tuya_svc_lan_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_lan_register_cb(IN UINT_T frame_type, IN lan_cmd_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief register callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] frame_type refer to lan_cmd_handler_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="Lan_Cfg_e;
+">Typedef <span>Lan_Cfg_e;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   CFG_UDP_DISCOVERY_FORCE,   // send upd discovery even if clients exceed(BOOL_T)
+   CFG_UDP_EXT_CONTENT,       // deprecated(reserved for gw/ipc)
+   CFG_UDP_EXT_UPDATE,        // add/update new key/value(ty_cJSON)
+   CFG_UDP_EXT_DELETE,        // delete key/value(ty_cJSON)
+   CFG_SET_CLT_NUM,           // set clinet number(UINT_T)
+   CFG_UDP_DISCOVERY_INTERVAL, // set udp discovery interval(UINT_T, unit:s, default:5)
+   CFG_REV_BUF_SIZE,          // receive buffer size(UINT, default:512)
+   CFG_DEFAULT_LINKAGE,       // default lan linkage (netmgr_linkage_t)
+   CFG_MAX
+} Lan_Cfg_e;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_cmd_handler_cb">Typedef <span>lan_cmd_handler_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET(*lan_cmd_handler_cb)(IN CONST BYTE_T *data, OUT BYTE_T **out);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan cmd extersion, caller will free out
+ *
+ * @param[in] data data
+ * @param[out] out buf
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_ext_protocol_handler_cb">Typedef <span>lan_ext_protocol_handler_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET(*lan_ext_protocol_handler_cb)(IN ty_cJSON *root_json);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Callback to handle lan protocol data
+ *
+ * @param[in] root_json Json encoded protocol data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+    </div>
+  </body>
+</html>
+            

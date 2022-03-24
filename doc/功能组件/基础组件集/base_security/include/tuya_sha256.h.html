@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#string.h" class="nav-sub-label">string.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#POLARSSL_SHA2_H" class="nav-sub-label">POLARSSL_SHA2_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#POLARSSL_SHA2_C" class="nav-sub-label">POLARSSL_SHA2_C</a>
+              </li>
+      
+
+              <li>
+                <a href="#POLARSSL_ERR_SHA2_FILE_IO_ERROR" class="nav-sub-label">POLARSSL_ERR_SHA2_FILE_IO_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#SHA256TYPE" class="nav-sub-label">SHA256TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SHA244TYPE" class="nav-sub-label">SHA244TYPE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#sha2_starts" class="nav-sub-label">sha2_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_update" class="nav-sub-label">sha2_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_finish" class="nav-sub-label">sha2_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2" class="nav-sub-label">sha2</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_file" class="nav-sub-label">sha2_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_hmac_starts" class="nav-sub-label">sha2_hmac_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_hmac_update" class="nav-sub-label">sha2_hmac_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_hmac_finish" class="nav-sub-label">sha2_hmac_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_hmac_reset" class="nav-sub-label">sha2_hmac_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_hmac" class="nav-sub-label">sha2_hmac</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha2_self_test" class="nav-sub-label">sha2_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+sha2_context;
+" class="nav-sub-label">
+sha2_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="string.h"><span>string.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;string.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <string.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="POLARSSL_SHA2_H">Marco <span>POLARSSL_SHA2_H</span></h4>
+      <pre class="doc-declare"><code>#define POLARSSL_SHA2_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="POLARSSL_SHA2_C">Marco <span>POLARSSL_SHA2_C</span></h4>
+      <pre class="doc-declare"><code>#define POLARSSL_SHA2_C 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="POLARSSL_ERR_SHA2_FILE_IO_ERROR">Marco <span>POLARSSL_ERR_SHA2_FILE_IO_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define POLARSSL_ERR_SHA2_FILE_IO_ERROR -120 /**< Read/write error in file. */
+</code></pre>
+      <pre class="doc-comment">//#define POLARSSL_SELF_TEST	1</pre>
+
+      <h4 id="SHA256TYPE">Marco <span>SHA256TYPE</span></h4>
+      <pre class="doc-declare"><code>#define SHA256TYPE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SHA244TYPE">Marco <span>SHA244TYPE</span></h4>
+      <pre class="doc-declare"><code>#define SHA244TYPE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="sha2_starts">Func <span>sha2_starts</span></h4>
+      <pre class="doc-declare"><code>void sha2_starts( sha2_context *ctx, int is224 );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 context setup
+*
+* @param ctx context to be initialized
+* @param is224 0 = use SHA256, 1 = use SHA224
+*/</pre>
+
+      <h4 id="sha2_update">Func <span>sha2_update</span></h4>
+      <pre class="doc-declare"><code>void sha2_update( sha2_context *ctx, const unsigned char *input, size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 process buffer
+*
+* @param ctx SHA-256 context
+* @param input buffer holding the data
+* @param ilen length of the input data
+*/</pre>
+
+      <h4 id="sha2_finish">Func <span>sha2_finish</span></h4>
+      <pre class="doc-declare"><code>void sha2_finish( sha2_context *ctx, unsigned char output[32] );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 final digest
+*
+* @param ctx SHA-256 context
+* @param output SHA-224/256 checksum result
+*/</pre>
+
+      <h4 id="sha2">Func <span>sha2</span></h4>
+      <pre class="doc-declare"><code>void sha2( const unsigned char *input, size_t ilen,
+          unsigned char output[32], int is224 );</code></pre>
+      <pre class="doc-comment">/**
+* @brief Output = SHA-256( input buffer )
+*
+* @param input buffer holding the data
+* @param ilen length of the input data
+* @param output SHA-224/256 checksum result
+* @param is224 0 = use SHA256, 1 = use SHA224
+*/</pre>
+
+      <h4 id="sha2_file">Func <span>sha2_file</span></h4>
+      <pre class="doc-declare"><code>int sha2_file( const char *path, unsigned char output[32], int is224 );</code></pre>
+      <pre class="doc-comment">/**
+* @brief Output = SHA-256( file contents )
+*
+* @param path input file name
+* @param output SHA-224/256 checksum result
+* @param is224 0 = use SHA256, 1 = use SHA224
+*
+* @return 0 if successful, or POLARSSL_ERR_SHA2_FILE_IO_ERROR
+*/</pre>
+
+      <h4 id="sha2_hmac_starts">Func <span>sha2_hmac_starts</span></h4>
+      <pre class="doc-declare"><code>void sha2_hmac_starts( sha2_context *ctx, const unsigned char *key, size_t keylen,
+                      int is224 );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 HMAC context setup
+*
+* @param ctx HMAC context to be initialized
+* @param key HMAC secret key
+* @param keylen length of the HMAC key
+* @param is224 0 = use SHA256, 1 = use SHA224
+*/</pre>
+
+      <h4 id="sha2_hmac_update">Func <span>sha2_hmac_update</span></h4>
+      <pre class="doc-declare"><code>void sha2_hmac_update( sha2_context *ctx, const unsigned char *input, size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 HMAC process buffer
+*
+* @param ctx HMAC context
+* @param input buffer holding the data
+* @param ilen length of the input data
+*/</pre>
+
+      <h4 id="sha2_hmac_finish">Func <span>sha2_hmac_finish</span></h4>
+      <pre class="doc-declare"><code>void sha2_hmac_finish( sha2_context *ctx, unsigned char output[32] );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 HMAC final digest
+*
+* @param ctx HMAC context
+* @param output SHA-224/256 HMAC checksum result
+*/</pre>
+
+      <h4 id="sha2_hmac_reset">Func <span>sha2_hmac_reset</span></h4>
+      <pre class="doc-declare"><code>void sha2_hmac_reset( sha2_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 HMAC context reset
+*
+* @param ctx HMAC context to be reset
+*/</pre>
+
+      <h4 id="sha2_hmac">Func <span>sha2_hmac</span></h4>
+      <pre class="doc-declare"><code>void sha2_hmac( const unsigned char *key, size_t keylen,
+               const unsigned char *input, size_t ilen,
+               unsigned char output[32], int is224 );</code></pre>
+      <pre class="doc-comment">/**
+* @brief Output = HMAC-SHA-256( hmac key, input buffer )
+*
+* @param key HMAC secret key
+* @param keylen length of the HMAC key
+* @param input buffer holding the data
+* @param ilen length of the input data
+* @param output HMAC-SHA-224/256 result
+* @param is224 0 = use SHA256, 1 = use SHA224
+*/</pre>
+
+      <h4 id="sha2_self_test">Func <span>sha2_self_test</span></h4>
+      <pre class="doc-declare"><code>int sha2_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+* @brief Checkup routine
+*
+* @return 0 if successful, or 1 if the test failed
+*/</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+sha2_context;
+">Typedef <span>
+sha2_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   unsigned long total[2]; /*!< number of bytes processed */
+   unsigned long state[8]; /*!< intermediate digest state */
+   unsigned char buffer[64]; /*!< data block being processed */
+
+   unsigned char ipad[64]; /*!< HMAC: inner padding */
+   unsigned char opad[64]; /*!< HMAC: outer padding */
+   int is224; /*!< 0 => SHA-256, else SHA-224 */
+}
+sha2_context;
+</code></pre>
+      <pre class="doc-comment">/**
+* @brief SHA-256 context structure
+*/</pre>
+    </div>
+  </body>
+</html>
+            

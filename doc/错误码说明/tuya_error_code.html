@@ -1,0 +1,1565 @@
+<h1>Tuya Embedded software error code define</h1>
+
+<h2>1. module GLOBAL</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_OK</td>
+<td>(-0x0000)</td>
+<td>0, 执行成功</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_COM_ERROR</td>
+<td>(-0x0001)</td>
+<td>-1, 通用错误</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_INVALID_PARM</td>
+<td>(-0x0002)</td>
+<td>-2, 无效的入参</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_MALLOC_FAILED</td>
+<td>(-0x0003)</td>
+<td>-3, 内存分配失败</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_NOT_SUPPORTED</td>
+<td>(-0x0004)</td>
+<td>-4, 不支持</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_NETWORK_ERROR</td>
+<td>(-0x0005)</td>
+<td>-5, 网络错误</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_NOT_FOUND</td>
+<td>(-0x0006)</td>
+<td>-6, 没有找到对象</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_CR_CJSON_ERR</td>
+<td>(-0x0007)</td>
+<td>-7, 创建json对象失败</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_CJSON_PARSE_ERR</td>
+<td>(-0x0008)</td>
+<td>-8, json解析失败</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>OPRT_CJSON_GET_ERR</td>
+<td>(-0x0009)</td>
+<td>-9, 获取json对象失败</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>OPRT_CR_MUTEX_ERR</td>
+<td>(-0x000a)</td>
+<td>-10, 创建信号量失败</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>OPRT_SOCK_ERR</td>
+<td>(-0x000b)</td>
+<td>-11, 创建socket失败</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>OPRT_SET_SOCK_ERR</td>
+<td>(-0x000c)</td>
+<td>-12, socket设置失败</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>OPRT_SOCK_CONN_ERR</td>
+<td>(-0x000d)</td>
+<td>-13, socket连接失败</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>OPRT_SEND_ERR</td>
+<td>(-0x000e)</td>
+<td>-14, 发送失败</td>
+</tr>
+
+<tr>
+<td>16</td>
+<td>OPRT_RECV_ERR</td>
+<td>(-0x000f)</td>
+<td>-15, 接收失败</td>
+</tr>
+
+<tr>
+<td>17</td>
+<td>OPRT_RECV_DA_NOT_ENOUGH</td>
+<td>(-0x0010)</td>
+<td>-16, 接收数据不完整</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>OPRT_KVS_WR_FAIL</td>
+<td>(-0x0011)</td>
+<td>-17, KV写失败</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>OPRT_KVS_RD_FAIL</td>
+<td>(-0x0012)</td>
+<td>-18, KV读失败</td>
+</tr>
+
+<tr>
+<td>20</td>
+<td>OPRT_CRC32_FAILED</td>
+<td>(-0x0013)</td>
+<td>-19, CRC校验失败</td>
+</tr>
+
+<tr>
+<td>21</td>
+<td>OPRT_TIMEOUT</td>
+<td>(-0x0014)</td>
+<td>-20, 超时</td>
+</tr>
+
+<tr>
+<td>22</td>
+<td>OPRT_INIT_MORE_THAN_ONCE</td>
+<td>(-0x0015)</td>
+<td>-21, 初始化超过一次</td>
+</tr>
+
+<tr>
+<td>23</td>
+<td>OPRT_INDEX_OUT_OF_BOUND</td>
+<td>(-0x0016)</td>
+<td>-22, 索引越界</td>
+</tr>
+
+<tr>
+<td>24</td>
+<td>OPRT_RESOURCE_NOT_READY</td>
+<td>(-0x0017)</td>
+<td>-23, 资源未完善</td>
+</tr>
+
+<tr>
+<td>25</td>
+<td>OPRT_EXCEED_UPPER_LIMIT</td>
+<td>(-0x0018)</td>
+<td>-24, 超过上限</td>
+</tr>
+
+<tr>
+<td>26</td>
+<td>OPRT_FILE_NOT_FIND</td>
+<td>(-0x0019)</td>
+<td>-25, 文件未找到</td>
+</tr>
+</tbody>
+</table>
+
+<h2>2. module BASE_OS_ADAPTER</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_OS_ADAPTER_REG_NULL_ERROR</td>
+<td>(-0x0100)</td>
+<td>-256, 系统适配注册失败</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_BASE_OS_ADAPTER_INIT_MUTEX_ATTR_FAILED</td>
+<td>(-0x0101)</td>
+<td>-257, 初始化同步属性失败</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_BASE_OS_ADAPTER_SET_MUTEX_ATTR_FAILED</td>
+<td>(-0x0102)</td>
+<td>-258, 设置同步属性失败</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_BASE_OS_ADAPTER_DESTROY_MUTEX_ATTR_FAILED</td>
+<td>(-0x0103)</td>
+<td>-259, 销毁同步属性失败</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_BASE_OS_ADAPTER_INIT_MUTEX_FAILED</td>
+<td>(-0x0104)</td>
+<td>-260, 初始化互斥量失败</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_FAILED</td>
+<td>(-0x0105)</td>
+<td>-261, 互斥量加锁失败</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_BASE_OS_ADAPTER_MUTEX_TRYLOCK_FAILED</td>
+<td>(-0x0106)</td>
+<td>-262, 互斥量尝试加锁失败</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_BUSY</td>
+<td>(-0x0107)</td>
+<td>-263, 互斥量忙</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_BASE_OS_ADAPTER_MUTEX_UNLOCK_FAILED</td>
+<td>(-0x0108)</td>
+<td>-264, 互斥量解锁失败</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>OPRT_BASE_OS_ADAPTER_MUTEX_RELEASE_FAILED</td>
+<td>(-0x0109)</td>
+<td>-265, 互斥量释放失败</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>OPRT_BASE_OS_ADAPTER_CR_MUTEX_ERR</td>
+<td>(-0x010a)</td>
+<td>-266, 互斥量创建失败</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>OPRT_BASE_OS_ADAPTER_MEM_PARTITION_EMPTY</td>
+<td>(-0x010b)</td>
+<td>-267, 内存分区空</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>OPRT_BASE_OS_ADAPTER_MEM_PARTITION_FULL</td>
+<td>(-0x010c)</td>
+<td>-268, 内存分区满</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>OPRT_BASE_OS_ADAPTER_MEM_PARTITION_NOT_FOUND</td>
+<td>(-0x010d)</td>
+<td>-269, 内存分区不存在</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>OPRT_BASE_OS_ADAPTER_INIT_SEM_FAILED</td>
+<td>(-0x010e)</td>
+<td>-270, 初始化信号量失败</td>
+</tr>
+
+<tr>
+<td>16</td>
+<td>OPRT_BASE_OS_ADAPTER_WAIT_SEM_FAILED</td>
+<td>(-0x010f)</td>
+<td>-271, 等待信号量失败</td>
+</tr>
+
+<tr>
+<td>17</td>
+<td>OPRT_BASE_OS_ADAPTER_POST_SEM_FAILED</td>
+<td>(-0x0110)</td>
+<td>-272, 释放信号量失败</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>OPRT_BASE_OS_ADAPTER_THRD_STA_UNVALID</td>
+<td>(-0x0111)</td>
+<td>-273, 线程状态非法</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>OPRT_BASE_OS_ADAPTER_THRD_CR_FAILED</td>
+<td>(-0x0112)</td>
+<td>-274, 线程创建失败</td>
+</tr>
+
+<tr>
+<td>20</td>
+<td>OPRT_BASE_OS_ADAPTER_THRD_JOIN_FAILED</td>
+<td>(-0x0113)</td>
+<td>-275, 线程JOIN函数调用失败</td>
+</tr>
+
+<tr>
+<td>21</td>
+<td>OPRT_BASE_OS_ADAPTER_THRD_SELF_CAN_NOT_JOIN</td>
+<td>(-0x0114)</td>
+<td>-276, 自身线程不能调用JOIN函数</td>
+</tr>
+</tbody>
+</table>
+
+<h2>3. module BASE_UTILITIES</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_UTILITIES_PARTITION_EMPTY</td>
+<td>(-0x0200)</td>
+<td>-512, 无空闲链表</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_BASE_UTILITIES_PARTITION_FULL</td>
+<td>(-0x0201)</td>
+<td>-513, 链表已满</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_BASE_UTILITIES_PARTITION_NOT_FOUND</td>
+<td>(-0x0202)</td>
+<td>-514, 链表未遍历到</td>
+</tr>
+</tbody>
+</table>
+
+<h2>4. module BASE_SECURITY</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_SECURITY_CRC32_FAILED</td>
+<td>(-0x0300)</td>
+<td>-768, CRC32错误</td>
+</tr>
+</tbody>
+</table>
+
+<h2>5. module BASE_LOG_MNG</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_LOG_MNG_DONOT_FOUND_MODULE</td>
+<td>(-0x0400)</td>
+<td>-1024, 未发现log模块</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_BASE_LOG_MNG_PRINT_LOG_LEVEL_HIGHER</td>
+<td>(-0x0401)</td>
+<td>-1025, log级别低</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_BASE_LOG_MNG_FORMAT_STRING_FAILED</td>
+<td>(-0x0402)</td>
+<td>-1026, log字符串格式化失败</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_BASE_LOG_MNG_LOG_SEQ_OPEN_FILE_FAIL</td>
+<td>(-0x0403)</td>
+<td>-1027, 打开日志序文件失败</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_BASE_LOG_MNG_LOG_SEQ_WRITE_FILE_FAIL</td>
+<td>(-0x0404)</td>
+<td>-1028, 写日志序文件失败</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_FULL</td>
+<td>(-0x0405)</td>
+<td>-1029, 日志序文件满</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_NOT_EXIST</td>
+<td>(-0x0406)</td>
+<td>-1030, 日志序文件不存在</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_BASE_LOG_MNG_LOG_SEQ_NAME_INVALIDE</td>
+<td>(-0x0407)</td>
+<td>-1031, 日志序名称无效</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_BASE_LOG_MNG_LOG_SEQ_CREATE_FAIL</td>
+<td>(-0x0408)</td>
+<td>-1032, 日志序创建失败</td>
+</tr>
+</tbody>
+</table>
+
+<h2>6. module BASE_TIMEQ</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_TIMEQ_TIMERID_EXIST</td>
+<td>(-0x0600)</td>
+<td>-1536, 定时器ID已存在</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_BASE_TIMEQ_TIMERID_NOT_FOUND</td>
+<td>(-0x0601)</td>
+<td>-1537, 未找到指定定时器ID</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_BASE_TIMEQ_TIMERID_UNVALID</td>
+<td>(-0x0602)</td>
+<td>-1538, 定时器ID非法</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_BASE_TIMEQ_GET_IDLE_TIMERID_ERROR</td>
+<td>(-0x0603)</td>
+<td>-1539, 获取空闲定时器ID错误</td>
+</tr>
+</tbody>
+</table>
+
+<h2>7. module BASE_MSGQ</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_MSGQ_NOT_FOUND</td>
+<td>(-0x0700)</td>
+<td>-1792, 消息未找到</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_BASE_MSGQ_LIST_EMPTY</td>
+<td>(-0x0701)</td>
+<td>-1793, 列表为空</td>
+</tr>
+</tbody>
+</table>
+
+<h2>8. module MID_HTTP</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_MID_HTTP_BUF_NOT_ENOUGH</td>
+<td>(-0x0800)</td>
+<td>-2048, 缓冲区长度不足</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_MID_HTTP_URL_PARAM_OUT_LIMIT</td>
+<td>(-0x0801)</td>
+<td>-2049, URL长度超出限制</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_MID_HTTP_OS_ERROR</td>
+<td>(-0x0802)</td>
+<td>-2050, 系统错误</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_MID_HTTP_PR_REQ_ERROR</td>
+<td>(-0x0803)</td>
+<td>-2051, 准备请求错误</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_MID_HTTP_SD_REQ_ERROR</td>
+<td>(-0x0804)</td>
+<td>-2052, 发送请求错误</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_MID_HTTP_RD_ERROR</td>
+<td>(-0x0805)</td>
+<td>-2053, 读取错误</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_MID_HTTP_AD_HD_ERROR</td>
+<td>(-0x0806)</td>
+<td>-2054, 添加头错误</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_MID_HTTP_GET_RESP_ERROR</td>
+<td>(-0x0807)</td>
+<td>-2055, 获取应答错误</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_MID_HTTP_AES_INIT_ERR</td>
+<td>(-0x0808)</td>
+<td>-2056, AES初始化错误</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>OPRT_MID_HTTP_AES_OPEN_ERR</td>
+<td>(-0x0809)</td>
+<td>-2057, AES打开错误</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>OPRT_MID_HTTP_AES_SET_KEY_ERR</td>
+<td>(-0x080a)</td>
+<td>-2058, AES设置KEY错误</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>OPRT_MID_HTTP_AES_ENCRYPT_ERR</td>
+<td>(-0x080b)</td>
+<td>-2059, AES加密错误</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>OPRT_MID_HTTP_CR_HTTP_URL_H_ERR</td>
+<td>(-0x080c)</td>
+<td>-2060, 创建HTTP URL头错误</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>OPRT_MID_HTTP_HTTPS_HANDLE_FAIL</td>
+<td>(-0x080d)</td>
+<td>-2061, HTTPS句柄错误</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>OPRT_MID_HTTP_HTTPS_RESP_UNVALID</td>
+<td>(-0x080e)</td>
+<td>-2062, HTTPS无效应答</td>
+</tr>
+
+<tr>
+<td>16</td>
+<td>OPRT_MID_HTTP_NO_SUPPORT_RANGE</td>
+<td>(-0x080f)</td>
+<td>-2063, 不支持断点续传</td>
+</tr>
+</tbody>
+</table>
+
+<h2>9. module MID_MQTT</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_MID_MQTT_DEF_ERR</td>
+<td>(-0x0900)</td>
+<td>-2304, 定义失败</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_MID_MQTT_INVALID_PARM</td>
+<td>(-0x0901)</td>
+<td>-2305, 参数无效</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_MID_MQTT_MALLOC_FAILED</td>
+<td>(-0x0902)</td>
+<td>-2306, 内存申请失败</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_MID_MQTT_DNS_PARSED_FAILED</td>
+<td>(-0x0903)</td>
+<td>-2307, DNS解析失败</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_MID_MQTT_SOCK_CREAT_FAILED</td>
+<td>(-0x0904)</td>
+<td>-2308, socket创建失败</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_MID_MQTT_SOCK_SET_FAILED</td>
+<td>(-0x0905)</td>
+<td>-2309, socket set失败</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_MID_MQTT_TCP_CONNECD_FAILED</td>
+<td>(-0x0906)</td>
+<td>-2310, tcp连接失败</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_MID_MQTT_TCP_TLS_CONNECD_FAILED</td>
+<td>(-0x0907)</td>
+<td>-2311, tcp tls连接失败</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_MID_MQTT_PACK_SEND_FAILED</td>
+<td>(-0x0908)</td>
+<td>-2312, 包发送失败</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>OPRT_MID_MQTT_RECV_DATA_FORMAT_WRONG</td>
+<td>(-0x0909)</td>
+<td>-2313, 接收数据格式错误</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>OPRT_MID_MQTT_MSGID_NOT_MATCH</td>
+<td>(-0x090a)</td>
+<td>-2314, 接收数据msgid未找到</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>OPRT_MID_MQTT_START_TM_MSG_ERR</td>
+<td>(-0x090b)</td>
+<td>-2315, 开始事件msg错误</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>OPRT_MID_MQTT_OVER_MAX_MESSAGE_LEN</td>
+<td>(-0x090c)</td>
+<td>-2316, 超过消息最大长度</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>OPRT_MID_MQTT_PING_SEND_ERR</td>
+<td>(-0x090d)</td>
+<td>-2317, ping发送失败</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>OPRT_MID_MQTT_PUBLISH_TIMEOUT</td>
+<td>(-0x090e)</td>
+<td>-2318, 发布超时</td>
+</tr>
+</tbody>
+</table>
+
+<h2>10. module MID_TLS</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_MID_TLS_NET_SOCKET_ERROR</td>
+<td>(-0x0a00)</td>
+<td>-2560, Failed to open a socket</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_MID_TLS_NET_CONNECT_ERROR</td>
+<td>(-0x0a01)</td>
+<td>-2561, The connection to the given server / port failed.</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_MID_TLS_UNKNOWN_HOST_ERROR</td>
+<td>(-0x0a02)</td>
+<td>-2562, Failed to get an IP address for the given hostname.</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_MID_TLS_CONNECTION_ERROR</td>
+<td>(-0x0a03)</td>
+<td>-2563, TLS连接失败</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_MID_TLS_DRBG_ENTROPY_ERROR</td>
+<td>(-0x0a04)</td>
+<td>-2564, mbedtls随机种子生成失败</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_MID_TLS_X509_ROOT_CRT_PARSE_ERROR</td>
+<td>(-0x0a05)</td>
+<td>-2565, X509根证书解析失败</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_MID_TLS_X509_DEVICE_CRT_PARSE_ERROR</td>
+<td>(-0x0a06)</td>
+<td>-2566, X509设备证书解析失败</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_MID_TLS_CTR_DRBG_ENTROPY_SOURCE_ERROR</td>
+<td>(-0x0a07)</td>
+<td>-2567, The entropy source failed</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_MID_TLS_PK_PRIVATE_KEY_PARSE_ERROR</td>
+<td>(-0x0a08)</td>
+<td>-2568, 秘钥解析失败</td>
+</tr>
+</tbody>
+</table>
+
+<h2>11. module SVC_WIFI_NETCFG</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_WIFI_NETCFG_RECV_CONTINUE</td>
+<td>(-0x0b00)</td>
+<td>-2816, 继续接收配网包</td>
+</tr>
+</tbody>
+</table>
+
+<h2>12. module SVC_MF_TEST</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_MF_TEST_UPDATE_DATA_LEN_EXECED</td>
+<td>(-0x0d00)</td>
+<td>-3328, 升级数据长度超过处理上限</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_MF_TEST_UPDATE_CRC_ERROR</td>
+<td>(-0x0d01)</td>
+<td>-3329, 升级crc校验失败</td>
+</tr>
+</tbody>
+</table>
+
+<h2>13. module SVC_DP</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_DP_ALREADY_PROCESS</td>
+<td>(-0x0e00)</td>
+<td>-3584, DP已经处理</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_DP_ID_NOT_FOUND</td>
+<td>(-0x0e01)</td>
+<td>-3585, DP ID没有发现</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_DP_TP_NOT_MATCH</td>
+<td>(-0x0e02)</td>
+<td>-3586, DP 类型未匹配</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_SVC_DP_DEVICE_NOT_BINDED</td>
+<td>(-0x0e03)</td>
+<td>-3587, 设备未绑定</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_SVC_DP_TYPE_PROP_ILLEGAL</td>
+<td>(-0x0e04)</td>
+<td>-3588, 类型属性不合法</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_SVC_DP_NW_INVALID</td>
+<td>(-0x0e05)</td>
+<td>-3589, 网络无效</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_SVC_DP_SECURITY_VERIFY_ERR</td>
+<td>(-0x0e06)</td>
+<td>-3590, 安全校验失败</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_SVC_DP_REPORT_FINISH</td>
+<td>(-0x0e07)</td>
+<td>-3591, DP上报已结束</td>
+</tr>
+</tbody>
+</table>
+
+<h2>14. module BASE_EVENT</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_EVENT_INVALID_EVENT_NAME</td>
+<td>(-0x0f00)</td>
+<td>-3840, 无效的事件名</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_BASE_EVENT_INVALID_EVENT_DESC</td>
+<td>(-0x0f01)</td>
+<td>-3841, 无效的事件描述</td>
+</tr>
+</tbody>
+</table>
+
+<h2>15. module SVC_TIMER_TASK</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_TIMER_TASK_LOAD_INVALID_CJSON</td>
+<td>(-0x1000)</td>
+<td>-4096, K/V中保存的数据JSON格式错误</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_TIMER_TASK_LOAD_INVALID_DATA</td>
+<td>(-0x1001)</td>
+<td>-4097, K/V中保存的数据缺少cnt字段</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_TIMER_TASK_UPDATE_LAST_FETCH_INVALID</td>
+<td>(-0x1002)</td>
+<td>-4098, 云端返回的数据缺少lastFetchTime字段</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_INVALID</td>
+<td>(-0x1003)</td>
+<td>-4099, 云端返回的数据缺少count字段</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_EXCEED</td>
+<td>(-0x1004)</td>
+<td>-4100, 云端返回的定时任务数量超过30个</td>
+</tr>
+</tbody>
+</table>
+
+<h2>16. module SVC_HTTP</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_HTTP_NOT_ENCRYPT_RET</td>
+<td>(-0x1100)</td>
+<td>-4352, 结果未加密</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_HTTP_FILL_URL_H_ERR</td>
+<td>(-0x1101)</td>
+<td>-4353, 构造header错误</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_HTTP_FILL_URL_FULL_ERR</td>
+<td>(-0x1102)</td>
+<td>-4354, 构造整个URL错误</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_SVC_HTTP_FILL_DATA_ERR</td>
+<td>(-0x1103)</td>
+<td>-4355, 构造data错误</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_SVC_HTTP_URL_CFG_AI_SPEAKER_ERR</td>
+<td>(-0x1104)</td>
+<td>-4356, 音响配置失败</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>OPRT_SVC_HTTP_URL_CFG_URL_ERR</td>
+<td>(-0x1105)</td>
+<td>-4357, httpUrl/mqttUrl字段缺失</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>OPRT_SVC_HTTP_URL_CFG_URL2IP_ERR</td>
+<td>(-0x1106)</td>
+<td>-4358, httpUrl/mqttUrl解析错误</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>OPRT_SVC_HTTP_URL_CFG_URL2IP_SELF_ERR</td>
+<td>(-0x1107)</td>
+<td>-4359, httpsSelfUrl/mqttsSelfUrl解析错误</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>OPRT_SVC_HTTP_URL_CFG_URL2IP_VERIFY_ERR</td>
+<td>(-0x1108)</td>
+<td>-4360, httpsVerifyUrl/mqttsVerifyUrl解析错误</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>OPRT_SVC_HTTP_URL_CFG_URL2IP_PSK_ERR</td>
+<td>(-0x1109)</td>
+<td>-4361, httpsPSKUrl/mqttsPSKUrl解析错误</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>OPRT_SVC_HTTP_RECV_ERR</td>
+<td>(-0x110a)</td>
+<td>-4362, 接收数据错误</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>OPRT_SVC_HTTP_RECV_DA_NOT_ENOUGH</td>
+<td>(-0x110b)</td>
+<td>-4363, 接收数据不足</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>OPRT_SVC_HTTP_API_VERIFY_FAILED</td>
+<td>(-0x110c)</td>
+<td>-4364, 数据校验错误</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>OPRT_SVC_HTTP_GW_NOT_EXIST</td>
+<td>(-0x110d)</td>
+<td>-4365, 网关信息不存在</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>OPRT_SVC_HTTP_API_TOKEN_EXPIRE</td>
+<td>(-0x110e)</td>
+<td>-4366, TOKEN过期</td>
+</tr>
+
+<tr>
+<td>16</td>
+<td>OPRT_SVC_HTTP_DEV_RESET_FACTORY</td>
+<td>(-0x110f)</td>
+<td>-4367, 设备需要恢复出厂</td>
+</tr>
+
+<tr>
+<td>17</td>
+<td>OPRT_SVC_HTTP_DEV_NEED_REGISTER</td>
+<td>(-0x1110)</td>
+<td>-4368, 设备未注册</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>OPRT_SVC_HTTP_ORDER_EXPIRE</td>
+<td>(-0x1111)</td>
+<td>-4369, 订单已过期</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>OPRT_SVC_HTTP_NOT_EXISTS</td>
+<td>(-0x1112)</td>
+<td>-4370, 不存在</td>
+</tr>
+
+<tr>
+<td>20</td>
+<td>OPRT_SVC_HTTP_SIGNATURE_ERROR</td>
+<td>(-0x1113)</td>
+<td>-4371, 签名错误</td>
+</tr>
+
+<tr>
+<td>21</td>
+<td>OPRT_SVC_HTTP_API_VERSION_WRONG</td>
+<td>(-0x1114)</td>
+<td>-4372, API版本错误</td>
+</tr>
+
+<tr>
+<td>22</td>
+<td>OPRT_SVC_HTTP_DEVICE_REMOVED</td>
+<td>(-0x1115)</td>
+<td>-4373, 设备已移除</td>
+</tr>
+
+<tr>
+<td>23</td>
+<td>OPRT_SVC_HTTP_DEV_ALREADY_BIND</td>
+<td>(-0x1116)</td>
+<td>-4374, 设备已经绑定</td>
+</tr>
+
+<tr>
+<td>24</td>
+<td>OPRT_SVC_HTTP_REMOTE_API_RUN_UNKNOW_FAILED</td>
+<td>(-0x1117)</td>
+<td>-4375, 无法识别API</td>
+</tr>
+
+<tr>
+<td>25</td>
+<td>OPRT_SVC_HTTP_FORMAT_STRING_FAILED</td>
+<td>(-0x1118)</td>
+<td>-4376, 字符串格式化错误</td>
+</tr>
+
+<tr>
+<td>26</td>
+<td>OPRT_SVC_HTTP_API_DECODE_FAILED</td>
+<td>(-0x1119)</td>
+<td>-4377, 数据解密失败</td>
+</tr>
+
+<tr>
+<td>27</td>
+<td>OPRT_SVC_HTTP_SERV_VRFY_FAIL</td>
+<td>(-0x111a)</td>
+<td>-4378, 服务端校验失败</td>
+</tr>
+</tbody>
+</table>
+
+<h2>17. module SVC_LAN</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_LAN_SOCKET_FAULT</td>
+<td>(-0x1500)</td>
+<td>-5376, socket错误</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_LAN_SEND_ERR</td>
+<td>(-0x1501)</td>
+<td>-5377, socket发送错误</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_LAN_NO_CLIENT_CONNECTED</td>
+<td>(-0x1502)</td>
+<td>-5378, 没有可以上报的局域网设备连接</td>
+</tr>
+</tbody>
+</table>
+
+<h2>18. module SVC_MQTT</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_MQTT_CMD_NOT_EXEC</td>
+<td>(-0x1700)</td>
+<td>-5888, 命令未执行</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_MQTT_CMD_OUT_OF_TIME</td>
+<td>(-0x1701)</td>
+<td>-5889, 命令未在规定时间内执行</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_MQTT_GW_MQ_OFFLILNE</td>
+<td>(-0x1702)</td>
+<td>-5890, MQTT离线</td>
+</tr>
+</tbody>
+</table>
+
+<h2>19. module SVC_PEGASUS</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_PEGASUS_DECODE_FAILED</td>
+<td>(-0x1800)</td>
+<td>-6144, 解码失败</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_PEGASUS_DONOT_FOUND_MODULE</td>
+<td>(-0x1801)</td>
+<td>-6145, 模块未找到</td>
+</tr>
+</tbody>
+</table>
+
+<h2>20. module SVC_UPGRADE</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_UPGRADE_APP_NOT_READY</td>
+<td>(-0x1900)</td>
+<td>-6400, 应用尚未就绪</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_UPGRADE_NO_VALID_FIRMWARE</td>
+<td>(-0x1901)</td>
+<td>-6401, 升级信息字段校验失败</td>
+</tr>
+</tbody>
+</table>
+
+<h2>21. module SVC_API_IOT</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_API_IOT_DISCONNECTED_WITH_ROUTER</td>
+<td>(-0x1a00)</td>
+<td>-6656, 路由器断开</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_API_IOT_DEV_NOT_BIND</td>
+<td>(-0x1a01)</td>
+<td>-6657, 设备未绑定</td>
+</tr>
+</tbody>
+</table>
+
+<h2>22. module SVC_DEVOS</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_DEVOS_NOT_EXISTS</td>
+<td>(-0x1c00)</td>
+<td>-7168, 不存在</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_DEVOS_SCMA_INVALID</td>
+<td>(-0x1c01)</td>
+<td>-7169, SCMA无效</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_DEVOS_DEV_DP_CNT_INVALID</td>
+<td>(-0x1c02)</td>
+<td>-7170, 设备DP数量无效</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>OPRT_SVC_DEVOS_NO_AUTHENTICATION</td>
+<td>(-0x1c03)</td>
+<td>-7171, 无授权</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>OPRT_SVC_DEVOS_ROUTER_NOT_FIND</td>
+<td>(-0x1c04)</td>
+<td>-7172, 路由器未找到</td>
+</tr>
+</tbody>
+</table>
+
+<h2>23. module BASE_DB</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_BASE_DB_FLASH_NOT_ENOUGH_PAGE</td>
+<td>(-0x1d00)</td>
+<td>-7424, flash页不够</td>
+</tr>
+</tbody>
+</table>
+
+<h2>24. module SVC_BT</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Name</th>
+<th>Value</th>
+<th>message</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>OPRT_SVC_BT_API_TRSMITR_CONTINUE</td>
+<td>(-0x1f00)</td>
+<td>-7936, 传输未结束</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>OPRT_SVC_BT_API_TRSMITR_ERROR</td>
+<td>(-0x1f01)</td>
+<td>-7937, 传输错误</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>OPRT_SVC_BT_NETCFG_ERROR_ACK</td>
+<td>(-0x1f02)</td>
+<td>-7938, bt命令出错，给app发送ack</td>
+</tr>
+</tbody>
+</table>

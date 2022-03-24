@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_IOT_DEV_CHECK__" class="nav-sub-label">__TUYA_IOT_DEV_CHECK__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_RANDOM_LENGTH" class="nav-sub-label">TY_DEV_RANDOM_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_KEY_LENGTH" class="nav-sub-label">TY_DEV_KEY_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_SHA256_DIGEST_SIZE" class="nav-sub-label">TY_DEV_SHA256_DIGEST_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_RANDOM_AES_LEN" class="nav-sub-label">TY_DEV_RANDOM_AES_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_SESSION_KEY_LEN" class="nav-sub-label">TY_DEV_SESSION_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENCRYPT_AUTHKEY_HMACRA_NAME" class="nav-sub-label">ENCRYPT_AUTHKEY_HMACRA_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENCRYPT_AUTHKEY_HMACRB_NAME" class="nav-sub-label">ENCRYPT_AUTHKEY_HMACRB_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENCRYPT_AUTHKEY_AESRB_NAME" class="nav-sub-label">ENCRYPT_AUTHKEY_AESRB_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENCRYPT_AUTHKEY_SESSIONKEY_NAME" class="nav-sub-label">ENCRYPT_AUTHKEY_SESSIONKEY_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_IS_INDEPENDENT_NAME" class="nav-sub-label">TY_DEV_IS_INDEPENDENT_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_IS_SUB_NAME" class="nav-sub-label">TY_DEV_IS_SUB_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DEV_IS_FAMILY_NAME" class="nav-sub-label">TY_DEV_IS_FAMILY_NAME</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_dev_gen_ra_check" class="nav-sub-label">tuya_dev_gen_ra_check</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_dev_http_ra_check_exchange" class="nav-sub-label">tuya_dev_http_ra_check_exchange</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_dev_rarb_session_key_calc" class="nav-sub-label">tuya_dev_rarb_session_key_calc</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_dev_gen_uuid_hmac" class="nav-sub-label">tuya_dev_gen_uuid_hmac</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_dev_http_relation_exchange" class="nav-sub-label">tuya_dev_http_relation_exchange</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_IOT_DEV_CHECK__">Marco <span>__TUYA_IOT_DEV_CHECK__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_IOT_DEV_CHECK__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_RANDOM_LENGTH">Marco <span>TY_DEV_RANDOM_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_RANDOM_LENGTH 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_KEY_LENGTH">Marco <span>TY_DEV_KEY_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_KEY_LENGTH 16 //取authkey前16字节
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_SHA256_DIGEST_SIZE">Marco <span>TY_DEV_SHA256_DIGEST_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_SHA256_DIGEST_SIZE 32 //uint8 type 512 = 32*8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_RANDOM_AES_LEN">Marco <span>TY_DEV_RANDOM_AES_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_RANDOM_AES_LEN 32 //16 byte->aes128ecb->32 byte
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_SESSION_KEY_LEN">Marco <span>TY_DEV_SESSION_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_SESSION_KEY_LEN 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENCRYPT_AUTHKEY_HMACRA_NAME">Marco <span>ENCRYPT_AUTHKEY_HMACRA_NAME</span></h4>
+      <pre class="doc-declare"><code>#define ENCRYPT_AUTHKEY_HMACRA_NAME "hmacRandomA"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENCRYPT_AUTHKEY_HMACRB_NAME">Marco <span>ENCRYPT_AUTHKEY_HMACRB_NAME</span></h4>
+      <pre class="doc-declare"><code>#define ENCRYPT_AUTHKEY_HMACRB_NAME "hmacRandomB"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENCRYPT_AUTHKEY_AESRB_NAME">Marco <span>ENCRYPT_AUTHKEY_AESRB_NAME</span></h4>
+      <pre class="doc-declare"><code>#define ENCRYPT_AUTHKEY_AESRB_NAME "aesRandomB"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENCRYPT_AUTHKEY_SESSIONKEY_NAME">Marco <span>ENCRYPT_AUTHKEY_SESSIONKEY_NAME</span></h4>
+      <pre class="doc-declare"><code>#define ENCRYPT_AUTHKEY_SESSIONKEY_NAME "sessionKey"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_IS_INDEPENDENT_NAME">Marco <span>TY_DEV_IS_INDEPENDENT_NAME</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_IS_INDEPENDENT_NAME "isIndependent"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_IS_SUB_NAME">Marco <span>TY_DEV_IS_SUB_NAME</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_IS_SUB_NAME "isSub"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DEV_IS_FAMILY_NAME">Marco <span>TY_DEV_IS_FAMILY_NAME</span></h4>
+      <pre class="doc-declare"><code>#define TY_DEV_IS_FAMILY_NAME "isFamily"
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_dev_gen_ra_check">Func <span>tuya_dev_gen_ra_check</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_dev_gen_ra_check(OUT BYTE_T RA[TY_DEV_RANDOM_LENGTH],OUT BYTE_T ra_en_hex[TY_DEV_RANDOM_AES_LEN],
+  OUT BYTE_T ra_uuid_hmac[TY_DEV_SHA256_DIGEST_SIZE], OUT BYTE_T ra_hmac[TY_DEV_SHA256_DIGEST_SIZE]);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_dev_gen_ra_check 
+ * @desc dev生成RA,ra_aes,hmac(ra+uuid),hmac(ra)，用于三向认证
+ *
+ * @param[out] RA[TY_DEV_RANDOM_LENGTH]
+ * @param[out] ra_en_hex[TY_DEV_RANDOM_AES_LEN]
+ * @param[out] ra_uuid_hmac[TY_DEV_SHA256_DIGEST_SIZE]
+ * @param[out] ra_hmac[TY_DEV_SHA256_DIGEST_SIZE]
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_dev_http_ra_check_exchange">Func <span>tuya_dev_http_ra_check_exchange</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_dev_http_ra_check_exchange(IN CONST CHAR_T* uuid, IN CONST BYTE_T* ra_aes_hex, UINT_T ra_aes_hex_len,
+   IN CONST BYTE_T* ra_uuid_hmac_hex, UINT_T ra_uuid_hmac_hex_len, OUT BYTE_T* ra_hmac, OUT BYTE_T* rb_aes,
+   OUT BYTE_T* rb_hmac, OUT BYTE_T* session_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_dev_http_ra_check_exchange 
+ * @desc gw通过uuid+ra_aes+hmac(ra+uuid)到云端交换ra_hmac,rb_aes
+ *
+ * @param[in] uuid
+ * @param[in] ra_aes_hex
+ * @param[in] ra_aes_hex_len
+ * @param[in] ra_uuid_hmac_hex
+ * @param[in] ra_uuid_hmac_hex_len
+ * @param[out] ra_hmac
+ * @param[out] rb_aes
+ * @param[out] rb_hmac
+ * @param[out] session_key
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_dev_rarb_session_key_calc">Func <span>tuya_dev_rarb_session_key_calc</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_dev_rarb_session_key_calc(IN CONST BYTE_T* auth_key, IN BYTE_T rb_aes[TY_DEV_RANDOM_AES_LEN],
+   IN BYTE_T RA[TY_DEV_RANDOM_LENGTH], OUT BYTE_T rb_hmac[TY_DEV_SHA256_DIGEST_SIZE],
+   OUT BYTE_T session_key[TY_DEV_SESSION_KEY_LEN]);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_dev_rarb_session_key_calc 
+ * @desc dev由RA,rb_aes,authkey计算rb_hmac,session_key(16字节)
+ *
+ * @param[in] auth_key
+ * @param[in] rb_aes[TY_DEV_RANDOM_AES_LEN]
+ * @param[in] RA[TY_DEV_RANDOM_LENGTH]
+ * @param[out] rb_hmac[TY_DEV_SHA256_DIGEST_SIZE]
+ * @param[out] session_key[TY_DEV_SESSION_KEY_LEN]
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_dev_gen_uuid_hmac">Func <span>tuya_dev_gen_uuid_hmac</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_dev_gen_uuid_hmac(OUT BYTE_T uuid_hmac[TY_DEV_SHA256_DIGEST_SIZE]);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_dev_gen_uuid_hmac 
+ * @desc dev生成hmac(uuid)
+ *
+ * @param[out] uuid_hmac[TY_DEV_SHA256_DIGEST_SIZE]
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_dev_http_relation_exchange">Func <span>tuya_dev_http_relation_exchange</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_dev_http_relation_exchange(IN CONST CHAR_T* uuid, IN CONST BYTE_T* hmacAuthKey_hex, UINT_T hmacAuthKey_hex_len,
+   OUT INT_T *isIndependent, OUT INT_T *isSub, OUT INT_T *isFamily);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_dev_http_relation_exchange 
+ * @desc gw由uuid+hmac(uuid)到云端交换dev和gw的关系
+ *
+ * @param uuid
+ * @param hmacAuthKey_hex
+ * @param hmacAuthKey_hex_len
+ * @param isIndependent: 是否独立 1 是 0 否 
+ * @param isSub: 是否父子设备 1 是 0 否
+ * @param isFamily: 是否同一家庭 1 是  0 否
+ *
+ * @return OPERATE_RET
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

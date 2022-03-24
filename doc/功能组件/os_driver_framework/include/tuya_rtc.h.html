@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver.h" class="nav-sub-label">tuya_driver.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#time.h" class="nav-sub-label">time.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_RTC_H__" class="nav-sub-label">__TUYA_RTC_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_rtc_register" class="nav-sub-label">tuya_rtc_register</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_rtc_init" class="nav-sub-label">tuya_rtc_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rtc_time_set" class="nav-sub-label">tuya_rtc_time_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rtc_time_get" class="nav-sub-label">tuya_rtc_time_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rtc_control" class="nav-sub-label">tuya_rtc_control</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rtc_deinit" class="nav-sub-label">tuya_rtc_deinit</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_rtc_ops_t;
+" class="nav-sub-label">tuya_rtc_ops_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_driver.h"><span>tuya_driver.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_driver.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_driver.h"
+</pre>
+
+      <h4 id="time.h"><span>time.h</span></h4>
+      <pre class="doc-declare"><code>#include "time.h"
+</code></pre>
+      <pre class="doc-comment">#include "time.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_RTC_H__">Marco <span>__TUYA_RTC_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_RTC_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_rtc_register">Func <span>tuya_rtc_register</span></h4>
+      <pre class="doc-declare"><code>int tuya_rtc_register(tuya_rtc_ops_t *ops);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rtc register
+ * 
+ * @param[in] ops refer to tuya_rtc_ops_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_rtc_init">Variable <span>tuya_rtc_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_rtc_init    (void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rtc init
+ *
+ */</pre>
+
+      <h4 id="tuya_rtc_time_set">Variable <span>tuya_rtc_time_set</span></h4>
+      <pre class="doc-declare"><code>int tuya_rtc_time_set   (time_t  timestamp);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief time set
+ * 
+ * @param[in] timestamp time
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rtc_time_get">Variable <span>tuya_rtc_time_get</span></h4>
+      <pre class="doc-declare"><code>int tuya_rtc_time_get   (time_t  *timestamp);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief time get
+ * 
+ * @param[in] timestamp time
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rtc_control">Variable <span>tuya_rtc_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_rtc_control    (uint8_t cmd, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief time control
+ * 
+ * @param[in] cmd command
+ * @param[in] arg command argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rtc_deinit">Variable <span>tuya_rtc_deinit</span></h4>
+      <pre class="doc-declare"><code>int tuya_rtc_deinit    (void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rtc deinit
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_rtc_ops_t;
+">Typedef <span>tuya_rtc_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int (*init)      (void);
+   int (*time_get)  (time_t *timestamp);
+   int (*time_set)  (time_t timestamp);
+   int (*control)   (uint8_t cmd, void *arg);
+   int (*deinit)    (void);
+} tuya_rtc_ops_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

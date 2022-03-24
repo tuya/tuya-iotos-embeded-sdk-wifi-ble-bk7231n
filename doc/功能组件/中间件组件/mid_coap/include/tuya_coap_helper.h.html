@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap.h" class="nav-sub-label">coap.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_COAP_SERVER_H" class="nav-sub-label">_COAP_SERVER_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ty_coap_server_start" class="nav-sub-label">ty_coap_server_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_coap_add_resource" class="nav-sub-label">ty_coap_add_resource</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_coap_send_custom_msg" class="nav-sub-label">ty_coap_send_custom_msg</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TY_COAP_SERVER_HANLDER" class="nav-sub-label">TY_COAP_SERVER_HANLDER</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_coap_init_resource_cb" class="nav-sub-label">ty_coap_init_resource_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_COAP_OPTION_S;
+" class="nav-sub-label">TY_COAP_OPTION_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="coap.h"><span>coap.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_COAP_SERVER_H">Marco <span>_COAP_SERVER_H</span></h4>
+      <pre class="doc-declare"><code>#define _COAP_SERVER_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ty_coap_server_start">Func <span>ty_coap_server_start</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_coap_server_start(OUT TY_COAP_SERVER_HANLDER *p_handler, IN CONST UINT_T port, ty_coap_init_resource_cb init_res_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create COAP wrapper instance
+ * 
+ * @param[out] p_handler Handler of COAP wrapper instance
+ * @param[in] port Port of COAP server
+ * @param[in] init_res_cb Callback after COAP wrapper inited
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_coap_add_resource">Func <span>ty_coap_add_resource</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_coap_add_resource(IN TY_COAP_SERVER_HANLDER handler, IN CONST CHAR_T *p_uri, \
+                                coap_method_handler_t post_cb, coap_method_handler_t get_cb, \
+                                coap_method_handler_t put_cb, coap_method_handler_t delete_cb );</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Add COAP resource
+ * 
+ * @param[out] handler Handler of COAP wrapper instance
+ * @param[in] p_uri COAP uri
+ * @param[in] post_cb Callback when POST
+ * @param[in] get_cb Callback when GET
+ * @param[in] put_cb Callback when PUT
+ * @param[in] delete_cb Callback when DELETE
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_coap_send_custom_msg">Func <span>ty_coap_send_custom_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_coap_send_custom_msg(IN TY_COAP_SERVER_HANLDER server_handler,
+                                   CHAR_T *url, UCHAR_T upload_mode, UCHAR_T msg_type,
+                                   CHAR_T *data, TY_COAP_OPTION_S *option_arr, UINT_T arr_size,
+                                   coap_response_handler_t handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Send COAP msg
+ * 
+ * @param[in] server_handler Handler created by ty_coap_server_start
+ * @param[in] url Coap url
+ * @param[in] upload_mode Upload mode
+ * @param[in] msg_type Msg type
+ * @param[in] data Buffer of data buffer
+ * @param[in] option_arr Options list
+ * @param[in] arr_size Count of options
+ * @param[in] handler Callback when msg recv
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TY_COAP_SERVER_HANLDER">Typedef <span>TY_COAP_SERVER_HANLDER</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T TY_COAP_SERVER_HANLDER;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ty_coap_init_resource_cb">Typedef <span>ty_coap_init_resource_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*ty_coap_init_resource_cb)(IN TY_COAP_SERVER_HANLDER handler);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_COAP_OPTION_S;
+">Typedef <span>TY_COAP_OPTION_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   /** option type */
+   SHORT_T type;
+   /** option length */
+   UINT_T length;
+   /** option data */
+   CHAR_T *p_data;
+}TY_COAP_OPTION_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of COAP option
+ */</pre>
+    </div>
+  </body>
+</html>
+            

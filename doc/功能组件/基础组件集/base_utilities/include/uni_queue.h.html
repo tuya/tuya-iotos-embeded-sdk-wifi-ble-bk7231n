@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_error_code.h" class="nav-sub-label">tuya_error_code.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_QUEUE_H" class="nav-sub-label">_UNI_QUEUE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#QUEUE_SAFE_FUNC" class="nav-sub-label">QUEUE_SAFE_FUNC</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#GetCurFreeQueNum" class="nav-sub-label">GetCurFreeQueNum</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetCurQueNum" class="nav-sub-label">GetCurQueNum</a>
+              </li>
+      
+
+              <li>
+                <a href="#ReleaseQueueObj" class="nav-sub-label">ReleaseQueueObj</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#P_QUEUE_CLASS" class="nav-sub-label">P_QUEUE_CLASS</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#QUEUE_CLASS,*P_QUEUE_CLASS;
+" class="nav-sub-label">QUEUE_CLASS,*P_QUEUE_CLASS;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_error_code.h"><span>tuya_error_code.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_error_code.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_error_code.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_QUEUE_H">Marco <span>_UNI_QUEUE_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_QUEUE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="QUEUE_SAFE_FUNC">Marco <span>QUEUE_SAFE_FUNC</span></h4>
+      <pre class="doc-declare"><code>#define QUEUE_SAFE_FUNC
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief support reentry prevent
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="GetCurFreeQueNum">Func <span>GetCurFreeQueNum</span></h4>
+      <pre class="doc-declare"><code>unsigned int GetCurFreeQueNum(P_QUEUE_CLASS pQueObj);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the free queue unit number
+ * 
+ * @param[in] pQueObj the queue handle
+ * @return the current free unit counts
+ */</pre>
+
+      <h4 id="GetCurQueNum">Func <span>GetCurQueNum</span></h4>
+      <pre class="doc-declare"><code>unsigned int GetCurQueNum(P_QUEUE_CLASS pQueObj);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the queue unit number 
+ * 
+ * @param[in] pQueObj the queue handle
+ * @return the current unit counts 
+ */</pre>
+
+      <h4 id="ReleaseQueueObj">Func <span>ReleaseQueueObj</span></h4>
+      <pre class="doc-declare"><code>void ReleaseQueueObj(P_QUEUE_CLASS pQueObj);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief release the queue
+ * 
+ * @param[in] pQueObj the queue handle
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="P_QUEUE_CLASS">Variable <span>P_QUEUE_CLASS</span></h4>
+      <pre class="doc-declare"><code>P_QUEUE_CLASS CreateQueueObj(const unsigned int queTolNum, const unsigned int queUnitSize);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create and initialize a queue 
+ * 
+ * @param[in] queTolNum the total number of the queue
+ * @param[in] queUnitSize the unit size of the queue
+ * @return the queue handle 
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char RegisterQueueObj(P_QUEUE_CLASS pQueObj, const unsigned char *pQueData, const unsigned int queTolNum, const unsigned int queUnitSize);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief register a queue, the queue handle and queue buffer malloc from other place
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] pQueData the queue unit buffer
+ * @param[in] queTolNum the total number of queue
+ * @param[in] queUnitSize the unit size of queue
+ * @return 1 on success, 0 on failed
+ * 
+ * @warning this API was NOT USED!!!
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char InQueue(P_QUEUE_CLASS pQueObj, const unsigned char *pQueUnit, const unsigned int queNum);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unit inqueue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] pQueUnit the inqueue unit buffer
+ * @param[in] queNum the inqueue unit counts
+ * @return 1 on success, 0 on failed
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char OutQueue(P_QUEUE_CLASS pQueObj,unsigned char *pQueUnit, const unsigned int queNum);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unit outqueue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] pQueUnit the outqueue unit buffer
+ * @param[in] queNum the outqueue unit counts
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h 
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char GetQueueMember(P_QUEUE_CLASS pQueObj, const unsigned int start, unsigned char *pQueUnit, const unsigned int queNum);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the unit from start postion, not outqueue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] start the outqueue start postion
+ * @param[in] pQueUnit the outqueue unit buffer
+ * @param[in] queNum the outqueue unit counts
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char ClearQueue(P_QUEUE_CLASS pQueObj);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief clear all unit of the queue
+ * 
+ * @param[in] pQueObj the queue handle
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h   
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char DelQueueMember(P_QUEUE_CLASS pQueObj,const unsigned int queNum);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief delete the unit from the queue out position
+ * 
+ * @param[in] pQueObj the queue handle
+ * @param[in] queNum the delete unit counts
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h  
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="QUEUE_CLASS,*P_QUEUE_CLASS;
+">Typedef <span>QUEUE_CLASS,*P_QUEUE_CLASS;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   unsigned int queUnitSize;  // queue unit size 
+   unsigned int queTolNum;    // queue total unit number
+   unsigned int queCurNum;    // queue current unit number
+   
+   unsigned char *queData;    // queue buffer
+   unsigned char *queIn;      // in queue position
+   unsigned char *queOut;     // out queue position
+
+   #ifdef QUEUE_SAFE_FUNC
+   MUTEX_HANDLE mutex;        // safity access prevent reentry
+   #endif
+}QUEUE_CLASS,*P_QUEUE_CLASS;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief queue data structure define
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

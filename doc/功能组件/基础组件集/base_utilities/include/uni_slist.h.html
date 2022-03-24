@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_SLIST_H" class="nav-sub-label">_UNI_SLIST_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_HEAD(name)" class="nav-sub-label">SLIST_HEAD(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INIT_SLIST_HEAD(ptr)" class="nav-sub-label">INIT_SLIST_HEAD(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#NEW_SLIST_NODE(type,node)" class="nav-sub-label">NEW_SLIST_NODE(type,node)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_ENTRY(ptr, type, member)" class="nav-sub-label">SLIST_ENTRY(ptr, type, member)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_FOR_EACH_ENTRY(tpos, type, pos, list, member)" class="nav-sub-label">SLIST_FOR_EACH_ENTRY(tpos, type, pos, list, member)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member)" class="nav-sub-label">SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_FOR_EACH(pos, list)" class="nav-sub-label">SLIST_FOR_EACH(pos, list)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_FOR_EACH_SAFE(pos, n, list)" class="nav-sub-label">SLIST_FOR_EACH_SAFE(pos, n, list)</a>
+              </li>
+      
+
+              <li>
+                <a href="#FREE_SLIST_SAFE(tpos, type, pos, n, list, member)" class="nav-sub-label">FREE_SLIST_SAFE(tpos, type, pos, n, list, member)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#last" class="nav-sub-label">last</a>
+              </li>
+      
+
+              <li>
+                <a href="#node" class="nav-sub-label">node</a>
+              </li>
+      
+
+              <li>
+                <a href="#break" class="nav-sub-label">break</a>
+              </li>
+      
+
+              <li>
+                <a href="#last" class="nav-sub-label">last</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#SLIST_HEAD;
+" class="nav-sub-label">SLIST_HEAD;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_SLIST_H">Marco <span>_UNI_SLIST_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_SLIST_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SLIST_HEAD(name)">Marco <span>SLIST_HEAD(name)</span></h4>
+      <pre class="doc-declare"><code>#define SLIST_HEAD(name) \
+SLIST_HEAD name = {NULL}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief define a sigle list head and initialize to empty
+ * 
+ */</pre>
+
+      <h4 id="INIT_SLIST_HEAD(ptr)">Marco <span>INIT_SLIST_HEAD(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define INIT_SLIST_HEAD(ptr) do { \
+   (ptr)->next = NULL; \
+} while (0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief sigle list head initialization
+ * 
+ */</pre>
+
+      <h4 id="NEW_SLIST_NODE(type,node)">Marco <span>NEW_SLIST_NODE(type,node)</span></h4>
+      <pre class="doc-declare"><code>#define NEW_SLIST_NODE(type,node) \
+{\
+   node = (type *)Malloc(sizeof(type));\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief new a sigle list head, will call Malloc
+ * 
+ */</pre>
+
+      <h4 id="SLIST_ENTRY(ptr, type, member)">Marco <span>SLIST_ENTRY(ptr, type, member)</span></h4>
+      <pre class="doc-declare"><code>#define SLIST_ENTRY(ptr, type, member) CNTR_OF(ptr,type,member)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief cast the slist entry to special type 
+ * 
+ */</pre>
+
+      <h4 id="SLIST_FOR_EACH_ENTRY(tpos, type, pos, list, member)">Marco <span>SLIST_FOR_EACH_ENTRY(tpos, type, pos, list, member)</span></h4>
+      <pre class="doc-declare"><code>#define SLIST_FOR_EACH_ENTRY(tpos, type, pos, list, member) \
+   for (pos = (list)->next;                    \
+        pos && (tpos = SLIST_ENTRY(pos, type, member), 1); \
+        pos = pos->next)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse each object of the sigle list, cannot change the sigle list
+ * 
+ */</pre>
+
+      <h4 id="SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member)">Marco <span>SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member)</span></h4>
+      <pre class="doc-declare"><code>#define SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member) \
+   for (pos = (list)->next; \
+        pos && (n = pos->next, 1) && \
+       (tpos = SLIST_ENTRY(pos, type, member), 1); \
+        pos = n)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse each object of the sigle list, you can add or del the object during traverse
+ * 
+ */</pre>
+
+      <h4 id="SLIST_FOR_EACH(pos, list)">Marco <span>SLIST_FOR_EACH(pos, list)</span></h4>
+      <pre class="doc-declare"><code>#define SLIST_FOR_EACH(pos, list) \
+   for (pos = (list)->next; pos ; \
+        pos = pos->next)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse each node of the sigle list, cannot change the sigle list
+ * 
+ */</pre>
+
+      <h4 id="SLIST_FOR_EACH_SAFE(pos, n, list)">Marco <span>SLIST_FOR_EACH_SAFE(pos, n, list)</span></h4>
+      <pre class="doc-declare"><code>#define SLIST_FOR_EACH_SAFE(pos, n, list) \
+   for (pos = (list)->next; pos && ({ n = pos->next; 1; }); \
+        pos = n)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse each node of the sigle list, you can add or del the object during traverse
+ * 
+ */</pre>
+
+      <h4 id="FREE_SLIST_SAFE(tpos, type, pos, n, list, member)">Marco <span>FREE_SLIST_SAFE(tpos, type, pos, n, list, member)</span></h4>
+      <pre class="doc-declare"><code>#define FREE_SLIST_SAFE(tpos, type, pos, n, list, member) \
+{\
+   type *posnode; \
+   SLIST_FOR_EACH_ENTRY_SAFE(tpos, type, pos, n, list, member) { \
+       list->next = n; \
+       posnode = tpos; \
+       Free(posnode); \
+   } \
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse and free each object of the sigle list
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="last">Variable <span>last</span></h4>
+      <pre class="doc-declare"><code>last->next = pos->next;</code></pre>
+      <pre class="doc-comment">// success find and delete</pre>
+
+      <h4 id="node">Variable <span>node</span></h4>
+      <pre class="doc-declare"><code>node->next = NULL;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="break">Variable <span>break</span></h4>
+      <pre class="doc-declare"><code>break;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="last">Variable <span>last</span></h4>
+      <pre class="doc-declare"><code>last->next = n;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="SLIST_HEAD;
+">Typedef <span>SLIST_HEAD;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct slist_head {
+   struct slist_head *next;
+}SLIST_HEAD;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief sigle list head
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

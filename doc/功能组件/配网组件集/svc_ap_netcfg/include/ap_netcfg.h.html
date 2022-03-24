@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_module.h" class="nav-sub-label">netcfg_module.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_protocol.h" class="nav-sub-label">lan_protocol.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_AP_NETCFG_H_" class="nav-sub-label">_AP_NETCFG_H_</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#wifi_netcfg_start_ap_mode" class="nav-sub-label">wifi_netcfg_start_ap_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#wifi_ap_netcfg_start" class="nav-sub-label">wifi_ap_netcfg_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#wifi_ap_netcfg_stop" class="nav-sub-label">wifi_ap_netcfg_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_ap_nw_cfg_error_report" class="nav-sub-label">lan_ap_nw_cfg_error_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#ap_netcfg_init" class="nav-sub-label">ap_netcfg_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#AP_CFG_FINISH_CB" class="nav-sub-label">AP_CFG_FINISH_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="netcfg_module.h"><span>netcfg_module.h</span></h4>
+      <pre class="doc-declare"><code>#include "netcfg_module.h"
+</code></pre>
+      <pre class="doc-comment">#include "netcfg_module.h"
+</pre>
+
+      <h4 id="lan_protocol.h"><span>lan_protocol.h</span></h4>
+      <pre class="doc-declare"><code>#include "lan_protocol.h"
+</code></pre>
+      <pre class="doc-comment">#include "lan_protocol.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_AP_NETCFG_H_">Marco <span>_AP_NETCFG_H_</span></h4>
+      <pre class="doc-declare"><code>#define _AP_NETCFG_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="wifi_netcfg_start_ap_mode">Func <span>wifi_netcfg_start_ap_mode</span></h4>
+      <pre class="doc-declare"><code>int wifi_netcfg_start_ap_mode();</code></pre>
+      <pre class="doc-comment">/*启动配网时，切换到ap模式，并开启热点*/</pre>
+
+      <h4 id="wifi_ap_netcfg_start">Func <span>wifi_ap_netcfg_start</span></h4>
+      <pre class="doc-declare"><code>int wifi_ap_netcfg_start(FN_NETCFG_CB cb, void * args, int type);</code></pre>
+      <pre class="doc-comment">/*
+	func desc:开始ap配网
+	parameter:
+		input:
+		out:
+	return:
+		
+*/</pre>
+
+      <h4 id="wifi_ap_netcfg_stop">Func <span>wifi_ap_netcfg_stop</span></h4>
+      <pre class="doc-declare"><code>int wifi_ap_netcfg_stop(int type);</code></pre>
+      <pre class="doc-comment">/*
+	func desc:停止配网，释放资源
+	parameters:
+		input:
+	return:
+
+*/</pre>
+
+      <h4 id="lan_ap_nw_cfg_error_report">Func <span>lan_ap_nw_cfg_error_report</span></h4>
+      <pre class="doc-declare"><code>void lan_ap_nw_cfg_error_report(IN CONST char *p_desc,IN CONST AP_CFG_ERR_CODE error_code);</code></pre>
+      <pre class="doc-comment">/*
+	func desc: 上报配网错误日志到app
+*/</pre>
+
+      <h4 id="ap_netcfg_init">Func <span>ap_netcfg_init</span></h4>
+      <pre class="doc-declare"><code>int ap_netcfg_init(int netcfg_policy, ApSsidPasswd_t ApInfo);</code></pre>
+      <pre class="doc-comment">/*
+	ap netcfg init :注册netcfg 到 netcfg module
+*/</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="AP_CFG_FINISH_CB">Typedef <span>AP_CFG_FINISH_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*AP_CFG_FINISH_CB)(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd, IN CONST CHAR_T *token);
+</code></pre>
+      <pre class="doc-comment">/*
+	配网完成之后的回调，在gw_intf.c中实现，用于保存配网信息到gw,同时触发绑定流程
+*/</pre>
+    </div>
+  </body>
+</html>
+            

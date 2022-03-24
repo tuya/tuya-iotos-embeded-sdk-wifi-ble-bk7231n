@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc.h" class="nav-sub-label">httpc.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq.h" class="nav-sub-label">log_seq.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_HTTP_INF_H" class="nav-sub-label">_HTTP_INF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEF_URL_LEN" class="nav-sub-label">DEF_URL_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_get(url, callback, pri_data)" class="nav-sub-label">http_inf_client_get(url, callback, pri_data)</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_post(url, callback, data, len, add_head_cb, add_head_data, p_decode_key, pri_data)" class="nav-sub-label">http_inf_client_post(url, callback, data, len, add_head_cb, add_head_data, p_decode_key, pri_data)</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_post_raw(url, len, p_inf)" class="nav-sub-label">http_inf_client_post_raw(url, len, p_inf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_get_raw(url, p_inf, offset, total_len)" class="nav-sub-label">http_inf_client_get_raw(url, p_inf, offset, total_len)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#http_inf_client_get_with_head" class="nav-sub-label">http_inf_client_get_with_head</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_get_file" class="nav-sub-label">http_inf_client_get_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_post_field" class="nav-sub-label">http_inf_client_post_field</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_post_raw_field" class="nav-sub-label">http_inf_client_post_raw_field</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_get_raw_with_head" class="nav-sub-label">http_inf_client_get_raw_with_head</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_put_raw" class="nav-sub-label">http_inf_client_put_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_write_content_raw" class="nav-sub-label">http_inf_write_content_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_inf_read_header_raw" class="nav-sub-label">httpc_inf_read_header_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_inf_read_content_raw" class="nav-sub-label">httpc_inf_read_content_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_close_raw" class="nav-sub-label">http_inf_close_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_add_head_cb_post" class="nav-sub-label">http_inf_client_add_head_cb_post</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_put" class="nav-sub-label">http_inf_client_put</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_inf_client_put_custom_content" class="nav-sub-label">http_inf_client_put_custom_content</a>
+              </li>
+      
+
+              <li>
+                <a href="#del_http_url_h" class="nav-sub-label">del_http_url_h</a>
+              </li>
+      
+
+              <li>
+                <a href="#fill_url_head" class="nav-sub-label">fill_url_head</a>
+              </li>
+      
+
+              <li>
+                <a href="#fill_url_param" class="nav-sub-label">fill_url_param</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#HTTP_URL_H_S" class="nav-sub-label">HTTP_URL_H_S</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#HTTP_DATA_RECV" class="nav-sub-label">HTTP_DATA_RECV</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_INF_H_S;
+" class="nav-sub-label">HTTP_INF_H_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_INF_CB" class="nav-sub-label">HTTP_INF_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_PARAM_H_S;
+" class="nav-sub-label">HTTP_PARAM_H_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_URL_H_S;
+" class="nav-sub-label">HTTP_URL_H_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="httpc.h"><span>httpc.h</span></h4>
+      <pre class="doc-declare"><code>#include "httpc.h"
+</code></pre>
+      <pre class="doc-comment">#include "httpc.h"
+</pre>
+
+      <h4 id="log_seq.h"><span>log_seq.h</span></h4>
+      <pre class="doc-declare"><code>#include "log_seq.h"
+</code></pre>
+      <pre class="doc-comment">#include "log_seq.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_HTTP_INF_H">Marco <span>_HTTP_INF_H</span></h4>
+      <pre class="doc-declare"><code>#define _HTTP_INF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEF_URL_LEN">Marco <span>DEF_URL_LEN</span></h4>
+      <pre class="doc-declare"><code>#define DEF_URL_LEN 1024 // max length of HTTP url
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_inf_client_get(url, callback, pri_data)">Marco <span>http_inf_client_get(url, callback, pri_data)</span></h4>
+      <pre class="doc-declare"><code>#define http_inf_client_get(url, callback, pri_data) \
+   http_inf_client_get_with_head(url, callback, pri_data, NULL, NULL)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to GET HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] pri_data Private data used by HTTP request
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_post(url, callback, data, len, add_head_cb, add_head_data, p_decode_key, pri_data)">Marco <span>http_inf_client_post(url, callback, data, len, add_head_cb, add_head_data, p_decode_key, pri_data)</span></h4>
+      <pre class="doc-declare"><code>#define http_inf_client_post(url, callback, data, len, add_head_cb, add_head_data, p_decode_key, pri_data) \
+   http_inf_client_post_field(url, callback, data, len, add_head_cb, add_head_data, p_decode_key, pri_data, \
+       STANDARD_HDR_FLAGS|HDR_ADD_CONN_KEEP_ALIVE|HDR_ADD_CONTENT_TYPE_FORM_URLENCODE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_inf_client_post_raw(url, len, p_inf)">Marco <span>http_inf_client_post_raw(url, len, p_inf)</span></h4>
+      <pre class="doc-declare"><code>#define http_inf_client_post_raw(url, len, p_inf)  \
+   http_inf_client_post_raw_field(url, len, p_inf, \
+       HRD_ADD_HTTP_RAW | STANDARD_HDR_FLAGS | HDR_ADD_CONN_KEEP_ALIVE | HDR_ADD_CONTENT_TYPE_JSON)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_inf_client_get_raw(url, p_inf, offset, total_len)">Marco <span>http_inf_client_get_raw(url, p_inf, offset, total_len)</span></h4>
+      <pre class="doc-declare"><code>#define http_inf_client_get_raw(url, p_inf, offset, total_len) \
+   http_inf_client_get_raw_with_head(url, p_inf, offset, total_len, NULL, NULL)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to GET raw HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ * @param[in] offset Offset of file content
+ * @param[in] total_len Max size to get from file
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="http_inf_client_get_with_head">Func <span>http_inf_client_get_with_head</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_get_with_head(IN CONST CHAR_T *url,
+                               IN CONST HTTP_INF_CB callback,
+                               INOUT PVOID_T *pri_data,
+                               IN HTTP_HEAD_ADD_CB add_head_cb,
+                               IN VOID* add_head_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to GET HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] pri_data Private data used by HTTP request
+ * @param[in] add_head_cb Hook before HTTP request sent, to add more HTTP header
+ * @param[in] add_head_data Header data of add_head_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_get_file">Func <span>http_inf_client_get_file</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_get_file(IN CONST CHAR_T *url,
+                               IN CONST HTTP_INF_CB callback,
+                               INOUT PVOID_T *pri_data,
+                               IN CONST UINT_T file_offset,
+                               IN CONST UINT_T file_size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to GET HTTP file
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] pri_data Private data used by HTTP request
+ * @param[in] file_offset Offset of file content
+ * @param[in] file_size Max size to get from file
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_post_field">Func <span>http_inf_client_post_field</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_post_field(IN CONST CHAR_T *url,
+                                      IN CONST HTTP_INF_CB callback,
+                                      IN CONST BYTE_T *data,
+                                      IN CONST UINT_T len,
+                                      IN HTTP_HEAD_ADD_CB add_head_cb,
+                                      IN VOID* add_head_data,
+                                      IN CONST CHAR_T *p_decode_key,
+                                      INOUT PVOID_T *pri_data, 
+                                      IN CONST http_hdr_field_sel_t field_flags);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to POST HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] data data of HTTP request
+ * @param[in] len length of HTTP request data
+ * @param[in] add_head_cb Hook before HTTP request sent, to add more HTTP header
+ * @param[in] add_head_data Header data of add_head_cb
+ * @param[in] p_decode_key Decode key of HTTP content
+ * @param[in] pri_data Private data used by HTTP request
+ * @param[in] field_flags The http_hdr_field_sel_t, OR of zero or more flags
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_post_raw_field">Func <span>http_inf_client_post_raw_field</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_post_raw_field(IN CONST CHAR_T *url,
+                                  IN CONST UINT_T len,
+                                  INOUT HTTP_INF_H_S *p_inf,
+                                  IN http_hdr_field_sel_t field_flags);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to POST raw HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] len Max length of HTTP response data
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ * @param[in] field_flags The http_hdr_field_sel_t, OR of zero or more flags
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_get_raw_with_head">Func <span>http_inf_client_get_raw_with_head</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_get_raw_with_head(IN CONST CHAR_T *url,
+                                    INOUT HTTP_INF_H_S *p_inf,
+                                   IN UINT_T offset, IN UINT_T total_len,
+                                   IN HTTP_HEAD_ADD_CB add_head_cb,
+                                   IN VOID* add_head_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to GET raw HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ * @param[in] offset Offset of file content
+ * @param[in] total_len Max size to get from file
+ * @param[in] add_head_cb Hook before HTTP request sent, to add more HTTP header
+ * @param[in] add_head_data Header data of add_head_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_put_raw">Func <span>http_inf_client_put_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_put_raw(IN CONST CHAR_T *url,
+                                   IN INT_T len,
+                                   INOUT HTTP_INF_H_S *p_inf);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to PUT raw HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] len Max length of HTTP response data
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_write_content_raw">Func <span>http_inf_write_content_raw</span></h4>
+      <pre class="doc-declare"><code>INT_T http_inf_write_content_raw(INOUT HTTP_INF_H_S *p_inf,
+                                        IN CONST BYTE_T *p_data,
+                                        IN CONST UINT_T len,
+                                        BOOL_T chunked );</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to write raw HTTP request content
+ *
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ * @param[in] p_data Buffer to write of HTTP request
+ * @param[in] buf_len Max length of HTTP request data
+ * @param[in] chunked Chunk is enabled or not
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="httpc_inf_read_header_raw">Func <span>httpc_inf_read_header_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET httpc_inf_read_header_raw(INOUT HTTP_INF_H_S *p_inf);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to read raw HTTP response header
+ * 
+ * @param[in,out] p_inf Pointer to HTTP_INF_H_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="httpc_inf_read_content_raw">Func <span>httpc_inf_read_content_raw</span></h4>
+      <pre class="doc-declare"><code>INT_T httpc_inf_read_content_raw(IN HTTP_INF_H_S *p_inf, IN BYTE_T *buf, IN CONST UINT_T buf_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to read raw HTTP response content
+ * 
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ * @param[in] buf Buffer to read HTTP response
+ * @param[in] buf_len Max length of HTTP response data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_close_raw">Func <span>http_inf_close_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_close_raw(INOUT HTTP_INF_H_S *p_inf);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to close raw HTTP request
+ * 
+ * @param[in] p_inf Pointer to HTTP_INF_H_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_add_head_cb_post">Func <span>http_inf_client_add_head_cb_post</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_add_head_cb_post(IN CONST char *url,
+                             IN CONST HTTP_INF_CB callback,
+                             IN CONST BYTE_T *data,
+                             IN CONST UINT_T len,
+                             IN HTTP_HEAD_ADD_CB add_head_cb,
+                             IN VOID* add_head_data,
+                             INOUT PVOID_T *pri_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to POST HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] data data of HTTP request
+ * @param[in] len length of HTTP request data
+ * @param[in] add_head_cb Hook before HTTP request sent, to add more HTTP header
+ * @param[in] add_head_data Header data of add_head_cb
+ * @param[in] pri_data Private data used by HTTP request
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_put">Func <span>http_inf_client_put</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_put(IN CONST CHAR_T *url,
+                                   IN CONST HTTP_INF_CB callback,
+                                   IN CONST BYTE_T *data,
+                                   IN CONST UINT_T len,
+                                   IN HTTP_HEAD_ADD_CB add_head_cb,
+                                   IN VOID* add_head_data,
+                                   INOUT PVOID_T *pri_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to PUT HTTP request/response
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] data data of HTTP request
+ * @param[in] len length of HTTP request data
+ * @param[in] add_head_cb Hook before HTTP request sent, to add more HTTP header
+ * @param[in] add_head_data Header data of add_head_cb
+ * @param[in] pri_data Private data used by HTTP request
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_inf_client_put_custom_content">Func <span>http_inf_client_put_custom_content</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_inf_client_put_custom_content(IN CONST CHAR_T *url,
+                                              IN CONST HTTP_INF_CB callback,
+                                              IN http_custom_content_ctx_s *p_ctx,
+                                              IN HTTP_HEAD_ADD_CB add_head_cb, IN VOID* add_head_data,
+                                              INOUT PVOID_T *pri_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to PUT HTTP request/response with customized content
+ * 
+ * @param[in] url URL of HTTP request
+ * @param[in] callback Handler of HTTP response
+ * @param[in] p_ctx Context of HTTP request customized
+ * @param[in] add_head_cb Hook before HTTP request sent, to add more HTTP header
+ * @param[in] add_head_data Header data of add_head_cb
+ * @param[in] pri_data Private data used by HTTP request
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="del_http_url_h">Func <span>del_http_url_h</span></h4>
+      <pre class="doc-declare"><code>VOID del_http_url_h(IN HTTP_URL_H_S *hu_h);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Free url of HTTP request
+ * 
+ * @param[in] hu_h A pointer that points to the structure returned from the call to create_http_url_h
+ *
+ */</pre>
+
+      <h4 id="fill_url_head">Func <span>fill_url_head</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET fill_url_head(INOUT HTTP_URL_H_S *hu_h, IN CONST CHAR_T *url_h);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Initiaze url of HTTP request
+ * 
+ * @param[in,out] hu_h A pointer that points to the structure returned from the call to create_http_url_h
+ * @param[in] url_h HTTP url
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="fill_url_param">Func <span>fill_url_param</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET fill_url_param(INOUT HTTP_URL_H_S *hu_h, IN CONST CHAR_T *key, IN CONST CHAR_T *value);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Add key/value param to HTTP url
+ * 
+ * @param[in,out] hu_h A pointer that points to the structure returned from the call to create_http_url_h
+ * @param[in] key Key to be added to url
+ * @param[in] value Value to be added to url
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="HTTP_URL_H_S">Variable <span>HTTP_URL_H_S</span></h4>
+      <pre class="doc-declare"><code>HTTP_URL_H_S *create_http_url_h(IN CONST USHORT_T buf_len, IN CONST USHORT_T param_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create url of HTTP request
+ * 
+ * @param[in] buf_len max lenth of URL(include params)
+ * @param[in] param_cnt max count of url params
+ *
+ * @return NULL on error. Pointer to HTTP_URL_H_S on success
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="HTTP_DATA_RECV">Typedef <span>HTTP_DATA_RECV</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*HTTP_DATA_RECV)(PVOID_T hand,PVOID_T buf,UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to handle HTTP response content
+ * 
+ * @param[in] hand http_session_t
+ * @param[in] buf Buffer of HTTP response content
+ * @param[in] len length of buf
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="HTTP_INF_H_S;
+">Typedef <span>HTTP_INF_H_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** chunk is enabled or not */
+   BOOL_T chunked;
+   /** if(chunked == FALSE) then valid */
+   UINT_T content_len;
+   /** http_session_t */
+   PVOID_T hand;
+   /** system auto fill */
+   HTTP_DATA_RECV recv;
+   /** private data */
+   PVOID_T *pri_data;
+   /** status code of HTTP response */
+   INT_T status_code;
+   /** decode key of HTTP response content */
+   CHAR_T *p_decode_key;
+}HTTP_INF_H_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of HTTP request/response structure
+ */</pre>
+
+      <h4 id="HTTP_INF_CB">Typedef <span>HTTP_INF_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*HTTP_INF_CB)(HTTP_INF_H_S *hand);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to handle customized HTTP response
+ * 
+ * @param[in] hand Pointer to HTTP_INF_H_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="HTTP_PARAM_H_S;
+">Typedef <span>HTTP_PARAM_H_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** max count of URL params */
+   BYTE_T total;
+   /** used count of URL params */
+   BYTE_T cnt;
+   /** pointer to URL param */
+   CHAR_T *pos[0];
+}HTTP_PARAM_H_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of HTTP URL param structure
+ */</pre>
+
+      <h4 id="HTTP_URL_H_S;
+">Typedef <span>HTTP_URL_H_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** param handle */
+   HTTP_PARAM_H_S *param_h;
+   /** param insert pos */
+   CHAR_T *param_in;
+   /** head_size == "url?" or "url" */
+   USHORT_T head_size;
+   /** bufer len */
+   USHORT_T buf_len;
+   /** "url?key=value" + "kev=value statistics" */
+   CHAR_T buf[0];
+}HTTP_URL_H_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of HTTP URL structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

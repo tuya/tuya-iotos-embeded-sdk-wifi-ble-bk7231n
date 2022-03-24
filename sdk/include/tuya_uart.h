@@ -1,23 +1,23 @@
- /*============================================================================
- *                                                                            *
- * Copyright (C) by Tuya Inc                                                  *
- * All rights reserved                                                        *
- *                                                                            *
- =============================================================================*/
+ /**
+ * @file tuya_uart.h
+ * @brief Common process - driver uart
+ * @version 0.1
+ * @date 2019-08-20
+ *
+ * @copyright Copyright 2019-2021 Tuya Inc. All Rights Reserved.
+ *
+ */
 
 #ifndef __TUYA_UART_H__
 #define __TUYA_UART_H__
 
-/*============================ INCLUDES ======================================*/
 #include "tuya_driver.h"
 #include "tuya_uart_legacy.h"
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
-/*============================ MACROS ========================================*/
-/*============================ MACROFIED FUNCTIONS ===========================*/
 #define TUYA_UART_8N1_CFG(__UART, __BAUDRATE, __BUFSZ, __FLAG)                \
         (__UART)->cfg.baudrate  = __BAUDRATE;                                 \
         (__UART)->cfg.flag      = TUYA_DRV_INT_RX_FLAG | __FLAG;              \
@@ -33,9 +33,7 @@
         (__CFG)->databits       = TUYA_UART_DATA_BIT8;                        \
         (__CFG)->stopbits       = TUYA_UART_STOP_BIT1;                        \
         (__CFG)->parity         = TUYA_UART_PARITY_NONE
-        
 
-/*============================ TYPES =========================================*/
 typedef enum {
     TUYA_UART0 = 0x00,
     TUYA_UART1,
@@ -88,8 +86,13 @@ typedef enum {
 } tuya_uart_event_t;
 
 enum tuya_uart_rx_isr_mode {
-    TUYA_UART_RX_ISR_FIFO_MODE    = 1,     //! rx has a fifo, need loop read until to failed
+    TUYA_UART_RX_ISR_FIFO_MODE    = 1,     // rx has a fifo, need loop read until to failed
 }; typedef uint8_t tuya_uart_rx_isr_mode_t;
+
+typedef enum {
+    TUYA_UART_FLOWCTRL_NONE       = 0,
+    TUYA_UART_FLOWCTRL_ENABLE     = 1,
+} tuya_uart_flowctrl_t;
 
 typedef struct {
     uint16_t                flag;
@@ -98,7 +101,15 @@ typedef struct {
     tuya_uart_databits_t    databits;
     tuya_uart_stopbits_t    stopbits;
     tuya_uart_parity_t      parity;
+    tuya_uart_flowctrl_t    flowctrl;
 } tuya_uart_cfg_t;
+
+typedef enum {
+    TUYA_UART_RXBUF_SIZE_CMD = TUYA_DRV_CUSTOM_CMD,
+    TUYA_UART_FLUSH_CMD,
+    TUYA_UART_RECONFIG_CMD,
+} tuya_uart_cmd_t;
+
 
 typedef struct tuya_uart tuya_uart_t;
 
@@ -125,17 +136,80 @@ struct tuya_uart {
     void               *rxfifo;
 };
 
-/*============================ LOCAL VARIABLES ===============================*/
-/*============================ PROTOTYPES ====================================*/
-int tuya_uart_init      (tuya_uart_t *uart);
-int tuya_uart_read      (tuya_uart_t *uart, void *data, uint16_t len);
+/**
+ * @brief uart init
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+int tuya_uart_init     (tuya_uart_t *uart);
+
+/**
+ * @brief uart read
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[out] data read buf
+ * @param[in] len read length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+int tuya_uart_read     (tuya_uart_t *uart, void *data, uint16_t len);
+
+/**
+ * @brief uart write
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[in] data write buf
+ * @param[in] len write length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 int tuya_uart_write     (tuya_uart_t *uart, void *data, uint16_t len);
+
+/**
+ * @brief uart control
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[in] cmd control command
+ * @param[in] arg command argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 int tuya_uart_control   (tuya_uart_t *uart, uint8_t cmd, void *arg);
+
+/**
+ * @brief uart deinit
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 int tuya_uart_deinit    (tuya_uart_t *uart);
 
+/**
+ * @brief uart data size
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+int tuya_uart_int_bufsize(tuya_uart_t *uart);
+
+/**
+ * @brief uart read with timeout
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[out] data read buf
+ * @param[in] len read length
+ * @param[in] timeout read timeout
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+int tuya_uart_read_timeout(tuya_uart_t *uart, void *data, uint16_t len, uint32_t timeout);
 
 #ifdef __cplusplus
-} // extern "C"
+}
 #endif
 
 #endif

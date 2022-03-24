@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_system.h" class="nav-sub-label">tuya_hal_system.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_TIME_H" class="nav-sub-label">_UNI_TIME_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SUM_ZONE_TAB_LMT" class="nav-sub-label">SUM_ZONE_TAB_LMT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#uni_time_init" class="nav-sub-label">uni_time_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_mktime" class="nav-sub-label">uni_mktime</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_http_date_to_time" class="nav-sub-label">uni_http_date_to_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_check_time_sync" class="nav-sub-label">uni_time_check_time_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_check_time_zone_sync" class="nav-sub-label">uni_time_check_time_zone_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_set" class="nav-sub-label">uni_time_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_set_posix" class="nav-sub-label">uni_time_set_posix</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_get" class="nav-sub-label">uni_time_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_get_posix" class="nav-sub-label">uni_time_get_posix</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_get_posix_ms" class="nav-sub-label">uni_time_get_posix_ms</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_get_posix_ms_ext" class="nav-sub-label">uni_time_get_posix_ms_ext</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_get_cur_posix" class="nav-sub-label">uni_time_get_cur_posix</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_get_posix_ms_remain_tick" class="nav-sub-label">uni_time_get_posix_ms_remain_tick</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_get_system_time" class="nav-sub-label">uni_get_system_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_set_time_zone" class="nav-sub-label">uni_set_time_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_set_time_zone_seconds" class="nav-sub-label">uni_set_time_zone_seconds</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_get_time_zone_seconds" class="nav-sub-label">uni_get_time_zone_seconds</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_set_sum_zone_tbl" class="nav-sub-label">uni_set_sum_zone_tbl</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_sum_time_get" class="nav-sub-label">uni_sum_time_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_sum_time_get_posix" class="nav-sub-label">uni_sum_time_get_posix</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_is_in_sum_zone" class="nav-sub-label">uni_is_in_sum_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_local_time_get" class="nav-sub-label">uni_local_time_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_local_time_get_custom" class="nav-sub-label">uni_local_time_get_custom</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uni_get_sum_zone" class="nav-sub-label">tuya_uni_get_sum_zone</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#POSIX_TM_S" class="nav-sub-label">POSIX_TM_S</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#POSIX_TM_S;
+" class="nav-sub-label">POSIX_TM_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SUM_ZONE_S;
+" class="nav-sub-label">SUM_ZONE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SUM_ZONE_TBL_S;
+" class="nav-sub-label">SUM_ZONE_TBL_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_hal_system.h"><span>tuya_hal_system.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_system.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_system.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_TIME_H">Marco <span>_UNI_TIME_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_TIME_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SUM_ZONE_TAB_LMT">Marco <span>SUM_ZONE_TAB_LMT</span></h4>
+      <pre class="doc-declare"><code>#define SUM_ZONE_TAB_LMT 6
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief number of time zone table
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="uni_time_init">Func <span>uni_time_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_init(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief time-management module initialization
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="uni_mktime">Func <span>uni_mktime</span></h4>
+      <pre class="doc-declare"><code>TIME_T uni_mktime(IN CONST POSIX_TM_S *tm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief change posix time to TIME_T, redefine the std C func mktime
+ * 
+ * @param[in] tm the time in posix time format
+ * @return the time in TIME_T format 
+ */</pre>
+
+      <h4 id="uni_http_date_to_time">Func <span>uni_http_date_to_time</span></h4>
+      <pre class="doc-declare"><code>TIME_T uni_http_date_to_time(IN CONST CHAR_T *date);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief change http-GMT format time to TIME_T
+ * 
+ * @param[in] date http-GMT format time
+ * @return the time in TIME_T format
+ */</pre>
+
+      <h4 id="uni_time_check_time_sync">Func <span>uni_time_check_time_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_check_time_sync(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check IoTOS time synchronize status
+ * 
+ * @return OPRT_OK on synchronized. Others on not
+ */</pre>
+
+      <h4 id="uni_time_check_time_zone_sync">Func <span>uni_time_check_time_zone_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_check_time_zone_sync(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check IoTOS time zone synchronized status
+ * 
+ * @return OPRT_OK on synchronized. Others on not 
+ */</pre>
+
+      <h4 id="uni_time_set">Func <span>uni_time_set</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_set(IN CONST POSIX_TM_S *tm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set IoTOS UTC time
+ * 
+ * @param[in] tm the new time in posix time format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ */</pre>
+
+      <h4 id="uni_time_set_posix">Func <span>uni_time_set_posix</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_set_posix(IN CONST TIME_T time, IN CONST INT_T update_source);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set IoTOS UTC time in time_t format
+ * 
+ * @param[in] time the new time in time_t format
+ * @param[in] update_source the source of time (0:rtc 1:cloud 2:other)
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="uni_time_get">Func <span>uni_time_get</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_get(OUT POSIX_TM_S *tm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC time in posix time format
+ * 
+ * @param[out] tm the IoTOS UTC time in posix time format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ */</pre>
+
+      <h4 id="uni_time_get_posix">Func <span>uni_time_get_posix</span></h4>
+      <pre class="doc-declare"><code>TIME_T uni_time_get_posix(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC time in TIME_T format
+ * 
+ * @return the current second time in TIME_T format 
+ */</pre>
+
+      <h4 id="uni_time_get_posix_ms">Func <span>uni_time_get_posix_ms</span></h4>
+      <pre class="doc-declare"><code>SYS_TICK_T uni_time_get_posix_ms(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC time in SYS_TICK_T format
+ * 
+ * @return the current micro-second time in SYS_TICK_T format 
+ */</pre>
+
+      <h4 id="uni_time_get_posix_ms_ext">Func <span>uni_time_get_posix_ms_ext</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_time_get_posix_ms_ext(uint32_t *time_s, uint32_t *remain_time_ms);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC time second/remain micro-second time
+ *
+ * @return the remain micro-second time in second/remain micro-second format
+ *
+ * @note in 32bit process, cannot return 8byte, because the high 4byte will be cut by cpu, we should use:
+ * "uint32_t time_s,remain_time_ms; uni_time_get_posix_ms_ext(&time_s, &remain_time_ms);
+ *  uint64_t time_ms = time_s*1000ULL + remain_time_ms" to get the micro-seconds
+ */</pre>
+
+      <h4 id="uni_time_get_cur_posix">Func <span>uni_time_get_cur_posix</span></h4>
+      <pre class="doc-declare"><code>TIME_T uni_time_get_cur_posix(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS last synchronized UTC time in TIME_T format
+ * 
+ * @return the time in TIME_T format 
+ */</pre>
+
+      <h4 id="uni_time_get_posix_ms_remain_tick">Func <span>uni_time_get_posix_ms_remain_tick</span></h4>
+      <pre class="doc-declare"><code>uint32_t uni_time_get_posix_ms_remain_tick(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC time remain micro-second time
+ * 
+ * @return the remain micro-second time
+ * 
+ * @note in 32bit process, cannot return 8byte, because the high 4byte will be cut by cpu, we should use:
+ * "uint64_t ms = uni_time_get_posix()*1000ULL + uni_time_get_posix_ms_remain_tick()" to get the micro-seconds
+ */</pre>
+
+      <h4 id="uni_get_system_time">Func <span>uni_get_system_time</span></h4>
+      <pre class="doc-declare"><code>VOID uni_get_system_time(OUT TIME_S *pSecTime,OUT TIME_MS *pMsTime);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC time, both second and micro-second
+ * 
+ * @param[out] pSecTime the current time in second
+ * @param[out] pMsTime the current time in micro-second
+ * @return VOID 
+ */</pre>
+
+      <h4 id="uni_set_time_zone">Func <span>uni_set_time_zone</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_set_time_zone(IN CONST CHAR_T *time_zone);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set IoTOS time zone in "+/-hh:mm" format
+ * 
+ * @param[in] time_zone the new time zone in "+/-hh:mm" format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="uni_set_time_zone_seconds">Func <span>uni_set_time_zone_seconds</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_set_time_zone_seconds(IN INT_T time_zone_sec);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set IoTOS time zone in second format
+ * 
+ * @param[in] time_zone the new time zone in second format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="uni_get_time_zone_seconds">Func <span>uni_get_time_zone_seconds</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_get_time_zone_seconds(OUT INT_T *time_zone);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS time zone in second format
+ * 
+ * @param[out] time_zone the current time zone in second format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="uni_set_sum_zone_tbl">Func <span>uni_set_sum_zone_tbl</span></h4>
+      <pre class="doc-declare"><code>VOID uni_set_sum_zone_tbl(IN CONST SUM_ZONE_S *zone,IN CONST UINT_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set IoTOS summer time zone
+ * 
+ * @param[in] zone the summer time zone table
+ * @param[in] cnt the summer time counts
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="uni_sum_time_get">Func <span>uni_sum_time_get</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_sum_time_get(OUT POSIX_TM_S *tm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC summer time in posix time format
+ * 
+ * @param[out] tm the summer time in posix format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="uni_sum_time_get_posix">Func <span>uni_sum_time_get_posix</span></h4>
+      <pre class="doc-declare"><code>TIME_T uni_sum_time_get_posix(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC summer time int TIME_T format 
+ * 
+ * @return the summer time in TIME_T format
+ */</pre>
+
+      <h4 id="uni_is_in_sum_zone">Func <span>uni_is_in_sum_zone</span></h4>
+      <pre class="doc-declare"><code>BOOL_T uni_is_in_sum_zone(TIME_T time);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS UTC summer time int TIME_T format 
+ * 
+ * @return the summer time in TIME_T format
+ */</pre>
+
+      <h4 id="uni_local_time_get">Func <span>uni_local_time_get</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_local_time_get(OUT POSIX_TM_S *tm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS local time (local, contains the time zone and summer time zone)
+ * 
+ * @param[out] tm the current local time in posix format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="uni_local_time_get_custom">Func <span>uni_local_time_get_custom</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uni_local_time_get_custom(IN TIME_T in_time, OUT POSIX_TM_S *tm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get IoTOS local time (local, contains the time zone and summer time zone)
+ * 
+ * @param[in] in_time the time need translate
+ * @param[out] tm the local time in posix format
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ *
+ * @note if in_time is 0, return the IoTOS local time, otherwise, translate the in_time to
+ * local time
+ */</pre>
+
+      <h4 id="tuya_uni_get_sum_zone">Func <span>tuya_uni_get_sum_zone</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_uni_get_sum_zone(OUT SUM_ZONE_TBL_S *sum_zone);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get sum zone info
+ * 
+ * @param[out] sum zone info
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="POSIX_TM_S">Variable <span>POSIX_TM_S</span></h4>
+      <pre class="doc-declare"><code>POSIX_TM_S *uni_gmtime_r(IN CONST TIME_T *tm, OUT POSIX_TM_S *result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief change TIME_T to posix time, redefine the std C func gmtime_r
+ * 
+ * @param[in] tm the time in TIME_T format
+ * @param[out] result the time in posix time format
+ * @return the time in posix time format
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="POSIX_TM_S;
+">Typedef <span>POSIX_TM_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   INT_T tm_sec;    /* seconds [0-59] */
+   INT_T tm_min;    /* minutes [0-59] */
+   INT_T tm_hour;   /* hours [0-23] */
+   INT_T tm_mday;   /* day of the month [1-31] */
+   INT_T tm_mon;    /* month [0-11] */
+   INT_T tm_year;   /* year. The number of years since 1900 */
+   INT_T tm_wday;   /* day of the week [0-6] 0-Sunday...6-Saturday */
+}POSIX_TM_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief posix time
+ * 
+ */</pre>
+
+      <h4 id="SUM_ZONE_S;
+">Typedef <span>SUM_ZONE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   TIME_T posix_min;  // summer time start
+   TIME_T posix_max;  // summer time end
+}SUM_ZONE_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief summer time zone
+ * 
+ */</pre>
+
+      <h4 id="SUM_ZONE_TBL_S;
+">Typedef <span>SUM_ZONE_TBL_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T cnt; //sum zone count
+   SUM_ZONE_S zone[SUM_ZONE_TAB_LMT];//zone info
+}SUM_ZONE_TBL_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief sum zone info
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

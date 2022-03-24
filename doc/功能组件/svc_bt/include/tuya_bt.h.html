@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_BT_H__" class="nav-sub-label">TUYA_BT_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ty_bt_init_env" class="nav-sub-label">ty_bt_init_env</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_bt_update_param" class="nav-sub-label">ty_bt_update_param</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_bt_update_local_key" class="nav-sub-label">ty_bt_update_local_key</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_device_update_adv_para" class="nav-sub-label">tuya_ble_device_update_adv_para</a>
+              </li>
+      
+
+              <li>
+                <a href="#bt_netcfg_init" class="nav-sub-label">bt_netcfg_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_bt_dp_report" class="nav-sub-label">ty_bt_dp_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_monitor_init" class="nav-sub-label">tuya_ble_monitor_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#is_bt_connected" class="nav-sub-label">is_bt_connected</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_reg_get_bt_stat_cb" class="nav-sub-label">tuya_ble_reg_get_bt_stat_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_set_bt_device_name" class="nav-sub-label">tuya_set_bt_device_name</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_set_bt_para" class="nav-sub-label">tuya_ble_set_bt_para</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_init_beacon_key" class="nav-sub-label">tuya_ble_init_beacon_key</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_save_beacon_key" class="nav-sub-label">tuya_ble_save_beacon_key</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_clear_beacon_key" class="nav-sub-label">tuya_ble_clear_beacon_key</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_clear_rmt_ctrl_info" class="nav-sub-label">tuya_ble_clear_rmt_ctrl_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_reg_app_scan_adv_cb" class="nav-sub-label">tuya_ble_reg_app_scan_adv_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_reg_app_scan_adv_handle_cbs" class="nav-sub-label">tuya_ble_reg_app_scan_adv_handle_cbs</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_set_bind_window" class="nav-sub-label">tuya_ble_set_bind_window</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_open_bind_window" class="nav-sub-label">tuya_ble_open_bind_window</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_set_serv_switch" class="nav-sub-label">tuya_ble_set_serv_switch</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ble_is_serv_opened" class="nav-sub-label">tuya_ble_is_serv_opened</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_BT_CONN_STAT" class="nav-sub-label">TUYA_BT_CONN_STAT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_BT_CONN_STAT;
+" class="nav-sub-label">TUYA_BT_CONN_STAT;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_BLE_BIND_TYPE;
+" class="nav-sub-label">TUYA_BLE_BIND_TYPE;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_BT_SDK_PARAM_S;
+" class="nav-sub-label">TY_BT_SDK_PARAM_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#VOID_T" class="nav-sub-label">VOID_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_DP_GET_TM_CB" class="nav-sub-label">BT_DP_GET_TM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_BLE_BT_PARA;
+" class="nav-sub-label">TUYA_BLE_BT_PARA;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_BT_CONN_STAT_CB" class="nav-sub-label">GET_BT_CONN_STAT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_BLE_APP_SCAN_HANDLE" class="nav-sub-label">TUYA_BLE_APP_SCAN_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#BLE_SCAN_ADV_BIND_CHECK_CB" class="nav-sub-label">BLE_SCAN_ADV_BIND_CHECK_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#BLE_SCAN_ADV_BIND_RSLT_NOTIFY_CB" class="nav-sub-label">BLE_SCAN_ADV_BIND_RSLT_NOTIFY_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_BLE_SCAN_ADV_HANDLE_CBS;
+" class="nav-sub-label">TUYA_BLE_SCAN_ADV_HANDLE_CBS;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_BT_H__">Marco <span>TUYA_BT_H__</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_BT_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ty_bt_init_env">Func <span>ty_bt_init_env</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_bt_init_env(IN CONST TY_BT_SDK_PARAM_S *p);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init the running environment for bluetooth.
+ *
+ * @param[in] p: initial parameters for bluetooth
+ *
+ * @note This API is used for initializing the running environment for bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_bt_update_param">Func <span>ty_bt_update_param</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_bt_update_param(CHAR_T *product_id, BOOL_T is_oem, TY_BT_SDK_PARAM_S *p_param);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Update parameters for bluetooth.
+ *
+ * @param[in] product_id: product id
+ * @param[in] is_oem: if be oem or not
+ * @param[in] p_param: parameters
+ *
+ * @note This API is used for updating parameters for bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_bt_update_local_key">Func <span>ty_bt_update_local_key</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_bt_update_local_key(UINT8_T* p_buf, UINT8_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Update local key
+ *
+ * @param[in] p_buf: local key
+ * @param[in] len: lenth of local key
+ *
+ * @note This API is used for update local key.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_ble_device_update_adv_para">Func <span>tuya_ble_device_update_adv_para</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ble_device_update_adv_para(uint8_t* p_buf, uint8_t bind_state);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Update broadcast param for bluetooth
+ *
+ * @param[in] p_buf: local key
+ * @param[in] bind_state: bind state
+ *
+ * @note This API is used for update broadcast param for bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="bt_netcfg_init">Func <span>bt_netcfg_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET bt_netcfg_init(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init network configuration by bluetooth
+ *
+ * @param VOID
+ *
+ * @note This API is used for initializing network configuration by bluetooth
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_bt_dp_report">Func <span>ty_bt_dp_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_bt_dp_report(IN CONST DP_REPT_TYPE_E dp_rept_type, IN CONST VOID_T* data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Report dp by bluetooth
+ *
+ * @param[in] dp_rept_type: dp report type
+ * @param[in] data: dp data
+ *
+ * @note This API is used for reporting dp data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_ble_monitor_init">Func <span>tuya_ble_monitor_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ble_monitor_init(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Monitor for bluetooth
+ *
+ * @param VOID
+ *
+ * @note This API is used for monitor for bluetooth.
+ * if the device connected cloud, start advertisement, otherwise stoo it.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="is_bt_connected">Func <span>is_bt_connected</span></h4>
+      <pre class="doc-declare"><code>BOOL_T is_bt_connected(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Check bluetooth is connected.
+ *
+ * @param VOID
+ *
+ * @note This API is used to check whether the bluetooth is connected.
+ *
+ * @return be connected or not
+ */</pre>
+
+      <h4 id="tuya_ble_reg_get_bt_stat_cb">Func <span>tuya_ble_reg_get_bt_stat_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ble_reg_get_bt_stat_cb(IN CONST GET_BT_CONN_STAT_CB bt_conn_stat_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register callback function for getting the connection status of bluetooth
+ *
+ * @param[in] bt_conn_stat_cb: callback function
+ *
+ * @note This API is used for registering callback function for getting the connection status of bluetooth
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_set_bt_device_name">Func <span>tuya_set_bt_device_name</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_set_bt_device_name(CHAR_T* dev_name);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set device name for bluetooth.
+ *
+ * @param[in] dev_name: device name for bluetooth
+ *
+ * @note This API is used for setting device name for bluetooth. this API should be called before bluetooth initialized.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_set_bt_para">Func <span>tuya_ble_set_bt_para</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_set_bt_para(TUYA_BLE_BT_PARA* para);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set parameters for bluetooth.
+ *
+ * @param[in] para: parameters for bluetooth
+ *
+ * @note This API is used for setting parameters for bluetooth. this API should be called before bluetooth initialized.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_init_beacon_key">Func <span>tuya_ble_init_beacon_key</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_init_beacon_key(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init beacon key for bluetooth remote control.
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialize beacon key for bluetooth remote control.
+ * This API is userd for new remote control.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_save_beacon_key">Func <span>tuya_ble_save_beacon_key</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ble_save_beacon_key(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Save beacon key for bluetooth remote control.
+ *
+ * @param VOID
+ *
+ * @note This API is used for saving beacon key for bluetooth remote control.
+ * This API is userd for new remote control.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_ble_clear_beacon_key">Func <span>tuya_ble_clear_beacon_key</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_clear_beacon_key(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Clear up beacon key for bluetooth remote control.
+ *
+ * @param VOID
+ *
+ * @note This API is used for clearing up beacon key for bluetooth remote control.
+ * This API is userd for new remote control.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_clear_rmt_ctrl_info">Func <span>tuya_ble_clear_rmt_ctrl_info</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_clear_rmt_ctrl_info(UINT8_T stat);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Clear up all flash information of bluetooth remote control.
+ *
+ * @param VOID
+ *
+ * @note This API is used for all flash information of bluetooth remote control.
+ * This API is userd for new remote control.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_reg_app_scan_adv_cb">Func <span>tuya_ble_reg_app_scan_adv_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ble_reg_app_scan_adv_cb(TUYA_BLE_APP_SCAN_HANDLE cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register callback function for advertisement scanning data processing
+ *
+ * @param[in] cb: callback function
+ *
+ * @note This API is used for registering callback function for advertisement scanning data processing
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_ble_reg_app_scan_adv_handle_cbs">Func <span>tuya_ble_reg_app_scan_adv_handle_cbs</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ble_reg_app_scan_adv_handle_cbs(TUYA_BLE_SCAN_ADV_HANDLE_CBS* cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register callback function for advertisement scanning data processing
+ *
+ * @param[in] cbs: callback function
+ *
+ * @note This API is used for registering callback function for advertisement scanning data processing
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_ble_set_bind_window">Func <span>tuya_ble_set_bind_window</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_set_bind_window(UINT_T time_out);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set timeout window for binding remote controller
+ *
+ * @param[in] time_out: time out in second, 0: no window
+ *
+ * @note This API is used for setting timeout window for binding remote controller
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_open_bind_window">Func <span>tuya_ble_open_bind_window</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_open_bind_window(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Open window for binding remote controller
+ *
+ * @param[in] VOID
+ *
+ * @note This API is used for opening window for binding remote controller
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_set_serv_switch">Func <span>tuya_ble_set_serv_switch</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_ble_set_serv_switch(BOOL_T swith);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set enable switch for bluetooth service
+ *
+ * @param[in] switch: enable switch: TRUE-open, FALSE-close
+ *
+ * @note This API is used for setting enable switch for bluetooth service, it should be called before sdk initialization.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_ble_is_serv_opened">Func <span>tuya_ble_is_serv_opened</span></h4>
+      <pre class="doc-declare"><code>BOOL_T tuya_ble_is_serv_opened(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Check bluetooth service is available
+ *
+ * @param VOID
+ *
+ * @note This API is used to check the bluetooth service is available.
+ *
+ * @return TRUE enable, FALSE disable
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="TUYA_BT_CONN_STAT">Variable <span>TUYA_BT_CONN_STAT</span></h4>
+      <pre class="doc-declare"><code>TUYA_BT_CONN_STAT tuya_bt_get_connect_status(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get connection status of bluetooth
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting the connection status of bluetooth
+ *
+ * @return connection status
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TUYA_BT_CONN_STAT;
+">Typedef <span>TUYA_BT_CONN_STAT;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum{
+   TUYA_BT_UNBONDING_UNCONN = 0,
+   TUYA_BT_UNBONDING_CONN,
+   TUYA_BT_BONDING_UNCONN,
+   TUYA_BT_BONDING_CONN,
+   TUYA_BT_UNKNOW_STATUS
+}TUYA_BT_CONN_STAT;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief connection status for bluetooth
+ */</pre>
+
+      <h4 id="TUYA_BLE_BIND_TYPE;
+">Typedef <span>TUYA_BLE_BIND_TYPE;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum{
+   TUYA_BLE_OP_UNBIND = 0,
+   TUYA_BLE_OP_BIND,
+}TUYA_BLE_BIND_TYPE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief bind type for bluetooth remote controller
+ */</pre>
+
+      <h4 id="TY_BT_SDK_PARAM_S;
+">Typedef <span>TY_BT_SDK_PARAM_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *uuid;   //uuid
+   CHAR_T *auth_key;//authentication key
+}TY_BT_SDK_PARAM_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief parameters for bluetooth
+ */</pre>
+
+      <h4 id="VOID_T">Typedef <span>VOID_T</span></h4>
+      <pre class="doc-declare"><code>typedef VOID_T (*BT_DP_QUERY_CB)(VOID_T);
+</code></pre>
+      <pre class="doc-comment">//callback function for user dp query</pre>
+
+      <h4 id="BT_DP_GET_TM_CB">Typedef <span>BT_DP_GET_TM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T (*BT_DP_GET_TM_CB)(CHAR_T*      time_str);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_BLE_BT_PARA;
+">Typedef <span>TUYA_BLE_BT_PARA;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT8_T priority_flag;     //0:wifi first  1:bt first
+   UINT8_T share_flag;        //0:no shared device  1:tuya shared device
+   UINT8_T dp_rept_with_time; //0:without time  1:with time
+   UINT8_T rsvd;
+   BT_DP_QUERY_CB query_dp_cb; //callback function for dp query
+   BT_DP_GET_TM_CB get_timestamp_cb;
+}TUYA_BLE_BT_PARA;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_BT_CONN_STAT_CB">Typedef <span>GET_BT_CONN_STAT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*GET_BT_CONN_STAT_CB)(IN CONST TUYA_BT_CONN_STAT stat);
+</code></pre>
+      <pre class="doc-comment">//callback function for getting the connection status of bluetooth</pre>
+
+      <h4 id="TUYA_BLE_APP_SCAN_HANDLE">Typedef <span>TUYA_BLE_APP_SCAN_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*TUYA_BLE_APP_SCAN_HANDLE)(UCHAR_T *data, UCHAR_T len, UCHAR_T type, UCHAR_T* mac);
+</code></pre>
+      <pre class="doc-comment">//callback function for advertisement scanning data processing</pre>
+
+      <h4 id="BLE_SCAN_ADV_BIND_CHECK_CB">Typedef <span>BLE_SCAN_ADV_BIND_CHECK_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*BLE_SCAN_ADV_BIND_CHECK_CB)(TUYA_BLE_BIND_TYPE type, UCHAR_T *data, UCHAR_T len);
+</code></pre>
+      <pre class="doc-comment">//callback function for validity check for bind or unbind operation</pre>
+
+      <h4 id="BLE_SCAN_ADV_BIND_RSLT_NOTIFY_CB">Typedef <span>BLE_SCAN_ADV_BIND_RSLT_NOTIFY_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID_T (*BLE_SCAN_ADV_BIND_RSLT_NOTIFY_CB)(TUYA_BLE_BIND_TYPE type, int rslt);
+</code></pre>
+      <pre class="doc-comment">//callback function for result notify for bind or unbind operation</pre>
+
+      <h4 id="TUYA_BLE_SCAN_ADV_HANDLE_CBS;
+">Typedef <span>TUYA_BLE_SCAN_ADV_HANDLE_CBS;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   BLE_SCAN_ADV_BIND_CHECK_CB      bind_check; 
+   BLE_SCAN_ADV_BIND_RSLT_NOTIFY_CB bind_notify;
+}TUYA_BLE_SCAN_ADV_HANDLE_CBS;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

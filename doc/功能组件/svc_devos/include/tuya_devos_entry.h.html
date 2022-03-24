@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_DEVOS_ENTRY_H__" class="nav-sub-label">__TUYA_DEVOS_ENTRY_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_dev_activated" class="nav-sub-label">tuya_iot_dev_activated</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dev_update_attachs" class="nav-sub-label">tuya_iot_dev_update_attachs</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dev_set_attach_attr" class="nav-sub-label">tuya_iot_dev_set_attach_attr</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dev_get_attach_attr" class="nav-sub-label">tuya_iot_dev_get_attach_attr</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_upload_rst_log_set" class="nav-sub-label">gw_upload_rst_log_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_oem_set" class="nav-sub-label">gw_oem_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#is_gw_oem" class="nav-sub-label">is_gw_oem</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_update_versions" class="nav-sub-label">gw_update_versions</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_ctrl_write_stride" class="nav-sub-label">gw_ctrl_write_stride</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_ctrl_reset_stride" class="nav-sub-label">gw_ctrl_reset_stride</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_ctrl_update_stride" class="nav-sub-label">gw_ctrl_update_stride</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#GW_STRIDE_UPDATE_S" class="nav-sub-label">GW_STRIDE_UPDATE_S</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_dev_init_t;
+" class="nav-sub-label">tuya_dev_init_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_DEVOS_ENTRY_H__">Marco <span>__TUYA_DEVOS_ENTRY_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_DEVOS_ENTRY_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_iot_dev_activated">Func <span>tuya_iot_dev_activated</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_activated(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Device is activated, and begin to launch
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_iot_dev_update_attachs">Func <span>tuya_iot_dev_update_attachs</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_update_attachs(UINT_T attr_num, GW_ATTACH_ATTR_T *attrs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Update versions of all attach modules.
+ *
+ * @param[in] attr_num Count of attach modules
+ * @param[in] attrs Attributes of attach modules
+ *
+ * @note This API is used for attach modules updating in case of dynamic add/remove/update.
+ * Info of main netlink module will also be included when upload.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_iot_dev_set_attach_attr">Func <span>tuya_iot_dev_set_attach_attr</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_set_attach_attr(GW_PERMIT_DEV_TP_T tp, GW_ATTACH_ATTR_T * attr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_dev_get_attach_attr">Func <span>tuya_iot_dev_get_attach_attr</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_get_attach_attr(GW_PERMIT_DEV_TP_T tp, GW_ATTACH_ATTR_T * attr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="gw_upload_rst_log_set">Func <span>gw_upload_rst_log_set</span></h4>
+      <pre class="doc-declare"><code>VOID gw_upload_rst_log_set(IN CONST BOOL_T upload);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Enable reset log upload or not
+ *
+ * @param[in] upload Enable or not
+ */</pre>
+
+      <h4 id="gw_oem_set">Func <span>gw_oem_set</span></h4>
+      <pre class="doc-declare"><code>VOID gw_oem_set(IN CONST BOOL_T oem);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Enable oem or not
+ *
+ * @param[in] oem Enable or not
+ */</pre>
+
+      <h4 id="is_gw_oem">Func <span>is_gw_oem</span></h4>
+      <pre class="doc-declare"><code>BOOL_T is_gw_oem(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Whether oem is enabled or not
+ *
+ * @return TRUE on positive, FALSE on negative
+ */</pre>
+
+      <h4 id="gw_update_versions">Func <span>gw_update_versions</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_update_versions(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Force to upload all versions
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_ctrl_write_stride">Func <span>gw_ctrl_write_stride</span></h4>
+      <pre class="doc-declare"><code>VOID gw_ctrl_write_stride(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Write stride info
+ */</pre>
+
+      <h4 id="gw_ctrl_reset_stride">Func <span>gw_ctrl_reset_stride</span></h4>
+      <pre class="doc-declare"><code>VOID gw_ctrl_reset_stride(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief reset stride info
+ */</pre>
+
+      <h4 id="gw_ctrl_update_stride">Func <span>gw_ctrl_update_stride</span></h4>
+      <pre class="doc-declare"><code>VOID gw_ctrl_update_stride(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Update stride info
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="GW_STRIDE_UPDATE_S">Variable <span>GW_STRIDE_UPDATE_S</span></h4>
+      <pre class="doc-declare"><code>GW_STRIDE_UPDATE_S* gw_get_new_pid_key(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get stride info
+ *
+ * @return NULL on faile, others see GW_STRIDE_UPDATE_S
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_dev_init_t;
+">Typedef <span>tuya_dev_init_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** The key of firmware, assigned by TUYA */
+   CHAR_T *firmware_key;
+   /** The key of product, assigned by TUYA */
+   CHAR_T *product_key;
+   /** The version of firmware, format is "x.y.z" */
+   CHAR_T *sw_ver;
+ 
+   /** The count of attach modules */
+   UINT_T attr_num;
+   /** The attributes of attach modules */
+   GW_ATTACH_ATTR_T *attrs;
+}tuya_dev_init_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init param of IoT device
+ */</pre>
+    </div>
+  </body>
+</html>
+            

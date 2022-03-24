@@ -1,0 +1,1109 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/tcpbase.h" class="nav-sub-label">lwip/tcpbase.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/tcp.h" class="nav-sub-label">lwip/tcp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_ALTCP_H" class="nav-sub-label">LWIP_HDR_ALTCP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_listen_with_backlog(conn, backlog)" class="nav-sub-label">altcp_listen_with_backlog(conn, backlog)</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_listen(conn)" class="nav-sub-label">altcp_listen(conn)</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_accept_fn" class="nav-sub-label">altcp_accept_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_connected_fn" class="nav-sub-label">altcp_connected_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_recv_fn" class="nav-sub-label">altcp_recv_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sent_fn" class="nav-sub-label">altcp_sent_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_poll_fn" class="nav-sub-label">altcp_poll_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_err_fn" class="nav-sub-label">altcp_err_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_pcb" class="nav-sub-label">altcp_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_tcp_new_ip_type" class="nav-sub-label">altcp_tcp_new_ip_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_tcp_new" class="nav-sub-label">altcp_tcp_new</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_tcp_new_ip6" class="nav-sub-label">altcp_tcp_new_ip6</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_new(allocator)" class="nav-sub-label">altcp_new(allocator)</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_new_ip6(allocator)" class="nav-sub-label">altcp_new_ip6(allocator)</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_new_ip_type(allocator, ip_type)" class="nav-sub-label">altcp_new_ip_type(allocator, ip_type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_arg" class="nav-sub-label">altcp_arg</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_accept" class="nav-sub-label">altcp_accept</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_recv" class="nav-sub-label">altcp_recv</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sent" class="nav-sub-label">altcp_sent</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_poll" class="nav-sub-label">altcp_poll</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_err" class="nav-sub-label">altcp_err</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_recved" class="nav-sub-label">altcp_recved</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_bind" class="nav-sub-label">altcp_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_connect" class="nav-sub-label">altcp_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_listen_with_backlog_and_err" class="nav-sub-label">altcp_listen_with_backlog_and_err</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_listen_with_backlog" class="nav-sub-label">altcp_listen_with_backlog</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_listen" class="nav-sub-label">altcp_listen</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_abort" class="nav-sub-label">altcp_abort</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_close" class="nav-sub-label">altcp_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_shutdown" class="nav-sub-label">altcp_shutdown</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_write" class="nav-sub-label">altcp_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_output" class="nav-sub-label">altcp_output</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_mss" class="nav-sub-label">altcp_mss</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sndbuf" class="nav-sub-label">altcp_sndbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sndqueuelen" class="nav-sub-label">altcp_sndqueuelen</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_nagle_disable" class="nav-sub-label">altcp_nagle_disable</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_nagle_enable" class="nav-sub-label">altcp_nagle_enable</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_nagle_disabled" class="nav-sub-label">altcp_nagle_disabled</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_setprio" class="nav-sub-label">altcp_setprio</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_get_tcp_addrinfo" class="nav-sub-label">altcp_get_tcp_addrinfo</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_get_ip(pcb, local)" class="nav-sub-label">altcp_get_ip(pcb, local)</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_dbg_get_tcp_state" class="nav-sub-label">altcp_dbg_get_tcp_state</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#altcp_new" class="nav-sub-label">altcp_new</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_new_ip6" class="nav-sub-label">altcp_new_ip6</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_new_ip_type" class="nav-sub-label">altcp_new_ip_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_arg" class="nav-sub-label">altcp_arg</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_accept" class="nav-sub-label">altcp_accept</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_recv" class="nav-sub-label">altcp_recv</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sent" class="nav-sub-label">altcp_sent</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_poll" class="nav-sub-label">altcp_poll</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_err" class="nav-sub-label">altcp_err</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_recved" class="nav-sub-label">altcp_recved</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_bind" class="nav-sub-label">altcp_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_connect" class="nav-sub-label">altcp_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_listen_with_backlog_and_err" class="nav-sub-label">altcp_listen_with_backlog_and_err</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_abort" class="nav-sub-label">altcp_abort</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_close" class="nav-sub-label">altcp_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_shutdown" class="nav-sub-label">altcp_shutdown</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_write" class="nav-sub-label">altcp_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_output" class="nav-sub-label">altcp_output</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_mss" class="nav-sub-label">altcp_mss</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sndbuf" class="nav-sub-label">altcp_sndbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sndqueuelen" class="nav-sub-label">altcp_sndqueuelen</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_nagle_disable" class="nav-sub-label">altcp_nagle_disable</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_nagle_enable" class="nav-sub-label">altcp_nagle_enable</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_nagle_disabled" class="nav-sub-label">altcp_nagle_disabled</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_setprio" class="nav-sub-label">altcp_setprio</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_get_tcp_addrinfo" class="nav-sub-label">altcp_get_tcp_addrinfo</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_get_ip" class="nav-sub-label">altcp_get_ip</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_get_port" class="nav-sub-label">altcp_get_port</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#" class="nav-sub-label"></a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_functions" class="nav-sub-label">altcp_functions</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#altcp_accept_fn" class="nav-sub-label">altcp_accept_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_connected_fn" class="nav-sub-label">altcp_connected_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_recv_fn" class="nav-sub-label">altcp_recv_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_sent_fn" class="nav-sub-label">altcp_sent_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_poll_fn" class="nav-sub-label">altcp_poll_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_err_fn" class="nav-sub-label">altcp_err_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_new_fn" class="nav-sub-label">altcp_new_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_allocator_t;
+" class="nav-sub-label">altcp_allocator_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/tcpbase.h"><span>lwip/tcpbase.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/tcpbase.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/tcpbase.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/tcp.h"><span>lwip/tcp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/tcp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/tcp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_ALTCP_H">Marco <span>LWIP_HDR_ALTCP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_ALTCP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_listen_with_backlog(conn, backlog)">Marco <span>altcp_listen_with_backlog(conn, backlog)</span></h4>
+      <pre class="doc-declare"><code>#define altcp_listen_with_backlog(conn, backlog) altcp_listen_with_backlog_and_err(conn, backlog, NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_listen(conn)">Marco <span>altcp_listen(conn)</span></h4>
+      <pre class="doc-declare"><code>#define altcp_listen(conn) altcp_listen_with_backlog_and_err(conn, TCP_DEFAULT_LISTEN_BACKLOG, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup altcp */</pre>
+
+      <h4 id="altcp_accept_fn">Marco <span>altcp_accept_fn</span></h4>
+      <pre class="doc-declare"><code>#define altcp_accept_fn tcp_accept_fn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_connected_fn">Marco <span>altcp_connected_fn</span></h4>
+      <pre class="doc-declare"><code>#define altcp_connected_fn tcp_connected_fn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_recv_fn">Marco <span>altcp_recv_fn</span></h4>
+      <pre class="doc-declare"><code>#define altcp_recv_fn tcp_recv_fn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sent_fn">Marco <span>altcp_sent_fn</span></h4>
+      <pre class="doc-declare"><code>#define altcp_sent_fn tcp_sent_fn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_poll_fn">Marco <span>altcp_poll_fn</span></h4>
+      <pre class="doc-declare"><code>#define altcp_poll_fn tcp_poll_fn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_err_fn">Marco <span>altcp_err_fn</span></h4>
+      <pre class="doc-declare"><code>#define altcp_err_fn tcp_err_fn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_pcb">Marco <span>altcp_pcb</span></h4>
+      <pre class="doc-declare"><code>#define altcp_pcb tcp_pcb
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_tcp_new_ip_type">Marco <span>altcp_tcp_new_ip_type</span></h4>
+      <pre class="doc-declare"><code>#define altcp_tcp_new_ip_type tcp_new_ip_type
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_tcp_new">Marco <span>altcp_tcp_new</span></h4>
+      <pre class="doc-declare"><code>#define altcp_tcp_new tcp_new
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_tcp_new_ip6">Marco <span>altcp_tcp_new_ip6</span></h4>
+      <pre class="doc-declare"><code>#define altcp_tcp_new_ip6 tcp_new_ip6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_new(allocator)">Marco <span>altcp_new(allocator)</span></h4>
+      <pre class="doc-declare"><code>#define altcp_new(allocator) tcp_new()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_new_ip6(allocator)">Marco <span>altcp_new_ip6(allocator)</span></h4>
+      <pre class="doc-declare"><code>#define altcp_new_ip6(allocator) tcp_new_ip6()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_new_ip_type(allocator, ip_type)">Marco <span>altcp_new_ip_type(allocator, ip_type)</span></h4>
+      <pre class="doc-declare"><code>#define altcp_new_ip_type(allocator, ip_type) tcp_new_ip_type(ip_type)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_arg">Marco <span>altcp_arg</span></h4>
+      <pre class="doc-declare"><code>#define altcp_arg tcp_arg
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_accept">Marco <span>altcp_accept</span></h4>
+      <pre class="doc-declare"><code>#define altcp_accept tcp_accept
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_recv">Marco <span>altcp_recv</span></h4>
+      <pre class="doc-declare"><code>#define altcp_recv tcp_recv
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sent">Marco <span>altcp_sent</span></h4>
+      <pre class="doc-declare"><code>#define altcp_sent tcp_sent
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_poll">Marco <span>altcp_poll</span></h4>
+      <pre class="doc-declare"><code>#define altcp_poll tcp_poll
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_err">Marco <span>altcp_err</span></h4>
+      <pre class="doc-declare"><code>#define altcp_err tcp_err
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_recved">Marco <span>altcp_recved</span></h4>
+      <pre class="doc-declare"><code>#define altcp_recved tcp_recved
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_bind">Marco <span>altcp_bind</span></h4>
+      <pre class="doc-declare"><code>#define altcp_bind tcp_bind
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_connect">Marco <span>altcp_connect</span></h4>
+      <pre class="doc-declare"><code>#define altcp_connect tcp_connect
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_listen_with_backlog_and_err">Marco <span>altcp_listen_with_backlog_and_err</span></h4>
+      <pre class="doc-declare"><code>#define altcp_listen_with_backlog_and_err tcp_listen_with_backlog_and_err
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_listen_with_backlog">Marco <span>altcp_listen_with_backlog</span></h4>
+      <pre class="doc-declare"><code>#define altcp_listen_with_backlog tcp_listen_with_backlog
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_listen">Marco <span>altcp_listen</span></h4>
+      <pre class="doc-declare"><code>#define altcp_listen tcp_listen
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_abort">Marco <span>altcp_abort</span></h4>
+      <pre class="doc-declare"><code>#define altcp_abort tcp_abort
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_close">Marco <span>altcp_close</span></h4>
+      <pre class="doc-declare"><code>#define altcp_close tcp_close
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_shutdown">Marco <span>altcp_shutdown</span></h4>
+      <pre class="doc-declare"><code>#define altcp_shutdown tcp_shutdown
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_write">Marco <span>altcp_write</span></h4>
+      <pre class="doc-declare"><code>#define altcp_write tcp_write
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_output">Marco <span>altcp_output</span></h4>
+      <pre class="doc-declare"><code>#define altcp_output tcp_output
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_mss">Marco <span>altcp_mss</span></h4>
+      <pre class="doc-declare"><code>#define altcp_mss tcp_mss
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sndbuf">Marco <span>altcp_sndbuf</span></h4>
+      <pre class="doc-declare"><code>#define altcp_sndbuf tcp_sndbuf
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sndqueuelen">Marco <span>altcp_sndqueuelen</span></h4>
+      <pre class="doc-declare"><code>#define altcp_sndqueuelen tcp_sndqueuelen
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_nagle_disable">Marco <span>altcp_nagle_disable</span></h4>
+      <pre class="doc-declare"><code>#define altcp_nagle_disable tcp_nagle_disable
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_nagle_enable">Marco <span>altcp_nagle_enable</span></h4>
+      <pre class="doc-declare"><code>#define altcp_nagle_enable tcp_nagle_enable
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_nagle_disabled">Marco <span>altcp_nagle_disabled</span></h4>
+      <pre class="doc-declare"><code>#define altcp_nagle_disabled tcp_nagle_disabled
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_setprio">Marco <span>altcp_setprio</span></h4>
+      <pre class="doc-declare"><code>#define altcp_setprio tcp_setprio
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_get_tcp_addrinfo">Marco <span>altcp_get_tcp_addrinfo</span></h4>
+      <pre class="doc-declare"><code>#define altcp_get_tcp_addrinfo tcp_get_tcp_addrinfo
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_get_ip(pcb, local)">Marco <span>altcp_get_ip(pcb, local)</span></h4>
+      <pre class="doc-declare"><code>#define altcp_get_ip(pcb, local) ((local) ? (&(pcb)->local_ip) : (&(pcb)->remote_ip))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_dbg_get_tcp_state">Marco <span>altcp_dbg_get_tcp_state</span></h4>
+      <pre class="doc-declare"><code>#define altcp_dbg_get_tcp_state tcp_dbg_get_tcp_state
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="altcp_new">Func <span>altcp_new</span></h4>
+      <pre class="doc-declare"><code>struct altcp_pcb *altcp_new(altcp_allocator_t *allocator);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_new_ip6">Func <span>altcp_new_ip6</span></h4>
+      <pre class="doc-declare"><code>struct altcp_pcb *altcp_new_ip6(altcp_allocator_t *allocator);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_new_ip_type">Func <span>altcp_new_ip_type</span></h4>
+      <pre class="doc-declare"><code>struct altcp_pcb *altcp_new_ip_type(altcp_allocator_t *allocator, u8_t ip_type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_arg">Func <span>altcp_arg</span></h4>
+      <pre class="doc-declare"><code>void altcp_arg(struct altcp_pcb *conn, void *arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_accept">Func <span>altcp_accept</span></h4>
+      <pre class="doc-declare"><code>void altcp_accept(struct altcp_pcb *conn, altcp_accept_fn accept);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_recv">Func <span>altcp_recv</span></h4>
+      <pre class="doc-declare"><code>void altcp_recv(struct altcp_pcb *conn, altcp_recv_fn recv);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sent">Func <span>altcp_sent</span></h4>
+      <pre class="doc-declare"><code>void altcp_sent(struct altcp_pcb *conn, altcp_sent_fn sent);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_poll">Func <span>altcp_poll</span></h4>
+      <pre class="doc-declare"><code>void altcp_poll(struct altcp_pcb *conn, altcp_poll_fn poll, u8_t interval);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_err">Func <span>altcp_err</span></h4>
+      <pre class="doc-declare"><code>void altcp_err(struct altcp_pcb *conn, altcp_err_fn err);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_recved">Func <span>altcp_recved</span></h4>
+      <pre class="doc-declare"><code>void altcp_recved(struct altcp_pcb *conn, u16_t len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_bind">Func <span>altcp_bind</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_bind(struct altcp_pcb *conn, const ip_addr_t *ipaddr, u16_t port);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_connect">Func <span>altcp_connect</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_connect(struct altcp_pcb *conn, const ip_addr_t *ipaddr, u16_t port, altcp_connected_fn connected);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_listen_with_backlog_and_err">Func <span>altcp_listen_with_backlog_and_err</span></h4>
+      <pre class="doc-declare"><code>struct altcp_pcb *altcp_listen_with_backlog_and_err(struct altcp_pcb *conn, u8_t backlog, err_t *err);</code></pre>
+      <pre class="doc-comment">/* return conn for source code compatibility to tcp callback API only */</pre>
+
+      <h4 id="altcp_abort">Func <span>altcp_abort</span></h4>
+      <pre class="doc-declare"><code>void altcp_abort(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_close">Func <span>altcp_close</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_close(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_shutdown">Func <span>altcp_shutdown</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_shutdown(struct altcp_pcb *conn, int shut_rx, int shut_tx);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_write">Func <span>altcp_write</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_write(struct altcp_pcb *conn, const void *dataptr, u16_t len, u8_t apiflags);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_output">Func <span>altcp_output</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_output(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_mss">Func <span>altcp_mss</span></h4>
+      <pre class="doc-declare"><code>u16_t altcp_mss(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sndbuf">Func <span>altcp_sndbuf</span></h4>
+      <pre class="doc-declare"><code>u16_t altcp_sndbuf(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sndqueuelen">Func <span>altcp_sndqueuelen</span></h4>
+      <pre class="doc-declare"><code>u16_t altcp_sndqueuelen(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_nagle_disable">Func <span>altcp_nagle_disable</span></h4>
+      <pre class="doc-declare"><code>void altcp_nagle_disable(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_nagle_enable">Func <span>altcp_nagle_enable</span></h4>
+      <pre class="doc-declare"><code>void altcp_nagle_enable(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_nagle_disabled">Func <span>altcp_nagle_disabled</span></h4>
+      <pre class="doc-declare"><code>int  altcp_nagle_disabled(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_setprio">Func <span>altcp_setprio</span></h4>
+      <pre class="doc-declare"><code>void altcp_setprio(struct altcp_pcb *conn, u8_t prio);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_get_tcp_addrinfo">Func <span>altcp_get_tcp_addrinfo</span></h4>
+      <pre class="doc-declare"><code>err_t altcp_get_tcp_addrinfo(struct altcp_pcb *conn, int local, ip_addr_t *addr, u16_t *port);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_get_ip">Func <span>altcp_get_ip</span></h4>
+      <pre class="doc-declare"><code>ip_addr_t *altcp_get_ip(struct altcp_pcb *conn, int local);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_get_port">Func <span>altcp_get_port</span></h4>
+      <pre class="doc-declare"><code>u16_t altcp_get_port(struct altcp_pcb *conn, int local);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="">Variable <span></span></h4>
+      <pre class="doc-declare"><code>struct altcp_pcb;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_functions">Variable <span>altcp_functions</span></h4>
+      <pre class="doc-declare"><code>struct altcp_functions;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+
+      <h4 id=" ">Type <span> </span></h4>
+      <pre class="doc-declare"><code>enum tcp_state altcp_dbg_get_tcp_state(struct altcp_pcb *conn);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="altcp_accept_fn">Typedef <span>altcp_accept_fn</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*altcp_accept_fn)(void *arg, struct altcp_pcb *new_conn, err_t err);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_connected_fn">Typedef <span>altcp_connected_fn</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*altcp_connected_fn)(void *arg, struct altcp_pcb *conn, err_t err);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_recv_fn">Typedef <span>altcp_recv_fn</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*altcp_recv_fn)(void *arg, struct altcp_pcb *conn, struct pbuf *p, err_t err);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_sent_fn">Typedef <span>altcp_sent_fn</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*altcp_sent_fn)(void *arg, struct altcp_pcb *conn, u16_t len);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_poll_fn">Typedef <span>altcp_poll_fn</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*altcp_poll_fn)(void *arg, struct altcp_pcb *conn);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_err_fn">Typedef <span>altcp_err_fn</span></h4>
+      <pre class="doc-declare"><code>typedef void (*altcp_err_fn)(void *arg, err_t err);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_new_fn">Typedef <span>altcp_new_fn</span></h4>
+      <pre class="doc-declare"><code>typedef struct altcp_pcb* (*altcp_new_fn)(void *arg, u8_t ip_type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_allocator_t;
+">Typedef <span>altcp_allocator_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct altcp_allocator_s {
+ /** Allocator function */
+ altcp_new_fn alloc;
+ /** Argument to allocator function */
+ void        *arg;
+} altcp_allocator_t;
+</code></pre>
+      <pre class="doc-comment">/** @ingroup altcp */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,1532 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#errno.h" class="nav-sub-label">errno.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_ERRNO_INCLUDE" class="nav-sub-label">LWIP_ERRNO_INCLUDE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_ERRNO_H" class="nav-sub-label">LWIP_HDR_ERRNO_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPERM" class="nav-sub-label">EPERM</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOENT" class="nav-sub-label">ENOENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESRCH" class="nav-sub-label">ESRCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#EINTR" class="nav-sub-label">EINTR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EIO" class="nav-sub-label">EIO</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENXIO" class="nav-sub-label">ENXIO</a>
+              </li>
+      
+
+              <li>
+                <a href="#E2BIG" class="nav-sub-label">E2BIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOEXEC" class="nav-sub-label">ENOEXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADF" class="nav-sub-label">EBADF</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECHILD" class="nav-sub-label">ECHILD</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAGAIN" class="nav-sub-label">EAGAIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOMEM" class="nav-sub-label">ENOMEM</a>
+              </li>
+      
+
+              <li>
+                <a href="#EACCES" class="nav-sub-label">EACCES</a>
+              </li>
+      
+
+              <li>
+                <a href="#EFAULT" class="nav-sub-label">EFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTBLK" class="nav-sub-label">ENOTBLK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBUSY" class="nav-sub-label">EBUSY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EEXIST" class="nav-sub-label">EEXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#EXDEV" class="nav-sub-label">EXDEV</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENODEV" class="nav-sub-label">ENODEV</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTDIR" class="nav-sub-label">ENOTDIR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EISDIR" class="nav-sub-label">EISDIR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EINVAL" class="nav-sub-label">EINVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENFILE" class="nav-sub-label">ENFILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EMFILE" class="nav-sub-label">EMFILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTTY" class="nav-sub-label">ENOTTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETXTBSY" class="nav-sub-label">ETXTBSY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EFBIG" class="nav-sub-label">EFBIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOSPC" class="nav-sub-label">ENOSPC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESPIPE" class="nav-sub-label">ESPIPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EROFS" class="nav-sub-label">EROFS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EMLINK" class="nav-sub-label">EMLINK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPIPE" class="nav-sub-label">EPIPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EDOM" class="nav-sub-label">EDOM</a>
+              </li>
+      
+
+              <li>
+                <a href="#ERANGE" class="nav-sub-label">ERANGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EDEADLK" class="nav-sub-label">EDEADLK</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENAMETOOLONG" class="nav-sub-label">ENAMETOOLONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOLCK" class="nav-sub-label">ENOLCK</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOSYS" class="nav-sub-label">ENOSYS</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTEMPTY" class="nav-sub-label">ENOTEMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELOOP" class="nav-sub-label">ELOOP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EWOULDBLOCK" class="nav-sub-label">EWOULDBLOCK</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOMSG" class="nav-sub-label">ENOMSG</a>
+              </li>
+      
+
+              <li>
+                <a href="#EIDRM" class="nav-sub-label">EIDRM</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECHRNG" class="nav-sub-label">ECHRNG</a>
+              </li>
+      
+
+              <li>
+                <a href="#EL2NSYNC" class="nav-sub-label">EL2NSYNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#EL3HLT" class="nav-sub-label">EL3HLT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EL3RST" class="nav-sub-label">EL3RST</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELNRNG" class="nav-sub-label">ELNRNG</a>
+              </li>
+      
+
+              <li>
+                <a href="#EUNATCH" class="nav-sub-label">EUNATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOCSI" class="nav-sub-label">ENOCSI</a>
+              </li>
+      
+
+              <li>
+                <a href="#EL2HLT" class="nav-sub-label">EL2HLT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADE" class="nav-sub-label">EBADE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADR" class="nav-sub-label">EBADR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EXFULL" class="nav-sub-label">EXFULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOANO" class="nav-sub-label">ENOANO</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADRQC" class="nav-sub-label">EBADRQC</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADSLT" class="nav-sub-label">EBADSLT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EDEADLOCK" class="nav-sub-label">EDEADLOCK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBFONT" class="nav-sub-label">EBFONT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOSTR" class="nav-sub-label">ENOSTR</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENODATA" class="nav-sub-label">ENODATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETIME" class="nav-sub-label">ETIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOSR" class="nav-sub-label">ENOSR</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENONET" class="nav-sub-label">ENONET</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOPKG" class="nav-sub-label">ENOPKG</a>
+              </li>
+      
+
+              <li>
+                <a href="#EREMOTE" class="nav-sub-label">EREMOTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOLINK" class="nav-sub-label">ENOLINK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EADV" class="nav-sub-label">EADV</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESRMNT" class="nav-sub-label">ESRMNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECOMM" class="nav-sub-label">ECOMM</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPROTO" class="nav-sub-label">EPROTO</a>
+              </li>
+      
+
+              <li>
+                <a href="#EMULTIHOP" class="nav-sub-label">EMULTIHOP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EDOTDOT" class="nav-sub-label">EDOTDOT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADMSG" class="nav-sub-label">EBADMSG</a>
+              </li>
+      
+
+              <li>
+                <a href="#EOVERFLOW" class="nav-sub-label">EOVERFLOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTUNIQ" class="nav-sub-label">ENOTUNIQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#EBADFD" class="nav-sub-label">EBADFD</a>
+              </li>
+      
+
+              <li>
+                <a href="#EREMCHG" class="nav-sub-label">EREMCHG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELIBACC" class="nav-sub-label">ELIBACC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELIBBAD" class="nav-sub-label">ELIBBAD</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELIBSCN" class="nav-sub-label">ELIBSCN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELIBMAX" class="nav-sub-label">ELIBMAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#ELIBEXEC" class="nav-sub-label">ELIBEXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#EILSEQ" class="nav-sub-label">EILSEQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#ERESTART" class="nav-sub-label">ERESTART</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESTRPIPE" class="nav-sub-label">ESTRPIPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EUSERS" class="nav-sub-label">EUSERS</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTSOCK" class="nav-sub-label">ENOTSOCK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EDESTADDRREQ" class="nav-sub-label">EDESTADDRREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#EMSGSIZE" class="nav-sub-label">EMSGSIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPROTOTYPE" class="nav-sub-label">EPROTOTYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOPROTOOPT" class="nav-sub-label">ENOPROTOOPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPROTONOSUPPORT" class="nav-sub-label">EPROTONOSUPPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESOCKTNOSUPPORT" class="nav-sub-label">ESOCKTNOSUPPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EOPNOTSUPP" class="nav-sub-label">EOPNOTSUPP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPFNOSUPPORT" class="nav-sub-label">EPFNOSUPPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAFNOSUPPORT" class="nav-sub-label">EAFNOSUPPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EADDRINUSE" class="nav-sub-label">EADDRINUSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EADDRNOTAVAIL" class="nav-sub-label">EADDRNOTAVAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENETDOWN" class="nav-sub-label">ENETDOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENETUNREACH" class="nav-sub-label">ENETUNREACH</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENETRESET" class="nav-sub-label">ENETRESET</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECONNABORTED" class="nav-sub-label">ECONNABORTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECONNRESET" class="nav-sub-label">ECONNRESET</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOBUFS" class="nav-sub-label">ENOBUFS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EISCONN" class="nav-sub-label">EISCONN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTCONN" class="nav-sub-label">ENOTCONN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESHUTDOWN" class="nav-sub-label">ESHUTDOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETOOMANYREFS" class="nav-sub-label">ETOOMANYREFS</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETIMEDOUT" class="nav-sub-label">ETIMEDOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECONNREFUSED" class="nav-sub-label">ECONNREFUSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#EHOSTDOWN" class="nav-sub-label">EHOSTDOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#EHOSTUNREACH" class="nav-sub-label">EHOSTUNREACH</a>
+              </li>
+      
+
+              <li>
+                <a href="#EALREADY" class="nav-sub-label">EALREADY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EINPROGRESS" class="nav-sub-label">EINPROGRESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#ESTALE" class="nav-sub-label">ESTALE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EUCLEAN" class="nav-sub-label">EUCLEAN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOTNAM" class="nav-sub-label">ENOTNAM</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENAVAIL" class="nav-sub-label">ENAVAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#EISNAM" class="nav-sub-label">EISNAM</a>
+              </li>
+      
+
+              <li>
+                <a href="#EREMOTEIO" class="nav-sub-label">EREMOTEIO</a>
+              </li>
+      
+
+              <li>
+                <a href="#EDQUOT" class="nav-sub-label">EDQUOT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENOMEDIUM" class="nav-sub-label">ENOMEDIUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#EMEDIUMTYPE" class="nav-sub-label">EMEDIUMTYPE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="errno.h"><span>errno.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;errno.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <errno.h>
+</pre>
+
+      <h4 id="LWIP_ERRNO_INCLUDE"><span>LWIP_ERRNO_INCLUDE</span></h4>
+      <pre class="doc-declare"><code>#include LWIP_ERRNO_INCLUDE
+</code></pre>
+      <pre class="doc-comment">#include LWIP_ERRNO_INCLUDE
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_ERRNO_H">Marco <span>LWIP_HDR_ERRNO_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_ERRNO_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPERM">Marco <span>EPERM</span></h4>
+      <pre class="doc-declare"><code>#define EPERM           1 /* Operation not permitted */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOENT">Marco <span>ENOENT</span></h4>
+      <pre class="doc-declare"><code>#define ENOENT          2 /* No such file or directory */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESRCH">Marco <span>ESRCH</span></h4>
+      <pre class="doc-declare"><code>#define ESRCH           3 /* No such process */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EINTR">Marco <span>EINTR</span></h4>
+      <pre class="doc-declare"><code>#define EINTR           4 /* Interrupted system call */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EIO">Marco <span>EIO</span></h4>
+      <pre class="doc-declare"><code>#define EIO             5 /* I/O error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENXIO">Marco <span>ENXIO</span></h4>
+      <pre class="doc-declare"><code>#define ENXIO           6 /* No such device or address */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="E2BIG">Marco <span>E2BIG</span></h4>
+      <pre class="doc-declare"><code>#define E2BIG           7 /* Arg list too long */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOEXEC">Marco <span>ENOEXEC</span></h4>
+      <pre class="doc-declare"><code>#define ENOEXEC         8 /* Exec format error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADF">Marco <span>EBADF</span></h4>
+      <pre class="doc-declare"><code>#define EBADF           9 /* Bad file number */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECHILD">Marco <span>ECHILD</span></h4>
+      <pre class="doc-declare"><code>#define ECHILD         10 /* No child processes */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAGAIN">Marco <span>EAGAIN</span></h4>
+      <pre class="doc-declare"><code>#define EAGAIN         11 /* Try again */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOMEM">Marco <span>ENOMEM</span></h4>
+      <pre class="doc-declare"><code>#define ENOMEM         12 /* Out of memory */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EACCES">Marco <span>EACCES</span></h4>
+      <pre class="doc-declare"><code>#define EACCES         13 /* Permission denied */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EFAULT">Marco <span>EFAULT</span></h4>
+      <pre class="doc-declare"><code>#define EFAULT         14 /* Bad address */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTBLK">Marco <span>ENOTBLK</span></h4>
+      <pre class="doc-declare"><code>#define ENOTBLK        15 /* Block device required */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBUSY">Marco <span>EBUSY</span></h4>
+      <pre class="doc-declare"><code>#define EBUSY          16 /* Device or resource busy */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EEXIST">Marco <span>EEXIST</span></h4>
+      <pre class="doc-declare"><code>#define EEXIST         17 /* File exists */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EXDEV">Marco <span>EXDEV</span></h4>
+      <pre class="doc-declare"><code>#define EXDEV          18 /* Cross-device link */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENODEV">Marco <span>ENODEV</span></h4>
+      <pre class="doc-declare"><code>#define ENODEV         19 /* No such device */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTDIR">Marco <span>ENOTDIR</span></h4>
+      <pre class="doc-declare"><code>#define ENOTDIR        20 /* Not a directory */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EISDIR">Marco <span>EISDIR</span></h4>
+      <pre class="doc-declare"><code>#define EISDIR         21 /* Is a directory */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EINVAL">Marco <span>EINVAL</span></h4>
+      <pre class="doc-declare"><code>#define EINVAL         22 /* Invalid argument */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENFILE">Marco <span>ENFILE</span></h4>
+      <pre class="doc-declare"><code>#define ENFILE         23 /* File table overflow */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EMFILE">Marco <span>EMFILE</span></h4>
+      <pre class="doc-declare"><code>#define EMFILE         24 /* Too many open files */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTTY">Marco <span>ENOTTY</span></h4>
+      <pre class="doc-declare"><code>#define ENOTTY         25 /* Not a typewriter */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETXTBSY">Marco <span>ETXTBSY</span></h4>
+      <pre class="doc-declare"><code>#define ETXTBSY        26 /* Text file busy */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EFBIG">Marco <span>EFBIG</span></h4>
+      <pre class="doc-declare"><code>#define EFBIG          27 /* File too large */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOSPC">Marco <span>ENOSPC</span></h4>
+      <pre class="doc-declare"><code>#define ENOSPC         28 /* No space left on device */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESPIPE">Marco <span>ESPIPE</span></h4>
+      <pre class="doc-declare"><code>#define ESPIPE         29 /* Illegal seek */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EROFS">Marco <span>EROFS</span></h4>
+      <pre class="doc-declare"><code>#define EROFS          30 /* Read-only file system */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EMLINK">Marco <span>EMLINK</span></h4>
+      <pre class="doc-declare"><code>#define EMLINK         31 /* Too many links */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPIPE">Marco <span>EPIPE</span></h4>
+      <pre class="doc-declare"><code>#define EPIPE          32 /* Broken pipe */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EDOM">Marco <span>EDOM</span></h4>
+      <pre class="doc-declare"><code>#define EDOM           33 /* Math argument out of domain of func */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ERANGE">Marco <span>ERANGE</span></h4>
+      <pre class="doc-declare"><code>#define ERANGE         34 /* Math result not representable */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EDEADLK">Marco <span>EDEADLK</span></h4>
+      <pre class="doc-declare"><code>#define EDEADLK        35 /* Resource deadlock would occur */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENAMETOOLONG">Marco <span>ENAMETOOLONG</span></h4>
+      <pre class="doc-declare"><code>#define ENAMETOOLONG   36 /* File name too long */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOLCK">Marco <span>ENOLCK</span></h4>
+      <pre class="doc-declare"><code>#define ENOLCK         37 /* No record locks available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOSYS">Marco <span>ENOSYS</span></h4>
+      <pre class="doc-declare"><code>#define ENOSYS         38 /* Function not implemented */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTEMPTY">Marco <span>ENOTEMPTY</span></h4>
+      <pre class="doc-declare"><code>#define ENOTEMPTY      39 /* Directory not empty */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELOOP">Marco <span>ELOOP</span></h4>
+      <pre class="doc-declare"><code>#define ELOOP          40 /* Too many symbolic links encountered */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EWOULDBLOCK">Marco <span>EWOULDBLOCK</span></h4>
+      <pre class="doc-declare"><code>#define EWOULDBLOCK    EAGAIN /* Operation would block */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOMSG">Marco <span>ENOMSG</span></h4>
+      <pre class="doc-declare"><code>#define ENOMSG         42 /* No message of desired type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EIDRM">Marco <span>EIDRM</span></h4>
+      <pre class="doc-declare"><code>#define EIDRM          43 /* Identifier removed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECHRNG">Marco <span>ECHRNG</span></h4>
+      <pre class="doc-declare"><code>#define ECHRNG         44 /* Channel number out of range */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EL2NSYNC">Marco <span>EL2NSYNC</span></h4>
+      <pre class="doc-declare"><code>#define EL2NSYNC       45 /* Level 2 not synchronized */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EL3HLT">Marco <span>EL3HLT</span></h4>
+      <pre class="doc-declare"><code>#define EL3HLT         46 /* Level 3 halted */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EL3RST">Marco <span>EL3RST</span></h4>
+      <pre class="doc-declare"><code>#define EL3RST         47 /* Level 3 reset */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELNRNG">Marco <span>ELNRNG</span></h4>
+      <pre class="doc-declare"><code>#define ELNRNG         48 /* Link number out of range */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EUNATCH">Marco <span>EUNATCH</span></h4>
+      <pre class="doc-declare"><code>#define EUNATCH        49 /* Protocol driver not attached */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOCSI">Marco <span>ENOCSI</span></h4>
+      <pre class="doc-declare"><code>#define ENOCSI         50 /* No CSI structure available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EL2HLT">Marco <span>EL2HLT</span></h4>
+      <pre class="doc-declare"><code>#define EL2HLT         51 /* Level 2 halted */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADE">Marco <span>EBADE</span></h4>
+      <pre class="doc-declare"><code>#define EBADE          52 /* Invalid exchange */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADR">Marco <span>EBADR</span></h4>
+      <pre class="doc-declare"><code>#define EBADR          53 /* Invalid request descriptor */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EXFULL">Marco <span>EXFULL</span></h4>
+      <pre class="doc-declare"><code>#define EXFULL         54 /* Exchange full */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOANO">Marco <span>ENOANO</span></h4>
+      <pre class="doc-declare"><code>#define ENOANO         55 /* No anode */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADRQC">Marco <span>EBADRQC</span></h4>
+      <pre class="doc-declare"><code>#define EBADRQC        56 /* Invalid request code */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADSLT">Marco <span>EBADSLT</span></h4>
+      <pre class="doc-declare"><code>#define EBADSLT        57 /* Invalid slot */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EDEADLOCK">Marco <span>EDEADLOCK</span></h4>
+      <pre class="doc-declare"><code>#define EDEADLOCK      EDEADLK
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBFONT">Marco <span>EBFONT</span></h4>
+      <pre class="doc-declare"><code>#define EBFONT         59 /* Bad font file format */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOSTR">Marco <span>ENOSTR</span></h4>
+      <pre class="doc-declare"><code>#define ENOSTR         60 /* Device not a stream */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENODATA">Marco <span>ENODATA</span></h4>
+      <pre class="doc-declare"><code>#define ENODATA        61 /* No data available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETIME">Marco <span>ETIME</span></h4>
+      <pre class="doc-declare"><code>#define ETIME          62 /* Timer expired */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOSR">Marco <span>ENOSR</span></h4>
+      <pre class="doc-declare"><code>#define ENOSR          63 /* Out of streams resources */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENONET">Marco <span>ENONET</span></h4>
+      <pre class="doc-declare"><code>#define ENONET         64 /* Machine is not on the network */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOPKG">Marco <span>ENOPKG</span></h4>
+      <pre class="doc-declare"><code>#define ENOPKG         65 /* Package not installed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EREMOTE">Marco <span>EREMOTE</span></h4>
+      <pre class="doc-declare"><code>#define EREMOTE        66 /* Object is remote */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOLINK">Marco <span>ENOLINK</span></h4>
+      <pre class="doc-declare"><code>#define ENOLINK        67 /* Link has been severed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EADV">Marco <span>EADV</span></h4>
+      <pre class="doc-declare"><code>#define EADV           68 /* Advertise error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESRMNT">Marco <span>ESRMNT</span></h4>
+      <pre class="doc-declare"><code>#define ESRMNT         69 /* Srmount error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECOMM">Marco <span>ECOMM</span></h4>
+      <pre class="doc-declare"><code>#define ECOMM          70 /* Communication error on send */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPROTO">Marco <span>EPROTO</span></h4>
+      <pre class="doc-declare"><code>#define EPROTO         71 /* Protocol error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EMULTIHOP">Marco <span>EMULTIHOP</span></h4>
+      <pre class="doc-declare"><code>#define EMULTIHOP      72 /* Multihop attempted */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EDOTDOT">Marco <span>EDOTDOT</span></h4>
+      <pre class="doc-declare"><code>#define EDOTDOT        73 /* RFS specific error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADMSG">Marco <span>EBADMSG</span></h4>
+      <pre class="doc-declare"><code>#define EBADMSG        74 /* Not a data message */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EOVERFLOW">Marco <span>EOVERFLOW</span></h4>
+      <pre class="doc-declare"><code>#define EOVERFLOW      75 /* Value too large for defined data type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTUNIQ">Marco <span>ENOTUNIQ</span></h4>
+      <pre class="doc-declare"><code>#define ENOTUNIQ       76 /* Name not unique on network */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EBADFD">Marco <span>EBADFD</span></h4>
+      <pre class="doc-declare"><code>#define EBADFD         77 /* File descriptor in bad state */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EREMCHG">Marco <span>EREMCHG</span></h4>
+      <pre class="doc-declare"><code>#define EREMCHG        78 /* Remote address changed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELIBACC">Marco <span>ELIBACC</span></h4>
+      <pre class="doc-declare"><code>#define ELIBACC        79 /* Can not access a needed shared library */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELIBBAD">Marco <span>ELIBBAD</span></h4>
+      <pre class="doc-declare"><code>#define ELIBBAD        80 /* Accessing a corrupted shared library */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELIBSCN">Marco <span>ELIBSCN</span></h4>
+      <pre class="doc-declare"><code>#define ELIBSCN        81 /* .lib section in a.out corrupted */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELIBMAX">Marco <span>ELIBMAX</span></h4>
+      <pre class="doc-declare"><code>#define ELIBMAX        82 /* Attempting to link in too many shared libraries */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ELIBEXEC">Marco <span>ELIBEXEC</span></h4>
+      <pre class="doc-declare"><code>#define ELIBEXEC       83 /* Cannot exec a shared library directly */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EILSEQ">Marco <span>EILSEQ</span></h4>
+      <pre class="doc-declare"><code>#define EILSEQ         84 /* Illegal byte sequence */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ERESTART">Marco <span>ERESTART</span></h4>
+      <pre class="doc-declare"><code>#define ERESTART       85 /* Interrupted system call should be restarted */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESTRPIPE">Marco <span>ESTRPIPE</span></h4>
+      <pre class="doc-declare"><code>#define ESTRPIPE       86 /* Streams pipe error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EUSERS">Marco <span>EUSERS</span></h4>
+      <pre class="doc-declare"><code>#define EUSERS         87 /* Too many users */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTSOCK">Marco <span>ENOTSOCK</span></h4>
+      <pre class="doc-declare"><code>#define ENOTSOCK       88 /* Socket operation on non-socket */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EDESTADDRREQ">Marco <span>EDESTADDRREQ</span></h4>
+      <pre class="doc-declare"><code>#define EDESTADDRREQ   89 /* Destination address required */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EMSGSIZE">Marco <span>EMSGSIZE</span></h4>
+      <pre class="doc-declare"><code>#define EMSGSIZE       90 /* Message too long */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPROTOTYPE">Marco <span>EPROTOTYPE</span></h4>
+      <pre class="doc-declare"><code>#define EPROTOTYPE     91 /* Protocol wrong type for socket */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOPROTOOPT">Marco <span>ENOPROTOOPT</span></h4>
+      <pre class="doc-declare"><code>#define ENOPROTOOPT    92 /* Protocol not available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPROTONOSUPPORT">Marco <span>EPROTONOSUPPORT</span></h4>
+      <pre class="doc-declare"><code>#define EPROTONOSUPPORT 93 /* Protocol not supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESOCKTNOSUPPORT">Marco <span>ESOCKTNOSUPPORT</span></h4>
+      <pre class="doc-declare"><code>#define ESOCKTNOSUPPORT 94 /* Socket type not supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EOPNOTSUPP">Marco <span>EOPNOTSUPP</span></h4>
+      <pre class="doc-declare"><code>#define EOPNOTSUPP     95 /* Operation not supported on transport endpoint */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPFNOSUPPORT">Marco <span>EPFNOSUPPORT</span></h4>
+      <pre class="doc-declare"><code>#define EPFNOSUPPORT   96 /* Protocol family not supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAFNOSUPPORT">Marco <span>EAFNOSUPPORT</span></h4>
+      <pre class="doc-declare"><code>#define EAFNOSUPPORT   97 /* Address family not supported by protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EADDRINUSE">Marco <span>EADDRINUSE</span></h4>
+      <pre class="doc-declare"><code>#define EADDRINUSE     98 /* Address already in use */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EADDRNOTAVAIL">Marco <span>EADDRNOTAVAIL</span></h4>
+      <pre class="doc-declare"><code>#define EADDRNOTAVAIL  99 /* Cannot assign requested address */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENETDOWN">Marco <span>ENETDOWN</span></h4>
+      <pre class="doc-declare"><code>#define ENETDOWN      100 /* Network is down */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENETUNREACH">Marco <span>ENETUNREACH</span></h4>
+      <pre class="doc-declare"><code>#define ENETUNREACH   101 /* Network is unreachable */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENETRESET">Marco <span>ENETRESET</span></h4>
+      <pre class="doc-declare"><code>#define ENETRESET     102 /* Network dropped connection because of reset */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECONNABORTED">Marco <span>ECONNABORTED</span></h4>
+      <pre class="doc-declare"><code>#define ECONNABORTED  103 /* Software caused connection abort */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECONNRESET">Marco <span>ECONNRESET</span></h4>
+      <pre class="doc-declare"><code>#define ECONNRESET    104 /* Connection reset by peer */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOBUFS">Marco <span>ENOBUFS</span></h4>
+      <pre class="doc-declare"><code>#define ENOBUFS       105 /* No buffer space available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EISCONN">Marco <span>EISCONN</span></h4>
+      <pre class="doc-declare"><code>#define EISCONN       106 /* Transport endpoint is already connected */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTCONN">Marco <span>ENOTCONN</span></h4>
+      <pre class="doc-declare"><code>#define ENOTCONN      107 /* Transport endpoint is not connected */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESHUTDOWN">Marco <span>ESHUTDOWN</span></h4>
+      <pre class="doc-declare"><code>#define ESHUTDOWN     108 /* Cannot send after transport endpoint shutdown */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETOOMANYREFS">Marco <span>ETOOMANYREFS</span></h4>
+      <pre class="doc-declare"><code>#define ETOOMANYREFS  109 /* Too many references: cannot splice */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETIMEDOUT">Marco <span>ETIMEDOUT</span></h4>
+      <pre class="doc-declare"><code>#define ETIMEDOUT     110 /* Connection timed out */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECONNREFUSED">Marco <span>ECONNREFUSED</span></h4>
+      <pre class="doc-declare"><code>#define ECONNREFUSED  111 /* Connection refused */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EHOSTDOWN">Marco <span>EHOSTDOWN</span></h4>
+      <pre class="doc-declare"><code>#define EHOSTDOWN     112 /* Host is down */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EHOSTUNREACH">Marco <span>EHOSTUNREACH</span></h4>
+      <pre class="doc-declare"><code>#define EHOSTUNREACH  113 /* No route to host */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EALREADY">Marco <span>EALREADY</span></h4>
+      <pre class="doc-declare"><code>#define EALREADY      114 /* Operation already in progress */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EINPROGRESS">Marco <span>EINPROGRESS</span></h4>
+      <pre class="doc-declare"><code>#define EINPROGRESS   115 /* Operation now in progress */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ESTALE">Marco <span>ESTALE</span></h4>
+      <pre class="doc-declare"><code>#define ESTALE        116 /* Stale NFS file handle */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EUCLEAN">Marco <span>EUCLEAN</span></h4>
+      <pre class="doc-declare"><code>#define EUCLEAN       117 /* Structure needs cleaning */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOTNAM">Marco <span>ENOTNAM</span></h4>
+      <pre class="doc-declare"><code>#define ENOTNAM       118 /* Not a XENIX named type file */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENAVAIL">Marco <span>ENAVAIL</span></h4>
+      <pre class="doc-declare"><code>#define ENAVAIL       119 /* No XENIX semaphores available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EISNAM">Marco <span>EISNAM</span></h4>
+      <pre class="doc-declare"><code>#define EISNAM        120 /* Is a named type file */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EREMOTEIO">Marco <span>EREMOTEIO</span></h4>
+      <pre class="doc-declare"><code>#define EREMOTEIO     121 /* Remote I/O error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EDQUOT">Marco <span>EDQUOT</span></h4>
+      <pre class="doc-declare"><code>#define EDQUOT        122 /* Quota exceeded */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENOMEDIUM">Marco <span>ENOMEDIUM</span></h4>
+      <pre class="doc-declare"><code>#define ENOMEDIUM     123 /* No medium found */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EMEDIUMTYPE">Marco <span>EMEDIUMTYPE</span></h4>
+      <pre class="doc-declare"><code>#define EMEDIUMTYPE   124 /* Wrong medium type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

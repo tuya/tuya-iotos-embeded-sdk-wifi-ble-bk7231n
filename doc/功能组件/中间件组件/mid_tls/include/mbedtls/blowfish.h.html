@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#platform_util.h" class="nav-sub-label">platform_util.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#blowfish_alt.h" class="nav-sub-label">blowfish_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_H" class="nav-sub-label">MBEDTLS_BLOWFISH_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_ENCRYPT" class="nav-sub-label">MBEDTLS_BLOWFISH_ENCRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_DECRYPT" class="nav-sub-label">MBEDTLS_BLOWFISH_DECRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_MAX_KEY_BITS" class="nav-sub-label">MBEDTLS_BLOWFISH_MAX_KEY_BITS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_MIN_KEY_BITS" class="nav-sub-label">MBEDTLS_BLOWFISH_MIN_KEY_BITS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_ROUNDS" class="nav-sub-label">MBEDTLS_BLOWFISH_ROUNDS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_BLOWFISH_BLOCKSIZE" class="nav-sub-label">MBEDTLS_BLOWFISH_BLOCKSIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_BLOWFISH_INVALID_KEY_LENGTH" class="nav-sub-label">MBEDTLS_ERR_BLOWFISH_INVALID_KEY_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_BLOWFISH_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_BLOWFISH_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_BLOWFISH_INVALID_INPUT_LENGTH" class="nav-sub-label">MBEDTLS_ERR_BLOWFISH_INVALID_INPUT_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_BLOWFISH_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_BLOWFISH_HW_ACCEL_FAILED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_blowfish_init" class="nav-sub-label">mbedtls_blowfish_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_blowfish_free" class="nav-sub-label">mbedtls_blowfish_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_blowfish_setkey" class="nav-sub-label">mbedtls_blowfish_setkey</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_blowfish_crypt_ecb" class="nav-sub-label">mbedtls_blowfish_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_blowfish_crypt_cbc" class="nav-sub-label">mbedtls_blowfish_crypt_cbc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_blowfish_crypt_cfb64" class="nav-sub-label">mbedtls_blowfish_crypt_cfb64</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_blowfish_crypt_ctr" class="nav-sub-label">mbedtls_blowfish_crypt_ctr</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_blowfish_context;
+" class="nav-sub-label">
+mbedtls_blowfish_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="platform_util.h"><span>platform_util.h</span></h4>
+      <pre class="doc-declare"><code>#include "platform_util.h"
+</code></pre>
+      <pre class="doc-comment">#include "platform_util.h"
+</pre>
+
+      <h4 id="blowfish_alt.h"><span>blowfish_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "blowfish_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "blowfish_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_BLOWFISH_H">Marco <span>MBEDTLS_BLOWFISH_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_BLOWFISH_ENCRYPT">Marco <span>MBEDTLS_BLOWFISH_ENCRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_ENCRYPT    1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_BLOWFISH_DECRYPT">Marco <span>MBEDTLS_BLOWFISH_DECRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_DECRYPT    0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_BLOWFISH_MAX_KEY_BITS">Marco <span>MBEDTLS_BLOWFISH_MAX_KEY_BITS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_MAX_KEY_BITS    448
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_BLOWFISH_MIN_KEY_BITS">Marco <span>MBEDTLS_BLOWFISH_MIN_KEY_BITS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_MIN_KEY_BITS    32
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_BLOWFISH_ROUNDS">Marco <span>MBEDTLS_BLOWFISH_ROUNDS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_ROUNDS     16        /**< Rounds to use. When increasing this value, make sure to extend the initialisation vectors */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_BLOWFISH_BLOCKSIZE">Marco <span>MBEDTLS_BLOWFISH_BLOCKSIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_BLOWFISH_BLOCKSIZE  8         /* Blowfish uses 64 bit blocks */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_BLOWFISH_INVALID_KEY_LENGTH">Marco <span>MBEDTLS_ERR_BLOWFISH_INVALID_KEY_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_BLOWFISH_INVALID_KEY_LENGTH  MBEDTLS_DEPRECATED_NUMERIC_CONSTANT( -22 )
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_BLOWFISH_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_BLOWFISH_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_BLOWFISH_BAD_INPUT_DATA -22 /**< Bad input data. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_BLOWFISH_INVALID_INPUT_LENGTH">Marco <span>MBEDTLS_ERR_BLOWFISH_INVALID_INPUT_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_BLOWFISH_INVALID_INPUT_LENGTH -24 /**< Invalid data input length. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_BLOWFISH_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_BLOWFISH_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_BLOWFISH_HW_ACCEL_FAILED                  -23 /**< Blowfish hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_BLOWFISH_HW_ACCEL_FAILED is deprecated and should not be used.
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_blowfish_init">Func <span>mbedtls_blowfish_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_blowfish_init( mbedtls_blowfish_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize a Blowfish context.
+ *
+ * \param ctx      The Blowfish context to be initialized.
+ *                 This must not be \c NULL.
+ */</pre>
+
+      <h4 id="mbedtls_blowfish_free">Func <span>mbedtls_blowfish_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_blowfish_free( mbedtls_blowfish_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Clear a Blowfish context.
+ *
+ * \param ctx      The Blowfish context to be cleared.
+ *                 This may be \c NULL, in which case this function
+ *                 returns immediately. If it is not \c NULL, it must
+ *                 point to an initialized Blowfish context.
+ */</pre>
+
+      <h4 id="mbedtls_blowfish_setkey">Func <span>mbedtls_blowfish_setkey</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_blowfish_setkey( mbedtls_blowfish_context *ctx, const unsigned char *key,
+                    unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a Blowfish key schedule operation.
+ *
+ * \param ctx      The Blowfish context to perform the key schedule on.
+ * \param key      The encryption key. This must be a readable buffer of
+ *                 length \p keybits Bits.
+ * \param keybits  The length of \p key in Bits. This must be between
+ *                 \c 32 and \c 448 and a multiple of \c 8.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_blowfish_crypt_ecb">Func <span>mbedtls_blowfish_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_blowfish_crypt_ecb( mbedtls_blowfish_context *ctx,
+                       int mode,
+                       const unsigned char input[MBEDTLS_BLOWFISH_BLOCKSIZE],
+                       unsigned char output[MBEDTLS_BLOWFISH_BLOCKSIZE] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a Blowfish-ECB block encryption/decryption operation.
+ *
+ * \param ctx      The Blowfish context to use. This must be initialized
+ *                 and bound to a key.
+ * \param mode     The mode of operation. Possible values are
+ *                 #MBEDTLS_BLOWFISH_ENCRYPT for encryption, or
+ *                 #MBEDTLS_BLOWFISH_DECRYPT for decryption.
+ * \param input    The input block. This must be a readable buffer
+ *                 of size \c 8 Bytes.
+ * \param output   The output block. This must be a writable buffer
+ *                 of size \c 8 Bytes.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_blowfish_crypt_cbc">Func <span>mbedtls_blowfish_crypt_cbc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_blowfish_crypt_cbc( mbedtls_blowfish_context *ctx,
+                       int mode,
+                       size_t length,
+                       unsigned char iv[MBEDTLS_BLOWFISH_BLOCKSIZE],
+                       const unsigned char *input,
+                       unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a Blowfish-CBC buffer encryption/decryption operation.
+ *
+ * \note           Upon exit, the content of the IV is updated so that you can
+ *                 call the function same function again on the following
+ *                 block(s) of data and get the same result as if it was
+ *                 encrypted in one call. This allows a "streaming" usage.
+ *                 If on the other hand you need to retain the contents of the
+ *                 IV, you should either save it manually or use the cipher
+ *                 module instead.
+ *
+ * \param ctx      The Blowfish context to use. This must be initialized
+ *                 and bound to a key.
+ * \param mode     The mode of operation. Possible values are
+ *                 #MBEDTLS_BLOWFISH_ENCRYPT for encryption, or
+ *                 #MBEDTLS_BLOWFISH_DECRYPT for decryption.
+ * \param length   The length of the input data in Bytes. This must be
+ *                 multiple of \c 8.
+ * \param iv       The initialization vector. This must be a read/write buffer
+ *                 of length \c 8 Bytes. It is updated by this function.
+ * \param input    The input data. This must be a readable buffer of length
+ *                 \p length Bytes.
+ * \param output   The output data. This must be a writable buffer of length
+ *                 \p length Bytes.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_blowfish_crypt_cfb64">Func <span>mbedtls_blowfish_crypt_cfb64</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_blowfish_crypt_cfb64( mbedtls_blowfish_context *ctx,
+                         int mode,
+                         size_t length,
+                         size_t *iv_off,
+                         unsigned char iv[MBEDTLS_BLOWFISH_BLOCKSIZE],
+                         const unsigned char *input,
+                         unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a Blowfish CFB buffer encryption/decryption operation.
+ *
+ * \note           Upon exit, the content of the IV is updated so that you can
+ *                 call the function same function again on the following
+ *                 block(s) of data and get the same result as if it was
+ *                 encrypted in one call. This allows a "streaming" usage.
+ *                 If on the other hand you need to retain the contents of the
+ *                 IV, you should either save it manually or use the cipher
+ *                 module instead.
+ *
+ * \param ctx      The Blowfish context to use. This must be initialized
+ *                 and bound to a key.
+ * \param mode     The mode of operation. Possible values are
+ *                 #MBEDTLS_BLOWFISH_ENCRYPT for encryption, or
+ *                 #MBEDTLS_BLOWFISH_DECRYPT for decryption.
+ * \param length   The length of the input data in Bytes.
+ * \param iv_off   The offset in the initialiation vector.
+ *                 The value pointed to must be smaller than \c 8 Bytes.
+ *                 It is updated by this function to support the aforementioned
+ *                 streaming usage.
+ * \param iv       The initialization vector. This must be a read/write buffer
+ *                 of size \c 8 Bytes. It is updated after use.
+ * \param input    The input data. This must be a readable buffer of length
+ *                 \p length Bytes.
+ * \param output   The output data. This must be a writable buffer of length
+ *                 \p length Bytes.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_blowfish_crypt_ctr">Func <span>mbedtls_blowfish_crypt_ctr</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_blowfish_crypt_ctr( mbedtls_blowfish_context *ctx,
+                       size_t length,
+                       size_t *nc_off,
+                       unsigned char nonce_counter[MBEDTLS_BLOWFISH_BLOCKSIZE],
+                       unsigned char stream_block[MBEDTLS_BLOWFISH_BLOCKSIZE],
+                       const unsigned char *input,
+                       unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief      Perform a Blowfish-CTR buffer encryption/decryption operation.
+ *
+ * \warning    You must never reuse a nonce value with the same key. Doing so
+ *             would void the encryption for the two messages encrypted with
+ *             the same nonce and key.
+ *
+ *             There are two common strategies for managing nonces with CTR:
+ *
+ *             1. You can handle everything as a single message processed over
+ *             successive calls to this function. In that case, you want to
+ *             set \p nonce_counter and \p nc_off to 0 for the first call, and
+ *             then preserve the values of \p nonce_counter, \p nc_off and \p
+ *             stream_block across calls to this function as they will be
+ *             updated by this function.
+ *
+ *             With this strategy, you must not encrypt more than 2**64
+ *             blocks of data with the same key.
+ *
+ *             2. You can encrypt separate messages by dividing the \p
+ *             nonce_counter buffer in two areas: the first one used for a
+ *             per-message nonce, handled by yourself, and the second one
+ *             updated by this function internally.
+ *
+ *             For example, you might reserve the first 4 bytes for the
+ *             per-message nonce, and the last 4 bytes for internal use. In that
+ *             case, before calling this function on a new message you need to
+ *             set the first 4 bytes of \p nonce_counter to your chosen nonce
+ *             value, the last 4 to 0, and \p nc_off to 0 (which will cause \p
+ *             stream_block to be ignored). That way, you can encrypt at most
+ *             2**32 messages of up to 2**32 blocks each with the same key.
+ *
+ *             The per-message nonce (or information sufficient to reconstruct
+ *             it) needs to be communicated with the ciphertext and must be unique.
+ *             The recommended way to ensure uniqueness is to use a message
+ *             counter.
+ *
+ *             Note that for both stategies, sizes are measured in blocks and
+ *             that a Blowfish block is 8 bytes.
+ *
+ * \warning    Upon return, \p stream_block contains sensitive data. Its
+ *             content must not be written to insecure storage and should be
+ *             securely discarded as soon as it's no longer needed.
+ *
+ * \param ctx           The Blowfish context to use. This must be initialized
+ *                      and bound to a key.
+ * \param length        The length of the input data in Bytes.
+ * \param nc_off        The offset in the current stream_block (for resuming
+ *                      within current cipher stream). The offset pointer
+ *                      should be \c 0 at the start of a stream and must be
+ *                      smaller than \c 8. It is updated by this function.
+ * \param nonce_counter The 64-bit nonce and counter. This must point to a
+ *                      read/write buffer of length \c 8 Bytes.
+ * \param stream_block  The saved stream-block for resuming. This must point to
+ *                      a read/write buffer of length \c 8 Bytes.
+ * \param input         The input data. This must be a readable buffer of
+ *                      length \p length Bytes.
+ * \param output        The output data. This must be a writable buffer of
+ *                      length \p length Bytes.
+ *
+ * \return              \c 0 if successful.
+ * \return              A negative error code on failure.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_blowfish_context;
+">Typedef <span>
+mbedtls_blowfish_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_blowfish_context
+{
+   uint32_t P[MBEDTLS_BLOWFISH_ROUNDS + 2];   /*!<  Blowfish round keys    */
+   uint32_t S[4][256];                /*!<  key dependent S-boxes  */
+}
+mbedtls_blowfish_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Blowfish context structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

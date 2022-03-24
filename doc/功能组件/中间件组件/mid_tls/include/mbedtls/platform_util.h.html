@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#platform_time.h" class="nav-sub-label">platform_time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#time.h" class="nav-sub-label">time.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_UTIL_H" class="nav-sub-label">MBEDTLS_PLATFORM_UTIL_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PARAM_FAILED_ALT" class="nav-sub-label">MBEDTLS_PARAM_FAILED_ALT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PARAM_FAILED( cond )" class="nav-sub-label">MBEDTLS_PARAM_FAILED( cond )</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )" class="nav-sub-label">MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_INTERNAL_VALIDATE( cond )" class="nav-sub-label">MBEDTLS_INTERNAL_VALIDATE( cond )</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )" class="nav-sub-label">MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_INTERNAL_VALIDATE( cond )" class="nav-sub-label">MBEDTLS_INTERNAL_VALIDATE( cond )</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_param_failed" class="nav-sub-label">mbedtls_param_failed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_zeroize" class="nav-sub-label">mbedtls_platform_zeroize</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#tm" class="nav-sub-label">tm</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="platform_time.h"><span>platform_time.h</span></h4>
+      <pre class="doc-declare"><code>#include "platform_time.h"
+</code></pre>
+      <pre class="doc-comment">#include "platform_time.h"
+</pre>
+
+      <h4 id="time.h"><span>time.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;time.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <time.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_PLATFORM_UTIL_H">Marco <span>MBEDTLS_PLATFORM_UTIL_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_UTIL_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PARAM_FAILED_ALT">Marco <span>MBEDTLS_PARAM_FAILED_ALT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PARAM_FAILED_ALT
+</code></pre>
+      <pre class="doc-comment">/** An alternative definition of MBEDTLS_PARAM_FAILED has been set in config.h.
+ *
+ * This flag can be used to check whether it is safe to assume that
+ * MBEDTLS_PARAM_FAILED() will expand to a call to mbedtls_param_failed().
+ */</pre>
+
+      <h4 id="MBEDTLS_PARAM_FAILED( cond )">Marco <span>MBEDTLS_PARAM_FAILED( cond )</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PARAM_FAILED( cond ) \
+   mbedtls_param_failed( #cond, __FILE__, __LINE__ )
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )">Marco <span>MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret ) \
+   do {                                           \
+       if( !(cond) )                              \
+       {                                          \
+           MBEDTLS_PARAM_FAILED( cond );          \
+           return( ret );                         \
+       }                                          \
+   } while( 0 )
+</code></pre>
+      <pre class="doc-comment">/* Internal macro meant to be called only from within the library. */</pre>
+
+      <h4 id="MBEDTLS_INTERNAL_VALIDATE( cond )">Marco <span>MBEDTLS_INTERNAL_VALIDATE( cond )</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_INTERNAL_VALIDATE( cond )          \
+   do {                                           \
+       if( !(cond) )                              \
+       {                                          \
+           MBEDTLS_PARAM_FAILED( cond );          \
+           return;                                \
+       }                                          \
+   } while( 0 )
+</code></pre>
+      <pre class="doc-comment">/* Internal macro meant to be called only from within the library. */</pre>
+
+      <h4 id="MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )">Marco <span>MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret )</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_INTERNAL_VALIDATE_RET( cond, ret ) do { } while( 0 )
+</code></pre>
+      <pre class="doc-comment">/* Internal macros meant to be called only from within the library. */</pre>
+
+      <h4 id="MBEDTLS_INTERNAL_VALIDATE( cond )">Marco <span>MBEDTLS_INTERNAL_VALIDATE( cond )</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_INTERNAL_VALIDATE( cond )          do { } while( 0 )
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment">/* Deliberately don't (yet) export MBEDTLS_DEPRECATED here
+ * to avoid conflict with other headers which define and use
+ * it, too. We might want to move all these definitions here at
+ * some point for uniformity. */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_param_failed">Func <span>mbedtls_param_failed</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_param_failed( const char *failure_condition,
+                          const char *file,
+                          int line );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       User supplied callback function for parameter validation failure.
+ *              See #MBEDTLS_CHECK_PARAMS for context.
+ *
+ *              This function will be called unless an alternative treatement
+ *              is defined through the #MBEDTLS_PARAM_FAILED macro.
+ *
+ *              This function can return, and the operation will be aborted, or
+ *              alternatively, through use of setjmp()/longjmp() can resume
+ *              execution in the application code.
+ *
+ * \param failure_condition The assertion that didn't hold.
+ * \param file  The file where the assertion failed.
+ * \param line  The line in the file where the assertion failed.
+ */</pre>
+
+      <h4 id="mbedtls_platform_zeroize">Func <span>mbedtls_platform_zeroize</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_platform_zeroize( void *buf, size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       Securely zeroize a buffer
+ *
+ *              The function is meant to wipe the data contained in a buffer so
+ *              that it can no longer be recovered even if the program memory
+ *              is later compromised. Call this function on sensitive data
+ *              stored on the stack before returning from a function, and on
+ *              sensitive data stored on the heap before freeing the heap
+ *              object.
+ *
+ *              It is extremely difficult to guarantee that calls to
+ *              mbedtls_platform_zeroize() are not removed by aggressive
+ *              compiler optimizations in a portable way. For this reason, Mbed
+ *              TLS provides the configuration option
+ *              MBEDTLS_PLATFORM_ZEROIZE_ALT, which allows users to configure
+ *              mbedtls_platform_zeroize() to use a suitable implementation for
+ *              their platform and needs
+ *
+ * \param buf   Buffer to be zeroized
+ * \param len   Length of the buffer in bytes
+ *
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED typedef char const * mbedtls_deprecated_string_constant_t;
+#define MBEDTLS_DEPRECATED_STRING_CONSTANT( VAL )      \
+   ( (mbedtls_deprecated_string_constant_t) ( VAL ) )
+MBEDTLS_DEPRECATED typedef int mbedtls_deprecated_numeric_constant_t;
+#define MBEDTLS_DEPRECATED_NUMERIC_CONSTANT( VAL )      \
+   ( (mbedtls_deprecated_numeric_constant_t) ( VAL ) )
+#undef MBEDTLS_DEPRECATED
+#else /* MBEDTLS_DEPRECATED_WARNING */
+#define MBEDTLS_DEPRECATED_STRING_CONSTANT( VAL ) VAL
+#define MBEDTLS_DEPRECATED_NUMERIC_CONSTANT( VAL ) VAL</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tm">Variable <span>tm</span></h4>
+      <pre class="doc-declare"><code>struct tm *mbedtls_platform_gmtime_r( const mbedtls_time_t *tt,
+                                     struct tm *tm_buf );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief      Platform-specific implementation of gmtime_r()
+ *
+ *             The function is a thread-safe abstraction that behaves
+ *             similarly to the gmtime_r() function from Unix/POSIX.
+ *
+ *             Mbed TLS will try to identify the underlying platform and
+ *             make use of an appropriate underlying implementation (e.g.
+ *             gmtime_r() for POSIX and gmtime_s() for Windows). If this is
+ *             not possible, then gmtime() will be used. In this case, calls
+ *             from the library to gmtime() will be guarded by the mutex
+ *             mbedtls_threading_gmtime_mutex if MBEDTLS_THREADING_C is
+ *             enabled. It is recommended that calls from outside the library
+ *             are also guarded by this mutex.
+ *
+ *             If MBEDTLS_PLATFORM_GMTIME_R_ALT is defined, then Mbed TLS will
+ *             unconditionally use the alternative implementation for
+ *             mbedtls_platform_gmtime_r() supplied by the user at compile time.
+ *
+ * \param tt     Pointer to an object containing time (in seconds) since the
+ *               epoch to be converted
+ * \param tm_buf Pointer to an object where the results will be stored
+ *
+ * \return      Pointer to an object of type struct tm on success, otherwise
+ *              NULL
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

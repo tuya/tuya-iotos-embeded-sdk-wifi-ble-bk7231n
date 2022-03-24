@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_intf.h" class="nav-sub-label">gw_intf.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_SMART_FRAME_H" class="nav-sub-label">_SMART_FRAME_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#smart_frame_init" class="nav-sub-label">smart_frame_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_send_gw_dev_cmd" class="nav-sub-label">sf_send_gw_dev_cmd</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_start_sync_obj_dp" class="nav-sub-label">sf_start_sync_obj_dp</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_pack_local_obj_dp_data" class="nav-sub-label">sf_pack_local_obj_dp_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_get_serial_no" class="nav-sub-label">sf_get_serial_no</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_respone_obj_dp_query" class="nav-sub-label">sf_respone_obj_dp_query</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_dp_data_is_equl" class="nav-sub-label">sf_dp_data_is_equl</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_special_dp_register_cb" class="nav-sub-label">sf_special_dp_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_dp_low_power_query" class="nav-sub-label">sf_dp_low_power_query</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_trans_type_register_cb" class="nav-sub-label">sf_trans_type_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_dp_set_delete_null_dp" class="nav-sub-label">sf_dp_set_delete_null_dp</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_dp_set_report_timeout" class="nav-sub-label">sf_dp_set_report_timeout</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_subdev_register_cb" class="nav-sub-label">sf_subdev_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_print_dp_time" class="nav-sub-label">ty_print_dp_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_regist_dp_rept_cb" class="nav-sub-label">sf_regist_dp_rept_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_dp_report" class="nav-sub-label">ty_dp_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_get_obj_dp_from_json" class="nav-sub-label">ty_get_obj_dp_from_json</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_free_obj_dp_data" class="nav-sub-label">ty_free_obj_dp_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_set_dp_rept_chan" class="nav-sub-label">ty_set_dp_rept_chan</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_get_dp_rept_chan" class="nav-sub-label">ty_get_dp_rept_chan</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#DP_CNTL_S" class="nav-sub-label">DP_CNTL_S</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#SF_GW_DEV_CMD_S;
+" class="nav-sub-label">SF_GW_DEV_CMD_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_DATA_S;
+" class="nav-sub-label">MSG_DATA_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_special_dp_cb" class="nav-sub-label">sf_special_dp_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_trans_type_cb" class="nav-sub-label">sf_trans_type_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#subdev_dev_cntl_cb" class="nav-sub-label">subdev_dev_cntl_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_subdev_dev_cntl_traversal_cb" class="nav-sub-label">sf_subdev_dev_cntl_traversal_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_subdev_reliable_transfer_check_cb" class="nav-sub-label">sf_subdev_reliable_transfer_check_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_subdev_reliable_transfer_time_get_cb" class="nav-sub-label">sf_subdev_reliable_transfer_time_get_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#sf_subdev_report_check_cb" class="nav-sub-label">sf_subdev_report_check_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#SF_SUBDEV_HANDLE_CB_S;
+" class="nav-sub-label">SF_SUBDEV_HANDLE_CB_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_OBJ_DP_DATA_S;
+" class="nav-sub-label">TY_OBJ_DP_DATA_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_OBJ_DP_REPT_S;
+" class="nav-sub-label">TY_OBJ_DP_REPT_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_STAT_DP_REPT_S;
+" class="nav-sub-label">TY_STAT_DP_REPT_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_RAW_DP_REPT_S;
+" class="nav-sub-label">TY_RAW_DP_REPT_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="gw_intf.h"><span>gw_intf.h</span></h4>
+      <pre class="doc-declare"><code>#include "gw_intf.h"
+</code></pre>
+      <pre class="doc-comment">#include "gw_intf.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_SMART_FRAME_H">Marco <span>_SMART_FRAME_H</span></h4>
+      <pre class="doc-declare"><code>#define _SMART_FRAME_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="smart_frame_init">Func <span>smart_frame_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET smart_frame_init(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Smart frame init
+ *
+ * @param VOID
+ *
+ * @note This API is used for initializing the resource of smart frame
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_send_gw_dev_cmd">Func <span>sf_send_gw_dev_cmd</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_send_gw_dev_cmd(IN SF_GW_DEV_CMD_S *gd_cmd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Send dp command
+ *
+ * @param[in] gd_cmd: dp command information
+ *
+ * @note This API is used for sending dp command from mqtt/lan/bt
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_start_sync_obj_dp">Func <span>sf_start_sync_obj_dp</span></h4>
+      <pre class="doc-declare"><code>VOID sf_start_sync_obj_dp(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start to synchronize dp data
+ *
+ * @param VOID
+ *
+ * @note This API is used to start a timer task to synchronize dp data to the cloud/app
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="sf_pack_local_obj_dp_data">Func <span>sf_pack_local_obj_dp_data</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *sf_pack_local_obj_dp_data(IN DEV_CNTL_N_S *dev_cntl, IN CONST UINT_T max_len, IN CONST BOOL_T addDevId, OUT BOOL_T *p_all_data_packed, BOOL_T reset_flow_ctl, IN CONST BOOL_T is_lan);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Packed the local dp data as string in json format
+ *
+ * @param[in] dev_cntl: device control handle
+ * @param[in] max_len: max lenth of the dp string
+ * @param[in] addDevId: if add devid or not
+ * @param[out] p_all_data_packed: if all dp is packed or not
+ * @param[in] reset_flow_ctl: if need reset flow control or not
+ * @param[in] is_lan: if be lan or not
+ *
+ * @note This API is used for packing the local dp data as string in json format
+ *
+ * @return the dp string in json format
+ */</pre>
+
+      <h4 id="sf_get_serial_no">Func <span>sf_get_serial_no</span></h4>
+      <pre class="doc-declare"><code>UINT_T sf_get_serial_no(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get serial number for dp report 
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting serial number for dp report 
+ *
+ * @return the serial number
+ */</pre>
+
+      <h4 id="sf_respone_obj_dp_query">Func <span>sf_respone_obj_dp_query</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_respone_obj_dp_query(IN CONST ty_cJSON *pCidArr, IN CONST ty_cJSON *pDpIdArr);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Response for dp query
+ *
+ * @param[in] pCidArr: cid in json format
+ * @param[in] pDpIdArr: dp id in json format
+ *
+ * @note This API is used for response for dp query
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_dp_data_is_equl">Func <span>sf_dp_data_is_equl</span></h4>
+      <pre class="doc-declare"><code>BOOL_T sf_dp_data_is_equl(IN ty_cJSON *dp_cmd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Check the dp data is same
+ *
+ * @param[in] dp_cmd: dp information in josn format
+ *
+ * @note This API is used for checking the dp data is same.
+ *
+ * @return the result whether the dp data is same.
+ */</pre>
+
+      <h4 id="sf_special_dp_register_cb">Func <span>sf_special_dp_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_special_dp_register_cb(IN sf_special_dp_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register special dp callback function
+ *
+ * @param[in] handler: special dp callback function
+ *
+ * @note This API is used to register special dp callback function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_dp_low_power_query">Func <span>sf_dp_low_power_query</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_dp_low_power_query(IN CONST UCHAR_T *dps, IN CONST UINT_T cnt, 
+                                          OUT TY_RECV_OBJ_DP_S **obj_dps, OUT TY_RECV_RAW_DP_S **raw_dps);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Query dp for low power
+ *
+ * @param[in] dps: dp string
+ * @param[in] cnt: dp count
+ * @param[out] obj_dps: dp in object format
+ * @param[out] raw_dps: dp in raw format
+ *
+ * @note This API is used for quering dp for low power
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_trans_type_register_cb">Func <span>sf_trans_type_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_trans_type_register_cb(IN CONST DP_TRANS_TYPE_T trans, IN sf_trans_type_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register callback function for different kind of transport type
+ *
+ * @param[in] trans: transport type
+ * @param[in] handler: callback function
+ *
+ * @note This API is used for registering callback function for different kind of transport type
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_dp_set_delete_null_dp">Func <span>sf_dp_set_delete_null_dp</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_dp_set_delete_null_dp(BOOL_T enable);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set enable switch for deleting null dp 
+ *
+ * @param[in] enable: enable switch
+ *
+ * @note This API is used for setting enable switch for deleting null dp.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_dp_set_report_timeout">Func <span>sf_dp_set_report_timeout</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_dp_set_report_timeout(UINT_T timeout_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set default dp report timeout 
+ *
+ * @param[in] timeout_s: in second
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="sf_subdev_register_cb">Func <span>sf_subdev_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_subdev_register_cb(IN SF_SUBDEV_HANDLE_CB_S *cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register callback function for subdevice
+ *
+ * @param[in] cbs: callback functions
+ *
+ * @note This API is used for registering  callback function for subdevice
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_print_dp_time">Func <span>ty_print_dp_time</span></h4>
+      <pre class="doc-declare"><code>VOID_T ty_print_dp_time(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Print the key time for dp report
+ *
+ * @param VOID
+ *
+ * @note This API is used to print the key time for dp report
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="sf_regist_dp_rept_cb">Func <span>sf_regist_dp_rept_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET sf_regist_dp_rept_cb(IN DP_REPT_HADLE_CB_S* dp_rept_cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register callback function for dp report
+ *
+ * @param[in] dp_rept_cbs: callback functions
+ *
+ * @note This API is used for registering callback function for dp report.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_dp_report">Func <span>ty_dp_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_dp_report(IN CONST DP_REPT_TYPE_E dp_rept_type, IN VOID_T* dp_rept,IN CONST BOOL_T is_query);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Report dp data
+ *
+ * @param[in] dp_rept_type: dp report type
+ * @param[in] dp_rept: dp report data
+ * @param[in] is_query: if query interface or not
+ *
+ * @note This API is used for reporting dp data.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_get_obj_dp_from_json">Func <span>ty_get_obj_dp_from_json</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_get_obj_dp_from_json(IN CHAR_T *dev_id, IN CONST CHAR_T *json_str, OUT TY_OBJ_DP_S **dp_data, OUT UINT_T *cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ty_dp_json_to_obj 
+ * @desc transfer json format dp to object
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] json_str: string in json format
+ * @param[OUT] dp_data: dp array header
+ * @param[OUT] cnt: dp array count
+ *
+ * @note This API is used to transfer json format dp to object. 
+ * Memory of dp_data need to be freed.
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="ty_free_obj_dp_data">Func <span>ty_free_obj_dp_data</span></h4>
+      <pre class="doc-declare"><code>VOID_T ty_free_obj_dp_data(TY_OBJ_DP_S* dp_data, UINT_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ty_free_obj_dp_data 
+ * @desc free memory of object dp
+ *
+ * @param[in] dp_data: dp data
+ * @param[in] cnt: dp count
+ *
+ * @note This API is used to free memory of object dp. 
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="ty_set_dp_rept_chan">Func <span>ty_set_dp_rept_chan</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_set_dp_rept_chan(IN UINT8_T chan[], UINT8_T cnt, BOOL_T only);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set report channel for dp
+ *
+ * @param[in] chan: array of channel for dp report, refer to TY_DP_REPT_CHAN_TP_T
+ * @param[in] cnt: count of array member
+ * @param[in] only: report dp on the only first channel
+ *
+ * @note This API is used for setting report channel for dp. this API should be called before or during device initialization.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_get_dp_rept_chan">Func <span>ty_get_dp_rept_chan</span></h4>
+      <pre class="doc-declare"><code>UINT8_T* ty_get_dp_rept_chan(UINT8_T* cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get report channel for dp
+ *
+ * @param[out] cnt: count of array member
+ *
+ * @note This API is used for getting report channel for dp. this API should be called after device initialization.
+ *
+ * @return array of dp channels
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="DP_CNTL_S">Variable <span>DP_CNTL_S</span></h4>
+      <pre class="doc-declare"><code>DP_CNTL_S * sf_dp_data_get(IN CHAR_T *id, IN CONST CHAR_T dp_id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get dp control information
+ *
+ * @param[in] id: device id
+ * @param[in] dp_id: dp id
+ *
+ * @note This API is used for getting dp control information by device id and dp id.
+ *
+ * @return the dp control information
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="SF_GW_DEV_CMD_S;
+">Typedef <span>SF_GW_DEV_CMD_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   DP_CMD_TYPE_E tp; //command source
+   ty_cJSON *cmd_js; //command content
+}SF_GW_DEV_CMD_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief info of dp command
+ */</pre>
+
+      <h4 id="MSG_DATA_S;
+">Typedef <span>MSG_DATA_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct msg_data_s{
+   UINT_T serno; //serial number
+   UINT_T len;   //message data lenth
+   BYTE_T data[0];//message data
+}MSG_DATA_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief info of dp message data
+ */</pre>
+
+      <h4 id="sf_special_dp_cb">Typedef <span>sf_special_dp_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*sf_special_dp_cb)(IN CONST UINT16_T dpid, IN CONST ty_cJSON *dp_obj);
+</code></pre>
+      <pre class="doc-comment">//special dp callback function</pre>
+
+      <h4 id="sf_trans_type_cb">Typedef <span>sf_trans_type_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*sf_trans_type_cb)(IN CONST UINT16_T dpid, IN CONST ty_cJSON *data_js);
+</code></pre>
+      <pre class="doc-comment">//callback function by different kind of transport type</pre>
+
+      <h4 id="subdev_dev_cntl_cb">Typedef <span>subdev_dev_cntl_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*subdev_dev_cntl_cb)(IN DEV_CNTL_N_S *subdev_cntl, VOID *param);
+</code></pre>
+      <pre class="doc-comment">//callback function for subdevice</pre>
+
+      <h4 id="sf_subdev_dev_cntl_traversal_cb">Typedef <span>sf_subdev_dev_cntl_traversal_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*sf_subdev_dev_cntl_traversal_cb)(subdev_dev_cntl_cb, VOID *param);
+</code></pre>
+      <pre class="doc-comment">//callback function for traversal subdevice</pre>
+
+      <h4 id="sf_subdev_reliable_transfer_check_cb">Typedef <span>sf_subdev_reliable_transfer_check_cb</span></h4>
+      <pre class="doc-declare"><code>typedef BOOL_T (*sf_subdev_reliable_transfer_check_cb)(IN CHAR_T *id);
+</code></pre>
+      <pre class="doc-comment">//callback function for checking whether the subdevice needs to execute the reliable trasmission</pre>
+
+      <h4 id="sf_subdev_reliable_transfer_time_get_cb">Typedef <span>sf_subdev_reliable_transfer_time_get_cb</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T (*sf_subdev_reliable_transfer_time_get_cb)(IN CHAR_T *id);
+</code></pre>
+      <pre class="doc-comment">//callback function for getting the time of subdevice's reliable trasmission</pre>
+
+      <h4 id="sf_subdev_report_check_cb">Typedef <span>sf_subdev_report_check_cb</span></h4>
+      <pre class="doc-declare"><code>typedef BOOL_T (*sf_subdev_report_check_cb)(IN CHAR_T *id);
+</code></pre>
+      <pre class="doc-comment">//callback function for checking whether the subdevice nedds report</pre>
+
+      <h4 id="SF_SUBDEV_HANDLE_CB_S;
+">Typedef <span>SF_SUBDEV_HANDLE_CB_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** callback function for traversal subdevice */
+   sf_subdev_dev_cntl_traversal_cb traversal_cb;
+   /** callback function for checking whether the subdevice needs to execute the reliable trasmission */
+   sf_subdev_reliable_transfer_check_cb rt_check_cb;
+   /** callback function for getting the time of subdevice's reliable trasmission */
+   sf_subdev_reliable_transfer_time_get_cb rt_time_get_cb;
+   /** callback function for checking whether the subdevice nedds report */
+   sf_subdev_report_check_cb rpt_check_cb;
+} SF_SUBDEV_HANDLE_CB_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback function of subdevice handle
+ */</pre>
+
+      <h4 id="TY_OBJ_DP_DATA_S;
+">Typedef <span>TY_OBJ_DP_DATA_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T*     dev_id;       // device id
+   TY_OBJ_DP_S* data;         // dp data
+   UINT_T      cnt;          // dp count
+}TY_OBJ_DP_DATA_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dp data information
+ */</pre>
+
+      <h4 id="TY_OBJ_DP_REPT_S;
+">Typedef <span>TY_OBJ_DP_REPT_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   TY_OBJ_DP_DATA_S obj_dp;     // dp data information
+   BOOL_T          force_send; // if report dp forcely or not
+}TY_OBJ_DP_REPT_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dp data report information for object type
+ */</pre>
+
+      <h4 id="TY_STAT_DP_REPT_S;
+">Typedef <span>TY_STAT_DP_REPT_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   TY_OBJ_DP_DATA_S obj_dp;        // dp data information
+   UINT_T          timeout;       // report timeout
+   BOOL_T          auto_retrans;  // if re-report or not
+}TY_STAT_DP_REPT_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dp data report information for statistic type
+ */</pre>
+
+      <h4 id="TY_RAW_DP_REPT_S;
+">Typedef <span>TY_RAW_DP_REPT_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   CHAR_T*     dev_id;       // device id
+   BYTE_T      dpid;         // dp id
+   BYTE_T*     data;         // dp data
+   UINT_T      len;          // dp data lenth
+   CHAR_T*     time_str;     // dp report time
+   UINT_T      timeout;      // report timeout
+   BOOL_T      auto_retrans; // if re-report or not
+}TY_RAW_DP_REPT_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dp data report information for raw type
+ */</pre>
+    </div>
+  </body>
+</html>
+            

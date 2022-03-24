@@ -1,6 +1,10 @@
-/*
-tuya_cloud_com_defs.h
-Copyright(C),2018-2020, 涂鸦科技 www.tuya.comm
+/**
+* @file tuya_cloud_wifi_defs.h
+* @brief Common definitions of TUYA cloud
+* @version 0.1
+* @date 2016-04-25
+*
+* @copyright Copyright 2016-2021 Tuya Inc. All Rights Reserved.
 */
 
 #ifndef TUYA_CLOUD_COM_DEFS_H
@@ -20,17 +24,18 @@ extern "C" {
 #define PSK_KEY_LEN             64      // max string length of PSK_KEY
 #define PRODUCT_KEY_LEN         16      // max string length of PRODUCT_KEY
 #define SW_VER_LEN              10      // max string length of VERSION
+#define SW_MD5_LEN              32      // max string length of attatch MD5
 
 #define BT_HID_LEN              19      // max string length of HID
 #define BT_MAC_LEN              12      // max string length of MAC
 
-#define TUYA_PSK_LEN            32
-#define TUYA_PSK21_LEN          44
-#define TUYA_IMEI_LEN           18
-#define TUYA_SN_LEN             20
+#define TUYA_PSK_LEN            32      // max string length of PSK
+#define TUYA_PSK21_LEN          44      // max string length of PSK21
+#define TUYA_IMEI_LEN           18      // max string length of IMEI
+#define TUYA_SN_LEN             20      // max string length of SN
 
-#define SYS_ENV_LEN             20
-#define LOG_SEQ_PATH_LEN        32
+#define SYS_ENV_LEN             20      // max string length of ENV
+#define LOG_SEQ_PATH_LEN        128     // max string length of LOG SEQ PATH
 #define GW_ID_LEN               25      // max string length of GW_ID
 #define DEV_UUID_LEN            25      // max string length of DEV UUID
 #define DEV_ID_LEN              25      // max string length of DEV_ID
@@ -57,28 +62,17 @@ extern "C" {
 #define GRP_ID_LEN              5       // max string length of group id range:1-65535
 #define SCENE_ID_LEN            3       // max string length of scene id range:1-255
 
-#define NET_MODE_LEN            32       // max string length of NET MODE
-#define SIGMESH_NET_KEY_LEN 32
-#define SIGMESH_APP_KEY_LEN 32
-#define SIGMESH_DEV_KEY_LEN 32
-#define SIGMESH_DEV_MAC_LEN 32
+#define NET_MODE_LEN            32      // max string length of NET MODE
+
 
 #define LC_GW_SLEEP_HB_LMT_S 12*3600 // 12h
 //group and scene error code
-#define M_SCE_SUCCESS 0        //成功
-#define M_SCE_ERR_EXCEED 1     //空间不足
-#define M_SCE_ERR_TIMEOUT 2    //通讯超时
-#define M_SCE_ERR_PARAM 3      //参数超出范围
-#define M_SCE_WRITE_FILE 4     //写数据库文件错误
-#define M_SCE_ERR_OTHER 5      //其他错误
-
-#define SIGMESH_AUTH_KEY_LEN 32
-#define SIGMESH_RADOM_LEN    32
-
-typedef struct{
-    CHAR_T encrypted_auth_key[SIGMESH_AUTH_KEY_LEN+1];
-    CHAR_T random[SIGMESH_RADOM_LEN+1];
-}TY_SIGMESH_AUTH_KEY;
+#define M_SCE_SUCCESS 0        // success
+#define M_SCE_ERR_EXCEED 1     // space not enough
+#define M_SCE_ERR_TIMEOUT 2    // timeout
+#define M_SCE_ERR_PARAM 3      // param not in range
+#define M_SCE_WRITE_FILE 4     // failed to write db
+#define M_SCE_ERR_OTHER 5      // other failure
 
 // Product Function Specification
 typedef BYTE_T GW_ABI;
@@ -94,169 +88,183 @@ typedef BYTE_T GW_NW_STAT_T;
 
 // Product Extend State
 typedef BYTE_T GW_EXT_STAT_T;
-#define EXT_UNAUTH 0
-#define EXT_PROD_TEST 1
-#define EXT_NORMAL_S 2
-#define EXT_GW_UPGRD 3
-#define EXT_DEV_UPGRD 4
-#define EXT_DEV_ADD 5
-#define EXT_REG_FAIL 6
-#define EXT_NET_FAIL 7
-#define EXT_CONFIG_BACK_UP 8
-#define EXT_CONFIG_RESTORE 9
+#define EXT_UNAUTH 0            // UNAUTH
+#define EXT_PROD_TEST 1         // PROD_TEST
+#define EXT_NORMAL_S 2          // NORMAL_S
+#define EXT_GW_UPGRD 3          // GW_UPGRD
+#define EXT_DEV_UPGRD 4         // DEV_UPGRD
+#define EXT_DEV_ADD 5           // DEV_ADD
+#define EXT_REG_FAIL 6          // REG_FAIL
+#define EXT_NET_FAIL 7          // NET_FAIL
+#define EXT_CONFIG_BACK_UP 8    // CONFIG_BACK_UP
+#define EXT_CONFIG_RESTORE 9    // CONFIG_RESTORE
 
-//固件类型与云端保持一致
-//为了保持API接口一致性，复用原DEV_TYPE_T表示固件类型及对应的OTA通道
+/**
+ * @brief Definition of device ota channel
+ * 
+ * @note 0~9 are consistent among all TUYA devices
+ * 10~19 are customized by device itself
+ */
 typedef BYTE_T DEV_TYPE_T;
-#define DEV_NM_ATH_SNGL     0   //主联网模块固件
-#define DEV_BLE_SNGL        1   //BLE固件
-#define DEV_ZB_SNGL         3   //ZigBee固件
-#define DEV_NM_NOT_ATH_SNGL 9   //MCU固件
-//使用attach模块固件type时，需和平台上添加的attach固件type一一对应
-#define DEV_ATTACH_MOD_1 10
-#define DEV_ATTACH_MOD_2 11
-#define DEV_ATTACH_MOD_3 12
-#define DEV_ATTACH_MOD_4 13
-#define DEV_ATTACH_MOD_5 14
-#define DEV_ATTACH_MOD_6 15
-#define DEV_ATTACH_MOD_7 16
-#define DEV_ATTACH_MOD_8 17
-#define DEV_ATTACH_MOD_9 18
-#define DEV_ATTACH_MOD_10 19
+#define DEV_NM_ATH_SNGL     0   // main netlink module
+#define DEV_BLE_SNGL        1   // ble
+#define DEV_ZB_SNGL         3   // ZigBee
+#define DEV_NM_NOT_ATH_SNGL 9   // MCU
+#define DEV_ATTACH_MOD_1 10     // attach 1
+#define DEV_ATTACH_MOD_2 11     // attach 2
+#define DEV_ATTACH_MOD_3 12     // attach 3
+#define DEV_ATTACH_MOD_4 13     // attach 4
+#define DEV_ATTACH_MOD_5 14     // attach 5
+#define DEV_ATTACH_MOD_6 15     // attach 6
+#define DEV_ATTACH_MOD_7 16     // attach 7
+#define DEV_ATTACH_MOD_8 17     // attach 8
+#define DEV_ATTACH_MOD_9 18     // attach 9
+#define DEV_ATTACH_MOD_10 19    // attach 10
 
-// Device sub type ,can be different type of devices.
-typedef BYTE_T DEV_SUB_TYPE_T;
-#define NONE_DEV_SUB_TYPE   0
-#define BLE_SUB_TP_MESH     0
-#define BLE_SUB_TP_SINGLE   1
 
-typedef BYTE_T DEV_ABI_E;
-#define ABI_DEV_MESH            0x8000 //bit 15
-#define ABI_DEV_SINGLE_BLE      0x400   //bit10
 
 #if defined(GW_SUPPORT_WIRED_WIFI) && (GW_SUPPORT_WIRED_WIFI==1)
 typedef BYTE_T IOT_GW_NET_TYPE_T;
-#define IOT_GW_NET_WIRED       0   //只支持有线, only support wried
-#define IOT_GW_NET_WIFI        1   //只支持无线, only support wifi
-#define IOT_GW_NET_WIRED_WIFI  2   //有线无线都支持, support wired and wifi
+#define IOT_GW_NET_WIRED       0   // only support wried
+#define IOT_GW_NET_WIFI        1   // only support wifi
+#define IOT_GW_NET_WIRED_WIFI  2   // support wired and wifi
 
 typedef BYTE_T CUR_NET_STATUS_T;
-#define NET_WIRED 0
-#define NET_WIFI  1
+#define NET_WIRED 0 // wired
+#define NET_WIFI  1 // wifi
 #endif
 
 // sub-device detail type
 typedef UINT_T USER_DEV_DTL_DEF_T; // user detial type define
 
+/**
+ * @brief Definition of all attache types
+ */
 typedef BYTE_T GW_PERMIT_DEV_TP_T;
-#define GP_DEV_DEF 0xFF //不区分协议类型
-#define GP_DEV_ZB DEV_ZB_SNGL
-#define GP_DEV_BLE DEV_BLE_SNGL
-#define GP_DEV_MCU  DEV_NM_NOT_ATH_SNGL
-#define GP_DEV_ATH_1 DEV_ATTACH_MOD_1
-#define GP_DEV_ATH_2 DEV_ATTACH_MOD_2
-#define GP_DEV_ATH_3 DEV_ATTACH_MOD_3
-#define GP_DEV_ATH_4 DEV_ATTACH_MOD_4
-#define GP_DEV_ATH_5 DEV_ATTACH_MOD_5
-#define GP_DEV_ATH_6 DEV_ATTACH_MOD_6
-#define GP_DEV_ATH_7 DEV_ATTACH_MOD_7
-#define GP_DEV_ATH_8 DEV_ATTACH_MOD_8
-#define GP_DEV_ATH_9 DEV_ATTACH_MOD_9
-#define GP_DEV_ATH_10 DEV_ATTACH_MOD_10
+#define GP_DEV_DEF 0xFF                 // default device type
+#define GP_DEV_ZB DEV_ZB_SNGL           // zigbee
+#define GP_DEV_BLE DEV_BLE_SNGL         // ble
+#define GP_DEV_MCU  DEV_NM_NOT_ATH_SNGL // mcu
+#define GP_DEV_ATH_1 DEV_ATTACH_MOD_1   // attach 1
+#define GP_DEV_ATH_2 DEV_ATTACH_MOD_2   // attach 2
+#define GP_DEV_ATH_3 DEV_ATTACH_MOD_3   // attach 3
+#define GP_DEV_ATH_4 DEV_ATTACH_MOD_4   // attach 4
+#define GP_DEV_ATH_5 DEV_ATTACH_MOD_5   // attach 5
+#define GP_DEV_ATH_6 DEV_ATTACH_MOD_6   // attach 6
+#define GP_DEV_ATH_7 DEV_ATTACH_MOD_7   // attach 7
+#define GP_DEV_ATH_8 DEV_ATTACH_MOD_8   // attach 8
+#define GP_DEV_ATH_9 DEV_ATTACH_MOD_9   // attach 9
+#define GP_DEV_ATH_10 DEV_ATTACH_MOD_10 // attach 10
 
-#define GP_DEV_SUPPORT_MAX GP_DEV_ATH_10
+#define GP_DEV_SUPPORT_MAX GP_DEV_ATH_10 // max attach id
 
+typedef BYTE_T TY_DP_REPT_CHAN_TP_T;
+#define TY_DP_REPT_CHAN_LAN       0
+#define TY_DP_REPT_CHAN_MQTT      1
+#define TY_DP_REPT_CHAN_HTTP      2
+#define TY_DP_REPT_CHAN_BLE       3
+#define TY_DP_REPT_CHAN_SIGMESH   4
+#define TY_DP_REPT_CHAN_TUYA_MESH 5
+#define TY_DP_REPT_CHAN_BEACON    6
+#define TY_DP_REPT_CHAN_MAX       7
+
+/**
+ * @brief Definition of TUYA DevOS init param
+ */
 typedef struct {
+    /** kv init or not */
     BOOL_T init_db;
+    /** sys env settings */
     CHAR_T sys_env[SYS_ENV_LEN];
+    /** log seq path */
     CHAR_T log_seq_path[LOG_SEQ_PATH_LEN];
 }TY_INIT_PARAMS_S;
 
+/**
+ * @brief Definition of attach moudule attribute
+ */
 typedef struct {
+    /** attach ota channel */
     GW_PERMIT_DEV_TP_T tp;
-    CHAR_T ver[SW_VER_LEN+1]; // xx.xx.xx
+    /** attach version, format xx.xx.xx */
+    CHAR_T ver[SW_VER_LEN+1];
+    CHAR_T md5[SW_MD5_LEN+1];
 }GW_ATTACH_ATTR_T;
 
-#define CH_NAME_LMT 15
-#define CH_CODE_LMT 20
-#define CH_SN_LMT 20
-#define CH_REPORT_CODE_LMT 20
-#define CH_MANU_ID_LMT 10
-#define CH_VERSION_LMT 10
-#define CH_ENCRYPT_KEY_LMT 20
+#define CH_NAME_LMT 15          // max string length of operator name
+#define CH_CODE_LMT 20          // max string length of operator code
+#define CH_SN_LMT 20            // max string length of device sn
+#define CH_REPORT_CODE_LMT 20   // max string length of report code
+#define CH_MANU_ID_LMT 10       // max string length of manufacture id
+#define CH_VERSION_LMT 10       // max string length of sw version
+#define CH_ENCRYPT_KEY_LMT 20   // max string length of encrypt key
 
+/**
+ * @brief Definition of operator code info
+ */
 typedef struct{
-    CHAR_T ch_name[CH_NAME_LMT+1];    
+    /** operator name */
+    CHAR_T ch_name[CH_NAME_LMT+1];
+    /** operator code */ 
     CHAR_T ch_code[CH_CODE_LMT+1];
+    /** device sn */
     CHAR_T ch_sn[CH_SN_LMT+1];
+    /** report code */
     CHAR_T ch_report_code[CH_REPORT_CODE_LMT+1];
+    /** manufacture id */
     CHAR_T ch_manu_id[CH_MANU_ID_LMT+1];
+    /** sw version */
     CHAR_T ch_version[CH_VERSION_LMT+1];
+    /** encrypt key */
     CHAR_T ch_encrype_key[CH_ENCRYPT_KEY_LMT+1];
 }CH_CODE_ST;
 
+/**
+ * @brief Definition of device Quaility of Service
+ */
 typedef struct{
-    USHORT_T sNodeID;   //short nodeID
-    USHORT_T fNodeID;   //father short nodeID
+    /** short nodeID */
+    USHORT_T sNodeID;
+    /** father short nodeID */
+    USHORT_T fNodeID;
+    /** RSSI */
     CHAR_T   rssi;
+    /** lqi info */
     UCHAR_T  lqi;
-    CHAR_T   fid[DEV_ID_LEN+1];//father node ID str
-}DEV_QOS_ST;   // Device Quaility of Service
+    /** father node ID str */
+    CHAR_T   fid[DEV_ID_LEN+1];
+}DEV_QOS_ST;
 
 #define GW_ATTACH_ATTR_LMT 4
-typedef struct {
-    CHAR_T id[DEV_ID_LEN+1];
-    CHAR_T sw_ver[SW_VER_LEN+1];
-    CHAR_T schema_id[SCHEMA_ID_LEN+1];
-    CHAR_T product_key[PRODUCT_KEY_LEN+1];
-    CHAR_T firmware_key[PRODUCT_KEY_LEN+1];
-    BOOL_T is_oem;    
-    #if defined(ENABLE_SIGMESH) && (ENABLE_SIGMESH==1)
-    CHAR_T sigmesh_dev_key[SIGMESH_DEV_KEY_LEN+1];
-    CHAR_T sigmesh_mac[SIGMESH_DEV_MAC_LEN+1];
-    #endif
-    USER_DEV_DTL_DEF_T uddd; // user detial type define
-    USER_DEV_DTL_DEF_T uddd2; /* 最高为1，预留给用户自有子设备*/
-    DEV_TYPE_T tp;
-    DEV_SUB_TYPE_T sub_tp;
-    CHAR_T uuid[DEV_UUID_LEN+1];
-    INT_T abi;// ability
-    BOOL_T bind;
-    BOOL_T sync;
-    #if defined(ENABLE_SIGMESH) && (ENABLE_SIGMESH==1)
-    BOOL_T sigmesh_sync;
-    BOOL_T ble_mesh_bind_rept_sync;
-    #endif
-    BOOL_T bind_status;
-    BYTE_T attr_num;
-    GW_ATTACH_ATTR_T attr[GW_ATTACH_ATTR_LMT];
-    BOOL_T reset_flag;
-    #if ((defined(TUYA_GW_OPERATOR) && (TUYA_GW_OPERATOR==1)) || (defined(TUYA_OPERATOR_TYPE) && (TUYA_OPERATOR_DISABLE!=TUYA_OPERATOR_TYPE)))
-    CH_CODE_ST ch_dminfo;
-    #endif
-	CHAR_T subList_flag;//优化sublist比较速度
-    #if ((!defined(TY_BT_MOD)) || (defined(TY_BT_MOD) && (TY_BT_MOD != 1))) //临时使用，之后从这边移除
-    DEV_QOS_ST dev_qos;
-    #endif
-    CHAR_T schema_flag;//优化schema更新比较的速度
-    CHAR_T schema_sync;//schema是否同步完成, 1 未同步
-    CHAR_T schema_ver[SCHEMA_VER_LEN+1];
-    UINT_T dev_attr; //子设备是否支持ota属性
-}DEV_DESC_IF_S;
 
-// dp type
+/**
+ * @brief  Definition of dp report type
+ */
+typedef BYTE_T DP_REPT_TYPE_E;
+#define T_OBJ_REPT      0           // dp is value,str,enum,bool,bitmap
+#define T_RAW_REPT      1           // raw type
+#define T_STAT_REPT     2           // stat type
+#define T_RE_TRANS_REPT 10          // repeat report
+
+/**
+ * @brief  Definition of dp type
+ */
 typedef BYTE_T DP_TYPE_E;
 #define T_OBJ           0           // dp is value,str,enum,bool,bitmap
 #define T_RAW           1           // raw type
 #define T_FILE          2           // file type
 
-// dp mode
+/**
+ * @brief  Definition of dp mode
+ */
 typedef BYTE_T DP_MODE_E;
 #define M_RW            0          // cloud/app can read and write
 #define M_WR            1          // cloud/app can only write to device
 #define M_RO            2          // cloud/app can only read from device
 
-// dp schema type
+/**
+ * @brief  Definition of dp property type
+ */
 typedef BYTE_T DP_PROP_TP_E;
 #define PROP_BOOL 0
 #define PROP_VALUE 1
@@ -264,81 +272,143 @@ typedef BYTE_T DP_PROP_TP_E;
 #define PROP_ENUM 3
 #define PROP_BITMAP 4
 
+/**
+ * @brief  Definition of map type
+ */
 typedef BYTE_T UP_MAP_TYPE_E;
 #define UP_CLEANER_MAP   0
 #define UP_CLEANER_PATH  1
 #define UP_CLEANER_MAP_PATH 2
 
+/**
+ * @brief  Definition of upgrade type
+ */
 typedef BYTE_T UPGRADE_TYPE_T;
 #define UPGRADE_TYPE_NORMAL 0
 #define UPGRADE_TYPE_SILENT 1
 
-// dp prop
+/**
+ * @brief  Definition of dp prop
+ */
 typedef struct {
+    /** min value */
     INT_T min;
+    /** max value */
     INT_T max;
+    /** step */
     SHORT_T step;
+    /** scale */
     USHORT_T scale;
+    /** dp value */
     INT_T value;
 }DP_PROP_VAL_S;
 
+/**
+ * @brief  Definition of dp prop
+ */
 typedef struct {
+    /** enum count */
     INT_T cnt;
+    /** enum value */
     CHAR_T **pp_enum;
+    /** current value */
     INT_T value;
 }DP_PROP_ENUM_S;
 
+/**
+ * @brief  Definition of dp prop
+ */
 typedef struct {
+    /** max len */
     INT_T max_len;
-    INT_T cur_len;//当前分配的长度
+    /** cur len */
+    INT_T cur_len;
+    /** mutex */
     void* dp_str_mutex;
+    /** dp value */
     CHAR_T *value;
 }DP_PROP_STR_S;
 
+/**
+ * @brief  Definition of dp prop
+ */
 typedef struct {
+    /** bool value */
     BOOL_T value;
 }DP_BOOL_S;
 
+/**
+ * @brief  Definition of dp prop
+ */
 typedef struct {
+    /** max len */
     UINT_T max_len;
+    /** value */
     UINT_T value;
 }DP_PROP_BITMAP;
 
+/**
+ * @brief  Definition of dp prop value
+ */
 typedef union {
+    /** see DP_PROP_VAL_S */
     DP_PROP_VAL_S prop_value;
+    /** see DP_PROP_ENUM_S */
     DP_PROP_ENUM_S prop_enum;
+    /** see DP_PROP_STR_S */
     DP_PROP_STR_S prop_str;
+    /** see DP_BOOL_S */
     DP_BOOL_S prop_bool;
+    /** see DP_PROP_BITMAP */
     DP_PROP_BITMAP prop_bitmap;
 }DP_PROP_VALUE_U;
 
+/**
+ * @brief  Definition of dp trigger type
+ */
 typedef BYTE_T DP_TRIG_T_E;
 #define TRIG_PULSE      0   // upload when value changes
 #define TRIG_DIRECT     1   // upload without value change check
 
-/* tuya sdk dp positive upload policy */
+/**
+ * @brief  Definition of dp positive upload policy
+ */
 typedef BYTE_T DP_PSV_E;
 #define PSV_FALSE 0    /* disabled */
 #define PSV_TRUE 1     /* app hasn't query yet */
 #define PSV_F_ONCE 2   /* app has queryed, shoulb report */
 
-// dp statistics type
+/**
+ * @brief  Definition of dp statistics type
+ */
 typedef BYTE_T DP_STAT_TP_T;
 #define DST_NONE 0 // no need statistics
 #define DST_INC 1 // dp statistics increase
 #define DST_TOTAL 2 // dp statistics total
 
+/**
+ * @brief Definition of dp description
+ */
 typedef struct {
+    /** dp id */
     BYTE_T dp_id;
+    /** see DP_MODE_E */
     DP_MODE_E mode;
-    DP_PSV_E passive;  /* true false once */
-    DP_TYPE_E type;   /* obj raw file */
+    /** see DP_PSV_E */
+    DP_PSV_E passive;
+    /** see DP_TYPE_E */
+    DP_TYPE_E type;
+    /** see DP_PROP_TP_E */
     DP_PROP_TP_E prop_tp;
+    /** see DP_TRIG_T_E */
     DP_TRIG_T_E trig_t;
-    DP_STAT_TP_T stat; /* none total increase */
+    /** see DP_STAT_TP_T */
+    DP_STAT_TP_T stat;
 }DP_DESC_IF_S;
 
-/* tuya sdk dp cmd type */
+/**
+ * @brief tuya sdk dp cmd type
+ */
 typedef BYTE_T DP_CMD_TYPE_E;
 #define DP_CMD_LAN      0       // cmd from LAN
 #define DP_CMD_MQ       1       // cmd from MQTT
@@ -347,15 +417,20 @@ typedef BYTE_T DP_CMD_TYPE_E;
 #define DP_CMD_RELIABLE_TRANSFER 4 // cmd from reliable transfer
 #define DP_CMD_BT       5      // cmd from bt
 #define DP_CMD_SCENE_LINKAGE_LAN 6  // cmd from lan scene linkage
+#define DP_CMD_FFC      7       // cmd from ffc
 
-
+/**
+ * @brief tuya sdk dp trans type
+ */
 typedef BYTE_T DP_TRANS_TYPE_T;
 #define DTT_SCT_UNC     0       // unicast
 #define DTT_SCT_BNC     1       // boardcast
 #define DTT_SCT_MNC     2       // multicast
 #define DTT_SCT_SCENE   3       // scene
 
-/* tuya sdk dp value union */
+/**
+ * @brief tuya sdk dp value union
+ */
 typedef union {
     INT_T dp_value;             // valid when dp type is value
     UINT_T dp_enum;             // valid when dp type is enum
@@ -364,168 +439,191 @@ typedef union {
     UINT_T dp_bitmap;           // valid when dp type is bitmap
 }TY_OBJ_DP_VALUE_U;
 
-/* tuya sdk obj dp manage info */
+/**
+ * @brief Definition of structured dp
+ */
 typedef struct {
-    BYTE_T dpid;                // dp id
-    DP_PROP_TP_E type;          // dp type
-    TY_OBJ_DP_VALUE_U value;    // dp value
-    UINT_T time_stamp;          // dp happen time. if 0, mean now
+    /** dp id */
+    BYTE_T dpid;
+    /** dp type, see DP_PROP_TP_E */
+    DP_PROP_TP_E type;
+    /** dp value, see TY_OBJ_DP_VALUE_U */
+    TY_OBJ_DP_VALUE_U value;
+    /** dp happen time. if 0, mean now */
+    UINT_T time_stamp;
 }TY_OBJ_DP_S;
 
+/**
+ * @brief Definition of recved structured dp
+ */
 typedef struct {
+    /** see DP_CMD_TYPE_E */
     DP_CMD_TYPE_E cmd_tp;
+    /** see DP_TRANS_TYPE_T */
     DP_TRANS_TYPE_T dtt_tp;
-    CHAR_T *cid; // if(NULL == cid) then then the cid represents gwid
+    /** if(NULL == cid) then then the cid represents gwid */
+    CHAR_T *cid;
+    /** mb id */
     CHAR_T *mb_id;
+    /** count of dp */
     UINT_T dps_cnt;
+    /** the dp data */
     TY_OBJ_DP_S dps[0];
 }TY_RECV_OBJ_DP_S;
 
+/**
+ * @brief Definition of recved raw dp
+ */
 typedef struct {
+    /** see DP_CMD_TYPE_E */
     DP_CMD_TYPE_E cmd_tp;
+    /** see DP_TRANS_TYPE_T */
     DP_TRANS_TYPE_T dtt_tp;
-    CHAR_T *cid; // if(NULL == cid) then then the cid represents gwid
+    /** if(NULL == cid) then then the cid represents gwid */
+    CHAR_T *cid;
+    /** dp id */
     BYTE_T dpid;
+    /** mb id */
     CHAR_T *mb_id;
+    /** data len */
     UINT_T len;
+    /** the data */
     BYTE_T data[0];
 }TY_RECV_RAW_DP_S;
 
+/**
+ * @brief Definition of DP query
+ */
 typedef struct {
-    CHAR_T *cid; // if(NULL == cid) then then the cid represents gwid
-    UINT_T cnt; // dpid cnt if(0 == cnt) then query all object dp
-    BYTE_T dpid[0]; // dpid
+    /** if(NULL == cid) then then the cid represents gwid */
+    CHAR_T *cid;
+    /** dpid cnt if(0 == cnt) then query all object dp */
+    UINT_T cnt;
+    /** dpid */
+    BYTE_T dpid[0];
 }TY_DP_QUERY_S;
+
+//add by sunkz
+#define DP_REPT_USER_REG_MAX_NUM  5
+/**
+ * @brief Definition of DP report callbak
+ */
+typedef struct{
+    /** report type, see DP_REPT_TYPE_E */
+    DP_REPT_TYPE_E  dp_rept_type;
+    /** obj:为TY_OBJ_DP_REPT_S，stat:dp为TY_STAT_DP_REPT_S，RAW:TY_RAW_DP_REPT_S */
+    VOID_T*         dp_data;
+    /** Json decoded dp string */
+    CHAR_T*         dp_data_json;
+    /** is query or not */
+    BOOL_T          is_query;
+}DP_REPT_CB_DATA;
+
+/**
+ * @brief Handler of dp report pre-process
+ * 
+ * @param[in] dp_rslt Default report result
+ * @param[in] dp_data DP data, see DP_REPT_CB_DATA
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+typedef OPERATE_RET (*DP_REPT_PRE_HANDLE)(IN CONST DP_REPT_CB_DATA* dp_data);
+
+/**
+ * @brief Handler of dp report post-process
+ * 
+ * @param[in] dp_rslt Default report result
+ * @param[in] dp_data DP data, see DP_REPT_CB_DATA
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+typedef OPERATE_RET (*DP_REPT_POST_HANDLE)(IN CONST OPERATE_RET dp_rslt, IN CONST DP_REPT_CB_DATA* dp_data);
+
+/**
+ * @brief Definition of DP handlers
+*/
+typedef struct{
+    /** handler of pre-precess */
+    DP_REPT_PRE_HANDLE  dp_rept_pre_cb;
+    /** handler of post-precess */
+    DP_REPT_POST_HANDLE dp_rept_post_cb;
+    /** send dp force or not */
+    BOOL_T need_dp_force;
+}DP_REPT_HADLE_CB_S;
+//add by sunkz
 
 #define FW_URL_LEN      255       // max length of firmware download url
 #define FW_MD5_LEN      32        // max length of firmware md5
 #define FW_HMAC_LEN     64        // max length of firmware hmac
 
-/* tuya sdk ota firmware info */
+/**
+ * @brief tuya sdk ota firmware info 
+ */
 typedef struct {
-    DEV_TYPE_T tp;      // firmware type
+    /** firmware type */
+    DEV_TYPE_T tp;
+    /** upgrade type, see UPGRADE_TYPE_T */
     UPGRADE_TYPE_T type;
-    CHAR_T fw_url[FW_URL_LEN+1];  // firmware download url
-    CHAR_T sw_ver[SW_VER_LEN+1];  // firmware version
-    UINT_T file_size;             // firmware size in BYTE
-    CHAR_T fw_hmac[FW_HMAC_LEN+1];  // firmware hmac
-#if defined(ENABLE_IPC) && (ENABLE_IPC != 0)
-    CHAR_T fw_md5[FW_MD5_LEN+1];  // firmware md5
-#endif
+    /** firmware download url */
+    CHAR_T fw_url[FW_URL_LEN+1];
+    /** firmware version */
+    CHAR_T sw_ver[SW_VER_LEN+1];
+    /** firmware size in BYTE */
+    UINT_T file_size;
+    /** firmware hmac */
+    CHAR_T fw_hmac[FW_HMAC_LEN+1];
+    /** firmware md5 */
+    CHAR_T fw_md5[FW_MD5_LEN+1];
+    /** is difference ota or not */
     BOOL_T diff_ota;
 }FW_UG_S;
 
-#if defined(ENABLE_ALARM) && (ENABLE_ALARM==1)
-
-#define HOME_SECURITY_VER "1.0.1"
-typedef BYTE_T HOME_SECURITY_INFO_SET_E;
-#define HOME_SECURITY_INFO_SET_MQ      0       // cmd from mqtt
-#define HOME_SECURITY_INFO_SET_AP      1       // cmd from application
-#define HOME_SECURITY_INFO_SET_LAN     2       // cmd from LAN
-#define HOME_SECURITY_INFO_SET_SDK     3       // cmd from SDK
-
-#define ALARM_SECURITY_MODE_STR_LEN_MAX 32
-#define HOME_SECURITY_ARMED_DISARMED "0"        //撤防,固定为0
-
-typedef enum  {
-    HOME_SECURITY_MODE_DISARMED=0,         //撤防
-    HOME_SECURITY_MODE_ARMED_STAYING,      //在家布防
-    HOME_SECURITY_MODE_ARMED_LEAVING,      //离家布防
-    HOME_SECURITY_MODE_BUT,                
-}HOME_SECURITY_MODE;
-
-typedef enum  {
-    HOME_SECURITY_NET_MODE_WAN=0,     //以太网
-    HOME_SECURITY_NET_MODE_WIFI,      //wifi
-    HOME_SECURITY_NET_MODE_4G,        //4G
-}HOME_SECURITY_NET_MODE;
-
-typedef enum  {
-    ALARM_DELAY_DONOT_CREATE=0, //报警延时未创建
-    ALARM_DELAY_COUNTDOWN,      //报警延时进行中
-    ALARM_DELAY_END,            //报警延时结束
-}ALARM_DELAY_STATE;
 
 
-typedef enum  {
-    DISARMED_EVENT,
-    ARMED_EVENT,                //进入布防(倒计时后,在家或离家)
-    BYPASS_EVNET,               //忽略
-    WARING_COUNTDOWN,           //报警倒计时
-}SECURITY_EVENT_E;
-
-typedef enum  {
-    NO_ENV_DEV,   //非环境设备，如门磁，pir等
-    ENV_DEV,      //环境设备，如燃气报警器，co报警器等
-}SECURITY_DEV_TYPE_E;
-
-
-typedef struct {
-    CHAR_T alarm_mode[ALARM_SECURITY_MODE_STR_LEN_MAX+1];  // alarm mode
-    BOOL_T alarm_status;//报警状态（报警延时，报警中为true）
-    BOOL_T enable_countdown_status;//布防延时中为true
-}ALARM_INFO_S;
-
-
-#endif
-
-typedef struct {
-    CHAR_T net_key[SIGMESH_NET_KEY_LEN+1];
-    CHAR_T app_key[SIGMESH_APP_KEY_LEN+1];
-}TY_SIGMESH_NET_INFO_S;
-
-typedef struct {
-    INT_T nodeId_num;
-    USHORT_T *node_list;
-}TY_SIGMESH_NODE_LIST_S;
-
-/***********************************************************
-*  callback function: DEV_HEARTBEAT_SEND_CB
-*  Desc:    send heartbeat to subdevice callback
-*  Input:   dev_id: subdevice id
-***********************************************************/
-typedef VOID (*DEV_HEARTBEAT_SEND_CB)(IN CONST CHAR_T *dev_id);
-
-/* tuya sdk gateway status info */
+/**
+ * @brief tuya sdk gateway status info
+ */
 typedef BYTE_T GW_STATUS_E;
 #define GW_RESET            0 // gw reset
 #define GW_ACTIVED          1 // gw actived
 #define GW_FIRST_START      2 // start tuya-sdk in the first time.
 #define GW_NORMAL           3 // tuya-sdk is actived and started
-
-/***********************************************************
-*  callback function: GW_STATUS_CHANGED_CB
-*  Desc:    gw status changed callback
-*  Input:   status: current status
-***********************************************************/
+#define GW_BLE_ACTIVED          4 // gw ble actived
+/**
+ * @brief Handler to process gateway state change
+ * 
+ * @param[in] status Gateway status, see GW_STATUS_E
+ */
 typedef VOID (*GW_STATUS_CHANGED_CB)(IN CONST GW_STATUS_E status);
 
-/***********************************************************
-*  callback function: DEV_OBJ_DP_CMD_CB
-*  Desc:    obj dp info cmd callback
-*  Input:   dp: obj dp info
-***********************************************************/
+/**
+ * @brief Handler to process structured DP info
+ * 
+ * @param[in] dp DP query info, see TY_RECV_OBJ_DP_S
+ */
 typedef VOID (*DEV_OBJ_DP_CMD_CB)(IN CONST TY_RECV_OBJ_DP_S *dp);
 
-/***********************************************************
-*  callback function: DEV_RAW_DP_CMD_CB
-*  Desc:    raw dp info cmd callback
-*  Input:   dp: raw dp info
-***********************************************************/
+/**
+ * @brief Handler to process raw DP info
+ * 
+ * @param[in] dp DP query info, see TY_RECV_RAW_DP_S
+ */
 typedef VOID (*DEV_RAW_DP_CMD_CB)(IN CONST TY_RECV_RAW_DP_S *dp);
 
-/***********************************************************
-*  callback function: DEV_DP_QUERY_CB
-*  Desc:    dp info query callback
-*  Input:   dp_qry: query info
-***********************************************************/
+/**
+ * @brief Handler to process structured DP query info
+ * 
+ * @param[in] dp_qry DP query info, see TY_DP_QUERY_S
+ */
 typedef VOID (*DEV_DP_QUERY_CB)(IN CONST TY_DP_QUERY_S *dp_qry);
 
-/***********************************************************
-*  callback function: GW_UG_INFORM_CB
-*  Desc:    gateway ota firmware available nofity callback.
-*  Input:   fw: firmware info
-***********************************************************/
+/**
+ * @brief Handler to process gateway upgrade inform
+ * 
+ * @param[in] fw Firmware info, see FW_UG_S
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 typedef int (*GW_UG_INFORM_CB)(IN CONST FW_UG_S *fw);
 
 
@@ -537,235 +635,125 @@ typedef enum {
     GW_REMOTE_RESET_FACTORY,
     GW_RESET_DATA_FACTORY, //need clear local data when active
 }GW_RESET_TYPE_E;
-/***********************************************************
-*  callback function: GW_RESET_IFM_CB
-*  Desc:    gateway restart callback
-***********************************************************/
+
+/**
+ * @brief Handler to process gateway reset
+ * 
+ * @param[in] type Reset type, see DEV_RESET_TYPE_E
+ */
 typedef VOID (*GW_RESET_IFM_CB)(GW_RESET_TYPE_E type);
 
-/***********************************************************
-*  callback function: DEV_UG_INFORM_CB
-*  Desc:    subdevice ota firmware available nofity callback.
-*  Input:   dev_id: subdevice id
-*  Input:   fw: firmware info
-***********************************************************/
+/**
+ * @brief Handler to process sub-device upgrade inform
+ * 
+ * @param[in] dev_id Device ID, NULL indicates gateway
+ * @param[in] fw Firmware info, see FW_UG_S
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 typedef int (*DEV_UG_INFORM_CB)(IN CONST CHAR_T *dev_id,IN CONST FW_UG_S *fw);
 
 typedef enum {
     DEV_REMOTE_RESET_FACTORY,
     DEV_RESET_DATA_FACTORY, //need clear local data when bind
 }DEV_RESET_TYPE_E;
-/***********************************************************
-*  callback function: DEV_RESET_IFM_CB
-*  Desc:    subdevice reset callback
-***********************************************************/
+
+/**
+ * @brief Handler to process reset
+ * 
+ * @param[in] dev_id Device ID, NULL indicates gateway
+ * @param[in] type Reset type, see DEV_RESET_TYPE_E
+ */
 typedef VOID (*DEV_RESET_IFM_CB)(IN CONST CHAR_T *dev_id,IN DEV_RESET_TYPE_E type);
 
 #if defined(TUYA_GW_OPERATOR) && (TUYA_GW_OPERATOR==1)
-/***********************************************************
-*  callback function: OPE_HTTPC_GET_CHCODE_CB
-*  Desc:    subdevice reset callback
-***********************************************************/
+/**
+ * @brief Handler to get operator code
+ * 
+ * @param[in] is_gw Whether gateway or not
+ * @param[in] devid Device ID, NULL indicates gateway
+ * @param[out] ch_code Operator code, see CH_CODE_ST
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 typedef OPERATE_RET (*OPE_HTTPC_GET_CHCODE_CB)(IN CONST BOOL_T is_gw, IN CONST CHAR_T *devid, INOUT CH_CODE_ST *ch_code);
 #endif
 
-#if defined(ENABLE_ALARM) && (ENABLE_ALARM==1)
-/***********************************************************
-*  callback function: GW_OFFLINE_DP_SAVE
-*  Desc:    offline log save
-***********************************************************/
-typedef OPERATE_RET (*GW_OFFLINE_DP_SAVE)(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt);
-#endif
-
-/***********************************************************
-*  callback function: GET_FILE_DATA_CB
-*  Desc:    firmware download content process callback.
-*  Input:   fw: firmware info
-*  Input:   total_len: firmware total size
-*  Input:   offset: offset of this download package
-*  Input:   data && len: this download package
-*  Output:  remain_len: the size left to process in next cb.
-*  Input:   pri_data: private data
-*  Return:  OPRT_OK: success  Other: fail
-***********************************************************/
-typedef OPERATE_RET (*GET_FILE_DATA_CB)(IN CONST FW_UG_S *fw, IN CONST UINT_T total_len,IN CONST UINT_T offset,\
+/**
+ * @brief Handler to process firmware download content
+ * 
+ * @param[in] fw Firmware info, see FW_UG_S
+ * @param[in] total_len Total length of firmware
+ * @param[in] offset Current offset
+ * @param[in] data File data buffer
+ * @param[in] len Length of buffer
+ * @param[in] remain_len Length not handled
+ * @param[in] pri_data Private data
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+typedef OPERATE_RET (*GET_FILE_DATA_CB)(IN CONST FW_UG_S *fw, IN CONST UINT_T total_len,IN CONST UINT_T offset,
                                                 IN CONST BYTE_T *data,IN CONST UINT_T len,OUT UINT_T *remain_len, IN PVOID_T pri_data);
 
-/***********************************************************
-*  callback function: ACTIVE_SHORTURL_CB
-*  Desc:    device active short url.
-***********************************************************/
+/**
+ * @brief Handler to process device active short url
+ * 
+ * @param[out] shorturl Short url to active
+ */
 typedef VOID (*ACTIVE_SHORTURL_CB)(OUT CONST CHAR_T *shorturl);
 
-
-/***********************************************************
-*  callback function: UPGRADE_NOTIFY_CB
-*  Desc:    firmware download finish result callback.
-*  Input:   fw: firmware info
-*  Input:   download_result: 0 means download succes. other means fail
-*  Input:   pri_data: private data
-***********************************************************/
+/**
+ * @brief Handler to process download result
+ * 
+ * @param[in] fw Firmware info, see FW_UG_S
+ * @param[in] download_result download result, 0 indicates success
+ * @param[in] pri_data Private data
+ */
 typedef VOID (*UPGRADE_NOTIFY_CB)(IN CONST FW_UG_S *fw, IN CONST INT_T download_result, IN PVOID_T pri_data);
 
-
-/* tuya-sdk gateway callback functions */
+/**
+ * @brief Definition of gateway callback funtions
+ */
 typedef struct {
+    /** status update */
     GW_STATUS_CHANGED_CB gw_status_cb;
+    /** gateway upgrade */
     GW_UG_INFORM_CB gw_ug_cb;
+    /** gateway reset */
     GW_RESET_IFM_CB gw_reset_cb;
+    /** structured DP info */
     DEV_OBJ_DP_CMD_CB dev_obj_dp_cb;
+    /** raw DP info */
     DEV_RAW_DP_CMD_CB dev_raw_dp_cb;
+    /** DP query */
     DEV_DP_QUERY_CB dev_dp_query_cb;
+    /** sub-device upgrade */
     DEV_UG_INFORM_CB dev_ug_cb;
+    /** sub-device reset */
     DEV_RESET_IFM_CB dev_reset_cb;
 #if defined(TUYA_GW_OPERATOR) && (TUYA_GW_OPERATOR==1)
+    /** opoerator code */
     OPE_HTTPC_GET_CHCODE_CB ope_get_chcode_cb;
 #endif
-#if defined(ENABLE_ALARM) && (ENABLE_ALARM==1)
-    GW_OFFLINE_DP_SAVE gw_offline_dp_save_cb;
-#endif
+
 #if defined(QRCODE_ACTIVE_MODE) && (QRCODE_ACTIVE_MODE==1)
+    /** active short url */
     ACTIVE_SHORTURL_CB active_shorturl;
 #endif
+    /** gateway upgrade pre-condition */
     GW_UG_INFORM_CB pre_gw_ug_cb;
+    /** sub-device upgrade pre-condition */
     DEV_UG_INFORM_CB pre_dev_ug_cb;
 }TY_IOT_CBS_S;
 
-/***********************************************************
-*  callback function: GW_PERMIT_ADD_DEV_CB
-*  Desc:    permit to add subdevices callback
-*  Input:   tp      subdevice type
-*  Input:   permit  is permit to add subdevices
-*  Output:  timeout timeout
-*  Return:  BOOL_T  if function process success, return true, if function process fails,return false.
-***********************************************************/
-typedef BOOL_T (*GW_PERMIT_ADD_DEV_CB)(IN CONST GW_PERMIT_DEV_TP_T tp,IN CONST BOOL_T permit,IN CONST UINT_T timeout);
 
-/***********************************************************
-*  callback function: GW_DEV_DEL_CB
-*  Desc:    when a subdevice is deleted,use this callback to notify user
-*  Input:   dev_id  subdevice_id
-***********************************************************/
-typedef VOID (*GW_DEV_DEL_CB)(IN CONST CHAR_T *dev_id);
-
-/* tuya-sdk group process type */
-typedef enum {
-    GRP_ADD = 0, // add a group
-    GRP_DEL      // delete a group
-}GRP_ACTION_E;
-
-/***********************************************************
-*  callback function: GW_DEV_GRP_INFM_CB
-*  Desc:    the group process command callback
-*  Input:   action  group action type
-*  Input:   dev_id  subdevice_id
-*  Input:   grp_id  group_id
-*  Return:  OPRT_OK:bind success. other values:bind failure
-***********************************************************/
-typedef OPERATE_RET (*GW_DEV_GRP_INFM_CB)(IN CONST GRP_ACTION_E action,IN CONST CHAR_T *dev_id,IN CONST CHAR_T *grp_id);
-
-/* tuya-sdk scene process type */
-typedef enum {
-    SCE_ADD = 0, // add a scene
-    SCE_DEL,     // delete a scene
-    SCE_EXEC     // execute a scene
-}SCE_ACTION_E;
-
-/***********************************************************
-*  callback function: GW_DEV_SCENE_INFM_CB
-*  Desc:    the scene process command callback
-*  Input:   action  scene action type
-*  Input:   dev_id  subdevice_id
-*  Input:   grp_id  group_id
-*  Input:   sce_id  scene_id
-*  Return:  OPRT_OK:bind success. other values:bind failure
-***********************************************************/
-typedef OPERATE_RET (*GW_DEV_SCENE_INFM_CB)(IN CONST SCE_ACTION_E action,IN CONST CHAR_T *dev_id,\
-                                                 IN CONST CHAR_T *grp_id,IN CONST CHAR_T *sce_id);
-
-/***********************************************************
-*  callback function: GW_BIND_DEV_INFORM_CB
-*  Desc:    the subdevice bind result callback
-*  Input:   dev_id: subdevice_id
-*  Input:   op_ret  OPRT_OK:bind success. other values:bind failure
-***********************************************************/
-typedef VOID (*GW_BIND_DEV_INFORM_CB)(IN CONST CHAR_T *dev_id, IN CONST OPERATE_RET op_ret);
-
-#if defined(ENABLE_SIGMESH) && (ENABLE_SIGMESH==1)
-/***********************************************************
-*  callback function: GW_DEV_SIGMESH_TOPO_UPDAET_CB
-*  Desc:    the sigmesh topo update cb
-*  Input:   dev_id: subdevice_id
-*  Input:   op_ret  OPRT_OK:bind success. other values:bind failure
-***********************************************************/
-typedef VOID (*GW_DEV_SIGMESH_TOPO_UPDAET_CB)(IN CONST CHAR_T *dev_id);
-
-/***********************************************************
-*  callback function: GW_DEV_SIGMESH_TOPO_UPDAET_CB
-*  Desc:    the sigmesh topo update cb
-*  Input:   dev_id: subdevice_id
-*  Input:   op_ret  OPRT_OK:bind success. other values:bind failure
-***********************************************************/
-typedef VOID (*GW_DEV_SIGMESH_DEV_CACHE_DEL_CB)(IN CONST CHAR_T *dev_id);
-
-/***********************************************************
-*  Callback function: GW_DEV_SIGMESH_CONN_CB
-*  Desc:    The sigmesh connection callback, tell devie 
-*           to disconnect or connect timeout value
-*  Output: igmesh_dev_conn_inf_json
-*         {
-*           "type":"CONNECT", 
-*          "nodeId":[xxxx,xxxx2],
-*          "timeout":-1  //连接时 参数有效-1表示不会断开，
-*                       //1000表示连上1000s后断开，若无timeout
-*                       //参数 则只进行连接，timeout使用原设备
-*                       //记录的timeout
-*          }
-*       或{
-*         "type":"DISCONNECT",
-*         "nodeId":[xxxx,xxxx2]
-*        }
-***********************************************************/
-typedef VOID (*GW_DEV_SIGMESH_CONN_CB)(OUT CHAR_T *sigmesh_dev_conn_inf_json);
-#endif
-/***********************************************************
-*  callback function: DEV_WAKEUP_CB
-*  Desc:    Wake up the low power subdevice
-*  Input:   dev_id: subdevice id
-*  Input:   time: wakeup duration unit:second
-***********************************************************/
-typedef VOID (*GW_DEV_WAKEUP_CB)(IN CONST CHAR_T *dev_id,IN UINT_T duration);
-
-#if (ENABLE_CLOUD_STREAM == 1)
+#if defined(ENABLE_CLOUD_STREAM) && (ENABLE_CLOUD_STREAM == 1)
 typedef OPERATE_RET (*GW_CLOUD_STREAM_MQTT_CB)(IN struct ty_cJSON *root_json);
 #endif
 
-/***********************************************************
-*  callback function: GW_BIND_BLE_MESH_DEV_INFORM_CB
-*  Desc:    the ble mesh subdevice bind result callback
-*  Input:   dev_id: subdevice_id
-*  Input:   virt_id: subdevice virtual id
-*  Input:   op_ret  OPRT_OK:bind success. other values:bind failure
-***********************************************************/
-typedef VOID (*GW_BIND_BLE_MESH_DEV_INFORM_CB)(IN CONST CHAR_T *dev_id, IN CONST CHAR_T *virt_id, IN CONST OPERATE_RET op_ret);
 
 /* tuya-sdk gateway subdevices management callback functions */
-typedef struct {
-    GW_PERMIT_ADD_DEV_CB gw_add_dev_cb;
-    GW_DEV_DEL_CB gw_del_cb;
-    GW_DEV_GRP_INFM_CB gw_dev_grp_cb;
-    GW_DEV_SCENE_INFM_CB gw_dev_scene_cb;
-    GW_BIND_DEV_INFORM_CB gw_ifm_cb;
-    #if defined(ENABLE_SIGMESH) && (ENABLE_SIGMESH==1)
-    GW_DEV_SIGMESH_TOPO_UPDAET_CB gw_dev_sigmesh_topo_update_cb;
-    GW_DEV_SIGMESH_DEV_CACHE_DEL_CB gw_dev_sigmesh_dev_cache_del;
-    #endif
-    GW_DEV_WAKEUP_CB gw_dev_wakeup_cb;
-    #if defined(ENABLE_SIGMESH) && (ENABLE_SIGMESH==1)
-    GW_DEV_SIGMESH_CONN_CB gw_dev_sigmesh_conn_cb;
-    GW_BIND_BLE_MESH_DEV_INFORM_CB gw_ble_mesh_ifm_cb;
-    #endif
-}TY_IOT_GW_CBS_S;
+
 
 // mqtt media data interface
 typedef BYTE_T TRAN_STEP_T;
@@ -805,50 +793,53 @@ typedef struct {
 #pragma pack()
 
 
+/**
+ * @brief Definition of region info
+ */
 typedef struct {
+    /** region info */
     CHAR_T region[REGION_LEN + 1];
+    /** timezone info */
     CHAR_T time_zone[TIME_ZONE_LEN+1];
 }TY_IOT_REGION_INFO_S;
 
-
+/**
+ * Definition of customer config type
+ */
 typedef enum {
+    /** device cfg */
     CFG_DEVICE = 1,
+    /** product cfg */
     CFG_PRODUCT = 2,
     CFG_INVALID,
 }TY_CUSTOM_CFG_E;
 
 
+/**
+ * @brief Definition of location info
+ */
 typedef struct {
+    /** country code */
     CHAR_T country_code[COUNTRY_CODE_LEN + 1];
+    /** ip addr. */
     CHAR_T ip[IPV4_LEN + 1];
 }TY_LOCATION_INFO_S;
 
-
+/**
+ * @brief Handler for log upload
+ * 
+ * @param path Log upload path
+ * @param len Length of path
+ */
 typedef VOID (*GW_APP_LOG_PATH_CB)(OUT CHAR_T *path, IN CONST INT_T len);
-#if defined(ENABLE_ALARM) && (ENABLE_ALARM==1)
-typedef VOID (*GW_HOME_SECURITY_IF_CB)(IN CONST CHAR_T *mode_str, IN CONST UINT_T time, BOOL_T is_sound);
-typedef VOID (*GW_HOME_SECURITY_ALARM_DEV_CB)(IN CONST CHAR_T *cid,  IN ty_cJSON *dp_inf);
-typedef VOID (*GW_HOME_SECURITY_ALARM_DELAY_STATUS_CB)(IN ALARM_DELAY_STATE alarm_status);
-typedef VOID (*GW_HOME_SECURITY_EVENT_CB)(IN SECURITY_EVENT_E security_event_status, PVOID_T data);
-typedef VOID (*GW_HOME_SECURITY_CANCEL_ALARM_CB)(VOID);
-typedef VOID (*GW_HOME_SECURITY_ALARM_DEV_NEW_CB)(IN CONST CHAR_T *cid,  IN ty_cJSON *dp_inf, SECURITY_DEV_TYPE_E dev_type);
-typedef VOID (*GW_HOME_SECURITY_ENTER_ALARM_CB)(IN BOOL_T alarm_status, IN CHAR_T *alarm_info);
-#endif
 
+/**
+ * @brief Definition of IoT callbacks used by APP
+ */
 typedef struct {
+    /** path for log upload */
     GW_APP_LOG_PATH_CB gw_app_log_path_cb;
-#if defined(ENABLE_ALARM) && (ENABLE_ALARM==1)
-    GW_HOME_SECURITY_IF_CB gw_home_security_if_cb;
-    GW_HOME_SECURITY_ALARM_DEV_CB gw_home_security_alarm_dev_cb;//no use, new interface:  gw_home_security_alarm_dev_new_cb
-    GW_HOME_SECURITY_ALARM_DEV_CB gw_home_security_alarm_env_dev_cb;//no use, new interface:  gw_home_security_alarm_dev_new_cb
-    GW_HOME_SECURITY_ALARM_DELAY_STATUS_CB gw_home_security_alarm_delay_status_cb;
-    GW_HOME_SECURITY_EVENT_CB gw_home_security_event_cb;
-    GW_HOME_SECURITY_CANCEL_ALARM_CB gw_home_security_cancel_alarm;
-    GW_HOME_SECURITY_ALARM_DEV_NEW_CB gw_home_security_alarm_dev_new_cb;//replace dev_cb and env_dev_cb interface,application show
-	GW_HOME_SECURITY_ENTER_ALARM_CB gw_home_security_enter_alarm_cb;
-#endif
 }TY_IOT_APP_CBS_S;
-
 
 #ifdef __cplusplus
 }

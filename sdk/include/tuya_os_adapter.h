@@ -1,19 +1,19 @@
 /**
- * @file tuya_os_adapter.h
- * @author sunkz@tuya.com
- * @brief 
- * @version 0.1
- * @date 2020-05-15
- * 
- * @copyright Copyright (c) tuya.inc 2019
- * 
- */
+* @file tuya_os_adapter.h
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef _TUYA_OS_ADAPTER_H
 #define _TUYA_OS_ADAPTER_H
 
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include "tuya_cloud_types.h"
 #include "tuya_os_adapter_error_code.h"
 
@@ -37,9 +37,11 @@ typedef enum {
     INTF_QUEUE,
     INTF_WIFI,
     INTF_BT,
+    INTF_BLE_MESH_PROV,
     INTF_STORAGE,
     INTF_OTA,
     INTF_WIRED,
+    INTF_CELLULAR,
     ALL_INTF_NUMS
 } INTF_TYPE_ENUM;
 
@@ -91,6 +93,8 @@ typedef struct {
 typedef struct {
     VOID_T*  (*malloc)    (CONST size_t size);
     VOID_T   (*free)      (VOID_T* ptr);
+    VOID_T*  (*calloc)    (size_t nitems, size_t size);
+    VOID_T*  (*realloc)   (VOID_T* ptr, size_t size);
 } TUYA_OS_MEMORY_INTF;
 
 
@@ -123,7 +127,7 @@ typedef struct {
 #define UNW_SHUT_WR   1
 #define UNW_SHUT_RDWR 2
 
-#if defined(SYSTEM_LINUX) && (OPERATING_SYSTEM == SYSTEM_LINUX)
+#if defined(OPERATING_SYSTEM) && ((OPERATING_SYSTEM == SYSTEM_LINUX) || (OPERATING_SYSTEM == SYSTEM_LITEOS))
 /* fd 最大个数, 不同平台根据实际情况定义 */
 #define UNW_FD_MAX_COUNT    (1024)
 #else
@@ -176,7 +180,7 @@ typedef struct {
     int           (*fd_zero)       (UNW_FD_SET_T* fds);
     int           (*select)        (const int maxfd, UNW_FD_SET_T *readfds, UNW_FD_SET_T *writefds, UNW_FD_SET_T *errorfds, const UINT_T ms_timeout);
     int           (*get_nonblock)  (const int fd);
-    int           (*set_block)     (const int fd, const bool_t block);
+    int           (*set_block)     (const int fd, const BOOL_T block);
     int           (*close)         (const int fd);
     int           (*shutdown)      (const int fd, const int how);
     int           (*socket_create) (const UNW_PROTOCOL_TYPE type);
@@ -196,13 +200,13 @@ typedef struct {
     int           (*gethostbyname) (const char *domain, UNW_IP_ADDR_T *addr);
     int           (*accept)        (const int fd, UNW_IP_ADDR_T *addr, UINT16_T *port);
     int           (*recv_nd_size)  (const int fd, void *buf, const UINT_T buf_size, const UINT_T nd_size);
-    UNW_IP_ADDR_T (*str2addr)      (signed char *ip_str);
+    UNW_IP_ADDR_T (*str2addr)      (const char *ip_str);
     char*         (*addr2str)      (UNW_IP_ADDR_T ipaddr);
     int           (*set_keepalive) (int fd, const bool_t alive, const UINT_T idle, const UINT_T intr, const UINT_T cnt);
     int           (*socket_bind)   (int fd, const char *ip);
     int           (*set_cloexec)   (const int fd);
     int           (*get_socket_ip) (int fd, UNW_IP_ADDR_T *addr);
-    UNW_IP_ADDR_T (*addr)          (const signed char *cp);
+    UNW_IP_ADDR_T (*addr)          (const char *cp);
 }TUYA_OS_NETWORK_INTF;
 
 
@@ -220,6 +224,7 @@ typedef struct {
  *********************************tuya_os_semaphore_intf*************************
  ********************************************************************************/
 typedef void* SEM_HANDLE;
+#define TUYA_OS_ADAPT_SEM_FOREVER 0xFFFFffff
 
 typedef struct {
     OPERATE_RET   (*init)       (SEM_HANDLE *pHandle, CONST UINT_T semCnt, CONST UINT_T sem_max);
@@ -293,10 +298,10 @@ typedef struct {
 typedef void* QUEUE_HANDLE;
 
 typedef struct {
-    OPERATE_RET   (*init)   (QUEUE_HANDLE *queue, int size);
+    OPERATE_RET   (*init)   (QUEUE_HANDLE *queue, int msgsize,int msgcount);
     VOID_T        (*free)   (QUEUE_HANDLE queue);
     OPERATE_RET   (*post)   (QUEUE_HANDLE queue, void *data, unsigned int timeout);
-    OPERATE_RET   (*fetch)  (QUEUE_HANDLE queue, void **msg, unsigned int timeout);
+    OPERATE_RET   (*fetch)  (QUEUE_HANDLE queue, void *msg, unsigned int timeout);
 } TUYA_OS_QUEUE_INTF;
 
 /********************************************************************************
@@ -322,8 +327,10 @@ typedef enum {
 }ty_bt_cb_event_t;
 
 typedef enum {
-    TY_BT_MODE_PERIPHERAL,
-    TY_BT_MODE_CENTRAL,
+    TY_BT_MODE_PERIPHERAL = BIT(0),
+    TY_BT_MODE_CENTRAL = BIT(1),
+    TY_BT_MODE_MESH_PROVISIONER = BIT(2),
+    TY_BT_MODE_MESH_DEVICE = BIT(3),
 }ty_bt_mode_t;
 
 typedef struct{
@@ -331,7 +338,147 @@ typedef struct{
 	unsigned char *data;
 }tuya_ble_data_buf_t;
 
+typedef enum {
+    TY_BT_MESH_PROV_EVENT_STACK_STATE,
+    TY_BT_MESH_PROV_EVENT_ADD_DEV,
+    TY_BT_MESH_PROV_EVENT_DEL_DEV,
+    TY_BT_MESH_PROV_EVENT_RECV_DATA,
+    TY_BT_MESH_PROV_EVENT_RECV_UNPROV_ADV,
+    TY_BT_MESH_PROV_EVENT_MAX,
+} ty_bt_mesh_prov_cb_event_t;
+
+typedef enum {
+    TY_BT_MESH_PROV_STACK_INIT_STATE_IDLE,
+    TY_BT_MESH_PROV_STACK_INIT_STATE_INITING,
+    TY_BT_MESH_PROV_STACK_INIT_STATE_READY,
+    TY_BT_MESH_PROV_STACK_INIT_STATE_DEINITING,
+} ty_bt_mesh_prov_init_state_t;
+
+typedef union {
+    struct ble_mesh_prov_stack_state_param {
+        INT_T err_code; /*!< Indicate the result of BLE Mesh initialization */
+        ty_bt_mesh_prov_init_state_t init_state; /*!< Mesh stack init state */
+    } prov_stack_state; /*!< Event parameter of TY_BT_MESH_PROV_EVENT_STACK_STATE */
+    struct ble_mesh_prov_add_comp_param {
+        INT_T err_code; /*!< Indicate the result of BLE Mesh initialization */
+        UINT16_T unicast_addr; /*!< Primary address of the provisioned device */
+        UINT8_T dev_uuid[16]; /*!< Device UUID of the unprovisioned device */
+        UINT8_T mac[6]; /*!< Device address of the unprovisioned device */
+        UINT8_T dev_key[16];
+        UINT8_T* composite_data;
+        UINT16_T composite_data_len;
+    } prov_add_comp; /*!< Event parameter of TY_BT_MESH_PROV_EVENT_ADD_DEV */
+
+    struct ble_mesh_prov_del_comp_param {
+        INT_T err_code; /*!< Indicate the result of BLE Mesh initialization */
+        UINT16_T unicast_addr; /*!< Primary address of the provisioned device */
+    } prov_del_comp; /*!< Event parameter of TY_BT_MESH_PROV_EVENT_DEL_DEV */
+
+    struct ble_mesh_prov_recv_data_param {
+        INT_T err_code; /*!< Indicate the result of BLE Mesh initialization */
+        UINT16_T unicast_addr; /*!< Primary address of the provisioned device */
+        UINT8_T *data;
+        UINT_T len;
+    } prov_recv_data; /*!< Event parameter of TY_BT_MESH_PROV_EVENT_RECV_DATA */
+
+    struct ble_mesh_prov_recv_unprov_adv_pkt_param {
+        UINT8_T dev_uuid[16]; /*!< Device UUID of the unprovisioned device */
+        UINT8_T mac[6]; /*!< Device address of the unprovisioned device */
+        UINT8_T addr_type; /*!< Device address type */
+        UINT16_T oob_info; /*!< OOB Info of the unprovisioned device */
+        UINT8_T adv_type; /*!< Avertising type of the unprovisioned device */
+        INT8_T rssi; /*!< RSSI of the received advertising packet */
+    } prov_recv_unprov_adv_pkt; /*!< Event parameter of TY_BT_MESH_PROV_EVENT_RECV_UNPROV_ADV */
+
+} ty_bt_mesh_prov_cb_param_t;
+
+typedef enum {
+    TY_BLE_CENTRAL_STACK_INIT_STATE_IDLE,
+    TY_BLE_CENTRAL_STACK_INIT_STATE_INITING,
+    TY_BLE_CENTRAL_STACK_INIT_STATE_READY,
+    TY_BLE_CENTRAL_STACK_INIT_STATE_DEINITING,
+} ty_ble_central_init_state_t;
+
+
+typedef enum {
+    TY_BLE_GAP_ADV_EVT_TYPE_UNDIRECTED = 0,    /**<  Connectable  undirected advertising. */
+    TY_BLE_GAP_ADV_EVT_TYPE_DIRECTED   = 1,    /**<  Connectable directed advertising. */
+    TY_BLE_GAP_ADV_EVT_TYPE_SCANNABLE  = 2,    /**<  Scanable undirected advertising. */
+    TY_BLE_GAP_ADV_EVT_TYPE_NON_CONNECTABLE,   /**<  Nonconnectable undirected advertising. */
+    TY_BLE_GAP_ADV_EVT_TYPE_SCAN_RSP           /**<  scan response. */
+} ty_ble_gap_adv_type_t;
+
+typedef struct {
+#define TY_BT_UUID_LEN_16     2
+#define TY_BT_UUID_LEN_32     4
+#define TY_BT_UUID_LEN_128    16
+    UINT16_T len;							/*!< UUID length, 16bit, 32bit or 128bit */
+    union {
+        UINT16_T    uuid16;                 /*!< 16bit UUID */
+        UINT_T    uuid32;                 /*!< 32bit UUID */
+        UINT8_T     uuid128[TY_BT_UUID_LEN_128]; /*!< 128bit UUID */
+    } uuid;									/*!< UUID */
+} __attribute__((packed)) ty_bt_uuid_t;
+
+typedef enum {
+    TUYA_BLE_ADDR_RANDOM = 0x01,
+    TUYA_BLE_ADDR_PUBLIC = 0x02,
+} ty_ble_addr_type_t;
+
+typedef enum {
+    TY_BLE_CENTRAL_EVENT_STACK_STATE,
+    TY_BLE_CENTRAL_EVENT_GAP_RECV_SCAN_INFO,
+    TY_BLE_CENTRAL_EVENT_GAP_CONN_EVT,
+    TY_BLE_CENTRAL_EVENT_GAP_DISCONN_EVT,
+    TY_BLE_CENTRAL_EVENT_GATTC_RECV_DATA,
+    TY_BLE_CENTRAL_EVENT_GATTC_CFG_MTU_EVT,
+    TY_BLE_CENTRAL_EVENT_GATTC_DIS_SRVC_CMPL_EVT,    /*!< When the ble discover service complete, the event comes */
+    TY_BLE_CENTRAL_EVENT_MAX,
+} ty_ble_central_cb_event_t;
+
+typedef union {
+    struct ble_cent_stack_state_param {
+        INT_T err_code; /*!< Indicate the result of BLE Central initialization */
+        ty_ble_central_init_state_t init_state; /*!< BLE Central stack init state */
+    } ble_cent_stack_state; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_STACK_STATE */
+    struct ble_gap_scan_info_param {
+        UINT8_T mac[6]; /**< Bluetooth address of remote device. */
+        ty_ble_addr_type_t remote_addr_type; /**< Address type of remote device. */
+        ty_ble_gap_adv_type_t adv_type; /**< Advertising event type. */
+        INT8_T rssi; /**< RSSI. */
+        UINT8_T data_len;
+        UINT8_T data[31];
+    } gap_scan_info; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_GAP_RECV_SCAN_INFO */
+    struct ble_gap_conn_evt_param {
+        UINT8_T mac[6]; /**< Bluetooth address of remote device. */
+    } gap_conn_evt; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_GAP_CONN_EVT */
+    struct ble_gap_disconn_evt_param {
+        INT_T err_code; /*!< Indicate the result of BLE Central initialization */
+        BOOL_T discovery_success;
+        UINT8_T mac[6]; /**< Bluetooth address of remote device. */
+    } gap_disconn_evt; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_GAP_DISCONN_EVT */
+    struct ble_gattc_cfg_mtu_evt_param {
+        UINT8_T mac[6]; /**< Bluetooth address of remote device. */
+        UINT16_T conn_id;               /*!< Connection id */
+        UINT16_T mtu;                   /*!< MTU size */
+    } gattc_cfg_mtu; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_GATTC_CFG_MTU_EVT */
+    struct gattc_dis_srvc_cmpl_evt_param {
+        INT_T err_code; /*!< Indicate the result of BLE Central initialization */
+        UINT8_T mac[6]; /**< Bluetooth address of remote device. */
+        ty_ble_addr_type_t remote_addr_type; /**< Address type of remote device. */
+        UINT16_T conn_id;              /*!< Connection id */
+    } gattc_dis_srvc_cmpl; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_GATTC_DIS_SRVC_CMPL_EVT */
+    struct ble_gattc_recv_data_param {
+        UINT8_T mac[6]; /**< Bluetooth address of remote device. */
+        UINT_T data_len;
+        UINT8_T *data;
+    } gattc_recv_data; /*!< Event parameter of TY_BLE_CENTRAL_EVENT_GATTC_RECV_DATA */
+} ty_ble_central_cb_param_t;
+
+
 typedef VOID (*TY_BT_MSG_CB)(INT_T id, ty_bt_cb_event_t e, tuya_ble_data_buf_t *buf);
+typedef VOID (*TY_BT_MESH_PROV_MSG_CB)(ty_bt_mesh_prov_cb_event_t event, ty_bt_mesh_prov_cb_param_t *params);
+typedef VOID (*TY_BLE_CENTRAL_MSG_CB)(ty_ble_central_cb_event_t event, ty_ble_central_cb_param_t *params);
 
 typedef struct {
     CHAR_T name[DEVICE_NAME_LEN];
@@ -342,7 +489,7 @@ typedef struct {
     tuya_ble_data_buf_t scan_rsp;
 }ty_bt_param_t;
 
-typedef VOID (*TY_BT_SCAN_ADV_CB)(CHAR_T *data, UINT_T len);
+typedef VOID (*TY_BT_SCAN_ADV_CB)(CHAR_T *data, UINT_T len, UCHAR_T* mac, UINT8_T type);
 typedef struct {
     CHAR_T scan_type; /* ref ty_bt_scan_type_t. */
     CHAR_T name[DEVICE_NAME_LEN];
@@ -352,6 +499,47 @@ typedef struct {
     UCHAR_T timeout_s; /* second. */
     TY_BT_SCAN_ADV_CB scan_adv_cb;
 }ty_bt_scan_info_t;
+
+
+#define TY_BT_MESH_APP_KEY_LEN 16
+#define TY_BT_MESH_NET_KEY_LEN 16
+typedef struct{
+    UINT8_T netkey[TY_BT_MESH_NET_KEY_LEN];
+    UINT8_T appkey[TY_BT_MESH_APP_KEY_LEN];
+    UINT16_T local_addr;
+}ty_ble_mesh_info_t;
+
+
+
+typedef struct {
+    /** Scan interval in 0.625ms units */
+    UINT16_T scan_itvl;
+
+    /** Scan window in 0.625ms units */
+    UINT16_T scan_window;
+
+    /** Minimum value for connection interval in 1.25ms units */
+    UINT16_T itvl_min;
+
+    /** Maximum value for connection interval in 1.25ms units */
+    UINT16_T itvl_max;
+
+    /** Connection latency */
+    UINT16_T latency;
+
+    /** Supervision timeout in 10ms units */
+    UINT16_T supervision_timeout;
+
+    /** Minimum length of connection event in 0.625ms units */
+    UINT16_T min_ce_len;
+
+    /** Maximum length of connection event in 0.625ms units */
+    UINT16_T max_ce_len;
+} ty_ble_gap_conn_params_t;
+
+typedef struct {
+    TY_BLE_CENTRAL_MSG_CB ble_central_cb;
+}ty_ble_central_param_t;
 
 typedef struct {
     OPERATE_RET (*port_init)(ty_bt_param_t *p);
@@ -367,8 +555,34 @@ typedef struct {
     OPERATE_RET (*start_scan)(VOID_T);
     OPERATE_RET (*stop_scan)(VOID_T);
     OPERATE_RET (*get_ability)(VOID_T);
+    OPERATE_RET (*set_mac)(CONST NW_MAC_S *mac);
+    OPERATE_RET (*get_mac)(NW_MAC_S *mac);
+
+    OPERATE_RET (*central_init)(ty_ble_central_param_t *p);
+    OPERATE_RET (*central_deinit)(VOID_T);
+    OPERATE_RET (*master_connect)(UINT8_T mac[6], ty_ble_addr_type_t type, UINT_T timeout_ms, ty_ble_gap_conn_params_t *params);
+    OPERATE_RET (*master_disconnect)(UINT8_T mac[6], ty_ble_addr_type_t type);
+    OPERATE_RET (*master_scan)(BOOL_T enable);
+    OPERATE_RET (*master_get_max_slave_num)(UINT16_T *num);
+    OPERATE_RET (*gattc_send_data)(UINT8_T mac[6], UINT8_T *data, UINT_T length);
+    OPERATE_RET (*gattc_start_discovery)(UINT8_T mac[6], ty_bt_uuid_t *uuid);
 } TUYA_OS_BT_INTF;
 
+typedef struct {
+    TY_BT_MESH_PROV_MSG_CB mesh_prov_cb;
+}ty_ble_mesh_prov_param_t;
+
+typedef struct {
+    OPERATE_RET (*mesh_prov_init)(ty_ble_mesh_prov_param_t *p);
+    OPERATE_RET (*mesh_prov_deinit)(VOID_T);
+    OPERATE_RET (*mesh_prov_set_info)(ty_ble_mesh_info_t *info);
+    OPERATE_RET (*mesh_prov_set_addr)(UINT16_T mesh_addr);
+    OPERATE_RET (*mesh_prov_scan)(BOOL_T enable);
+    OPERATE_RET (*mesh_prov_add_dev)(UINT8_T uuid[16], UINT8_T mac[6], UINT16_T mesh_addr);
+    OPERATE_RET (*mesh_prov_del_dev_with_addr)(UINT16_T mesh_addr, UINT8_T dev_key[16]);
+    OPERATE_RET (*mesh_prov_send_data)(UINT_T opcode, UINT16_T mesh_addr, UINT8_T *data, UINT_T length, UINT8_T dev_key[16]);
+    OPERATE_RET (*mesh_prov_node_reset)(VOID_T);
+} TUYA_OS_BLE_MESH_RPOV_INTF;
 
 /********************************************************************************
  *********************************tuya_os_wifi_intf******************************
@@ -431,10 +645,6 @@ typedef struct
     unsigned char mcs;
 } MIMO_IF_S;
 
-/*!
-\brief 802.11 frame info
-\enum WLAN_FRM_TP_E
-*/
 typedef enum {
     WFT_PROBE_REQ   = 0x40,     ///< Probe request
     WFT_PROBE_RSP   = 0x50,     ///< Probe response
@@ -632,8 +842,6 @@ typedef struct {
     unsigned char data[0];                                                ///< data buff
 }FAST_WF_CONNECTED_AP_INFO_V2_S;
 
-
-
 /**
  * @brief callback function: SNIFFER_CALLBACK
  *        when wifi sniffers package from air, notify tuya-sdk
@@ -641,7 +849,7 @@ typedef struct {
  * @param[in]       buf         the buf wifi recv
  * @param[in]       len         the len of buf
  */
-typedef void (*SNIFFER_CALLBACK)(CONST UINT8_T *buf, CONST UINT16_T len, CONST INT8_T rssi);
+typedef void (*SNIFFER_CALLBACK)(CONST UINT8_T *buf, CONST UINT16_T len, CONST SCHAR_T rssi);
 
 /**
  * @brief receive wifi management callback
@@ -675,6 +883,7 @@ typedef struct {
     OPERATE_RET (*register_recv_mgnt_callback)(CONST BOOL_T enable, CONST WIFI_REV_MGNT_CB recv_cb);
     OPERATE_RET (*set_lp_mode)(CONST BOOL_T en, CONST UCHAR_T dtim);
     BOOL_T      (*rf_calibrated)(VOID_T);
+    OPERATE_RET (*send_beacon)(uint8_t channel, uint8_t *ssid, uint8_t ssid_len);
 } TUYA_OS_WIFI_INTF;
 
 /********************************************************************************
@@ -702,6 +911,8 @@ typedef struct {
 } UNI_STORAGE_DESC_S;
 
 
+#define PARTATION_NUM_MAX 3
+
 /**
  * @brief UF partition
  * 
@@ -718,8 +929,10 @@ typedef struct {
 typedef struct {
     unsigned int sector_size;
     unsigned int  uf_partition_num;
-    UF_PARTITION uf_partition[3];
+    UF_PARTITION uf_partition[PARTATION_NUM_MAX];
 } UF_PARTITION_TABLE_S;
+
+typedef UF_PARTITION_TABLE_S PARTITION_TABLE_S;
 
 typedef struct {
     OPERATE_RET             (*read)             (CONST UINT_T addr, UCHAR_T *dst, CONST UINT_T size);
@@ -727,7 +940,7 @@ typedef struct {
     OPERATE_RET             (*erase)            (CONST UINT_T addr, CONST UINT_T size);
     UNI_STORAGE_DESC_S*     (*get_storage_desc) (void);
     UF_PARTITION_TABLE_S*   (*get_uf_desc)      (void);
-    UF_PARTITION_TABLE_S*   (*get_rcd_desc)     (void);
+    PARTITION_TABLE_S*      (*get_rcd_desc)      (void);
     OPERATE_RET             (*get_legacy_swap_desc)(UINT_T *addr, UINT_T *size);
 } TUYA_OS_STORAGE_INTF;
 
@@ -763,21 +976,87 @@ typedef struct {
 } TUYA_OS_WIRED_INTF;
 
 
-/***********************************************************
-*************************variable define********************
-***********************************************************/
+/********************************************************************************
+ *********************************tuya_cat1_intf*****************************
+ ********************************************************************************/
+typedef struct {
+    BOOL_T      (*sim_card_test)            (VOID);
+    BOOL_T      (*tf_card_test)             (VOID);
+    BOOL_T      (*sound_loopback_test)      (INT_T rate);
+    BOOL_T      (*uart_loopback_test)       (VOID);
+    unsigned int (*adc_self_test)           (VOID);
+} CELLULAR_TEST_INTF;
 
-/***********************************************************
-*************************function define********************
-***********************************************************/
+typedef enum {
+    CELLULAR_GET_TEST_INTF_CMD = 0x00,
+    CELLULAR_GET_CELLSITE_INFO_CMD = 0x01,
+    CELLULAR_RECOVER_SYS_CONFIG = 0x02,
+} CELLULAR_CMD_E;
 
-//该接口给开发环境各类型的系统接口注册使用
+typedef struct {
+    unsigned char oper_id[6];   //运营商ID
+    unsigned char area_code[2]; //小区编码
+    unsigned char cell_id[4];   //基站编码
+} CELL_SITE_INFO;
+
+typedef struct {
+    OPERATE_RET (*set_imei)                 (CONST CHAR_T imei[15 + 1]);
+    OPERATE_RET (*get_imei)                 (CHAR_T  imei[15 + 1]);
+    OPERATE_RET (*get_iccid)                (CHAR_T  iccid[20 + 1]);
+    OPERATE_RET (*get_ip)                   (NW_IP_S *ip);
+    OPERATE_RET (*get_simcard_state)        (uint8_t *state);
+    OPERATE_RET (*get_network_state)        (BOOL_T  *state);
+    OPERATE_RET (*get_rssi)                 (SCHAR_T *rssi);
+    OPERATE_RET (*control)                  (uint8_t cmd, void *arg);
+    BOOL_T      (*rf_calibrated)            (VOID_T);
+} TUYA_OS_CELLULAR_INTF;
+
+
+
+
+/**
+* @brief register system interfaces in various types of platform
+*
+* @param[in] type: interface type
+* @param[in] intf_ptr: interface pointer
+*
+* @note This API is used to register system interfaces in various types of platform.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/
 OPERATE_RET tuya_os_adapt_reg_intf(INTF_TYPE_ENUM type, void* intf_ptr);
-//该接口给上层sdk调用用于初始化组件接口
+
+/**
+* @brief Initialize system interface
+*
+* @param VOID
+*
+* @note This API is used to initialize system interface.
+*
+* @return VOID
+*/
 VOID_T tuya_os_adapter_intf_impl_init(VOID_T);
-//该接口给上层sdk获取各类型的系统接口列表
+
+/**
+* @brief Get the pointer of various types of system interfaces
+*
+* @param VOID
+*
+* @note This API is used to get the pointer of various types of system interfaces.
+*
+* @return the pointer of system interface
+*/
 VOID_T* tuya_os_adapter_get_intf(INTF_TYPE_ENUM type);
-//该接口用于获取开发环境适配层版本号
+
+/**
+* @brief Get version of platform
+*
+* @param VOID
+*
+* @note This API is used to get the version of platform.
+*
+* @return the version of platform
+*/
 CHAR_T* tuya_os_adapter_get_platform_ver(VOID_T);
 
 

@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
 /* tuya sdk definition of error code */
-typedef int OPERATE_RET;
+//typedef int OPERATE_RET;
 
 //#define OPRT_OK                             (0)
 //#define OPRT_COM_ERROR                      (-1)
@@ -209,6 +209,8 @@ typedef int OPERATE_RET;
 #define OPRT_LOCAL_AI_FACE_NOT_INIT         (-2013)
 #define OPRT_LOCAL_AI_FACE_DB_ERROR         (-2014)
 #define OPRT_UPLOAD_INTERRUPT_ERROR         (-2015)
+
+#define OPRT_DEVICE_IS_SUB_NODE_OR_IN_ELECTION         (-2016)
 
 
 #define OPRT_WARN_LIVING_CHROMECAST         (148)

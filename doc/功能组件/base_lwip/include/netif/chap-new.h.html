@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp.h" class="nav-sub-label">ppp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#CHAP_H" class="nav-sub-label">CHAP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_HDRLEN" class="nav-sub-label">CHAP_HDRLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_CHALLENGE" class="nav-sub-label">CHAP_CHALLENGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_RESPONSE" class="nav-sub-label">CHAP_RESPONSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_SUCCESS" class="nav-sub-label">CHAP_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_FAILURE" class="nav-sub-label">CHAP_FAILURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MD5" class="nav-sub-label">CHAP_MD5</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MICROSOFT" class="nav-sub-label">CHAP_MICROSOFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MICROSOFT_V2" class="nav-sub-label">CHAP_MICROSOFT_V2</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_CHALLENGE_LEN" class="nav-sub-label">MAX_CHALLENGE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_RESPONSE_LEN" class="nav-sub-label">MAX_RESPONSE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAL_MAX_PKTLEN" class="nav-sub-label">CHAL_MAX_PKTLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#RESP_MAX_PKTLEN" class="nav-sub-label">RESP_MAX_PKTLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDTYPE_MICROSOFT_V2" class="nav-sub-label">MDTYPE_MICROSOFT_V2</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDTYPE_MICROSOFT" class="nav-sub-label">MDTYPE_MICROSOFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDTYPE_MD5" class="nav-sub-label">MDTYPE_MD5</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDTYPE_NONE" class="nav-sub-label">MDTYPE_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_DIGEST(mdtype)" class="nav-sub-label">CHAP_DIGEST(mdtype)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_DIGEST(mdtype)" class="nav-sub-label">CHAP_DIGEST(mdtype)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MDTYPE(mdtype)" class="nav-sub-label">CHAP_MDTYPE(mdtype)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MDTYPE_D(digest)" class="nav-sub-label">CHAP_MDTYPE_D(digest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MDTYPE_D(digest)" class="nav-sub-label">CHAP_MDTYPE_D(digest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_CANDIGEST(mdtype, digest)" class="nav-sub-label">CHAP_CANDIGEST(mdtype, digest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_CANDIGEST(mdtype, digest)" class="nav-sub-label">CHAP_CANDIGEST(mdtype, digest)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#chap_client_state;
+" class="nav-sub-label">chap_client_state;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#chap_server_state;" class="nav-sub-label">chap_server_state;</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="ppp.h"><span>ppp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="CHAP_H">Marco <span>CHAP_H</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_HDRLEN">Marco <span>CHAP_HDRLEN</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_HDRLEN 4
+</code></pre>
+      <pre class="doc-comment">/*
+ * CHAP packets begin with a standard header with code, id, len (2 bytes).
+ */</pre>
+
+      <h4 id="CHAP_CHALLENGE">Marco <span>CHAP_CHALLENGE</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_CHALLENGE 1
+</code></pre>
+      <pre class="doc-comment">/*
+ * Values for the code field.
+ */</pre>
+
+      <h4 id="CHAP_RESPONSE">Marco <span>CHAP_RESPONSE</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_RESPONSE 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_SUCCESS">Marco <span>CHAP_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_SUCCESS 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_FAILURE">Marco <span>CHAP_FAILURE</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_FAILURE 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MD5">Marco <span>CHAP_MD5</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MD5	5
+</code></pre>
+      <pre class="doc-comment">/*
+ * CHAP digest codes.
+ */</pre>
+
+      <h4 id="CHAP_MICROSOFT">Marco <span>CHAP_MICROSOFT</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MICROSOFT	128
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MICROSOFT_V2">Marco <span>CHAP_MICROSOFT_V2</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MICROSOFT_V2 129
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_CHALLENGE_LEN">Marco <span>MAX_CHALLENGE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MAX_CHALLENGE_LEN 64
+</code></pre>
+      <pre class="doc-comment">/*
+ * Semi-arbitrary limits on challenge and response fields.
+ */</pre>
+
+      <h4 id="MAX_RESPONSE_LEN">Marco <span>MAX_RESPONSE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MAX_RESPONSE_LEN 64
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAL_MAX_PKTLEN">Marco <span>CHAL_MAX_PKTLEN</span></h4>
+      <pre class="doc-declare"><code>#define CHAL_MAX_PKTLEN (PPP_HDRLEN + CHAP_HDRLEN + 4 + MAX_CHALLENGE_LEN + MAXNAMELEN)
+</code></pre>
+      <pre class="doc-comment">/*
+ * These limits apply to challenge and response packets we send.
+ * The +4 is the +1 that we actually need rounded up.
+ */</pre>
+
+      <h4 id="RESP_MAX_PKTLEN">Marco <span>RESP_MAX_PKTLEN</span></h4>
+      <pre class="doc-declare"><code>#define RESP_MAX_PKTLEN (PPP_HDRLEN + CHAP_HDRLEN + 4 + MAX_RESPONSE_LEN + MAXNAMELEN)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDTYPE_MICROSOFT_V2">Marco <span>MDTYPE_MICROSOFT_V2</span></h4>
+      <pre class="doc-declare"><code>#define MDTYPE_MICROSOFT_V2 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDTYPE_MICROSOFT">Marco <span>MDTYPE_MICROSOFT</span></h4>
+      <pre class="doc-declare"><code>#define MDTYPE_MICROSOFT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDTYPE_MD5">Marco <span>MDTYPE_MD5</span></h4>
+      <pre class="doc-declare"><code>#define MDTYPE_MD5	4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDTYPE_NONE">Marco <span>MDTYPE_NONE</span></h4>
+      <pre class="doc-declare"><code>#define MDTYPE_NONE	0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_DIGEST(mdtype)">Marco <span>CHAP_DIGEST(mdtype)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_DIGEST(mdtype) \
+   ((mdtype) & MDTYPE_MD5)? CHAP_MD5: \
+   ((mdtype) & MDTYPE_MICROSOFT_V2)? CHAP_MICROSOFT_V2: \
+   ((mdtype) & MDTYPE_MICROSOFT)? CHAP_MICROSOFT: \
+   0
+</code></pre>
+      <pre class="doc-comment">/* Return the digest alg. ID for the most preferred digest type. */</pre>
+
+      <h4 id="CHAP_DIGEST(mdtype)">Marco <span>CHAP_DIGEST(mdtype)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_DIGEST(mdtype) \
+   ((mdtype) & MDTYPE_MD5)? CHAP_MD5: \
+   0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MDTYPE(mdtype)">Marco <span>CHAP_MDTYPE(mdtype)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MDTYPE(mdtype) ((mdtype) ^ ((mdtype) - 1)) & (mdtype)
+</code></pre>
+      <pre class="doc-comment">/* Return the bit flag (lsb set) for our most preferred digest type. */</pre>
+
+      <h4 id="CHAP_MDTYPE_D(digest)">Marco <span>CHAP_MDTYPE_D(digest)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MDTYPE_D(digest) \
+   ((digest) == CHAP_MICROSOFT_V2)? MDTYPE_MICROSOFT_V2: \
+   ((digest) == CHAP_MICROSOFT)? MDTYPE_MICROSOFT: \
+   ((digest) == CHAP_MD5)? MDTYPE_MD5: \
+   0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MDTYPE_D(digest)">Marco <span>CHAP_MDTYPE_D(digest)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MDTYPE_D(digest) \
+   ((digest) == CHAP_MD5)? MDTYPE_MD5: \
+   0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_CANDIGEST(mdtype, digest)">Marco <span>CHAP_CANDIGEST(mdtype, digest)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_CANDIGEST(mdtype, digest) \
+   ((digest) == CHAP_MICROSOFT_V2)? (mdtype) & MDTYPE_MICROSOFT_V2: \
+   ((digest) == CHAP_MICROSOFT)? (mdtype) & MDTYPE_MICROSOFT: \
+   ((digest) == CHAP_MD5)? (mdtype) & MDTYPE_MD5: \
+   0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_CANDIGEST(mdtype, digest)">Marco <span>CHAP_CANDIGEST(mdtype, digest)</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_CANDIGEST(mdtype, digest) \
+   ((digest) == CHAP_MD5)? (mdtype) & MDTYPE_MD5: \
+   0
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const struct chap_digest_type *digest,
+		unsigned char *challenge, unsigned char *response,
+		char *message, int message_space);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="chap_client_state;
+">Typedef <span>chap_client_state;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct chap_client_state {
+ u8_t flags;
+ const char *name;
+ const struct chap_digest_type *digest;
+ unsigned char priv[64];	/* private area for digest's use */
+} chap_client_state;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="chap_server_state;">Typedef <span>chap_server_state;</span></h4>
+      <pre class="doc-declare"><code>typedef struct chap_server_state {
+ u8_t flags;
+ u8_t id;
+ const char *name;
+ const struct chap_digest_type *digest;
+ int challenge_xmits;
+ int challenge_pktlen;
+ unsigned char challenge[CHAL_MAX_PKTLEN];
+} chap_server_state;</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

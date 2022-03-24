@@ -29,6 +29,7 @@ BOOL_T lan_dev_master_cap();
 
 BOOL_T lan_scene_linkage_master_is_alive();
 
+
 #ifdef __cplusplus
 }
 #endif

@@ -2,6 +2,11 @@
 #define __WIFI_NETCFG_FRAME_TRANSPORTER_H__
 #include "tuya_hal_network.h"
 #include "tuya_hal_wifi.h"
+
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
 /*
 	wifi_netcfg_frame_transporter组件是wifi相关配网组件的公共服务模块，原来是ez配网中的
 	cc_t(chanChannel_timer)的工作，由于ez+ap共存配网，ffs配网，无感配网等配网的引入，因此
@@ -44,7 +49,8 @@ typedef bool (*fnIsRun)(int netcfg_type);
 typedef int (*fnUnregister)(int netcfg_type);
 
 typedef int (*fnLock)(bool lockState);
-typedef int (*fnStop)();
+typedef int (*fnStartTransporter)();
+typedef int (*fnStopTransporter)();
 typedef int (*fnGetApInfo)(AP_IF_S **ppApArray, uint32_t * pApNum);
 
 
@@ -55,7 +61,8 @@ typedef struct WifiNetcfgFrameTransporter_s{
 	fnUnregister	unregisterTransporteeFn;
 	
 	fnLock			lockTransporterChannelFn;
-	fnStop			stopTransporterFn;
+    fnStartTransporter         startTransporterFn;
+	fnStopTransporter			stopTransporterFn;
 	fnGetApInfo		getApInfoFn;
 }WifiNetcfgFrameTransporter_t, *ptrWifiNetcfgFrameTransporter_t;
 
@@ -78,4 +85,7 @@ int WifiNetcfgFrameTransporterSessionInit();
 int WifiNetcfgFrameTransporterSessionUninit();
 
 
+#ifdef __cplusplus
+}
+#endif
 #endif

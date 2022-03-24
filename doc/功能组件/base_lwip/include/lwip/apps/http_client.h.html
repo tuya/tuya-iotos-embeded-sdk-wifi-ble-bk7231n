@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/altcp.h" class="nav-sub-label">lwip/altcp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/iana.h" class="nav-sub-label">lwip/prot/iana.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_HTTP_CLIENT_H" class="nav-sub-label">LWIP_HDR_APPS_HTTP_CLIENT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPC_HAVE_FILE_IO" class="nav-sub-label">LWIP_HTTPC_HAVE_FILE_IO</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DEFAULT_PORT" class="nav-sub-label">HTTP_DEFAULT_PORT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#httpc_get_file" class="nav-sub-label">httpc_get_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_get_file_dns" class="nav-sub-label">httpc_get_file_dns</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_get_file_to_disk" class="nav-sub-label">httpc_get_file_to_disk</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_get_file_dns_to_disk" class="nav-sub-label">httpc_get_file_dns_to_disk</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#httpc_result_t;
+" class="nav-sub-label">httpc_result_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_state_t" class="nav-sub-label">httpc_state_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_result_fn" class="nav-sub-label">httpc_result_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#err_t" class="nav-sub-label">err_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_connection_t;
+" class="nav-sub-label">httpc_connection_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/altcp.h"><span>lwip/altcp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/altcp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/altcp.h"
+</pre>
+
+      <h4 id="lwip/prot/iana.h"><span>lwip/prot/iana.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/iana.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/iana.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_HTTP_CLIENT_H">Marco <span>LWIP_HDR_APPS_HTTP_CLIENT_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_HTTP_CLIENT_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPC_HAVE_FILE_IO">Marco <span>LWIP_HTTPC_HAVE_FILE_IO</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPC_HAVE_FILE_IO  0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_DEFAULT_PORT">Marco <span>HTTP_DEFAULT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DEFAULT_PORT        LWIP_IANA_PORT_HTTP
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpc 
+ * The default TCP port used for HTTP
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="httpc_get_file">Func <span>httpc_get_file</span></h4>
+      <pre class="doc-declare"><code>err_t httpc_get_file(const ip_addr_t* server_addr, u16_t port, const char* uri, const httpc_connection_t *settings,
+                    altcp_recv_fn recv_fn, void* callback_arg, httpc_state_t **connection);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpc_get_file_dns">Func <span>httpc_get_file_dns</span></h4>
+      <pre class="doc-declare"><code>err_t httpc_get_file_dns(const char* server_name, u16_t port, const char* uri, const httpc_connection_t *settings,
+                    altcp_recv_fn recv_fn, void* callback_arg, httpc_state_t **connection);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpc_get_file_to_disk">Func <span>httpc_get_file_to_disk</span></h4>
+      <pre class="doc-declare"><code>err_t httpc_get_file_to_disk(const ip_addr_t* server_addr, u16_t port, const char* uri, const httpc_connection_t *settings,
+                    void* callback_arg, const char* local_file_name, httpc_state_t **connection);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpc_get_file_dns_to_disk">Func <span>httpc_get_file_dns_to_disk</span></h4>
+      <pre class="doc-declare"><code>err_t httpc_get_file_dns_to_disk(const char* server_name, u16_t port, const char* uri, const httpc_connection_t *settings,
+                    void* callback_arg, const char* local_file_name, httpc_state_t **connection);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="httpc_result_t;
+">Typedef <span>httpc_result_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum ehttpc_result {
+ /** File successfully received */
+ HTTPC_RESULT_OK           = 0,
+ /** Unknown error */
+ HTTPC_RESULT_ERR_UNKNOWN  = 1,
+ /** Connection to server failed */
+ HTTPC_RESULT_ERR_CONNECT  = 2,
+ /** Failed to resolve server hostname */
+ HTTPC_RESULT_ERR_HOSTNAME = 3,
+ /** Connection unexpectedly closed by remote server */
+ HTTPC_RESULT_ERR_CLOSED   = 4,
+ /** Connection timed out (server didn't respond in time) */
+ HTTPC_RESULT_ERR_TIMEOUT  = 5,
+ /** Server responded with an error code */
+ HTTPC_RESULT_ERR_SVR_RESP = 6,
+ /** Local memory error */
+ HTTPC_RESULT_ERR_MEM      = 7,
+ /** Local abort */
+ HTTPC_RESULT_LOCAL_ABORT  = 8,
+ /** Content length mismatch */
+ HTTPC_RESULT_ERR_CONTENT_LEN = 9
+} httpc_result_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpc 
+ * HTTP client result codes
+ */</pre>
+
+      <h4 id="httpc_state_t">Typedef <span>httpc_state_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct _httpc_state httpc_state_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpc_result_fn">Typedef <span>httpc_result_fn</span></h4>
+      <pre class="doc-declare"><code>typedef void (*httpc_result_fn)(void *arg, httpc_result_t httpc_result, u32_t rx_content_len, u32_t srv_res, err_t err);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpc 
+ * Prototype of a http client callback function
+ *
+ * @param arg argument specified when initiating the request
+ * @param httpc_result result of the http transfer (see enum httpc_result_t)
+ * @param rx_content_len number of bytes received (without headers)
+ * @param srv_res this contains the http status code received (if any)
+ * @param err an error returned by internal lwip functions, can help to specify
+ *            the source of the error but must not necessarily be != ERR_OK
+ */</pre>
+
+      <h4 id="err_t">Typedef <span>err_t</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*httpc_headers_done_fn)(httpc_state_t *connection, void *arg, struct pbuf *hdr, u16_t hdr_len, u32_t content_len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpc 
+ * Prototype of http client callback: called when the headers are received
+ *
+ * @param connection http client connection
+ * @param arg argument specified when initiating the request
+ * @param hdr header pbuf(s) (may contain data also)
+ * @param hdr_len length of the heders in 'hdr'
+ * @param content_len content length as received in the headers (-1 if not received)
+ * @return if != ERR_OK is returned, the connection is aborted
+ */</pre>
+
+      <h4 id="httpc_connection_t;
+">Typedef <span>httpc_connection_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct _httpc_connection {
+ ip_addr_t proxy_addr;
+ u16_t proxy_port;
+ u8_t use_proxy;
+ /* @todo: add username:pass? */
+
+#if LWIP_ALTCP
+ altcp_allocator_t *altcp_allocator;
+#endif
+
+ /* this callback is called when the transfer is finished (or aborted) */
+ httpc_result_fn result_fn;
+ /* this callback is called after receiving the http headers
+     It can abort the connection by returning != ERR_OK */
+ httpc_headers_done_fn headers_done_fn;
+} httpc_connection_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

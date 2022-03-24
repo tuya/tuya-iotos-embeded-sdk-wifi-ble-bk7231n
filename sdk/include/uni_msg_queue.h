@@ -1,8 +1,13 @@
-/***********************************************************
-*  File: uni_msg_queue.h
-*  Author: nzy
-*  Date: 120427
-***********************************************************/
+/**
+* @file uni_msg_queue.h
+* @author nzy@tuya.com
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef _UNI_MSG_QUEUE_H
 #define _UNI_MSG_QUEUE_H
 
@@ -14,213 +19,303 @@ extern "C" {
 #include "uni_pointer.h"
 #include "sys_timer.h"
 
-#ifdef _UNI_MSG_QUEUE_GLOBAL
-    #define _UNI_MSG_QUEUE_EXT 
-#else
-    #define _UNI_MSG_QUEUE_EXT extern
-#endif
-
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
-typedef PVOID_T MSG_QUE_HANDLE; // 消息队列操作句柄
-
-typedef USHORT_T MSG_ID;          // 消息ID
-typedef PVOID_T P_MSG_DATA;       // 消息数据
-typedef UINT_T MSG_DATA_LEN;      // 消息数据长度
-
-#define UNVALUED_MSGID 0xffff
-
-typedef UINT_T MSG_TYPE; // 消息类型
-#define INSTANCY_MESSAGE 0  // 紧急消息(该消息为优先先执行)
-#define NORMAL_MESSAGE 1    // 普通消息(该消息以先进先出方式执行)
-
-// 消息
-typedef struct
-{
-    MSG_ID msgID;
-    P_MSG_DATA pMsgData;
-    MSG_DATA_LEN msgDataLen;
-}MESSAGE,*P_MESSAGE;
-
-// 消息链
-typedef struct
-{
-    LIST_HEAD listHead;     // 链表节点
-    MESSAGE msg;
-}MSG_LIST,*P_MSG_LIST;
-
-typedef VOID(*MSG_CALLBACK)(MESSAGE *msg);
-
 #define USE_SEM_COUNTING 1
 #if !(USE_SEM_COUNTING)
     #include "tuya_hal_system.h"
     #define PROC_MSG_DELAY 100
 #endif
 
+typedef PVOID_T MSG_QUE_HANDLE; // message queue handle
+
+typedef USHORT_T MSG_ID;          // message id
+typedef PVOID_T P_MSG_DATA;       // message data
+typedef UINT_T MSG_DATA_LEN;      // message data lenth
+
+#define UNVALUED_MSGID 0xffff  // invalid message id
+
+/**
+ * @brief Definition of message type
+ */
+typedef UINT_T MSG_TYPE; 
+#define INSTANCY_MESSAGE 0  // instant message type
+#define NORMAL_MESSAGE 1    // normal message type
+
+/**
+ * @brief Init param of message
+ */
+typedef struct
+{
+    MSG_ID msgID;            // message id
+    P_MSG_DATA pMsgData;     // message data
+    MSG_DATA_LEN msgDataLen; // message data len
+}MESSAGE,*P_MESSAGE;
+
+/**
+ * @brief message list
+ */
+typedef struct
+{
+    LIST_HEAD listHead;  // list head
+    MESSAGE msg;         // message info
+}MSG_LIST,*P_MSG_LIST;
+
+// message processing callback
+typedef VOID(*MSG_CALLBACK)(MESSAGE *msg);
+
 struct s_tm_msg;
-typedef VOID(* TM_MSG_CB)(struct s_tm_msg *tm_msg);
-// common timer message 
+typedef VOID(* TM_MSG_CB)(struct s_tm_msg *tm_msg); // timer message callback
+
+/**
+ * @brief timer message definition
+ */
 typedef struct s_tm_msg {
-    TIMER_ID timer;
-    MSG_QUE_HANDLE msgQueHandle;
-    TM_MSG_CB cb;
-    MSG_ID msgID;
-    VOID *data;
+    TIMER_ID timer;              // timer id
+    MSG_QUE_HANDLE msgQueHandle; // timer queue handle
+    TM_MSG_CB cb;                // timer callback function
+    MSG_ID msgID;                // message id
+    VOID *data;                  // message data
 }TM_MSG_S;
 
+/**
+ * @brief message entry definition
+ */
 typedef struct {
-    MSG_ID *mid;
-    MSG_CALLBACK msg_cb;
+    MSG_ID *mid;         // message id
+    MSG_CALLBACK msg_cb; // message callback
 }MSG_ENTRY_S;
 
+/**
+ * @brief timer message entry definition
+ */
 typedef struct {
-    TM_MSG_S **tm_msg;
-    TM_MSG_CB tmm_msg_cb;
+    TM_MSG_S **tm_msg;    //timer message info
+    TM_MSG_CB tmm_msg_cb; //timer message callback
 }TM_MSG_ENTRY_S;
 
-/***********************************************************
-*************************variable define********************
-***********************************************************/
-
-/***********************************************************
-*************************function define********************
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Create and init the message queue
+ *
+ * @param[in] pMsgQueHandle: the handle of message queue
+ *
+ * @note This API is used for initializing the message queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET CreateMsgQueAndInit(OUT MSG_QUE_HANDLE *pMsgQueHandle);
 
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Add message to queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[in] pMsgData: message data
+ * @param[in] pMsgData: message data lenth
+ * @param[in] msgType: message type
+ *
+ * @note This API is used for adding a timer to the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET AddMsgNodeToQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                              IN CONST MSG_ID msgID,IN CONST P_MSG_DATA pMsgData,\
-                              IN CONST MSG_DATA_LEN msgDataLen,\
-                              IN CONST MSG_TYPE msgType);
+                                     IN CONST MSG_ID msgID, IN CONST P_MSG_DATA pMsgData,\
+                                     IN CONST MSG_DATA_LEN msgDataLen,\
+                                     IN CONST MSG_TYPE msgType);
 
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Get message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[out] ppMsgListNode: message node
+ *
+ * @note This API is used for getting message node from the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET GetMsgNodeFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                                IN CONST MSG_ID msgID,OUT P_MSG_LIST *ppMsgListNode);
+                                        IN CONST MSG_ID msgID, OUT P_MSG_LIST *ppMsgListNode);
 
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Get the first message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[out] ppMsgListNode: message node
+ *
+ * @note This API is used for getting the first message node from queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET GetFirstMsgFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                                 OUT P_MSG_LIST *ppMsgListNode);
+                                         OUT P_MSG_LIST *ppMsgListNode);
 
-_UNI_MSG_QUEUE_EXT \
-OPERATE_RET GetMsgNodeNum(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                          OUT PINT_T pMsgNodeNum);
+/**
+ * @brief Get the count of message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[out] pMsgNodeNum: the count of message node
+ *
+ * @note This API is used for getting the first message node from queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET GetMsgNodeNum(IN CONST MSG_QUE_HANDLE msgQueHandle, OUT PINT_T pMsgNodeNum);
 
-_UNI_MSG_QUEUE_EXT \
-OPERATE_RET DelAndFreeMsgNodeFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                                       IN CONST P_MSG_LIST pMsgListNode);
+/**
+ * @brief Delete and free the message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] pMsgListNode: the message node
+ *
+ * @note This API is used to delete and free the message node from queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET DelAndFreeMsgNodeFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle, IN CONST P_MSG_LIST pMsgListNode);
 
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Release the message queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ *
+ * @note This API is used releasing the message queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET ReleaseMsgQue(IN CONST MSG_QUE_HANDLE msgQueHandle);
 
-/***********************************************************
-*  Function: PostMessage 递送一个消息至模块(消息先进先执行)
-*  Input: msgQueHandle->消息处理句柄
-*         msgID->消息ID
-*         pMsgData->消息数据
-*         msgDataLen->消息数据长度
-*  Output: none
-*  Return: OPERATE_RET
-*  Date: 20140624
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Post a message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[in] pMsgData: message data
+ * @param[in] msgDataLen: message data len
+ *
+ * @note This API is used for posting a message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET PostMessage(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                        IN CONST MSG_ID msgID,\
-                        IN CONST P_MSG_DATA pMsgData,\
-                        IN CONST MSG_DATA_LEN msgDataLen);
-
-/***********************************************************
-*  Function: PostInstancyMsg 递送一个紧急消息至模块
-*  Input: msgQueHandle->消息处理句柄
-*         msgID->消息ID
-*         pMsgData->消息数据
-*         msgDataLen->消息数据长度
-*  Output: none
-*  Return: OPERATE_RET
-*  Date: 20140624
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
-OPERATE_RET PostInstancyMsg(IN CONST MSG_QUE_HANDLE msgQueHandle,\
                             IN CONST MSG_ID msgID,\
                             IN CONST P_MSG_DATA pMsgData,\
                             IN CONST MSG_DATA_LEN msgDataLen);
 
-/***********************************************************
-*  Function: WaitMessage 等待消息 
-*            WaitMessage成功需调用，消息处理完后需调用
-*                       DelAndFreeMsgNodeFromQueue释放消息
-*  Input: msgQueHandle->消息处理句柄
-*  Output: ppMsgListNode
-*  Return: OPERATE_RET
-*  Date: 20140624
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
-OPERATE_RET WaitMessage(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                        OUT P_MSG_LIST *ppMsgListNode);
+/**
+ * @brief Post a message instantly
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[in] pMsgData: message data
+ * @param[in] msgDataLen: message data len
+ *
+ * @note This API is used for posting a message instantly
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET PostInstancyMsg(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                                  IN CONST MSG_ID msgID,\
+                                  IN CONST P_MSG_DATA pMsgData,\
+                                  IN CONST MSG_DATA_LEN msgDataLen);
 
-/***********************************************************
-*  Function: RegisterMsgCb 
-*  Input: msgQueHandle->消息处理句柄
-*         msgID
-*         msg_cb
-*  Output: ppMsgListNode
-*  Return: OPERATE_RET
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Wait a message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[out] ppMsgListNode: message node
+ *
+ * @note This API is used for waiting a message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET WaitMessage(IN CONST MSG_QUE_HANDLE msgQueHandle, OUT P_MSG_LIST *ppMsgListNode);
+
+/**
+ * @brief Regist callback function for message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msg_cb: message callback function
+ * @param[out] msg_id: message id
+ *
+ * @note This API is used for registing message's callback function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET RegisterMsgCb(IN CONST MSG_QUE_HANDLE msgQueHandle,\
-                          IN CONST MSG_CALLBACK msg_cb, OUT MSG_ID *msg_id);
+                               IN CONST MSG_CALLBACK msg_cb, OUT MSG_ID *msg_id);
 
 
-/***********************************************************
-*  Function: UnregisterMsgCb 
-*  Input: msgQueHandle->消息处理句柄
-*         msgID
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Unregist callback function for message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ *
+ * @note This API is used for unRegisting message's callback function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET UnregisterMsgCb(IN CONST MSG_QUE_HANDLE msgQueHandle,IN CONST MSG_ID msgID);
 
-/***********************************************************
-*  Function: MessageLoop 
-*  Input: msgQueHandle->消息处理句柄
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Message loop processing.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ *
+ * @note This API is used for Message loop processing.
+ *
+ * @return VOID
+ */
 VOID MessageLoop(IN CONST MSG_QUE_HANDLE msgQueHandle);
 
-/***********************************************************
-*  Function: create_tm_msg_hand->create a timer message hand
-*  Input: msgQueHandle data msgID cb
-*  Output: tm_msg 
-*  Return: OPERATE_RET
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Create timer message handle.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] data: message data
+ * @param[in] cb: callback function
+ * @param[out] tm_msg: timer message info
+ *
+ * @note This API is used for creating a timer message handle
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET create_tm_msg_hand(IN CONST MSG_QUE_HANDLE msgQueHandle,IN CONST VOID *data,\
-                               IN CONST TM_MSG_CB cb,OUT TM_MSG_S **tm_msg);
+                                      IN CONST TM_MSG_CB cb,OUT TM_MSG_S **tm_msg);
 
-/***********************************************************
-*  Function: start_tm_msg->start timer message
-*  Input: tm_msg timeCycle timer_type
-*  Output: tm_msg 
-*  Return: OPERATE_RET
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Start the timer message.
+ *
+ * @param[in] tm_msg: timer message info
+ * @param[in] timeCycle: cycle time of the timer
+ * @param[in] timer_type: timer type, cycle or once
+ *
+ * @note This API is used for starting the timer message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET start_tm_msg(IN CONST TM_MSG_S *tm_msg,IN CONST TIME_MS timeCycle,\
-                         IN CONST TIMER_TYPE timer_type);
+                              IN CONST TIMER_TYPE timer_type);
 
-/***********************************************************
-*  Function: stop_tm_msg->stop timer message
-*  Input: tm_msg
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Stop the timer message.
+ *
+ * @param[in] tm_msg: timer message info
+ *
+ * @note This API is used for stopping the timer message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET stop_tm_msg(IN CONST TM_MSG_S *tm_msg);
 
-_UNI_MSG_QUEUE_EXT \
+/**
+ * @brief Release the timer message.
+ *
+ * @param[in] tm_msg: timer message info
+ *
+ * @note This API is used for releasing the timer message
+ *
+ * @return VOID
+ */
 VOID release_tm_msg_hand(IN CONST TM_MSG_S *tm_msg);
 
 #ifdef __cplusplus

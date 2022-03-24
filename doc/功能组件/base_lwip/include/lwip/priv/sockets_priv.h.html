@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/sockets.h" class="nav-sub-label">lwip/sockets.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/sys.h" class="nav-sub-label">lwip/sys.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_SOCKETS_PRIV_H" class="nav-sub-label">LWIP_HDR_SOCKETS_PRIV_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#NUM_SOCKETS" class="nav-sub-label">NUM_SOCKETS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SELWAIT_T" class="nav-sub-label">SELWAIT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_errno(err)" class="nav-sub-label">set_errno(err)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SETGETSOCKOPT_MAXOPTLEN" class="nav-sub-label">LWIP_SETGETSOCKOPT_MAXOPTLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SELECT_SEM_T" class="nav-sub-label">SELECT_SEM_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#SELECT_SEM_PTR(sem)" class="nav-sub-label">SELECT_SEM_PTR(sem)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SELECT_SEM_T" class="nav-sub-label">SELECT_SEM_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#SELECT_SEM_PTR(sem)" class="nav-sub-label">SELECT_SEM_PTR(sem)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#optlen" class="nav-sub-label">optlen</a>
+              </li>
+      
+
+              <li>
+                <a href="#err" class="nav-sub-label">err</a>
+              </li>
+      
+
+              <li>
+                <a href="#completed_sem" class="nav-sub-label">completed_sem</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sock" class="nav-sub-label">lwip_sock</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/sockets.h"><span>lwip/sockets.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/sockets.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/sockets.h"
+</pre>
+
+      <h4 id="lwip/sys.h"><span>lwip/sys.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/sys.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/sys.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_SOCKETS_PRIV_H">Marco <span>LWIP_HDR_SOCKETS_PRIV_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_SOCKETS_PRIV_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NUM_SOCKETS">Marco <span>NUM_SOCKETS</span></h4>
+      <pre class="doc-declare"><code>#define NUM_SOCKETS MEMP_NUM_NETCONN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SELWAIT_T">Marco <span>SELWAIT_T</span></h4>
+      <pre class="doc-declare"><code>#define SELWAIT_T u8_t
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="set_errno(err)">Marco <span>set_errno(err)</span></h4>
+      <pre class="doc-declare"><code>#define set_errno(err) do { if (err) { errno = (err); } } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SETGETSOCKOPT_MAXOPTLEN">Marco <span>LWIP_SETGETSOCKOPT_MAXOPTLEN</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SETGETSOCKOPT_MAXOPTLEN LWIP_MAX(16, sizeof(struct ifreq))
+</code></pre>
+      <pre class="doc-comment">/** Maximum optlen used by setsockopt/getsockopt */</pre>
+
+      <h4 id="SELECT_SEM_T">Marco <span>SELECT_SEM_T</span></h4>
+      <pre class="doc-declare"><code>#define SELECT_SEM_T       sys_sem_t*
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SELECT_SEM_PTR(sem)">Marco <span>SELECT_SEM_PTR(sem)</span></h4>
+      <pre class="doc-declare"><code>#define SELECT_SEM_PTR(sem) (sem)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SELECT_SEM_T">Marco <span>SELECT_SEM_T</span></h4>
+      <pre class="doc-declare"><code>#define SELECT_SEM_T       sys_sem_t
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SELECT_SEM_PTR(sem)">Marco <span>SELECT_SEM_PTR(sem)</span></h4>
+      <pre class="doc-declare"><code>#define SELECT_SEM_PTR(sem) (&(sem))
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="optlen">Variable <span>optlen</span></h4>
+      <pre class="doc-declare"><code>socklen_t optlen;</code></pre>
+      <pre class="doc-comment">/** size of *optval */</pre>
+
+      <h4 id="err">Variable <span>err</span></h4>
+      <pre class="doc-declare"><code>int err;</code></pre>
+      <pre class="doc-comment">/** if an error occurs, it is temporarily stored here */</pre>
+
+      <h4 id="completed_sem">Variable <span>completed_sem</span></h4>
+      <pre class="doc-declare"><code>void* completed_sem;</code></pre>
+      <pre class="doc-comment">/** semaphore to wake up the calling task */</pre>
+
+      <h4 id="lwip_sock">Variable <span>lwip_sock</span></h4>
+      <pre class="doc-declare"><code>struct lwip_sock* lwip_socket_dbg_get_socket(int fd);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

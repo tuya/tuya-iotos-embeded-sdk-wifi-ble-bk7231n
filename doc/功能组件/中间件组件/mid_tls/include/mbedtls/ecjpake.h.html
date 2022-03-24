@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ecp.h" class="nav-sub-label">ecp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#md.h" class="nav-sub-label">md.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ecjpake_alt.h" class="nav-sub-label">ecjpake_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_ECJPAKE_H" class="nav-sub-label">MBEDTLS_ECJPAKE_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_ecjpake_init" class="nav-sub-label">mbedtls_ecjpake_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_setup" class="nav-sub-label">mbedtls_ecjpake_setup</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_check" class="nav-sub-label">mbedtls_ecjpake_check</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_write_round_one" class="nav-sub-label">mbedtls_ecjpake_write_round_one</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_read_round_one" class="nav-sub-label">mbedtls_ecjpake_read_round_one</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_write_round_two" class="nav-sub-label">mbedtls_ecjpake_write_round_two</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_read_round_two" class="nav-sub-label">mbedtls_ecjpake_read_round_two</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_derive_secret" class="nav-sub-label">mbedtls_ecjpake_derive_secret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_free" class="nav-sub-label">mbedtls_ecjpake_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_self_test" class="nav-sub-label">mbedtls_ecjpake_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_ecjpake_role;
+" class="nav-sub-label">mbedtls_ecjpake_role;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ecjpake_context;
+" class="nav-sub-label">mbedtls_ecjpake_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="ecp.h"><span>ecp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ecp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ecp.h"
+</pre>
+
+      <h4 id="md.h"><span>md.h</span></h4>
+      <pre class="doc-declare"><code>#include "md.h"
+</code></pre>
+      <pre class="doc-comment">#include "md.h"
+</pre>
+
+      <h4 id="ecjpake_alt.h"><span>ecjpake_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "ecjpake_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "ecjpake_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_ECJPAKE_H">Marco <span>MBEDTLS_ECJPAKE_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ECJPAKE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_ecjpake_init">Func <span>mbedtls_ecjpake_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_ecjpake_init( mbedtls_ecjpake_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Initialize an ECJPAKE context.
+ *
+ * \param ctx       The ECJPAKE context to initialize.
+ *                  This must not be \c NULL.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_setup">Func <span>mbedtls_ecjpake_setup</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_setup( mbedtls_ecjpake_context *ctx,
+                          mbedtls_ecjpake_role role,
+                          mbedtls_md_type_t hash,
+                          mbedtls_ecp_group_id curve,
+                          const unsigned char *secret,
+                          size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Set up an ECJPAKE context for use.
+ *
+ * \note            Currently the only values for hash/curve allowed by the
+ *                  standard are #MBEDTLS_MD_SHA256/#MBEDTLS_ECP_DP_SECP256R1.
+ *
+ * \param ctx       The ECJPAKE context to set up. This must be initialized.
+ * \param role      The role of the caller. This must be either
+ *                  #MBEDTLS_ECJPAKE_CLIENT or #MBEDTLS_ECJPAKE_SERVER.
+ * \param hash      The identifier of the hash function to use,
+ *                  for example #MBEDTLS_MD_SHA256.
+ * \param curve     The identifier of the elliptic curve to use,
+ *                  for example #MBEDTLS_ECP_DP_SECP256R1.
+ * \param secret    The pre-shared secret (passphrase). This must be
+ *                  a readable buffer of length \p len Bytes. It need
+ *                  only be valid for the duration of this call.
+ * \param len       The length of the pre-shared secret \p secret.
+ *
+ * \return          \c 0 if successful.
+ * \return          A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_check">Func <span>mbedtls_ecjpake_check</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_check( const mbedtls_ecjpake_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Check if an ECJPAKE context is ready for use.
+ *
+ * \param ctx       The ECJPAKE context to check. This must be
+ *                  initialized.
+ *
+ * \return          \c 0 if the context is ready for use.
+ * \return          #MBEDTLS_ERR_ECP_BAD_INPUT_DATA otherwise.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_write_round_one">Func <span>mbedtls_ecjpake_write_round_one</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_write_round_one( mbedtls_ecjpake_context *ctx,
+                           unsigned char *buf, size_t len, size_t *olen,
+                           int (*f_rng)(void *, unsigned char *, size_t),
+                           void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Generate and write the first round message
+ *                  (TLS: contents of the Client/ServerHello extension,
+ *                  excluding extension type and length bytes).
+ *
+ * \param ctx       The ECJPAKE context to use. This must be
+ *                  initialized and set up.
+ * \param buf       The buffer to write the contents to. This must be a
+ *                  writable buffer of length \p len Bytes.
+ * \param len       The length of \p buf in Bytes.
+ * \param olen      The address at which to store the total number
+ *                  of Bytes written to \p buf. This must not be \c NULL.
+ * \param f_rng     The RNG function to use. This must not be \c NULL.
+ * \param p_rng     The RNG parameter to be passed to \p f_rng. This
+ *                  may be \c NULL if \p f_rng doesn't use a context.
+ *
+ * \return          \c 0 if successful.
+ * \return          A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_read_round_one">Func <span>mbedtls_ecjpake_read_round_one</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_read_round_one( mbedtls_ecjpake_context *ctx,
+                                   const unsigned char *buf,
+                                   size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Read and process the first round message
+ *                  (TLS: contents of the Client/ServerHello extension,
+ *                  excluding extension type and length bytes).
+ *
+ * \param ctx       The ECJPAKE context to use. This must be initialized
+ *                  and set up.
+ * \param buf       The buffer holding the first round message. This must
+ *                  be a readable buffer of length \p len Bytes.
+ * \param len       The length in Bytes of \p buf.
+ *
+ * \return          \c 0 if successful.
+ * \return          A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_write_round_two">Func <span>mbedtls_ecjpake_write_round_two</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_write_round_two( mbedtls_ecjpake_context *ctx,
+                           unsigned char *buf, size_t len, size_t *olen,
+                           int (*f_rng)(void *, unsigned char *, size_t),
+                           void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Generate and write the second round message
+ *                  (TLS: contents of the Client/ServerKeyExchange).
+ *
+ * \param ctx       The ECJPAKE context to use. This must be initialized,
+ *                  set up, and already have performed round one.
+ * \param buf       The buffer to write the round two contents to.
+ *                  This must be a writable buffer of length \p len Bytes.
+ * \param len       The size of \p buf in Bytes.
+ * \param olen      The address at which to store the total number of Bytes
+ *                  written to \p buf. This must not be \c NULL.
+ * \param f_rng     The RNG function to use. This must not be \c NULL.
+ * \param p_rng     The RNG parameter to be passed to \p f_rng. This
+ *                  may be \c NULL if \p f_rng doesn't use a context.
+ *
+ * \return          \c 0 if successful.
+ * \return          A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_read_round_two">Func <span>mbedtls_ecjpake_read_round_two</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_read_round_two( mbedtls_ecjpake_context *ctx,
+                                   const unsigned char *buf,
+                                   size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Read and process the second round message
+ *                  (TLS: contents of the Client/ServerKeyExchange).
+ *
+ * \param ctx       The ECJPAKE context to use. This must be initialized
+ *                  and set up and already have performed round one.
+ * \param buf       The buffer holding the second round message. This must
+ *                  be a readable buffer of length \p len Bytes.
+ * \param len       The length in Bytes of \p buf.
+ *
+ * \return          \c 0 if successful.
+ * \return          A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_derive_secret">Func <span>mbedtls_ecjpake_derive_secret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_derive_secret( mbedtls_ecjpake_context *ctx,
+                           unsigned char *buf, size_t len, size_t *olen,
+                           int (*f_rng)(void *, unsigned char *, size_t),
+                           void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Derive the shared secret
+ *                  (TLS: Pre-Master Secret).
+ *
+ * \param ctx       The ECJPAKE context to use. This must be initialized,
+ *                  set up and have performed both round one and two.
+ * \param buf       The buffer to write the derived secret to. This must
+ *                  be a writable buffer of length \p len Bytes.
+ * \param len       The length of \p buf in Bytes.
+ * \param olen      The address at which to store the total number of Bytes
+ *                  written to \p buf. This must not be \c NULL.
+ * \param f_rng     The RNG function to use. This must not be \c NULL.
+ * \param p_rng     The RNG parameter to be passed to \p f_rng. This
+ *                  may be \c NULL if \p f_rng doesn't use a context.
+ *
+ * \return          \c 0 if successful.
+ * \return          A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_free">Func <span>mbedtls_ecjpake_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_ecjpake_free( mbedtls_ecjpake_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This clears an ECJPAKE context and frees any
+ *                  embedded data structure.
+ *
+ * \param ctx       The ECJPAKE context to free. This may be \c NULL,
+ *                  in which case this function does nothing. If it is not
+ *                  \c NULL, it must point to an initialized ECJPAKE context.
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_self_test">Func <span>mbedtls_ecjpake_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ecjpake_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ * \return         0 if successful, or 1 if a test failed
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_ecjpake_role;
+">Typedef <span>mbedtls_ecjpake_role;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   MBEDTLS_ECJPAKE_CLIENT = 0,        /**< Client                         */
+   MBEDTLS_ECJPAKE_SERVER,            /**< Server                         */
+} mbedtls_ecjpake_role;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Roles in the EC J-PAKE exchange
+ */</pre>
+
+      <h4 id="mbedtls_ecjpake_context;
+">Typedef <span>mbedtls_ecjpake_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_ecjpake_context
+{
+   const mbedtls_md_info_t *md_info;  /**< Hash to use                    */
+   mbedtls_ecp_group grp;             /**< Elliptic curve                 */
+   mbedtls_ecjpake_role role;         /**< Are we client or server?       */
+   int point_format;                  /**< Format for point export        */
+
+   mbedtls_ecp_point Xm1;             /**< My public key 1   C: X1, S: X3 */
+   mbedtls_ecp_point Xm2;             /**< My public key 2   C: X2, S: X4 */
+   mbedtls_ecp_point Xp1;             /**< Peer public key 1 C: X3, S: X1 */
+   mbedtls_ecp_point Xp2;             /**< Peer public key 2 C: X4, S: X2 */
+   mbedtls_ecp_point Xp;              /**< Peer public key   C: Xs, S: Xc */
+
+   mbedtls_mpi xm1;                   /**< My private key 1  C: x1, S: x3 */
+   mbedtls_mpi xm2;                   /**< My private key 2  C: x2, S: x4 */
+
+   mbedtls_mpi s;                     /**< Pre-shared secret (passphrase) */
+} mbedtls_ecjpake_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * EC J-PAKE context structure.
+ *
+ * J-PAKE is a symmetric protocol, except for the identifiers used in
+ * Zero-Knowledge Proofs, and the serialization of the second message
+ * (KeyExchange) as defined by the Thread spec.
+ *
+ * In order to benefit from this symmetry, we choose a different naming
+ * convetion from the Thread v1.0 spec. Correspondance is indicated in the
+ * description as a pair C: client name, S: server name
+ */</pre>
+    </div>
+  </body>
+</html>
+            

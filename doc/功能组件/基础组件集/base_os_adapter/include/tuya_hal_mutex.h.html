@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_TUYA_HAL_MUTEX_H" class="nav-sub-label">_TUYA_HAL_MUTEX_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_mutex_create_init" class="nav-sub-label">tuya_hal_mutex_create_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_mutex_lock" class="nav-sub-label">tuya_hal_mutex_lock</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_mutex_unlock" class="nav-sub-label">tuya_hal_mutex_unlock</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_mutex_release" class="nav-sub-label">tuya_hal_mutex_release</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_mutex_intf_init" class="nav-sub-label">tuya_os_mutex_intf_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_TUYA_HAL_MUTEX_H">Marco <span>_TUYA_HAL_MUTEX_H</span></h4>
+      <pre class="doc-declare"><code>#define _TUYA_HAL_MUTEX_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_hal_mutex_create_init">Func <span>tuya_hal_mutex_create_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_mutex_create_init(MUTEX_HANDLE *pMutexHandle);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Create mutex
+*
+* @param[out] pMutexHandle: mutex handle
+*
+* @note This API is used to create mutex.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_mutex_lock">Func <span>tuya_hal_mutex_lock</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_mutex_lock(const MUTEX_HANDLE mutexHandle);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Lock mutex
+*
+* @param[in] mutexHandle: mutex handle
+*
+* @note This API is used to lock mutex.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_mutex_unlock">Func <span>tuya_hal_mutex_unlock</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_mutex_unlock(const MUTEX_HANDLE mutexHandle);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Unlock mutex
+*
+* @param[in] mutexHandle: mutex handle
+*
+* @note This API is used to unlock mutex.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_mutex_release">Func <span>tuya_hal_mutex_release</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_mutex_release(const MUTEX_HANDLE mutexHandle);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Release mutex
+*
+* @param[in] mutexHandle: mutex handle
+*
+* @note This API is used to release mutex.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_os_mutex_intf_init">Func <span>tuya_os_mutex_intf_init</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_os_mutex_intf_init(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Mutex interface initialization
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialization of mutex interface.
+ *
+ * @return VOID
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

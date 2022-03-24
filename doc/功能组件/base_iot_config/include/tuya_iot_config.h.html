@@ -1,0 +1,1500 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_IOT_CONFIG_H" class="nav-sub-label">TUYA_IOT_CONFIG_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_SMALL_MEMORY_BEGIN" class="nav-sub-label">SYSTEM_SMALL_MEMORY_BEGIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_REALTEK8710_1M" class="nav-sub-label">SYSTEM_REALTEK8710_1M</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_REALTEK8710_2M" class="nav-sub-label">SYSTEM_REALTEK8710_2M</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_FREERTOS" class="nav-sub-label">SYSTEM_FREERTOS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_SMALL_MEMORY_END" class="nav-sub-label">SYSTEM_SMALL_MEMORY_END</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_LINUX" class="nav-sub-label">SYSTEM_LINUX</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYSTEM_LITEOS" class="nav-sub-label">SYSTEM_LITEOS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_DISABLE" class="nav-sub-label">TLS_DISABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_TUYA_PSK_ONLY" class="nav-sub-label">TLS_TUYA_PSK_ONLY</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_TUYA_ECC_PSK" class="nav-sub-label">TLS_TUYA_ECC_PSK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_TUYA_ECC_ONLY" class="nav-sub-label">TLS_TUYA_ECC_ONLY</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_TUYA_ECC_ONLY_NOSTRIP" class="nav-sub-label">TLS_TUYA_ECC_ONLY_NOSTRIP</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_TUYA_ECC_CLIENT_AUTH" class="nav-sub-label">TLS_TUYA_ECC_CLIENT_AUTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_DISABLE" class="nav-sub-label">TUYA_OPERATOR_DISABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_CUCC" class="nav-sub-label">TUYA_OPERATOR_CUCC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_CTCC" class="nav-sub-label">TUYA_OPERATOR_CTCC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_CMCC" class="nav-sub-label">TUYA_OPERATOR_CMCC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_CMCC_ANDLINK" class="nav-sub-label">TUYA_OPERATOR_CMCC_ANDLINK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_ALL" class="nav-sub-label">TUYA_OPERATOR_ALL</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RTL8196E" class="nav-sub-label">GW_RTL8196E</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RTL8197F" class="nav-sub-label">GW_RTL8197F</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RTL8711AM" class="nav-sub-label">GW_RTL8711AM</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_ROKIDK18" class="nav-sub-label">GW_ROKIDK18</a>
+              </li>
+      
+
+              <li>
+                <a href="#BUILD_DATE" class="nav-sub-label">BUILD_DATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#BUILD_TIME" class="nav-sub-label">BUILD_TIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#GIT_USER" class="nav-sub-label">GIT_USER</a>
+              </li>
+      
+
+              <li>
+                <a href="#IOT_SDK_VER" class="nav-sub-label">IOT_SDK_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#SDK_BETA_VER" class="nav-sub-label">SDK_BETA_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#PROJECT_NAME" class="nav-sub-label">PROJECT_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#TARGET_PLATFORM" class="nav-sub-label">TARGET_PLATFORM</a>
+              </li>
+      
+
+              <li>
+                <a href="#KV_KEY_SEED" class="nav-sub-label">KV_KEY_SEED</a>
+              </li>
+      
+
+              <li>
+                <a href="#SDK_ID" class="nav-sub-label">SDK_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_BASE_IOT_CONFIG" class="nav-sub-label">ENABLE_BASE_IOT_CONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_IOT_DEBUG" class="nav-sub-label">TUYA_IOT_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_ENCRYPTION" class="nav-sub-label">ENABLE_LAN_ENCRYPTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_HTTP_TRUNK" class="nav-sub-label">ENABLE_HTTP_TRUNK</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_ASTRO_TIMER" class="nav-sub-label">ENABLE_ASTRO_TIMER</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_REDUCE_BIN" class="nav-sub-label">TUYA_REDUCE_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_BLE_VER" class="nav-sub-label">TUYA_BLE_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_GPIO_TEST_V2" class="nav-sub-label">TY_GPIO_TEST_V2</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_GW" class="nav-sub-label">WIFI_GW</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_GET_RFTEST_STAT" class="nav-sub-label">TY_GET_RFTEST_STAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_WIFI_FFC" class="nav-sub-label">TY_WIFI_FFC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_FFS_NETCFG" class="nav-sub-label">TY_FFS_NETCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_PEGASUS_NETCFG" class="nav-sub-label">TY_PEGASUS_NETCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_BT_MOD" class="nav-sub-label">TY_BT_MOD</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_NETCFG" class="nav-sub-label">BT_NETCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_CTRL" class="nav-sub-label">BT_CTRL</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_REMOTE_CTRL" class="nav-sub-label">BT_REMOTE_CTRL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_BT" class="nav-sub-label">MF_BT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_VIRTUAL" class="nav-sub-label">BT_VIRTUAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_ACTIVE" class="nav-sub-label">BT_ACTIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_BT_MESH_PROV" class="nav-sub-label">TY_BT_MESH_PROV</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_SUPPORT_WIRED_WIFI" class="nav-sub-label">GW_SUPPORT_WIRED_WIFI</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_CLOUD_OPERATION" class="nav-sub-label">ENABLE_CLOUD_OPERATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#KV_FILE" class="nav-sub-label">KV_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_LEGACY_HANDLE_UF" class="nav-sub-label">TY_LEGACY_HANDLE_UF</a>
+              </li>
+      
+
+              <li>
+                <a href="#SHUTDOWN_MODE" class="nav-sub-label">SHUTDOWN_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LITTLE_END" class="nav-sub-label">LITTLE_END</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_NXP_SE050" class="nav-sub-label">ENABLE_NXP_SE050</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_MODE" class="nav-sub-label">TLS_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_SESSION" class="nav-sub-label">TLS_SESSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_DEV" class="nav-sub-label">ENABLE_LAN_DEV</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_LINKAGE" class="nav-sub-label">ENABLE_LAN_LINKAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_SYS_RPC" class="nav-sub-label">ENABLE_SYS_RPC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_TYPE" class="nav-sub-label">TUYA_OPERATOR_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPERATING_SYSTEM" class="nav-sub-label">OPERATING_SYSTEM</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_RTC" class="nav-sub-label">TY_RTC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_WATCHDOG" class="nav-sub-label">TY_WATCHDOG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_STATION_AP_MODE" class="nav-sub-label">ENABLE_STATION_AP_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#AP_SNIFFER_EN" class="nav-sub-label">AP_SNIFFER_EN</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_AP_FAST_CONNECT" class="nav-sub-label">ENABLE_AP_FAST_CONNECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#KV_PROTECTED_ENABLE" class="nav-sub-label">KV_PROTECTED_ENABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_CALENDAR_TIMER" class="nav-sub-label">ENABLE_CALENDAR_TIMER</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_NAME_MAX_LEN" class="nav-sub-label">EVENT_NAME_MAX_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_GW" class="nav-sub-label">WIFI_GW</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_IOT_DEBUG" class="nav-sub-label">TUYA_IOT_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#KV_FILE" class="nav-sub-label">KV_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#KV_SWAP_EQUAL_USER" class="nav-sub-label">KV_SWAP_EQUAL_USER</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN" class="nav-sub-label">ENABLE_LAN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SHUTDOWN_MODE" class="nav-sub-label">SHUTDOWN_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LITTLE_END" class="nav-sub-label">LITTLE_END</a>
+              </li>
+      
+
+              <li>
+                <a href="#TLS_MODE" class="nav-sub-label">TLS_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LOCAL_LINKAGE" class="nav-sub-label">ENABLE_LOCAL_LINKAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_CLOUD_OPERATION" class="nav-sub-label">ENABLE_CLOUD_OPERATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_SUBDEVICE" class="nav-sub-label">ENABLE_SUBDEVICE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_SIGMESH" class="nav-sub-label">ENABLE_SIGMESH</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_ENGINEER_TO_NORMAL" class="nav-sub-label">ENABLE_ENGINEER_TO_NORMAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPERATING_SYSTEM" class="nav-sub-label">OPERATING_SYSTEM</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_SYS_RPC" class="nav-sub-label">ENABLE_SYS_RPC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_SECURITY_CHIP" class="nav-sub-label">TY_SECURITY_CHIP</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_IPC" class="nav-sub-label">ENABLE_IPC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_AI_SPEAKER" class="nav-sub-label">ENABLE_AI_SPEAKER</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_EXTRA_MQTT" class="nav-sub-label">ENABLE_EXTRA_MQTT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_RTC" class="nav-sub-label">TY_RTC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_GPIO_TEST_V2" class="nav-sub-label">TY_GPIO_TEST_V2</a>
+              </li>
+      
+
+              <li>
+                <a href="#RELIABLE_TRANSFER" class="nav-sub-label">RELIABLE_TRANSFER</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_WATCHDOG" class="nav-sub-label">TY_WATCHDOG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_ENCRYPTION" class="nav-sub-label">ENABLE_LAN_ENCRYPTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_OPERATOR_TYPE" class="nav-sub-label">TUYA_OPERATOR_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_HTTP_TRUNK" class="nav-sub-label">ENABLE_HTTP_TRUNK</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_AP_FAST_CONNECT" class="nav-sub-label">ENABLE_AP_FAST_CONNECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_WIFI_FFC" class="nav-sub-label">TY_WIFI_FFC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_BT_MOD" class="nav-sub-label">TY_BT_MOD</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_NETCFG" class="nav-sub-label">BT_NETCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_CTRL" class="nav-sub-label">BT_CTRL</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_REMOTE_CTRL" class="nav-sub-label">BT_REMOTE_CTRL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_BT" class="nav-sub-label">MF_BT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_VIRTUAL" class="nav-sub-label">BT_VIRTUAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_ACTIVE" class="nav-sub-label">BT_ACTIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_FFS_NETCFG" class="nav-sub-label">TY_FFS_NETCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_PEGASUS_NETCFG" class="nav-sub-label">TY_PEGASUS_NETCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_LINKAGE" class="nav-sub-label">ENABLE_LAN_LINKAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_LINKAGE_MASTER" class="nav-sub-label">ENABLE_LAN_LINKAGE_MASTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_DEV" class="nav-sub-label">ENABLE_LAN_DEV</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_LAN_DEV_MASTER" class="nav-sub-label">ENABLE_LAN_DEV_MASTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#RECORD_DB" class="nav-sub-label">RECORD_DB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_P2P" class="nav-sub-label">TUYA_P2P</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_ECHO_SHOW" class="nav-sub-label">ENABLE_ECHO_SHOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_CHROMECAST" class="nav-sub-label">ENABLE_CHROMECAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENABLE_CLOUD_STORAGE" class="nav-sub-label">ENABLE_CLOUD_STORAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOW_POWER_ENABLE" class="nav-sub-label">LOW_POWER_ENABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_REDUCE_BIN" class="nav-sub-label">TUYA_REDUCE_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_BLE_VER" class="nav-sub-label">TUYA_BLE_VER</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_IOT_CONFIG_H">Marco <span>TUYA_IOT_CONFIG_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_IOT_CONFIG_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_SMALL_MEMORY_BEGIN">Marco <span>SYSTEM_SMALL_MEMORY_BEGIN</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_SMALL_MEMORY_BEGIN      0      /*small memory systems begin */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_REALTEK8710_1M">Marco <span>SYSTEM_REALTEK8710_1M</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_REALTEK8710_1M          1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_REALTEK8710_2M">Marco <span>SYSTEM_REALTEK8710_2M</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_REALTEK8710_2M          2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_FREERTOS">Marco <span>SYSTEM_FREERTOS</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_FREERTOS                98
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_SMALL_MEMORY_END">Marco <span>SYSTEM_SMALL_MEMORY_END</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_SMALL_MEMORY_END        99     /*small memory systems end */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_LINUX">Marco <span>SYSTEM_LINUX</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_LINUX                   100
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYSTEM_LITEOS">Marco <span>SYSTEM_LITEOS</span></h4>
+      <pre class="doc-declare"><code>#define SYSTEM_LITEOS                  120
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_DISABLE">Marco <span>TLS_DISABLE</span></h4>
+      <pre class="doc-declare"><code>#define TLS_DISABLE                    0      /* disable tls function */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_TUYA_PSK_ONLY">Marco <span>TLS_TUYA_PSK_ONLY</span></h4>
+      <pre class="doc-declare"><code>#define TLS_TUYA_PSK_ONLY              2      /* only enable ciper 0xAE */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_TUYA_ECC_PSK">Marco <span>TLS_TUYA_ECC_PSK</span></h4>
+      <pre class="doc-declare"><code>#define TLS_TUYA_ECC_PSK               3      /* enable ciper 0xAE && 0xC027 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_TUYA_ECC_ONLY">Marco <span>TLS_TUYA_ECC_ONLY</span></h4>
+      <pre class="doc-declare"><code>#define TLS_TUYA_ECC_ONLY              4      /* only enable ciper 0xC027 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_TUYA_ECC_ONLY_NOSTRIP">Marco <span>TLS_TUYA_ECC_ONLY_NOSTRIP</span></h4>
+      <pre class="doc-declare"><code>#define TLS_TUYA_ECC_ONLY_NOSTRIP      5      /* only enable ciper 0xC027, but enable most of mbed-tls configs */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_TUYA_ECC_CLIENT_AUTH">Marco <span>TLS_TUYA_ECC_CLIENT_AUTH</span></h4>
+      <pre class="doc-declare"><code>#define TLS_TUYA_ECC_CLIENT_AUTH       6      /* TLS Client Authentication and Server Authentication mode */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_DISABLE">Marco <span>TUYA_OPERATOR_DISABLE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_DISABLE          0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_CUCC">Marco <span>TUYA_OPERATOR_CUCC</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_CUCC             1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_CTCC">Marco <span>TUYA_OPERATOR_CTCC</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_CTCC             2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_CMCC">Marco <span>TUYA_OPERATOR_CMCC</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_CMCC             4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_CMCC_ANDLINK">Marco <span>TUYA_OPERATOR_CMCC_ANDLINK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_CMCC_ANDLINK     8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_ALL">Marco <span>TUYA_OPERATOR_ALL</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_ALL              (TUYA_OPERATOR_CUCC | TUYA_OPERATOR_CTCC | TUYA_OPERATOR_CMCC)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_RTL8196E">Marco <span>GW_RTL8196E</span></h4>
+      <pre class="doc-declare"><code>#define GW_RTL8196E    3
+</code></pre>
+      <pre class="doc-comment">/*gateway platform*/</pre>
+
+      <h4 id="GW_RTL8197F">Marco <span>GW_RTL8197F</span></h4>
+      <pre class="doc-declare"><code>#define GW_RTL8197F    1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_RTL8711AM">Marco <span>GW_RTL8711AM</span></h4>
+      <pre class="doc-declare"><code>#define GW_RTL8711AM 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_ROKIDK18">Marco <span>GW_ROKIDK18</span></h4>
+      <pre class="doc-declare"><code>#define GW_ROKIDK18    6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BUILD_DATE">Marco <span>BUILD_DATE</span></h4>
+      <pre class="doc-declare"><code>#define BUILD_DATE   "2022_03_02"
+</code></pre>
+      <pre class="doc-comment">/* custom settings */</pre>
+
+      <h4 id="BUILD_TIME">Marco <span>BUILD_TIME</span></h4>
+      <pre class="doc-declare"><code>#define BUILD_TIME   "16_44_57"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GIT_USER">Marco <span>GIT_USER</span></h4>
+      <pre class="doc-declare"><code>#define GIT_USER   "ci_manage"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IOT_SDK_VER">Marco <span>IOT_SDK_VER</span></h4>
+      <pre class="doc-declare"><code>#define IOT_SDK_VER   "2.3.3"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SDK_BETA_VER">Marco <span>SDK_BETA_VER</span></h4>
+      <pre class="doc-declare"><code>#define SDK_BETA_VER   "beta.307"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PROJECT_NAME">Marco <span>PROJECT_NAME</span></h4>
+      <pre class="doc-declare"><code>#define PROJECT_NAME   "ty_iot_sdk"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TARGET_PLATFORM">Marco <span>TARGET_PLATFORM</span></h4>
+      <pre class="doc-declare"><code>#define TARGET_PLATFORM   "bk7231n"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="KV_KEY_SEED">Marco <span>KV_KEY_SEED</span></h4>
+      <pre class="doc-declare"><code>#define KV_KEY_SEED   "8710_2M"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SDK_ID">Marco <span>SDK_ID</span></h4>
+      <pre class="doc-declare"><code>#define SDK_ID   "TuyaOS2.3.3_ty_iot_sdk_2.3.3-beta.307_bk7231n_default_kv_protected_0.0.21"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_BASE_IOT_CONFIG">Marco <span>ENABLE_BASE_IOT_CONFIG</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_BASE_IOT_CONFIG 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_IOT_DEBUG">Marco <span>TUYA_IOT_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_IOT_DEBUG 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_ENCRYPTION">Marco <span>ENABLE_LAN_ENCRYPTION</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_ENCRYPTION 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_HTTP_TRUNK">Marco <span>ENABLE_HTTP_TRUNK</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_HTTP_TRUNK 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_ASTRO_TIMER">Marco <span>ENABLE_ASTRO_TIMER</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_ASTRO_TIMER 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_REDUCE_BIN">Marco <span>TUYA_REDUCE_BIN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_REDUCE_BIN 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_BLE_VER">Marco <span>TUYA_BLE_VER</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_BLE_VER 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_GPIO_TEST_V2">Marco <span>TY_GPIO_TEST_V2</span></h4>
+      <pre class="doc-declare"><code>#define TY_GPIO_TEST_V2 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_GW">Marco <span>WIFI_GW</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_GW 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_GET_RFTEST_STAT">Marco <span>TY_GET_RFTEST_STAT</span></h4>
+      <pre class="doc-declare"><code>#define TY_GET_RFTEST_STAT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_WIFI_FFC">Marco <span>TY_WIFI_FFC</span></h4>
+      <pre class="doc-declare"><code>#define TY_WIFI_FFC 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_FFS_NETCFG">Marco <span>TY_FFS_NETCFG</span></h4>
+      <pre class="doc-declare"><code>#define TY_FFS_NETCFG 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_PEGASUS_NETCFG">Marco <span>TY_PEGASUS_NETCFG</span></h4>
+      <pre class="doc-declare"><code>#define TY_PEGASUS_NETCFG 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_BT_MOD">Marco <span>TY_BT_MOD</span></h4>
+      <pre class="doc-declare"><code>#define TY_BT_MOD 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_NETCFG">Marco <span>BT_NETCFG</span></h4>
+      <pre class="doc-declare"><code>#define BT_NETCFG 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_CTRL">Marco <span>BT_CTRL</span></h4>
+      <pre class="doc-declare"><code>#define BT_CTRL 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_REMOTE_CTRL">Marco <span>BT_REMOTE_CTRL</span></h4>
+      <pre class="doc-declare"><code>#define BT_REMOTE_CTRL 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MF_BT">Marco <span>MF_BT</span></h4>
+      <pre class="doc-declare"><code>#define MF_BT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_VIRTUAL">Marco <span>BT_VIRTUAL</span></h4>
+      <pre class="doc-declare"><code>#define BT_VIRTUAL 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_ACTIVE">Marco <span>BT_ACTIVE</span></h4>
+      <pre class="doc-declare"><code>#define BT_ACTIVE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_BT_MESH_PROV">Marco <span>TY_BT_MESH_PROV</span></h4>
+      <pre class="doc-declare"><code>#define TY_BT_MESH_PROV 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_SUPPORT_WIRED_WIFI">Marco <span>GW_SUPPORT_WIRED_WIFI</span></h4>
+      <pre class="doc-declare"><code>#define GW_SUPPORT_WIRED_WIFI 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_CLOUD_OPERATION">Marco <span>ENABLE_CLOUD_OPERATION</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_CLOUD_OPERATION 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="KV_FILE">Marco <span>KV_FILE</span></h4>
+      <pre class="doc-declare"><code>#define KV_FILE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_LEGACY_HANDLE_UF">Marco <span>TY_LEGACY_HANDLE_UF</span></h4>
+      <pre class="doc-declare"><code>#define TY_LEGACY_HANDLE_UF 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SHUTDOWN_MODE">Marco <span>SHUTDOWN_MODE</span></h4>
+      <pre class="doc-declare"><code>#define SHUTDOWN_MODE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LITTLE_END">Marco <span>LITTLE_END</span></h4>
+      <pre class="doc-declare"><code>#define LITTLE_END 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_NXP_SE050">Marco <span>ENABLE_NXP_SE050</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_NXP_SE050 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_MODE">Marco <span>TLS_MODE</span></h4>
+      <pre class="doc-declare"><code>#define TLS_MODE 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_SESSION">Marco <span>TLS_SESSION</span></h4>
+      <pre class="doc-declare"><code>#define TLS_SESSION 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_DEV">Marco <span>ENABLE_LAN_DEV</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_DEV 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_LINKAGE">Marco <span>ENABLE_LAN_LINKAGE</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_LINKAGE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_SYS_RPC">Marco <span>ENABLE_SYS_RPC</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_SYS_RPC 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_TYPE">Marco <span>TUYA_OPERATOR_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_TYPE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPERATING_SYSTEM">Marco <span>OPERATING_SYSTEM</span></h4>
+      <pre class="doc-declare"><code>#define OPERATING_SYSTEM 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_RTC">Marco <span>TY_RTC</span></h4>
+      <pre class="doc-declare"><code>#define TY_RTC 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_WATCHDOG">Marco <span>TY_WATCHDOG</span></h4>
+      <pre class="doc-declare"><code>#define TY_WATCHDOG 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_STATION_AP_MODE">Marco <span>ENABLE_STATION_AP_MODE</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_STATION_AP_MODE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AP_SNIFFER_EN">Marco <span>AP_SNIFFER_EN</span></h4>
+      <pre class="doc-declare"><code>#define AP_SNIFFER_EN 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_AP_FAST_CONNECT">Marco <span>ENABLE_AP_FAST_CONNECT</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_AP_FAST_CONNECT 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="KV_PROTECTED_ENABLE">Marco <span>KV_PROTECTED_ENABLE</span></h4>
+      <pre class="doc-declare"><code>#define KV_PROTECTED_ENABLE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_CALENDAR_TIMER">Marco <span>ENABLE_CALENDAR_TIMER</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_CALENDAR_TIMER 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_NAME_MAX_LEN">Marco <span>EVENT_NAME_MAX_LEN</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_NAME_MAX_LEN 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_GW">Marco <span>WIFI_GW</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_GW 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_IOT_DEBUG">Marco <span>TUYA_IOT_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_IOT_DEBUG 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="KV_FILE">Marco <span>KV_FILE</span></h4>
+      <pre class="doc-declare"><code>#define KV_FILE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="KV_SWAP_EQUAL_USER">Marco <span>KV_SWAP_EQUAL_USER</span></h4>
+      <pre class="doc-declare"><code>#define KV_SWAP_EQUAL_USER 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN">Marco <span>ENABLE_LAN</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SHUTDOWN_MODE">Marco <span>SHUTDOWN_MODE</span></h4>
+      <pre class="doc-declare"><code>#define SHUTDOWN_MODE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LITTLE_END">Marco <span>LITTLE_END</span></h4>
+      <pre class="doc-declare"><code>#define LITTLE_END 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TLS_MODE">Marco <span>TLS_MODE</span></h4>
+      <pre class="doc-declare"><code>#define TLS_MODE TLS_TUYA_ECC_PSK
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LOCAL_LINKAGE">Marco <span>ENABLE_LOCAL_LINKAGE</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LOCAL_LINKAGE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_CLOUD_OPERATION">Marco <span>ENABLE_CLOUD_OPERATION</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_CLOUD_OPERATION 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_SUBDEVICE">Marco <span>ENABLE_SUBDEVICE</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_SUBDEVICE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_SIGMESH">Marco <span>ENABLE_SIGMESH</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_SIGMESH 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_ENGINEER_TO_NORMAL">Marco <span>ENABLE_ENGINEER_TO_NORMAL</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_ENGINEER_TO_NORMAL 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPERATING_SYSTEM">Marco <span>OPERATING_SYSTEM</span></h4>
+      <pre class="doc-declare"><code>#define OPERATING_SYSTEM SYSTEM_LINUX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_SYS_RPC">Marco <span>ENABLE_SYS_RPC</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_SYS_RPC 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_SECURITY_CHIP">Marco <span>TY_SECURITY_CHIP</span></h4>
+      <pre class="doc-declare"><code>#define TY_SECURITY_CHIP 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_IPC">Marco <span>ENABLE_IPC</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_IPC 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_AI_SPEAKER">Marco <span>ENABLE_AI_SPEAKER</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_AI_SPEAKER 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_EXTRA_MQTT">Marco <span>ENABLE_EXTRA_MQTT</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_EXTRA_MQTT 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_RTC">Marco <span>TY_RTC</span></h4>
+      <pre class="doc-declare"><code>#define TY_RTC 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_GPIO_TEST_V2">Marco <span>TY_GPIO_TEST_V2</span></h4>
+      <pre class="doc-declare"><code>#define TY_GPIO_TEST_V2 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RELIABLE_TRANSFER">Marco <span>RELIABLE_TRANSFER</span></h4>
+      <pre class="doc-declare"><code>#define RELIABLE_TRANSFER 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_WATCHDOG">Marco <span>TY_WATCHDOG</span></h4>
+      <pre class="doc-declare"><code>#define TY_WATCHDOG 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_ENCRYPTION">Marco <span>ENABLE_LAN_ENCRYPTION</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_ENCRYPTION 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_OPERATOR_TYPE">Marco <span>TUYA_OPERATOR_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_OPERATOR_TYPE TUYA_OPERATOR_DISABLE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_HTTP_TRUNK">Marco <span>ENABLE_HTTP_TRUNK</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_HTTP_TRUNK 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_AP_FAST_CONNECT">Marco <span>ENABLE_AP_FAST_CONNECT</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_AP_FAST_CONNECT 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_WIFI_FFC">Marco <span>TY_WIFI_FFC</span></h4>
+      <pre class="doc-declare"><code>#define TY_WIFI_FFC 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_BT_MOD">Marco <span>TY_BT_MOD</span></h4>
+      <pre class="doc-declare"><code>#define TY_BT_MOD 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_NETCFG">Marco <span>BT_NETCFG</span></h4>
+      <pre class="doc-declare"><code>#define BT_NETCFG 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_CTRL">Marco <span>BT_CTRL</span></h4>
+      <pre class="doc-declare"><code>#define BT_CTRL 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_REMOTE_CTRL">Marco <span>BT_REMOTE_CTRL</span></h4>
+      <pre class="doc-declare"><code>#define BT_REMOTE_CTRL 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MF_BT">Marco <span>MF_BT</span></h4>
+      <pre class="doc-declare"><code>#define MF_BT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_VIRTUAL">Marco <span>BT_VIRTUAL</span></h4>
+      <pre class="doc-declare"><code>#define BT_VIRTUAL 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_ACTIVE">Marco <span>BT_ACTIVE</span></h4>
+      <pre class="doc-declare"><code>#define BT_ACTIVE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_FFS_NETCFG">Marco <span>TY_FFS_NETCFG</span></h4>
+      <pre class="doc-declare"><code>#define TY_FFS_NETCFG 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_PEGASUS_NETCFG">Marco <span>TY_PEGASUS_NETCFG</span></h4>
+      <pre class="doc-declare"><code>#define TY_PEGASUS_NETCFG 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_LINKAGE">Marco <span>ENABLE_LAN_LINKAGE</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_LINKAGE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_LINKAGE_MASTER">Marco <span>ENABLE_LAN_LINKAGE_MASTER</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_LINKAGE_MASTER 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_DEV">Marco <span>ENABLE_LAN_DEV</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_DEV 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_LAN_DEV_MASTER">Marco <span>ENABLE_LAN_DEV_MASTER</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_LAN_DEV_MASTER 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RECORD_DB">Marco <span>RECORD_DB</span></h4>
+      <pre class="doc-declare"><code>#define RECORD_DB 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_P2P">Marco <span>TUYA_P2P</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_P2P 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_ECHO_SHOW">Marco <span>ENABLE_ECHO_SHOW</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_ECHO_SHOW 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_CHROMECAST">Marco <span>ENABLE_CHROMECAST</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_CHROMECAST 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENABLE_CLOUD_STORAGE">Marco <span>ENABLE_CLOUD_STORAGE</span></h4>
+      <pre class="doc-declare"><code>#define ENABLE_CLOUD_STORAGE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOW_POWER_ENABLE">Marco <span>LOW_POWER_ENABLE</span></h4>
+      <pre class="doc-declare"><code>#define LOW_POWER_ENABLE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_REDUCE_BIN">Marco <span>TUYA_REDUCE_BIN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_REDUCE_BIN 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_BLE_VER">Marco <span>TUYA_BLE_VER</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_BLE_VER 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

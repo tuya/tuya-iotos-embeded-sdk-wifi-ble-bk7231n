@@ -2,7 +2,6 @@
 #define __LAN_PUB_SUB_MQ_API_H
 
 #include "tuya_cloud_com_defs.h"
-#include "lan_pub_sub_mq.h"
 
 #ifdef __cplusplus
 	extern "C" {
@@ -26,6 +25,8 @@
 /***********************************************************
 *************************micro define***********************
 ***********************************************************/
+#define LAN_TOPIC_NAME_LEN_MAX 32
+
 typedef VOID* LAN_PUB_SUB_MQ_SVC_HANDLE;
 
 //收到其他设备的发布消息，回调

@@ -1,0 +1,842 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_pointer.h" class="nav-sub-label">uni_pointer.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sys_timer.h" class="nav-sub-label">sys_timer.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_system.h" class="nav-sub-label">tuya_hal_system.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_MSG_QUEUE_H" class="nav-sub-label">_UNI_MSG_QUEUE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#USE_SEM_COUNTING" class="nav-sub-label">USE_SEM_COUNTING</a>
+              </li>
+      
+
+              <li>
+                <a href="#PROC_MSG_DELAY" class="nav-sub-label">PROC_MSG_DELAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNVALUED_MSGID" class="nav-sub-label">UNVALUED_MSGID</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#CreateMsgQueAndInit" class="nav-sub-label">CreateMsgQueAndInit</a>
+              </li>
+      
+
+              <li>
+                <a href="#AddMsgNodeToQueue" class="nav-sub-label">AddMsgNodeToQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetMsgNodeFromQueue" class="nav-sub-label">GetMsgNodeFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetFirstMsgFromQueue" class="nav-sub-label">GetFirstMsgFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetMsgNodeNum" class="nav-sub-label">GetMsgNodeNum</a>
+              </li>
+      
+
+              <li>
+                <a href="#DelAndFreeMsgNodeFromQueue" class="nav-sub-label">DelAndFreeMsgNodeFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#ReleaseMsgQue" class="nav-sub-label">ReleaseMsgQue</a>
+              </li>
+      
+
+              <li>
+                <a href="#PostMessage" class="nav-sub-label">PostMessage</a>
+              </li>
+      
+
+              <li>
+                <a href="#PostInstancyMsg" class="nav-sub-label">PostInstancyMsg</a>
+              </li>
+      
+
+              <li>
+                <a href="#WaitMessage" class="nav-sub-label">WaitMessage</a>
+              </li>
+      
+
+              <li>
+                <a href="#RegisterMsgCb" class="nav-sub-label">RegisterMsgCb</a>
+              </li>
+      
+
+              <li>
+                <a href="#UnregisterMsgCb" class="nav-sub-label">UnregisterMsgCb</a>
+              </li>
+      
+
+              <li>
+                <a href="#MessageLoop" class="nav-sub-label">MessageLoop</a>
+              </li>
+      
+
+              <li>
+                <a href="#create_tm_msg_hand" class="nav-sub-label">create_tm_msg_hand</a>
+              </li>
+      
+
+              <li>
+                <a href="#start_tm_msg" class="nav-sub-label">start_tm_msg</a>
+              </li>
+      
+
+              <li>
+                <a href="#stop_tm_msg" class="nav-sub-label">stop_tm_msg</a>
+              </li>
+      
+
+              <li>
+                <a href="#release_tm_msg_hand" class="nav-sub-label">release_tm_msg_hand</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#s_tm_msg" class="nav-sub-label">s_tm_msg</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MSG_QUE_HANDLE" class="nav-sub-label">MSG_QUE_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_ID" class="nav-sub-label">MSG_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#P_MSG_DATA" class="nav-sub-label">P_MSG_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_DATA_LEN" class="nav-sub-label">MSG_DATA_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_TYPE" class="nav-sub-label">MSG_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MESSAGE,*P_MESSAGE;
+" class="nav-sub-label">MESSAGE,*P_MESSAGE;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_LIST,*P_MSG_LIST;
+" class="nav-sub-label">MSG_LIST,*P_MSG_LIST;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_CALLBACK" class="nav-sub-label">MSG_CALLBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TM_MSG_CB" class="nav-sub-label">TM_MSG_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TM_MSG_S;
+" class="nav-sub-label">TM_MSG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_ENTRY_S;
+" class="nav-sub-label">MSG_ENTRY_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TM_MSG_ENTRY_S;
+" class="nav-sub-label">TM_MSG_ENTRY_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="uni_pointer.h"><span>uni_pointer.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_pointer.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_pointer.h"
+</pre>
+
+      <h4 id="sys_timer.h"><span>sys_timer.h</span></h4>
+      <pre class="doc-declare"><code>#include "sys_timer.h"
+</code></pre>
+      <pre class="doc-comment">#include "sys_timer.h"
+</pre>
+
+      <h4 id="tuya_hal_system.h"><span>tuya_hal_system.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_system.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_system.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_MSG_QUEUE_H">Marco <span>_UNI_MSG_QUEUE_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_MSG_QUEUE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="USE_SEM_COUNTING">Marco <span>USE_SEM_COUNTING</span></h4>
+      <pre class="doc-declare"><code>#define USE_SEM_COUNTING 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PROC_MSG_DELAY">Marco <span>PROC_MSG_DELAY</span></h4>
+      <pre class="doc-declare"><code>#define PROC_MSG_DELAY 100
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNVALUED_MSGID">Marco <span>UNVALUED_MSGID</span></h4>
+      <pre class="doc-declare"><code>#define UNVALUED_MSGID 65535 // invalid message id
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="CreateMsgQueAndInit">Func <span>CreateMsgQueAndInit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET CreateMsgQueAndInit(OUT MSG_QUE_HANDLE *pMsgQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create and init the message queue
+ *
+ * @param[in] pMsgQueHandle: the handle of message queue
+ *
+ * @note This API is used for initializing the message queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="AddMsgNodeToQueue">Func <span>AddMsgNodeToQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET AddMsgNodeToQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                                    IN CONST MSG_ID msgID, IN CONST P_MSG_DATA pMsgData,\
+                                    IN CONST MSG_DATA_LEN msgDataLen,\
+                                    IN CONST MSG_TYPE msgType);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Add message to queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[in] pMsgData: message data
+ * @param[in] pMsgData: message data lenth
+ * @param[in] msgType: message type
+ *
+ * @note This API is used for adding a timer to the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GetMsgNodeFromQueue">Func <span>GetMsgNodeFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET GetMsgNodeFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                                       IN CONST MSG_ID msgID, OUT P_MSG_LIST *ppMsgListNode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[out] ppMsgListNode: message node
+ *
+ * @note This API is used for getting message node from the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GetFirstMsgFromQueue">Func <span>GetFirstMsgFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET GetFirstMsgFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                                        OUT P_MSG_LIST *ppMsgListNode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get the first message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[out] ppMsgListNode: message node
+ *
+ * @note This API is used for getting the first message node from queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GetMsgNodeNum">Func <span>GetMsgNodeNum</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET GetMsgNodeNum(IN CONST MSG_QUE_HANDLE msgQueHandle, OUT PINT_T pMsgNodeNum);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get the count of message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[out] pMsgNodeNum: the count of message node
+ *
+ * @note This API is used for getting the first message node from queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="DelAndFreeMsgNodeFromQueue">Func <span>DelAndFreeMsgNodeFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET DelAndFreeMsgNodeFromQueue(IN CONST MSG_QUE_HANDLE msgQueHandle, IN CONST P_MSG_LIST pMsgListNode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Delete and free the message node from queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] pMsgListNode: the message node
+ *
+ * @note This API is used to delete and free the message node from queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ReleaseMsgQue">Func <span>ReleaseMsgQue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ReleaseMsgQue(IN CONST MSG_QUE_HANDLE msgQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Release the message queue
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ *
+ * @note This API is used releasing the message queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="PostMessage">Func <span>PostMessage</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET PostMessage(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                           IN CONST MSG_ID msgID,\
+                           IN CONST P_MSG_DATA pMsgData,\
+                           IN CONST MSG_DATA_LEN msgDataLen);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Post a message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[in] pMsgData: message data
+ * @param[in] msgDataLen: message data len
+ *
+ * @note This API is used for posting a message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="PostInstancyMsg">Func <span>PostInstancyMsg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET PostInstancyMsg(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                                 IN CONST MSG_ID msgID,\
+                                 IN CONST P_MSG_DATA pMsgData,\
+                                 IN CONST MSG_DATA_LEN msgDataLen);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Post a message instantly
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ * @param[in] pMsgData: message data
+ * @param[in] msgDataLen: message data len
+ *
+ * @note This API is used for posting a message instantly
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="WaitMessage">Func <span>WaitMessage</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET WaitMessage(IN CONST MSG_QUE_HANDLE msgQueHandle, OUT P_MSG_LIST *ppMsgListNode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Wait a message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[out] ppMsgListNode: message node
+ *
+ * @note This API is used for waiting a message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="RegisterMsgCb">Func <span>RegisterMsgCb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET RegisterMsgCb(IN CONST MSG_QUE_HANDLE msgQueHandle,\
+                              IN CONST MSG_CALLBACK msg_cb, OUT MSG_ID *msg_id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Regist callback function for message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msg_cb: message callback function
+ * @param[out] msg_id: message id
+ *
+ * @note This API is used for registing message's callback function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="UnregisterMsgCb">Func <span>UnregisterMsgCb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET UnregisterMsgCb(IN CONST MSG_QUE_HANDLE msgQueHandle,IN CONST MSG_ID msgID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Unregist callback function for message.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] msgID: message id
+ *
+ * @note This API is used for unRegisting message's callback function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="MessageLoop">Func <span>MessageLoop</span></h4>
+      <pre class="doc-declare"><code>VOID MessageLoop(IN CONST MSG_QUE_HANDLE msgQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Message loop processing.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ *
+ * @note This API is used for Message loop processing.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="create_tm_msg_hand">Func <span>create_tm_msg_hand</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET create_tm_msg_hand(IN CONST MSG_QUE_HANDLE msgQueHandle,IN CONST VOID *data,\
+                                     IN CONST TM_MSG_CB cb,OUT TM_MSG_S **tm_msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create timer message handle.
+ *
+ * @param[in] msgQueHandle: the handle of the message queue
+ * @param[in] data: message data
+ * @param[in] cb: callback function
+ * @param[out] tm_msg: timer message info
+ *
+ * @note This API is used for creating a timer message handle
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="start_tm_msg">Func <span>start_tm_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET start_tm_msg(IN CONST TM_MSG_S *tm_msg,IN CONST TIME_MS timeCycle,\
+                             IN CONST TIMER_TYPE timer_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start the timer message.
+ *
+ * @param[in] tm_msg: timer message info
+ * @param[in] timeCycle: cycle time of the timer
+ * @param[in] timer_type: timer type, cycle or once
+ *
+ * @note This API is used for starting the timer message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="stop_tm_msg">Func <span>stop_tm_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET stop_tm_msg(IN CONST TM_MSG_S *tm_msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Stop the timer message.
+ *
+ * @param[in] tm_msg: timer message info
+ *
+ * @note This API is used for stopping the timer message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="release_tm_msg_hand">Func <span>release_tm_msg_hand</span></h4>
+      <pre class="doc-declare"><code>VOID release_tm_msg_hand(IN CONST TM_MSG_S *tm_msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Release the timer message.
+ *
+ * @param[in] tm_msg: timer message info
+ *
+ * @note This API is used for releasing the timer message
+ *
+ * @return VOID
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="s_tm_msg">Variable <span>s_tm_msg</span></h4>
+      <pre class="doc-declare"><code>struct s_tm_msg;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="MSG_QUE_HANDLE">Typedef <span>MSG_QUE_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T MSG_QUE_HANDLE; // message queue handle
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_ID">Typedef <span>MSG_ID</span></h4>
+      <pre class="doc-declare"><code>typedef USHORT_T MSG_ID;         // message id
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="P_MSG_DATA">Typedef <span>P_MSG_DATA</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T P_MSG_DATA;      // message data
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_DATA_LEN">Typedef <span>MSG_DATA_LEN</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T MSG_DATA_LEN;     // message data lenth
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_TYPE">Typedef <span>MSG_TYPE</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T MSG_TYPE; 
+#define INSTANCY_MESSAGE 0 // instant message type
+#define NORMAL_MESSAGE 1   // normal message type
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of message type
+ */</pre>
+
+      <h4 id="MESSAGE,*P_MESSAGE;
+">Typedef <span>MESSAGE,*P_MESSAGE;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   MSG_ID msgID;           // message id
+   P_MSG_DATA pMsgData;    // message data
+   MSG_DATA_LEN msgDataLen; // message data len
+}MESSAGE,*P_MESSAGE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init param of message
+ */</pre>
+
+      <h4 id="MSG_LIST,*P_MSG_LIST;
+">Typedef <span>MSG_LIST,*P_MSG_LIST;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   LIST_HEAD listHead; // list head
+   MESSAGE msg;        // message info
+}MSG_LIST,*P_MSG_LIST;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief message list
+ */</pre>
+
+      <h4 id="MSG_CALLBACK">Typedef <span>MSG_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(*MSG_CALLBACK)(MESSAGE *msg);
+</code></pre>
+      <pre class="doc-comment">// message processing callback</pre>
+
+      <h4 id="TM_MSG_CB">Typedef <span>TM_MSG_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(* TM_MSG_CB)(struct s_tm_msg *tm_msg); // timer message callback
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TM_MSG_S;
+">Typedef <span>TM_MSG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct s_tm_msg {
+   TIMER_ID timer;             // timer id
+   MSG_QUE_HANDLE msgQueHandle; // timer queue handle
+   TM_MSG_CB cb;               // timer callback function
+   MSG_ID msgID;               // message id
+   VOID *data;                 // message data
+}TM_MSG_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief timer message definition
+ */</pre>
+
+      <h4 id="MSG_ENTRY_S;
+">Typedef <span>MSG_ENTRY_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   MSG_ID *mid;        // message id
+   MSG_CALLBACK msg_cb; // message callback
+}MSG_ENTRY_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief message entry definition
+ */</pre>
+
+      <h4 id="TM_MSG_ENTRY_S;
+">Typedef <span>TM_MSG_ENTRY_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   TM_MSG_S **tm_msg;   //timer message info
+   TM_MSG_CB tmm_msg_cb; //timer message callback
+}TM_MSG_ENTRY_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief timer message entry definition
+ */</pre>
+    </div>
+  </body>
+</html>
+            

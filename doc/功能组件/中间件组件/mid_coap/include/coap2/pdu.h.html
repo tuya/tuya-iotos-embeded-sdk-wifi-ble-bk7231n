@@ -1,0 +1,1978 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#uri.h" class="nav-sub-label">uri.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_PDU_H_" class="nav-sub-label">COAP_PDU_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_PORT" class="nav-sub-label">COAP_DEFAULT_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAPS_DEFAULT_PORT" class="nav-sub-label">COAPS_DEFAULT_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_MAX_AGE" class="nav-sub-label">COAP_DEFAULT_MAX_AGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_MTU" class="nav-sub-label">COAP_DEFAULT_MTU</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_SIZE_OFFSET_TCP8" class="nav-sub-label">COAP_MESSAGE_SIZE_OFFSET_TCP8</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_SIZE_OFFSET_TCP16" class="nav-sub-label">COAP_MESSAGE_SIZE_OFFSET_TCP16</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_SIZE_OFFSET_TCP32" class="nav-sub-label">COAP_MESSAGE_SIZE_OFFSET_TCP32</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MAX_MESSAGE_SIZE_TCP0" class="nav-sub-label">COAP_MAX_MESSAGE_SIZE_TCP0</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MAX_MESSAGE_SIZE_TCP8" class="nav-sub-label">COAP_MAX_MESSAGE_SIZE_TCP8</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MAX_MESSAGE_SIZE_TCP16" class="nav-sub-label">COAP_MAX_MESSAGE_SIZE_TCP16</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MAX_MESSAGE_SIZE_TCP32" class="nav-sub-label">COAP_MAX_MESSAGE_SIZE_TCP32</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_MAX_PDU_RX_SIZE" class="nav-sub-label">COAP_DEFAULT_MAX_PDU_RX_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_MAX_PDU_RX_SIZE" class="nav-sub-label">COAP_DEFAULT_MAX_PDU_RX_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEBUG_BUF_SIZE" class="nav-sub-label">COAP_DEBUG_BUF_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEBUG_BUF_SIZE" class="nav-sub-label">COAP_DEBUG_BUF_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_VERSION" class="nav-sub-label">COAP_DEFAULT_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_SCHEME" class="nav-sub-label">COAP_DEFAULT_SCHEME</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_URI_WELLKNOWN" class="nav-sub-label">COAP_DEFAULT_URI_WELLKNOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_CON" class="nav-sub-label">COAP_MESSAGE_CON</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_NON" class="nav-sub-label">COAP_MESSAGE_NON</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_ACK" class="nav-sub-label">COAP_MESSAGE_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MESSAGE_RST" class="nav-sub-label">COAP_MESSAGE_RST</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_GET" class="nav-sub-label">COAP_REQUEST_GET</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_POST" class="nav-sub-label">COAP_REQUEST_POST</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_PUT" class="nav-sub-label">COAP_REQUEST_PUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_DELETE" class="nav-sub-label">COAP_REQUEST_DELETE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_FETCH" class="nav-sub-label">COAP_REQUEST_FETCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_PATCH" class="nav-sub-label">COAP_REQUEST_PATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_REQUEST_IPATCH" class="nav-sub-label">COAP_REQUEST_IPATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_IF_MATCH" class="nav-sub-label">COAP_OPTION_IF_MATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_URI_HOST" class="nav-sub-label">COAP_OPTION_URI_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_ETAG" class="nav-sub-label">COAP_OPTION_ETAG</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_IF_NONE_MATCH" class="nav-sub-label">COAP_OPTION_IF_NONE_MATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_URI_PORT" class="nav-sub-label">COAP_OPTION_URI_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_LOCATION_PATH" class="nav-sub-label">COAP_OPTION_LOCATION_PATH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_URI_PATH" class="nav-sub-label">COAP_OPTION_URI_PATH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_CONTENT_FORMAT" class="nav-sub-label">COAP_OPTION_CONTENT_FORMAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_CONTENT_TYPE" class="nav-sub-label">COAP_OPTION_CONTENT_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_MAXAGE" class="nav-sub-label">COAP_OPTION_MAXAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_URI_QUERY" class="nav-sub-label">COAP_OPTION_URI_QUERY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_ACCEPT" class="nav-sub-label">COAP_OPTION_ACCEPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_LOCATION_QUERY" class="nav-sub-label">COAP_OPTION_LOCATION_QUERY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_SIZE2" class="nav-sub-label">COAP_OPTION_SIZE2</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_PROXY_URI" class="nav-sub-label">COAP_OPTION_PROXY_URI</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_PROXY_SCHEME" class="nav-sub-label">COAP_OPTION_PROXY_SCHEME</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_SIZE1" class="nav-sub-label">COAP_OPTION_SIZE1</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_OBSERVE" class="nav-sub-label">COAP_OPTION_OBSERVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_SUBSCRIPTION" class="nav-sub-label">COAP_OPTION_SUBSCRIPTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_BLOCK2" class="nav-sub-label">COAP_OPTION_BLOCK2</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_BLOCK1" class="nav-sub-label">COAP_OPTION_BLOCK1</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_NORESPONSE" class="nav-sub-label">COAP_OPTION_NORESPONSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MAX_OPT" class="nav-sub-label">COAP_MAX_OPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_CODE(N)" class="nav-sub-label">COAP_RESPONSE_CODE(N)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_CLASS(C)" class="nav-sub-label">COAP_RESPONSE_CLASS(C)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_ERROR_PHRASE_LENGTH" class="nav-sub-label">COAP_ERROR_PHRASE_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_response_phrase(x)" class="nav-sub-label">coap_response_phrase(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_ERROR_PHRASE_LENGTH" class="nav-sub-label">COAP_ERROR_PHRASE_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_100" class="nav-sub-label">COAP_RESPONSE_100</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_200" class="nav-sub-label">COAP_RESPONSE_200</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_201" class="nav-sub-label">COAP_RESPONSE_201</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_304" class="nav-sub-label">COAP_RESPONSE_304</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_400" class="nav-sub-label">COAP_RESPONSE_400</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_404" class="nav-sub-label">COAP_RESPONSE_404</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_405" class="nav-sub-label">COAP_RESPONSE_405</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_415" class="nav-sub-label">COAP_RESPONSE_415</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_500" class="nav-sub-label">COAP_RESPONSE_500</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_501" class="nav-sub-label">COAP_RESPONSE_501</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_503" class="nav-sub-label">COAP_RESPONSE_503</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_504" class="nav-sub-label">COAP_RESPONSE_504</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RESPONSE_X_242" class="nav-sub-label">COAP_RESPONSE_X_242</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_CODE(N)" class="nav-sub-label">COAP_SIGNALING_CODE(N)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_CSM" class="nav-sub-label">COAP_SIGNALING_CSM</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_PING" class="nav-sub-label">COAP_SIGNALING_PING</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_PONG" class="nav-sub-label">COAP_SIGNALING_PONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_RELEASE" class="nav-sub-label">COAP_SIGNALING_RELEASE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_ABORT" class="nav-sub-label">COAP_SIGNALING_ABORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_OPTION_MAX_MESSAGE_SIZE" class="nav-sub-label">COAP_SIGNALING_OPTION_MAX_MESSAGE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_OPTION_BLOCK_WISE_TRANSFER" class="nav-sub-label">COAP_SIGNALING_OPTION_BLOCK_WISE_TRANSFER</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_OPTION_CUSTODY" class="nav-sub-label">COAP_SIGNALING_OPTION_CUSTODY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_OPTION_ALTERNATIVE_ADDRESS" class="nav-sub-label">COAP_SIGNALING_OPTION_ALTERNATIVE_ADDRESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_OPTION_HOLD_OFF" class="nav-sub-label">COAP_SIGNALING_OPTION_HOLD_OFF</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SIGNALING_OPTION_BAD_CSM_OPTION" class="nav-sub-label">COAP_SIGNALING_OPTION_BAD_CSM_OPTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_TEXT_PLAIN" class="nav-sub-label">COAP_MEDIATYPE_TEXT_PLAIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_LINK_FORMAT" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_LINK_FORMAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_XML" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_XML</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_OCTET_STREAM" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_OCTET_STREAM</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_RDF_XML" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_RDF_XML</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_EXI" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_EXI</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_JSON" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_JSON</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_CBOR" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_CBOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_SIGN" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_SIGN</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_SIGN1" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_SIGN1</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT0" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT0</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_MAC" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_MAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_MAC0" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_MAC0</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_KEY" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_KEY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_COSE_KEY_SET" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_COSE_KEY_SET</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENML_JSON" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENML_JSON</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENSML_JSON" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENSML_JSON</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENML_CBOR" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENML_CBOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENSML_CBOR" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENSML_CBOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENML_EXI" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENML_EXI</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENSML_EXI" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENSML_EXI</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENML_XML" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENML_XML</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_APPLICATION_SENSML_XML" class="nav-sub-label">COAP_MEDIATYPE_APPLICATION_SENSML_XML</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MEDIATYPE_ANY" class="nav-sub-label">COAP_MEDIATYPE_ANY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_INVALID_TID" class="nav-sub-label">COAP_INVALID_TID</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DROPPED_RESPONSE" class="nav-sub-label">COAP_DROPPED_RESPONSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_DELAYED" class="nav-sub-label">COAP_PDU_DELAYED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPT_LONG" class="nav-sub-label">COAP_OPT_LONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPT_END" class="nav-sub-label">COAP_OPT_END</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PAYLOAD_START" class="nav-sub-label">COAP_PAYLOAD_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_KEY(option)" class="nav-sub-label">COAP_OPTION_KEY(option)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_LENGTH(option)" class="nav-sub-label">COAP_OPTION_LENGTH(option)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPTION_DATA(option)" class="nav-sub-label">COAP_OPTION_DATA(option)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_IS_EMPTY(pdu)" class="nav-sub-label">COAP_PDU_IS_EMPTY(pdu)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_IS_REQUEST(pdu)" class="nav-sub-label">COAP_PDU_IS_REQUEST(pdu)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_IS_RESPONSE(pdu)" class="nav-sub-label">COAP_PDU_IS_RESPONSE(pdu)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_IS_SIGNALING(pdu)" class="nav-sub-label">COAP_PDU_IS_SIGNALING(pdu)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_MAX_UDP_HEADER_SIZE" class="nav-sub-label">COAP_PDU_MAX_UDP_HEADER_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PDU_MAX_TCP_HEADER_SIZE" class="nav-sub-label">COAP_PDU_MAX_TCP_HEADER_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_NONE" class="nav-sub-label">COAP_PROTO_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_UDP" class="nav-sub-label">COAP_PROTO_UDP</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_DTLS" class="nav-sub-label">COAP_PROTO_DTLS</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_TCP" class="nav-sub-label">COAP_PROTO_TCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_TLS" class="nav-sub-label">COAP_PROTO_TLS</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_pdu_resize" class="nav-sub-label">coap_pdu_resize</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_clear" class="nav-sub-label">coap_pdu_clear</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_delete_pdu" class="nav-sub-label">coap_delete_pdu</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_parse_header_size" class="nav-sub-label">coap_pdu_parse_header_size</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_parse_size" class="nav-sub-label">coap_pdu_parse_size</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_parse_header" class="nav-sub-label">coap_pdu_parse_header</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_parse_opt" class="nav-sub-label">coap_pdu_parse_opt</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_parse" class="nav-sub-label">coap_pdu_parse</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_token" class="nav-sub-label">coap_add_token</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_option" class="nav-sub-label">coap_add_option</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_option_later" class="nav-sub-label">coap_add_option_later</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_data" class="nav-sub-label">coap_add_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_data_after" class="nav-sub-label">coap_add_data_after</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_get_data" class="nav-sub-label">coap_get_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_encode_header" class="nav-sub-label">coap_pdu_encode_header</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEPRECATED" class="nav-sub-label">COAP_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_tid_t" class="nav-sub-label">coap_tid_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t;
+" class="nav-sub-label">coap_pdu_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_proto_t" class="nav-sub-label">coap_proto_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="uri.h"><span>uri.h</span></h4>
+      <pre class="doc-declare"><code>#include "uri.h"
+</code></pre>
+      <pre class="doc-comment">#include "uri.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;lwip/pbuf.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <lwip/pbuf.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_PDU_H_">Marco <span>COAP_PDU_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_PORT">Marco <span>COAP_DEFAULT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_PORT     5683 /* CoAP default UDP/TCP port */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAPS_DEFAULT_PORT">Marco <span>COAPS_DEFAULT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define COAPS_DEFAULT_PORT    5684 /* CoAP default UDP/TCP port for secure transmission */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_MAX_AGE">Marco <span>COAP_DEFAULT_MAX_AGE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_MAX_AGE    60 /* default maximum object lifetime in seconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_MTU">Marco <span>COAP_DEFAULT_MTU</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_MTU      1152
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MESSAGE_SIZE_OFFSET_TCP8">Marco <span>COAP_MESSAGE_SIZE_OFFSET_TCP8</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_SIZE_OFFSET_TCP8 13
+</code></pre>
+      <pre class="doc-comment">/* TCP Message format constants, do not modify */</pre>
+
+      <h4 id="COAP_MESSAGE_SIZE_OFFSET_TCP16">Marco <span>COAP_MESSAGE_SIZE_OFFSET_TCP16</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_SIZE_OFFSET_TCP16 269 /* 13 + 256 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MESSAGE_SIZE_OFFSET_TCP32">Marco <span>COAP_MESSAGE_SIZE_OFFSET_TCP32</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_SIZE_OFFSET_TCP32 65805 /* 269 + 65536 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MAX_MESSAGE_SIZE_TCP0">Marco <span>COAP_MAX_MESSAGE_SIZE_TCP0</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MAX_MESSAGE_SIZE_TCP0 (COAP_MESSAGE_SIZE_OFFSET_TCP8-1) /* 12 */
+</code></pre>
+      <pre class="doc-comment">/* Derived message size limits */</pre>
+
+      <h4 id="COAP_MAX_MESSAGE_SIZE_TCP8">Marco <span>COAP_MAX_MESSAGE_SIZE_TCP8</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MAX_MESSAGE_SIZE_TCP8 (COAP_MESSAGE_SIZE_OFFSET_TCP16-1) /* 268 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MAX_MESSAGE_SIZE_TCP16">Marco <span>COAP_MAX_MESSAGE_SIZE_TCP16</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MAX_MESSAGE_SIZE_TCP16 (COAP_MESSAGE_SIZE_OFFSET_TCP32-1) /* 65804 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MAX_MESSAGE_SIZE_TCP32">Marco <span>COAP_MAX_MESSAGE_SIZE_TCP32</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MAX_MESSAGE_SIZE_TCP32 (COAP_MESSAGE_SIZE_OFFSET_TCP32+4294967295)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_MAX_PDU_RX_SIZE">Marco <span>COAP_DEFAULT_MAX_PDU_RX_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_MAX_PDU_RX_SIZE (COAP_MAX_MESSAGE_SIZE_TCP16+4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_MAX_PDU_RX_SIZE">Marco <span>COAP_DEFAULT_MAX_PDU_RX_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_MAX_PDU_RX_SIZE (8*1024*1024+256)
+</code></pre>
+      <pre class="doc-comment">/* 8 MiB max-message-size plus some space for options */</pre>
+
+      <h4 id="COAP_DEBUG_BUF_SIZE">Marco <span>COAP_DEBUG_BUF_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEBUG_BUF_SIZE 128
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEBUG_BUF_SIZE">Marco <span>COAP_DEBUG_BUF_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEBUG_BUF_SIZE (8 + 1024 * 2)
+</code></pre>
+      <pre class="doc-comment">/* 1024 derived from RFC7252 4.6.  Message Size max payload */</pre>
+
+      <h4 id="COAP_DEFAULT_VERSION">Marco <span>COAP_DEFAULT_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_VERSION     1 /* version of CoAP supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_SCHEME">Marco <span>COAP_DEFAULT_SCHEME</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_SCHEME "coap" /* the default scheme for CoAP URIs */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_URI_WELLKNOWN">Marco <span>COAP_DEFAULT_URI_WELLKNOWN</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_URI_WELLKNOWN ".well-known/core"
+</code></pre>
+      <pre class="doc-comment">/** well-known resources URI */</pre>
+
+      <h4 id="COAP_MESSAGE_CON">Marco <span>COAP_MESSAGE_CON</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_CON      0 /* confirmable message (requires ACK/RST) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MESSAGE_NON">Marco <span>COAP_MESSAGE_NON</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_NON      1 /* non-confirmable message (one-shot message) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MESSAGE_ACK">Marco <span>COAP_MESSAGE_ACK</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_ACK      2 /* used to acknowledge confirmable messages */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MESSAGE_RST">Marco <span>COAP_MESSAGE_RST</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MESSAGE_RST      3 /* indicates error in received messages */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_GET">Marco <span>COAP_REQUEST_GET</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_GET      1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_POST">Marco <span>COAP_REQUEST_POST</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_POST     2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_PUT">Marco <span>COAP_REQUEST_PUT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_PUT      3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_DELETE">Marco <span>COAP_REQUEST_DELETE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_DELETE   4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_FETCH">Marco <span>COAP_REQUEST_FETCH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_FETCH    5 /* RFC 8132 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_PATCH">Marco <span>COAP_REQUEST_PATCH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_PATCH    6 /* RFC 8132 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_REQUEST_IPATCH">Marco <span>COAP_REQUEST_IPATCH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_REQUEST_IPATCH   7 /* RFC 8132 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_IF_MATCH">Marco <span>COAP_OPTION_IF_MATCH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_IF_MATCH       1 /* C, opaque, 0-8 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_URI_HOST">Marco <span>COAP_OPTION_URI_HOST</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_URI_HOST       3 /* C, String, 1-255 B, destination address */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_ETAG">Marco <span>COAP_OPTION_ETAG</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_ETAG           4 /* E, opaque, 1-8 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_IF_NONE_MATCH">Marco <span>COAP_OPTION_IF_NONE_MATCH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_IF_NONE_MATCH  5 /* empty, 0 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_URI_PORT">Marco <span>COAP_OPTION_URI_PORT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_URI_PORT       7 /* C, uint, 0-2 B, destination port */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_LOCATION_PATH">Marco <span>COAP_OPTION_LOCATION_PATH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_LOCATION_PATH  8 /* E, String, 0-255 B, - */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_URI_PATH">Marco <span>COAP_OPTION_URI_PATH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_URI_PATH      11 /* C, String, 0-255 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_CONTENT_FORMAT">Marco <span>COAP_OPTION_CONTENT_FORMAT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_CONTENT_FORMAT 12 /* E, uint, 0-2 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_CONTENT_TYPE">Marco <span>COAP_OPTION_CONTENT_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_CONTENT_TYPE COAP_OPTION_CONTENT_FORMAT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_MAXAGE">Marco <span>COAP_OPTION_MAXAGE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_MAXAGE        14 /* E, uint, 0--4 B, 60 Seconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_URI_QUERY">Marco <span>COAP_OPTION_URI_QUERY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_URI_QUERY     15 /* C, String, 1-255 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_ACCEPT">Marco <span>COAP_OPTION_ACCEPT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_ACCEPT        17 /* C, uint,   0-2 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_LOCATION_QUERY">Marco <span>COAP_OPTION_LOCATION_QUERY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_LOCATION_QUERY 20 /* E, String,   0-255 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_SIZE2">Marco <span>COAP_OPTION_SIZE2</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_SIZE2         28 /* E, uint, 0-4 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_PROXY_URI">Marco <span>COAP_OPTION_PROXY_URI</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_PROXY_URI     35 /* C, String, 1-1034 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_PROXY_SCHEME">Marco <span>COAP_OPTION_PROXY_SCHEME</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_PROXY_SCHEME  39 /* C, String, 1-255 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_SIZE1">Marco <span>COAP_OPTION_SIZE1</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_SIZE1         60 /* E, uint, 0-4 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_OBSERVE">Marco <span>COAP_OPTION_OBSERVE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_OBSERVE        6 /* E, empty/uint, 0 B/0-3 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_SUBSCRIPTION">Marco <span>COAP_OPTION_SUBSCRIPTION</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_SUBSCRIPTION COAP_OPTION_OBSERVE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_BLOCK2">Marco <span>COAP_OPTION_BLOCK2</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_BLOCK2        23 /* C, uint, 0--3 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_BLOCK1">Marco <span>COAP_OPTION_BLOCK1</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_BLOCK1        27 /* C, uint, 0--3 B, (none) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_NORESPONSE">Marco <span>COAP_OPTION_NORESPONSE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_NORESPONSE   258 /* N, uint, 0--1 B, 0 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MAX_OPT">Marco <span>COAP_MAX_OPT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MAX_OPT           65535 /**< the highest option number we know */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_CODE(N)">Marco <span>COAP_RESPONSE_CODE(N)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_CODE(N) (((N)/100 << 5) | (N)%100)
+</code></pre>
+      <pre class="doc-comment">/* As of draft-ietf-core-coap-04, response codes are encoded to base
+ * 32, i.e.  the three upper bits determine the response class while
+ * the remaining five fine-grained information specific to that class.
+ */</pre>
+
+      <h4 id="COAP_RESPONSE_CLASS(C)">Marco <span>COAP_RESPONSE_CLASS(C)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_CLASS(C) (((C) >> 5) & 255)
+</code></pre>
+      <pre class="doc-comment">/* Determines the class of response code C */</pre>
+
+      <h4 id="COAP_ERROR_PHRASE_LENGTH">Marco <span>COAP_ERROR_PHRASE_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ERROR_PHRASE_LENGTH  32 /**< maximum length of error phrase */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_response_phrase(x)">Marco <span>coap_response_phrase(x)</span></h4>
+      <pre class="doc-declare"><code>#define coap_response_phrase(x) ((char *)NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_ERROR_PHRASE_LENGTH">Marco <span>COAP_ERROR_PHRASE_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ERROR_PHRASE_LENGTH   0 /**< maximum length of error phrase */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_100">Marco <span>COAP_RESPONSE_100</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_100     40 /* 100 Continue */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_200">Marco <span>COAP_RESPONSE_200</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_200     COAP_RESPONSE_CODE(200) /* 2.00 OK */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_201">Marco <span>COAP_RESPONSE_201</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_201     COAP_RESPONSE_CODE(201) /* 2.01 Created */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_304">Marco <span>COAP_RESPONSE_304</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_304     COAP_RESPONSE_CODE(203) /* 2.03 Valid */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_400">Marco <span>COAP_RESPONSE_400</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_400     COAP_RESPONSE_CODE(400) /* 4.00 Bad Request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_404">Marco <span>COAP_RESPONSE_404</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_404     COAP_RESPONSE_CODE(404) /* 4.04 Not Found */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_405">Marco <span>COAP_RESPONSE_405</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_405     COAP_RESPONSE_CODE(405) /* 4.05 Method Not Allowed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_415">Marco <span>COAP_RESPONSE_415</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_415     COAP_RESPONSE_CODE(415) /* 4.15 Unsupported Media Type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_500">Marco <span>COAP_RESPONSE_500</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_500     COAP_RESPONSE_CODE(500) /* 5.00 Internal Server Error */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_501">Marco <span>COAP_RESPONSE_501</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_501     COAP_RESPONSE_CODE(501) /* 5.01 Not Implemented */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_503">Marco <span>COAP_RESPONSE_503</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_503     COAP_RESPONSE_CODE(503) /* 5.03 Service Unavailable */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_504">Marco <span>COAP_RESPONSE_504</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_504     COAP_RESPONSE_CODE(504) /* 5.04 Gateway Timeout */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RESPONSE_X_242">Marco <span>COAP_RESPONSE_X_242</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RESPONSE_X_242   COAP_RESPONSE_CODE(402) /* Critical Option not supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_CODE(N)">Marco <span>COAP_SIGNALING_CODE(N)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_CODE(N) (((N)/100 << 5) | (N)%100)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_CSM">Marco <span>COAP_SIGNALING_CSM</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_CSM    COAP_SIGNALING_CODE(701)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_PING">Marco <span>COAP_SIGNALING_PING</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_PING   COAP_SIGNALING_CODE(702)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_PONG">Marco <span>COAP_SIGNALING_PONG</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_PONG   COAP_SIGNALING_CODE(703)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_RELEASE">Marco <span>COAP_SIGNALING_RELEASE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_RELEASE COAP_SIGNALING_CODE(704)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_ABORT">Marco <span>COAP_SIGNALING_ABORT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_ABORT  COAP_SIGNALING_CODE(705)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_OPTION_MAX_MESSAGE_SIZE">Marco <span>COAP_SIGNALING_OPTION_MAX_MESSAGE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_OPTION_MAX_MESSAGE_SIZE 2
+</code></pre>
+      <pre class="doc-comment">/* Applies to COAP_SIGNALING_CSM */</pre>
+
+      <h4 id="COAP_SIGNALING_OPTION_BLOCK_WISE_TRANSFER">Marco <span>COAP_SIGNALING_OPTION_BLOCK_WISE_TRANSFER</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_OPTION_BLOCK_WISE_TRANSFER 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_OPTION_CUSTODY">Marco <span>COAP_SIGNALING_OPTION_CUSTODY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_OPTION_CUSTODY 2
+</code></pre>
+      <pre class="doc-comment">/* Applies to COAP_SIGNALING_PING / COAP_SIGNALING_PONG */</pre>
+
+      <h4 id="COAP_SIGNALING_OPTION_ALTERNATIVE_ADDRESS">Marco <span>COAP_SIGNALING_OPTION_ALTERNATIVE_ADDRESS</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_OPTION_ALTERNATIVE_ADDRESS 2
+</code></pre>
+      <pre class="doc-comment">/* Applies to COAP_SIGNALING_RELEASE */</pre>
+
+      <h4 id="COAP_SIGNALING_OPTION_HOLD_OFF">Marco <span>COAP_SIGNALING_OPTION_HOLD_OFF</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_OPTION_HOLD_OFF 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SIGNALING_OPTION_BAD_CSM_OPTION">Marco <span>COAP_SIGNALING_OPTION_BAD_CSM_OPTION</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SIGNALING_OPTION_BAD_CSM_OPTION 2
+</code></pre>
+      <pre class="doc-comment">/* Applies to COAP_SIGNALING_ABORT */</pre>
+
+      <h4 id="COAP_MEDIATYPE_TEXT_PLAIN">Marco <span>COAP_MEDIATYPE_TEXT_PLAIN</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_TEXT_PLAIN                0 /* text/plain (UTF-8) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_LINK_FORMAT">Marco <span>COAP_MEDIATYPE_APPLICATION_LINK_FORMAT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_LINK_FORMAT  40 /* application/link-format */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_XML">Marco <span>COAP_MEDIATYPE_APPLICATION_XML</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_XML          41 /* application/xml */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_OCTET_STREAM">Marco <span>COAP_MEDIATYPE_APPLICATION_OCTET_STREAM</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_OCTET_STREAM 42 /* application/octet-stream */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_RDF_XML">Marco <span>COAP_MEDIATYPE_APPLICATION_RDF_XML</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_RDF_XML      43 /* application/rdf+xml */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_EXI">Marco <span>COAP_MEDIATYPE_APPLICATION_EXI</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_EXI          47 /* application/exi  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_JSON">Marco <span>COAP_MEDIATYPE_APPLICATION_JSON</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_JSON         50 /* application/json  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_CBOR">Marco <span>COAP_MEDIATYPE_APPLICATION_CBOR</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_CBOR         60 /* application/cbor  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_SIGN">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_SIGN</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_SIGN    98 /* application/cose; cose-type="cose-sign"     */
+</code></pre>
+      <pre class="doc-comment">/* Content formats from RFC 8152 */</pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_SIGN1">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_SIGN1</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_SIGN1   18 /* application/cose; cose-type="cose-sign1"    */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT 96 /* application/cose; cose-type="cose-encrypt"  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT0">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT0</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_ENCRYPT0 16 /* application/cose; cose-type="cose-encrypt0" */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_MAC">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_MAC</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_MAC     97 /* application/cose; cose-type="cose-mac"      */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_MAC0">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_MAC0</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_MAC0    17 /* application/cose; cose-type="cose-mac0"     */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_KEY">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_KEY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_KEY    101 /* application/cose-key  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_COSE_KEY_SET">Marco <span>COAP_MEDIATYPE_APPLICATION_COSE_KEY_SET</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_COSE_KEY_SET 102 /* application/cose-key-set  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENML_JSON">Marco <span>COAP_MEDIATYPE_APPLICATION_SENML_JSON</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENML_JSON  110 /* application/senml+json  */
+</code></pre>
+      <pre class="doc-comment">/* Content formats from RFC 8428 */</pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENSML_JSON">Marco <span>COAP_MEDIATYPE_APPLICATION_SENSML_JSON</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENSML_JSON 111 /* application/sensml+json */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENML_CBOR">Marco <span>COAP_MEDIATYPE_APPLICATION_SENML_CBOR</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENML_CBOR  112 /* application/senml+cbor  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENSML_CBOR">Marco <span>COAP_MEDIATYPE_APPLICATION_SENSML_CBOR</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENSML_CBOR 113 /* application/sensml+cbor */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENML_EXI">Marco <span>COAP_MEDIATYPE_APPLICATION_SENML_EXI</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENML_EXI   114 /* application/senml-exi   */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENSML_EXI">Marco <span>COAP_MEDIATYPE_APPLICATION_SENSML_EXI</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENSML_EXI  115 /* application/sensml-exi  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENML_XML">Marco <span>COAP_MEDIATYPE_APPLICATION_SENML_XML</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENML_XML   310 /* application/senml+xml   */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_APPLICATION_SENSML_XML">Marco <span>COAP_MEDIATYPE_APPLICATION_SENSML_XML</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_APPLICATION_SENSML_XML  311 /* application/sensml+xml  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MEDIATYPE_ANY">Marco <span>COAP_MEDIATYPE_ANY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEDIATYPE_ANY                        255 /* any media type */
+</code></pre>
+      <pre class="doc-comment">/* Note that identifiers for registered media types are in the range 0-65535. We
+ * use an unallocated type here and hope for the best. */</pre>
+
+      <h4 id="COAP_INVALID_TID">Marco <span>COAP_INVALID_TID</span></h4>
+      <pre class="doc-declare"><code>#define COAP_INVALID_TID -1
+</code></pre>
+      <pre class="doc-comment">/** Indicates an invalid transaction id. */</pre>
+
+      <h4 id="COAP_DROPPED_RESPONSE">Marco <span>COAP_DROPPED_RESPONSE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DROPPED_RESPONSE -2
+</code></pre>
+      <pre class="doc-comment">/**
+ * Indicates that a response is suppressed. This will occur for error
+ * responses if the request was received via IP multicast.
+ */</pre>
+
+      <h4 id="COAP_PDU_DELAYED">Marco <span>COAP_PDU_DELAYED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_DELAYED -3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPT_LONG">Marco <span>COAP_OPT_LONG</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPT_LONG 15     /* OC == 0b1111 indicates that the option list
+                                 * in a CoAP message is limited by 0b11110000
+                                 * marker */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPT_END">Marco <span>COAP_OPT_END</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPT_END 240      /* end marker */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PAYLOAD_START">Marco <span>COAP_PAYLOAD_START</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PAYLOAD_START 255 /* payload marker */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_KEY(option)">Marco <span>COAP_OPTION_KEY(option)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_KEY(option) (option).key
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_LENGTH(option)">Marco <span>COAP_OPTION_LENGTH(option)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_LENGTH(option) (option).length
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OPTION_DATA(option)">Marco <span>COAP_OPTION_DATA(option)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPTION_DATA(option) ((unsigned char *)&(option) + sizeof(coap_option))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PDU_IS_EMPTY(pdu)">Marco <span>COAP_PDU_IS_EMPTY(pdu)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_IS_EMPTY(pdu)    ((pdu)->code == 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PDU_IS_REQUEST(pdu)">Marco <span>COAP_PDU_IS_REQUEST(pdu)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_IS_REQUEST(pdu)  (!COAP_PDU_IS_EMPTY(pdu) && (pdu)->code < 32)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PDU_IS_RESPONSE(pdu)">Marco <span>COAP_PDU_IS_RESPONSE(pdu)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_IS_RESPONSE(pdu) ((pdu)->code >= 64 && (pdu)->code < 224)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PDU_IS_SIGNALING(pdu)">Marco <span>COAP_PDU_IS_SIGNALING(pdu)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_IS_SIGNALING(pdu) ((pdu)->code >= 224)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PDU_MAX_UDP_HEADER_SIZE">Marco <span>COAP_PDU_MAX_UDP_HEADER_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_MAX_UDP_HEADER_SIZE 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PDU_MAX_TCP_HEADER_SIZE">Marco <span>COAP_PDU_MAX_TCP_HEADER_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PDU_MAX_TCP_HEADER_SIZE 6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PROTO_NONE">Marco <span>COAP_PROTO_NONE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_NONE        0
+</code></pre>
+      <pre class="doc-comment">/**
+* coap_proto_t values
+*/</pre>
+
+      <h4 id="COAP_PROTO_UDP">Marco <span>COAP_PROTO_UDP</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_UDP         1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PROTO_DTLS">Marco <span>COAP_PROTO_DTLS</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_DTLS        2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PROTO_TCP">Marco <span>COAP_PROTO_TCP</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_TCP         3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PROTO_TLS">Marco <span>COAP_PROTO_TLS</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_TLS         4
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_pdu_resize">Func <span>coap_pdu_resize</span></h4>
+      <pre class="doc-declare"><code>int coap_pdu_resize(coap_pdu_t *pdu, size_t new_size);</code></pre>
+      <pre class="doc-comment">/**
+ * Dynamically grows the size of @p pdu to @p new_size. The new size
+ * must not exceed the PDU's configure maximum size. On success, this
+ * function returns 1, otherwise 0.
+ *
+ * @param pdu      The PDU to resize.
+ * @param new_size The new size in bytes.
+ * @return         1 if the operation succeeded, 0 otherwise.
+ */</pre>
+
+      <h4 id="coap_pdu_clear">Func <span>coap_pdu_clear</span></h4>
+      <pre class="doc-declare"><code>void coap_pdu_clear(coap_pdu_t *pdu, size_t size);</code></pre>
+      <pre class="doc-comment">/**
+ * Clears any contents from @p pdu and resets @c used_size,
+ * and @c data pointers. @c max_size is set to @p size, any
+ * other field is set to @c 0. Note that @p pdu must be a valid
+ * pointer to a coap_pdu_t object created e.g. by coap_pdu_init().
+ */</pre>
+
+      <h4 id="coap_delete_pdu">Func <span>coap_delete_pdu</span></h4>
+      <pre class="doc-declare"><code>void coap_delete_pdu(coap_pdu_t *);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_pdu_parse_header_size">Func <span>coap_pdu_parse_header_size</span></h4>
+      <pre class="doc-declare"><code>size_t coap_pdu_parse_header_size(coap_proto_t proto,
+                                const uint8_t *data);</code></pre>
+      <pre class="doc-comment">/**
+* Interprets @p data to determine the number of bytes in the header.
+* This function returns @c 0 on error or a number greater than zero on success.
+*
+* @param proto  Session's protocol
+* @param data   The first byte of raw data to parse as CoAP PDU.
+*
+* @return       A value greater than zero on success or @c 0 on error.
+*/</pre>
+
+      <h4 id="coap_pdu_parse_size">Func <span>coap_pdu_parse_size</span></h4>
+      <pre class="doc-declare"><code>size_t coap_pdu_parse_size(coap_proto_t proto,
+                          const uint8_t *data,
+                          size_t length);</code></pre>
+      <pre class="doc-comment">/**
+ * Parses @p data to extract the message size.
+ * @p length must be at least coap_pdu_parse_header_size(proto, data).
+ * This function returns @c 0 on error or a number greater than zero on success.
+ *
+ * @param proto  Session's protocol
+ * @param data   The raw data to parse as CoAP PDU.
+ * @param length The actual size of @p data.
+ *
+ * @return       A value greater than zero on success or @c 0 on error.
+ */</pre>
+
+      <h4 id="coap_pdu_parse_header">Func <span>coap_pdu_parse_header</span></h4>
+      <pre class="doc-declare"><code>int coap_pdu_parse_header(coap_pdu_t *pdu, coap_proto_t proto);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_pdu_parse_opt">Func <span>coap_pdu_parse_opt</span></h4>
+      <pre class="doc-declare"><code>int coap_pdu_parse_opt(coap_pdu_t *pdu);</code></pre>
+      <pre class="doc-comment">/**
+ * Verify consistency in the given CoAP PDU structure and locate the data.
+ * This function returns @c 0 on error or a number greater than zero on
+ * success.
+ * This function only parses the token and options, up to the payload start
+ * marker.
+ *
+ * @param pdu     The PDU structure to.
+ *
+ * @return       1 on success or @c 0 on error.
+ */</pre>
+
+      <h4 id="coap_pdu_parse">Func <span>coap_pdu_parse</span></h4>
+      <pre class="doc-declare"><code>int coap_pdu_parse(coap_proto_t proto,
+                  const uint8_t *data,
+                  size_t length,
+                  coap_pdu_t *pdu);</code></pre>
+      <pre class="doc-comment">/**
+* Parses @p data into the CoAP PDU structure given in @p result.
+* The target pdu must be large enough to
+* This function returns @c 0 on error or a number greater than zero on success.
+*
+* @param proto   Session's protocol
+* @param data    The raw data to parse as CoAP PDU.
+* @param length  The actual size of @p data.
+* @param pdu     The PDU structure to fill. Note that the structure must
+*                provide space to hold at least the token and options
+*                part of the message.
+*
+* @return       1 on success or @c 0 on error.
+*/</pre>
+
+      <h4 id="coap_add_token">Func <span>coap_add_token</span></h4>
+      <pre class="doc-declare"><code>int coap_add_token(coap_pdu_t *pdu,
+                 size_t len,
+                 const uint8_t *data);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds token of length @p len to @p pdu.
+ * Adding the token destroys any following contents of the pdu. Hence options
+ * and data must be added after coap_add_token() has been called. In @p pdu,
+ * length is set to @p len + @c 4, and max_delta is set to @c 0. This function
+ * returns @c 0 on error or a value greater than zero on success.
+ *
+ * @param pdu  The PDU where the token is to be added.
+ * @param len  The length of the new token.
+ * @param data The token to add.
+ *
+ * @return     A value greater than zero on success, or @c 0 on error.
+ */</pre>
+
+      <h4 id="coap_add_option">Func <span>coap_add_option</span></h4>
+      <pre class="doc-declare"><code>size_t coap_add_option(coap_pdu_t *pdu,
+                      uint16_t type,
+                      size_t len,
+                      const uint8_t *data);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds option of given type to pdu that is passed as first
+ * parameter.
+ * coap_add_option() destroys the PDU's data, so coap_add_data() must be called
+ * after all options have been added. As coap_add_token() destroys the options
+ * following the token, the token must be added before coap_add_option() is
+ * called. This function returns the number of bytes written or @c 0 on error.
+ */</pre>
+
+      <h4 id="coap_add_option_later">Func <span>coap_add_option_later</span></h4>
+      <pre class="doc-declare"><code>uint8_t *coap_add_option_later(coap_pdu_t *pdu,
+                              uint16_t type,
+                              size_t len);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds option of given type to pdu that is passed as first parameter, but does
+ * not write a value. It works like coap_add_option with respect to calling
+ * sequence (i.e. after token and before data). This function returns a memory
+ * address to which the option data has to be written before the PDU can be
+ * sent, or @c NULL on error.
+ */</pre>
+
+      <h4 id="coap_add_data">Func <span>coap_add_data</span></h4>
+      <pre class="doc-declare"><code>int coap_add_data(coap_pdu_t *pdu,
+                 size_t len,
+                 const uint8_t *data);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds given data to the pdu that is passed as first parameter. Note that the
+ * PDU's data is destroyed by coap_add_option(). coap_add_data() must be called
+ * only once per PDU, otherwise the result is undefined.
+ */</pre>
+
+      <h4 id="coap_add_data_after">Func <span>coap_add_data_after</span></h4>
+      <pre class="doc-declare"><code>uint8_t *coap_add_data_after(coap_pdu_t *pdu, size_t len);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds given data to the pdu that is passed as first parameter but does not
+ * copyt it. Note that the PDU's data is destroyed by coap_add_option().
+ * coap_add_data() must be have been called once for this PDU, otherwise the
+ * result is undefined.
+ * The actual data must be copied at the returned location.
+ */</pre>
+
+      <h4 id="coap_get_data">Func <span>coap_get_data</span></h4>
+      <pre class="doc-declare"><code>int coap_get_data(const coap_pdu_t *pdu,
+                 size_t *len,
+                 uint8_t **data);</code></pre>
+      <pre class="doc-comment">/**
+ * Retrieves the length and data pointer of specified PDU. Returns 0 on error or
+ * 1 if *len and *data have correct values. Note that these values are destroyed
+ * with the pdu.
+ */</pre>
+
+      <h4 id="coap_pdu_encode_header">Func <span>coap_pdu_encode_header</span></h4>
+      <pre class="doc-declare"><code>size_t coap_pdu_encode_header(coap_pdu_t *pdu, coap_proto_t proto);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_session_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEPRECATED">Variable <span>COAP_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>COAP_DEPRECATED typedef struct {
+ uint16_t key;          /* the option key (no delta coding) */
+ unsigned int length;
+} coap_option;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @deprecated Use coap_optlist_t instead.
+ *
+ * Structures for more convenient handling of options. (To be used with ordered
+ * coap_list_t.) The option's data will be added to the end of the coap_option
+ * structure (see macro COAP_OPTION_DATA).
+ */</pre>
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>coap_pdu_t * coap_pdu_from_pbuf(struct pbuf *pbuf);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a CoAP PDU from an lwIP @p pbuf, whose reference is passed on to this
+ * function.
+ *
+ * The pbuf is checked for being contiguous, and for having only one reference.
+ * The reference is stored in the PDU and will be freed when the PDU is freed.
+ *
+ * (For now, these are fatal errors; in future, a new pbuf might be allocated,
+ * the data copied and the passed pbuf freed).
+ *
+ * This behaves like coap_pdu_init(0, 0, 0, pbuf->tot_len), and afterwards
+ * copying the contents of the pbuf to the pdu.
+ *
+ * @return A pointer to the new PDU object or @c NULL on error.
+ */</pre>
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>coap_pdu_t *
+coap_pdu_init(uint8_t type, uint8_t code, uint16_t tid, size_t size);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new CoAP PDU with at least enough storage space for the given
+ * @p size maximum message size. The function returns a pointer to the
+ * node coap_pdu_t object on success, or @c NULL on error. The storage allocated
+ * for the result must be released with coap_delete_pdu() if coap_send() is not
+ * called.
+ *
+ * @param type The type of the PDU (one of COAP_MESSAGE_CON, COAP_MESSAGE_NON,
+ *             COAP_MESSAGE_ACK, COAP_MESSAGE_RST).
+ * @param code The message code.
+ * @param tid  The transcation id to set or 0 if unknown / not applicable.
+ * @param size The maximum allowed number of byte for the message.
+ * @return     A pointer to the new PDU object or @c NULL on error.
+ */</pre>
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>coap_pdu_t *coap_new_pdu(const struct coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new CoAP PDU.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char *coap_response_phrase(unsigned char code);</code></pre>
+      <pre class="doc-comment">/**
+ * Returns a human-readable response phrase for the specified CoAP response @p
+ * code. This function returns @c NULL if not found.
+ *
+ * @param code The response code for which the literal phrase should be
+ *             retrieved.
+ *
+ * @return     A zero-terminated string describing the error, or @c NULL if not
+ *             found.
+ */</pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_tid_t">Typedef <span>coap_tid_t</span></h4>
+      <pre class="doc-declare"><code>typedef int coap_tid_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * coap_tid_t is used to store CoAP transaction id, i.e. a hash value
+ * built from the remote transport address and the message id of a
+ * CoAP PDU.  Valid transaction ids are greater or equal zero.
+ */</pre>
+
+      <h4 id="coap_pdu_t;
+">Typedef <span>coap_pdu_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_pdu_t {
+ uint8_t type;            /**< message type */
+ uint8_t code;            /**< request method (value 1--10) or response code (value 40-255) */
+ uint8_t max_hdr_size;    /**< space reserved for protocol-specific header */
+ uint8_t hdr_size;        /**< actaul size used for protocol-specific header */
+ uint8_t token_length;    /**< length of Token */
+ uint16_t tid;            /**< transaction id, if any, in regular host byte order */
+ uint16_t max_delta;      /**< highest option number */
+ size_t alloc_size;       /**< allocated storage for token, options and payload */
+ size_t used_size;        /**< used bytes of storage for token, options and payload */
+ size_t max_size;         /**< maximum size for token, options and payload, or zero for variable size pdu */
+ uint8_t *token;          /**< first byte of token, if any, or options */
+ uint8_t *data;           /**< first byte of payload, if any */
+#ifdef WITH_LWIP
+ struct pbuf *pbuf;       /**< lwIP PBUF. The package data will always reside
+                             *   inside the pbuf's payload, but this pointer
+                             *   has to be kept because no exact offset can be
+                             *   given. This field must not be accessed from
+                             *   outside, because the pbuf's reference count
+                             *   is checked to be 1 when the pbuf is assigned
+                             *   to the pdu, and the pbuf stays exclusive to
+                             *   this pdu. */
+#endif
+} coap_pdu_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_proto_t">Typedef <span>coap_proto_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint8_t coap_proto_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

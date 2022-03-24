@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/bridgeif_opts.h" class="nav-sub-label">netif/bridgeif_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/ethernet.h" class="nav-sub-label">lwip/prot/ethernet.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/sys.h" class="nav-sub-label">lwip/sys.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/tcpip.h" class="nav-sub-label">lwip/tcpip.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_NETIF_BRIDGEIF_H" class="nav-sub-label">LWIP_HDR_NETIF_BRIDGEIF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#BR_FLOOD" class="nav-sub-label">BR_FLOOD</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_INITDATA1(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, ethaddr)" class="nav-sub-label">BRIDGEIF_INITDATA1(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, ethaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_INITDATA2(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, e0, e1, e2, e3, e4, e5)" class="nav-sub-label">BRIDGEIF_INITDATA2(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, e0, e1, e2, e3, e4, e5)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_DECL_PROTECT(lev)" class="nav-sub-label">BRIDGEIF_DECL_PROTECT(lev)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_READ_PROTECT(lev)" class="nav-sub-label">BRIDGEIF_READ_PROTECT(lev)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_READ_UNPROTECT(lev)" class="nav-sub-label">BRIDGEIF_READ_UNPROTECT(lev)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_WRITE_PROTECT" class="nav-sub-label">BRIDGEIF_WRITE_PROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_WRITE_UNPROTECT" class="nav-sub-label">BRIDGEIF_WRITE_UNPROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_DECL_PROTECT" class="nav-sub-label">BRIDGEIF_DECL_PROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_READ_PROTECT" class="nav-sub-label">BRIDGEIF_READ_PROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_READ_UNPROTECT" class="nav-sub-label">BRIDGEIF_READ_UNPROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_WRITE_PROTECT" class="nav-sub-label">BRIDGEIF_WRITE_PROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRIDGEIF_WRITE_UNPROTECT" class="nav-sub-label">BRIDGEIF_WRITE_UNPROTECT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#bridgeif_init" class="nav-sub-label">bridgeif_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_add_port" class="nav-sub-label">bridgeif_add_port</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_fdb_add" class="nav-sub-label">bridgeif_fdb_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_fdb_remove" class="nav-sub-label">bridgeif_fdb_remove</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_fdb_update_src" class="nav-sub-label">bridgeif_fdb_update_src</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_fdb_get_dst_ports" class="nav-sub-label">bridgeif_fdb_get_dst_ports</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_fdb_init" class="nav-sub-label">bridgeif_fdb_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif" class="nav-sub-label">netif</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#bridgeif_portmask_t" class="nav-sub-label">bridgeif_portmask_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#bridgeif_initdata_t;
+" class="nav-sub-label">bridgeif_initdata_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/bridgeif_opts.h"><span>netif/bridgeif_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/bridgeif_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/bridgeif_opts.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/prot/ethernet.h"><span>lwip/prot/ethernet.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/ethernet.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/ethernet.h"
+</pre>
+
+      <h4 id="lwip/sys.h"><span>lwip/sys.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/sys.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/sys.h"
+</pre>
+
+      <h4 id="lwip/tcpip.h"><span>lwip/tcpip.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/tcpip.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/tcpip.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_NETIF_BRIDGEIF_H">Marco <span>LWIP_HDR_NETIF_BRIDGEIF_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_NETIF_BRIDGEIF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BR_FLOOD">Marco <span>BR_FLOOD</span></h4>
+      <pre class="doc-declare"><code>#define BR_FLOOD ((bridgeif_portmask_t)-1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_INITDATA1(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, ethaddr)">Marco <span>BRIDGEIF_INITDATA1(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, ethaddr)</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_INITDATA1(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, ethaddr) {ethaddr, max_ports, max_fdb_dynamic_entries, max_fdb_static_entries}
+</code></pre>
+      <pre class="doc-comment">/** @ingroup bridgeif
+ * Use this for constant initialization of a bridgeif_initdat_t
+ * (ethaddr must be passed as ETH_ADDR())
+ */</pre>
+
+      <h4 id="BRIDGEIF_INITDATA2(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, e0, e1, e2, e3, e4, e5)">Marco <span>BRIDGEIF_INITDATA2(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, e0, e1, e2, e3, e4, e5)</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_INITDATA2(max_ports, max_fdb_dynamic_entries, max_fdb_static_entries, e0, e1, e2, e3, e4, e5) {{e0, e1, e2, e3, e4, e5}, max_ports, max_fdb_dynamic_entries, max_fdb_static_entries}
+</code></pre>
+      <pre class="doc-comment">/** @ingroup bridgeif
+ * Use this for constant initialization of a bridgeif_initdat_t
+ * (each byte of ethaddr must be passed)
+ */</pre>
+
+      <h4 id="BRIDGEIF_DECL_PROTECT(lev)">Marco <span>BRIDGEIF_DECL_PROTECT(lev)</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_DECL_PROTECT(lev)   SYS_ARCH_DECL_PROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_READ_PROTECT(lev)">Marco <span>BRIDGEIF_READ_PROTECT(lev)</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_READ_PROTECT(lev)   SYS_ARCH_PROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_READ_UNPROTECT(lev)">Marco <span>BRIDGEIF_READ_UNPROTECT(lev)</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_READ_UNPROTECT(lev) SYS_ARCH_UNPROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_WRITE_PROTECT">Marco <span>BRIDGEIF_WRITE_PROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_WRITE_PROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_WRITE_UNPROTECT">Marco <span>BRIDGEIF_WRITE_UNPROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_WRITE_UNPROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_DECL_PROTECT">Marco <span>BRIDGEIF_DECL_PROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_DECL_PROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_READ_PROTECT">Marco <span>BRIDGEIF_READ_PROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_READ_PROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_READ_UNPROTECT">Marco <span>BRIDGEIF_READ_UNPROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_READ_UNPROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_WRITE_PROTECT">Marco <span>BRIDGEIF_WRITE_PROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_WRITE_PROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRIDGEIF_WRITE_UNPROTECT">Marco <span>BRIDGEIF_WRITE_UNPROTECT</span></h4>
+      <pre class="doc-declare"><code>#define BRIDGEIF_WRITE_UNPROTECT(lev)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="bridgeif_init">Func <span>bridgeif_init</span></h4>
+      <pre class="doc-declare"><code>err_t bridgeif_init(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bridgeif_add_port">Func <span>bridgeif_add_port</span></h4>
+      <pre class="doc-declare"><code>err_t bridgeif_add_port(struct netif *bridgeif, struct netif *portif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bridgeif_fdb_add">Func <span>bridgeif_fdb_add</span></h4>
+      <pre class="doc-declare"><code>err_t bridgeif_fdb_add(struct netif *bridgeif, const struct eth_addr *addr, bridgeif_portmask_t ports);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bridgeif_fdb_remove">Func <span>bridgeif_fdb_remove</span></h4>
+      <pre class="doc-declare"><code>err_t bridgeif_fdb_remove(struct netif *bridgeif, const struct eth_addr *addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bridgeif_fdb_update_src">Func <span>bridgeif_fdb_update_src</span></h4>
+      <pre class="doc-declare"><code>void               bridgeif_fdb_update_src(void *fdb_ptr, struct eth_addr *src_addr, u8_t port_idx);</code></pre>
+      <pre class="doc-comment">/* FDB interface, can be replaced by own implementation */</pre>
+
+      <h4 id="bridgeif_fdb_get_dst_ports">Func <span>bridgeif_fdb_get_dst_ports</span></h4>
+      <pre class="doc-declare"><code>bridgeif_portmask_t bridgeif_fdb_get_dst_ports(void *fdb_ptr, struct eth_addr *dst_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bridgeif_fdb_init">Func <span>bridgeif_fdb_init</span></h4>
+      <pre class="doc-declare"><code>void*              bridgeif_fdb_init(u16_t max_fdb_entries);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="netif">Variable <span>netif</span></h4>
+      <pre class="doc-declare"><code>struct netif;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="bridgeif_portmask_t">Typedef <span>bridgeif_portmask_t</span></h4>
+      <pre class="doc-declare"><code>typedef u8_t bridgeif_portmask_t;
+#elif BRIDGEIF_MAX_PORTS < 16
+typedef u16_t bridgeif_portmask_t;
+#elif BRIDGEIF_MAX_PORTS < 32
+typedef u32_t bridgeif_portmask_t;
+#elif BRIDGEIF_MAX_PORTS < 64
+typedef u64_t bridgeif_portmask_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bridgeif_initdata_t;
+">Typedef <span>bridgeif_initdata_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct bridgeif_initdata_s {
+ /** MAC address of the bridge (cannot use the netif's addresses) */
+ struct eth_addr ethaddr;
+ /** Maximum number of ports in the bridge (ports are stored in an array, this
+      influences memory allocated for netif->state of the bridge netif). */
+ u8_t           max_ports;
+ /** Maximum number of dynamic/learning entries in the bridge's forwarding database.
+      In the default implementation, this controls memory consumption only. */
+ u16_t          max_fdb_dynamic_entries;
+ /** Maximum number of static forwarding entries. Influences memory consumption! */
+ u16_t          max_fdb_static_entries;
+} bridgeif_initdata_t;
+</code></pre>
+      <pre class="doc-comment">/** @ingroup bridgeif
+ * Initialisation data for @ref bridgeif_init.
+ * An instance of this type must be passed as parameter 'state' to @ref netif_add
+ * when the bridge is added.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

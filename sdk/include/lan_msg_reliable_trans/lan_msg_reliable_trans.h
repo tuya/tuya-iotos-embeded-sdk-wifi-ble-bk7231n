@@ -39,6 +39,7 @@ typedef struct {
 	USHORT_T max_retry_cnt;			//每个消息的最大的重试次数，如果超过，就开始丢弃该消息
 	USHORT_T max_total_retry_cnt;	//最大的连续重试次数，如果超过，就开始丢消息drop_msg_cnt个
 	USHORT_T drop_msg_cnt;			//一次丢消息的个数
+	USHORT_T cache_msg_max_cnt_per_peer;	//每个对端存储的最大的消息个数，一旦超过。视为消息堆积，快速丢弃一半的新报文
 } LAN_MSG_MOD_INIT_PARAM;
 
 

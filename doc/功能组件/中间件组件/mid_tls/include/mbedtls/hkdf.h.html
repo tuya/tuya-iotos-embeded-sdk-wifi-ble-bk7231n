@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#md.h" class="nav-sub-label">md.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_HKDF_H" class="nav-sub-label">MBEDTLS_HKDF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_HKDF_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_HKDF_BAD_INPUT_DATA</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_hkdf" class="nav-sub-label">mbedtls_hkdf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hkdf_extract" class="nav-sub-label">mbedtls_hkdf_extract</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hkdf_expand" class="nav-sub-label">mbedtls_hkdf_expand</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="md.h"><span>md.h</span></h4>
+      <pre class="doc-declare"><code>#include "md.h"
+</code></pre>
+      <pre class="doc-comment">#include "md.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_HKDF_H">Marco <span>MBEDTLS_HKDF_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HKDF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_HKDF_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_HKDF_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_HKDF_BAD_INPUT_DATA -24448 /**< Bad input parameters to function. */
+</code></pre>
+      <pre class="doc-comment">/**
+ *  \name HKDF Error codes
+ *  \{
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_hkdf">Func <span>mbedtls_hkdf</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hkdf( const mbedtls_md_info_t *md, const unsigned char *salt,
+                 size_t salt_len, const unsigned char *ikm, size_t ikm_len,
+                 const unsigned char *info, size_t info_len,
+                 unsigned char *okm, size_t okm_len );</code></pre>
+      <pre class="doc-comment">/**
+ *  \brief  This is the HMAC-based Extract-and-Expand Key Derivation Function
+ *          (HKDF).
+ *
+ *  \param  md        A hash function; md.size denotes the length of the hash
+ *                    function output in bytes.
+ *  \param  salt      An optional salt value (a non-secret random value);
+ *                    if the salt is not provided, a string of all zeros of
+ *                    md.size length is used as the salt.
+ *  \param  salt_len  The length in bytes of the optional \p salt.
+ *  \param  ikm       The input keying material.
+ *  \param  ikm_len   The length in bytes of \p ikm.
+ *  \param  info      An optional context and application specific information
+ *                    string. This can be a zero-length string.
+ *  \param  info_len  The length of \p info in bytes.
+ *  \param  okm       The output keying material of \p okm_len bytes.
+ *  \param  okm_len   The length of the output keying material in bytes. This
+ *                    must be less than or equal to 255 * md.size bytes.
+ *
+ *  \return 0 on success.
+ *  \return #MBEDTLS_ERR_HKDF_BAD_INPUT_DATA when the parameters are invalid.
+ *  \return An MBEDTLS_ERR_MD_* error for errors returned from the underlying
+ *          MD layer.
+ */</pre>
+
+      <h4 id="mbedtls_hkdf_extract">Func <span>mbedtls_hkdf_extract</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hkdf_extract( const mbedtls_md_info_t *md,
+                         const unsigned char *salt, size_t salt_len,
+                         const unsigned char *ikm, size_t ikm_len,
+                         unsigned char *prk );</code></pre>
+      <pre class="doc-comment">/**
+ *  \brief  Take the input keying material \p ikm and extract from it a
+ *          fixed-length pseudorandom key \p prk.
+ *
+ *  \warning    This function should only be used if the security of it has been
+ *              studied and established in that particular context (eg. TLS 1.3
+ *              key schedule). For standard HKDF security guarantees use
+ *              \c mbedtls_hkdf instead.
+ *
+ *  \param       md        A hash function; md.size denotes the length of the
+ *                         hash function output in bytes.
+ *  \param       salt      An optional salt value (a non-secret random value);
+ *                         if the salt is not provided, a string of all zeros
+ *                         of md.size length is used as the salt.
+ *  \param       salt_len  The length in bytes of the optional \p salt.
+ *  \param       ikm       The input keying material.
+ *  \param       ikm_len   The length in bytes of \p ikm.
+ *  \param[out]  prk       A pseudorandom key of at least md.size bytes.
+ *
+ *  \return 0 on success.
+ *  \return #MBEDTLS_ERR_HKDF_BAD_INPUT_DATA when the parameters are invalid.
+ *  \return An MBEDTLS_ERR_MD_* error for errors returned from the underlying
+ *          MD layer.
+ */</pre>
+
+      <h4 id="mbedtls_hkdf_expand">Func <span>mbedtls_hkdf_expand</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hkdf_expand( const mbedtls_md_info_t *md, const unsigned char *prk,
+                        size_t prk_len, const unsigned char *info,
+                        size_t info_len, unsigned char *okm, size_t okm_len );</code></pre>
+      <pre class="doc-comment">/**
+ *  \brief  Expand the supplied \p prk into several additional pseudorandom
+ *          keys, which is the output of the HKDF.
+ *
+ *  \warning    This function should only be used if the security of it has been
+ *              studied and established in that particular context (eg. TLS 1.3
+ *              key schedule). For standard HKDF security guarantees use
+ *              \c mbedtls_hkdf instead.
+ *
+ *  \param  md        A hash function; md.size denotes the length of the hash
+ *                    function output in bytes.
+ *  \param  prk       A pseudorandom key of at least md.size bytes. \p prk is
+ *                    usually the output from the HKDF extract step.
+ *  \param  prk_len   The length in bytes of \p prk.
+ *  \param  info      An optional context and application specific information
+ *                    string. This can be a zero-length string.
+ *  \param  info_len  The length of \p info in bytes.
+ *  \param  okm       The output keying material of \p okm_len bytes.
+ *  \param  okm_len   The length of the output keying material in bytes. This
+ *                    must be less than or equal to 255 * md.size bytes.
+ *
+ *  \return 0 on success.
+ *  \return #MBEDTLS_ERR_HKDF_BAD_INPUT_DATA when the parameters are invalid.
+ *  \return An MBEDTLS_ERR_MD_* error for errors returned from the underlying
+ *          MD layer.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

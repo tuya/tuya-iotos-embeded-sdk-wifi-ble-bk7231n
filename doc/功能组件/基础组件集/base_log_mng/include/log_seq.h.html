@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_pointer.h" class="nav-sub-label">uni_pointer.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__LOG_SEQ_H" class="nav-sub-label">__LOG_SEQ_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#STR_DATA_MAX_LENGTH" class="nav-sub-label">STR_DATA_MAX_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#LS_DELIMITER" class="nav-sub-label">LS_DELIMITER</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_LOG_SEQ_NULL(seq)" class="nav-sub-label">INSERT_LOG_SEQ_NULL(seq)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_LOG_SEQ_DEC(seq,dec)" class="nav-sub-label">INSERT_LOG_SEQ_DEC(seq,dec)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_LOG_SEQ_HEX(seq,hex)" class="nav-sub-label">INSERT_LOG_SEQ_HEX(seq,hex)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_LOG_SEQ_TM(seq,tm)" class="nav-sub-label">INSERT_LOG_SEQ_TM(seq,tm)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_LOG_SEQ_STR(seq,str)" class="nav-sub-label">INSERT_LOG_SEQ_STR(seq,str)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_ERROR_LOG_SEQ_NULL(seq)" class="nav-sub-label">INSERT_ERROR_LOG_SEQ_NULL(seq)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_ERROR_LOG_SEQ_DEC(seq,dec)" class="nav-sub-label">INSERT_ERROR_LOG_SEQ_DEC(seq,dec)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_ERROR_LOG_SEQ_HEX(seq,hex)" class="nav-sub-label">INSERT_ERROR_LOG_SEQ_HEX(seq,hex)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_ERROR_LOG_SEQ_TM(seq,tm)" class="nav-sub-label">INSERT_ERROR_LOG_SEQ_TM(seq,tm)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_ERROR_LOG_SEQ_STR(seq,str)" class="nav-sub-label">INSERT_ERROR_LOG_SEQ_STR(seq,str)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_REPORT_LOG_SEQ_NULL(seq)" class="nav-sub-label">INSERT_REPORT_LOG_SEQ_NULL(seq)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_REPORT_LOG_SEQ_DEC(seq,dec)" class="nav-sub-label">INSERT_REPORT_LOG_SEQ_DEC(seq,dec)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_REPORT_LOG_SEQ_HEX(seq,hex)" class="nav-sub-label">INSERT_REPORT_LOG_SEQ_HEX(seq,hex)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_REPORT_LOG_SEQ_TM(seq,tm)" class="nav-sub-label">INSERT_REPORT_LOG_SEQ_TM(seq,tm)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INSERT_REPORT_LOG_SEQ_STR(seq,str)" class="nav-sub-label">INSERT_REPORT_LOG_SEQ_STR(seq,str)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#log_seq_insert_log" class="nav-sub-label">log_seq_insert_log</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_insert_error_log" class="nav-sub-label">log_seq_insert_error_log</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_insert_report_log" class="nav-sub-label">log_seq_insert_report_log</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_init" class="nav-sub-label">log_seq_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_set_enable" class="nav-sub-label">log_seq_set_enable</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_set_depth" class="nav-sub-label">log_seq_set_depth</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_clean" class="nav-sub-label">log_seq_clean</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_force_sync" class="nav-sub-label">log_seq_force_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_upload_custom_log" class="nav-sub-label">log_seq_upload_custom_log</a>
+              </li>
+      
+
+              <li>
+                <a href="#log_seq_get_netcfg_log" class="nav-sub-label">log_seq_get_netcfg_log</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LS_DATA_TP_T" class="nav-sub-label">LS_DATA_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOG_DA_TP_U;
+" class="nav-sub-label">LOG_DA_TP_U;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LS_DATA_S;
+" class="nav-sub-label">LS_DATA_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LS_STAT_T" class="nav-sub-label">LS_STAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOG_SEQ_UPLOAD_CB" class="nav-sub-label">LOG_SEQ_UPLOAD_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="uni_pointer.h"><span>uni_pointer.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_pointer.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_pointer.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__LOG_SEQ_H">Marco <span>__LOG_SEQ_H</span></h4>
+      <pre class="doc-declare"><code>#define __LOG_SEQ_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STR_DATA_MAX_LENGTH">Marco <span>STR_DATA_MAX_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define STR_DATA_MAX_LENGTH 64
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LS_DELIMITER">Marco <span>LS_DELIMITER</span></h4>
+      <pre class="doc-declare"><code>#define LS_DELIMITER " | "
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_LOG_SEQ_NULL(seq)">Marco <span>INSERT_LOG_SEQ_NULL(seq)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_LOG_SEQ_NULL(seq)          log_seq_insert_log(LOGSEQ_OBJ, seq, LDT_NULL, NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_LOG_SEQ_DEC(seq,dec)">Marco <span>INSERT_LOG_SEQ_DEC(seq,dec)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_LOG_SEQ_DEC(seq,dec)       log_seq_insert_log(LOGSEQ_OBJ, seq, LDT_DEC, (VOID_T*)(intptr_t)dec)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_LOG_SEQ_HEX(seq,hex)">Marco <span>INSERT_LOG_SEQ_HEX(seq,hex)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_LOG_SEQ_HEX(seq,hex)       log_seq_insert_log(LOGSEQ_OBJ, seq, LDT_HEX, (VOID_T*)(uintptr_t)hex)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_LOG_SEQ_TM(seq,tm)">Marco <span>INSERT_LOG_SEQ_TM(seq,tm)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_LOG_SEQ_TM(seq,tm)         log_seq_insert_log(LOGSEQ_OBJ, seq, LDT_TIMESTAMP, (VOID_T*)tm)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_LOG_SEQ_STR(seq,str)">Marco <span>INSERT_LOG_SEQ_STR(seq,str)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_LOG_SEQ_STR(seq,str)       log_seq_insert_log(LOGSEQ_OBJ, seq, LDT_STRING, (VOID_T*)str)
+</code></pre>
+      <pre class="doc-comment">//string max length is STR_DATA_MAX_LENGTH</pre>
+
+      <h4 id="INSERT_ERROR_LOG_SEQ_NULL(seq)">Marco <span>INSERT_ERROR_LOG_SEQ_NULL(seq)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_ERROR_LOG_SEQ_NULL(seq)    log_seq_insert_error_log(LOGSEQ_OBJ, seq, LDT_NULL, NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_ERROR_LOG_SEQ_DEC(seq,dec)">Marco <span>INSERT_ERROR_LOG_SEQ_DEC(seq,dec)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_ERROR_LOG_SEQ_DEC(seq,dec) log_seq_insert_error_log(LOGSEQ_OBJ, seq, LDT_DEC, (VOID_T*)(intptr_t)dec)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_ERROR_LOG_SEQ_HEX(seq,hex)">Marco <span>INSERT_ERROR_LOG_SEQ_HEX(seq,hex)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_ERROR_LOG_SEQ_HEX(seq,hex) log_seq_insert_error_log(LOGSEQ_OBJ, seq, LDT_HEX, (VOID_T*)(uintptr_t)hex)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_ERROR_LOG_SEQ_TM(seq,tm)">Marco <span>INSERT_ERROR_LOG_SEQ_TM(seq,tm)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_ERROR_LOG_SEQ_TM(seq,tm)   log_seq_insert_error_log(LOGSEQ_OBJ, seq, LDT_TIMESTAMP, (VOID_T*)tm)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_ERROR_LOG_SEQ_STR(seq,str)">Marco <span>INSERT_ERROR_LOG_SEQ_STR(seq,str)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_ERROR_LOG_SEQ_STR(seq,str) log_seq_insert_error_log(LOGSEQ_OBJ, seq, LDT_STRING, (VOID_T*)str)
+</code></pre>
+      <pre class="doc-comment">//string max length is STR_DATA_MAX_LENGTH</pre>
+
+      <h4 id="INSERT_REPORT_LOG_SEQ_NULL(seq)">Marco <span>INSERT_REPORT_LOG_SEQ_NULL(seq)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_REPORT_LOG_SEQ_NULL(seq)   log_seq_insert_report_log(LOGSEQ_OBJ, seq, LDT_NULL, NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_REPORT_LOG_SEQ_DEC(seq,dec)">Marco <span>INSERT_REPORT_LOG_SEQ_DEC(seq,dec)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_REPORT_LOG_SEQ_DEC(seq,dec) log_seq_insert_report_log(LOGSEQ_OBJ, seq, LDT_DEC, (VOID_T*)(intptr_t)dec)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_REPORT_LOG_SEQ_HEX(seq,hex)">Marco <span>INSERT_REPORT_LOG_SEQ_HEX(seq,hex)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_REPORT_LOG_SEQ_HEX(seq,hex) log_seq_insert_report_log(LOGSEQ_OBJ, seq, LDT_HEX, (VOID_T*)(uintptr_t)hex)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_REPORT_LOG_SEQ_TM(seq,tm)">Marco <span>INSERT_REPORT_LOG_SEQ_TM(seq,tm)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_REPORT_LOG_SEQ_TM(seq,tm)  log_seq_insert_report_log(LOGSEQ_OBJ, seq, LDT_TIMESTAMP, (VOID_T*)tm)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INSERT_REPORT_LOG_SEQ_STR(seq,str)">Marco <span>INSERT_REPORT_LOG_SEQ_STR(seq,str)</span></h4>
+      <pre class="doc-declare"><code>#define INSERT_REPORT_LOG_SEQ_STR(seq,str) log_seq_insert_report_log(LOGSEQ_OBJ, seq, LDT_STRING, (VOID_T*)str)
+</code></pre>
+      <pre class="doc-comment">//string max length is STR_DATA_MAX_LENGTH</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="log_seq_insert_log">Func <span>log_seq_insert_log</span></h4>
+      <pre class="doc-declare"><code>int log_seq_insert_log(const char *ls_name, BYTE_T id, LS_DATA_TP_T type, VOID_T* data);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="log_seq_insert_error_log">Func <span>log_seq_insert_error_log</span></h4>
+      <pre class="doc-declare"><code>int log_seq_insert_error_log(const char *ls_name, BYTE_T id, LS_DATA_TP_T type, VOID_T* data);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="log_seq_insert_report_log">Func <span>log_seq_insert_report_log</span></h4>
+      <pre class="doc-declare"><code>int log_seq_insert_report_log(const char *ls_name, BYTE_T id, LS_DATA_TP_T type, VOID_T* data);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="log_seq_init">Func <span>log_seq_init</span></h4>
+      <pre class="doc-declare"><code>int log_seq_init(const char *log_seq_path);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief initialize of log sequence.
+ *
+ * @param[in] log_seq_path log sequence path
+ *
+ * @note This API is used for initialize log sequence.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="log_seq_set_enable">Func <span>log_seq_set_enable</span></h4>
+      <pre class="doc-declare"><code>int log_seq_set_enable(bool_t enable);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief enable or disable log sequence.
+ *
+ * @param[in] enable if value is true, enable log sequence, otherwise disable log sequence
+ *
+ * @note This API is used for enalbe or disable log sequence.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="log_seq_set_depth">Func <span>log_seq_set_depth</span></h4>
+      <pre class="doc-declare"><code>int log_seq_set_depth(const        unsigned int depth);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set log sequence depth.
+ *
+ * @param[in] depth log sequence depth
+ *
+ * @note This API is used for set depth of log sequence.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="log_seq_clean">Func <span>log_seq_clean</span></h4>
+      <pre class="doc-declare"><code>int log_seq_clean(int is_force_clean_all);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief reset log sequence, clean all log sequence, this is used when device reset.
+ *
+ * @param[in] is_force_clean_all, force clean all log sequence object
+ *
+ * @note This API is used for clean all log sequence object.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="log_seq_force_sync">Func <span>log_seq_force_sync</span></h4>
+      <pre class="doc-declare"><code>int log_seq_force_sync(void);</code></pre>
+      <pre class="doc-comment">/**
+* @brief force synchronization of log sequence .
+*
+* @param[in] NONE
+*
+* @note This API is used for synchronization of log sequence.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="log_seq_upload_custom_log">Func <span>log_seq_upload_custom_log</span></h4>
+      <pre class="doc-declare"><code>int log_seq_upload_custom_log(const char *p_log);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief upload customer log sequence .
+ *
+ * @param[in] p_log user log
+ *
+ * @note This API is used for upload customer log sequence.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="log_seq_get_netcfg_log">Func <span>log_seq_get_netcfg_log</span></h4>
+      <pre class="doc-declare"><code>int log_seq_get_netcfg_log(char **log_buff, int *log_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get network configure log sequence.
+ *
+ * @param[in] log_buff, log buffer
+ * @param[in] log_len, log size
+ *
+ * @note This API is used for get network configure log sequence.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="LS_DATA_TP_T">Typedef <span>LS_DATA_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T LS_DATA_TP_T; // log sequence data type
+#define LDT_NULL 0
+#define LDT_DEC 1
+#define LDT_HEX 2
+#define LDT_TIMESTAMP 3
+#define LDT_STRING 4
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOG_DA_TP_U;
+">Typedef <span>LOG_DA_TP_U;
+</span></h4>
+      <pre class="doc-declare"><code>typedef union {
+   INT_T  dec_data;
+   UINT_T hex_data;
+   TIME_T tm_data;
+   CHAR_T *str_data;
+}LOG_DA_TP_U;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief data storage structure of log sequence
+ */</pre>
+
+      <h4 id="LS_DATA_S;
+">Typedef <span>LS_DATA_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** log id */
+   BYTE_T         id;
+   /** log type */
+   LS_DATA_TP_T   type;
+   /** log data */
+   LOG_DA_TP_U    data;
+   /** log list node */
+   struct tuya_list_head node;
+}LS_DATA_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief data structure of log sequence
+ */</pre>
+
+      <h4 id="LS_STAT_T">Typedef <span>LS_STAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T LS_STAT_T;
+#define LSS_INIT 0
+#define LSS_RECORDING 1
+#define LSS_LOCKED 2 // LOG_SEQ_T set locked status when record the error log sequence
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOG_SEQ_UPLOAD_CB">Typedef <span>LOG_SEQ_UPLOAD_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (*LOG_SEQ_UPLOAD_CB)(const char *p_log); 
+</code></pre>
+      <pre class="doc-comment">// Calling when record the error log sequence</pre>
+    </div>
+  </body>
+</html>
+            

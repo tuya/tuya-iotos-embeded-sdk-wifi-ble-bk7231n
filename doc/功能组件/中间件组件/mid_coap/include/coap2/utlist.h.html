@@ -1,0 +1,2190 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#assert.h" class="nav-sub-label">assert.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#UTLIST_H" class="nav-sub-label">UTLIST_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_VERSION" class="nav-sub-label">UTLIST_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#LDECLTYPE(x)" class="nav-sub-label">LDECLTYPE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#NO_DECLTYPE" class="nav-sub-label">NO_DECLTYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#NO_DECLTYPE" class="nav-sub-label">NO_DECLTYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LDECLTYPE(x)" class="nav-sub-label">LDECLTYPE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IF_NO_DECLTYPE(x)" class="nav-sub-label">IF_NO_DECLTYPE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LDECLTYPE(x)" class="nav-sub-label">LDECLTYPE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_SV(elt,list)" class="nav-sub-label">UTLIST_SV(elt,list)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_NEXT(elt,list,next)" class="nav-sub-label">UTLIST_NEXT(elt,list,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_NEXTASGN(elt,list,to,next)" class="nav-sub-label">UTLIST_NEXTASGN(elt,list,to,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_PREVASGN(elt,list,to,prev)" class="nav-sub-label">UTLIST_PREVASGN(elt,list,to,prev)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_RS(list)" class="nav-sub-label">UTLIST_RS(list)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_CASTASGN(a,b)" class="nav-sub-label">UTLIST_CASTASGN(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IF_NO_DECLTYPE" class="nav-sub-label">IF_NO_DECLTYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_SV" class="nav-sub-label">UTLIST_SV</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_NEXT(elt,list,next)" class="nav-sub-label">UTLIST_NEXT(elt,list,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_NEXTASGN(elt,list,to,next)" class="nav-sub-label">UTLIST_NEXTASGN(elt,list,to,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_PREVASGN(elt,list,to,prev)" class="nav-sub-label">UTLIST_PREVASGN(elt,list,to,prev)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_RS" class="nav-sub-label">UTLIST_RS</a>
+              </li>
+      
+
+              <li>
+                <a href="#UTLIST_CASTASGN(a,b)" class="nav-sub-label">UTLIST_CASTASGN(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_SORT(list, cmp)" class="nav-sub-label">LL_SORT(list, cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_SORT2(list, cmp, next)" class="nav-sub-label">LL_SORT2(list, cmp, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_SORT(list, cmp)" class="nav-sub-label">DL_SORT(list, cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_SORT2(list, cmp, prev, next)" class="nav-sub-label">DL_SORT2(list, cmp, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_SORT(list, cmp)" class="nav-sub-label">CDL_SORT(list, cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_SORT2(list, cmp, prev, next)" class="nav-sub-label">CDL_SORT2(list, cmp, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_PREPEND(head,add)" class="nav-sub-label">LL_PREPEND(head,add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_PREPEND2(head,add,next)" class="nav-sub-label">LL_PREPEND2(head,add,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_CONCAT(head1,head2)" class="nav-sub-label">LL_CONCAT(head1,head2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_CONCAT2(head1,head2,next)" class="nav-sub-label">LL_CONCAT2(head1,head2,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_APPEND(head,add)" class="nav-sub-label">LL_APPEND(head,add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_APPEND2(head,add,next)" class="nav-sub-label">LL_APPEND2(head,add,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_INSERT_INORDER(head,add,cmp)" class="nav-sub-label">LL_INSERT_INORDER(head,add,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_INSERT_INORDER2(head,add,cmp,next)" class="nav-sub-label">LL_INSERT_INORDER2(head,add,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_LOWER_BOUND(head,elt,like,cmp)" class="nav-sub-label">LL_LOWER_BOUND(head,elt,like,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_LOWER_BOUND2(head,elt,like,cmp,next)" class="nav-sub-label">LL_LOWER_BOUND2(head,elt,like,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_DELETE(head,del)" class="nav-sub-label">LL_DELETE(head,del)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_DELETE2(head,del,next)" class="nav-sub-label">LL_DELETE2(head,del,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_COUNT(head,el,counter)" class="nav-sub-label">LL_COUNT(head,el,counter)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_COUNT2(head,el,counter,next)" class="nav-sub-label">LL_COUNT2(head,el,counter,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_FOREACH(head,el)" class="nav-sub-label">LL_FOREACH(head,el)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_FOREACH2(head,el,next)" class="nav-sub-label">LL_FOREACH2(head,el,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_FOREACH_SAFE(head,el,tmp)" class="nav-sub-label">LL_FOREACH_SAFE(head,el,tmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_FOREACH_SAFE2(head,el,tmp,next)" class="nav-sub-label">LL_FOREACH_SAFE2(head,el,tmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_SEARCH_SCALAR(head,out,field,val)" class="nav-sub-label">LL_SEARCH_SCALAR(head,out,field,val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_SEARCH_SCALAR2(head,out,field,val,next)" class="nav-sub-label">LL_SEARCH_SCALAR2(head,out,field,val,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_SEARCH(head,out,elt,cmp)" class="nav-sub-label">LL_SEARCH(head,out,elt,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_SEARCH2(head,out,elt,cmp,next)" class="nav-sub-label">LL_SEARCH2(head,out,elt,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_REPLACE_ELEM2(head, el, add, next)" class="nav-sub-label">LL_REPLACE_ELEM2(head, el, add, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_REPLACE_ELEM(head, el, add)" class="nav-sub-label">LL_REPLACE_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_PREPEND_ELEM2(head, el, add, next)" class="nav-sub-label">LL_PREPEND_ELEM2(head, el, add, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_PREPEND_ELEM(head, el, add)" class="nav-sub-label">LL_PREPEND_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_APPEND_ELEM2(head, el, add, next)" class="nav-sub-label">LL_APPEND_ELEM2(head, el, add, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_APPEND_ELEM(head, el, add)" class="nav-sub-label">LL_APPEND_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_CONCAT2(head1,head2,next)" class="nav-sub-label">LL_CONCAT2(head1,head2,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_APPEND2(head,add,next)" class="nav-sub-label">LL_APPEND2(head,add,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_INSERT_INORDER2(head,add,cmp,next)" class="nav-sub-label">LL_INSERT_INORDER2(head,add,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_DELETE2(head,del,next)" class="nav-sub-label">LL_DELETE2(head,del,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_REPLACE_ELEM2(head, el, add, next)" class="nav-sub-label">LL_REPLACE_ELEM2(head, el, add, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LL_PREPEND_ELEM2(head, el, add, next)" class="nav-sub-label">LL_PREPEND_ELEM2(head, el, add, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_PREPEND(head,add)" class="nav-sub-label">DL_PREPEND(head,add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_PREPEND2(head,add,prev,next)" class="nav-sub-label">DL_PREPEND2(head,add,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_APPEND(head,add)" class="nav-sub-label">DL_APPEND(head,add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_APPEND2(head,add,prev,next)" class="nav-sub-label">DL_APPEND2(head,add,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_INSERT_INORDER(head,add,cmp)" class="nav-sub-label">DL_INSERT_INORDER(head,add,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_INSERT_INORDER2(head,add,cmp,next)" class="nav-sub-label">DL_INSERT_INORDER2(head,add,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_LOWER_BOUND(head,elt,like,cmp)" class="nav-sub-label">DL_LOWER_BOUND(head,elt,like,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_LOWER_BOUND2(head,elt,like,cmp,next)" class="nav-sub-label">DL_LOWER_BOUND2(head,elt,like,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_CONCAT(head1,head2)" class="nav-sub-label">DL_CONCAT(head1,head2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_CONCAT2(head1,head2,prev,next)" class="nav-sub-label">DL_CONCAT2(head1,head2,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_DELETE(head,del)" class="nav-sub-label">DL_DELETE(head,del)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_DELETE2(head,del,prev,next)" class="nav-sub-label">DL_DELETE2(head,del,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_COUNT(head,el,counter)" class="nav-sub-label">DL_COUNT(head,el,counter)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_COUNT2(head,el,counter,next)" class="nav-sub-label">DL_COUNT2(head,el,counter,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_FOREACH(head,el)" class="nav-sub-label">DL_FOREACH(head,el)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_FOREACH2(head,el,next)" class="nav-sub-label">DL_FOREACH2(head,el,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_FOREACH_SAFE(head,el,tmp)" class="nav-sub-label">DL_FOREACH_SAFE(head,el,tmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_FOREACH_SAFE2(head,el,tmp,next)" class="nav-sub-label">DL_FOREACH_SAFE2(head,el,tmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_SEARCH_SCALAR" class="nav-sub-label">DL_SEARCH_SCALAR</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_SEARCH" class="nav-sub-label">DL_SEARCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_SEARCH_SCALAR2" class="nav-sub-label">DL_SEARCH_SCALAR2</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_SEARCH2" class="nav-sub-label">DL_SEARCH2</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_REPLACE_ELEM2(head, el, add, prev, next)" class="nav-sub-label">DL_REPLACE_ELEM2(head, el, add, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_REPLACE_ELEM(head, el, add)" class="nav-sub-label">DL_REPLACE_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_PREPEND_ELEM2(head, el, add, prev, next)" class="nav-sub-label">DL_PREPEND_ELEM2(head, el, add, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_PREPEND_ELEM(head, el, add)" class="nav-sub-label">DL_PREPEND_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_APPEND_ELEM2(head, el, add, prev, next)" class="nav-sub-label">DL_APPEND_ELEM2(head, el, add, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_APPEND_ELEM(head, el, add)" class="nav-sub-label">DL_APPEND_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DL_INSERT_INORDER2(head,add,cmp,next)" class="nav-sub-label">DL_INSERT_INORDER2(head,add,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_APPEND(head,add)" class="nav-sub-label">CDL_APPEND(head,add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_APPEND2(head,add,prev,next)" class="nav-sub-label">CDL_APPEND2(head,add,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_PREPEND(head,add)" class="nav-sub-label">CDL_PREPEND(head,add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_PREPEND2(head,add,prev,next)" class="nav-sub-label">CDL_PREPEND2(head,add,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_INSERT_INORDER(head,add,cmp)" class="nav-sub-label">CDL_INSERT_INORDER(head,add,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_INSERT_INORDER2(head,add,cmp,next)" class="nav-sub-label">CDL_INSERT_INORDER2(head,add,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_LOWER_BOUND(head,elt,like,cmp)" class="nav-sub-label">CDL_LOWER_BOUND(head,elt,like,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_LOWER_BOUND2(head,elt,like,cmp,next)" class="nav-sub-label">CDL_LOWER_BOUND2(head,elt,like,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_DELETE(head,del)" class="nav-sub-label">CDL_DELETE(head,del)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_DELETE2(head,del,prev,next)" class="nav-sub-label">CDL_DELETE2(head,del,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_COUNT(head,el,counter)" class="nav-sub-label">CDL_COUNT(head,el,counter)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_COUNT2(head, el, counter,next)" class="nav-sub-label">CDL_COUNT2(head, el, counter,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_FOREACH(head,el)" class="nav-sub-label">CDL_FOREACH(head,el)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_FOREACH2(head,el,next)" class="nav-sub-label">CDL_FOREACH2(head,el,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_FOREACH_SAFE(head,el,tmp1,tmp2)" class="nav-sub-label">CDL_FOREACH_SAFE(head,el,tmp1,tmp2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_FOREACH_SAFE2(head,el,tmp1,tmp2,prev,next)" class="nav-sub-label">CDL_FOREACH_SAFE2(head,el,tmp1,tmp2,prev,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_SEARCH_SCALAR(head,out,field,val)" class="nav-sub-label">CDL_SEARCH_SCALAR(head,out,field,val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_SEARCH_SCALAR2(head,out,field,val,next)" class="nav-sub-label">CDL_SEARCH_SCALAR2(head,out,field,val,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_SEARCH(head,out,elt,cmp)" class="nav-sub-label">CDL_SEARCH(head,out,elt,cmp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_SEARCH2(head,out,elt,cmp,next)" class="nav-sub-label">CDL_SEARCH2(head,out,elt,cmp,next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_REPLACE_ELEM2(head, el, add, prev, next)" class="nav-sub-label">CDL_REPLACE_ELEM2(head, el, add, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_REPLACE_ELEM(head, el, add)" class="nav-sub-label">CDL_REPLACE_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_PREPEND_ELEM2(head, el, add, prev, next)" class="nav-sub-label">CDL_PREPEND_ELEM2(head, el, add, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_PREPEND_ELEM(head, el, add)" class="nav-sub-label">CDL_PREPEND_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_APPEND_ELEM2(head, el, add, prev, next)" class="nav-sub-label">CDL_APPEND_ELEM2(head, el, add, prev, next)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_APPEND_ELEM(head, el, add)" class="nav-sub-label">CDL_APPEND_ELEM(head, el, add)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CDL_INSERT_INORDER2(head,add,cmp,next)" class="nav-sub-label">CDL_INSERT_INORDER2(head,add,cmp,next)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="assert.h"><span>assert.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;assert.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <assert.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="UTLIST_H">Marco <span>UTLIST_H</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_VERSION">Marco <span>UTLIST_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_VERSION 2.0.2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LDECLTYPE(x)">Marco <span>LDECLTYPE(x)</span></h4>
+      <pre class="doc-declare"><code>#define LDECLTYPE(x) decltype(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NO_DECLTYPE">Marco <span>NO_DECLTYPE</span></h4>
+      <pre class="doc-declare"><code>#define NO_DECLTYPE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NO_DECLTYPE">Marco <span>NO_DECLTYPE</span></h4>
+      <pre class="doc-declare"><code>#define NO_DECLTYPE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LDECLTYPE(x)">Marco <span>LDECLTYPE(x)</span></h4>
+      <pre class="doc-declare"><code>#define LDECLTYPE(x) __typeof(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IF_NO_DECLTYPE(x)">Marco <span>IF_NO_DECLTYPE(x)</span></h4>
+      <pre class="doc-declare"><code>#define IF_NO_DECLTYPE(x) x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LDECLTYPE(x)">Marco <span>LDECLTYPE(x)</span></h4>
+      <pre class="doc-declare"><code>#define LDECLTYPE(x) char*
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_SV(elt,list)">Marco <span>UTLIST_SV(elt,list)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_SV(elt,list) _tmp = (char*)(list); {char **_alias = (char**)&(list); *_alias = (elt); }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_NEXT(elt,list,next)">Marco <span>UTLIST_NEXT(elt,list,next)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_NEXT(elt,list,next) ((char*)((list)->next))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_NEXTASGN(elt,list,to,next)">Marco <span>UTLIST_NEXTASGN(elt,list,to,next)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_NEXTASGN(elt,list,to,next) { char **_alias = (char**)&((list)->next); *_alias=(char*)(to); }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_PREVASGN(elt,list,to,prev)">Marco <span>UTLIST_PREVASGN(elt,list,to,prev)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_PREVASGN(elt,list,to,prev) { char **_alias = (char**)&((list)->prev); *_alias=(char*)(to); }
+</code></pre>
+      <pre class="doc-comment">/* #define UTLIST_PREV(elt,list,prev) ((char*)((list)->prev)) */</pre>
+
+      <h4 id="UTLIST_RS(list)">Marco <span>UTLIST_RS(list)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_RS(list) { char **_alias = (char**)&(list); *_alias=_tmp; }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_CASTASGN(a,b)">Marco <span>UTLIST_CASTASGN(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_CASTASGN(a,b) { char **_alias = (char**)&(a); *_alias=(char*)(b); }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IF_NO_DECLTYPE">Marco <span>IF_NO_DECLTYPE</span></h4>
+      <pre class="doc-declare"><code>#define IF_NO_DECLTYPE(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_SV">Marco <span>UTLIST_SV</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_SV(elt,list)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_NEXT(elt,list,next)">Marco <span>UTLIST_NEXT(elt,list,next)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_NEXT(elt,list,next) ((elt)->next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_NEXTASGN(elt,list,to,next)">Marco <span>UTLIST_NEXTASGN(elt,list,to,next)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_NEXTASGN(elt,list,to,next) ((elt)->next)=(to)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_PREVASGN(elt,list,to,prev)">Marco <span>UTLIST_PREVASGN(elt,list,to,prev)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_PREVASGN(elt,list,to,prev) ((elt)->prev)=(to)
+</code></pre>
+      <pre class="doc-comment">/* #define UTLIST_PREV(elt,list,prev) ((elt)->prev) */</pre>
+
+      <h4 id="UTLIST_RS">Marco <span>UTLIST_RS</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_RS(list)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UTLIST_CASTASGN(a,b)">Marco <span>UTLIST_CASTASGN(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define UTLIST_CASTASGN(a,b) (a)=(b)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_SORT(list, cmp)">Marco <span>LL_SORT(list, cmp)</span></h4>
+      <pre class="doc-declare"><code>#define LL_SORT(list, cmp)                                                                    \
+   LL_SORT2(list, cmp, next)
+</code></pre>
+      <pre class="doc-comment">/******************************************************************************
+ * The sort macro is an adaptation of Simon Tatham's O(n log(n)) mergesort    *
+ * Unwieldy variable names used here to avoid shadowing passed-in variables.  *
+ *****************************************************************************/</pre>
+
+      <h4 id="LL_SORT2(list, cmp, next)">Marco <span>LL_SORT2(list, cmp, next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_SORT2(list, cmp, next)                                                             \
+do {                                                                                          \
+ LDECLTYPE(list) _ls_p;                                                                      \
+ LDECLTYPE(list) _ls_q;                                                                      \
+ LDECLTYPE(list) _ls_e;                                                                      \
+ LDECLTYPE(list) _ls_tail;                                                                   \
+ IF_NO_DECLTYPE(LDECLTYPE(list) _tmp;)                                                       \
+ int _ls_insize, _ls_nmerges, _ls_psize, _ls_qsize, _ls_i, _ls_looping;                      \
+ if (list) {                                                                                 \
+   _ls_insize = 1;                                                                           \
+   _ls_looping = 1;                                                                          \
+   while (_ls_looping) {                                                                     \
+     UTLIST_CASTASGN(_ls_p,list);                                                            \
+     (list) = NULL;                                                                          \
+     _ls_tail = NULL;                                                                        \
+     _ls_nmerges = 0;                                                                        \
+     while (_ls_p) {                                                                         \
+       _ls_nmerges++;                                                                        \
+       _ls_q = _ls_p;                                                                        \
+       _ls_psize = 0;                                                                        \
+       for (_ls_i = 0; _ls_i < _ls_insize; _ls_i++) {                                        \
+         _ls_psize++;                                                                        \
+         UTLIST_SV(_ls_q,list); _ls_q = UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list);       \
+         if (!_ls_q) break;                                                                  \
+       }                                                                                     \
+       _ls_qsize = _ls_insize;                                                               \
+       while (_ls_psize > 0 || (_ls_qsize > 0 && _ls_q)) {                                   \
+         if (_ls_psize == 0) {                                                               \
+           _ls_e = _ls_q; UTLIST_SV(_ls_q,list); _ls_q =                                     \
+             UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list); _ls_qsize--;                     \
+         } else if (_ls_qsize == 0 || !_ls_q) {                                              \
+           _ls_e = _ls_p; UTLIST_SV(_ls_p,list); _ls_p =                                     \
+             UTLIST_NEXT(_ls_p,list,next); UTLIST_RS(list); _ls_psize--;                     \
+         } else if (cmp(_ls_p,_ls_q) <= 0) {                                                 \
+           _ls_e = _ls_p; UTLIST_SV(_ls_p,list); _ls_p =                                     \
+             UTLIST_NEXT(_ls_p,list,next); UTLIST_RS(list); _ls_psize--;                     \
+         } else {                                                                            \
+           _ls_e = _ls_q; UTLIST_SV(_ls_q,list); _ls_q =                                     \
+             UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list); _ls_qsize--;                     \
+         }                                                                                   \
+         if (_ls_tail) {                                                                     \
+           UTLIST_SV(_ls_tail,list); UTLIST_NEXTASGN(_ls_tail,list,_ls_e,next); UTLIST_RS(list); \
+         } else {                                                                            \
+           UTLIST_CASTASGN(list,_ls_e);                                                      \
+         }                                                                                   \
+         _ls_tail = _ls_e;                                                                   \
+       }                                                                                     \
+       _ls_p = _ls_q;                                                                        \
+     }                                                                                       \
+     if (_ls_tail) {                                                                         \
+       UTLIST_SV(_ls_tail,list); UTLIST_NEXTASGN(_ls_tail,list,NULL,next); UTLIST_RS(list);  \
+     }                                                                                       \
+     if (_ls_nmerges <= 1) {                                                                 \
+       _ls_looping=0;                                                                        \
+     }                                                                                       \
+     _ls_insize *= 2;                                                                        \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_SORT(list, cmp)">Marco <span>DL_SORT(list, cmp)</span></h4>
+      <pre class="doc-declare"><code>#define DL_SORT(list, cmp)                                                                    \
+   DL_SORT2(list, cmp, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_SORT2(list, cmp, prev, next)">Marco <span>DL_SORT2(list, cmp, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_SORT2(list, cmp, prev, next)                                                       \
+do {                                                                                          \
+ LDECLTYPE(list) _ls_p;                                                                      \
+ LDECLTYPE(list) _ls_q;                                                                      \
+ LDECLTYPE(list) _ls_e;                                                                      \
+ LDECLTYPE(list) _ls_tail;                                                                   \
+ IF_NO_DECLTYPE(LDECLTYPE(list) _tmp;)                                                       \
+ int _ls_insize, _ls_nmerges, _ls_psize, _ls_qsize, _ls_i, _ls_looping;                      \
+ if (list) {                                                                                 \
+   _ls_insize = 1;                                                                           \
+   _ls_looping = 1;                                                                          \
+   while (_ls_looping) {                                                                     \
+     UTLIST_CASTASGN(_ls_p,list);                                                            \
+     (list) = NULL;                                                                          \
+     _ls_tail = NULL;                                                                        \
+     _ls_nmerges = 0;                                                                        \
+     while (_ls_p) {                                                                         \
+       _ls_nmerges++;                                                                        \
+       _ls_q = _ls_p;                                                                        \
+       _ls_psize = 0;                                                                        \
+       for (_ls_i = 0; _ls_i < _ls_insize; _ls_i++) {                                        \
+         _ls_psize++;                                                                        \
+         UTLIST_SV(_ls_q,list); _ls_q = UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list);       \
+         if (!_ls_q) break;                                                                  \
+       }                                                                                     \
+       _ls_qsize = _ls_insize;                                                               \
+       while ((_ls_psize > 0) || ((_ls_qsize > 0) && _ls_q)) {                               \
+         if (_ls_psize == 0) {                                                               \
+           _ls_e = _ls_q; UTLIST_SV(_ls_q,list); _ls_q =                                     \
+             UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list); _ls_qsize--;                     \
+         } else if ((_ls_qsize == 0) || (!_ls_q)) {                                          \
+           _ls_e = _ls_p; UTLIST_SV(_ls_p,list); _ls_p =                                     \
+             UTLIST_NEXT(_ls_p,list,next); UTLIST_RS(list); _ls_psize--;                     \
+         } else if (cmp(_ls_p,_ls_q) <= 0) {                                                 \
+           _ls_e = _ls_p; UTLIST_SV(_ls_p,list); _ls_p =                                     \
+             UTLIST_NEXT(_ls_p,list,next); UTLIST_RS(list); _ls_psize--;                     \
+         } else {                                                                            \
+           _ls_e = _ls_q; UTLIST_SV(_ls_q,list); _ls_q =                                     \
+             UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list); _ls_qsize--;                     \
+         }                                                                                   \
+         if (_ls_tail) {                                                                     \
+           UTLIST_SV(_ls_tail,list); UTLIST_NEXTASGN(_ls_tail,list,_ls_e,next); UTLIST_RS(list); \
+         } else {                                                                            \
+           UTLIST_CASTASGN(list,_ls_e);                                                      \
+         }                                                                                   \
+         UTLIST_SV(_ls_e,list); UTLIST_PREVASGN(_ls_e,list,_ls_tail,prev); UTLIST_RS(list);  \
+         _ls_tail = _ls_e;                                                                   \
+       }                                                                                     \
+       _ls_p = _ls_q;                                                                        \
+     }                                                                                       \
+     UTLIST_CASTASGN((list)->prev, _ls_tail);                                                \
+     UTLIST_SV(_ls_tail,list); UTLIST_NEXTASGN(_ls_tail,list,NULL,next); UTLIST_RS(list);    \
+     if (_ls_nmerges <= 1) {                                                                 \
+       _ls_looping=0;                                                                        \
+     }                                                                                       \
+     _ls_insize *= 2;                                                                        \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_SORT(list, cmp)">Marco <span>CDL_SORT(list, cmp)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_SORT(list, cmp)                                                                   \
+   CDL_SORT2(list, cmp, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_SORT2(list, cmp, prev, next)">Marco <span>CDL_SORT2(list, cmp, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_SORT2(list, cmp, prev, next)                                                      \
+do {                                                                                          \
+ LDECLTYPE(list) _ls_p;                                                                      \
+ LDECLTYPE(list) _ls_q;                                                                      \
+ LDECLTYPE(list) _ls_e;                                                                      \
+ LDECLTYPE(list) _ls_tail;                                                                   \
+ LDECLTYPE(list) _ls_oldhead;                                                                \
+ LDECLTYPE(list) _tmp;                                                                       \
+ int _ls_insize, _ls_nmerges, _ls_psize, _ls_qsize, _ls_i, _ls_looping;                      \
+ if (list) {                                                                                 \
+   _ls_insize = 1;                                                                           \
+   _ls_looping = 1;                                                                          \
+   while (_ls_looping) {                                                                     \
+     UTLIST_CASTASGN(_ls_p,list);                                                            \
+     UTLIST_CASTASGN(_ls_oldhead,list);                                                      \
+     (list) = NULL;                                                                          \
+     _ls_tail = NULL;                                                                        \
+     _ls_nmerges = 0;                                                                        \
+     while (_ls_p) {                                                                         \
+       _ls_nmerges++;                                                                        \
+       _ls_q = _ls_p;                                                                        \
+       _ls_psize = 0;                                                                        \
+       for (_ls_i = 0; _ls_i < _ls_insize; _ls_i++) {                                        \
+         _ls_psize++;                                                                        \
+         UTLIST_SV(_ls_q,list);                                                              \
+         if (UTLIST_NEXT(_ls_q,list,next) == _ls_oldhead) {                                  \
+           _ls_q = NULL;                                                                     \
+         } else {                                                                            \
+           _ls_q = UTLIST_NEXT(_ls_q,list,next);                                             \
+         }                                                                                   \
+         UTLIST_RS(list);                                                                    \
+         if (!_ls_q) break;                                                                  \
+       }                                                                                     \
+       _ls_qsize = _ls_insize;                                                               \
+       while (_ls_psize > 0 || (_ls_qsize > 0 && _ls_q)) {                                   \
+         if (_ls_psize == 0) {                                                               \
+           _ls_e = _ls_q; UTLIST_SV(_ls_q,list); _ls_q =                                     \
+             UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list); _ls_qsize--;                     \
+           if (_ls_q == _ls_oldhead) { _ls_q = NULL; }                                       \
+         } else if (_ls_qsize == 0 || !_ls_q) {                                              \
+           _ls_e = _ls_p; UTLIST_SV(_ls_p,list); _ls_p =                                     \
+             UTLIST_NEXT(_ls_p,list,next); UTLIST_RS(list); _ls_psize--;                     \
+           if (_ls_p == _ls_oldhead) { _ls_p = NULL; }                                       \
+         } else if (cmp(_ls_p,_ls_q) <= 0) {                                                 \
+           _ls_e = _ls_p; UTLIST_SV(_ls_p,list); _ls_p =                                     \
+             UTLIST_NEXT(_ls_p,list,next); UTLIST_RS(list); _ls_psize--;                     \
+           if (_ls_p == _ls_oldhead) { _ls_p = NULL; }                                       \
+         } else {                                                                            \
+           _ls_e = _ls_q; UTLIST_SV(_ls_q,list); _ls_q =                                     \
+             UTLIST_NEXT(_ls_q,list,next); UTLIST_RS(list); _ls_qsize--;                     \
+           if (_ls_q == _ls_oldhead) { _ls_q = NULL; }                                       \
+         }                                                                                   \
+         if (_ls_tail) {                                                                     \
+           UTLIST_SV(_ls_tail,list); UTLIST_NEXTASGN(_ls_tail,list,_ls_e,next); UTLIST_RS(list); \
+         } else {                                                                            \
+           UTLIST_CASTASGN(list,_ls_e);                                                      \
+         }                                                                                   \
+         UTLIST_SV(_ls_e,list); UTLIST_PREVASGN(_ls_e,list,_ls_tail,prev); UTLIST_RS(list);  \
+         _ls_tail = _ls_e;                                                                   \
+       }                                                                                     \
+       _ls_p = _ls_q;                                                                        \
+     }                                                                                       \
+     UTLIST_CASTASGN((list)->prev,_ls_tail);                                                 \
+     UTLIST_CASTASGN(_tmp,list);                                                             \
+     UTLIST_SV(_ls_tail,list); UTLIST_NEXTASGN(_ls_tail,list,_tmp,next); UTLIST_RS(list);    \
+     if (_ls_nmerges <= 1) {                                                                 \
+       _ls_looping=0;                                                                        \
+     }                                                                                       \
+     _ls_insize *= 2;                                                                        \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_PREPEND(head,add)">Marco <span>LL_PREPEND(head,add)</span></h4>
+      <pre class="doc-declare"><code>#define LL_PREPEND(head,add)                                                                  \
+   LL_PREPEND2(head,add,next)
+</code></pre>
+      <pre class="doc-comment">/******************************************************************************
+ * singly linked list macros (non-circular)                                   *
+ *****************************************************************************/</pre>
+
+      <h4 id="LL_PREPEND2(head,add,next)">Marco <span>LL_PREPEND2(head,add,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_PREPEND2(head,add,next)                                                            \
+do {                                                                                          \
+ (add)->next = (head);                                                                       \
+ (head) = (add);                                                                             \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_CONCAT(head1,head2)">Marco <span>LL_CONCAT(head1,head2)</span></h4>
+      <pre class="doc-declare"><code>#define LL_CONCAT(head1,head2)                                                                \
+   LL_CONCAT2(head1,head2,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_CONCAT2(head1,head2,next)">Marco <span>LL_CONCAT2(head1,head2,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_CONCAT2(head1,head2,next)                                                          \
+do {                                                                                          \
+ LDECLTYPE(head1) _tmp;                                                                      \
+ if (head1) {                                                                                \
+   _tmp = (head1);                                                                           \
+   while (_tmp->next) { _tmp = _tmp->next; }                                                 \
+   _tmp->next=(head2);                                                                       \
+ } else {                                                                                    \
+   (head1)=(head2);                                                                          \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_APPEND(head,add)">Marco <span>LL_APPEND(head,add)</span></h4>
+      <pre class="doc-declare"><code>#define LL_APPEND(head,add)                                                                   \
+   LL_APPEND2(head,add,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_APPEND2(head,add,next)">Marco <span>LL_APPEND2(head,add,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_APPEND2(head,add,next)                                                             \
+do {                                                                                          \
+ LDECLTYPE(head) _tmp;                                                                       \
+ (add)->next=NULL;                                                                           \
+ if (head) {                                                                                 \
+   _tmp = (head);                                                                            \
+   while (_tmp->next) { _tmp = _tmp->next; }                                                 \
+   _tmp->next=(add);                                                                         \
+ } else {                                                                                    \
+   (head)=(add);                                                                             \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_INSERT_INORDER(head,add,cmp)">Marco <span>LL_INSERT_INORDER(head,add,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define LL_INSERT_INORDER(head,add,cmp)                                                       \
+   LL_INSERT_INORDER2(head,add,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_INSERT_INORDER2(head,add,cmp,next)">Marco <span>LL_INSERT_INORDER2(head,add,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_INSERT_INORDER2(head,add,cmp,next)                                                 \
+do {                                                                                          \
+ LDECLTYPE(head) _tmp;                                                                       \
+ if (head) {                                                                                 \
+   LL_LOWER_BOUND(head, _tmp, add, cmp);                                                     \
+   LL_APPEND_ELEM(head, _tmp, add);                                                          \
+ } else {                                                                                    \
+   (head) = (add);                                                                           \
+   (head)->next = NULL;                                                                      \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_LOWER_BOUND(head,elt,like,cmp)">Marco <span>LL_LOWER_BOUND(head,elt,like,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define LL_LOWER_BOUND(head,elt,like,cmp)                                                     \
+   LL_LOWER_BOUND2(head,elt,like,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_LOWER_BOUND2(head,elt,like,cmp,next)">Marco <span>LL_LOWER_BOUND2(head,elt,like,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_LOWER_BOUND2(head,elt,like,cmp,next)                                               \
+ do {                                                                                        \
+   if ((head) == NULL || (cmp(head, like)) >= 0) {                                           \
+     (elt) = NULL;                                                                           \
+   } else {                                                                                  \
+     for ((elt) = (head); (elt)->next != NULL; (elt) = (elt)->next) {                        \
+       if (cmp((elt)->next, like) >= 0) {                                                    \
+         break;                                                                              \
+       }                                                                                     \
+     }                                                                                       \
+   }                                                                                         \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_DELETE(head,del)">Marco <span>LL_DELETE(head,del)</span></h4>
+      <pre class="doc-declare"><code>#define LL_DELETE(head,del)                                                                   \
+   LL_DELETE2(head,del,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_DELETE2(head,del,next)">Marco <span>LL_DELETE2(head,del,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_DELETE2(head,del,next)                                                             \
+do {                                                                                          \
+ LDECLTYPE(head) _tmp;                                                                       \
+ if ((head) == (del)) {                                                                      \
+   (head)=(head)->next;                                                                      \
+ } else {                                                                                    \
+   _tmp = (head);                                                                            \
+   while (_tmp->next && (_tmp->next != (del))) {                                             \
+     _tmp = _tmp->next;                                                                      \
+   }                                                                                         \
+   if (_tmp->next) {                                                                         \
+     _tmp->next = (del)->next;                                                               \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_COUNT(head,el,counter)">Marco <span>LL_COUNT(head,el,counter)</span></h4>
+      <pre class="doc-declare"><code>#define LL_COUNT(head,el,counter)                                                             \
+   LL_COUNT2(head,el,counter,next)                                                           \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_COUNT2(head,el,counter,next)">Marco <span>LL_COUNT2(head,el,counter,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_COUNT2(head,el,counter,next)                                                       \
+do {                                                                                          \
+ (counter) = 0;                                                                              \
+ LL_FOREACH2(head,el,next) { ++(counter); }                                                  \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_FOREACH(head,el)">Marco <span>LL_FOREACH(head,el)</span></h4>
+      <pre class="doc-declare"><code>#define LL_FOREACH(head,el)                                                                   \
+   LL_FOREACH2(head,el,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_FOREACH2(head,el,next)">Marco <span>LL_FOREACH2(head,el,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_FOREACH2(head,el,next)                                                             \
+   for ((el) = (head); el; (el) = (el)->next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_FOREACH_SAFE(head,el,tmp)">Marco <span>LL_FOREACH_SAFE(head,el,tmp)</span></h4>
+      <pre class="doc-declare"><code>#define LL_FOREACH_SAFE(head,el,tmp)                                                          \
+   LL_FOREACH_SAFE2(head,el,tmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_FOREACH_SAFE2(head,el,tmp,next)">Marco <span>LL_FOREACH_SAFE2(head,el,tmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_FOREACH_SAFE2(head,el,tmp,next)                                                    \
+ for ((el) = (head); (el) && ((tmp) = (el)->next, 1); (el) = (tmp))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_SEARCH_SCALAR(head,out,field,val)">Marco <span>LL_SEARCH_SCALAR(head,out,field,val)</span></h4>
+      <pre class="doc-declare"><code>#define LL_SEARCH_SCALAR(head,out,field,val)                                                  \
+   LL_SEARCH_SCALAR2(head,out,field,val,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_SEARCH_SCALAR2(head,out,field,val,next)">Marco <span>LL_SEARCH_SCALAR2(head,out,field,val,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_SEARCH_SCALAR2(head,out,field,val,next)                                            \
+do {                                                                                          \
+   LL_FOREACH2(head,out,next) {                                                              \
+     if ((out)->field == (val)) break;                                                       \
+   }                                                                                         \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_SEARCH(head,out,elt,cmp)">Marco <span>LL_SEARCH(head,out,elt,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define LL_SEARCH(head,out,elt,cmp)                                                           \
+   LL_SEARCH2(head,out,elt,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_SEARCH2(head,out,elt,cmp,next)">Marco <span>LL_SEARCH2(head,out,elt,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_SEARCH2(head,out,elt,cmp,next)                                                     \
+do {                                                                                          \
+   LL_FOREACH2(head,out,next) {                                                              \
+     if ((cmp(out,elt))==0) break;                                                           \
+   }                                                                                         \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_REPLACE_ELEM2(head, el, add, next)">Marco <span>LL_REPLACE_ELEM2(head, el, add, next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_REPLACE_ELEM2(head, el, add, next)                                                 \
+do {                                                                                          \
+ LDECLTYPE(head) _tmp;                                                                        \
+ assert((head) != NULL);                                                                      \
+ assert((el) != NULL);                                                                        \
+ assert((add) != NULL);                                                                       \
+ (add)->next = (el)->next;                                                                    \
+ if ((head) == (el)) {                                                                        \
+ (head) = (add);                                                                             \
+ } else {                                                                                     \
+ _tmp = (head);                                                                              \
+ while (_tmp->next && (_tmp->next != (el))) {                                                \
+  _tmp = _tmp->next;                                                                         \
+ }                                                                                           \
+ if (_tmp->next) {                                                                           \
+   _tmp->next = (add);                                                                       \
+ }                                                                                           \
+ }                                                                                            \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_REPLACE_ELEM(head, el, add)">Marco <span>LL_REPLACE_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define LL_REPLACE_ELEM(head, el, add)                                                        \
+   LL_REPLACE_ELEM2(head, el, add, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_PREPEND_ELEM2(head, el, add, next)">Marco <span>LL_PREPEND_ELEM2(head, el, add, next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_PREPEND_ELEM2(head, el, add, next)                                                 \
+do {                                                                                          \
+ if (el) {                                                                                    \
+ LDECLTYPE(head) _tmp;                                                                       \
+ assert((head) != NULL);                                                                     \
+ assert((add) != NULL);                                                                      \
+ (add)->next = (el);                                                                         \
+ if ((head) == (el)) {                                                                       \
+  (head) = (add);                                                                            \
+ } else {                                                                                    \
+  _tmp = (head);                                                                             \
+  while (_tmp->next && (_tmp->next != (el))) {                                               \
+   _tmp = _tmp->next;                                                                        \
+  }                                                                                          \
+  if (_tmp->next) {                                                                          \
+    _tmp->next = (add);                                                                      \
+  }                                                                                          \
+ }                                                                                           \
+ } else {                                                                                     \
+ LL_APPEND2(head, add, next);                                                                \
+ }                                                                                            \
+} while (0)                                                                                   \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_PREPEND_ELEM(head, el, add)">Marco <span>LL_PREPEND_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define LL_PREPEND_ELEM(head, el, add)                                                        \
+   LL_PREPEND_ELEM2(head, el, add, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_APPEND_ELEM2(head, el, add, next)">Marco <span>LL_APPEND_ELEM2(head, el, add, next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_APPEND_ELEM2(head, el, add, next)                                                  \
+do {                                                                                          \
+ if (el) {                                                                                    \
+ assert((head) != NULL);                                                                     \
+ assert((add) != NULL);                                                                      \
+ (add)->next = (el)->next;                                                                   \
+ (el)->next = (add);                                                                         \
+ } else {                                                                                     \
+ LL_PREPEND2(head, add, next);                                                               \
+ }                                                                                            \
+} while (0)                                                                                   \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_APPEND_ELEM(head, el, add)">Marco <span>LL_APPEND_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define LL_APPEND_ELEM(head, el, add)                                                         \
+   LL_APPEND_ELEM2(head, el, add, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_CONCAT2(head1,head2,next)">Marco <span>LL_CONCAT2(head1,head2,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_CONCAT2(head1,head2,next)                                                          \
+do {                                                                                          \
+ char *_tmp;                                                                                 \
+ if (head1) {                                                                                \
+   _tmp = (char*)(head1);                                                                    \
+   while ((head1)->next) { (head1) = (head1)->next; }                                        \
+   (head1)->next = (head2);                                                                  \
+   UTLIST_RS(head1);                                                                         \
+ } else {                                                                                    \
+   (head1)=(head2);                                                                          \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_APPEND2(head,add,next)">Marco <span>LL_APPEND2(head,add,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_APPEND2(head,add,next)                                                             \
+do {                                                                                          \
+ if (head) {                                                                                 \
+   (add)->next = head;    /* use add->next as a temp variable */                            \
+   while ((add)->next->next) { (add)->next = (add)->next->next; }                            \
+   (add)->next->next=(add);                                                                  \
+ } else {                                                                                    \
+   (head)=(add);                                                                             \
+ }                                                                                           \
+ (add)->next=NULL;                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_INSERT_INORDER2(head,add,cmp,next)">Marco <span>LL_INSERT_INORDER2(head,add,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_INSERT_INORDER2(head,add,cmp,next)                                                 \
+do {                                                                                          \
+ if ((head) == NULL || (cmp(head, add)) >= 0) {                                              \
+   (add)->next = (head);                                                                     \
+   (head) = (add);                                                                           \
+ } else {                                                                                    \
+   char *_tmp = (char*)(head);                                                               \
+   while ((head)->next != NULL && (cmp((head)->next, add)) < 0) {                            \
+     (head) = (head)->next;                                                                  \
+   }                                                                                         \
+   (add)->next = (head)->next;                                                               \
+   (head)->next = (add);                                                                     \
+   UTLIST_RS(head);                                                                          \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_DELETE2(head,del,next)">Marco <span>LL_DELETE2(head,del,next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_DELETE2(head,del,next)                                                             \
+do {                                                                                          \
+ if ((head) == (del)) {                                                                      \
+   (head)=(head)->next;                                                                      \
+ } else {                                                                                    \
+   char *_tmp = (char*)(head);                                                               \
+   while ((head)->next && ((head)->next != (del))) {                                         \
+     (head) = (head)->next;                                                                  \
+   }                                                                                         \
+   if ((head)->next) {                                                                       \
+     (head)->next = ((del)->next);                                                           \
+   }                                                                                         \
+   UTLIST_RS(head);                                                                          \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_REPLACE_ELEM2(head, el, add, next)">Marco <span>LL_REPLACE_ELEM2(head, el, add, next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_REPLACE_ELEM2(head, el, add, next)                                                 \
+do {                                                                                          \
+ assert((head) != NULL);                                                                     \
+ assert((el) != NULL);                                                                       \
+ assert((add) != NULL);                                                                      \
+ if ((head) == (el)) {                                                                       \
+   (head) = (add);                                                                           \
+ } else {                                                                                    \
+   (add)->next = head;                                                                       \
+   while ((add)->next->next && ((add)->next->next != (el))) {                                \
+     (add)->next = (add)->next->next;                                                        \
+   }                                                                                         \
+   if ((add)->next->next) {                                                                  \
+     (add)->next->next = (add);                                                              \
+   }                                                                                         \
+ }                                                                                           \
+ (add)->next = (el)->next;                                                                   \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LL_PREPEND_ELEM2(head, el, add, next)">Marco <span>LL_PREPEND_ELEM2(head, el, add, next)</span></h4>
+      <pre class="doc-declare"><code>#define LL_PREPEND_ELEM2(head, el, add, next)                                                 \
+do {                                                                                          \
+ if (el) {                                                                                   \
+   assert((head) != NULL);                                                                   \
+   assert((add) != NULL);                                                                    \
+   if ((head) == (el)) {                                                                     \
+     (head) = (add);                                                                         \
+   } else {                                                                                  \
+     (add)->next = (head);                                                                   \
+     while ((add)->next->next && ((add)->next->next != (el))) {                              \
+       (add)->next = (add)->next->next;                                                      \
+     }                                                                                       \
+     if ((add)->next->next) {                                                                \
+       (add)->next->next = (add);                                                            \
+     }                                                                                       \
+   }                                                                                         \
+   (add)->next = (el);                                                                       \
+ } else {                                                                                    \
+   LL_APPEND2(head, add, next);                                                              \
+ }                                                                                           \
+} while (0)                                                                                   \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_PREPEND(head,add)">Marco <span>DL_PREPEND(head,add)</span></h4>
+      <pre class="doc-declare"><code>#define DL_PREPEND(head,add)                                                                  \
+   DL_PREPEND2(head,add,prev,next)
+</code></pre>
+      <pre class="doc-comment">/******************************************************************************
+ * doubly linked list macros (non-circular)                                   *
+ *****************************************************************************/</pre>
+
+      <h4 id="DL_PREPEND2(head,add,prev,next)">Marco <span>DL_PREPEND2(head,add,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_PREPEND2(head,add,prev,next)                                                       \
+do {                                                                                          \
+ (add)->next = (head);                                                                        \
+ if (head) {                                                                                  \
+  (add)->prev = (head)->prev;                                                                \
+  (head)->prev = (add);                                                                      \
+ } else {                                                                                     \
+  (add)->prev = (add);                                                                       \
+ }                                                                                            \
+ (head) = (add);                                                                              \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_APPEND(head,add)">Marco <span>DL_APPEND(head,add)</span></h4>
+      <pre class="doc-declare"><code>#define DL_APPEND(head,add)                                                                   \
+   DL_APPEND2(head,add,prev,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_APPEND2(head,add,prev,next)">Marco <span>DL_APPEND2(head,add,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_APPEND2(head,add,prev,next)                                                        \
+do {                                                                                          \
+ if (head) {                                                                                 \
+     (add)->prev = (head)->prev;                                                             \
+     (head)->prev->next = (add);                                                             \
+     (head)->prev = (add);                                                                   \
+     (add)->next = NULL;                                                                     \
+ } else {                                                                                    \
+     (head)=(add);                                                                           \
+     (head)->prev = (head);                                                                  \
+     (head)->next = NULL;                                                                    \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_INSERT_INORDER(head,add,cmp)">Marco <span>DL_INSERT_INORDER(head,add,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define DL_INSERT_INORDER(head,add,cmp)                                                       \
+   DL_INSERT_INORDER2(head,add,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_INSERT_INORDER2(head,add,cmp,next)">Marco <span>DL_INSERT_INORDER2(head,add,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_INSERT_INORDER2(head,add,cmp,next)                                                 \
+do {                                                                                          \
+ LDECLTYPE(head) _tmp;                                                                       \
+ if (head) {                                                                                 \
+   DL_LOWER_BOUND(head, _tmp, add, cmp);                                                     \
+   DL_APPEND_ELEM(head, _tmp, add);                                                          \
+ } else {                                                                                    \
+   (head) = (add);                                                                           \
+   (head)->prev = (head);                                                                    \
+   (head)->next = NULL;                                                                      \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_LOWER_BOUND(head,elt,like,cmp)">Marco <span>DL_LOWER_BOUND(head,elt,like,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define DL_LOWER_BOUND(head,elt,like,cmp)                                                     \
+   DL_LOWER_BOUND2(head,elt,like,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_LOWER_BOUND2(head,elt,like,cmp,next)">Marco <span>DL_LOWER_BOUND2(head,elt,like,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_LOWER_BOUND2(head,elt,like,cmp,next)                                               \
+do {                                                                                          \
+ if ((head) == NULL || (cmp(head, like)) >= 0) {                                             \
+   (elt) = NULL;                                                                             \
+ } else {                                                                                    \
+   for ((elt) = (head); (elt)->next != NULL; (elt) = (elt)->next) {                          \
+     if ((cmp((elt)->next, like)) >= 0) {                                                    \
+       break;                                                                                \
+     }                                                                                       \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_CONCAT(head1,head2)">Marco <span>DL_CONCAT(head1,head2)</span></h4>
+      <pre class="doc-declare"><code>#define DL_CONCAT(head1,head2)                                                                \
+   DL_CONCAT2(head1,head2,prev,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_CONCAT2(head1,head2,prev,next)">Marco <span>DL_CONCAT2(head1,head2,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_CONCAT2(head1,head2,prev,next)                                                     \
+do {                                                                                          \
+ LDECLTYPE(head1) _tmp;                                                                      \
+ if (head2) {                                                                                \
+   if (head1) {                                                                              \
+       UTLIST_CASTASGN(_tmp, (head2)->prev);                                                 \
+       (head2)->prev = (head1)->prev;                                                        \
+       (head1)->prev->next = (head2);                                                        \
+       UTLIST_CASTASGN((head1)->prev, _tmp);                                                 \
+   } else {                                                                                  \
+       (head1)=(head2);                                                                      \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_DELETE(head,del)">Marco <span>DL_DELETE(head,del)</span></h4>
+      <pre class="doc-declare"><code>#define DL_DELETE(head,del)                                                                   \
+   DL_DELETE2(head,del,prev,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_DELETE2(head,del,prev,next)">Marco <span>DL_DELETE2(head,del,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_DELETE2(head,del,prev,next)                                                        \
+do {                                                                                          \
+ assert((head) != NULL);                                                                     \
+ assert((del)->prev != NULL);                                                                \
+ if ((del)->prev == (del)) {                                                                 \
+     (head)=NULL;                                                                            \
+ } else if ((del)==(head)) {                                                                 \
+     (del)->next->prev = (del)->prev;                                                        \
+     (head) = (del)->next;                                                                   \
+ } else {                                                                                    \
+     (del)->prev->next = (del)->next;                                                        \
+     if ((del)->next) {                                                                      \
+         (del)->next->prev = (del)->prev;                                                    \
+     } else {                                                                                \
+         (head)->prev = (del)->prev;                                                         \
+     }                                                                                       \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_COUNT(head,el,counter)">Marco <span>DL_COUNT(head,el,counter)</span></h4>
+      <pre class="doc-declare"><code>#define DL_COUNT(head,el,counter)                                                             \
+   DL_COUNT2(head,el,counter,next)                                                           \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_COUNT2(head,el,counter,next)">Marco <span>DL_COUNT2(head,el,counter,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_COUNT2(head,el,counter,next)                                                       \
+do {                                                                                          \
+ (counter) = 0;                                                                              \
+ DL_FOREACH2(head,el,next) { ++(counter); }                                                  \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_FOREACH(head,el)">Marco <span>DL_FOREACH(head,el)</span></h4>
+      <pre class="doc-declare"><code>#define DL_FOREACH(head,el)                                                                   \
+   DL_FOREACH2(head,el,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_FOREACH2(head,el,next)">Marco <span>DL_FOREACH2(head,el,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_FOREACH2(head,el,next)                                                             \
+   for ((el) = (head); el; (el) = (el)->next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_FOREACH_SAFE(head,el,tmp)">Marco <span>DL_FOREACH_SAFE(head,el,tmp)</span></h4>
+      <pre class="doc-declare"><code>#define DL_FOREACH_SAFE(head,el,tmp)                                                          \
+   DL_FOREACH_SAFE2(head,el,tmp,next)
+</code></pre>
+      <pre class="doc-comment">/* this version is safe for deleting the elements during iteration */</pre>
+
+      <h4 id="DL_FOREACH_SAFE2(head,el,tmp,next)">Marco <span>DL_FOREACH_SAFE2(head,el,tmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_FOREACH_SAFE2(head,el,tmp,next)                                                    \
+ for ((el) = (head); (el) && ((tmp) = (el)->next, 1); (el) = (tmp))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_SEARCH_SCALAR">Marco <span>DL_SEARCH_SCALAR</span></h4>
+      <pre class="doc-declare"><code>#define DL_SEARCH_SCALAR LL_SEARCH_SCALAR
+</code></pre>
+      <pre class="doc-comment">/* these are identical to their singly-linked list counterparts */</pre>
+
+      <h4 id="DL_SEARCH">Marco <span>DL_SEARCH</span></h4>
+      <pre class="doc-declare"><code>#define DL_SEARCH LL_SEARCH
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_SEARCH_SCALAR2">Marco <span>DL_SEARCH_SCALAR2</span></h4>
+      <pre class="doc-declare"><code>#define DL_SEARCH_SCALAR2 LL_SEARCH_SCALAR2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_SEARCH2">Marco <span>DL_SEARCH2</span></h4>
+      <pre class="doc-declare"><code>#define DL_SEARCH2 LL_SEARCH2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_REPLACE_ELEM2(head, el, add, prev, next)">Marco <span>DL_REPLACE_ELEM2(head, el, add, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_REPLACE_ELEM2(head, el, add, prev, next)                                           \
+do {                                                                                          \
+ assert((head) != NULL);                                                                      \
+ assert((el) != NULL);                                                                        \
+ assert((add) != NULL);                                                                       \
+ if ((head) == (el)) {                                                                        \
+ (head) = (add);                                                                             \
+ (add)->next = (el)->next;                                                                   \
+ if ((el)->next == NULL) {                                                                   \
+  (add)->prev = (add);                                                                       \
+ } else {                                                                                    \
+  (add)->prev = (el)->prev;                                                                  \
+  (add)->next->prev = (add);                                                                 \
+ }                                                                                           \
+ } else {                                                                                     \
+ (add)->next = (el)->next;                                                                   \
+ (add)->prev = (el)->prev;                                                                   \
+ (add)->prev->next = (add);                                                                  \
+ if ((el)->next == NULL) {                                                                   \
+  (head)->prev = (add);                                                                      \
+ } else {                                                                                    \
+  (add)->next->prev = (add);                                                                 \
+ }                                                                                           \
+ }                                                                                            \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_REPLACE_ELEM(head, el, add)">Marco <span>DL_REPLACE_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define DL_REPLACE_ELEM(head, el, add)                                                        \
+   DL_REPLACE_ELEM2(head, el, add, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_PREPEND_ELEM2(head, el, add, prev, next)">Marco <span>DL_PREPEND_ELEM2(head, el, add, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_PREPEND_ELEM2(head, el, add, prev, next)                                           \
+do {                                                                                          \
+ if (el) {                                                                                    \
+ assert((head) != NULL);                                                                     \
+ assert((add) != NULL);                                                                      \
+ (add)->next = (el);                                                                         \
+ (add)->prev = (el)->prev;                                                                   \
+ (el)->prev = (add);                                                                         \
+ if ((head) == (el)) {                                                                       \
+  (head) = (add);                                                                            \
+ } else {                                                                                    \
+  (add)->prev->next = (add);                                                                 \
+ }                                                                                           \
+ } else {                                                                                     \
+ DL_APPEND2(head, add, prev, next);                                                          \
+ }                                                                                            \
+} while (0)                                                                                   \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_PREPEND_ELEM(head, el, add)">Marco <span>DL_PREPEND_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define DL_PREPEND_ELEM(head, el, add)                                                        \
+   DL_PREPEND_ELEM2(head, el, add, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_APPEND_ELEM2(head, el, add, prev, next)">Marco <span>DL_APPEND_ELEM2(head, el, add, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_APPEND_ELEM2(head, el, add, prev, next)                                            \
+do {                                                                                          \
+ if (el) {                                                                                    \
+ assert((head) != NULL);                                                                     \
+ assert((add) != NULL);                                                                      \
+ (add)->next = (el)->next;                                                                   \
+ (add)->prev = (el);                                                                         \
+ (el)->next = (add);                                                                         \
+ if ((add)->next) {                                                                          \
+  (add)->next->prev = (add);                                                                 \
+ } else {                                                                                    \
+  (head)->prev = (add);                                                                      \
+ }                                                                                           \
+ } else {                                                                                     \
+ DL_PREPEND2(head, add, prev, next);                                                         \
+ }                                                                                            \
+} while (0)                                                                                   \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_APPEND_ELEM(head, el, add)">Marco <span>DL_APPEND_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define DL_APPEND_ELEM(head, el, add)                                                         \
+  DL_APPEND_ELEM2(head, el, add, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DL_INSERT_INORDER2(head,add,cmp,next)">Marco <span>DL_INSERT_INORDER2(head,add,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define DL_INSERT_INORDER2(head,add,cmp,next)                                                 \
+do {                                                                                          \
+ if ((head) == NULL) {                                                                       \
+   (add)->prev = (add);                                                                      \
+   (add)->next = NULL;                                                                       \
+   (head) = (add);                                                                           \
+ } else if ((cmp(head, add)) >= 0) {                                                         \
+   (add)->prev = (head)->prev;                                                               \
+   (add)->next = (head);                                                                     \
+   (head)->prev = (add);                                                                     \
+   (head) = (add);                                                                           \
+ } else {                                                                                    \
+   char *_tmp = (char*)(head);                                                               \
+   while ((char*)(head)->next != _tmp && (cmp((head)->next, add)) < 0) {                     \
+     (head) = (head)->next;                                                                  \
+   }                                                                                         \
+   (add)->prev = (head);                                                                     \
+   (add)->next = (head)->next;                                                               \
+   (head)->next = (add);                                                                     \
+   UTLIST_RS(head);                                                                          \
+   if ((add)->next) {                                                                        \
+     (add)->next->prev = (add);                                                              \
+   } else {                                                                                  \
+     (head)->prev = (add);                                                                   \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_APPEND(head,add)">Marco <span>CDL_APPEND(head,add)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_APPEND(head,add)                                                                  \
+   CDL_APPEND2(head,add,prev,next)
+</code></pre>
+      <pre class="doc-comment">/******************************************************************************
+ * circular doubly linked list macros                                         *
+ *****************************************************************************/</pre>
+
+      <h4 id="CDL_APPEND2(head,add,prev,next)">Marco <span>CDL_APPEND2(head,add,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_APPEND2(head,add,prev,next)                                                       \
+do {                                                                                          \
+ if (head) {                                                                                  \
+  (add)->prev = (head)->prev;                                                                \
+  (add)->next = (head);                                                                      \
+  (head)->prev = (add);                                                                      \
+  (add)->prev->next = (add);                                                                 \
+ } else {                                                                                     \
+  (add)->prev = (add);                                                                       \
+  (add)->next = (add);                                                                       \
+  (head) = (add);                                                                            \
+ }                                                                                            \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_PREPEND(head,add)">Marco <span>CDL_PREPEND(head,add)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_PREPEND(head,add)                                                                 \
+   CDL_PREPEND2(head,add,prev,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_PREPEND2(head,add,prev,next)">Marco <span>CDL_PREPEND2(head,add,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_PREPEND2(head,add,prev,next)                                                      \
+do {                                                                                          \
+ if (head) {                                                                                  \
+  (add)->prev = (head)->prev;                                                                \
+  (add)->next = (head);                                                                      \
+  (head)->prev = (add);                                                                      \
+  (add)->prev->next = (add);                                                                 \
+ } else {                                                                                     \
+  (add)->prev = (add);                                                                       \
+  (add)->next = (add);                                                                       \
+ }                                                                                            \
+ (head) = (add);                                                                              \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_INSERT_INORDER(head,add,cmp)">Marco <span>CDL_INSERT_INORDER(head,add,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_INSERT_INORDER(head,add,cmp)                                                      \
+   CDL_INSERT_INORDER2(head,add,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_INSERT_INORDER2(head,add,cmp,next)">Marco <span>CDL_INSERT_INORDER2(head,add,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_INSERT_INORDER2(head,add,cmp,next)                                                \
+do {                                                                                          \
+ LDECLTYPE(head) _tmp;                                                                       \
+ if (head) {                                                                                 \
+   CDL_LOWER_BOUND(head, _tmp, add, cmp);                                                    \
+   CDL_APPEND_ELEM(head, _tmp, add);                                                         \
+ } else {                                                                                    \
+   (head) = (add);                                                                           \
+   (head)->next = (head);                                                                    \
+   (head)->prev = (head);                                                                    \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_LOWER_BOUND(head,elt,like,cmp)">Marco <span>CDL_LOWER_BOUND(head,elt,like,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_LOWER_BOUND(head,elt,like,cmp)                                                    \
+   CDL_LOWER_BOUND2(head,elt,like,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_LOWER_BOUND2(head,elt,like,cmp,next)">Marco <span>CDL_LOWER_BOUND2(head,elt,like,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_LOWER_BOUND2(head,elt,like,cmp,next)                                              \
+do {                                                                                          \
+ if ((head) == NULL || (cmp(head, like)) >= 0) {                                             \
+   (elt) = NULL;                                                                             \
+ } else {                                                                                    \
+   for ((elt) = (head); (elt)->next != (head); (elt) = (elt)->next) {                        \
+     if ((cmp((elt)->next, like)) >= 0) {                                                    \
+       break;                                                                                \
+     }                                                                                       \
+   }                                                                                         \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_DELETE(head,del)">Marco <span>CDL_DELETE(head,del)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_DELETE(head,del)                                                                  \
+   CDL_DELETE2(head,del,prev,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_DELETE2(head,del,prev,next)">Marco <span>CDL_DELETE2(head,del,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_DELETE2(head,del,prev,next)                                                       \
+do {                                                                                          \
+ if (((head)==(del)) && ((head)->next == (head))) {                                          \
+     (head) = NULL;                                                                          \
+ } else {                                                                                    \
+    (del)->next->prev = (del)->prev;                                                         \
+    (del)->prev->next = (del)->next;                                                         \
+    if ((del) == (head)) (head)=(del)->next;                                                 \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_COUNT(head,el,counter)">Marco <span>CDL_COUNT(head,el,counter)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_COUNT(head,el,counter)                                                            \
+   CDL_COUNT2(head,el,counter,next)                                                          \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_COUNT2(head, el, counter,next)">Marco <span>CDL_COUNT2(head, el, counter,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_COUNT2(head, el, counter,next)                                                    \
+do {                                                                                          \
+ (counter) = 0;                                                                              \
+ CDL_FOREACH2(head,el,next) { ++(counter); }                                                 \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_FOREACH(head,el)">Marco <span>CDL_FOREACH(head,el)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_FOREACH(head,el)                                                                  \
+   CDL_FOREACH2(head,el,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_FOREACH2(head,el,next)">Marco <span>CDL_FOREACH2(head,el,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_FOREACH2(head,el,next)                                                            \
+   for ((el)=(head);el;(el)=(((el)->next==(head)) ? NULL : (el)->next))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_FOREACH_SAFE(head,el,tmp1,tmp2)">Marco <span>CDL_FOREACH_SAFE(head,el,tmp1,tmp2)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_FOREACH_SAFE(head,el,tmp1,tmp2)                                                   \
+   CDL_FOREACH_SAFE2(head,el,tmp1,tmp2,prev,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_FOREACH_SAFE2(head,el,tmp1,tmp2,prev,next)">Marco <span>CDL_FOREACH_SAFE2(head,el,tmp1,tmp2,prev,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_FOREACH_SAFE2(head,el,tmp1,tmp2,prev,next)                                        \
+ for ((el) = (head), (tmp1) = (head) ? (head)->prev : NULL;                                  \
+      (el) && ((tmp2) = (el)->next, 1);                                                      \
+      (el) = ((el) == (tmp1) ? NULL : (tmp2)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_SEARCH_SCALAR(head,out,field,val)">Marco <span>CDL_SEARCH_SCALAR(head,out,field,val)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_SEARCH_SCALAR(head,out,field,val)                                                 \
+   CDL_SEARCH_SCALAR2(head,out,field,val,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_SEARCH_SCALAR2(head,out,field,val,next)">Marco <span>CDL_SEARCH_SCALAR2(head,out,field,val,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_SEARCH_SCALAR2(head,out,field,val,next)                                           \
+do {                                                                                          \
+   CDL_FOREACH2(head,out,next) {                                                             \
+     if ((out)->field == (val)) break;                                                       \
+   }                                                                                         \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_SEARCH(head,out,elt,cmp)">Marco <span>CDL_SEARCH(head,out,elt,cmp)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_SEARCH(head,out,elt,cmp)                                                          \
+   CDL_SEARCH2(head,out,elt,cmp,next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_SEARCH2(head,out,elt,cmp,next)">Marco <span>CDL_SEARCH2(head,out,elt,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_SEARCH2(head,out,elt,cmp,next)                                                    \
+do {                                                                                          \
+   CDL_FOREACH2(head,out,next) {                                                             \
+     if ((cmp(out,elt))==0) break;                                                           \
+   }                                                                                         \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_REPLACE_ELEM2(head, el, add, prev, next)">Marco <span>CDL_REPLACE_ELEM2(head, el, add, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_REPLACE_ELEM2(head, el, add, prev, next)                                          \
+do {                                                                                          \
+ assert((head) != NULL);                                                                      \
+ assert((el) != NULL);                                                                        \
+ assert((add) != NULL);                                                                       \
+ if ((el)->next == (el)) {                                                                    \
+ (add)->next = (add);                                                                        \
+ (add)->prev = (add);                                                                        \
+ (head) = (add);                                                                             \
+ } else {                                                                                     \
+ (add)->next = (el)->next;                                                                   \
+ (add)->prev = (el)->prev;                                                                   \
+ (add)->next->prev = (add);                                                                  \
+ (add)->prev->next = (add);                                                                  \
+ if ((head) == (el)) {                                                                       \
+  (head) = (add);                                                                            \
+ }                                                                                           \
+ }                                                                                            \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_REPLACE_ELEM(head, el, add)">Marco <span>CDL_REPLACE_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_REPLACE_ELEM(head, el, add)                                                       \
+   CDL_REPLACE_ELEM2(head, el, add, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_PREPEND_ELEM2(head, el, add, prev, next)">Marco <span>CDL_PREPEND_ELEM2(head, el, add, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_PREPEND_ELEM2(head, el, add, prev, next)                                          \
+do {                                                                                          \
+ if (el) {                                                                                   \
+   assert((head) != NULL);                                                                   \
+   assert((add) != NULL);                                                                    \
+   (add)->next = (el);                                                                       \
+   (add)->prev = (el)->prev;                                                                 \
+   (el)->prev = (add);                                                                       \
+   (add)->prev->next = (add);                                                                \
+   if ((head) == (el)) {                                                                     \
+     (head) = (add);                                                                         \
+   }                                                                                         \
+ } else {                                                                                    \
+   CDL_APPEND2(head, add, prev, next);                                                       \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_PREPEND_ELEM(head, el, add)">Marco <span>CDL_PREPEND_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_PREPEND_ELEM(head, el, add)                                                       \
+   CDL_PREPEND_ELEM2(head, el, add, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_APPEND_ELEM2(head, el, add, prev, next)">Marco <span>CDL_APPEND_ELEM2(head, el, add, prev, next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_APPEND_ELEM2(head, el, add, prev, next)                                           \
+do {                                                                                          \
+ if (el) {                                                                                    \
+ assert((head) != NULL);                                                                     \
+ assert((add) != NULL);                                                                      \
+ (add)->next = (el)->next;                                                                   \
+ (add)->prev = (el);                                                                         \
+ (el)->next = (add);                                                                         \
+ (add)->next->prev = (add);                                                                  \
+ } else {                                                                                     \
+ CDL_PREPEND2(head, add, prev, next);                                                        \
+ }                                                                                            \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_APPEND_ELEM(head, el, add)">Marco <span>CDL_APPEND_ELEM(head, el, add)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_APPEND_ELEM(head, el, add)                                                        \
+   CDL_APPEND_ELEM2(head, el, add, prev, next)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CDL_INSERT_INORDER2(head,add,cmp,next)">Marco <span>CDL_INSERT_INORDER2(head,add,cmp,next)</span></h4>
+      <pre class="doc-declare"><code>#define CDL_INSERT_INORDER2(head,add,cmp,next)                                                \
+do {                                                                                          \
+ if ((head) == NULL) {                                                                       \
+   (add)->prev = (add);                                                                      \
+   (add)->next = (add);                                                                      \
+   (head) = (add);                                                                           \
+ } else if ((cmp(head, add)) >= 0) {                                                         \
+   (add)->prev = (head)->prev;                                                               \
+   (add)->next = (head);                                                                     \
+   (add)->prev->next = (add);                                                                \
+   (head)->prev = (add);                                                                     \
+   (head) = (add);                                                                           \
+ } else {                                                                                    \
+   char *_tmp = (char*)(head);                                                               \
+   while ((char*)(head)->next != _tmp && (cmp((head)->next, add)) < 0) {                     \
+     (head) = (head)->next;                                                                  \
+   }                                                                                         \
+   (add)->prev = (head);                                                                     \
+   (add)->next = (head)->next;                                                               \
+   (add)->next->prev = (add);                                                                \
+   (head)->next = (add);                                                                     \
+   UTLIST_RS(head);                                                                          \
+ }                                                                                           \
+} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

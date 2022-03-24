@@ -1,13 +1,12 @@
 /**
- * @file base_os_adapter.h
- * @author sunkz@tuya.com
- * @brief 
- * @version 0.1
- * @date 2020-05-08
- * 
- * @copyright Copyright (c) tuya.inc 2019
- * 
- */
+* @file base_os_adapter.h
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef _BASE_OS_ADAPTER_H
 #define _BASE_OS_ADAPTER_H
 
@@ -16,22 +15,14 @@
 extern "C" {
 #endif
 
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
-
-/***********************************************************
-*************************variable define********************
-***********************************************************/
-
-/***********************************************************
-*************************function define********************
-***********************************************************/
-
 /**
- * @brief tuya_os_intf_init用于系统接口的初始化
- * 
- * @return int 0，成功；非0，失败
+ * @brief Initialization for system interface adaption.
+ *
+ * @param void
+ *
+ * @note This API is used for Initialization for system interface adaption.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */
 int tuya_os_intf_init(void);
 

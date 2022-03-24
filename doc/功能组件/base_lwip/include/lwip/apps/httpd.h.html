@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#httpd_opts.h" class="nav-sub-label">httpd_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_HTTPD_H" class="nav-sub-label">LWIP_HDR_APPS_HTTPD_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_SSI_TAG_UNKNOWN" class="nav-sub-label">HTTPD_SSI_TAG_UNKNOWN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#http_set_cgi_handlers" class="nav-sub-label">http_set_cgi_handlers</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_set_ssi_handler" class="nav-sub-label">http_set_ssi_handler</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpd_post_begin" class="nav-sub-label">httpd_post_begin</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpd_post_receive_data" class="nav-sub-label">httpd_post_receive_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpd_post_finished" class="nav-sub-label">httpd_post_finished</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpd_post_data_recved" class="nav-sub-label">httpd_post_data_recved</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpd_init" class="nav-sub-label">httpd_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpd_inits" class="nav-sub-label">httpd_inits</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#fs_file" class="nav-sub-label">fs_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#altcp_tls_config" class="nav-sub-label">altcp_tls_config</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#const" class="nav-sub-label">const</a>
+              </li>
+      
+
+              <li>
+                <a href="#tCGI;
+" class="nav-sub-label">tCGI;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tSSIHandler" class="nav-sub-label">tSSIHandler</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="httpd_opts.h"><span>httpd_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "httpd_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "httpd_opts.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_HTTPD_H">Marco <span>LWIP_HDR_APPS_HTTPD_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_HTTPD_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_SSI_TAG_UNKNOWN">Marco <span>HTTPD_SSI_TAG_UNKNOWN</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_SSI_TAG_UNKNOWN 65535
+</code></pre>
+      <pre class="doc-comment">/** For LWIP_HTTPD_SSI_RAW==1, return this to indicate the tag is unknown.
+ * In this case, the webserver writes a warning into the page.
+ * You can also just return 0 to write nothing for unknown tags.
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="http_set_cgi_handlers">Func <span>http_set_cgi_handlers</span></h4>
+      <pre class="doc-declare"><code>void http_set_cgi_handlers(const tCGI *pCGIs, int iNumHandlers);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_set_ssi_handler">Func <span>http_set_ssi_handler</span></h4>
+      <pre class="doc-declare"><code>void http_set_ssi_handler(tSSIHandler pfnSSIHandler,
+                         const char **ppcTags, int iNumTags);</code></pre>
+      <pre class="doc-comment">/** Set the SSI handler function
+ * (if LWIP_HTTPD_SSI_RAW==1, only the first argument is used)
+ */</pre>
+
+      <h4 id="httpd_post_begin">Func <span>httpd_post_begin</span></h4>
+      <pre class="doc-declare"><code>err_t httpd_post_begin(void *connection, const char *uri, const char *http_request,
+                      u16_t http_request_len, int content_len, char *response_uri,
+                      u16_t response_uri_len, u8_t *post_auto_wnd);</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpd
+ * Called when a POST request has been received. The application can decide
+ * whether to accept it or not.
+ *
+ * @param connection Unique connection identifier, valid until httpd_post_end
+ *        is called.
+ * @param uri The HTTP header URI receiving the POST request.
+ * @param http_request The raw HTTP request (the first packet, normally).
+ * @param http_request_len Size of 'http_request'.
+ * @param content_len Content-Length from HTTP header.
+ * @param response_uri Filename of response file, to be filled when denying the
+ *        request
+ * @param response_uri_len Size of the 'response_uri' buffer.
+ * @param post_auto_wnd Set this to 0 to let the callback code handle window
+ *        updates by calling 'httpd_post_data_recved' (to throttle rx speed)
+ *        default is 1 (httpd handles window updates automatically)
+ * @return ERR_OK: Accept the POST request, data may be passed in
+ *         another err_t: Deny the POST request, send back 'bad request'.
+ */</pre>
+
+      <h4 id="httpd_post_receive_data">Func <span>httpd_post_receive_data</span></h4>
+      <pre class="doc-declare"><code>err_t httpd_post_receive_data(void *connection, struct pbuf *p);</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpd
+ * Called for each pbuf of data that has been received for a POST.
+ * ATTENTION: The application is responsible for freeing the pbufs passed in!
+ *
+ * @param connection Unique connection identifier.
+ * @param p Received data.
+ * @return ERR_OK: Data accepted.
+ *         another err_t: Data denied, http_post_get_response_uri will be called.
+ */</pre>
+
+      <h4 id="httpd_post_finished">Func <span>httpd_post_finished</span></h4>
+      <pre class="doc-declare"><code>void httpd_post_finished(void *connection, char *response_uri, u16_t response_uri_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpd
+ * Called when all data is received or when the connection is closed.
+ * The application must return the filename/URI of a file to send in response
+ * to this POST request. If the response_uri buffer is untouched, a 404
+ * response is returned.
+ *
+ * @param connection Unique connection identifier.
+ * @param response_uri Filename of response file, to be filled when denying the request
+ * @param response_uri_len Size of the 'response_uri' buffer.
+ */</pre>
+
+      <h4 id="httpd_post_data_recved">Func <span>httpd_post_data_recved</span></h4>
+      <pre class="doc-declare"><code>void httpd_post_data_recved(void *connection, u16_t recved_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpd_init">Func <span>httpd_init</span></h4>
+      <pre class="doc-declare"><code>void httpd_init(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpd_inits">Func <span>httpd_inits</span></h4>
+      <pre class="doc-declare"><code>void httpd_inits(struct altcp_tls_config *conf);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="fs_file">Variable <span>fs_file</span></h4>
+      <pre class="doc-declare"><code>struct fs_file;</code></pre>
+      <pre class="doc-comment">/* we have to prototype this struct here to make it available for the handler */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char **pcParam, char **pcValue
+#if defined(LWIP_HTTPD_FILE_STATE) && LWIP_HTTPD_FILE_STATE
+                                    , void *connection_state
+#endif /* LWIP_HTTPD_FILE_STATE */
+                                    );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="altcp_tls_config">Variable <span>altcp_tls_config</span></h4>
+      <pre class="doc-declare"><code>struct altcp_tls_config;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="const">Typedef <span>const</span></h4>
+      <pre class="doc-declare"><code>typedef const char *(*tCGIHandler)(int iIndex, int iNumParams, char *pcParam[],
+                            char *pcValue[]);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpd
+ * Function pointer for a CGI script handler.
+ *
+ * This function is called each time the HTTPD server is asked for a file
+ * whose name was previously registered as a CGI function using a call to
+ * http_set_cgi_handlers. The iIndex parameter provides the index of the
+ * CGI within the cgis array passed to http_set_cgi_handlers. Parameters
+ * pcParam and pcValue provide access to the parameters provided along with
+ * the URI. iNumParams provides a count of the entries in the pcParam and
+ * pcValue arrays. Each entry in the pcParam array contains the name of a
+ * parameter with the corresponding entry in the pcValue array containing the
+ * value for that parameter. Note that pcParam may contain multiple elements
+ * with the same name if, for example, a multi-selection list control is used
+ * in the form generating the data.
+ *
+ * The function should return a pointer to a character string which is the
+ * path and filename of the response that is to be sent to the connected
+ * browser, for example "/thanks.htm" or "/response/error.ssi".
+ *
+ * The maximum number of parameters that will be passed to this function via
+ * iNumParams is defined by LWIP_HTTPD_MAX_CGI_PARAMETERS. Any parameters in
+ * the incoming HTTP request above this number will be discarded.
+ *
+ * Requests intended for use by this CGI mechanism must be sent using the GET
+ * method (which encodes all parameters within the URI rather than in a block
+ * later in the request). Attempts to use the POST method will result in the
+ * request being ignored.
+ *
+ */</pre>
+
+      <h4 id="tCGI;
+">Typedef <span>tCGI;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   const char *pcCGIName;
+   tCGIHandler pfnCGIHandler;
+} tCGI;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpd
+ * Structure defining the base filename (URL) of a CGI and the associated
+ * function which is to be called when that URL is requested.
+ */</pre>
+
+      <h4 id="tSSIHandler">Typedef <span>tSSIHandler</span></h4>
+      <pre class="doc-declare"><code>typedef u16_t (*tSSIHandler)(
+#if LWIP_HTTPD_SSI_RAW
+                            const char* ssi_tag_name,
+#else /* LWIP_HTTPD_SSI_RAW */
+                            int iIndex,
+#endif /* LWIP_HTTPD_SSI_RAW */
+                            char *pcInsert, int iInsertLen
+#if LWIP_HTTPD_SSI_MULTIPART
+                            , u16_t current_tag_part, u16_t *next_tag_part
+#endif /* LWIP_HTTPD_SSI_MULTIPART */
+#if defined(LWIP_HTTPD_FILE_STATE) && LWIP_HTTPD_FILE_STATE
+                            , void *connection_state
+#endif /* LWIP_HTTPD_FILE_STATE */
+                            );
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup httpd
+ * Function pointer for the SSI tag handler callback.
+ *
+ * This function will be called each time the HTTPD server detects a tag of the
+ * form <!--#name--> in files with extensions mentioned in the g_pcSSIExtensions
+ * array (currently .shtml, .shtm, .ssi, .xml, .json) where "name" appears as
+ * one of the tags supplied to http_set_ssi_handler in the tags array.  The
+ * returned insert string, which will be appended after the the string
+ * "<!--#name-->" in file sent back to the client, should be written to pointer
+ * pcInsert. iInsertLen contains the size of the buffer pointed to by
+ * pcInsert. The iIndex parameter provides the zero-based index of the tag as
+ * found in the tags array and identifies the tag that is to be processed.
+ *
+ * The handler returns the number of characters written to pcInsert excluding
+ * any terminating NULL or HTTPD_SSI_TAG_UNKNOWN when tag is not recognized.
+ *
+ * Note that the behavior of this SSI mechanism is somewhat different from the
+ * "normal" SSI processing as found in, for example, the Apache web server.  In
+ * this case, the inserted text is appended following the SSI tag rather than
+ * replacing the tag entirely.  This allows for an implementation that does not
+ * require significant additional buffering of output data yet which will still
+ * offer usable SSI functionality. One downside to this approach is when
+ * attempting to use SSI within JavaScript.  The SSI tag is structured to
+ * resemble an HTML comment but this syntax does not constitute a comment
+ * within JavaScript and, hence, leaving the tag in place will result in
+ * problems in these cases. In order to avoid these problems, define
+ * LWIP_HTTPD_SSI_INCLUDE_TAG as zero in your lwip options file, or use JavaScript
+ * style block comments in the form / * # name * / (without the spaces).
+ */</pre>
+    </div>
+  </body>
+</html>
+            

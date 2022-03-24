@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_net.h" class="nav-sub-label">coap_net.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_ASYNC_H_" class="nav-sub-label">COAP_ASYNC_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_ASYNC_CONFIRM" class="nav-sub-label">COAP_ASYNC_CONFIRM</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_ASYNC_SEPARATE" class="nav-sub-label">COAP_ASYNC_SEPARATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_ASYNC_OBSERVED" class="nav-sub-label">COAP_ASYNC_OBSERVED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_ASYNC_RELEASE_DATA" class="nav-sub-label">COAP_ASYNC_RELEASE_DATA</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_remove_async" class="nav-sub-label">coap_remove_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_free_async" class="nav-sub-label">coap_free_async</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_async_state_t" class="nav-sub-label">coap_async_state_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_async_state_t" class="nav-sub-label">coap_async_state_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_async_state_t;
+" class="nav-sub-label">coap_async_state_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="coap_net.h"><span>coap_net.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_net.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_net.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_ASYNC_H_">Marco <span>COAP_ASYNC_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ASYNC_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_ASYNC_CONFIRM">Marco <span>COAP_ASYNC_CONFIRM</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ASYNC_CONFIRM  1 /**< send confirmable response */
+</code></pre>
+      <pre class="doc-comment">/* Definitions for Async Status Flags These flags can be used to control the
+ * behaviour of asynchronous response generation.
+ */</pre>
+
+      <h4 id="COAP_ASYNC_SEPARATE">Marco <span>COAP_ASYNC_SEPARATE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ASYNC_SEPARATE 2 /**< send separate response */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_ASYNC_OBSERVED">Marco <span>COAP_ASYNC_OBSERVED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ASYNC_OBSERVED 4 /**< the resource is being observed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_ASYNC_RELEASE_DATA">Marco <span>COAP_ASYNC_RELEASE_DATA</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ASYNC_RELEASE_DATA 8
+</code></pre>
+      <pre class="doc-comment">/** release application data on destruction */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_remove_async">Func <span>coap_remove_async</span></h4>
+      <pre class="doc-declare"><code>int coap_remove_async(coap_context_t *context,
+                     coap_session_t *session,
+                     coap_tid_t id,
+                     coap_async_state_t **s);</code></pre>
+      <pre class="doc-comment">/**
+ * Removes the state object identified by @p id from @p context. The removed
+ * object is returned in @p s, if found. Otherwise, @p s is undefined. This
+ * function returns @c 1 if the object was removed, @c 0 otherwise. Note that
+ * the storage allocated for the stored object is not released by this
+ * functions. You will have to call coap_free_async() to do so.
+ *
+ * @param context The context where the async object is registered.
+ * @param session  The session that is used for asynchronous transmissions.
+ * @param id      The identifier of the asynchronous transaction.
+ * @param s       Will be set to the object identified by @p id after removal.
+ *
+ * @return        @c 1 if object was removed and @p s updated, or @c 0 if no
+ *                object was found with the given id. @p s is valid only if the
+ *                return value is @c 1.
+ */</pre>
+
+      <h4 id="coap_free_async">Func <span>coap_free_async</span></h4>
+      <pre class="doc-declare"><code>void
+coap_free_async(coap_async_state_t *state);</code></pre>
+      <pre class="doc-comment">/**
+ * Releases the memory that was allocated by coap_async_state_init() for the
+ * object @p s. The registered application data will be released automatically
+ * if COAP_ASYNC_RELEASE_DATA is set.
+ *
+ * @param state The object to delete.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_async_state_t">Variable <span>coap_async_state_t</span></h4>
+      <pre class="doc-declare"><code>coap_async_state_t *
+coap_register_async(coap_context_t *context,
+                   coap_session_t *session,
+                   coap_pdu_t *request,
+                   unsigned char flags,
+                   void *data);</code></pre>
+      <pre class="doc-comment">/**
+ * Allocates a new coap_async_state_t object and fills its fields according to
+ * the given @p request. The @p flags are used to control generation of empty
+ * ACK responses to stop retransmissions and to release registered @p data when
+ * the resource is deleted by coap_free_async(). This function returns a pointer
+ * to the registered coap_async_t object or @c NULL on error. Note that this
+ * function will return @c NULL in case that an object with the same identifier
+ * is already registered.
+ *
+ * @param context  The context to use.
+ * @param session  The session that is used for asynchronous transmissions.
+ * @param request  The request that is handled asynchronously.
+ * @param flags    Flags to control state management.
+ * @param data     Opaque application data to register. Note that the
+ *                 storage occupied by @p data is released on destruction
+ *                 only if flag COAP_ASYNC_RELEASE_DATA is set.
+ *
+ * @return         A pointer to the registered coap_async_state_t object or @c
+ *                 NULL in case of an error.
+ */</pre>
+
+      <h4 id="coap_async_state_t">Variable <span>coap_async_state_t</span></h4>
+      <pre class="doc-declare"><code>coap_async_state_t *coap_find_async(coap_context_t *context, coap_session_t *session, coap_tid_t id);</code></pre>
+      <pre class="doc-comment">/**
+ * Retrieves the object identified by @p id from the list of asynchronous
+ * transactions that are registered with @p context. This function returns a
+ * pointer to that object or @c NULL if not found.
+ *
+ * @param context The context where the asynchronous objects are registered
+ *                with.
+ * @param session  The session that is used for asynchronous transmissions.
+ * @param id      The id of the object to retrieve.
+ *
+ * @return        A pointer to the object identified by @p id or @c NULL if
+ *                not found.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_async_state_t;
+">Typedef <span>coap_async_state_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_async_state_t {
+ unsigned char flags; /**< holds the flags to control behaviour */
+
+ /**
+   * Holds the internal time when the object was registered with a
+   * resource. This field will be updated whenever
+   * coap_register_async() is called for a specific resource.
+   */
+ coap_tick_t created;
+
+ /**
+   * This field can be used to register opaque application data with the
+   * asynchronous state object.
+   */
+ void *appdata;
+ uint16_t message_id;      /**< id of last message seen */
+ coap_session_t *session;        /**< transaction session */
+ coap_tid_t id;                  /**< transaction id */
+ struct coap_async_state_t *next; /**< internally used for linking */
+ size_t tokenlen;                /**< length of the token */
+ uint8_t token[8];               /**< the token to use in a response */
+} coap_async_state_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @defgroup coap_async Asynchronous Messaging
+ * @{
+ * Structure for managing asynchronous state of CoAP resources. A
+ * coap_resource_t object holds a list of coap_async_state_t objects that can be
+ * used to generate a separate response in case a result of an operation cannot
+ * be delivered in time, or the resource has been explicitly subscribed to with
+ * the option @c observe.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

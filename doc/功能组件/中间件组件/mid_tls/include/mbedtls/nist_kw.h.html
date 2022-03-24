@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#cipher.h" class="nav-sub-label">cipher.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#nist_kw_alt.h" class="nav-sub-label">nist_kw_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_NIST_KW_H" class="nav-sub-label">MBEDTLS_NIST_KW_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_nist_kw_init" class="nav-sub-label">mbedtls_nist_kw_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nist_kw_setkey" class="nav-sub-label">mbedtls_nist_kw_setkey</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nist_kw_free" class="nav-sub-label">mbedtls_nist_kw_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nist_kw_wrap" class="nav-sub-label">mbedtls_nist_kw_wrap</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nist_kw_unwrap" class="nav-sub-label">mbedtls_nist_kw_unwrap</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nist_kw_self_test" class="nav-sub-label">mbedtls_nist_kw_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_nist_kw_mode_t;
+" class="nav-sub-label">mbedtls_nist_kw_mode_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nist_kw_context;
+" class="nav-sub-label">mbedtls_nist_kw_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="cipher.h"><span>cipher.h</span></h4>
+      <pre class="doc-declare"><code>#include "cipher.h"
+</code></pre>
+      <pre class="doc-comment">#include "cipher.h"
+</pre>
+
+      <h4 id="nist_kw_alt.h"><span>nist_kw_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "nist_kw_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "nist_kw_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_NIST_KW_H">Marco <span>MBEDTLS_NIST_KW_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NIST_KW_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_nist_kw_init">Func <span>mbedtls_nist_kw_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_nist_kw_init( mbedtls_nist_kw_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function initializes the specified key wrapping context
+ *                  to make references valid and prepare the context
+ *                  for mbedtls_nist_kw_setkey() or mbedtls_nist_kw_free().
+ *
+ * \param ctx       The key wrapping context to initialize.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_nist_kw_setkey">Func <span>mbedtls_nist_kw_setkey</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_nist_kw_setkey( mbedtls_nist_kw_context *ctx,
+                           mbedtls_cipher_id_t cipher,
+                           const unsigned char *key,
+                           unsigned int keybits,
+                           const int is_wrap );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function initializes the key wrapping context set in the
+ *                  \p ctx parameter and sets the encryption key.
+ *
+ * \param ctx       The key wrapping context.
+ * \param cipher    The 128-bit block cipher to use. Only AES is supported.
+ * \param key       The Key Encryption Key (KEK).
+ * \param keybits   The KEK size in bits. This must be acceptable by the cipher.
+ * \param is_wrap   Specify whether the operation within the context is wrapping or unwrapping
+ *
+ * \return          \c 0 on success.
+ * \return          \c MBEDTLS_ERR_CIPHER_BAD_INPUT_DATA for any invalid input.
+ * \return          \c MBEDTLS_ERR_CIPHER_FEATURE_UNAVAILABLE for 128-bit block ciphers
+ *                  which are not supported.
+ * \return          cipher-specific error code on failure of the underlying cipher.
+ */</pre>
+
+      <h4 id="mbedtls_nist_kw_free">Func <span>mbedtls_nist_kw_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_nist_kw_free( mbedtls_nist_kw_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief   This function releases and clears the specified key wrapping context
+ *          and underlying cipher sub-context.
+ *
+ * \param ctx       The key wrapping context to clear.
+ */</pre>
+
+      <h4 id="mbedtls_nist_kw_wrap">Func <span>mbedtls_nist_kw_wrap</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_nist_kw_wrap( mbedtls_nist_kw_context *ctx, mbedtls_nist_kw_mode_t mode,
+                         const unsigned char *input, size_t in_len,
+                         unsigned char *output, size_t* out_len, size_t out_size );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function encrypts a buffer using key wrapping.
+ *
+ * \param ctx       The key wrapping context to use for encryption.
+ * \param mode      The key wrapping mode to use (MBEDTLS_KW_MODE_KW or MBEDTLS_KW_MODE_KWP)
+ * \param input     The buffer holding the input data.
+ * \param in_len    The length of the input data in Bytes.
+ *                  The input uses units of 8 Bytes called semiblocks.
+ *                  <ul><li>For KW mode: a multiple of 8 bytes between 16 and 2^57-8 inclusive. </li>
+ *                  <li>For KWP mode: any length between 1 and 2^32-1 inclusive.</li></ul>
+ * \param[out] output    The buffer holding the output data.
+ *                  <ul><li>For KW mode: Must be at least 8 bytes larger than \p in_len.</li>
+ *                  <li>For KWP mode: Must be at least 8 bytes larger rounded up to a multiple of
+ *                  8 bytes for KWP (15 bytes at most).</li></ul>
+ * \param[out] out_len The number of bytes written to the output buffer. \c 0 on failure.
+ * \param[in] out_size The capacity of the output buffer.
+ *
+ * \return          \c 0 on success.
+ * \return          \c MBEDTLS_ERR_CIPHER_BAD_INPUT_DATA for invalid input length.
+ * \return          cipher-specific error code on failure of the underlying cipher.
+ */</pre>
+
+      <h4 id="mbedtls_nist_kw_unwrap">Func <span>mbedtls_nist_kw_unwrap</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_nist_kw_unwrap( mbedtls_nist_kw_context *ctx, mbedtls_nist_kw_mode_t mode,
+                           const unsigned char *input, size_t in_len,
+                           unsigned char *output, size_t* out_len, size_t out_size);</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function decrypts a buffer using key wrapping.
+ *
+ * \param ctx       The key wrapping context to use for decryption.
+ * \param mode      The key wrapping mode to use (MBEDTLS_KW_MODE_KW or MBEDTLS_KW_MODE_KWP)
+ * \param input     The buffer holding the input data.
+ * \param in_len    The length of the input data in Bytes.
+ *                  The input uses units of 8 Bytes called semiblocks.
+ *                  The input must be a multiple of semiblocks.
+ *                  <ul><li>For KW mode: a multiple of 8 bytes between 24 and 2^57 inclusive. </li>
+ *                  <li>For KWP mode: a multiple of 8 bytes between 16 and 2^32 inclusive.</li></ul>
+ * \param[out] output    The buffer holding the output data.
+ *                  The output buffer's minimal length is 8 bytes shorter than \p in_len.
+ * \param[out] out_len The number of bytes written to the output buffer. \c 0 on failure.
+ *                  For KWP mode, the length could be up to 15 bytes shorter than \p in_len,
+ *                  depending on how much padding was added to the data.
+ * \param[in] out_size The capacity of the output buffer.
+ *
+ * \return          \c 0 on success.
+ * \return          \c MBEDTLS_ERR_CIPHER_BAD_INPUT_DATA for invalid input length.
+ * \return          \c MBEDTLS_ERR_CIPHER_AUTH_FAILED for verification failure of the ciphertext.
+ * \return          cipher-specific error code on failure of the underlying cipher.
+ */</pre>
+
+      <h4 id="mbedtls_nist_kw_self_test">Func <span>mbedtls_nist_kw_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_nist_kw_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The key wrapping checkup routine.
+ *
+ * \return         \c 0 on success.
+ * \return         \c 1 on failure.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_nist_kw_mode_t;
+">Typedef <span>mbedtls_nist_kw_mode_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+   MBEDTLS_KW_MODE_KW = 0,
+   MBEDTLS_KW_MODE_KWP = 1
+} mbedtls_nist_kw_mode_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_nist_kw_context;
+">Typedef <span>mbedtls_nist_kw_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   mbedtls_cipher_context_t cipher_ctx;   /*!< The cipher context used. */
+} mbedtls_nist_kw_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief    The key wrapping context-type definition. The key wrapping context is passed
+ *           to the APIs called.
+ *
+ * \note     The definition of this type may change in future library versions.
+ *           Don't make any assumptions on this context!
+ */</pre>
+    </div>
+  </body>
+</html>
+            

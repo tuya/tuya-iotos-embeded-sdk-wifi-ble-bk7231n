@@ -1,0 +1,1918 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_settings.h" class="nav-sub-label">ppp_settings.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdio.h" class="nav-sub-label">stdio.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdarg.h" class="nav-sub-label">stdarg.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#string.h" class="nav-sub-label">string.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/netif.h" class="nav-sub-label">lwip/netif.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/def.h" class="nav-sub-label">lwip/def.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/timeouts.h" class="nav-sub-label">lwip/timeouts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp.h" class="nav-sub-label">ppp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#pppdebug.h" class="nav-sub-label">pppdebug.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_PPP_IMPL_H" class="nav-sub-label">LWIP_HDR_PPP_IMPL_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CTRL_PBUF_TYPE" class="nav-sub-label">PPP_CTRL_PBUF_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CTRL_PBUF_MAX_SIZE" class="nav-sub-label">PPP_CTRL_PBUF_MAX_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CTRL_PBUF_TYPE" class="nav-sub-label">PPP_CTRL_PBUF_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CTRL_PBUF_MAX_SIZE" class="nav-sub-label">PPP_CTRL_PBUF_MAX_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_ADDRESS(p)" class="nav-sub-label">PPP_ADDRESS(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CONTROL(p)" class="nav-sub-label">PPP_CONTROL(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_PROTOCOL(p)" class="nav-sub-label">PPP_PROTOCOL(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_ALLSTATIONS" class="nav-sub-label">PPP_ALLSTATIONS</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_UI" class="nav-sub-label">PPP_UI</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FLAG" class="nav-sub-label">PPP_FLAG</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_ESCAPE" class="nav-sub-label">PPP_ESCAPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_TRANS" class="nav-sub-label">PPP_TRANS</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_IP" class="nav-sub-label">PPP_IP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_AT" class="nav-sub-label">PPP_AT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_IPX" class="nav-sub-label">PPP_IPX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_VJC_COMP" class="nav-sub-label">PPP_VJC_COMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_VJC_UNCOMP" class="nav-sub-label">PPP_VJC_UNCOMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_IPV6" class="nav-sub-label">PPP_IPV6</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_COMP" class="nav-sub-label">PPP_COMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_IPCP" class="nav-sub-label">PPP_IPCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_ATCP" class="nav-sub-label">PPP_ATCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_IPXCP" class="nav-sub-label">PPP_IPXCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_IPV6CP" class="nav-sub-label">PPP_IPV6CP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CCP" class="nav-sub-label">PPP_CCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_ECP" class="nav-sub-label">PPP_ECP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_LCP" class="nav-sub-label">PPP_LCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_PAP" class="nav-sub-label">PPP_PAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_LQR" class="nav-sub-label">PPP_LQR</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CHAP" class="nav-sub-label">PPP_CHAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_CBCP" class="nav-sub-label">PPP_CBCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_EAP" class="nav-sub-label">PPP_EAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPD_NULL" class="nav-sub-label">EPD_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPD_LOCAL" class="nav-sub-label">EPD_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPD_IP" class="nav-sub-label">EPD_IP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPD_MAC" class="nav-sub-label">EPD_MAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPD_MAGIC" class="nav-sub-label">EPD_MAGIC</a>
+              </li>
+      
+
+              <li>
+                <a href="#EPD_PHONENUM" class="nav-sub-label">EPD_PHONENUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_OCTETS_DIRECTION_SUM" class="nav-sub-label">PPP_OCTETS_DIRECTION_SUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_OCTETS_DIRECTION_IN" class="nav-sub-label">PPP_OCTETS_DIRECTION_IN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_OCTETS_DIRECTION_OUT" class="nav-sub-label">PPP_OCTETS_DIRECTION_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_OCTETS_DIRECTION_MAXOVERAL" class="nav-sub-label">PPP_OCTETS_DIRECTION_MAXOVERAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_OCTETS_DIRECTION_MAXSESSION" class="nav-sub-label">PPP_OCTETS_DIRECTION_MAXSESSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_DATAINPUT" class="nav-sub-label">PPP_DATAINPUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PAP_WITHPEER" class="nav-sub-label">PAP_WITHPEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#PAP_PEER" class="nav-sub-label">PAP_PEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_WITHPEER" class="nav-sub-label">CHAP_WITHPEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_PEER" class="nav-sub-label">CHAP_PEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_WITHPEER" class="nav-sub-label">EAP_WITHPEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_PEER" class="nav-sub-label">EAP_PEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MD5_WITHPEER" class="nav-sub-label">CHAP_MD5_WITHPEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MD5_PEER" class="nav-sub-label">CHAP_MD5_PEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MS_SHIFT" class="nav-sub-label">CHAP_MS_SHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MS_WITHPEER" class="nav-sub-label">CHAP_MS_WITHPEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MS_PEER" class="nav-sub-label">CHAP_MS_PEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MS2_WITHPEER" class="nav-sub-label">CHAP_MS2_WITHPEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MS2_PEER" class="nav-sub-label">CHAP_MS2_PEER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MDTYPE_SUPPORTED" class="nav-sub-label">CHAP_MDTYPE_SUPPORTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MDTYPE_SUPPORTED" class="nav-sub-label">CHAP_MDTYPE_SUPPORTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAP_MDTYPE_SUPPORTED" class="nav-sub-label">CHAP_MDTYPE_SUPPORTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#GETCHAR(c, cp)" class="nav-sub-label">GETCHAR(c, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PUTCHAR(c, cp)" class="nav-sub-label">PUTCHAR(c, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GETSHORT(s, cp)" class="nav-sub-label">GETSHORT(s, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PUTSHORT(s, cp)" class="nav-sub-label">PUTSHORT(s, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GETLONG(l, cp)" class="nav-sub-label">GETLONG(l, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PUTLONG(l, cp)" class="nav-sub-label">PUTLONG(l, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INCPTR(n, cp)" class="nav-sub-label">INCPTR(n, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DECPTR(n, cp)" class="nav-sub-label">DECPTR(n, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIMEOUT(f, a, t)" class="nav-sub-label">TIMEOUT(f, a, t)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIMEOUTMS(f, a, t)" class="nav-sub-label">TIMEOUTMS(f, a, t)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNTIMEOUT(f, a)" class="nav-sub-label">UNTIMEOUT(f, a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BZERO(s, n)" class="nav-sub-label">BZERO(s, n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BCMP(s1, s2, l)" class="nav-sub-label">BCMP(s1, s2, l)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRINTMSG(m, l)" class="nav-sub-label">PRINTMSG(m, l)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAKEHEADER(p, t)" class="nav-sub-label">MAKEHEADER(p, t)</a>
+              </li>
+      
+
+              <li>
+                <a href="#mp_bundle_terminated()" class="nav-sub-label">mp_bundle_terminated()</a>
+              </li>
+      
+
+              <li>
+                <a href="#mp_exit_bundle()" class="nav-sub-label">mp_exit_bundle()</a>
+              </li>
+      
+
+              <li>
+                <a href="#doing_multilink" class="nav-sub-label">doing_multilink</a>
+              </li>
+      
+
+              <li>
+                <a href="#multilink_master" class="nav-sub-label">multilink_master</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ppp_init" class="nav-sub-label">ppp_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_new" class="nav-sub-label">ppp_new</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_start" class="nav-sub-label">ppp_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_link_failed" class="nav-sub-label">ppp_link_failed</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_link_end" class="nav-sub-label">ppp_link_end</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_input" class="nav-sub-label">ppp_input</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_write" class="nav-sub-label">ppp_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_link_terminated" class="nav-sub-label">ppp_link_terminated</a>
+              </li>
+      
+
+              <li>
+                <a href="#new_phase" class="nav-sub-label">new_phase</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_send_config" class="nav-sub-label">ppp_send_config</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_recv_config" class="nav-sub-label">ppp_recv_config</a>
+              </li>
+      
+
+              <li>
+                <a href="#sifaddr" class="nav-sub-label">sifaddr</a>
+              </li>
+      
+
+              <li>
+                <a href="#cifaddr" class="nav-sub-label">cifaddr</a>
+              </li>
+      
+
+              <li>
+                <a href="#sifproxyarp" class="nav-sub-label">sifproxyarp</a>
+              </li>
+      
+
+              <li>
+                <a href="#cifproxyarp" class="nav-sub-label">cifproxyarp</a>
+              </li>
+      
+
+              <li>
+                <a href="#sdns" class="nav-sub-label">sdns</a>
+              </li>
+      
+
+              <li>
+                <a href="#cdns" class="nav-sub-label">cdns</a>
+              </li>
+      
+
+              <li>
+                <a href="#sifvjcomp" class="nav-sub-label">sifvjcomp</a>
+              </li>
+      
+
+              <li>
+                <a href="#sifup" class="nav-sub-label">sifup</a>
+              </li>
+      
+
+              <li>
+                <a href="#sifdown" class="nav-sub-label">sifdown</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_mask" class="nav-sub-label">get_mask</a>
+              </li>
+      
+
+              <li>
+                <a href="#sif6addr" class="nav-sub-label">sif6addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#cif6addr" class="nav-sub-label">cif6addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#sif6up" class="nav-sub-label">sif6up</a>
+              </li>
+      
+
+              <li>
+                <a href="#sif6down" class="nav-sub-label">sif6down</a>
+              </li>
+      
+
+              <li>
+                <a href="#sifnpmode" class="nav-sub-label">sifnpmode</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif_set_mtu" class="nav-sub-label">netif_set_mtu</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif_get_mtu" class="nav-sub-label">netif_get_mtu</a>
+              </li>
+      
+
+              <li>
+                <a href="#ccp_test" class="nav-sub-label">ccp_test</a>
+              </li>
+      
+
+              <li>
+                <a href="#ccp_set" class="nav-sub-label">ccp_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#ccp_reset_comp" class="nav-sub-label">ccp_reset_comp</a>
+              </li>
+      
+
+              <li>
+                <a href="#ccp_reset_decomp" class="nav-sub-label">ccp_reset_decomp</a>
+              </li>
+      
+
+              <li>
+                <a href="#ccp_fatal_error" class="nav-sub-label">ccp_fatal_error</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_idle_time" class="nav-sub-label">get_idle_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_loop_output" class="nav-sub-label">get_loop_output</a>
+              </li>
+      
+
+              <li>
+                <a href="#print_link_stats" class="nav-sub-label">print_link_stats</a>
+              </li>
+      
+
+              <li>
+                <a href="#reset_link_stats" class="nav-sub-label">reset_link_stats</a>
+              </li>
+      
+
+              <li>
+                <a href="#update_link_stats" class="nav-sub-label">update_link_stats</a>
+              </li>
+      
+
+              <li>
+                <a href="#link_required" class="nav-sub-label">link_required</a>
+              </li>
+      
+
+              <li>
+                <a href="#link_terminated" class="nav-sub-label">link_terminated</a>
+              </li>
+      
+
+              <li>
+                <a href="#link_down" class="nav-sub-label">link_down</a>
+              </li>
+      
+
+              <li>
+                <a href="#upper_layers_down" class="nav-sub-label">upper_layers_down</a>
+              </li>
+      
+
+              <li>
+                <a href="#link_established" class="nav-sub-label">link_established</a>
+              </li>
+      
+
+              <li>
+                <a href="#start_networks" class="nav-sub-label">start_networks</a>
+              </li>
+      
+
+              <li>
+                <a href="#continue_networks" class="nav-sub-label">continue_networks</a>
+              </li>
+      
+
+              <li>
+                <a href="#auth_check_passwd" class="nav-sub-label">auth_check_passwd</a>
+              </li>
+      
+
+              <li>
+                <a href="#auth_peer_fail" class="nav-sub-label">auth_peer_fail</a>
+              </li>
+      
+
+              <li>
+                <a href="#auth_peer_success" class="nav-sub-label">auth_peer_success</a>
+              </li>
+      
+
+              <li>
+                <a href="#auth_withpeer_fail" class="nav-sub-label">auth_withpeer_fail</a>
+              </li>
+      
+
+              <li>
+                <a href="#auth_withpeer_success" class="nav-sub-label">auth_withpeer_success</a>
+              </li>
+      
+
+              <li>
+                <a href="#np_up" class="nav-sub-label">np_up</a>
+              </li>
+      
+
+              <li>
+                <a href="#np_down" class="nav-sub-label">np_down</a>
+              </li>
+      
+
+              <li>
+                <a href="#np_finished" class="nav-sub-label">np_finished</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_secret" class="nav-sub-label">get_secret</a>
+              </li>
+      
+
+              <li>
+                <a href="#demand_conf" class="nav-sub-label">demand_conf</a>
+              </li>
+      
+
+              <li>
+                <a href="#demand_block" class="nav-sub-label">demand_block</a>
+              </li>
+      
+
+              <li>
+                <a href="#demand_unblock" class="nav-sub-label">demand_unblock</a>
+              </li>
+      
+
+              <li>
+                <a href="#demand_discard" class="nav-sub-label">demand_discard</a>
+              </li>
+      
+
+              <li>
+                <a href="#demand_rexmit" class="nav-sub-label">demand_rexmit</a>
+              </li>
+      
+
+              <li>
+                <a href="#loop_chars" class="nav-sub-label">loop_chars</a>
+              </li>
+      
+
+              <li>
+                <a href="#loop_frame" class="nav-sub-label">loop_frame</a>
+              </li>
+      
+
+              <li>
+                <a href="#mp_check_options" class="nav-sub-label">mp_check_options</a>
+              </li>
+      
+
+              <li>
+                <a href="#mp_join_bundle" class="nav-sub-label">mp_join_bundle</a>
+              </li>
+      
+
+              <li>
+                <a href="#mp_exit_bundle" class="nav-sub-label">mp_exit_bundle</a>
+              </li>
+      
+
+              <li>
+                <a href="#mp_bundle_terminated" class="nav-sub-label">mp_bundle_terminated</a>
+              </li>
+      
+
+              <li>
+                <a href="#str_to_epdisc" class="nav-sub-label">str_to_epdisc</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_print_string" class="nav-sub-label">ppp_print_string</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_slprintf" class="nav-sub-label">ppp_slprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_vslprintf" class="nav-sub-label">ppp_vslprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_strlcpy" class="nav-sub-label">ppp_strlcpy</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_strlcat" class="nav-sub-label">ppp_strlcat</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_dbglog" class="nav-sub-label">ppp_dbglog</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_info" class="nav-sub-label">ppp_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_notice" class="nav-sub-label">ppp_notice</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_warn" class="nav-sub-label">ppp_warn</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_error" class="nav-sub-label">ppp_error</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_fatal" class="nav-sub-label">ppp_fatal</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp_dump_packet" class="nav-sub-label">ppp_dump_packet</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="ppp_settings.h"><span>ppp_settings.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp_settings.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp_settings.h"
+</pre>
+
+      <h4 id="stdio.h"><span>stdio.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdio.h&gt; /* formats */
+</code></pre>
+      <pre class="doc-comment">#include <stdio.h> /* formats */
+</pre>
+
+      <h4 id="stdarg.h"><span>stdarg.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdarg.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdarg.h>
+</pre>
+
+      <h4 id="string.h"><span>string.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;string.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <string.h>
+</pre>
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt; /* strtol() */
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h> /* strtol() */
+</pre>
+
+      <h4 id="lwip/netif.h"><span>lwip/netif.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/netif.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/netif.h"
+</pre>
+
+      <h4 id="lwip/def.h"><span>lwip/def.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/def.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/def.h"
+</pre>
+
+      <h4 id="lwip/timeouts.h"><span>lwip/timeouts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/timeouts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/timeouts.h"
+</pre>
+
+      <h4 id="ppp.h"><span>ppp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp.h"
+</pre>
+
+      <h4 id="pppdebug.h"><span>pppdebug.h</span></h4>
+      <pre class="doc-declare"><code>#include "pppdebug.h"
+</code></pre>
+      <pre class="doc-comment">#include "pppdebug.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_PPP_IMPL_H">Marco <span>LWIP_HDR_PPP_IMPL_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_PPP_IMPL_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CTRL_PBUF_TYPE">Marco <span>PPP_CTRL_PBUF_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CTRL_PBUF_TYPE      PBUF_RAM
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CTRL_PBUF_MAX_SIZE">Marco <span>PPP_CTRL_PBUF_MAX_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CTRL_PBUF_MAX_SIZE  512
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CTRL_PBUF_TYPE">Marco <span>PPP_CTRL_PBUF_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CTRL_PBUF_TYPE      PBUF_POOL
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CTRL_PBUF_MAX_SIZE">Marco <span>PPP_CTRL_PBUF_MAX_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CTRL_PBUF_MAX_SIZE  PBUF_POOL_BUFSIZE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_ADDRESS(p)">Marco <span>PPP_ADDRESS(p)</span></h4>
+      <pre class="doc-declare"><code>#define PPP_ADDRESS(p) (((u_char *)(p))[0])
+</code></pre>
+      <pre class="doc-comment">/*
+ * The basic PPP frame.
+ */</pre>
+
+      <h4 id="PPP_CONTROL(p)">Marco <span>PPP_CONTROL(p)</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CONTROL(p) (((u_char *)(p))[1])
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_PROTOCOL(p)">Marco <span>PPP_PROTOCOL(p)</span></h4>
+      <pre class="doc-declare"><code>#define PPP_PROTOCOL(p) ((((u_char *)(p))[2] << 8) + ((u_char *)(p))[3])
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_ALLSTATIONS">Marco <span>PPP_ALLSTATIONS</span></h4>
+      <pre class="doc-declare"><code>#define PPP_ALLSTATIONS 255 /* All-Stations broadcast address */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Significant octet values.
+ */</pre>
+
+      <h4 id="PPP_UI">Marco <span>PPP_UI</span></h4>
+      <pre class="doc-declare"><code>#define PPP_UI	3 /* Unnumbered Information */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FLAG">Marco <span>PPP_FLAG</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FLAG 7e /* Flag Sequence */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_ESCAPE">Marco <span>PPP_ESCAPE</span></h4>
+      <pre class="doc-declare"><code>#define PPP_ESCAPE 7d /* Asynchronous Control Escape */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_TRANS">Marco <span>PPP_TRANS</span></h4>
+      <pre class="doc-declare"><code>#define PPP_TRANS 32 /* Asynchronous transparency modifier */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_IP">Marco <span>PPP_IP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_IP	33 /* Internet Protocol */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Protocol field values.
+ */</pre>
+
+      <h4 id="PPP_AT">Marco <span>PPP_AT</span></h4>
+      <pre class="doc-declare"><code>#define PPP_AT	41 /* AppleTalk Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_IPX">Marco <span>PPP_IPX</span></h4>
+      <pre class="doc-declare"><code>#define PPP_IPX	2b /* IPX protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_VJC_COMP">Marco <span>PPP_VJC_COMP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_VJC_COMP 2d /* VJ compressed TCP */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_VJC_UNCOMP">Marco <span>PPP_VJC_UNCOMP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_VJC_UNCOMP 47 /* VJ uncompressed TCP */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_IPV6">Marco <span>PPP_IPV6</span></h4>
+      <pre class="doc-declare"><code>#define PPP_IPV6 87 /* Internet Protocol Version 6 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_COMP">Marco <span>PPP_COMP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_COMP 15d /* compressed packet */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_IPCP">Marco <span>PPP_IPCP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_IPCP 32801 /* IP Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_ATCP">Marco <span>PPP_ATCP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_ATCP 32809 /* AppleTalk Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_IPXCP">Marco <span>PPP_IPXCP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_IPXCP 2050b /* IPX Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_IPV6CP">Marco <span>PPP_IPV6CP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_IPV6CP 32855 /* IPv6 Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CCP">Marco <span>PPP_CCP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CCP	2063d /* Compression Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_ECP">Marco <span>PPP_ECP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_ECP	32851 /* Encryption Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_LCP">Marco <span>PPP_LCP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_LCP	0xc021 /* Link Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_PAP">Marco <span>PPP_PAP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_PAP	0xc023 /* Password Authentication Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_LQR">Marco <span>PPP_LQR</span></h4>
+      <pre class="doc-declare"><code>#define PPP_LQR	0xc025 /* Link Quality Report protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CHAP">Marco <span>PPP_CHAP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CHAP 0xc223 /* Cryptographic Handshake Auth. Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_CBCP">Marco <span>PPP_CBCP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_CBCP 0xc029 /* Callback Control Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_EAP">Marco <span>PPP_EAP</span></h4>
+      <pre class="doc-declare"><code>#define PPP_EAP	0xc227 /* Extensible Authentication Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPD_NULL">Marco <span>EPD_NULL</span></h4>
+      <pre class="doc-declare"><code>#define EPD_NULL 0 /* null discriminator, no data */
+</code></pre>
+      <pre class="doc-comment">/* values for epdisc.class */</pre>
+
+      <h4 id="EPD_LOCAL">Marco <span>EPD_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define EPD_LOCAL 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPD_IP">Marco <span>EPD_IP</span></h4>
+      <pre class="doc-declare"><code>#define EPD_IP	2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPD_MAC">Marco <span>EPD_MAC</span></h4>
+      <pre class="doc-declare"><code>#define EPD_MAC	3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPD_MAGIC">Marco <span>EPD_MAGIC</span></h4>
+      <pre class="doc-declare"><code>#define EPD_MAGIC 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EPD_PHONENUM">Marco <span>EPD_PHONENUM</span></h4>
+      <pre class="doc-declare"><code>#define EPD_PHONENUM 5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_OCTETS_DIRECTION_SUM">Marco <span>PPP_OCTETS_DIRECTION_SUM</span></h4>
+      <pre class="doc-declare"><code>#define PPP_OCTETS_DIRECTION_SUM       0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_OCTETS_DIRECTION_IN">Marco <span>PPP_OCTETS_DIRECTION_IN</span></h4>
+      <pre class="doc-declare"><code>#define PPP_OCTETS_DIRECTION_IN        1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_OCTETS_DIRECTION_OUT">Marco <span>PPP_OCTETS_DIRECTION_OUT</span></h4>
+      <pre class="doc-declare"><code>#define PPP_OCTETS_DIRECTION_OUT       2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_OCTETS_DIRECTION_MAXOVERAL">Marco <span>PPP_OCTETS_DIRECTION_MAXOVERAL</span></h4>
+      <pre class="doc-declare"><code>#define PPP_OCTETS_DIRECTION_MAXOVERAL 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_OCTETS_DIRECTION_MAXSESSION">Marco <span>PPP_OCTETS_DIRECTION_MAXSESSION</span></h4>
+      <pre class="doc-declare"><code>#define PPP_OCTETS_DIRECTION_MAXSESSION 4
+</code></pre>
+      <pre class="doc-comment">/* same as previos, but little different on RADIUS side */</pre>
+
+      <h4 id="PPP_DATAINPUT">Marco <span>PPP_DATAINPUT</span></h4>
+      <pre class="doc-declare"><code>#define PPP_DATAINPUT 0
+</code></pre>
+      <pre class="doc-comment">/* Data input may be used by CCP and ECP, remove this entry
+ * from struct protent to save some flash
+ */</pre>
+
+      <h4 id="PAP_WITHPEER">Marco <span>PAP_WITHPEER</span></h4>
+      <pre class="doc-declare"><code>#define PAP_WITHPEER 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PAP_PEER">Marco <span>PAP_PEER</span></h4>
+      <pre class="doc-declare"><code>#define PAP_PEER 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_WITHPEER">Marco <span>CHAP_WITHPEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_WITHPEER 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_PEER">Marco <span>CHAP_PEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_PEER 8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_WITHPEER">Marco <span>EAP_WITHPEER</span></h4>
+      <pre class="doc-declare"><code>#define EAP_WITHPEER 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_PEER">Marco <span>EAP_PEER</span></h4>
+      <pre class="doc-declare"><code>#define EAP_PEER 32
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MD5_WITHPEER">Marco <span>CHAP_MD5_WITHPEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MD5_WITHPEER 64
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MD5_PEER">Marco <span>CHAP_MD5_PEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MD5_PEER	128
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MS_SHIFT">Marco <span>CHAP_MS_SHIFT</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MS_SHIFT	8 /* LSB position for MS auths */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MS_WITHPEER">Marco <span>CHAP_MS_WITHPEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MS_WITHPEER 256
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MS_PEER">Marco <span>CHAP_MS_PEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MS_PEER	512
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MS2_WITHPEER">Marco <span>CHAP_MS2_WITHPEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MS2_WITHPEER 1024
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MS2_PEER">Marco <span>CHAP_MS2_PEER</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MS2_PEER	2048
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MDTYPE_SUPPORTED">Marco <span>CHAP_MDTYPE_SUPPORTED</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MDTYPE_SUPPORTED (MDTYPE_MICROSOFT_V2 | MDTYPE_MICROSOFT | MDTYPE_MD5)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MDTYPE_SUPPORTED">Marco <span>CHAP_MDTYPE_SUPPORTED</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MDTYPE_SUPPORTED (MDTYPE_MD5)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAP_MDTYPE_SUPPORTED">Marco <span>CHAP_MDTYPE_SUPPORTED</span></h4>
+      <pre class="doc-declare"><code>#define CHAP_MDTYPE_SUPPORTED (MDTYPE_NONE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GETCHAR(c, cp)">Marco <span>GETCHAR(c, cp)</span></h4>
+      <pre class="doc-declare"><code>#define GETCHAR(c, cp) { \
+ (c) = *(cp)++; \
+}
+</code></pre>
+      <pre class="doc-comment">/*
+ * Inline versions of get/put char/short/long.
+ * Pointer is advanced; we assume that both arguments
+ * are lvalues and will already be in registers.
+ * cp MUST be u_char *.
+ */</pre>
+
+      <h4 id="PUTCHAR(c, cp)">Marco <span>PUTCHAR(c, cp)</span></h4>
+      <pre class="doc-declare"><code>#define PUTCHAR(c, cp) { \
+ *(cp)++ = (u_char) (c); \
+}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GETSHORT(s, cp)">Marco <span>GETSHORT(s, cp)</span></h4>
+      <pre class="doc-declare"><code>#define GETSHORT(s, cp) { \
+ (s) = *(cp)++ << 8; \
+ (s) |= *(cp)++; \
+}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PUTSHORT(s, cp)">Marco <span>PUTSHORT(s, cp)</span></h4>
+      <pre class="doc-declare"><code>#define PUTSHORT(s, cp) { \
+ *(cp)++ = (u_char) ((s) >> 8); \
+ *(cp)++ = (u_char) (s); \
+}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GETLONG(l, cp)">Marco <span>GETLONG(l, cp)</span></h4>
+      <pre class="doc-declare"><code>#define GETLONG(l, cp) { \
+ (l) = *(cp)++ << 8; \
+ (l) |= *(cp)++; (l) <<= 8; \
+ (l) |= *(cp)++; (l) <<= 8; \
+ (l) |= *(cp)++; \
+}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PUTLONG(l, cp)">Marco <span>PUTLONG(l, cp)</span></h4>
+      <pre class="doc-declare"><code>#define PUTLONG(l, cp) { \
+ *(cp)++ = (u_char) ((l) >> 24); \
+ *(cp)++ = (u_char) ((l) >> 16); \
+ *(cp)++ = (u_char) ((l) >> 8); \
+ *(cp)++ = (u_char) (l); \
+}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INCPTR(n, cp)">Marco <span>INCPTR(n, cp)</span></h4>
+      <pre class="doc-declare"><code>#define INCPTR(n, cp) ((cp) += (n))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DECPTR(n, cp)">Marco <span>DECPTR(n, cp)</span></h4>
+      <pre class="doc-declare"><code>#define DECPTR(n, cp) ((cp) -= (n))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TIMEOUT(f, a, t)">Marco <span>TIMEOUT(f, a, t)</span></h4>
+      <pre class="doc-declare"><code>#define TIMEOUT(f, a, t)       do { sys_untimeout((f), (a)); sys_timeout((t)*1000, (f), (a)); } while(0)
+</code></pre>
+      <pre class="doc-comment">/*
+ * System dependent definitions for user-level 4.3BSD UNIX implementation.
+ */</pre>
+
+      <h4 id="TIMEOUTMS(f, a, t)">Marco <span>TIMEOUTMS(f, a, t)</span></h4>
+      <pre class="doc-declare"><code>#define TIMEOUTMS(f, a, t)     do { sys_untimeout((f), (a)); sys_timeout((t), (f), (a)); } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNTIMEOUT(f, a)">Marco <span>UNTIMEOUT(f, a)</span></h4>
+      <pre class="doc-declare"><code>#define UNTIMEOUT(f, a)        sys_untimeout((f), (a))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BZERO(s, n)">Marco <span>BZERO(s, n)</span></h4>
+      <pre class="doc-declare"><code>#define BZERO(s, n)	memset(s, 0, n)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BCMP(s1, s2, l)">Marco <span>BCMP(s1, s2, l)</span></h4>
+      <pre class="doc-declare"><code>#define BCMP(s1, s2, l)	memcmp(s1, s2, l)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRINTMSG(m, l)">Marco <span>PRINTMSG(m, l)</span></h4>
+      <pre class="doc-declare"><code>#define PRINTMSG(m, l)	{ ppp_info("Remote message: %0.*v", l, m); }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAKEHEADER(p, t)">Marco <span>MAKEHEADER(p, t)</span></h4>
+      <pre class="doc-declare"><code>#define MAKEHEADER(p, t) { \
+   PUTCHAR(PPP_ALLSTATIONS, p); \
+   PUTCHAR(PPP_UI, p); \
+   PUTSHORT(t, p); }
+</code></pre>
+      <pre class="doc-comment">/*
+ * MAKEHEADER - Add Header fields to a packet.
+ */</pre>
+
+      <h4 id="mp_bundle_terminated()">Marco <span>mp_bundle_terminated()</span></h4>
+      <pre class="doc-declare"><code>#define mp_bundle_terminated() /* nothing */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mp_exit_bundle()">Marco <span>mp_exit_bundle()</span></h4>
+      <pre class="doc-declare"><code>#define mp_exit_bundle() /* nothing */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="doing_multilink">Marco <span>doing_multilink</span></h4>
+      <pre class="doc-declare"><code>#define doing_multilink	0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="multilink_master">Marco <span>multilink_master</span></h4>
+      <pre class="doc-declare"><code>#define multilink_master 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ppp_init">Func <span>ppp_init</span></h4>
+      <pre class="doc-declare"><code>int ppp_init(void);</code></pre>
+      <pre class="doc-comment">/* initialize the PPP subsystem */</pre>
+
+      <h4 id="ppp_new">Func <span>ppp_new</span></h4>
+      <pre class="doc-declare"><code>ppp_pcb *ppp_new(struct netif *pppif, const struct link_callbacks *callbacks, void *link_ctx_cb,
+                ppp_link_status_cb_fn link_status_cb, void *ctx_cb);</code></pre>
+      <pre class="doc-comment">/* Create a new PPP control block */</pre>
+
+      <h4 id="ppp_start">Func <span>ppp_start</span></h4>
+      <pre class="doc-declare"><code>void ppp_start(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* Initiate LCP open request */</pre>
+
+      <h4 id="ppp_link_failed">Func <span>ppp_link_failed</span></h4>
+      <pre class="doc-declare"><code>void ppp_link_failed(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* Called when link failed to setup */</pre>
+
+      <h4 id="ppp_link_end">Func <span>ppp_link_end</span></h4>
+      <pre class="doc-declare"><code>void ppp_link_end(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* Called when link is normally down (i.e. it was asked to end) */</pre>
+
+      <h4 id="ppp_input">Func <span>ppp_input</span></h4>
+      <pre class="doc-declare"><code>void ppp_input(ppp_pcb *pcb, struct pbuf *pb);</code></pre>
+      <pre class="doc-comment">/* function called to process input packet */</pre>
+
+      <h4 id="ppp_write">Func <span>ppp_write</span></h4>
+      <pre class="doc-declare"><code>err_t ppp_write(ppp_pcb *pcb, struct pbuf *p);</code></pre>
+      <pre class="doc-comment">/* function called by all PPP subsystems to send packets */</pre>
+
+      <h4 id="ppp_link_terminated">Func <span>ppp_link_terminated</span></h4>
+      <pre class="doc-declare"><code>void ppp_link_terminated(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* functions called by auth.c link_terminated() */</pre>
+
+      <h4 id="new_phase">Func <span>new_phase</span></h4>
+      <pre class="doc-declare"><code>void new_phase(ppp_pcb *pcb, int p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ppp_send_config">Func <span>ppp_send_config</span></h4>
+      <pre class="doc-declare"><code>int ppp_send_config(ppp_pcb *pcb, int mtu, u32_t accm, int pcomp, int accomp);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ppp_recv_config">Func <span>ppp_recv_config</span></h4>
+      <pre class="doc-declare"><code>int ppp_recv_config(ppp_pcb *pcb, int mru, u32_t accm, int pcomp, int accomp);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sifaddr">Func <span>sifaddr</span></h4>
+      <pre class="doc-declare"><code>int sifaddr(ppp_pcb *pcb, u32_t our_adr, u32_t his_adr, u32_t netmask);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="cifaddr">Func <span>cifaddr</span></h4>
+      <pre class="doc-declare"><code>int cifaddr(ppp_pcb *pcb, u32_t our_adr, u32_t his_adr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sifproxyarp">Func <span>sifproxyarp</span></h4>
+      <pre class="doc-declare"><code>int sifproxyarp(ppp_pcb *pcb, u32_t his_adr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="cifproxyarp">Func <span>cifproxyarp</span></h4>
+      <pre class="doc-declare"><code>int cifproxyarp(ppp_pcb *pcb, u32_t his_adr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sdns">Func <span>sdns</span></h4>
+      <pre class="doc-declare"><code>int sdns(ppp_pcb *pcb, u32_t ns1, u32_t ns2);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="cdns">Func <span>cdns</span></h4>
+      <pre class="doc-declare"><code>int cdns(ppp_pcb *pcb, u32_t ns1, u32_t ns2);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sifvjcomp">Func <span>sifvjcomp</span></h4>
+      <pre class="doc-declare"><code>int sifvjcomp(ppp_pcb *pcb, int vjcomp, int cidcomp, int maxcid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sifup">Func <span>sifup</span></h4>
+      <pre class="doc-declare"><code>int sifup(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sifdown">Func <span>sifdown</span></h4>
+      <pre class="doc-declare"><code>int sifdown (ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="get_mask">Func <span>get_mask</span></h4>
+      <pre class="doc-declare"><code>u32_t get_mask(u32_t addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sif6addr">Func <span>sif6addr</span></h4>
+      <pre class="doc-declare"><code>int sif6addr(ppp_pcb *pcb, eui64_t our_eui64, eui64_t his_eui64);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="cif6addr">Func <span>cif6addr</span></h4>
+      <pre class="doc-declare"><code>int cif6addr(ppp_pcb *pcb, eui64_t our_eui64, eui64_t his_eui64);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sif6up">Func <span>sif6up</span></h4>
+      <pre class="doc-declare"><code>int sif6up(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sif6down">Func <span>sif6down</span></h4>
+      <pre class="doc-declare"><code>int sif6down (ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sifnpmode">Func <span>sifnpmode</span></h4>
+      <pre class="doc-declare"><code>int sifnpmode(ppp_pcb *pcb, int proto, enum NPmode mode);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netif_set_mtu">Func <span>netif_set_mtu</span></h4>
+      <pre class="doc-declare"><code>void netif_set_mtu(ppp_pcb *pcb, int mtu);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netif_get_mtu">Func <span>netif_get_mtu</span></h4>
+      <pre class="doc-declare"><code>int netif_get_mtu(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ccp_test">Func <span>ccp_test</span></h4>
+      <pre class="doc-declare"><code>int ccp_test(ppp_pcb *pcb, u_char *opt_ptr, int opt_len, int for_transmit);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ccp_set">Func <span>ccp_set</span></h4>
+      <pre class="doc-declare"><code>void ccp_set(ppp_pcb *pcb, u8_t isopen, u8_t isup, u8_t receive_method, u8_t transmit_method);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ccp_reset_comp">Func <span>ccp_reset_comp</span></h4>
+      <pre class="doc-declare"><code>void ccp_reset_comp(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ccp_reset_decomp">Func <span>ccp_reset_decomp</span></h4>
+      <pre class="doc-declare"><code>void ccp_reset_decomp(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ccp_fatal_error">Func <span>ccp_fatal_error</span></h4>
+      <pre class="doc-declare"><code>int ccp_fatal_error(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="get_idle_time">Func <span>get_idle_time</span></h4>
+      <pre class="doc-declare"><code>int get_idle_time(ppp_pcb *pcb, struct ppp_idle *ip);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="get_loop_output">Func <span>get_loop_output</span></h4>
+      <pre class="doc-declare"><code>int get_loop_output(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="print_link_stats">Func <span>print_link_stats</span></h4>
+      <pre class="doc-declare"><code>void print_link_stats(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="reset_link_stats">Func <span>reset_link_stats</span></h4>
+      <pre class="doc-declare"><code>void reset_link_stats(int u);</code></pre>
+      <pre class="doc-comment">/* Print stats, if available */</pre>
+
+      <h4 id="update_link_stats">Func <span>update_link_stats</span></h4>
+      <pre class="doc-declare"><code>void update_link_stats(int u);</code></pre>
+      <pre class="doc-comment">/* Reset (init) stats when link goes up */</pre>
+
+      <h4 id="link_required">Func <span>link_required</span></h4>
+      <pre class="doc-declare"><code>void link_required(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* Procedures exported from auth.c */</pre>
+
+      <h4 id="link_terminated">Func <span>link_terminated</span></h4>
+      <pre class="doc-declare"><code>void link_terminated(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* we are starting to use the link */</pre>
+
+      <h4 id="link_down">Func <span>link_down</span></h4>
+      <pre class="doc-declare"><code>void link_down(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* we are finished with the link */</pre>
+
+      <h4 id="upper_layers_down">Func <span>upper_layers_down</span></h4>
+      <pre class="doc-declare"><code>void upper_layers_down(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* the LCP layer has left the Opened state */</pre>
+
+      <h4 id="link_established">Func <span>link_established</span></h4>
+      <pre class="doc-declare"><code>void link_established(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* take all NCPs down */</pre>
+
+      <h4 id="start_networks">Func <span>start_networks</span></h4>
+      <pre class="doc-declare"><code>void start_networks(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* the link is up; authenticate now */</pre>
+
+      <h4 id="continue_networks">Func <span>continue_networks</span></h4>
+      <pre class="doc-declare"><code>void continue_networks(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* start all the network control protos */</pre>
+
+      <h4 id="auth_check_passwd">Func <span>auth_check_passwd</span></h4>
+      <pre class="doc-declare"><code>int auth_check_passwd(ppp_pcb *pcb, char *auser, int userlen, char *apasswd, int passwdlen, const char **msg, int *msglen);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="auth_peer_fail">Func <span>auth_peer_fail</span></h4>
+      <pre class="doc-declare"><code>void auth_peer_fail(ppp_pcb *pcb, int protocol);</code></pre>
+      <pre class="doc-comment">/* check the user name and passwd against configuration */</pre>
+
+      <h4 id="auth_peer_success">Func <span>auth_peer_success</span></h4>
+      <pre class="doc-declare"><code>void auth_peer_success(ppp_pcb *pcb, int protocol, int prot_flavor, const char *name, int namelen);</code></pre>
+      <pre class="doc-comment">/* peer failed to authenticate itself */</pre>
+
+      <h4 id="auth_withpeer_fail">Func <span>auth_withpeer_fail</span></h4>
+      <pre class="doc-declare"><code>void auth_withpeer_fail(ppp_pcb *pcb, int protocol);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="auth_withpeer_success">Func <span>auth_withpeer_success</span></h4>
+      <pre class="doc-declare"><code>void auth_withpeer_success(ppp_pcb *pcb, int protocol, int prot_flavor);</code></pre>
+      <pre class="doc-comment">/* we failed to authenticate ourselves */</pre>
+
+      <h4 id="np_up">Func <span>np_up</span></h4>
+      <pre class="doc-declare"><code>void np_up(ppp_pcb *pcb, int proto);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="np_down">Func <span>np_down</span></h4>
+      <pre class="doc-declare"><code>void np_down(ppp_pcb *pcb, int proto);</code></pre>
+      <pre class="doc-comment">/* a network protocol has come up */</pre>
+
+      <h4 id="np_finished">Func <span>np_finished</span></h4>
+      <pre class="doc-declare"><code>void np_finished(ppp_pcb *pcb, int proto);</code></pre>
+      <pre class="doc-comment">/* a network protocol has gone down */</pre>
+
+      <h4 id="get_secret">Func <span>get_secret</span></h4>
+      <pre class="doc-declare"><code>int get_secret(ppp_pcb *pcb, const char *client, const char *server, char *secret, int *secret_len, int am_server);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="demand_conf">Func <span>demand_conf</span></h4>
+      <pre class="doc-declare"><code>void demand_conf (void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="demand_block">Func <span>demand_block</span></h4>
+      <pre class="doc-declare"><code>void demand_block (void);</code></pre>
+      <pre class="doc-comment">/* config interface(s) for demand-dial */</pre>
+
+      <h4 id="demand_unblock">Func <span>demand_unblock</span></h4>
+      <pre class="doc-declare"><code>void demand_unblock (void);</code></pre>
+      <pre class="doc-comment">/* set all NPs to queue up packets */</pre>
+
+      <h4 id="demand_discard">Func <span>demand_discard</span></h4>
+      <pre class="doc-declare"><code>void demand_discard (void);</code></pre>
+      <pre class="doc-comment">/* set all NPs to pass packets */</pre>
+
+      <h4 id="demand_rexmit">Func <span>demand_rexmit</span></h4>
+      <pre class="doc-declare"><code>void demand_rexmit (int, u32_t);</code></pre>
+      <pre class="doc-comment">/* set all NPs to discard packets */</pre>
+
+      <h4 id="loop_chars">Func <span>loop_chars</span></h4>
+      <pre class="doc-declare"><code>int loop_chars (unsigned char *, int);</code></pre>
+      <pre class="doc-comment">/* retransmit saved frames for an NP*/</pre>
+
+      <h4 id="loop_frame">Func <span>loop_frame</span></h4>
+      <pre class="doc-declare"><code>int loop_frame (unsigned char *, int);</code></pre>
+      <pre class="doc-comment">/* process chars from loopback */</pre>
+
+      <h4 id="mp_check_options">Func <span>mp_check_options</span></h4>
+      <pre class="doc-declare"><code>void mp_check_options (void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mp_join_bundle">Func <span>mp_join_bundle</span></h4>
+      <pre class="doc-declare"><code>int mp_join_bundle (void);</code></pre>
+      <pre class="doc-comment">/* Check multilink-related options */</pre>
+
+      <h4 id="mp_exit_bundle">Func <span>mp_exit_bundle</span></h4>
+      <pre class="doc-declare"><code>void mp_exit_bundle (void);</code></pre>
+      <pre class="doc-comment">/* join our link to an appropriate bundle */</pre>
+
+      <h4 id="mp_bundle_terminated">Func <span>mp_bundle_terminated</span></h4>
+      <pre class="doc-declare"><code>void mp_bundle_terminated (void);</code></pre>
+      <pre class="doc-comment">/* have disconnected our link from bundle */</pre>
+
+      <h4 id="str_to_epdisc">Func <span>str_to_epdisc</span></h4>
+      <pre class="doc-declare"><code>int str_to_epdisc (struct epdisc *, char *);</code></pre>
+      <pre class="doc-comment">/* string from endpoint discrim. */</pre>
+
+      <h4 id="ppp_print_string">Func <span>ppp_print_string</span></h4>
+      <pre class="doc-declare"><code>void ppp_print_string(const u_char *p, int len, void (*printer) (void *, const char *, ...), void *arg);</code></pre>
+      <pre class="doc-comment">/* Procedures exported from utils.c. */</pre>
+
+      <h4 id="ppp_slprintf">Func <span>ppp_slprintf</span></h4>
+      <pre class="doc-declare"><code>int ppp_slprintf(char *buf, int buflen, const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* Format a string for output */</pre>
+
+      <h4 id="ppp_vslprintf">Func <span>ppp_vslprintf</span></h4>
+      <pre class="doc-declare"><code>int ppp_vslprintf(char *buf, int buflen, const char *fmt, va_list args);</code></pre>
+      <pre class="doc-comment">/* sprintf++ */</pre>
+
+      <h4 id="ppp_strlcpy">Func <span>ppp_strlcpy</span></h4>
+      <pre class="doc-declare"><code>size_t ppp_strlcpy(char *dest, const char *src, size_t len);</code></pre>
+      <pre class="doc-comment">/* vsprintf++ */</pre>
+
+      <h4 id="ppp_strlcat">Func <span>ppp_strlcat</span></h4>
+      <pre class="doc-declare"><code>size_t ppp_strlcat(char *dest, const char *src, size_t len);</code></pre>
+      <pre class="doc-comment">/* safe strcpy */</pre>
+
+      <h4 id="ppp_dbglog">Func <span>ppp_dbglog</span></h4>
+      <pre class="doc-declare"><code>void ppp_dbglog(const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* safe strncpy */</pre>
+
+      <h4 id="ppp_info">Func <span>ppp_info</span></h4>
+      <pre class="doc-declare"><code>void ppp_info(const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* log a debug message */</pre>
+
+      <h4 id="ppp_notice">Func <span>ppp_notice</span></h4>
+      <pre class="doc-declare"><code>void ppp_notice(const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* log an informational message */</pre>
+
+      <h4 id="ppp_warn">Func <span>ppp_warn</span></h4>
+      <pre class="doc-declare"><code>void ppp_warn(const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* log a notice-level message */</pre>
+
+      <h4 id="ppp_error">Func <span>ppp_error</span></h4>
+      <pre class="doc-declare"><code>void ppp_error(const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* log a warning message */</pre>
+
+      <h4 id="ppp_fatal">Func <span>ppp_fatal</span></h4>
+      <pre class="doc-declare"><code>void ppp_fatal(const char *fmt, ...);</code></pre>
+      <pre class="doc-comment">/* log an error message */</pre>
+
+      <h4 id="ppp_dump_packet">Func <span>ppp_dump_packet</span></h4>
+      <pre class="doc-declare"><code>void ppp_dump_packet(ppp_pcb *pcb, const char *tag, unsigned char *p, int len);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *epdisc_to_str (struct epdisc *);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char * protocol_name(int proto);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

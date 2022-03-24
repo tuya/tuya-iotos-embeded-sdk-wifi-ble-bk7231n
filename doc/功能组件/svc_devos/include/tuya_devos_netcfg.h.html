@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_protocol.h" class="nav-sub-label">lan_protocol.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_wifi_defs.h" class="nav-sub-label">tuya_cloud_wifi_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_DEVOS_NETCFG_H" class="nav-sub-label">TUYA_DEVOS_NETCFG_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVT_NETCFG_DONE" class="nav-sub-label">EVT_NETCFG_DONE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_devos_netcfg_init" class="nav-sub-label">tuya_devos_netcfg_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_netcfg_start" class="nav-sub-label">tuya_devos_netcfg_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_netcfg_stop" class="nav-sub-label">tuya_devos_netcfg_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_netcfg_validate" class="nav-sub-label">tuya_devos_netcfg_validate</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_wf_cfg_timeout" class="nav-sub-label">set_wf_cfg_timeout</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_ap_cfg_info" class="nav-sub-label">set_ap_cfg_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_write_wf_start_mode" class="nav-sub-label">gw_write_wf_start_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_fast_get_nc_type" class="nav-sub-label">gw_fast_get_nc_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_user_def_ap_if" class="nav-sub-label">set_user_def_ap_if</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_dev_ap_if" class="nav-sub-label">get_dev_ap_if</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_max_sta_conn" class="nav-sub-label">set_max_sta_conn</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_nw_ip" class="nav-sub-label">set_nw_ip</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_wf_gw_nw_cfg_err_code" class="nav-sub-label">get_wf_gw_nw_cfg_err_code</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_wifi_user_cfg" class="nav-sub-label">gw_wifi_user_cfg</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_user_token_bind" class="nav-sub-label">gw_user_token_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_reset_nc_type" class="nav-sub-label">gw_reset_nc_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_check_wechat_mode" class="nav-sub-label">gw_check_wechat_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_rept_netcfg_type" class="nav-sub-label">gw_rept_netcfg_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_ble_actived_add_wifi_info" class="nav-sub-label">gw_ble_actived_add_wifi_info</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_netcfg_t;
+" class="nav-sub-label">tuya_netcfg_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="lan_protocol.h"><span>lan_protocol.h</span></h4>
+      <pre class="doc-declare"><code>#include "lan_protocol.h"
+</code></pre>
+      <pre class="doc-comment">#include "lan_protocol.h"
+</pre>
+
+      <h4 id="tuya_cloud_wifi_defs.h"><span>tuya_cloud_wifi_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_wifi_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_wifi_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_DEVOS_NETCFG_H">Marco <span>TUYA_DEVOS_NETCFG_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_DEVOS_NETCFG_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVT_NETCFG_DONE">Marco <span>EVT_NETCFG_DONE</span></h4>
+      <pre class="doc-declare"><code>#define EVT_NETCFG_DONE     "netcfg.done"
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_devos_netcfg_init">Func <span>tuya_devos_netcfg_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_devos_netcfg_init(tuya_netcfg_t *param);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Initialize network configuration module
+ * 
+ * @param[in] param Init param, see tuya_netcfg_t
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_devos_netcfg_start">Func <span>tuya_devos_netcfg_start</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_devos_netcfg_start(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start network config
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_devos_netcfg_stop">Func <span>tuya_devos_netcfg_stop</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_devos_netcfg_stop(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Stop network config
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_devos_netcfg_validate">Func <span>tuya_devos_netcfg_validate</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_devos_netcfg_validate(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Validate network config status
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="set_wf_cfg_timeout">Func <span>set_wf_cfg_timeout</span></h4>
+      <pre class="doc-declare"><code>VOID set_wf_cfg_timeout(UINT_T timeout_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set Wi-Fi configuration timeout
+ * 
+ * @param[in] timeout_s Timeout(unit s), default 15 min
+ */</pre>
+
+      <h4 id="set_ap_cfg_info">Func <span>set_ap_cfg_info</span></h4>
+      <pre class="doc-declare"><code>VOID set_ap_cfg_info(WF_AP_CFG_IF_S *cfg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set information for AP config
+ * 
+ * @param[in] cfg AP config, see WF_AP_CFG_IF_S
+ */</pre>
+
+      <h4 id="gw_write_wf_start_mode">Func <span>gw_write_wf_start_mode</span></h4>
+      <pre class="doc-declare"><code>VOID gw_write_wf_start_mode(GW_WF_START_MODE wf_start_mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set network start mode
+ * 
+ * @param[in] wf_start_mode Network start mode, see GW_WF_START_MODE
+ */</pre>
+
+      <h4 id="gw_fast_get_nc_type">Func <span>gw_fast_get_nc_type</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_fast_get_nc_type(GW_WF_NWC_FAST_STAT_T *nc_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get network configuration type
+ * 
+ * @param[out] nc_type Network configuration type, see GW_WF_NWC_FAST_STAT_T
+
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="set_user_def_ap_if">Func <span>set_user_def_ap_if</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET set_user_def_ap_if(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set device AP config
+ * 
+ * @param[out] ssid SSID to connect
+ * @param[out] passwd Password of AP
+
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="get_dev_ap_if">Func <span>get_dev_ap_if</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET get_dev_ap_if(OUT CHAR_T* ssid, OUT CHAR_T* passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get device AP config
+ * 
+ * @param[out] ssid SSID to connect
+ * @param[out] passwd Password of AP
+
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="set_max_sta_conn">Func <span>set_max_sta_conn</span></h4>
+      <pre class="doc-declare"><code>VOID set_max_sta_conn(IN CONST UCHAR_T max_conn);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set maximum of clients that are allowed to connect this device
+ * 
+ * @param[in] max_conn Max count
+ */</pre>
+
+      <h4 id="set_nw_ip">Func <span>set_nw_ip</span></h4>
+      <pre class="doc-declare"><code>VOID set_nw_ip(IN CONST CHAR_T* ip, IN CONST CHAR_T* mask, IN CONST CHAR_T* gw);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set device network info
+ * 
+ * @param[in] ip IP addr.
+ * @param[in] gw Gateway addr.
+ * @param[in] mask Network mask
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="get_wf_gw_nw_cfg_err_code">Func <span>get_wf_gw_nw_cfg_err_code</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET get_wf_gw_nw_cfg_err_code(OUT NW_CFG_ERR_CODE_E *nw_cfg_err_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get network configuration error code
+ * 
+ * @param[out] nw_cfg_err_code Error code, see NW_CFG_ERR_CODE_E
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_wifi_user_cfg">Func <span>gw_wifi_user_cfg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_wifi_user_cfg(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd,IN CONST CHAR_T *token);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Configure network with user defined params
+ * 
+ * @param[in] ssid SSID to connect
+ * @param[in] passwd Password of AP
+ * @param[in] token The token
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_user_token_bind">Func <span>gw_user_token_bind</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_user_token_bind(IN CONST CHAR_T *token);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set network configuration token
+ * 
+ * @param[in] token Token got from network configuration
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_reset_nc_type">Func <span>gw_reset_nc_type</span></h4>
+      <pre class="doc-declare"><code>VOID gw_reset_nc_type(IN CONST GW_WF_CFG_MTHD_SEL mthd,INOUT GW_WORK_STAT_MAG_S *gw_wsm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Reset work state according to network configuration method
+ * 
+ * @param[in] mthd Network configuration method, see GW_WF_CFG_MTHD_SEL
+ * @param[in,out] gw_wsm Work state, see GW_WORK_STAT_MAG_S
+ */</pre>
+
+      <h4 id="gw_check_wechat_mode">Func <span>gw_check_wechat_mode</span></h4>
+      <pre class="doc-declare"><code>BOOL_T gw_check_wechat_mode(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Whether in wechat network configuration or not
+ * 
+ * @return TRUE on positive, FALSE on negative
+ */</pre>
+
+      <h4 id="gw_rept_netcfg_type">Func <span>gw_rept_netcfg_type</span></h4>
+      <pre class="doc-declare"><code>VOID gw_rept_netcfg_type(AP_CFG_ERR_CODE err_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Error dispatch when network configuration fail
+ * 
+ * @param[in] err_code Error code, see AP_CFG_ERR_CODE
+ */</pre>
+
+      <h4 id="gw_ble_actived_add_wifi_info">Func <span>gw_ble_actived_add_wifi_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_ble_actived_add_wifi_info(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd,IN CONST CHAR_T *region,IN CONST CHAR_T *env );</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Connect Wi-Fi with given ssid and password, together with runtime region and env
+ * 
+ * @param[in] ssid SSID to connect
+ * @param[in] passwd Password of AP
+ * @param[in] region Device runtime region
+ * @param[in] env Device runtime environment
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_netcfg_t;
+">Typedef <span>tuya_netcfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T resved;
+}tuya_netcfg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

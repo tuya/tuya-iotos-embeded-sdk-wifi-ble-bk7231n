@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_HAL_STORAGE_H__" class="nav-sub-label">__TUYA_HAL_STORAGE_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_flash_read" class="nav-sub-label">tuya_hal_flash_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_flash_write" class="nav-sub-label">tuya_hal_flash_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_flash_erase" class="nav-sub-label">tuya_hal_flash_erase</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_legacy_swap_get_desc" class="nav-sub-label">tuya_hal_legacy_swap_get_desc</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_get_rcd_flash_desc" class="nav-sub-label">tuya_hal_get_rcd_flash_desc</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_storage_intf_init" class="nav-sub-label">tuya_os_storage_intf_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#UNI_STORAGE_DESC_S" class="nav-sub-label">UNI_STORAGE_DESC_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#UF_PARTITION_TABLE_S" class="nav-sub-label">UF_PARTITION_TABLE_S</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_HAL_STORAGE_H__">Marco <span>__TUYA_HAL_STORAGE_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_HAL_STORAGE_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_hal_flash_read">Func <span>tuya_hal_flash_read</span></h4>
+      <pre class="doc-declare"><code>int tuya_hal_flash_read(const unsigned int addr, unsigned char *dst, const unsigned int size);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Read flash
+*
+* @param[in] addr: flash address
+* @param[out] dst: pointer of buffer
+* @param[in] size: size of buffer
+*
+* @note This API is used for reading flash.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_flash_write">Func <span>tuya_hal_flash_write</span></h4>
+      <pre class="doc-declare"><code>int tuya_hal_flash_write(const unsigned int addr, const unsigned char *src, const unsigned int size);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Write flash
+*
+* @param[in] addr: flash address
+* @param[in] src: pointer of buffer
+* @param[in] size: size of buffer
+*
+* @note This API is used for reading flash.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_flash_erase">Func <span>tuya_hal_flash_erase</span></h4>
+      <pre class="doc-declare"><code>int tuya_hal_flash_erase(const unsigned int addr, const unsigned int size);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Erase flash
+*
+* @param[in] addr: flash address
+* @param[in] size: size of flash block
+*
+* @note This API is used for erasing flash.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_legacy_swap_get_desc">Func <span>tuya_hal_legacy_swap_get_desc</span></h4>
+      <pre class="doc-declare"><code>int tuya_hal_legacy_swap_get_desc(unsigned int *addr, unsigned int *size);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Get legacy swap description
+*
+* @param[out] addr: legacy swap address
+* @param[out] size: size of legacy swap
+*
+* @note This API is used to get legacy swap description.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_get_rcd_flash_desc">Func <span>tuya_hal_get_rcd_flash_desc</span></h4>
+      <pre class="doc-declare"><code>PARTITION_TABLE_S *tuya_hal_get_rcd_flash_desc(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get rcd flash description
+ * 
+ * @return  pointer to descrtion of rcd flash
+ */</pre>
+
+      <h4 id="tuya_os_storage_intf_init">Func <span>tuya_os_storage_intf_init</span></h4>
+      <pre class="doc-declare"><code>void tuya_os_storage_intf_init(void);</code></pre>
+      <pre class="doc-comment">/**
+
+ * @brief tuya_os_storage_intf_init用于初始化tuya storage组件接口
+ * 
+ * @return int 0=成功，非0=失败
+ * @brief Storage interface initialization
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialization of storage interface.
+ *
+ * @return VOID
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="UNI_STORAGE_DESC_S">Variable <span>UNI_STORAGE_DESC_S</span></h4>
+      <pre class="doc-declare"><code>UNI_STORAGE_DESC_S* tuya_hal_storage_get_desc(void);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Get description of storage
+*
+* @param void
+*
+* @note This API is used to get description of storage.
+*
+* @return the description of storage
+*/</pre>
+
+      <h4 id="UF_PARTITION_TABLE_S">Variable <span>UF_PARTITION_TABLE_S</span></h4>
+      <pre class="doc-declare"><code>UF_PARTITION_TABLE_S* tuya_hal_uf_get_desc(void);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Get UF file description
+*
+* @param void
+*
+* @note This API is used to get UF file description.
+*
+* @return the UF file description
+*/</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

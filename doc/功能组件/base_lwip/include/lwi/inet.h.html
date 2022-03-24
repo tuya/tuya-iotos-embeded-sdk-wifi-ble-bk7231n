@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/def.h" class="nav-sub-label">lwip/def.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6_addr.h" class="nav-sub-label">lwip/ip6_addr.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_INET_H" class="nav-sub-label">LWIP_HDR_INET_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#s6_addr" class="nav-sub-label">s6_addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#INADDR_NONE" class="nav-sub-label">INADDR_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#INADDR_LOOPBACK" class="nav-sub-label">INADDR_LOOPBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#INADDR_ANY" class="nav-sub-label">INADDR_ANY</a>
+              </li>
+      
+
+              <li>
+                <a href="#INADDR_BROADCAST" class="nav-sub-label">INADDR_BROADCAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN6ADDR_ANY_INIT" class="nav-sub-label">IN6ADDR_ANY_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN6ADDR_LOOPBACK_INIT" class="nav-sub-label">IN6ADDR_LOOPBACK_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSA(a)" class="nav-sub-label">IN_CLASSA(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSA_NET" class="nav-sub-label">IN_CLASSA_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSA_NSHIFT" class="nav-sub-label">IN_CLASSA_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSA_HOST" class="nav-sub-label">IN_CLASSA_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSA_MAX" class="nav-sub-label">IN_CLASSA_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSB(b)" class="nav-sub-label">IN_CLASSB(b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSB_NET" class="nav-sub-label">IN_CLASSB_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSB_NSHIFT" class="nav-sub-label">IN_CLASSB_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSB_HOST" class="nav-sub-label">IN_CLASSB_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSB_MAX" class="nav-sub-label">IN_CLASSB_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSC(c)" class="nav-sub-label">IN_CLASSC(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSC_NET" class="nav-sub-label">IN_CLASSC_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSC_NSHIFT" class="nav-sub-label">IN_CLASSC_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSC_HOST" class="nav-sub-label">IN_CLASSC_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSC_MAX" class="nav-sub-label">IN_CLASSC_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSD(d)" class="nav-sub-label">IN_CLASSD(d)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSD_NET" class="nav-sub-label">IN_CLASSD_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSD_NSHIFT" class="nav-sub-label">IN_CLASSD_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSD_HOST" class="nav-sub-label">IN_CLASSD_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_CLASSD_MAX" class="nav-sub-label">IN_CLASSD_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_MULTICAST(a)" class="nav-sub-label">IN_MULTICAST(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_EXPERIMENTAL(a)" class="nav-sub-label">IN_EXPERIMENTAL(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_BADCLASS(a)" class="nav-sub-label">IN_BADCLASS(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN_LOOPBACKNET" class="nav-sub-label">IN_LOOPBACKNET</a>
+              </li>
+      
+
+              <li>
+                <a href="#INET_ADDRSTRLEN" class="nav-sub-label">INET_ADDRSTRLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#INET6_ADDRSTRLEN" class="nav-sub-label">INET6_ADDRSTRLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet_addr_from_ip4addr(target_inaddr, source_ipaddr)" class="nav-sub-label">inet_addr_from_ip4addr(target_inaddr, source_ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet_addr_to_ip4addr(target_ipaddr, source_inaddr)" class="nav-sub-label">inet_addr_to_ip4addr(target_ipaddr, source_inaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet_addr(cp)" class="nav-sub-label">inet_addr(cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet_aton(cp, addr)" class="nav-sub-label">inet_aton(cp, addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet_ntoa(addr)" class="nav-sub-label">inet_ntoa(addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet_ntoa_r(addr, buf, buflen)" class="nav-sub-label">inet_ntoa_r(addr, buf, buflen)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet6_addr_from_ip6addr(target_in6addr, source_ip6addr)" class="nav-sub-label">inet6_addr_from_ip6addr(target_in6addr, source_ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet6_addr_to_ip6addr(target_ip6addr, source_in6addr)" class="nav-sub-label">inet6_addr_to_ip6addr(target_ip6addr, source_in6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet6_aton(cp, addr)" class="nav-sub-label">inet6_aton(cp, addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet6_ntoa(addr)" class="nav-sub-label">inet6_ntoa(addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#inet6_ntoa_r(addr, buf, buflen)" class="nav-sub-label">inet6_ntoa_r(addr, buf, buflen)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#in_addr_t" class="nav-sub-label">in_addr_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/def.h"><span>lwip/def.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/def.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/def.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/ip6_addr.h"><span>lwip/ip6_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6_addr.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_INET_H">Marco <span>LWIP_HDR_INET_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_INET_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="s6_addr">Marco <span>s6_addr</span></h4>
+      <pre class="doc-declare"><code>#define s6_addr un.u8_addr
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INADDR_NONE">Marco <span>INADDR_NONE</span></h4>
+      <pre class="doc-declare"><code>#define INADDR_NONE        IPADDR_NONE
+</code></pre>
+      <pre class="doc-comment">/** 255.255.255.255 */</pre>
+
+      <h4 id="INADDR_LOOPBACK">Marco <span>INADDR_LOOPBACK</span></h4>
+      <pre class="doc-declare"><code>#define INADDR_LOOPBACK    IPADDR_LOOPBACK
+</code></pre>
+      <pre class="doc-comment">/** 127.0.0.1 */</pre>
+
+      <h4 id="INADDR_ANY">Marco <span>INADDR_ANY</span></h4>
+      <pre class="doc-declare"><code>#define INADDR_ANY         IPADDR_ANY
+</code></pre>
+      <pre class="doc-comment">/** 0.0.0.0 */</pre>
+
+      <h4 id="INADDR_BROADCAST">Marco <span>INADDR_BROADCAST</span></h4>
+      <pre class="doc-declare"><code>#define INADDR_BROADCAST   IPADDR_BROADCAST
+</code></pre>
+      <pre class="doc-comment">/** 255.255.255.255 */</pre>
+
+      <h4 id="IN6ADDR_ANY_INIT">Marco <span>IN6ADDR_ANY_INIT</span></h4>
+      <pre class="doc-declare"><code>#define IN6ADDR_ANY_INIT {{{0,0,0,0}}}
+</code></pre>
+      <pre class="doc-comment">/** This macro can be used to initialize a variable of type struct in6_addr
+    to the IPv6 wildcard address. */</pre>
+
+      <h4 id="IN6ADDR_LOOPBACK_INIT">Marco <span>IN6ADDR_LOOPBACK_INIT</span></h4>
+      <pre class="doc-declare"><code>#define IN6ADDR_LOOPBACK_INIT {{{0,0,0,PP_HTONL(1)}}}
+</code></pre>
+      <pre class="doc-comment">/** This macro can be used to initialize a variable of type struct in6_addr
+    to the IPv6 loopback address. */</pre>
+
+      <h4 id="IN_CLASSA(a)">Marco <span>IN_CLASSA(a)</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSA(a)       IP_CLASSA(a)
+</code></pre>
+      <pre class="doc-comment">/* Definitions of the bits in an (IPv4) Internet address integer.
+
+   On subnets, host and network parts are found according to
+   the subnet mask, not these masks.  */</pre>
+
+      <h4 id="IN_CLASSA_NET">Marco <span>IN_CLASSA_NET</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSA_NET      IP_CLASSA_NET
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSA_NSHIFT">Marco <span>IN_CLASSA_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSA_NSHIFT   IP_CLASSA_NSHIFT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSA_HOST">Marco <span>IN_CLASSA_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSA_HOST     IP_CLASSA_HOST
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSA_MAX">Marco <span>IN_CLASSA_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSA_MAX      IP_CLASSA_MAX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSB(b)">Marco <span>IN_CLASSB(b)</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSB(b)       IP_CLASSB(b)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSB_NET">Marco <span>IN_CLASSB_NET</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSB_NET      IP_CLASSB_NET
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSB_NSHIFT">Marco <span>IN_CLASSB_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSB_NSHIFT   IP_CLASSB_NSHIFT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSB_HOST">Marco <span>IN_CLASSB_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSB_HOST     IP_CLASSB_HOST
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSB_MAX">Marco <span>IN_CLASSB_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSB_MAX      IP_CLASSB_MAX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSC(c)">Marco <span>IN_CLASSC(c)</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSC(c)       IP_CLASSC(c)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSC_NET">Marco <span>IN_CLASSC_NET</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSC_NET      IP_CLASSC_NET
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSC_NSHIFT">Marco <span>IN_CLASSC_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSC_NSHIFT   IP_CLASSC_NSHIFT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSC_HOST">Marco <span>IN_CLASSC_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSC_HOST     IP_CLASSC_HOST
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSC_MAX">Marco <span>IN_CLASSC_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSC_MAX      IP_CLASSC_MAX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSD(d)">Marco <span>IN_CLASSD(d)</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSD(d)       IP_CLASSD(d)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSD_NET">Marco <span>IN_CLASSD_NET</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSD_NET      IP_CLASSD_NET    /* These ones aren't really */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSD_NSHIFT">Marco <span>IN_CLASSD_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSD_NSHIFT   IP_CLASSD_NSHIFT /*   net and host fields, but */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSD_HOST">Marco <span>IN_CLASSD_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSD_HOST     IP_CLASSD_HOST   /*   routing needn't know. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_CLASSD_MAX">Marco <span>IN_CLASSD_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IN_CLASSD_MAX      IP_CLASSD_MAX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_MULTICAST(a)">Marco <span>IN_MULTICAST(a)</span></h4>
+      <pre class="doc-declare"><code>#define IN_MULTICAST(a)    IP_MULTICAST(a)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_EXPERIMENTAL(a)">Marco <span>IN_EXPERIMENTAL(a)</span></h4>
+      <pre class="doc-declare"><code>#define IN_EXPERIMENTAL(a) IP_EXPERIMENTAL(a)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_BADCLASS(a)">Marco <span>IN_BADCLASS(a)</span></h4>
+      <pre class="doc-declare"><code>#define IN_BADCLASS(a)     IP_BADCLASS(a)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN_LOOPBACKNET">Marco <span>IN_LOOPBACKNET</span></h4>
+      <pre class="doc-declare"><code>#define IN_LOOPBACKNET     IP_LOOPBACKNET
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INET_ADDRSTRLEN">Marco <span>INET_ADDRSTRLEN</span></h4>
+      <pre class="doc-declare"><code>#define INET_ADDRSTRLEN    IP4ADDR_STRLEN_MAX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INET6_ADDRSTRLEN">Marco <span>INET6_ADDRSTRLEN</span></h4>
+      <pre class="doc-declare"><code>#define INET6_ADDRSTRLEN   IP6ADDR_STRLEN_MAX
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet_addr_from_ip4addr(target_inaddr, source_ipaddr)">Marco <span>inet_addr_from_ip4addr(target_inaddr, source_ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define inet_addr_from_ip4addr(target_inaddr, source_ipaddr) ((target_inaddr)->s_addr = ip4_addr_get_u32(source_ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet_addr_to_ip4addr(target_ipaddr, source_inaddr)">Marco <span>inet_addr_to_ip4addr(target_ipaddr, source_inaddr)</span></h4>
+      <pre class="doc-declare"><code>#define inet_addr_to_ip4addr(target_ipaddr, source_inaddr)  (ip4_addr_set_u32(target_ipaddr, (source_inaddr)->s_addr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet_addr(cp)">Marco <span>inet_addr(cp)</span></h4>
+      <pre class="doc-declare"><code>#define inet_addr(cp)                  ipaddr_addr(cp)
+</code></pre>
+      <pre class="doc-comment">/* directly map this to the lwip internal functions */</pre>
+
+      <h4 id="inet_aton(cp, addr)">Marco <span>inet_aton(cp, addr)</span></h4>
+      <pre class="doc-declare"><code>#define inet_aton(cp, addr)            ip4addr_aton(cp, (ip4_addr_t*)addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet_ntoa(addr)">Marco <span>inet_ntoa(addr)</span></h4>
+      <pre class="doc-declare"><code>#define inet_ntoa(addr)                ip4addr_ntoa((const ip4_addr_t*)&(addr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet_ntoa_r(addr, buf, buflen)">Marco <span>inet_ntoa_r(addr, buf, buflen)</span></h4>
+      <pre class="doc-declare"><code>#define inet_ntoa_r(addr, buf, buflen) ip4addr_ntoa_r((const ip4_addr_t*)&(addr), buf, buflen)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet6_addr_from_ip6addr(target_in6addr, source_ip6addr)">Marco <span>inet6_addr_from_ip6addr(target_in6addr, source_ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define inet6_addr_from_ip6addr(target_in6addr, source_ip6addr) {(target_in6addr)->un.u32_addr[0] = (source_ip6addr)->addr[0]; \
+                                                                (target_in6addr)->un.u32_addr[1] = (source_ip6addr)->addr[1]; \
+                                                                (target_in6addr)->un.u32_addr[2] = (source_ip6addr)->addr[2]; \
+                                                                (target_in6addr)->un.u32_addr[3] = (source_ip6addr)->addr[3];}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet6_addr_to_ip6addr(target_ip6addr, source_in6addr)">Marco <span>inet6_addr_to_ip6addr(target_ip6addr, source_in6addr)</span></h4>
+      <pre class="doc-declare"><code>#define inet6_addr_to_ip6addr(target_ip6addr, source_in6addr)  {(target_ip6addr)->addr[0] = (source_in6addr)->un.u32_addr[0]; \
+                                                                (target_ip6addr)->addr[1] = (source_in6addr)->un.u32_addr[1]; \
+                                                                (target_ip6addr)->addr[2] = (source_in6addr)->un.u32_addr[2]; \
+                                                                (target_ip6addr)->addr[3] = (source_in6addr)->un.u32_addr[3]; \
+                                                                ip6_addr_clear_zone(target_ip6addr);}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet6_aton(cp, addr)">Marco <span>inet6_aton(cp, addr)</span></h4>
+      <pre class="doc-declare"><code>#define inet6_aton(cp, addr)           ip6addr_aton(cp, (ip6_addr_t*)addr)
+</code></pre>
+      <pre class="doc-comment">/* directly map this to the lwip internal functions */</pre>
+
+      <h4 id="inet6_ntoa(addr)">Marco <span>inet6_ntoa(addr)</span></h4>
+      <pre class="doc-declare"><code>#define inet6_ntoa(addr)               ip6addr_ntoa((const ip6_addr_t*)&(addr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="inet6_ntoa_r(addr, buf, buflen)">Marco <span>inet6_ntoa_r(addr, buf, buflen)</span></h4>
+      <pre class="doc-declare"><code>#define inet6_ntoa_r(addr, buf, buflen) ip6addr_ntoa_r((const ip6_addr_t*)&(addr), buf, buflen)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="in_addr_t">Typedef <span>in_addr_t</span></h4>
+      <pre class="doc-declare"><code>typedef u32_t in_addr_t;</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdbool.h" class="nav-sub-label">stdbool.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_HAL_FS_H__" class="nav-sub-label">__TUYA_HAL_FS_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_fs_mkdir" class="nav-sub-label">tuya_hal_fs_mkdir</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fs_remove" class="nav-sub-label">tuya_hal_fs_remove</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fs_mode" class="nav-sub-label">tuya_hal_fs_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fs_is_exist" class="nav-sub-label">tuya_hal_fs_is_exist</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fs_rename" class="nav-sub-label">tuya_hal_fs_rename</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_dir_open" class="nav-sub-label">tuya_hal_dir_open</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_dir_close" class="nav-sub-label">tuya_hal_dir_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_dir_read" class="nav-sub-label">tuya_hal_dir_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_dir_name" class="nav-sub-label">tuya_hal_dir_name</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_dir_is_directory" class="nav-sub-label">tuya_hal_dir_is_directory</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_dir_is_regular" class="nav-sub-label">tuya_hal_dir_is_regular</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fopen" class="nav-sub-label">tuya_hal_fopen</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fclose" class="nav-sub-label">tuya_hal_fclose</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fread" class="nav-sub-label">tuya_hal_fread</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fwrite" class="nav-sub-label">tuya_hal_fwrite</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fsync" class="nav-sub-label">tuya_hal_fsync</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fgets" class="nav-sub-label">tuya_hal_fgets</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_feof" class="nav-sub-label">tuya_hal_feof</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_fseek" class="nav-sub-label">tuya_hal_fseek</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_ftell" class="nav-sub-label">tuya_hal_ftell</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_fs_intf_init" class="nav-sub-label">tuya_os_fs_intf_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="stdbool.h"><span>stdbool.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdbool.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdbool.h>
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_HAL_FS_H__">Marco <span>__TUYA_HAL_FS_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_HAL_FS_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_hal_fs_mkdir">Func <span>tuya_hal_fs_mkdir</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fs_mkdir(CONST CHAR_T* path);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Make directory
+ *
+ * @param[in] path: path of directory
+ *
+ * @note This API is used for making a directory
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_fs_remove">Func <span>tuya_hal_fs_remove</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fs_remove(CONST CHAR_T* path);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Remove directory
+*
+* @param[in] path: path of directory
+*
+* @note This API is used for removing a directory
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fs_mode">Func <span>tuya_hal_fs_mode</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fs_mode(CONST CHAR_T* path, UINT_T* mode);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Get file mode
+*
+* @param[in] path: path of directory
+* @param[out] mode: bit attibute of directory
+*
+* @note This API is used for getting file mode.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fs_is_exist">Func <span>tuya_hal_fs_is_exist</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fs_is_exist(CONST CHAR_T* path, BOOL_T* is_exist);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Check whether the file or directory exists
+*
+* @param[in] path: path of directory
+* @param[out] is_exist: the file or directory exists or not
+*
+* @note This API is used to check whether the file or directory exists.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fs_rename">Func <span>tuya_hal_fs_rename</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fs_rename(CONST CHAR_T* path_old, CONST CHAR_T* path_new);</code></pre>
+      <pre class="doc-comment">/**
+* @brief File rename
+*
+* @param[in] path_old: old path of directory
+* @param[in] path_new: new path of directory
+*
+* @note This API is used to rename the file.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_dir_open">Func <span>tuya_hal_dir_open</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_dir_open(CONST CHAR_T* path, TUYA_DIR* dir);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Open directory
+*
+* @param[in] path: path of directory
+* @param[out] dir: handle of directory
+*
+* @note This API is used to open a directory
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_dir_close">Func <span>tuya_hal_dir_close</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_dir_close(TUYA_DIR dir);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Close directory
+*
+* @param[in] dir: handle of directory
+*
+* @note This API is used to close a directory
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_dir_read">Func <span>tuya_hal_dir_read</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_dir_read(TUYA_DIR dir, TUYA_FILEINFO* info);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Read directory
+*
+* @param[in] dir: handle of directory
+* @param[out] info: file information
+*
+* @note This API is used to read a directory.
+* Read the file information of the current node, and the internal pointer points to the next node.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_dir_name">Func <span>tuya_hal_dir_name</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_dir_name(TUYA_FILEINFO info, CONST CHAR_T** name);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Get the name of the file node
+*
+* @param[in] info: file information
+* @param[out] name: file name
+*
+* @note This API is used to get the name of the file node.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_dir_is_directory">Func <span>tuya_hal_dir_is_directory</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_dir_is_directory(TUYA_FILEINFO info, BOOL_T* is_dir);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Check whether the node is a directory
+*
+* @param[in] info: file information
+* @param[out] is_dir: is directory or not
+*
+* @note This API is used to check whether the node is a directory.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_dir_is_regular">Func <span>tuya_hal_dir_is_regular</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_dir_is_regular(TUYA_FILEINFO info, BOOL_T* is_regular);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_fopen">Func <span>tuya_hal_fopen</span></h4>
+      <pre class="doc-declare"><code>TUYA_FILE tuya_hal_fopen(CONST CHAR_T* path, CONST CHAR_T* mode);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Open file
+*
+* @param[in] path: path of file
+* @param[in] mode: file open mode: "r","w"...
+*
+* @note This API is used to open a file
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fclose">Func <span>tuya_hal_fclose</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fclose(TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Close file
+*
+* @param[in] file: file handle
+*
+* @note This API is used to close a file
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fread">Func <span>tuya_hal_fread</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fread(VOID_T* buf, INT_T bytes, TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Read file
+*
+* @param[in] buf: buffer for reading file
+* @param[in] bytes: buffer size
+* @param[in] file: file handle
+*
+* @note This API is used to read a file
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fwrite">Func <span>tuya_hal_fwrite</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fwrite(VOID_T* buf, INT_T bytes, TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief write file
+*
+* @param[in] buf: buffer for writing file
+* @param[in] bytes: buffer size
+* @param[in] file: file handle
+*
+* @note This API is used to write a file
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fsync">Func <span>tuya_hal_fsync</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fsync(TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief write buffer to flash
+*
+* @param[in] file: file handle
+*
+* @note This API is used to write buffer to flash
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fgets">Func <span>tuya_hal_fgets</span></h4>
+      <pre class="doc-declare"><code>CHAR_T* tuya_hal_fgets(CHAR_T* buf, INT_T len, TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Read string from file
+*
+* @param[in] buf: buffer for reading file
+* @param[in] len: buffer size
+* @param[in] file: file handle
+*
+* @note This API is used to read string from file
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_feof">Func <span>tuya_hal_feof</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_feof(TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Check wheather to reach the end fo the file
+*
+* @param[in] file: file handle
+*
+* @note This API is used to check wheather to reach the end fo the file
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_fseek">Func <span>tuya_hal_fseek</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_hal_fseek(TUYA_FILE file, INT64_T offs, INT_T whence);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Seek to the offset position of the file
+*
+* @param[in] file: file handle
+* @param[in] offs: offset
+* @param[in] whence: seek start point mode
+*
+* @note This API is used to seek to the offset position of the file.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_hal_ftell">Func <span>tuya_hal_ftell</span></h4>
+      <pre class="doc-declare"><code>INT64_T tuya_hal_ftell(TUYA_FILE file);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Get current position of file
+*
+* @param[in] file: file handle
+*
+* @note This API is used to get current position of file.
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+
+      <h4 id="tuya_os_fs_intf_init">Func <span>tuya_os_fs_intf_init</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_os_fs_intf_init(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief File system interface initialization
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialization of file system interface.
+ *
+ * @return VOID
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

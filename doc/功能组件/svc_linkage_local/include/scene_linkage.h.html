@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#action.h" class="nav-sub-label">action.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__SCENE_LINKAGE_H" class="nav-sub-label">__SCENE_LINKAGE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINKAGE_RULE_LOCAL" class="nav-sub-label">LINKAGE_RULE_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINKAGE_RULE_LAN" class="nav-sub-label">LINKAGE_RULE_LAN</a>
+              </li>
+      
+
+              <li>
+                <a href="#RULE_TYPE_LOCAL_2_PROTOCOL(local)" class="nav-sub-label">RULE_TYPE_LOCAL_2_PROTOCOL(local)</a>
+              </li>
+      
+
+              <li>
+                <a href="#RULE_TYPE_PROTOCOL_2_LOCAL(pro)" class="nav-sub-label">RULE_TYPE_PROTOCOL_2_LOCAL(pro)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINKAGE_RULE_NUM" class="nav-sub-label">LINKAGE_RULE_NUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINKAGE_RULE_NUM" class="nav-sub-label">LINKAGE_RULE_NUM</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#secne_linkage_parse_alarm" class="nav-sub-label">secne_linkage_parse_alarm</a>
+              </li>
+      
+
+              <li>
+                <a href="#scene_linkage_reg_on_exe_dp_issue" class="nav-sub-label">scene_linkage_reg_on_exe_dp_issue</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__SCENE_LINKAGE_EXT" class="nav-sub-label">__SCENE_LINKAGE_EXT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LINKAGE_RULE_TYPE_T" class="nav-sub-label">LINKAGE_RULE_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_ACTION_SET_EXECUTE" class="nav-sub-label">LAN_ACTION_SET_EXECUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_TOGGLE_ACTION_EXECUTE" class="nav-sub-label">LAN_TOGGLE_ACTION_EXECUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_SCENE_EXECUTE" class="nav-sub-label">LAN_SCENE_EXECUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_LOCAL_SCENE_EXECUTE" class="nav-sub-label">LAN_LOCAL_SCENE_EXECUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_DPSTEP_ACTION_EXECUTE" class="nav-sub-label">LAN_DPSTEP_ACTION_EXECUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_GROUP_ACTION_EXECUTE" class="nav-sub-label">LAN_GROUP_ACTION_EXECUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_LINKAGE_ON_EXE_COND_S;
+" class="nav-sub-label">SCENE_LINKAGE_ON_EXE_COND_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_LINKAGE_ON_EXE_ACT_DP_ISSUE_S;
+" class="nav-sub-label">SCENE_LINKAGE_ON_EXE_ACT_DP_ISSUE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_LINKAGE_ON_EXE_DP_ISSUE" class="nav-sub-label">SCENE_LINKAGE_ON_EXE_DP_ISSUE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="action.h"><span>action.h</span></h4>
+      <pre class="doc-declare"><code>#include "action.h"
+</code></pre>
+      <pre class="doc-comment">#include "action.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__SCENE_LINKAGE_H">Marco <span>__SCENE_LINKAGE_H</span></h4>
+      <pre class="doc-declare"><code>#define __SCENE_LINKAGE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Marco <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>#define __SCENE_LINKAGE_EXT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Marco <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>#define __SCENE_LINKAGE_EXT extern
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINKAGE_RULE_LOCAL">Marco <span>LINKAGE_RULE_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define LINKAGE_RULE_LOCAL    		0 
+</code></pre>
+      <pre class="doc-comment">//��https://wiki.tuya-inc.com:7799/pages/viewpage.action?pageId=22086410</pre>
+
+      <h4 id="LINKAGE_RULE_LAN">Marco <span>LINKAGE_RULE_LAN</span></h4>
+      <pre class="doc-declare"><code>#define LINKAGE_RULE_LAN    		1 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RULE_TYPE_LOCAL_2_PROTOCOL(local)">Marco <span>RULE_TYPE_LOCAL_2_PROTOCOL(local)</span></h4>
+      <pre class="doc-declare"><code>#define RULE_TYPE_LOCAL_2_PROTOCOL(local) ((local) + 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RULE_TYPE_PROTOCOL_2_LOCAL(pro)">Marco <span>RULE_TYPE_PROTOCOL_2_LOCAL(pro)</span></h4>
+      <pre class="doc-declare"><code>#define RULE_TYPE_PROTOCOL_2_LOCAL(pro) ((pro) - 1) 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINKAGE_RULE_NUM">Marco <span>LINKAGE_RULE_NUM</span></h4>
+      <pre class="doc-declare"><code>#define LINKAGE_RULE_NUM    		2 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINKAGE_RULE_NUM">Marco <span>LINKAGE_RULE_NUM</span></h4>
+      <pre class="doc-declare"><code>#define LINKAGE_RULE_NUM    		1 
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="secne_linkage_parse_alarm">Func <span>secne_linkage_parse_alarm</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET secne_linkage_parse_alarm(IN CHAR_T *alarmed_mode, OUT CHAR_T **id_list);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="scene_linkage_reg_on_exe_dp_issue">Func <span>scene_linkage_reg_on_exe_dp_issue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET scene_linkage_reg_on_exe_dp_issue(IN SCENE_LINKAGE_ON_EXE_DP_ISSUE on_exe_func);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_module_init(VOID);</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*  Function: scene_linkage_module_init
+*  Input: none
+*  Output: none
+*  Return: OPERATE_RET
+*  Note:
+***********************************************************/</pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+VOID scene_linkage_module_uninit(VOID);</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*  Function: scene_linkage_module_uninit
+*  Input: none
+*  Output: none
+*  Return: none
+*  Note:
+***********************************************************/</pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+VOID scene_linkage_update_from_server(LINKAGE_RULE_TYPE_T linkage_type, INT_T delaymS);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+VOID scene_linkage_scene_exe(CHAR_T *sceneId);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_scene_exe_by_name(const CHAR_T *scene_name);</code></pre>
+      <pre class="doc-comment">//否则返回不存在 OPRT_NOT_FOUND</pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET dp_condition_detect(IN CONST CHAR_T *id,IN CONST CHAR_T *dp_cmd, IN CONST CHAR_T *gw_id, IN LINKAGE_RULE_TYPE_T rule_type);</code></pre>
+      <pre class="doc-comment">// dp_cmd:{"cid":"xxxxxx",dps:{"1":2,"2":"111"}} or {"devid":"xxxxxx",dps:{"1":2,"2":"111"}}</pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_reg_lan_action(IN LAN_ACTION_SET_EXECUTE func);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_reg_lan_toggle_action(IN LAN_TOGGLE_ACTION_EXECUTE func);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_reg_lan_scene_action(LAN_SCENE_EXECUTE func);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_reg_lan_local_scene_action(LAN_LOCAL_SCENE_EXECUTE func);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_reg_lan_dpstep_action(IN LAN_DPSTEP_ACTION_EXECUTE func);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__SCENE_LINKAGE_EXT">Variable <span>__SCENE_LINKAGE_EXT</span></h4>
+      <pre class="doc-declare"><code>__SCENE_LINKAGE_EXT \
+OPERATE_RET scene_linkage_reg_lan_group_action(IN LAN_GROUP_ACTION_EXECUTE func);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="LINKAGE_RULE_TYPE_T">Typedef <span>LINKAGE_RULE_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T LINKAGE_RULE_TYPE_T;
+</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*************************micro define***********************
+***********************************************************/</pre>
+
+      <h4 id="LAN_ACTION_SET_EXECUTE">Typedef <span>LAN_ACTION_SET_EXECUTE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_ACTION_SET_EXECUTE)(IN CONST CHAR_T *gw_id, IN CONST CHAR_T *dp_cmd, IN BOOL_T check, OUT BOOL_T *is_local);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_TOGGLE_ACTION_EXECUTE">Typedef <span>LAN_TOGGLE_ACTION_EXECUTE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_TOGGLE_ACTION_EXECUTE)(IN CONST ACTION_S *action, OUT BOOL_T *is_local);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_SCENE_EXECUTE">Typedef <span>LAN_SCENE_EXECUTE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_SCENE_EXECUTE)(IN CONST ACTION_S *action, OUT BOOL_T *is_local);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_LOCAL_SCENE_EXECUTE">Typedef <span>LAN_LOCAL_SCENE_EXECUTE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_LOCAL_SCENE_EXECUTE)(IN CONST ACTION_S *action, OUT BOOL_T *is_local);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_DPSTEP_ACTION_EXECUTE">Typedef <span>LAN_DPSTEP_ACTION_EXECUTE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_DPSTEP_ACTION_EXECUTE)(IN CONST ACTION_S *action, OUT BOOL_T *is_local);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_GROUP_ACTION_EXECUTE">Typedef <span>LAN_GROUP_ACTION_EXECUTE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_GROUP_ACTION_EXECUTE)(IN CONST ACTION_S *action, OUT BOOL_T *is_local);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCENE_LINKAGE_ON_EXE_COND_S;
+">Typedef <span>SCENE_LINKAGE_ON_EXE_COND_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ CHAR_T *cid;
+ BYTE_T dp_id;
+}SCENE_LINKAGE_ON_EXE_COND_S;
+</code></pre>
+      <pre class="doc-comment">//如果条件或动作是网关本身的，cid为网关的虚拟ID，否则为子设备node_id。调用者需要拷贝内容</pre>
+
+      <h4 id="SCENE_LINKAGE_ON_EXE_ACT_DP_ISSUE_S;
+">Typedef <span>SCENE_LINKAGE_ON_EXE_ACT_DP_ISSUE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ CHAR_T *cid;
+ BYTE_T dp_id;
+}SCENE_LINKAGE_ON_EXE_ACT_DP_ISSUE_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCENE_LINKAGE_ON_EXE_DP_ISSUE">Typedef <span>SCENE_LINKAGE_ON_EXE_DP_ISSUE</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*SCENE_LINKAGE_ON_EXE_DP_ISSUE)(IN CONST SCENE_LINKAGE_ON_EXE_COND_S *cond, IN CONST SCENE_LINKAGE_ON_EXE_ACT_DP_ISSUE_S *act_dp);
+</code></pre>
+      <pre class="doc-comment">//动作如果有多个，会回调多次</pre>
+    </div>
+  </body>
+</html>
+            

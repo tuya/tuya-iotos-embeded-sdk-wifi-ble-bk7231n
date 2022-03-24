@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/mem.h" class="nav-sub-label">lwip/mem.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/priv/mem_priv.h" class="nav-sub-label">lwip/priv/mem_priv.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_MEMP_PRIV_H" class="nav-sub-label">LWIP_HDR_MEMP_PRIV_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_SIZE" class="nav-sub-label">MEMP_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_ALIGN_SIZE(x)" class="nav-sub-label">MEMP_ALIGN_SIZE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_SIZE" class="nav-sub-label">MEMP_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_ALIGN_SIZE(x)" class="nav-sub-label">MEMP_ALIGN_SIZE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_POOL_FIRST" class="nav-sub-label">MEMP_POOL_FIRST</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_POOL_LAST" class="nav-sub-label">MEMP_POOL_LAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#DECLARE_LWIP_MEMPOOL_DESC(desc)" class="nav-sub-label">DECLARE_LWIP_MEMPOOL_DESC(desc)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DECLARE_LWIP_MEMPOOL_DESC" class="nav-sub-label">DECLARE_LWIP_MEMPOOL_DESC</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(name)" class="nav-sub-label">LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(name)" class="nav-sub-label">LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_DECLARE_STATS_INSTANCE" class="nav-sub-label">LWIP_MEMPOOL_DECLARE_STATS_INSTANCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_DECLARE_STATS_REFERENCE" class="nav-sub-label">LWIP_MEMPOOL_DECLARE_STATS_REFERENCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_malloc_pool(d)" class="nav-sub-label">memp_malloc_pool(d)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#memp_init_pool" class="nav-sub-label">memp_init_pool</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_malloc_pool_fn" class="nav-sub-label">memp_malloc_pool_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_malloc_pool" class="nav-sub-label">memp_malloc_pool</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_free_pool" class="nav-sub-label">memp_free_pool</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#memp_pool_helper_t;
+" class="nav-sub-label">memp_pool_helper_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/mem.h"><span>lwip/mem.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/mem.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/mem.h"
+</pre>
+
+      <h4 id="lwip/priv/mem_priv.h"><span>lwip/priv/mem_priv.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/priv/mem_priv.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/priv/mem_priv.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_MEMP_PRIV_H">Marco <span>LWIP_HDR_MEMP_PRIV_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_MEMP_PRIV_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_SIZE">Marco <span>MEMP_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_SIZE         (LWIP_MEM_ALIGN_SIZE(sizeof(struct memp)) + MEM_SANITY_REGION_BEFORE_ALIGNED)
+</code></pre>
+      <pre class="doc-comment">/* MEMP_SIZE: save space for struct memp and for sanity check */</pre>
+
+      <h4 id="MEMP_ALIGN_SIZE(x)">Marco <span>MEMP_ALIGN_SIZE(x)</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_ALIGN_SIZE(x) (LWIP_MEM_ALIGN_SIZE(x) + MEM_SANITY_REGION_AFTER_ALIGNED)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_SIZE">Marco <span>MEMP_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_SIZE          0
+</code></pre>
+      <pre class="doc-comment">/* No sanity checks
+ * We don't need to preserve the struct memp while not allocated, so we
+ * can save a little space and set MEMP_SIZE to 0.
+ */</pre>
+
+      <h4 id="MEMP_ALIGN_SIZE(x)">Marco <span>MEMP_ALIGN_SIZE(x)</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_ALIGN_SIZE(x) (LWIP_MEM_ALIGN_SIZE(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_POOL_FIRST">Marco <span>MEMP_POOL_FIRST</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_POOL_FIRST ((memp_t) MEMP_POOL_HELPER_FIRST)
+</code></pre>
+      <pre class="doc-comment">/* The actual start and stop values are here (cast them over)
+   We use this helper type and these defines so we can avoid using const memp_t values */</pre>
+
+      <h4 id="MEMP_POOL_LAST">Marco <span>MEMP_POOL_LAST</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_POOL_LAST  ((memp_t) MEMP_POOL_HELPER_LAST)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DECLARE_LWIP_MEMPOOL_DESC(desc)">Marco <span>DECLARE_LWIP_MEMPOOL_DESC(desc)</span></h4>
+      <pre class="doc-declare"><code>#define DECLARE_LWIP_MEMPOOL_DESC(desc) (desc),
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DECLARE_LWIP_MEMPOOL_DESC">Marco <span>DECLARE_LWIP_MEMPOOL_DESC</span></h4>
+      <pre class="doc-declare"><code>#define DECLARE_LWIP_MEMPOOL_DESC(desc)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(name)">Marco <span>LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(name)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(name) static struct stats_mem name;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(name)">Marco <span>LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(name)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(name) &name,
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEMPOOL_DECLARE_STATS_INSTANCE">Marco <span>LWIP_MEMPOOL_DECLARE_STATS_INSTANCE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEMPOOL_DECLARE_STATS_REFERENCE">Marco <span>LWIP_MEMPOOL_DECLARE_STATS_REFERENCE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_malloc_pool(d)">Marco <span>memp_malloc_pool(d)</span></h4>
+      <pre class="doc-declare"><code>#define memp_malloc_pool(d) memp_malloc_pool_fn((d), __FILE__, __LINE__)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="memp_init_pool">Func <span>memp_init_pool</span></h4>
+      <pre class="doc-declare"><code>void memp_init_pool(const struct memp_desc *desc);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_malloc_pool_fn">Func <span>memp_malloc_pool_fn</span></h4>
+      <pre class="doc-declare"><code>void *memp_malloc_pool_fn(const struct memp_desc* desc, const char* file, const int line);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_malloc_pool">Func <span>memp_malloc_pool</span></h4>
+      <pre class="doc-declare"><code>void *memp_malloc_pool(const struct memp_desc *desc);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_free_pool">Func <span>memp_free_pool</span></h4>
+      <pre class="doc-declare"><code>void memp_free_pool(const struct memp_desc* desc, void *mem);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="memp_pool_helper_t;
+">Typedef <span>memp_pool_helper_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   /* Get the first (via:
+       MEMP_POOL_HELPER_START = ((u8_t) 1*MEMP_POOL_A + 0*MEMP_POOL_B + 0*MEMP_POOL_C + 0)*/
+   MEMP_POOL_HELPER_FIRST = ((u8_t)
+#define LWIP_MEMPOOL(name,num,size,desc)
+#define LWIP_MALLOC_MEMPOOL_START 1
+#define LWIP_MALLOC_MEMPOOL(num, size) * MEMP_POOL_##size + 0
+#define LWIP_MALLOC_MEMPOOL_END
+#include "lwip/priv/memp_std.h"
+   ) ,
+   /* Get the last (via:
+       MEMP_POOL_HELPER_END = ((u8_t) 0 + MEMP_POOL_A*0 + MEMP_POOL_B*0 + MEMP_POOL_C*1) */
+   MEMP_POOL_HELPER_LAST = ((u8_t)
+#define LWIP_MEMPOOL(name,num,size,desc)
+#define LWIP_MALLOC_MEMPOOL_START
+#define LWIP_MALLOC_MEMPOOL(num, size) 0 + MEMP_POOL_##size *
+#define LWIP_MALLOC_MEMPOOL_END 1
+#include "lwip/priv/memp_std.h"
+   )
+} memp_pool_helper_t;
+</code></pre>
+      <pre class="doc-comment">/* Use a helper type to get the start and end of the user "memory pools" for mem_malloc */</pre>
+    </div>
+  </body>
+</html>
+            

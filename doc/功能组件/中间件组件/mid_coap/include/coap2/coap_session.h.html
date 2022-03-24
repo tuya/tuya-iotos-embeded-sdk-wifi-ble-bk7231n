@@ -1,0 +1,1177 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_io.h" class="nav-sub-label">coap_io.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_time.h" class="nav-sub-label">coap_time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#pdu.h" class="nav-sub-label">pdu.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_SESSION_H_" class="nav-sub-label">COAP_SESSION_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_SESSION_TIMEOUT" class="nav-sub-label">COAP_DEFAULT_SESSION_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PARTIAL_SESSION_TIMEOUT_TICKS" class="nav-sub-label">COAP_PARTIAL_SESSION_TIMEOUT_TICKS</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_MAX_HANDSHAKE_SESSIONS" class="nav-sub-label">COAP_DEFAULT_MAX_HANDSHAKE_SESSIONS</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_NOT_RELIABLE(p)" class="nav-sub-label">COAP_PROTO_NOT_RELIABLE(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PROTO_RELIABLE(p)" class="nav-sub-label">COAP_PROTO_RELIABLE(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_TYPE_CLIENT" class="nav-sub-label">COAP_SESSION_TYPE_CLIENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_TYPE_SERVER" class="nav-sub-label">COAP_SESSION_TYPE_SERVER</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_TYPE_HELLO" class="nav-sub-label">COAP_SESSION_TYPE_HELLO</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_STATE_NONE" class="nav-sub-label">COAP_SESSION_STATE_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_STATE_CONNECTING" class="nav-sub-label">COAP_SESSION_STATE_CONNECTING</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_STATE_HANDSHAKE" class="nav-sub-label">COAP_SESSION_STATE_HANDSHAKE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_STATE_CSM" class="nav-sub-label">COAP_SESSION_STATE_CSM</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SESSION_STATE_ESTABLISHED" class="nav-sub-label">COAP_SESSION_STATE_ESTABLISHED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_ACK_TIMEOUT" class="nav-sub-label">COAP_DEFAULT_ACK_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_ACK_RANDOM_FACTOR" class="nav-sub-label">COAP_DEFAULT_ACK_RANDOM_FACTOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_MAX_RETRANSMIT" class="nav-sub-label">COAP_DEFAULT_MAX_RETRANSMIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEFAULT_NSTART" class="nav-sub-label">COAP_DEFAULT_NSTART</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_session_release" class="nav-sub-label">coap_session_release</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_set_app_data" class="nav-sub-label">coap_session_set_app_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_get_app_data" class="nav-sub-label">coap_session_get_app_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_disconnected" class="nav-sub-label">coap_session_disconnected</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_send_csm" class="nav-sub-label">coap_session_send_csm</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_connected" class="nav-sub-label">coap_session_connected</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_set_mtu" class="nav-sub-label">coap_session_set_mtu</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_max_pdu_size" class="nav-sub-label">coap_session_max_pdu_size</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_send" class="nav-sub-label">coap_session_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_write" class="nav-sub-label">coap_session_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_send_pdu" class="nav-sub-label">coap_session_send_pdu</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_delay_pdu" class="nav-sub-label">coap_session_delay_pdu</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_endpoint_set_default_mtu" class="nav-sub-label">coap_endpoint_set_default_mtu</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_free_endpoint" class="nav-sub-label">coap_free_endpoint</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_free" class="nav-sub-label">coap_session_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_mfree" class="nav-sub-label">coap_session_mfree</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_set_max_retransmit" class="nav-sub-label">coap_session_set_max_retransmit</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_set_ack_timeout" class="nav-sub-label">coap_session_set_ack_timeout</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_set_ack_random_factor" class="nav-sub-label">coap_session_set_ack_random_factor</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_get_max_transmit" class="nav-sub-label">coap_session_get_max_transmit</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_send_ping" class="nav-sub-label">coap_session_send_ping</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_endpoint_t" class="nav-sub-label">coap_endpoint_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_t" class="nav-sub-label">coap_context_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_queue_t" class="nav-sub-label">coap_queue_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_dtls_pki_t" class="nav-sub-label">coap_dtls_pki_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_endpoint_t" class="nav-sub-label">coap_endpoint_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_fixed_point_t" class="nav-sub-label">coap_fixed_point_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_fixed_point_t" class="nav-sub-label">coap_fixed_point_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_fixed_point_t;
+" class="nav-sub-label">coap_fixed_point_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_type_t" class="nav-sub-label">coap_session_type_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_state_t" class="nav-sub-label">coap_session_state_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t;
+" class="nav-sub-label">coap_session_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_endpoint_t;
+" class="nav-sub-label">coap_endpoint_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="coap_io.h"><span>coap_io.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_io.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_io.h"
+</pre>
+
+      <h4 id="coap_time.h"><span>coap_time.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_time.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_time.h"
+</pre>
+
+      <h4 id="pdu.h"><span>pdu.h</span></h4>
+      <pre class="doc-declare"><code>#include "pdu.h"
+</code></pre>
+      <pre class="doc-comment">#include "pdu.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_SESSION_H_">Marco <span>COAP_SESSION_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_SESSION_TIMEOUT">Marco <span>COAP_DEFAULT_SESSION_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_SESSION_TIMEOUT 300
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PARTIAL_SESSION_TIMEOUT_TICKS">Marco <span>COAP_PARTIAL_SESSION_TIMEOUT_TICKS</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PARTIAL_SESSION_TIMEOUT_TICKS (30 * COAP_TICKS_PER_SECOND)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_MAX_HANDSHAKE_SESSIONS">Marco <span>COAP_DEFAULT_MAX_HANDSHAKE_SESSIONS</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_MAX_HANDSHAKE_SESSIONS 100
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PROTO_NOT_RELIABLE(p)">Marco <span>COAP_PROTO_NOT_RELIABLE(p)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_NOT_RELIABLE(p) ((p)==COAP_PROTO_UDP || (p)==COAP_PROTO_DTLS)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PROTO_RELIABLE(p)">Marco <span>COAP_PROTO_RELIABLE(p)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PROTO_RELIABLE(p) ((p)==COAP_PROTO_TCP || (p)==COAP_PROTO_TLS)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SESSION_TYPE_CLIENT">Marco <span>COAP_SESSION_TYPE_CLIENT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_TYPE_CLIENT 1 /**< client-side */
+</code></pre>
+      <pre class="doc-comment">/**
+ * coap_session_type_t values
+ */</pre>
+
+      <h4 id="COAP_SESSION_TYPE_SERVER">Marco <span>COAP_SESSION_TYPE_SERVER</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_TYPE_SERVER 2 /**< server-side */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SESSION_TYPE_HELLO">Marco <span>COAP_SESSION_TYPE_HELLO</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_TYPE_HELLO 3 /**< server-side ephemeral session for responding to a client hello */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SESSION_STATE_NONE">Marco <span>COAP_SESSION_STATE_NONE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_STATE_NONE               0
+</code></pre>
+      <pre class="doc-comment">/**
+ * coap_session_state_t values
+ */</pre>
+
+      <h4 id="COAP_SESSION_STATE_CONNECTING">Marco <span>COAP_SESSION_STATE_CONNECTING</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_STATE_CONNECTING       1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SESSION_STATE_HANDSHAKE">Marco <span>COAP_SESSION_STATE_HANDSHAKE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_STATE_HANDSHAKE       2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SESSION_STATE_CSM">Marco <span>COAP_SESSION_STATE_CSM</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_STATE_CSM               3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SESSION_STATE_ESTABLISHED">Marco <span>COAP_SESSION_STATE_ESTABLISHED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SESSION_STATE_ESTABLISHED       4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEFAULT_ACK_TIMEOUT">Marco <span>COAP_DEFAULT_ACK_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_ACK_TIMEOUT ((coap_fixed_point_t){2,0})
+</code></pre>
+      <pre class="doc-comment">/**
+   * Number of seconds when to expect an ACK or a response to an
+   * outstanding CON message.
+   * RFC 7252, Section 4.8 Default value of ACK_TIMEOUT is 2
+   */</pre>
+
+      <h4 id="COAP_DEFAULT_ACK_RANDOM_FACTOR">Marco <span>COAP_DEFAULT_ACK_RANDOM_FACTOR</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_ACK_RANDOM_FACTOR ((coap_fixed_point_t){1,500})
+</code></pre>
+      <pre class="doc-comment">/**
+    * A factor that is used to randomize the wait time before a message
+    * is retransmitted to prevent synchronization effects.
+    * RFC 7252, Section 4.8 Default value of ACK_RANDOM_FACTOR is 1.5
+    */</pre>
+
+      <h4 id="COAP_DEFAULT_MAX_RETRANSMIT">Marco <span>COAP_DEFAULT_MAX_RETRANSMIT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_MAX_RETRANSMIT 4
+</code></pre>
+      <pre class="doc-comment">/**
+     * Number of message retransmissions before message sending is stopped
+     * RFC 7252, Section 4.8 Default value of MAX_RETRANSMIT is 4
+     */</pre>
+
+      <h4 id="COAP_DEFAULT_NSTART">Marco <span>COAP_DEFAULT_NSTART</span></h4>
+      <pre class="doc-declare"><code>#define COAP_DEFAULT_NSTART 1
+</code></pre>
+      <pre class="doc-comment">/**
+      * The number of simultaneous outstanding interactions that a client
+      * maintains to a given server.
+      * RFC 7252, Section 4.8 Default value of NSTART is 1
+      */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_session_release">Func <span>coap_session_release</span></h4>
+      <pre class="doc-declare"><code>void coap_session_release(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Decrement reference counter on a session.
+* Note that the session may be deleted as a result and should not be used
+* after this call.
+*
+* @param session The CoAP session.
+*/</pre>
+
+      <h4 id="coap_session_set_app_data">Func <span>coap_session_set_app_data</span></h4>
+      <pre class="doc-declare"><code>void coap_session_set_app_data(coap_session_t *session, void *data);</code></pre>
+      <pre class="doc-comment">/**
+* Stores @p data with the given session. This function overwrites any value
+* that has previously been stored with @p session.
+*/</pre>
+
+      <h4 id="coap_session_get_app_data">Func <span>coap_session_get_app_data</span></h4>
+      <pre class="doc-declare"><code>void *coap_session_get_app_data(const coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Returns any application-specific data that has been stored with @p
+* session using the function coap_session_set_app_data(). This function will
+* return @c NULL if no data has been stored.
+*/</pre>
+
+      <h4 id="coap_session_disconnected">Func <span>coap_session_disconnected</span></h4>
+      <pre class="doc-declare"><code>void coap_session_disconnected(coap_session_t *session, coap_nack_reason_t reason);</code></pre>
+      <pre class="doc-comment">/**
+* Notify session that it has failed.
+*
+* @param session The CoAP session.
+* @param reason The reason why the session was disconnected.
+*/</pre>
+
+      <h4 id="coap_session_send_csm">Func <span>coap_session_send_csm</span></h4>
+      <pre class="doc-declare"><code>void coap_session_send_csm(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Notify session transport has just connected and CSM exchange can now start.
+*
+* @param session The CoAP session.
+*/</pre>
+
+      <h4 id="coap_session_connected">Func <span>coap_session_connected</span></h4>
+      <pre class="doc-declare"><code>void coap_session_connected(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Notify session that it has just connected or reconnected.
+*
+* @param session The CoAP session.
+*/</pre>
+
+      <h4 id="coap_session_set_mtu">Func <span>coap_session_set_mtu</span></h4>
+      <pre class="doc-declare"><code>void coap_session_set_mtu(coap_session_t *session, unsigned mtu);</code></pre>
+      <pre class="doc-comment">/**
+* Set the session MTU. This is the maximum message size that can be sent,
+* excluding IP and UDP overhead.
+*
+* @param session The CoAP session.
+* @param mtu maximum message size
+*/</pre>
+
+      <h4 id="coap_session_max_pdu_size">Func <span>coap_session_max_pdu_size</span></h4>
+      <pre class="doc-declare"><code>size_t coap_session_max_pdu_size(const coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+ * Get maximum acceptable PDU size
+ *
+ * @param session The CoAP session.
+ * @return maximum PDU size, not including header (but including token).
+ */</pre>
+
+      <h4 id="coap_session_send">Func <span>coap_session_send</span></h4>
+      <pre class="doc-declare"><code>ssize_t coap_session_send(coap_session_t *session,
+ const uint8_t *data, size_t datalen);</code></pre>
+      <pre class="doc-comment">/**
+* Function interface for datagram data transmission. This function returns
+* the number of bytes that have been transmitted, or a value less than zero
+* on error.
+*
+* @param session          Session to send data on.
+* @param data             The data to send.
+* @param datalen          The actual length of @p data.
+*
+* @return                 The number of bytes written on success, or a value
+*                         less than zero on error.
+*/</pre>
+
+      <h4 id="coap_session_write">Func <span>coap_session_write</span></h4>
+      <pre class="doc-declare"><code>ssize_t coap_session_write(coap_session_t *session,
+ const uint8_t *data, size_t datalen);</code></pre>
+      <pre class="doc-comment">/**
+* Function interface for stream data transmission. This function returns
+* the number of bytes that have been transmitted, or a value less than zero
+* on error. The number of bytes written may be less than datalen because of
+* congestion control.
+*
+* @param session          Session to send data on.
+* @param data             The data to send.
+* @param datalen          The actual length of @p data.
+*
+* @return                 The number of bytes written on success, or a value
+*                         less than zero on error.
+*/</pre>
+
+      <h4 id="coap_session_send_pdu">Func <span>coap_session_send_pdu</span></h4>
+      <pre class="doc-declare"><code>ssize_t coap_session_send_pdu(coap_session_t *session, coap_pdu_t *pdu);</code></pre>
+      <pre class="doc-comment">/**
+* Send a pdu according to the session's protocol. This function returns
+* the number of bytes that have been transmitted, or a value less than zero
+* on error.
+*
+* @param session          Session to send pdu on.
+* @param pdu              The pdu to send.
+*
+* @return                 The number of bytes written on success, or a value
+*                         less than zero on error.
+*/</pre>
+
+      <h4 id="coap_session_delay_pdu">Func <span>coap_session_delay_pdu</span></h4>
+      <pre class="doc-declare"><code>ssize_t
+coap_session_delay_pdu(coap_session_t *session, coap_pdu_t *pdu,
+                      struct coap_queue_t *node);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_endpoint_set_default_mtu">Func <span>coap_endpoint_set_default_mtu</span></h4>
+      <pre class="doc-declare"><code>void coap_endpoint_set_default_mtu(coap_endpoint_t *endpoint, unsigned mtu);</code></pre>
+      <pre class="doc-comment">/**
+* Set the endpoint's default MTU. This is the maximum message size that can be
+* sent, excluding IP and UDP overhead.
+*
+* @param endpoint The CoAP endpoint.
+* @param mtu maximum message size
+*/</pre>
+
+      <h4 id="coap_free_endpoint">Func <span>coap_free_endpoint</span></h4>
+      <pre class="doc-declare"><code>void coap_free_endpoint(coap_endpoint_t *ep);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_free">Func <span>coap_session_free</span></h4>
+      <pre class="doc-declare"><code>void coap_session_free(coap_session_t *session);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_mfree">Func <span>coap_session_mfree</span></h4>
+      <pre class="doc-declare"><code>void coap_session_mfree(coap_session_t *session);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_set_max_retransmit">Func <span>coap_session_set_max_retransmit</span></h4>
+      <pre class="doc-declare"><code>void coap_session_set_max_retransmit(coap_session_t *session,
+                                    unsigned int value);</code></pre>
+      <pre class="doc-comment">/**
+* Set the CoAP maximum retransmit count before failure
+*
+* Number of message retransmissions before message sending is stopped
+*
+* @param session The CoAP session.
+* @param value The value to set to. The default is 4 and should not normally
+*              get changed.
+*/</pre>
+
+      <h4 id="coap_session_set_ack_timeout">Func <span>coap_session_set_ack_timeout</span></h4>
+      <pre class="doc-declare"><code>void coap_session_set_ack_timeout(coap_session_t *session,
+                                 coap_fixed_point_t value);</code></pre>
+      <pre class="doc-comment">/**
+* Set the CoAP initial ack response timeout before the next re-transmit
+*
+* Number of seconds when to expect an ACK or a response to an
+* outstanding CON message.
+*
+* @param session The CoAP session.
+* @param value The value to set to. The default is 2 and should not normally
+*              get changed.
+*/</pre>
+
+      <h4 id="coap_session_set_ack_random_factor">Func <span>coap_session_set_ack_random_factor</span></h4>
+      <pre class="doc-declare"><code>void coap_session_set_ack_random_factor(coap_session_t *session,
+                                       coap_fixed_point_t value);</code></pre>
+      <pre class="doc-comment">/**
+* Set the CoAP ack randomize factor
+*
+* A factor that is used to randomize the wait time before a message
+* is retransmitted to prevent synchronization effects.
+*
+* @param session The CoAP session.
+* @param value The value to set to. The default is 1.5 and should not normally
+*              get changed.
+*/</pre>
+
+      <h4 id="coap_session_get_max_transmit">Func <span>coap_session_get_max_transmit</span></h4>
+      <pre class="doc-declare"><code>unsigned int coap_session_get_max_transmit(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Get the CoAP maximum retransmit before failure
+*
+* Number of message retransmissions before message sending is stopped
+*
+* @param session The CoAP session.
+*
+* @return Current maximum retransmit value
+*/</pre>
+
+      <h4 id="coap_session_send_ping">Func <span>coap_session_send_ping</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t coap_session_send_ping(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+ * Send a ping message for the session.
+ * @param session The CoAP session.
+ *
+ * @return COAP_INVALID_TID if there is an error
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_endpoint_t">Variable <span>coap_endpoint_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_endpoint_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_context_t">Variable <span>coap_context_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_context_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_queue_t">Variable <span>coap_queue_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_queue_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_session_reference(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Increment reference counter on a session.
+*
+* @param session The CoAP session.
+* @return same as session
+*/</pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_new_client_session(
+ struct coap_context_t *ctx,
+ const coap_address_t *local_if,
+ const coap_address_t *server,
+ coap_proto_t proto
+);</code></pre>
+      <pre class="doc-comment">/**
+* Creates a new client session to the designated server.
+* @param ctx The CoAP context.
+* @param local_if Address of local interface. It is recommended to use NULL to let the operating system choose a suitable local interface. If an address is specified, the port number should be zero, which means that a free port is automatically selected.
+* @param server The server's address. If the port number is zero, the default port for the protocol will be used.
+* @param proto Protocol.
+*
+* @return A new CoAP session or NULL if failed. Call coap_session_release to free.
+*/</pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_new_client_session_psk(
+ struct coap_context_t *ctx,
+ const coap_address_t *local_if,
+ const coap_address_t *server,
+ coap_proto_t proto,
+ const char *identity,
+ const uint8_t *key,
+ unsigned key_len
+);</code></pre>
+      <pre class="doc-comment">/**
+* Creates a new client session to the designated server with PSK credentials
+* @param ctx The CoAP context.
+* @param local_if Address of local interface. It is recommended to use NULL to let the operating system choose a suitable local interface. If an address is specified, the port number should be zero, which means that a free port is automatically selected.
+* @param server The server's address. If the port number is zero, the default port for the protocol will be used.
+* @param proto Protocol.
+* @param identity PSK client identity
+* @param key PSK shared key
+* @param key_len PSK shared key length
+*
+* @return A new CoAP session or NULL if failed. Call coap_session_release to free.
+*/</pre>
+
+      <h4 id="coap_dtls_pki_t">Variable <span>coap_dtls_pki_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_dtls_pki_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_new_client_session_pki(
+ struct coap_context_t *ctx,
+ const coap_address_t *local_if,
+ const coap_address_t *server,
+ coap_proto_t proto,
+ struct coap_dtls_pki_t *setup_data
+);</code></pre>
+      <pre class="doc-comment">/**
+* Creates a new client session to the designated server with PKI credentials
+* @param ctx The CoAP context.
+* @param local_if Address of local interface. It is recommended to use NULL to
+*                 let the operating system choose a suitable local interface.
+*                 If an address is specified, the port number should be zero,
+*                 which means that a free port is automatically selected.
+* @param server The server's address. If the port number is zero, the default
+*               port for the protocol will be used.
+* @param proto CoAP Protocol.
+* @param setup_data PKI parameters.
+*
+* @return A new CoAP session or NULL if failed. Call coap_session_release()
+*         to free.
+*/</pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_new_server_session(
+ struct coap_context_t *ctx,
+ struct coap_endpoint_t *ep
+);</code></pre>
+      <pre class="doc-comment">/**
+* Creates a new server session for the specified endpoint.
+* @param ctx The CoAP context.
+* @param ep An endpoint where an incoming connection request is pending.
+*
+* @return A new CoAP session or NULL if failed. Call coap_session_release to free.
+*/</pre>
+
+      <h4 id="coap_endpoint_t">Variable <span>coap_endpoint_t</span></h4>
+      <pre class="doc-declare"><code>coap_endpoint_t *coap_new_endpoint(struct coap_context_t *context, const coap_address_t *listen_addr, coap_proto_t proto);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_endpoint_get_session(coap_endpoint_t *endpoint,
+ const struct coap_packet_t *packet, coap_tick_t now);</code></pre>
+      <pre class="doc-comment">/**
+* Lookup the server session for the packet received on an endpoint, or create
+* a new one.
+*
+* @param endpoint Active endpoint the packet was received on.
+* @param packet Received packet.
+* @param now The current time in ticks.
+* @return The CoAP session.
+*/</pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_endpoint_new_dtls_session(coap_endpoint_t *endpoint,
+ const struct coap_packet_t *packet, coap_tick_t now);</code></pre>
+      <pre class="doc-comment">/**
+ * Create a new DTLS session for the @p endpoint.
+ *
+ * @ingroup dtls_internal
+ *
+ * @param endpoint  Endpoint to add DTLS session to
+ * @param packet    Received packet information to base session on.
+ * @param now       The current time in ticks.
+ *
+ * @return Created CoAP session or @c NULL if error.
+ */</pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>coap_session_t *coap_session_get_by_peer(struct coap_context_t *ctx,
+ const struct coap_address_t *remote_addr, int ifindex);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_fixed_point_t">Variable <span>coap_fixed_point_t</span></h4>
+      <pre class="doc-declare"><code>coap_fixed_point_t coap_session_get_ack_timeout(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Get the CoAP initial ack response timeout before the next re-transmit
+*
+* Number of seconds when to expect an ACK or a response to an
+* outstanding CON message.
+*
+* @param session The CoAP session.
+*
+* @return Current ack response timeout value
+*/</pre>
+
+      <h4 id="coap_fixed_point_t">Variable <span>coap_fixed_point_t</span></h4>
+      <pre class="doc-declare"><code>coap_fixed_point_t coap_session_get_ack_random_factor(coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+* Get the CoAP ack randomize factor
+*
+* A factor that is used to randomize the wait time before a message
+* is retransmitted to prevent synchronization effects.
+*
+* @param session The CoAP session.
+*
+* @return Current ack randomize value
+*/</pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char *coap_session_str(const coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup logging
+ * Get session description.
+ *
+ * @param session  The CoAP session.
+ * @return description string.
+ */</pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char *coap_endpoint_str(const coap_endpoint_t *endpoint);</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup logging
+* Get endpoint description.
+*
+* @param endpoint  The CoAP endpoint.
+* @return description string.
+*/</pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_fixed_point_t;
+">Typedef <span>coap_fixed_point_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_fixed_point_t {
+ uint16_t integer_part;   /**< Integer part of fixed point variable */
+ uint16_t fractional_part; /**< Fractional part of fixed point variable
+                                1/1000 (3 points) precision */
+} coap_fixed_point_t;
+</code></pre>
+      <pre class="doc-comment">/**
+* Abstraction of a fixed point number that can be used where necessary instead
+* of a float.  1,000 fractional bits equals one integer
+*/</pre>
+
+      <h4 id="coap_session_type_t">Typedef <span>coap_session_type_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint8_t coap_session_type_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_state_t">Typedef <span>coap_session_state_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint8_t coap_session_state_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t;
+">Typedef <span>coap_session_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_session_t {
+ struct coap_session_t *next;
+ coap_proto_t proto;              /**< protocol used */
+ coap_session_type_t type;        /**< client or server side socket */
+ coap_session_state_t state;      /**< current state of relationaship with peer */
+ unsigned ref;                    /**< reference count from queues */
+ unsigned tls_overhead;           /**< overhead of TLS layer */
+ unsigned mtu;                    /**< path or CSM mtu */
+ coap_address_t local_if;         /**< optional local interface address */
+ coap_address_t remote_addr;      /**< remote address and port */
+ coap_address_t local_addr;       /**< local address and port */
+ int ifindex;                     /**< interface index */
+ coap_socket_t sock;              /**< socket object for the session, if any */
+ struct coap_endpoint_t *endpoint; /**< session's endpoint */
+ struct coap_context_t *context;  /**< session's context */
+ void *tls;                       /**< security parameters */
+ uint16_t tx_mid;                 /**< the last message id that was used in this session */
+ uint8_t con_active;              /**< Active CON request sent */
+ struct coap_queue_t *delayqueue; /**< list of delayed messages waiting to be sent */
+ size_t partial_write;            /**< if > 0 indicates number of bytes already written from the pdu at the head of sendqueue */
+ uint8_t read_header[8];          /**< storage space for header of incoming message header */
+ size_t partial_read;             /**< if > 0 indicates number of bytes already read for an incoming message */
+ coap_pdu_t *partial_pdu;         /**< incomplete incoming pdu */
+ coap_tick_t last_rx_tx;
+ coap_tick_t last_tx_rst;
+ coap_tick_t last_ping;
+ coap_tick_t last_pong;
+ coap_tick_t csm_tx;
+ uint8_t *psk_identity;
+ size_t psk_identity_len;
+ uint8_t *psk_key;
+ size_t psk_key_len;
+ void *app;                       /**< application-specific data */
+ unsigned int max_retransmit;     /**< maximum re-transmit count (default 4) */
+ coap_fixed_point_t ack_timeout;  /**< timeout waiting for ack (default 2 secs) */
+ coap_fixed_point_t ack_random_factor; /**< ack random factor backoff (default 1.5) */
+ unsigned int dtls_timeout_count;     /**< dtls setup retry counter */
+ int dtls_event;                      /**< Tracking any (D)TLS events on this sesison */
+} coap_session_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_endpoint_t;
+">Typedef <span>coap_endpoint_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_endpoint_t {
+ struct coap_endpoint_t *next;
+ struct coap_context_t *context; /**< endpoint's context */
+ coap_proto_t proto;            /**< protocol used on this interface */
+ uint16_t default_mtu;          /**< default mtu for this interface */
+ coap_socket_t sock;            /**< socket object for the interface, if any */
+ coap_address_t bind_addr;      /**< local interface address */
+ coap_session_t *sessions;      /**< list of active sessions */
+ coap_session_t hello;          /**< special session of DTLS hello messages */
+} coap_endpoint_t;
+</code></pre>
+      <pre class="doc-comment">/**
+* Abstraction of virtual endpoint that can be attached to coap_context_t. The
+* tuple (handle, addr) must uniquely identify this endpoint.
+*/</pre>
+    </div>
+  </body>
+</html>
+            

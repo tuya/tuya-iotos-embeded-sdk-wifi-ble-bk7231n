@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_IP6_ZONE_H" class="nav-sub-label">LWIP_HDR_IP6_ZONE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_NO_ZONE" class="nav-sub-label">IP6_NO_ZONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPADDR6_ZONE_INIT" class="nav-sub-label">IPADDR6_ZONE_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_zone(ip6addr)" class="nav-sub-label">ip6_addr_zone(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_has_zone(ip6addr)" class="nav-sub-label">ip6_addr_has_zone(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_zone(ip6addr, zone_idx)" class="nav-sub-label">ip6_addr_set_zone(ip6addr, zone_idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_clear_zone(ip6addr)" class="nav-sub-label">ip6_addr_clear_zone(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_copy_zone(ip6addr1, ip6addr2)" class="nav-sub-label">ip6_addr_copy_zone(ip6addr1, ip6addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_equals_zone(ip6addr, zone_idx)" class="nav-sub-label">ip6_addr_equals_zone(ip6addr, zone_idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_cmp_zone(ip6addr1, ip6addr2)" class="nav-sub-label">ip6_addr_cmp_zone(ip6addr1, ip6addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPV6_CUSTOM_SCOPES" class="nav-sub-label">IPV6_CUSTOM_SCOPES</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_has_scope(ip6addr, type)" class="nav-sub-label">ip6_addr_has_scope(ip6addr, type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_assign_zone(ip6addr, type, netif)" class="nav-sub-label">ip6_addr_assign_zone(ip6addr, type, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_test_zone(ip6addr, netif)" class="nav-sub-label">ip6_addr_test_zone(ip6addr, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_lacks_zone(ip6addr, type)" class="nav-sub-label">ip6_addr_lacks_zone(ip6addr, type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_select_zone(dest, src)" class="nav-sub-label">ip6_addr_select_zone(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPADDR6_ZONE_INIT" class="nav-sub-label">IPADDR6_ZONE_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_zone(ip6addr)" class="nav-sub-label">ip6_addr_zone(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_has_zone(ip6addr)" class="nav-sub-label">ip6_addr_has_zone(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_zone" class="nav-sub-label">ip6_addr_set_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_clear_zone" class="nav-sub-label">ip6_addr_clear_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_copy_zone" class="nav-sub-label">ip6_addr_copy_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_equals_zone(ip6addr, zone_idx)" class="nav-sub-label">ip6_addr_equals_zone(ip6addr, zone_idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_cmp_zone(ip6addr1, ip6addr2)" class="nav-sub-label">ip6_addr_cmp_zone(ip6addr1, ip6addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPV6_CUSTOM_SCOPES" class="nav-sub-label">IPV6_CUSTOM_SCOPES</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_has_scope(ip6addr, type)" class="nav-sub-label">ip6_addr_has_scope(ip6addr, type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_assign_zone" class="nav-sub-label">ip6_addr_assign_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_test_zone(ip6addr, netif)" class="nav-sub-label">ip6_addr_test_zone(ip6addr, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_lacks_zone(ip6addr, type)" class="nav-sub-label">ip6_addr_lacks_zone(ip6addr, type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_select_zone" class="nav-sub-label">ip6_addr_select_zone</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_ZONECHECK(ip6addr)" class="nav-sub-label">IP6_ADDR_ZONECHECK(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_ZONECHECK_NETIF(ip6addr, netif)" class="nav-sub-label">IP6_ADDR_ZONECHECK_NETIF(ip6addr, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_ZONECHECK" class="nav-sub-label">IP6_ADDR_ZONECHECK</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_ZONECHECK_NETIF" class="nav-sub-label">IP6_ADDR_ZONECHECK_NETIF</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_IP6_ZONE_H">Marco <span>LWIP_HDR_IP6_ZONE_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_IP6_ZONE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_NO_ZONE">Marco <span>IP6_NO_ZONE</span></h4>
+      <pre class="doc-declare"><code>#define IP6_NO_ZONE 0
+</code></pre>
+      <pre class="doc-comment">/** Identifier for "no zone". */</pre>
+
+      <h4 id="IPADDR6_ZONE_INIT">Marco <span>IPADDR6_ZONE_INIT</span></h4>
+      <pre class="doc-declare"><code>#define IPADDR6_ZONE_INIT , IP6_NO_ZONE
+</code></pre>
+      <pre class="doc-comment">/** Zone initializer for static IPv6 address initialization, including comma. */</pre>
+
+      <h4 id="ip6_addr_zone(ip6addr)">Marco <span>ip6_addr_zone(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_zone(ip6addr) ((ip6addr)->zone)
+</code></pre>
+      <pre class="doc-comment">/** Return the zone index of the given IPv6 address; possibly "no zone". */</pre>
+
+      <h4 id="ip6_addr_has_zone(ip6addr)">Marco <span>ip6_addr_has_zone(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_has_zone(ip6addr) (ip6_addr_zone(ip6addr) != IP6_NO_ZONE)
+</code></pre>
+      <pre class="doc-comment">/** Does the given IPv6 address have a zone set? (0/1) */</pre>
+
+      <h4 id="ip6_addr_set_zone(ip6addr, zone_idx)">Marco <span>ip6_addr_set_zone(ip6addr, zone_idx)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_zone(ip6addr, zone_idx) ((ip6addr)->zone = (zone_idx))
+</code></pre>
+      <pre class="doc-comment">/** Set the zone field of an IPv6 address to a particular value. */</pre>
+
+      <h4 id="ip6_addr_clear_zone(ip6addr)">Marco <span>ip6_addr_clear_zone(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_clear_zone(ip6addr) ((ip6addr)->zone = IP6_NO_ZONE)
+</code></pre>
+      <pre class="doc-comment">/** Clear the zone field of an IPv6 address, setting it to "no zone". */</pre>
+
+      <h4 id="ip6_addr_copy_zone(ip6addr1, ip6addr2)">Marco <span>ip6_addr_copy_zone(ip6addr1, ip6addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_copy_zone(ip6addr1, ip6addr2) ((ip6addr1).zone = (ip6addr2).zone)
+</code></pre>
+      <pre class="doc-comment">/** Copy the zone field from the second IPv6 address to the first one. */</pre>
+
+      <h4 id="ip6_addr_equals_zone(ip6addr, zone_idx)">Marco <span>ip6_addr_equals_zone(ip6addr, zone_idx)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_equals_zone(ip6addr, zone_idx) ((ip6addr)->zone == (zone_idx))
+</code></pre>
+      <pre class="doc-comment">/** Is the zone field of the given IPv6 address equal to the given zone index? (0/1) */</pre>
+
+      <h4 id="ip6_addr_cmp_zone(ip6addr1, ip6addr2)">Marco <span>ip6_addr_cmp_zone(ip6addr1, ip6addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_cmp_zone(ip6addr1, ip6addr2) ((ip6addr1)->zone == (ip6addr2)->zone)
+</code></pre>
+      <pre class="doc-comment">/** Are the zone fields of the given IPv6 addresses equal? (0/1)
+ * This macro must only be used on IPv6 addresses of the same scope. */</pre>
+
+      <h4 id="IPV6_CUSTOM_SCOPES">Marco <span>IPV6_CUSTOM_SCOPES</span></h4>
+      <pre class="doc-declare"><code>#define IPV6_CUSTOM_SCOPES 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_has_scope(ip6addr, type)">Marco <span>ip6_addr_has_scope(ip6addr, type)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_has_scope(ip6addr, type) \
+ (ip6_addr_islinklocal(ip6addr) || (((type) != IP6_UNICAST) && \
+  (ip6_addr_ismulticast_iflocal(ip6addr) || \
+   ip6_addr_ismulticast_linklocal(ip6addr))))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Determine whether an IPv6 address has a constrained scope, and as such is
+ * meaningful only if accompanied by a zone index to identify the scope's zone.
+ * The given address type may be used to eliminate at compile time certain
+ * checks that will evaluate to false at run time anyway.
+ *
+ * This default implementation follows the default model of RFC 4007, where
+ * only interface-local and link-local scopes are defined.
+ *
+ * Even though the unicast loopback address does have an implied link-local
+ * scope, in this implementation it does not have an explicitly assigned zone
+ * index. As such it should not be tested for in this macro.
+ *
+ * @param ip6addr the IPv6 address (const); only its address part is examined.
+ * @param type address type; see @ref lwip_ipv6_scope_type.
+ * @return 1 if the address has a constrained scope, 0 if it does not.
+ */</pre>
+
+      <h4 id="ip6_addr_assign_zone(ip6addr, type, netif)">Marco <span>ip6_addr_assign_zone(ip6addr, type, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_assign_zone(ip6addr, type, netif) \
+   (ip6_addr_set_zone((ip6addr), \
+     ip6_addr_has_scope((ip6addr), (type)) ? netif_get_index(netif) : 0))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Assign a zone index to an IPv6 address, based on a network interface. If the
+ * given address has a scope, the assigned zone index is that scope's zone of
+ * the given netif; otherwise, the assigned zone index is "no zone".
+ *
+ * This default implementation follows the default model of RFC 4007, where
+ * only interface-local and link-local scopes are defined, and the zone index
+ * of both of those scopes always equals the index of the network interface.
+ * As such, this default implementation need not distinguish between different
+ * constrained scopes when assigning the zone.
+ *
+ * @param ip6addr the IPv6 address; its address part is examined, and its zone
+ *                index is assigned.
+ * @param type address type; see @ref lwip_ipv6_scope_type.
+ * @param netif the network interface (const).
+ */</pre>
+
+      <h4 id="ip6_addr_test_zone(ip6addr, netif)">Marco <span>ip6_addr_test_zone(ip6addr, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_test_zone(ip6addr, netif) \
+   (ip6_addr_equals_zone((ip6addr), netif_get_index(netif)))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Test whether an IPv6 address is "zone-compatible" with a network interface.
+ * That is, test whether the network interface is part of the zone associated
+ * with the address. For efficiency, this macro is only ever called if the
+ * given address is either scoped or zoned, and thus, it need not test this.
+ * If an address is scoped but not zoned, or zoned and not scoped, it is
+ * considered not zone-compatible with any netif.
+ *
+ * This default implementation follows the default model of RFC 4007, where
+ * only interface-local and link-local scopes are defined, and the zone index
+ * of both of those scopes always equals the index of the network interface.
+ * As such, there is always only one matching netif for a specific zone index,
+ * but all call sites of this macro currently support multiple matching netifs
+ * as well (at no additional expense in the common case).
+ *
+ * @param ip6addr the IPv6 address (const).
+ * @param netif the network interface (const).
+ * @return 1 if the address is scope-compatible with the netif, 0 if not.
+ */</pre>
+
+      <h4 id="ip6_addr_lacks_zone(ip6addr, type)">Marco <span>ip6_addr_lacks_zone(ip6addr, type)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_lacks_zone(ip6addr, type) \
+   (!ip6_addr_has_zone(ip6addr) && ip6_addr_has_scope((ip6addr), (type)))
+</code></pre>
+      <pre class="doc-comment">/** Does the given IPv6 address have a scope, and as such should also have a
+ * zone to be meaningful, but does not actually have a zone? (0/1) */</pre>
+
+      <h4 id="ip6_addr_select_zone(dest, src)">Marco <span>ip6_addr_select_zone(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_select_zone(dest, src) do { struct netif *selected_netif; \
+ selected_netif = ip6_route((src), (dest)); \
+ if (selected_netif != NULL) { \
+   ip6_addr_assign_zone((dest), IP6_UNKNOWN, selected_netif); \
+ } } while (0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * Try to select a zone for a scoped address that does not yet have a zone.
+ * Called from PCB bind and connect routines, for two reasons: 1) to save on
+ * this (relatively expensive) selection for every individual packet route
+ * operation and 2) to allow the application to obtain the selected zone from
+ * the PCB as is customary for e.g. getsockname/getpeername BSD socket calls.
+ *
+ * Ideally, callers would always supply a properly zoned address, in which case
+ * this function would not be needed. It exists both for compatibility with the
+ * BSD socket API (which accepts zoneless destination addresses) and for
+ * backward compatibility with pre-scoping lwIP code.
+ *
+ * It may be impossible to select a zone, e.g. if there are no netifs.  In that
+ * case, the address's zone field will be left as is.
+ *
+ * @param dest the IPv6 address for which to select and set a zone.
+ * @param src source IPv6 address (const); may be equal to dest.
+ */</pre>
+
+      <h4 id="IPADDR6_ZONE_INIT">Marco <span>IPADDR6_ZONE_INIT</span></h4>
+      <pre class="doc-declare"><code>#define IPADDR6_ZONE_INIT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_zone(ip6addr)">Marco <span>ip6_addr_zone(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_zone(ip6addr) (IP6_NO_ZONE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_has_zone(ip6addr)">Marco <span>ip6_addr_has_zone(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_has_zone(ip6addr) (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_set_zone">Marco <span>ip6_addr_set_zone</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_zone(ip6addr, zone_idx)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_clear_zone">Marco <span>ip6_addr_clear_zone</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_clear_zone(ip6addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_copy_zone">Marco <span>ip6_addr_copy_zone</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_copy_zone(ip6addr1, ip6addr2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_equals_zone(ip6addr, zone_idx)">Marco <span>ip6_addr_equals_zone(ip6addr, zone_idx)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_equals_zone(ip6addr, zone_idx) (1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_cmp_zone(ip6addr1, ip6addr2)">Marco <span>ip6_addr_cmp_zone(ip6addr1, ip6addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_cmp_zone(ip6addr1, ip6addr2) (1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPV6_CUSTOM_SCOPES">Marco <span>IPV6_CUSTOM_SCOPES</span></h4>
+      <pre class="doc-declare"><code>#define IPV6_CUSTOM_SCOPES 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_has_scope(ip6addr, type)">Marco <span>ip6_addr_has_scope(ip6addr, type)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_has_scope(ip6addr, type) (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_assign_zone">Marco <span>ip6_addr_assign_zone</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_assign_zone(ip6addr, type, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_test_zone(ip6addr, netif)">Marco <span>ip6_addr_test_zone(ip6addr, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_test_zone(ip6addr, netif) (1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_lacks_zone(ip6addr, type)">Marco <span>ip6_addr_lacks_zone(ip6addr, type)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_lacks_zone(ip6addr, type) (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_select_zone">Marco <span>ip6_addr_select_zone</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_select_zone(ip6addr, src)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_ZONECHECK(ip6addr)">Marco <span>IP6_ADDR_ZONECHECK(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_ZONECHECK(ip6addr) LWIP_ASSERT("IPv6 zone check failed", \
+   ip6_addr_has_scope(ip6addr, IP6_UNKNOWN) == ip6_addr_has_zone(ip6addr))
+</code></pre>
+      <pre class="doc-comment">/** Verify that the given IPv6 address is properly zoned. */</pre>
+
+      <h4 id="IP6_ADDR_ZONECHECK_NETIF(ip6addr, netif)">Marco <span>IP6_ADDR_ZONECHECK_NETIF(ip6addr, netif)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_ZONECHECK_NETIF(ip6addr, netif) LWIP_ASSERT("IPv6 netif zone check failed", \
+   ip6_addr_has_scope(ip6addr, IP6_UNKNOWN) ? \
+   (ip6_addr_has_zone(ip6addr) && \
+    (((netif) == NULL) || ip6_addr_test_zone((ip6addr), (netif)))) : \
+   !ip6_addr_has_zone(ip6addr))
+</code></pre>
+      <pre class="doc-comment">/** Verify that the given IPv6 address is properly zoned for the given netif. */</pre>
+
+      <h4 id="IP6_ADDR_ZONECHECK">Marco <span>IP6_ADDR_ZONECHECK</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_ZONECHECK(ip6addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_ZONECHECK_NETIF">Marco <span>IP6_ADDR_ZONECHECK_NETIF</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_ZONECHECK_NETIF(ip6addr, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

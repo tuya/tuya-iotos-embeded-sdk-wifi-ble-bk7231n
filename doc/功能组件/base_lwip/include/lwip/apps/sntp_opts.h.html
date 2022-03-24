@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/iana.h" class="nav-sub-label">lwip/prot/iana.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_SNTP_OPTS_H" class="nav-sub-label">LWIP_HDR_APPS_SNTP_OPTS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_SET_SYSTEM_TIME(sec)" class="nav-sub-label">SNTP_SET_SYSTEM_TIME(sec)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_MAX_SERVERS" class="nav-sub-label">SNTP_MAX_SERVERS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_GET_SERVERS_FROM_DHCP" class="nav-sub-label">SNTP_GET_SERVERS_FROM_DHCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_SERVER_DNS" class="nav-sub-label">SNTP_SERVER_DNS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_DEBUG" class="nav-sub-label">SNTP_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_PORT" class="nav-sub-label">SNTP_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_CHECK_RESPONSE" class="nav-sub-label">SNTP_CHECK_RESPONSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_COMP_ROUNDTRIP" class="nav-sub-label">SNTP_COMP_ROUNDTRIP</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_STARTUP_DELAY" class="nav-sub-label">SNTP_STARTUP_DELAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_STARTUP_DELAY" class="nav-sub-label">SNTP_STARTUP_DELAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_STARTUP_DELAY_FUNC" class="nav-sub-label">SNTP_STARTUP_DELAY_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_RECV_TIMEOUT" class="nav-sub-label">SNTP_RECV_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_UPDATE_DELAY" class="nav-sub-label">SNTP_UPDATE_DELAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_GET_SYSTEM_TIME(sec, us)" class="nav-sub-label">SNTP_GET_SYSTEM_TIME(sec, us)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_RETRY_TIMEOUT" class="nav-sub-label">SNTP_RETRY_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_RETRY_TIMEOUT_MAX" class="nav-sub-label">SNTP_RETRY_TIMEOUT_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_RETRY_TIMEOUT_EXP" class="nav-sub-label">SNTP_RETRY_TIMEOUT_EXP</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_MONITOR_SERVER_REACHABILITY" class="nav-sub-label">SNTP_MONITOR_SERVER_REACHABILITY</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/prot/iana.h"><span>lwip/prot/iana.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/iana.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/iana.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_SNTP_OPTS_H">Marco <span>LWIP_HDR_APPS_SNTP_OPTS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_SNTP_OPTS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_SET_SYSTEM_TIME(sec)">Marco <span>SNTP_SET_SYSTEM_TIME(sec)</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_SET_SYSTEM_TIME(sec)  LWIP_UNUSED_ARG(sec)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_MAX_SERVERS">Marco <span>SNTP_MAX_SERVERS</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_MAX_SERVERS          LWIP_DHCP_MAX_NTP_SERVERS
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_GET_SERVERS_FROM_DHCP">Marco <span>SNTP_GET_SERVERS_FROM_DHCP</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_GET_SERVERS_FROM_DHCP LWIP_DHCP_GET_NTP_SRV
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_SERVER_DNS">Marco <span>SNTP_SERVER_DNS</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_SERVER_DNS           0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_DEBUG">Marco <span>SNTP_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_DEBUG                 LWIP_DBG_OFF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_PORT">Marco <span>SNTP_PORT</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_PORT                  LWIP_IANA_PORT_SNTP
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_CHECK_RESPONSE">Marco <span>SNTP_CHECK_RESPONSE</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_CHECK_RESPONSE        0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_COMP_ROUNDTRIP">Marco <span>SNTP_COMP_ROUNDTRIP</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_COMP_ROUNDTRIP        0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_STARTUP_DELAY">Marco <span>SNTP_STARTUP_DELAY</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_STARTUP_DELAY         1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_STARTUP_DELAY">Marco <span>SNTP_STARTUP_DELAY</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_STARTUP_DELAY         0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_STARTUP_DELAY_FUNC">Marco <span>SNTP_STARTUP_DELAY_FUNC</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_STARTUP_DELAY_FUNC    (LWIP_RAND() % 5000)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_RECV_TIMEOUT">Marco <span>SNTP_RECV_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_RECV_TIMEOUT          15000
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_UPDATE_DELAY">Marco <span>SNTP_UPDATE_DELAY</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_UPDATE_DELAY          3600000
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_GET_SYSTEM_TIME(sec, us)">Marco <span>SNTP_GET_SYSTEM_TIME(sec, us)</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_GET_SYSTEM_TIME(sec, us)    do { (sec) = 0; (us) = 0; } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_RETRY_TIMEOUT">Marco <span>SNTP_RETRY_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_RETRY_TIMEOUT         SNTP_RECV_TIMEOUT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_RETRY_TIMEOUT_MAX">Marco <span>SNTP_RETRY_TIMEOUT_MAX</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_RETRY_TIMEOUT_MAX     (SNTP_RETRY_TIMEOUT * 10)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_RETRY_TIMEOUT_EXP">Marco <span>SNTP_RETRY_TIMEOUT_EXP</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_RETRY_TIMEOUT_EXP     1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_MONITOR_SERVER_REACHABILITY">Marco <span>SNTP_MONITOR_SERVER_REACHABILITY</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_MONITOR_SERVER_REACHABILITY 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

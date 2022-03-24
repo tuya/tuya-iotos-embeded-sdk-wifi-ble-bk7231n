@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes.h" class="nav-sub-label">aes.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_AESNI_H" class="nav-sub-label">MBEDTLS_AESNI_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_AESNI_AES" class="nav-sub-label">MBEDTLS_AESNI_AES</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_AESNI_CLMUL" class="nav-sub-label">MBEDTLS_AESNI_CLMUL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HAVE_X86_64" class="nav-sub-label">MBEDTLS_HAVE_X86_64</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_aesni_has_support" class="nav-sub-label">mbedtls_aesni_has_support</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aesni_crypt_ecb" class="nav-sub-label">mbedtls_aesni_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aesni_gcm_mult" class="nav-sub-label">mbedtls_aesni_gcm_mult</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aesni_inverse_key" class="nav-sub-label">mbedtls_aesni_inverse_key</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aesni_setkey_enc" class="nav-sub-label">mbedtls_aesni_setkey_enc</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="aes.h"><span>aes.h</span></h4>
+      <pre class="doc-declare"><code>#include "aes.h"
+</code></pre>
+      <pre class="doc-comment">#include "aes.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_AESNI_H">Marco <span>MBEDTLS_AESNI_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AESNI_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_AESNI_AES">Marco <span>MBEDTLS_AESNI_AES</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AESNI_AES     33554432u
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_AESNI_CLMUL">Marco <span>MBEDTLS_AESNI_CLMUL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AESNI_CLMUL   2u
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HAVE_X86_64">Marco <span>MBEDTLS_HAVE_X86_64</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HAVE_X86_64
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_aesni_has_support">Func <span>mbedtls_aesni_has_support</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aesni_has_support( unsigned int what );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Internal function to detect the AES-NI feature in CPUs.
+ *
+ * \note           This function is only for internal use by other library
+ *                 functions; you must not call it directly.
+ *
+ * \param what     The feature to detect
+ *                 (MBEDTLS_AESNI_AES or MBEDTLS_AESNI_CLMUL)
+ *
+ * \return         1 if CPU has support for the feature, 0 otherwise
+ */</pre>
+
+      <h4 id="mbedtls_aesni_crypt_ecb">Func <span>mbedtls_aesni_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aesni_crypt_ecb( mbedtls_aes_context *ctx,
+                            int mode,
+                            const unsigned char input[16],
+                            unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Internal AES-NI AES-ECB block encryption and decryption
+ *
+ * \note           This function is only for internal use by other library
+ *                 functions; you must not call it directly.
+ *
+ * \param ctx      AES context
+ * \param mode     MBEDTLS_AES_ENCRYPT or MBEDTLS_AES_DECRYPT
+ * \param input    16-byte input block
+ * \param output   16-byte output block
+ *
+ * \return         0 on success (cannot fail)
+ */</pre>
+
+      <h4 id="mbedtls_aesni_gcm_mult">Func <span>mbedtls_aesni_gcm_mult</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_aesni_gcm_mult( unsigned char c[16],
+                            const unsigned char a[16],
+                            const unsigned char b[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Internal GCM multiplication: c = a * b in GF(2^128)
+ *
+ * \note           This function is only for internal use by other library
+ *                 functions; you must not call it directly.
+ *
+ * \param c        Result
+ * \param a        First operand
+ * \param b        Second operand
+ *
+ * \note           Both operands and result are bit strings interpreted as
+ *                 elements of GF(2^128) as per the GCM spec.
+ */</pre>
+
+      <h4 id="mbedtls_aesni_inverse_key">Func <span>mbedtls_aesni_inverse_key</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_aesni_inverse_key( unsigned char *invkey,
+                               const unsigned char *fwdkey,
+                               int nr );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Internal round key inversion. This function computes
+ *                  decryption round keys from the encryption round keys.
+ *
+ * \note            This function is only for internal use by other library
+ *                  functions; you must not call it directly.
+ *
+ * \param invkey    Round keys for the equivalent inverse cipher
+ * \param fwdkey    Original round keys (for encryption)
+ * \param nr        Number of rounds (that is, number of round keys minus one)
+ */</pre>
+
+      <h4 id="mbedtls_aesni_setkey_enc">Func <span>mbedtls_aesni_setkey_enc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aesni_setkey_enc( unsigned char *rk,
+                             const unsigned char *key,
+                             size_t bits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Internal key expansion for encryption
+ *
+ * \note            This function is only for internal use by other library
+ *                  functions; you must not call it directly.
+ *
+ * \param rk        Destination buffer where the round keys are written
+ * \param key       Encryption key
+ * \param bits      Key size in bits (must be 128, 192 or 256)
+ *
+ * \return          0 if successful, or MBEDTLS_ERR_AES_INVALID_KEY_LENGTH
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

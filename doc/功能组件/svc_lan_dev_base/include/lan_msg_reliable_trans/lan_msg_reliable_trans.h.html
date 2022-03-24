@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_api.h" class="nav-sub-label">lan_cluster_api.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__LAN_MSG_RELIABLE_TRANS_H" class="nav-sub-label">__LAN_MSG_RELIABLE_TRANS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_MERGE_NUM_IN_MSG" class="nav-sub-label">MAX_MERGE_NUM_IN_MSG</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEER_NODE_ALLOW_CB_MAX" class="nav-sub-label">PEER_NODE_ALLOW_CB_MAX</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lan_msg_reli_trans_init" class="nav-sub-label">lan_msg_reli_trans_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_get_recv_seq" class="nav-sub-label">lan_msg_get_recv_seq</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_set_recv_seq" class="nav-sub-label">lan_msg_set_recv_seq</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_reli_send" class="nav-sub-label">lan_msg_reli_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_add_peer_node" class="nav-sub-label">lan_msg_add_peer_node</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_stop_peer_node" class="nav-sub-label">lan_msg_stop_peer_node</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_del_peer_node" class="nav-sub-label">lan_msg_del_peer_node</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_del_all_peer_node" class="nav-sub-label">lan_msg_del_all_peer_node</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_peer_node_clear_com_stat" class="nav-sub-label">lan_msg_peer_node_clear_com_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_set_peer_node_com_allow" class="nav-sub-label">lan_msg_set_peer_node_com_allow</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_get_peer_node_com_allow" class="nav-sub-label">lan_msg_get_peer_node_com_allow</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_msg_attach_on_peer_node_allow" class="nav-sub-label">lan_msg_attach_on_peer_node_allow</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LAN_MSG_MERGE_INFO;
+" class="nav-sub-label">LAN_MSG_MERGE_INFO;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_SEND_MSG2JSON" class="nav-sub-label">LAN_SEND_MSG2JSON</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_SEND_MSG_MERGE" class="nav-sub-label">LAN_SEND_MSG_MERGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_SEND_MSG_RET" class="nav-sub-label">LAN_SEND_MSG_RET</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_SEND_BUF_FREE" class="nav-sub-label">LAN_SEND_BUF_FREE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PEER_NODE_ALLOW" class="nav-sub-label">LAN_PEER_NODE_ALLOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_MSG_MOD_INIT_PARAM;
+" class="nav-sub-label">LAN_MSG_MOD_INIT_PARAM;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_MSG_RELI_TYPE_PARAM;
+" class="nav-sub-label">LAN_MSG_RELI_TYPE_PARAM;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_MSG_RELI_TYPE" class="nav-sub-label">LAN_MSG_RELI_TYPE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="lan_cluster_api.h"><span>lan_cluster_api.h</span></h4>
+      <pre class="doc-declare"><code>#include "lan_cluster_api.h"
+</code></pre>
+      <pre class="doc-comment">#include "lan_cluster_api.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__LAN_MSG_RELIABLE_TRANS_H">Marco <span>__LAN_MSG_RELIABLE_TRANS_H</span></h4>
+      <pre class="doc-declare"><code>#define __LAN_MSG_RELIABLE_TRANS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_MERGE_NUM_IN_MSG">Marco <span>MAX_MERGE_NUM_IN_MSG</span></h4>
+      <pre class="doc-declare"><code>#define MAX_MERGE_NUM_IN_MSG 3 //一个RPC消息中包含最大的命令个数
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEER_NODE_ALLOW_CB_MAX">Marco <span>PEER_NODE_ALLOW_CB_MAX</span></h4>
+      <pre class="doc-declare"><code>#define PEER_NODE_ALLOW_CB_MAX 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="lan_msg_reli_trans_init">Func <span>lan_msg_reli_trans_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_reli_trans_init(LAN_MSG_MOD_INIT_PARAM *init_param);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_get_recv_seq">Func <span>lan_msg_get_recv_seq</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_get_recv_seq(IN CONST CHAR_T *id, OUT INT_T *recv_seq);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_set_recv_seq">Func <span>lan_msg_set_recv_seq</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_set_recv_seq(IN CONST CHAR_T *id, IN INT_T recv_seq);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_reli_send">Func <span>lan_msg_reli_send</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_reli_send(LAN_MSG_RELI_TYPE type, IN CONST CHAR_T *id, IN CONST CHAR_T *send_buf, VOID *cb_param);</code></pre>
+      <pre class="doc-comment">//send_buf在函数内部释放</pre>
+
+      <h4 id="lan_msg_add_peer_node">Func <span>lan_msg_add_peer_node</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_add_peer_node(IN CONST CHAR_T *id);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_stop_peer_node">Func <span>lan_msg_stop_peer_node</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_stop_peer_node(IN CONST CHAR_T *id);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_del_peer_node">Func <span>lan_msg_del_peer_node</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_del_peer_node(IN CONST CHAR_T *id);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_del_all_peer_node">Func <span>lan_msg_del_all_peer_node</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_del_all_peer_node();</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_peer_node_clear_com_stat">Func <span>lan_msg_peer_node_clear_com_stat</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_peer_node_clear_com_stat(IN CONST CHAR_T *id);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_set_peer_node_com_allow">Func <span>lan_msg_set_peer_node_com_allow</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_set_peer_node_com_allow(IN CONST CHAR_T *id, BOOL_T allow);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_get_peer_node_com_allow">Func <span>lan_msg_get_peer_node_com_allow</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_get_peer_node_com_allow(IN CONST CHAR_T *id, BOOL_T *allow);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_msg_attach_on_peer_node_allow">Func <span>lan_msg_attach_on_peer_node_allow</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_msg_attach_on_peer_node_allow(LAN_PEER_NODE_ALLOW func_cb);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="LAN_MSG_MERGE_INFO;
+">Typedef <span>LAN_MSG_MERGE_INFO;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ CHAR_T *send_buf[MAX_MERGE_NUM_IN_MSG]; // 数量的
+ BYTE_T merge_cnt;						// send_buf的实际个数
+ CHAR_T *send_buf_out;					// 合并后的send_buf
+} LAN_MSG_MERGE_INFO;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_SEND_MSG2JSON">Typedef <span>LAN_SEND_MSG2JSON</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_SEND_MSG2JSON)(IN CONST CHAR_T *send_buf, IN INT_T seq, IN VOID *param, OUT JRPC_MSG_S *requset);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_SEND_MSG_MERGE">Typedef <span>LAN_SEND_MSG_MERGE</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*LAN_SEND_MSG_MERGE)(IN OUT LAN_MSG_MERGE_INFO *merge_info, IN VOID *param);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_SEND_MSG_RET">Typedef <span>LAN_SEND_MSG_RET</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*LAN_SEND_MSG_RET)(IN OPERATE_RET op_ret, IN CONST CHAR_T *id, IN CONST CHAR_T *send_buf, IN VOID *param);
+</code></pre>
+      <pre class="doc-comment">//注意：如果允许合并信息，param字段会是合并前的第一个消息的参数</pre>
+
+      <h4 id="LAN_SEND_BUF_FREE">Typedef <span>LAN_SEND_BUF_FREE</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*LAN_SEND_BUF_FREE)(IN CONST CHAR_T *send_buf, IN VOID *cb_param);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_PEER_NODE_ALLOW">Typedef <span>LAN_PEER_NODE_ALLOW</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*LAN_PEER_NODE_ALLOW)(IN CONST CHAR_T *id, IN BOOL_T allow);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_MSG_MOD_INIT_PARAM;
+">Typedef <span>LAN_MSG_MOD_INIT_PARAM;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ USHORT_T init_peer_cnt; 		//初始化对端节点的个数
+ USHORT_T max_retry_cnt;		//每个消息的最大的重试次数，如果超过，就开始丢弃该消息
+ USHORT_T max_total_retry_cnt; //最大的连续重试次数，如果超过，就开始丢消息drop_msg_cnt个
+ USHORT_T drop_msg_cnt;		//一次丢消息的个数
+ USHORT_T cache_msg_max_cnt_per_peer; //每个对端存储的最大的消息个数，一旦超过。视为消息堆积，快速丢弃一半的新报文
+} LAN_MSG_MOD_INIT_PARAM;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_MSG_RELI_TYPE_PARAM;
+">Typedef <span>LAN_MSG_RELI_TYPE_PARAM;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ LAN_SEND_MSG2JSON func_msg2Json;	//消息转为json-RPC接口，必须
+ VOID *func_msg2Json_param;
+
+ LAN_SEND_MSG_MERGE func_msgMerge;	//多条消息合并接口，非必须
+ VOID *func_msgMerge_param;
+
+ LAN_SEND_MSG_RET func_msgRet;		//消息发送结果回调，非必须, TODO,是否所有场景都回调？当前只保证正常发送后回调，异常时不一定
+ //VOID *func_msgRet_param;			//发送结果回调的参数在调用发送接口处传入
+
+ LAN_SEND_BUF_FREE func_buf_free;	//内存释放接口，非必须，空时内部使用Free释放.
+									//如果有merge函数，发生merge时内部使用Malloc Free
+ 
+} LAN_MSG_RELI_TYPE_PARAM;
+</code></pre>
+      <pre class="doc-comment">//为不同类型的消息，提供差异的部分</pre>
+
+      <h4 id="LAN_MSG_RELI_TYPE">Typedef <span>LAN_MSG_RELI_TYPE</span></h4>
+      <pre class="doc-declare"><code>typedef VOID* LAN_MSG_RELI_TYPE;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

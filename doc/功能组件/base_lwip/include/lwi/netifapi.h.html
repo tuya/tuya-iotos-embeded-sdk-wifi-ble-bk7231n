@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/sys.h" class="nav-sub-label">lwip/sys.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/netif.h" class="nav-sub-label">lwip/netif.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/dhcp.h" class="nav-sub-label">lwip/dhcp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/autoip.h" class="nav-sub-label">lwip/autoip.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/priv/tcpip_priv.h" class="nav-sub-label">lwip/priv/tcpip_priv.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/priv/api_msg.h" class="nav-sub-label">lwip/priv/api_msg.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/ethernet.h" class="nav-sub-label">lwip/prot/ethernet.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_NETIFAPI_H" class="nav-sub-label">LWIP_HDR_NETIFAPI_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_remove(n)" class="nav-sub-label">netifapi_netif_remove(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_set_up(n)" class="nav-sub-label">netifapi_netif_set_up(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_set_down(n)" class="nav-sub-label">netifapi_netif_set_down(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_set_default(n)" class="nav-sub-label">netifapi_netif_set_default(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_set_link_up(n)" class="nav-sub-label">netifapi_netif_set_link_up(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_set_link_down(n)" class="nav-sub-label">netifapi_netif_set_link_down(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_dhcp_start(n)" class="nav-sub-label">netifapi_dhcp_start(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_dhcp_stop(n)" class="nav-sub-label">netifapi_dhcp_stop(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_dhcp_inform(n)" class="nav-sub-label">netifapi_dhcp_inform(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_dhcp_renew(n)" class="nav-sub-label">netifapi_dhcp_renew(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_dhcp_release(n)" class="nav-sub-label">netifapi_dhcp_release(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_dhcp_release_and_stop(n)" class="nav-sub-label">netifapi_dhcp_release_and_stop(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_autoip_start(n)" class="nav-sub-label">netifapi_autoip_start(n)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_autoip_stop(n)" class="nav-sub-label">netifapi_autoip_stop(n)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netifapi_arp_add" class="nav-sub-label">netifapi_arp_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_arp_remove" class="nav-sub-label">netifapi_arp_remove</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_add" class="nav-sub-label">netifapi_netif_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_set_addr" class="nav-sub-label">netifapi_netif_set_addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_common" class="nav-sub-label">netifapi_netif_common</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_name_to_index" class="nav-sub-label">netifapi_netif_name_to_index</a>
+              </li>
+      
+
+              <li>
+                <a href="#netifapi_netif_index_to_name" class="nav-sub-label">netifapi_netif_index_to_name</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/sys.h"><span>lwip/sys.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/sys.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/sys.h"
+</pre>
+
+      <h4 id="lwip/netif.h"><span>lwip/netif.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/netif.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/netif.h"
+</pre>
+
+      <h4 id="lwip/dhcp.h"><span>lwip/dhcp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/dhcp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/dhcp.h"
+</pre>
+
+      <h4 id="lwip/autoip.h"><span>lwip/autoip.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/autoip.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/autoip.h"
+</pre>
+
+      <h4 id="lwip/priv/tcpip_priv.h"><span>lwip/priv/tcpip_priv.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/priv/tcpip_priv.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/priv/tcpip_priv.h"
+</pre>
+
+      <h4 id="lwip/priv/api_msg.h"><span>lwip/priv/api_msg.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/priv/api_msg.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/priv/api_msg.h"
+</pre>
+
+      <h4 id="lwip/prot/ethernet.h"><span>lwip/prot/ethernet.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/ethernet.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/ethernet.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_NETIFAPI_H">Marco <span>LWIP_HDR_NETIFAPI_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_NETIFAPI_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netifapi_netif_remove(n)">Marco <span>netifapi_netif_remove(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_netif_remove(n)       netifapi_netif_common(n, netif_remove, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif
+  * @see netif_remove()
+  */</pre>
+
+      <h4 id="netifapi_netif_set_up(n)">Marco <span>netifapi_netif_set_up(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_netif_set_up(n)       netifapi_netif_common(n, netif_set_up, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif
+  * @see netif_set_up()
+  */</pre>
+
+      <h4 id="netifapi_netif_set_down(n)">Marco <span>netifapi_netif_set_down(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_netif_set_down(n)     netifapi_netif_common(n, netif_set_down, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif
+  * @see netif_set_down()
+  */</pre>
+
+      <h4 id="netifapi_netif_set_default(n)">Marco <span>netifapi_netif_set_default(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_netif_set_default(n)  netifapi_netif_common(n, netif_set_default, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif
+  * @see netif_set_default()
+  */</pre>
+
+      <h4 id="netifapi_netif_set_link_up(n)">Marco <span>netifapi_netif_set_link_up(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_netif_set_link_up(n)  netifapi_netif_common(n, netif_set_link_up, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif
+  * @see netif_set_link_up()
+  */</pre>
+
+      <h4 id="netifapi_netif_set_link_down(n)">Marco <span>netifapi_netif_set_link_down(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_netif_set_link_down(n) netifapi_netif_common(n, netif_set_link_down, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif
+  * @see netif_set_link_down()
+  */</pre>
+
+      <h4 id="netifapi_dhcp_start(n)">Marco <span>netifapi_dhcp_start(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_dhcp_start(n)           netifapi_netif_common(n, NULL, dhcp_start)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_dhcp4
+  * @see dhcp_start()
+  */</pre>
+
+      <h4 id="netifapi_dhcp_stop(n)">Marco <span>netifapi_dhcp_stop(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_dhcp_stop(n)            netifapi_netif_common(n, dhcp_stop, NULL)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup netifapi_dhcp4
+ * @deprecated Use netifapi_dhcp_release_and_stop() instead.
+ */</pre>
+
+      <h4 id="netifapi_dhcp_inform(n)">Marco <span>netifapi_dhcp_inform(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_dhcp_inform(n)          netifapi_netif_common(n, dhcp_inform, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_dhcp4
+  * @see dhcp_inform()
+  */</pre>
+
+      <h4 id="netifapi_dhcp_renew(n)">Marco <span>netifapi_dhcp_renew(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_dhcp_renew(n)           netifapi_netif_common(n, NULL, dhcp_renew)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_dhcp4
+  * @see dhcp_renew()
+  */</pre>
+
+      <h4 id="netifapi_dhcp_release(n)">Marco <span>netifapi_dhcp_release(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_dhcp_release(n)         netifapi_netif_common(n, NULL, dhcp_release)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup netifapi_dhcp4
+ * @deprecated Use netifapi_dhcp_release_and_stop() instead.
+ */</pre>
+
+      <h4 id="netifapi_dhcp_release_and_stop(n)">Marco <span>netifapi_dhcp_release_and_stop(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_dhcp_release_and_stop(n) netifapi_netif_common(n, dhcp_release_and_stop, NULL)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_dhcp4
+  * @see dhcp_release_and_stop()
+  */</pre>
+
+      <h4 id="netifapi_autoip_start(n)">Marco <span>netifapi_autoip_start(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_autoip_start(n)     netifapi_netif_common(n, NULL, autoip_start)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_autoip
+  * @see autoip_start()
+  */</pre>
+
+      <h4 id="netifapi_autoip_stop(n)">Marco <span>netifapi_autoip_stop(n)</span></h4>
+      <pre class="doc-declare"><code>#define netifapi_autoip_stop(n)      netifapi_netif_common(n, NULL, autoip_stop)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_autoip
+  * @see autoip_stop()
+  */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="netifapi_arp_add">Func <span>netifapi_arp_add</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_arp_add(const ip4_addr_t *ipaddr, struct eth_addr *ethaddr, enum netifapi_arp_entry type);</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_arp */</pre>
+
+      <h4 id="netifapi_arp_remove">Func <span>netifapi_arp_remove</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_arp_remove(const ip4_addr_t *ipaddr, enum netifapi_arp_entry type);</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_arp */</pre>
+
+      <h4 id="netifapi_netif_add">Func <span>netifapi_netif_add</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_netif_add(struct netif *netif,
+#if LWIP_IPV4
+                        const ip4_addr_t *ipaddr, const ip4_addr_t *netmask, const ip4_addr_t *gw,
+#endif /* LWIP_IPV4 */
+                        void *state, netif_init_fn init, netif_input_fn input);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netifapi_netif_set_addr">Func <span>netifapi_netif_set_addr</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_netif_set_addr(struct netif *netif, const ip4_addr_t *ipaddr,
+                             const ip4_addr_t *netmask, const ip4_addr_t *gw);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netifapi_netif_common">Func <span>netifapi_netif_common</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_netif_common(struct netif *netif, netifapi_void_fn voidfunc,
+                           netifapi_errt_fn errtfunc);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netifapi_netif_name_to_index">Func <span>netifapi_netif_name_to_index</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_netif_name_to_index(const char *name, u8_t *index);</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif */</pre>
+
+      <h4 id="netifapi_netif_index_to_name">Func <span>netifapi_netif_index_to_name</span></h4>
+      <pre class="doc-declare"><code>err_t netifapi_netif_index_to_name(u8_t index, char *name);</code></pre>
+      <pre class="doc-comment">/** @ingroup netifapi_netif */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#base_rpc_com.h" class="nav-sub-label">base_rpc_com.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap.h" class="nav-sub-label">hashmap.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#json_rpc.h" class="nav-sub-label">json_rpc.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_thread.h" class="nav-sub-label">uni_thread.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__RPC_UDP_H__" class="nav-sub-label">__RPC_UDP_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_RPC_CALL_TIMEOUT" class="nav-sub-label">OPRT_RPC_CALL_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_RPC_CALL_ERROR" class="nav-sub-label">OPRT_RPC_CALL_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#RPC_DEFAULT_BUFSIZE" class="nav-sub-label">RPC_DEFAULT_BUFSIZE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_rpc_init" class="nav-sub-label">tuya_rpc_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rpc_run" class="nav-sub-label">tuya_rpc_run</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rpc_method_register" class="nav-sub-label">tuya_rpc_method_register</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rpc_call_sync" class="nav-sub-label">tuya_rpc_call_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_rpc_control" class="nav-sub-label">tuya_rpc_control</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#RPC_TYPE_E;
+" class="nav-sub-label">RPC_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#RPC_CMD_E;
+" class="nav-sub-label">RPC_CMD_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_RPC_S;
+" class="nav-sub-label">TUYA_RPC_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#RPC_METHOD_CB" class="nav-sub-label">RPC_METHOD_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#RPC_RET_CB" class="nav-sub-label">RPC_RET_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="base_rpc_com.h"><span>base_rpc_com.h</span></h4>
+      <pre class="doc-declare"><code>#include "base_rpc_com.h"
+</code></pre>
+      <pre class="doc-comment">#include "base_rpc_com.h"
+</pre>
+
+      <h4 id="hashmap.h"><span>hashmap.h</span></h4>
+      <pre class="doc-declare"><code>#include "hashmap.h"
+</code></pre>
+      <pre class="doc-comment">#include "hashmap.h"
+</pre>
+
+      <h4 id="json_rpc.h"><span>json_rpc.h</span></h4>
+      <pre class="doc-declare"><code>#include "json_rpc.h"
+</code></pre>
+      <pre class="doc-comment">#include "json_rpc.h"
+</pre>
+
+      <h4 id="uni_thread.h"><span>uni_thread.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_thread.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_thread.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__RPC_UDP_H__">Marco <span>__RPC_UDP_H__</span></h4>
+      <pre class="doc-declare"><code>#define __RPC_UDP_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_RPC_CALL_TIMEOUT">Marco <span>OPRT_RPC_CALL_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_RPC_CALL_TIMEOUT      -10
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_RPC_CALL_ERROR">Marco <span>OPRT_RPC_CALL_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_RPC_CALL_ERROR        -11
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RPC_DEFAULT_BUFSIZE">Marco <span>RPC_DEFAULT_BUFSIZE</span></h4>
+      <pre class="doc-declare"><code>#define RPC_DEFAULT_BUFSIZE        256
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_rpc_init">Func <span>tuya_rpc_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_rpc_init(TUYA_RPC_S *rpc, RPC_TYPE_E type, UINT8_T *host);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya udp rpc init
+ * 
+ * @param[in] rpc  udp rpc description
+ * @param[in] type reference to RPC_TYPE_E
+ * @param[in] host ip:port
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rpc_run">Func <span>tuya_rpc_run</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_rpc_run(TUYA_RPC_S *rpc, UINT_T stack_size, UINT_T prio);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create udp rpc task
+ * 
+ * @param[in] rpc  udp rpc description
+ * @param[in] stack_size task size
+ * @param[in] prio task prio
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rpc_method_register">Func <span>tuya_rpc_method_register</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_rpc_method_register(TUYA_RPC_S *rpc, CHAR_T *name, RPC_METHOD_CB cb, VOID *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief udp rpc method register
+ * 
+ * @param[in] rpc  udp rpc description
+ * @param[in] name key name
+ * @param[in] cb method callback
+ * @param[in] arg callback argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rpc_call_sync">Func <span>tuya_rpc_call_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_rpc_call_sync(TUYA_RPC_S *rpc, JRPC_MSG_S *requset, JRPC_MSG_S *result, UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rpc sync
+ * 
+ * @param[in] rpc udp rpc description
+ * @param[in] requset reference to JRPC_MSG_S
+ * @param[in] result reference to JRPC_MSG_S
+ * @param[in] timeout 
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_rpc_control">Func <span>tuya_rpc_control</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_rpc_control(TUYA_RPC_S *rpc, UINT8_T cmd, VOID *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rpc control
+ * 
+ * @param[in] rpc  udp rpc description
+ * @param[in] cmd control command
+ * @param[in] arg contol argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="RPC_TYPE_E;
+">Typedef <span>RPC_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   RPC_CLIENT,
+   RPC_SERVER,
+   RPC_LOOPIF,
+   RPC_CUSTOM,
+} RPC_TYPE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RPC_CMD_E;
+">Typedef <span>RPC_CMD_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   RPC_BUFSIZE_SET_CMD,
+   RPC_CUSTOM_HOST_CMD,
+   RPC_KEY_ENABLE_CMD,
+   RPC_KEY_SET_CMD,
+   RPC_METHOD_UNREGISTER_CMD,
+   RPC_EXIT_CMD,
+   RPC_CALL_RETRY_CMD,
+} RPC_CMD_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_RPC_S;
+">Typedef <span>TUYA_RPC_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   INT_T          udp_fd;
+   UINT_T         flag;
+   THRD_HANDLE    thread;
+   RPC_TYPE_E     type;
+   BRC_HAND_T     brchd;
+   MUTEX_HANDLE   mutex;
+   UINT_T         ipaddr;
+   UINT_T         port;
+   UINT8_T        key[16];
+   map_t          method_list;
+   UINT16_T       buffer_size;
+   UINT8_T        *buffer;
+   UINT8_T        default_buffer[RPC_DEFAULT_BUFSIZE];
+} TUYA_RPC_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RPC_METHOD_CB">Typedef <span>RPC_METHOD_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*RPC_METHOD_CB)(IN JRPC_MSG_S *request, IN VOID *arg, IN UNW_IP_ADDR_T peer_ip, OUT JRPC_MSG_S *reply);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback of rpc method
+ * 
+ * @param[in] request refer to JRPC_MSG_S
+ * @param[in] arg callback argument
+ * @param[in] peer_ip refer to UNW_IP_ADDR_T
+ * @param[out] reply refer to JRPC_MSG_S 
+ *
+ */</pre>
+
+      <h4 id="RPC_RET_CB">Typedef <span>RPC_RET_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*RPC_RET_CB)(IN OPERATE_RET op_ret, IN JRPC_MSG_S *result, IN VOID *prv_data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback of rpc return
+ * 
+ * @param[in] op_ret return code,refer to tuya_error_code.h
+ * @param[in] result reference to JRPC_MSG_S
+ * @param[in] prv_data
+ *
+ */</pre>
+    </div>
+  </body>
+</html>
+            

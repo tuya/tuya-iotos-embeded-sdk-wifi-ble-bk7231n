@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_config.h" class="nav-sub-label">coap_config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netinet/in.h" class="nav-sub-label">netinet/in.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#unistd.h" class="nav-sub-label">unistd.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#libcoap.h" class="nav-sub-label">libcoap.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#address.h" class="nav-sub-label">address.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#async.h" class="nav-sub-label">async.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#bits.h" class="nav-sub-label">bits.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#block.h" class="nav-sub-label">block.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_dtls.h" class="nav-sub-label">coap_dtls.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_event.h" class="nav-sub-label">coap_event.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_io.h" class="nav-sub-label">coap_io.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_time.h" class="nav-sub-label">coap_time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_debug.h" class="nav-sub-label">coap_debug.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#encode.h" class="nav-sub-label">encode.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_mem.h" class="nav-sub-label">coap_mem.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_net.h" class="nav-sub-label">coap_net.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#option.h" class="nav-sub-label">option.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#pdu.h" class="nav-sub-label">pdu.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng.h" class="nav-sub-label">prng.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#resource.h" class="nav-sub-label">resource.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#str.h" class="nav-sub-label">str.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#subscribe.h" class="nav-sub-label">subscribe.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uri.h" class="nav-sub-label">uri.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_H_" class="nav-sub-label">COAP_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIBCOAP_PACKAGE_BUGREPORT" class="nav-sub-label">LIBCOAP_PACKAGE_BUGREPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIBCOAP_PACKAGE_NAME" class="nav-sub-label">LIBCOAP_PACKAGE_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIBCOAP_PACKAGE_STRING" class="nav-sub-label">LIBCOAP_PACKAGE_STRING</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIBCOAP_PACKAGE_URL" class="nav-sub-label">LIBCOAP_PACKAGE_URL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIBCOAP_PACKAGE_VERSION" class="nav-sub-label">LIBCOAP_PACKAGE_VERSION</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="coap_config.h"><span>coap_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_config.h"
+</pre>
+
+      <h4 id="netinet/in.h"><span>netinet/in.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;netinet/in.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <netinet/in.h>
+</pre>
+
+      <h4 id="unistd.h"><span>unistd.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;unistd.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <unistd.h>
+</pre>
+
+      <h4 id="libcoap.h"><span>libcoap.h</span></h4>
+      <pre class="doc-declare"><code>#include "libcoap.h"
+</code></pre>
+      <pre class="doc-comment">#include "libcoap.h"
+</pre>
+
+      <h4 id="address.h"><span>address.h</span></h4>
+      <pre class="doc-declare"><code>#include "address.h"
+</code></pre>
+      <pre class="doc-comment">#include "address.h"
+</pre>
+
+      <h4 id="async.h"><span>async.h</span></h4>
+      <pre class="doc-declare"><code>#include "async.h"
+</code></pre>
+      <pre class="doc-comment">#include "async.h"
+</pre>
+
+      <h4 id="bits.h"><span>bits.h</span></h4>
+      <pre class="doc-declare"><code>#include "bits.h"
+</code></pre>
+      <pre class="doc-comment">#include "bits.h"
+</pre>
+
+      <h4 id="block.h"><span>block.h</span></h4>
+      <pre class="doc-declare"><code>#include "block.h"
+</code></pre>
+      <pre class="doc-comment">#include "block.h"
+</pre>
+
+      <h4 id="coap_dtls.h"><span>coap_dtls.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_dtls.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_dtls.h"
+</pre>
+
+      <h4 id="coap_event.h"><span>coap_event.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_event.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_event.h"
+</pre>
+
+      <h4 id="coap_io.h"><span>coap_io.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_io.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_io.h"
+</pre>
+
+      <h4 id="coap_time.h"><span>coap_time.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_time.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_time.h"
+</pre>
+
+      <h4 id="coap_debug.h"><span>coap_debug.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_debug.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_debug.h"
+</pre>
+
+      <h4 id="encode.h"><span>encode.h</span></h4>
+      <pre class="doc-declare"><code>#include "encode.h"
+</code></pre>
+      <pre class="doc-comment">#include "encode.h"
+</pre>
+
+      <h4 id="coap_mem.h"><span>coap_mem.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_mem.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_mem.h"
+</pre>
+
+      <h4 id="coap_net.h"><span>coap_net.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_net.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_net.h"
+</pre>
+
+      <h4 id="option.h"><span>option.h</span></h4>
+      <pre class="doc-declare"><code>#include "option.h"
+</code></pre>
+      <pre class="doc-comment">#include "option.h"
+</pre>
+
+      <h4 id="pdu.h"><span>pdu.h</span></h4>
+      <pre class="doc-declare"><code>#include "pdu.h"
+</code></pre>
+      <pre class="doc-comment">#include "pdu.h"
+</pre>
+
+      <h4 id="prng.h"><span>prng.h</span></h4>
+      <pre class="doc-declare"><code>#include "prng.h"
+</code></pre>
+      <pre class="doc-comment">#include "prng.h"
+</pre>
+
+      <h4 id="resource.h"><span>resource.h</span></h4>
+      <pre class="doc-declare"><code>#include "resource.h"
+</code></pre>
+      <pre class="doc-comment">#include "resource.h"
+</pre>
+
+      <h4 id="str.h"><span>str.h</span></h4>
+      <pre class="doc-declare"><code>#include "str.h"
+</code></pre>
+      <pre class="doc-comment">#include "str.h"
+</pre>
+
+      <h4 id="subscribe.h"><span>subscribe.h</span></h4>
+      <pre class="doc-declare"><code>#include "subscribe.h"
+</code></pre>
+      <pre class="doc-comment">#include "subscribe.h"
+</pre>
+
+      <h4 id="uri.h"><span>uri.h</span></h4>
+      <pre class="doc-declare"><code>#include "uri.h"
+</code></pre>
+      <pre class="doc-comment">#include "uri.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_H_">Marco <span>COAP_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LIBCOAP_PACKAGE_BUGREPORT">Marco <span>LIBCOAP_PACKAGE_BUGREPORT</span></h4>
+      <pre class="doc-declare"><code>#define LIBCOAP_PACKAGE_BUGREPORT "libcoap-developers@lists.sourceforge.net"
+</code></pre>
+      <pre class="doc-comment">/* Define the address where bug reports for libcoap should be sent. */</pre>
+
+      <h4 id="LIBCOAP_PACKAGE_NAME">Marco <span>LIBCOAP_PACKAGE_NAME</span></h4>
+      <pre class="doc-declare"><code>#define LIBCOAP_PACKAGE_NAME "libcoap"
+</code></pre>
+      <pre class="doc-comment">/* Define the full name of libcoap. */</pre>
+
+      <h4 id="LIBCOAP_PACKAGE_STRING">Marco <span>LIBCOAP_PACKAGE_STRING</span></h4>
+      <pre class="doc-declare"><code>#define LIBCOAP_PACKAGE_STRING "libcoap 4.2.0"
+</code></pre>
+      <pre class="doc-comment">/* Define the full name and version of libcoap. */</pre>
+
+      <h4 id="LIBCOAP_PACKAGE_URL">Marco <span>LIBCOAP_PACKAGE_URL</span></h4>
+      <pre class="doc-declare"><code>#define LIBCOAP_PACKAGE_URL "https://libcoap.net/"
+</code></pre>
+      <pre class="doc-comment">/* Define the home page for libcoap. */</pre>
+
+      <h4 id="LIBCOAP_PACKAGE_VERSION">Marco <span>LIBCOAP_PACKAGE_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define LIBCOAP_PACKAGE_VERSION "4.2.0rc4"
+</code></pre>
+      <pre class="doc-comment">/* Define the version of libcoap this file belongs to. */</pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

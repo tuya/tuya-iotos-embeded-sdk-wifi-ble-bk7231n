@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#bignum.h" class="nav-sub-label">bignum.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_RSA_INTERNAL_H" class="nav-sub-label">MBEDTLS_RSA_INTERNAL_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_rsa_deduce_primes" class="nav-sub-label">mbedtls_rsa_deduce_primes</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_rsa_deduce_private_exponent" class="nav-sub-label">mbedtls_rsa_deduce_private_exponent</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_rsa_deduce_crt" class="nav-sub-label">mbedtls_rsa_deduce_crt</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_rsa_validate_params" class="nav-sub-label">mbedtls_rsa_validate_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_rsa_validate_crt" class="nav-sub-label">mbedtls_rsa_validate_crt</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="bignum.h"><span>bignum.h</span></h4>
+      <pre class="doc-declare"><code>#include "bignum.h"
+</code></pre>
+      <pre class="doc-comment">#include "bignum.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_RSA_INTERNAL_H">Marco <span>MBEDTLS_RSA_INTERNAL_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_RSA_INTERNAL_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_rsa_deduce_primes">Func <span>mbedtls_rsa_deduce_primes</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_rsa_deduce_primes( mbedtls_mpi const *N, mbedtls_mpi const *E,
+                              mbedtls_mpi const *D,
+                              mbedtls_mpi *P, mbedtls_mpi *Q );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Compute RSA prime moduli P, Q from public modulus N=PQ
+ *                 and a pair of private and public key.
+ *
+ * \note           This is a 'static' helper function not operating on
+ *                 an RSA context. Alternative implementations need not
+ *                 overwrite it.
+ *
+ * \param N        RSA modulus N = PQ, with P, Q to be found
+ * \param E        RSA public exponent
+ * \param D        RSA private exponent
+ * \param P        Pointer to MPI holding first prime factor of N on success
+ * \param Q        Pointer to MPI holding second prime factor of N on success
+ *
+ * \return
+ *                 - 0 if successful. In this case, P and Q constitute a
+ *                   factorization of N.
+ *                 - A non-zero error code otherwise.
+ *
+ * \note           It is neither checked that P, Q are prime nor that
+ *                 D, E are modular inverses wrt. P-1 and Q-1. For that,
+ *                 use the helper function \c mbedtls_rsa_validate_params.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_rsa_deduce_private_exponent">Func <span>mbedtls_rsa_deduce_private_exponent</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_rsa_deduce_private_exponent( mbedtls_mpi const *P,
+                                        mbedtls_mpi const *Q,
+                                        mbedtls_mpi const *E,
+                                        mbedtls_mpi *D );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Compute RSA private exponent from
+ *                 prime moduli and public key.
+ *
+ * \note           This is a 'static' helper function not operating on
+ *                 an RSA context. Alternative implementations need not
+ *                 overwrite it.
+ *
+ * \param P        First prime factor of RSA modulus
+ * \param Q        Second prime factor of RSA modulus
+ * \param E        RSA public exponent
+ * \param D        Pointer to MPI holding the private exponent on success.
+ *
+ * \return
+ *                 - 0 if successful. In this case, D is set to a simultaneous
+ *                   modular inverse of E modulo both P-1 and Q-1.
+ *                 - A non-zero error code otherwise.
+ *
+ * \note           This function does not check whether P and Q are primes.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_rsa_deduce_crt">Func <span>mbedtls_rsa_deduce_crt</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_rsa_deduce_crt( const mbedtls_mpi *P, const mbedtls_mpi *Q,
+                           const mbedtls_mpi *D, mbedtls_mpi *DP,
+                           mbedtls_mpi *DQ, mbedtls_mpi *QP );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Generate RSA-CRT parameters
+ *
+ * \note           This is a 'static' helper function not operating on
+ *                 an RSA context. Alternative implementations need not
+ *                 overwrite it.
+ *
+ * \param P        First prime factor of N
+ * \param Q        Second prime factor of N
+ * \param D        RSA private exponent
+ * \param DP       Output variable for D modulo P-1
+ * \param DQ       Output variable for D modulo Q-1
+ * \param QP       Output variable for the modular inverse of Q modulo P.
+ *
+ * \return         0 on success, non-zero error code otherwise.
+ *
+ * \note           This function does not check whether P, Q are
+ *                 prime and whether D is a valid private exponent.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_rsa_validate_params">Func <span>mbedtls_rsa_validate_params</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_rsa_validate_params( const mbedtls_mpi *N, const mbedtls_mpi *P,
+                                const mbedtls_mpi *Q, const mbedtls_mpi *D,
+                                const mbedtls_mpi *E,
+                                int (*f_rng)(void *, unsigned char *, size_t),
+                                void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Check validity of core RSA parameters
+ *
+ * \note           This is a 'static' helper function not operating on
+ *                 an RSA context. Alternative implementations need not
+ *                 overwrite it.
+ *
+ * \param N        RSA modulus N = PQ
+ * \param P        First prime factor of N
+ * \param Q        Second prime factor of N
+ * \param D        RSA private exponent
+ * \param E        RSA public exponent
+ * \param f_rng    PRNG to be used for primality check, or NULL
+ * \param p_rng    PRNG context for f_rng, or NULL
+ *
+ * \return
+ *                 - 0 if the following conditions are satisfied
+ *                   if all relevant parameters are provided:
+ *                    - P prime if f_rng != NULL (%)
+ *                    - Q prime if f_rng != NULL (%)
+ *                    - 1 < N = P * Q
+ *                    - 1 < D, E < N
+ *                    - D and E are modular inverses modulo P-1 and Q-1
+ *                   (%) This is only done if MBEDTLS_GENPRIME is defined.
+ *                 - A non-zero error code otherwise.
+ *
+ * \note           The function can be used with a restricted set of arguments
+ *                 to perform specific checks only. E.g., calling it with
+ *                 (-,P,-,-,-) and a PRNG amounts to a primality check for P.
+ */</pre>
+
+      <h4 id="mbedtls_rsa_validate_crt">Func <span>mbedtls_rsa_validate_crt</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_rsa_validate_crt( const mbedtls_mpi *P, const mbedtls_mpi *Q,
+                             const mbedtls_mpi *D, const mbedtls_mpi *DP,
+                             const mbedtls_mpi *DQ, const mbedtls_mpi *QP );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Check validity of RSA CRT parameters
+ *
+ * \note           This is a 'static' helper function not operating on
+ *                 an RSA context. Alternative implementations need not
+ *                 overwrite it.
+ *
+ * \param P        First prime factor of RSA modulus
+ * \param Q        Second prime factor of RSA modulus
+ * \param D        RSA private exponent
+ * \param DP       MPI to check for D modulo P-1
+ * \param DQ       MPI to check for D modulo P-1
+ * \param QP       MPI to check for the modular inverse of Q modulo P.
+ *
+ * \return
+ *                 - 0 if the following conditions are satisfied:
+ *                    - D = DP mod P-1 if P, D, DP != NULL
+ *                    - Q = DQ mod P-1 if P, D, DQ != NULL
+ *                    - QP = Q^-1 mod P if P, Q, QP != NULL
+ *                 - \c MBEDTLS_ERR_RSA_KEY_CHECK_FAILED if check failed,
+ *                   potentially including \c MBEDTLS_ERR_MPI_XXX if some
+ *                   MPI calculations failed.
+ *                 - \c MBEDTLS_ERR_RSA_BAD_INPUT_DATA if insufficient
+ *                   data was provided to check DP, DQ or QP.
+ *
+ * \note           The function can be used with a restricted set of arguments
+ *                 to perform specific checks only. E.g., calling it with the
+ *                 parameters (P, -, D, DP, -, -) will check DP = D mod P-1.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

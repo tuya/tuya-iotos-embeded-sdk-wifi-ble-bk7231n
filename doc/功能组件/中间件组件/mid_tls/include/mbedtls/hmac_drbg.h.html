@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#md.h" class="nav-sub-label">md.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#threading.h" class="nav-sub-label">threading.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_H" class="nav-sub-label">MBEDTLS_HMAC_DRBG_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG" class="nav-sub-label">MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG" class="nav-sub-label">MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_HMAC_DRBG_FILE_IO_ERROR" class="nav-sub-label">MBEDTLS_ERR_HMAC_DRBG_FILE_IO_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED" class="nav-sub-label">MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_RESEED_INTERVAL" class="nav-sub-label">MBEDTLS_HMAC_DRBG_RESEED_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_MAX_INPUT" class="nav-sub-label">MBEDTLS_HMAC_DRBG_MAX_INPUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_MAX_REQUEST" class="nav-sub-label">MBEDTLS_HMAC_DRBG_MAX_REQUEST</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT" class="nav-sub-label">MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_PR_OFF" class="nav-sub-label">MBEDTLS_HMAC_DRBG_PR_OFF</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_HMAC_DRBG_PR_ON" class="nav-sub-label">MBEDTLS_HMAC_DRBG_PR_ON</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_init" class="nav-sub-label">mbedtls_hmac_drbg_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_seed" class="nav-sub-label">mbedtls_hmac_drbg_seed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_seed_buf" class="nav-sub-label">mbedtls_hmac_drbg_seed_buf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_set_prediction_resistance" class="nav-sub-label">mbedtls_hmac_drbg_set_prediction_resistance</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_set_entropy_len" class="nav-sub-label">mbedtls_hmac_drbg_set_entropy_len</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_set_reseed_interval" class="nav-sub-label">mbedtls_hmac_drbg_set_reseed_interval</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_update_ret" class="nav-sub-label">mbedtls_hmac_drbg_update_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_reseed" class="nav-sub-label">mbedtls_hmac_drbg_reseed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_random_with_add" class="nav-sub-label">mbedtls_hmac_drbg_random_with_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_random" class="nav-sub-label">mbedtls_hmac_drbg_random</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_free" class="nav-sub-label">mbedtls_hmac_drbg_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_write_seed_file" class="nav-sub-label">mbedtls_hmac_drbg_write_seed_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_update_seed_file" class="nav-sub-label">mbedtls_hmac_drbg_update_seed_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_self_test" class="nav-sub-label">mbedtls_hmac_drbg_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_hmac_drbg_context;
+" class="nav-sub-label">mbedtls_hmac_drbg_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="md.h"><span>md.h</span></h4>
+      <pre class="doc-declare"><code>#include "md.h"
+</code></pre>
+      <pre class="doc-comment">#include "md.h"
+</pre>
+
+      <h4 id="threading.h"><span>threading.h</span></h4>
+      <pre class="doc-declare"><code>#include "threading.h"
+</code></pre>
+      <pre class="doc-comment">#include "threading.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_HMAC_DRBG_H">Marco <span>MBEDTLS_HMAC_DRBG_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG">Marco <span>MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG             -3 /**< Too many random requested in single call. */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Error codes
+ */</pre>
+
+      <h4 id="MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG">Marco <span>MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG               -5 /**< Input too large (Entropy + additional). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_HMAC_DRBG_FILE_IO_ERROR">Marco <span>MBEDTLS_ERR_HMAC_DRBG_FILE_IO_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_HMAC_DRBG_FILE_IO_ERROR               -7 /**< Read/write error in file. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED">Marco <span>MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED       -9 /**< The entropy source failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HMAC_DRBG_RESEED_INTERVAL">Marco <span>MBEDTLS_HMAC_DRBG_RESEED_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_RESEED_INTERVAL  10000  /**< Interval before reseed is performed by default */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HMAC_DRBG_MAX_INPUT">Marco <span>MBEDTLS_HMAC_DRBG_MAX_INPUT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_MAX_INPUT        256    /**< Maximum number of additional input bytes */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HMAC_DRBG_MAX_REQUEST">Marco <span>MBEDTLS_HMAC_DRBG_MAX_REQUEST</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_MAX_REQUEST      1024   /**< Maximum number of requested bytes per call */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT">Marco <span>MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT   384    /**< Maximum size of (re)seed buffer */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HMAC_DRBG_PR_OFF">Marco <span>MBEDTLS_HMAC_DRBG_PR_OFF</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_PR_OFF  0  /**< No prediction resistance       */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_HMAC_DRBG_PR_ON">Marco <span>MBEDTLS_HMAC_DRBG_PR_ON</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_HMAC_DRBG_PR_ON   1  /**< Prediction resistance enabled  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED   __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_hmac_drbg_init">Func <span>mbedtls_hmac_drbg_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_hmac_drbg_init( mbedtls_hmac_drbg_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG context initialization
+ *                      Makes the context ready for mbedtls_hmac_drbg_seed(),
+ *                      mbedtls_hmac_drbg_seed_buf() or
+ *                      mbedtls_hmac_drbg_free().
+ *
+ * \param ctx           HMAC_DRBG context to be initialized
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_seed">Func <span>mbedtls_hmac_drbg_seed</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_seed( mbedtls_hmac_drbg_context *ctx,
+                   const mbedtls_md_info_t * md_info,
+                   int (*f_entropy)(void *, unsigned char *, size_t),
+                   void *p_entropy,
+                   const unsigned char *custom,
+                   size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG initial seeding
+ *                      Seed and setup entropy source for future reseeds.
+ *
+ * \param ctx           HMAC_DRBG context to be seeded
+ * \param md_info       MD algorithm to use for HMAC_DRBG
+ * \param f_entropy     Entropy callback (p_entropy, buffer to fill, buffer
+ *                      length)
+ * \param p_entropy     Entropy context
+ * \param custom        Personalization data (Device specific identifiers)
+ *                      (Can be NULL)
+ * \param len           Length of personalization data
+ *
+ * \note                The "security strength" as defined by NIST is set to:
+ *                      128 bits if md_alg is SHA-1,
+ *                      192 bits if md_alg is SHA-224,
+ *                      256 bits if md_alg is SHA-256 or higher.
+ *                      Note that SHA-256 is just as efficient as SHA-224.
+ *
+ * \return              0 if successful, or
+ *                      MBEDTLS_ERR_MD_BAD_INPUT_DATA, or
+ *                      MBEDTLS_ERR_MD_ALLOC_FAILED, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED.
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_seed_buf">Func <span>mbedtls_hmac_drbg_seed_buf</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_seed_buf( mbedtls_hmac_drbg_context *ctx,
+                       const mbedtls_md_info_t * md_info,
+                       const unsigned char *data, size_t data_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Initilisation of simpified HMAC_DRBG (never reseeds).
+ *                      (For use with deterministic ECDSA.)
+ *
+ * \param ctx           HMAC_DRBG context to be initialised
+ * \param md_info       MD algorithm to use for HMAC_DRBG
+ * \param data          Concatenation of entropy string and additional data
+ * \param data_len      Length of data in bytes
+ *
+ * \return              0 if successful, or
+ *                      MBEDTLS_ERR_MD_BAD_INPUT_DATA, or
+ *                      MBEDTLS_ERR_MD_ALLOC_FAILED.
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_set_prediction_resistance">Func <span>mbedtls_hmac_drbg_set_prediction_resistance</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_hmac_drbg_set_prediction_resistance( mbedtls_hmac_drbg_context *ctx,
+                                         int resistance );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Enable / disable prediction resistance (Default: Off)
+ *
+ * Note: If enabled, entropy is used for ctx->entropy_len before each call!
+ *       Only use this if you have ample supply of good entropy!
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param resistance    MBEDTLS_HMAC_DRBG_PR_ON or MBEDTLS_HMAC_DRBG_PR_OFF
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_set_entropy_len">Func <span>mbedtls_hmac_drbg_set_entropy_len</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_hmac_drbg_set_entropy_len( mbedtls_hmac_drbg_context *ctx,
+                               size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Set the amount of entropy grabbed on each reseed
+ *                      (Default: given by the security strength, which
+ *                      depends on the hash used, see \c mbedtls_hmac_drbg_init() )
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param len           Amount of entropy to grab, in bytes
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_set_reseed_interval">Func <span>mbedtls_hmac_drbg_set_reseed_interval</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_hmac_drbg_set_reseed_interval( mbedtls_hmac_drbg_context *ctx,
+                                   int interval );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Set the reseed interval
+ *                      (Default: MBEDTLS_HMAC_DRBG_RESEED_INTERVAL)
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param interval      Reseed interval
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_update_ret">Func <span>mbedtls_hmac_drbg_update_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_update_ret( mbedtls_hmac_drbg_context *ctx,
+                      const unsigned char *additional, size_t add_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG update state
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param additional    Additional data to update state with, or NULL
+ * \param add_len       Length of additional data, or 0
+ *
+ * \return              \c 0 on success, or an error from the underlying
+ *                      hash calculation.
+ *
+ * \note                Additional data is optional, pass NULL and 0 as second
+ *                      third argument if no additional data is being used.
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_reseed">Func <span>mbedtls_hmac_drbg_reseed</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_reseed( mbedtls_hmac_drbg_context *ctx,
+                     const unsigned char *additional, size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG reseeding (extracts data from entropy source)
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param additional    Additional data to add to state (Can be NULL)
+ * \param len           Length of additional data
+ *
+ * \return              0 if successful, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_random_with_add">Func <span>mbedtls_hmac_drbg_random_with_add</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_random_with_add( void *p_rng,
+                              unsigned char *output, size_t output_len,
+                              const unsigned char *additional,
+                              size_t add_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG generate random with additional update input
+ *
+ * Note: Automatically reseeds if reseed_counter is reached or PR is enabled.
+ *
+ * \param p_rng         HMAC_DRBG context
+ * \param output        Buffer to fill
+ * \param output_len    Length of the buffer
+ * \param additional    Additional data to update with (can be NULL)
+ * \param add_len       Length of additional data (can be 0)
+ *
+ * \return              0 if successful, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG.
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_random">Func <span>mbedtls_hmac_drbg_random</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_random( void *p_rng, unsigned char *output, size_t out_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG generate random
+ *
+ * Note: Automatically reseeds if reseed_counter is reached or PR is enabled.
+ *
+ * \param p_rng         HMAC_DRBG context
+ * \param output        Buffer to fill
+ * \param out_len       Length of the buffer
+ *
+ * \return              0 if successful, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_free">Func <span>mbedtls_hmac_drbg_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_hmac_drbg_free( mbedtls_hmac_drbg_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Free an HMAC_DRBG context
+ *
+ * \param ctx           HMAC_DRBG context to free.
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_write_seed_file">Func <span>mbedtls_hmac_drbg_write_seed_file</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_write_seed_file( mbedtls_hmac_drbg_context *ctx, const char *path );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Write a seed file
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param path          Name of the file
+ *
+ * \return              0 if successful, 1 on file error, or
+ *                      MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_update_seed_file">Func <span>mbedtls_hmac_drbg_update_seed_file</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_update_seed_file( mbedtls_hmac_drbg_context *ctx, const char *path );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Read and update a seed file. Seed is added to this
+ *                      instance
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param path          Name of the file
+ *
+ * \return              0 if successful, 1 on file error,
+ *                      MBEDTLS_ERR_HMAC_DRBG_ENTROPY_SOURCE_FAILED or
+ *                      MBEDTLS_ERR_HMAC_DRBG_INPUT_TOO_BIG
+ */</pre>
+
+      <h4 id="mbedtls_hmac_drbg_self_test">Func <span>mbedtls_hmac_drbg_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_hmac_drbg_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Checkup routine
+ *
+ * \return              0 if successful, or 1 if the test failed
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_hmac_drbg_update(
+   mbedtls_hmac_drbg_context *ctx,
+   const unsigned char *additional, size_t add_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               HMAC_DRBG update state
+ *
+ * \deprecated          Superseded by mbedtls_hmac_drbg_update_ret()
+ *                      in 2.16.0.
+ *
+ * \param ctx           HMAC_DRBG context
+ * \param additional    Additional data to update state with, or NULL
+ * \param add_len       Length of additional data, or 0
+ *
+ * \note                Additional data is optional, pass NULL and 0 as second
+ *                      third argument if no additional data is being used.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_hmac_drbg_context;
+">Typedef <span>mbedtls_hmac_drbg_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_hmac_drbg_context
+{
+   /* Working state: the key K is not stored explicitely,
+     * but is implied by the HMAC context */
+   mbedtls_md_context_t md_ctx;                   /*!< HMAC context (inc. K)  */
+   unsigned char V[MBEDTLS_MD_MAX_SIZE]; /*!< V in the spec          */
+   int reseed_counter;                    /*!< reseed counter         */
+
+   /* Administrative state */
+   size_t entropy_len;        /*!< entropy bytes grabbed on each (re)seed */
+   int prediction_resistance; /*!< enable prediction resistance (Automatic
+                                     reseed before every random generation) */
+   int reseed_interval;       /*!< reseed interval   */
+
+   /* Callbacks */
+   int (*f_entropy)(void *, unsigned char *, size_t); /*!< entropy function */
+   void *p_entropy;           /*!< context for the entropy function        */
+
+#if defined(MBEDTLS_THREADING_C)
+   mbedtls_threading_mutex_t mutex;
+#endif
+} mbedtls_hmac_drbg_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * HMAC_DRBG context.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

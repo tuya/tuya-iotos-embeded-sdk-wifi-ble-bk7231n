@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#assert.h" class="nav-sub-label">assert.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sys/types.h" class="nav-sub-label">sys/types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#address.h" class="nav-sub-label">address.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_IO_H_" class="nav-sub-label">COAP_IO_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_RXBUFFER_SIZE" class="nav-sub-label">COAP_RXBUFFER_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_EMPTY" class="nav-sub-label">COAP_SOCKET_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_NOT_EMPTY" class="nav-sub-label">COAP_SOCKET_NOT_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_BOUND" class="nav-sub-label">COAP_SOCKET_BOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_CONNECTED" class="nav-sub-label">COAP_SOCKET_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_WANT_READ" class="nav-sub-label">COAP_SOCKET_WANT_READ</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_WANT_WRITE" class="nav-sub-label">COAP_SOCKET_WANT_WRITE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_WANT_ACCEPT" class="nav-sub-label">COAP_SOCKET_WANT_ACCEPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_WANT_CONNECT" class="nav-sub-label">COAP_SOCKET_WANT_CONNECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_CAN_READ" class="nav-sub-label">COAP_SOCKET_CAN_READ</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_CAN_WRITE" class="nav-sub-label">COAP_SOCKET_CAN_WRITE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_CAN_ACCEPT" class="nav-sub-label">COAP_SOCKET_CAN_ACCEPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_CAN_CONNECT" class="nav-sub-label">COAP_SOCKET_CAN_CONNECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_SOCKET_MULTICAST" class="nav-sub-label">COAP_SOCKET_MULTICAST</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_mfree_endpoint" class="nav-sub-label">coap_mfree_endpoint</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_connect_udp" class="nav-sub-label">coap_socket_connect_udp</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_bind_udp" class="nav-sub-label">coap_socket_bind_udp</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_connect_tcp1" class="nav-sub-label">coap_socket_connect_tcp1</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_connect_tcp2" class="nav-sub-label">coap_socket_connect_tcp2</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_bind_tcp" class="nav-sub-label">coap_socket_bind_tcp</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_accept_tcp" class="nav-sub-label">coap_socket_accept_tcp</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_close" class="nav-sub-label">coap_socket_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_send" class="nav-sub-label">coap_socket_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_write" class="nav-sub-label">coap_socket_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_read" class="nav-sub-label">coap_socket_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_send_pdu" class="nav-sub-label">coap_socket_send_pdu</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_network_send" class="nav-sub-label">coap_network_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_network_read" class="nav-sub-label">coap_network_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_packet_get_memmapped" class="nav-sub-label">coap_packet_get_memmapped</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_packet_set_addr" class="nav-sub-label">coap_packet_set_addr</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#" class="nav-sub-label"></a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_endpoint_t" class="nav-sub-label">coap_endpoint_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#SOCKET" class="nav-sub-label">SOCKET</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_flags_t" class="nav-sub-label">coap_socket_flags_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_socket_t;
+" class="nav-sub-label">coap_socket_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_packet_t" class="nav-sub-label">coap_packet_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_nack_reason_t;
+" class="nav-sub-label">coap_nack_reason_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="assert.h"><span>assert.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;assert.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <assert.h>
+</pre>
+
+      <h4 id="sys/types.h"><span>sys/types.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;sys/types.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <sys/types.h>
+</pre>
+
+      <h4 id="address.h"><span>address.h</span></h4>
+      <pre class="doc-declare"><code>#include "address.h"
+</code></pre>
+      <pre class="doc-comment">#include "address.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_IO_H_">Marco <span>COAP_IO_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_IO_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_RXBUFFER_SIZE">Marco <span>COAP_RXBUFFER_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_RXBUFFER_SIZE 1472
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_EMPTY">Marco <span>COAP_SOCKET_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_EMPTY       0 /**< the socket is not used */
+</code></pre>
+      <pre class="doc-comment">/**
+ * coap_socket_flags_t values
+ */</pre>
+
+      <h4 id="COAP_SOCKET_NOT_EMPTY">Marco <span>COAP_SOCKET_NOT_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_NOT_EMPTY   1 /**< the socket is not empty */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_BOUND">Marco <span>COAP_SOCKET_BOUND</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_BOUND       2 /**< the socket is bound */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_CONNECTED">Marco <span>COAP_SOCKET_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_CONNECTED   4 /**< the socket is connected */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_WANT_READ">Marco <span>COAP_SOCKET_WANT_READ</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_WANT_READ   16 /**< non blocking socket is waiting for reading */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_WANT_WRITE">Marco <span>COAP_SOCKET_WANT_WRITE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_WANT_WRITE  32 /**< non blocking socket is waiting for writing */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_WANT_ACCEPT">Marco <span>COAP_SOCKET_WANT_ACCEPT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_WANT_ACCEPT 64 /**< non blocking server socket is waiting for accept */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_WANT_CONNECT">Marco <span>COAP_SOCKET_WANT_CONNECT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_WANT_CONNECT 128 /**< non blocking client socket is waiting for connect */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_CAN_READ">Marco <span>COAP_SOCKET_CAN_READ</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_CAN_READ    256 /**< non blocking socket can now read without blocking */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_CAN_WRITE">Marco <span>COAP_SOCKET_CAN_WRITE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_CAN_WRITE   512 /**< non blocking socket can now write without blocking */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_CAN_ACCEPT">Marco <span>COAP_SOCKET_CAN_ACCEPT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_CAN_ACCEPT  1024 /**< non blocking server socket can now accept without blocking */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_CAN_CONNECT">Marco <span>COAP_SOCKET_CAN_CONNECT</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_CAN_CONNECT 2048 /**< non blocking client socket can now connect without blocking */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_SOCKET_MULTICAST">Marco <span>COAP_SOCKET_MULTICAST</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SOCKET_MULTICAST   4096 /**< socket is used for multicast communication */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_mfree_endpoint">Func <span>coap_mfree_endpoint</span></h4>
+      <pre class="doc-declare"><code>void coap_mfree_endpoint( struct coap_endpoint_t *ep );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_connect_udp">Func <span>coap_socket_connect_udp</span></h4>
+      <pre class="doc-declare"><code>int
+coap_socket_connect_udp(coap_socket_t *sock,
+                       const coap_address_t *local_if,
+                       const coap_address_t *server,
+                       int default_port,
+                       coap_address_t *local_addr,
+                       coap_address_t *remote_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_bind_udp">Func <span>coap_socket_bind_udp</span></h4>
+      <pre class="doc-declare"><code>int
+coap_socket_bind_udp(coap_socket_t *sock,
+                    const coap_address_t *listen_addr,
+                    coap_address_t *bound_addr );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_connect_tcp1">Func <span>coap_socket_connect_tcp1</span></h4>
+      <pre class="doc-declare"><code>int
+coap_socket_connect_tcp1(coap_socket_t *sock,
+                        const coap_address_t *local_if,
+                        const coap_address_t *server,
+                        int default_port,
+                        coap_address_t *local_addr,
+                        coap_address_t *remote_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_connect_tcp2">Func <span>coap_socket_connect_tcp2</span></h4>
+      <pre class="doc-declare"><code>int
+coap_socket_connect_tcp2(coap_socket_t *sock,
+                        coap_address_t *local_addr,
+                        coap_address_t *remote_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_bind_tcp">Func <span>coap_socket_bind_tcp</span></h4>
+      <pre class="doc-declare"><code>int
+coap_socket_bind_tcp(coap_socket_t *sock,
+                    const coap_address_t *listen_addr,
+                    coap_address_t *bound_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_accept_tcp">Func <span>coap_socket_accept_tcp</span></h4>
+      <pre class="doc-declare"><code>int
+coap_socket_accept_tcp(coap_socket_t *server,
+                      coap_socket_t *new_client,
+                      coap_address_t *local_addr,
+                      coap_address_t *remote_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_close">Func <span>coap_socket_close</span></h4>
+      <pre class="doc-declare"><code>void coap_socket_close(coap_socket_t *sock);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_send">Func <span>coap_socket_send</span></h4>
+      <pre class="doc-declare"><code>ssize_t
+coap_socket_send( coap_socket_t *sock, struct coap_session_t *session,
+                 const uint8_t *data, size_t data_len );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_write">Func <span>coap_socket_write</span></h4>
+      <pre class="doc-declare"><code>ssize_t
+coap_socket_write(coap_socket_t *sock, const uint8_t *data, size_t data_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_read">Func <span>coap_socket_read</span></h4>
+      <pre class="doc-declare"><code>ssize_t
+coap_socket_read(coap_socket_t *sock, uint8_t *data, size_t data_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_send_pdu">Func <span>coap_socket_send_pdu</span></h4>
+      <pre class="doc-declare"><code>ssize_t
+coap_socket_send_pdu( coap_socket_t *sock, struct coap_session_t *session,
+                     struct coap_pdu_t *pdu );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_network_send">Func <span>coap_network_send</span></h4>
+      <pre class="doc-declare"><code>ssize_t coap_network_send( coap_socket_t *sock, const struct coap_session_t *session, const uint8_t *data, size_t datalen );</code></pre>
+      <pre class="doc-comment">/**
+ * Function interface for data transmission. This function returns the number of
+ * bytes that have been transmitted, or a value less than zero on error.
+ *
+ * @param sock             Socket to send data with
+ * @param session          Addressing information for unconnected sockets, or NULL
+ * @param data             The data to send.
+ * @param datalen          The actual length of @p data.
+ *
+ * @return                 The number of bytes written on success, or a value
+ *                         less than zero on error.
+ */</pre>
+
+      <h4 id="coap_network_read">Func <span>coap_network_read</span></h4>
+      <pre class="doc-declare"><code>ssize_t coap_network_read( coap_socket_t *sock, struct coap_packet_t *packet );</code></pre>
+      <pre class="doc-comment">/**
+ * Function interface for reading data. This function returns the number of
+ * bytes that have been read, or a value less than zero on error. In case of an
+ * error, @p *packet is set to NULL.
+ *
+ * @param sock   Socket to read data from
+ * @param packet Received packet metadata and payload. src and dst should be preset.
+ *
+ * @return       The number of bytes received on success, or a value less than
+ *               zero on error.
+ */</pre>
+
+      <h4 id="coap_packet_get_memmapped">Func <span>coap_packet_get_memmapped</span></h4>
+      <pre class="doc-declare"><code>void coap_packet_get_memmapped(struct coap_packet_t *packet,
+                              unsigned char **address,
+                              size_t *length);</code></pre>
+      <pre class="doc-comment">/**
+ * Given a packet, set msg and msg_len to an address and length of the packet's
+ * data in memory.
+ * */</pre>
+
+      <h4 id="coap_packet_set_addr">Func <span>coap_packet_set_addr</span></h4>
+      <pre class="doc-declare"><code>void coap_packet_set_addr( struct coap_packet_t *packet, const coap_address_t *src,
+                          const coap_address_t *dst );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="">Variable <span></span></h4>
+      <pre class="doc-declare"><code>struct coap_packet_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_session_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_pdu_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_endpoint_t">Variable <span>coap_endpoint_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_endpoint_t *coap_malloc_endpoint( void );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *coap_packet_extract_pbuf(struct coap_packet_t *packet);</code></pre>
+      <pre class="doc-comment">/**
+ * Get the pbuf of a packet. The caller takes over responsibility for freeing
+ * the pbuf.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char *coap_socket_strerror( void );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="SOCKET">Typedef <span>SOCKET</span></h4>
+      <pre class="doc-declare"><code>typedef SOCKET coap_fd_t;
+#define coap_closesocket closesocket
+#define COAP_SOCKET_ERROR SOCKET_ERROR
+#define COAP_INVALID_SOCKET INVALID_SOCKET
+#else
+typedef int coap_fd_t;
+#define coap_closesocket tuya_hal_net_close
+#define COAP_SOCKET_ERROR (-1)
+#define COAP_INVALID_SOCKET (-1)</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_flags_t">Typedef <span>coap_socket_flags_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint16_t coap_socket_flags_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_socket_t;
+">Typedef <span>coap_socket_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_socket_t {
+#if defined(WITH_LWIP)
+ struct udp_pcb *pcb;
+#elif defined(WITH_CONTIKI)
+ void *conn;
+#else
+ coap_fd_t fd;
+#endif /* WITH_LWIP */
+ coap_socket_flags_t flags;
+} coap_socket_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_packet_t">Typedef <span>coap_packet_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_packet_t coap_packet_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_nack_reason_t;
+">Typedef <span>coap_nack_reason_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ COAP_NACK_TOO_MANY_RETRIES,
+ COAP_NACK_NOT_DELIVERABLE,
+ COAP_NACK_RST,
+ COAP_NACK_TLS_FAILED
+} coap_nack_reason_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

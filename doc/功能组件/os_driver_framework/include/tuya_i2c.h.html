@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver.h" class="nav-sub-label">tuya_driver.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_I2C_H__" class="nav-sub-label">__TUYA_I2C_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_WR" class="nav-sub-label">TUYA_I2C_WR</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_RD" class="nav-sub-label">TUYA_I2C_RD</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_ADDR_10BIT" class="nav-sub-label">TUYA_I2C_ADDR_10BIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_NO_START" class="nav-sub-label">TUYA_I2C_NO_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_IGNORE_NACK" class="nav-sub-label">TUYA_I2C_IGNORE_NACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_NO_READ_ACK" class="nav-sub-label">TUYA_I2C_NO_READ_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_NO_WRITE_ACK" class="nav-sub-label">TUYA_I2C_NO_WRITE_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_MASTER_CFG(__I2C, __ADDR)" class="nav-sub-label">TUYA_I2C_MASTER_CFG(__I2C, __ADDR)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2C_SW_CFG_INIT(__CFG, __SCL, __SDA, __DELAY)" class="nav-sub-label">TUYA_I2C_SW_CFG_INIT(__CFG, __SCL, __SDA, __DELAY)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_i2c_init" class="nav-sub-label">tuya_i2c_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_xfer" class="nav-sub-label">tuya_i2c_xfer</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_control" class="nav-sub-label">tuya_i2c_control</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_deinit" class="nav-sub-label">tuya_i2c_deinit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_master_send" class="nav-sub-label">tuya_i2c_master_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_master_recv" class="nav-sub-label">tuya_i2c_master_recv</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_sw_i2c_register" class="nav-sub-label">tuya_sw_i2c_register</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_i2c_port_t;
+" class="nav-sub-label">tuya_i2c_port_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_mode_t;
+" class="nav-sub-label">tuya_i2c_mode_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_type_t;
+" class="nav-sub-label">tuya_i2c_type_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_sw_cfg_t;
+" class="nav-sub-label">tuya_i2c_sw_cfg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_cfg_t;
+" class="nav-sub-label">tuya_i2c_cfg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_msg_t;
+" class="nav-sub-label">tuya_i2c_msg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_t" class="nav-sub-label">tuya_i2c_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_ops_t;
+" class="nav-sub-label">tuya_i2c_ops_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_driver.h"><span>tuya_driver.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_driver.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_driver.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_I2C_H__">Marco <span>__TUYA_I2C_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_I2C_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_WR">Marco <span>TUYA_I2C_WR</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_WR               0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_RD">Marco <span>TUYA_I2C_RD</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_RD              (1 << 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_ADDR_10BIT">Marco <span>TUYA_I2C_ADDR_10BIT</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_ADDR_10BIT      (1 << 2) // this is a ten bit chip address
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_NO_START">Marco <span>TUYA_I2C_NO_START</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_NO_START        (1 << 4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_IGNORE_NACK">Marco <span>TUYA_I2C_IGNORE_NACK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_IGNORE_NACK     (1 << 5)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_NO_READ_ACK">Marco <span>TUYA_I2C_NO_READ_ACK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_NO_READ_ACK     (1 << 6) // when I2C reading, we do not ACK
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_NO_WRITE_ACK">Marco <span>TUYA_I2C_NO_WRITE_ACK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_NO_WRITE_ACK    (1 << 7) // when I2C writing, we do not ACK
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_MASTER_CFG(__I2C, __ADDR)">Marco <span>TUYA_I2C_MASTER_CFG(__I2C, __ADDR)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_MASTER_CFG(__I2C, __ADDR)                                 \
+   (__I2C)->cfg.dev_addr  = __ADDR;                                      \
+   (__I2C)->cfg.mode      = TUYA_I2C_MODE_MASTER                         \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2C_SW_CFG_INIT(__CFG, __SCL, __SDA, __DELAY)">Marco <span>TUYA_I2C_SW_CFG_INIT(__CFG, __SCL, __SDA, __DELAY)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2C_SW_CFG_INIT(__CFG, __SCL, __SDA, __DELAY)                 \
+   (__CFG)->scl_pin       = __SCL;                                       \
+   (__CFG)->sda_pin       = __SDA;                                       \
+   (__CFG)->delay_count   = __DELAY;                                     \
+   (__CFG)->timeout       = 100
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_i2c_init">Variable <span>tuya_i2c_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2c_init   (tuya_i2c_t *i2c);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c init
+ * 
+ * @param[in] i2c refer to tuya_i2c_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2c_xfer">Variable <span>tuya_i2c_xfer</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2c_xfer    (tuya_i2c_t *i2c, tuya_i2c_msg_t *msg, uint8_t num);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c transfer
+ * 
+ * @param[in] i2c refer to tuya_i2c_t
+ * @param[in] msg refer to tuya_i2c_msg_t
+ * @param[in] num i2c number
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2c_control">Variable <span>tuya_i2c_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2c_control     (tuya_i2c_t *i2c, uint8_t cmd, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c control
+ * 
+ * @param[in] i2c refer to tuya_i2c_t
+ * @param[in] cmd control command
+ * @param[in] arg control argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2c_deinit">Variable <span>tuya_i2c_deinit</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2c_deinit    (tuya_i2c_t *i2c);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c deinit
+ * 
+ * @param[in] i2c refer to tuya_i2c_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2c_master_send">Variable <span>tuya_i2c_master_send</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2c_master_send   (tuya_i2c_t *i2c, uint16_t addr, uint16_t flags, void *buf, uint16_t count);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c master send 
+ * 
+ * @param[in] i2c refer to tuya_i2c_t
+ * @param[in] addr message address
+ * @param[in] flags read or write
+ * @param[in] buf send buf
+ * @param[in] count send length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2c_master_recv">Variable <span>tuya_i2c_master_recv</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2c_master_recv   (tuya_i2c_t *i2c, uint16_t addr, uint16_t flags, void *buf, uint16_t count);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c master receive 
+ * 
+ * @param[in] i2c refer to tuya_i2c_t
+ * @param[in] addr message address
+ * @param[in] flags read or write
+ * @param[in] buf receive buf
+ * @param[in] count receive length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_sw_i2c_register">Variable <span>tuya_sw_i2c_register</span></h4>
+      <pre class="doc-declare"><code>int tuya_sw_i2c_register   (tuya_i2c_port_t port, tuya_i2c_sw_cfg_t *cfg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2c register 
+ * 
+ * @param[in] port refer to tuya_i2c_port_t
+ * @param[in] cfg refer to tuya_i2c_sw_cfg_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_i2c_port_t;
+">Typedef <span>tuya_i2c_port_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2C0 = 0,
+   TUYA_I2C1,
+   TUYA_I2C2,
+   TUYA_I2C3,
+} tuya_i2c_port_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_mode_t;
+">Typedef <span>tuya_i2c_mode_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2C_MODE_MASTER = 0,
+   TUYA_I2C_MODE_SLAVE,
+} tuya_i2c_mode_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_type_t;
+">Typedef <span>tuya_i2c_type_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2C_TYPE_SW = 0,
+   TUYA_I2C_TYPE_HD,
+} tuya_i2c_type_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_sw_cfg_t;
+">Typedef <span>tuya_i2c_sw_cfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   uint8_t            sda_pin;
+   uint8_t            scl_pin;
+   uint32_t           delay_count;
+   uint32_t           timeout;   
+} tuya_i2c_sw_cfg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_cfg_t;
+">Typedef <span>tuya_i2c_cfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   uint8_t            mode;
+   uint16_t           dev_addr;
+} tuya_i2c_cfg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_msg_t;
+">Typedef <span>tuya_i2c_msg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   uint16_t           addr;
+   uint16_t           flags;
+   uint16_t           len;
+   uint8_t            *buf;
+} tuya_i2c_msg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_t">Typedef <span>tuya_i2c_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct tuya_i2c tuya_i2c_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_ops_t;
+">Typedef <span>tuya_i2c_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int  (*init)      (tuya_i2c_t *i2c, tuya_i2c_cfg_t *cfg);
+   int  (*xfer)      (tuya_i2c_t *i2c, tuya_i2c_msg_t *msg, uint8_t num);
+   int  (*control)   (tuya_i2c_t *i2c, uint8_t cmd, void *arg);
+   int  (*deinit)    (tuya_i2c_t *i2c);
+} tuya_i2c_ops_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

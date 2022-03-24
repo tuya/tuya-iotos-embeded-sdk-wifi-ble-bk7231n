@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#encode.h" class="nav-sub-label">encode.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#option.h" class="nav-sub-label">option.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#pdu.h" class="nav-sub-label">pdu.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_BLOCK_H_" class="nav-sub-label">COAP_BLOCK_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_MAX_BLOCK_SZX" class="nav-sub-label">COAP_MAX_BLOCK_SZX</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPT_BLOCK_LAST(opt)" class="nav-sub-label">COAP_OPT_BLOCK_LAST(opt)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPT_BLOCK_MORE(opt)" class="nav-sub-label">COAP_OPT_BLOCK_MORE(opt)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OPT_BLOCK_SZX(opt)" class="nav-sub-label">COAP_OPT_BLOCK_SZX(opt)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_opt_block_num" class="nav-sub-label">coap_opt_block_num</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_get_block" class="nav-sub-label">coap_get_block</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_write_block_opt" class="nav-sub-label">coap_write_block_opt</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_block" class="nav-sub-label">coap_add_block</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_add_data_blocked_response" class="nav-sub-label">coap_add_data_blocked_response</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_dm_add_data_response" class="nav-sub-label">coap_dm_add_data_response</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_resource_t" class="nav-sub-label">coap_resource_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_block_t;
+" class="nav-sub-label">coap_block_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="encode.h"><span>encode.h</span></h4>
+      <pre class="doc-declare"><code>#include "encode.h"
+</code></pre>
+      <pre class="doc-comment">#include "encode.h"
+</pre>
+
+      <h4 id="option.h"><span>option.h</span></h4>
+      <pre class="doc-declare"><code>#include "option.h"
+</code></pre>
+      <pre class="doc-comment">#include "option.h"
+</pre>
+
+      <h4 id="pdu.h"><span>pdu.h</span></h4>
+      <pre class="doc-declare"><code>#include "pdu.h"
+</code></pre>
+      <pre class="doc-comment">#include "pdu.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_BLOCK_H_">Marco <span>COAP_BLOCK_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_BLOCK_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_MAX_BLOCK_SZX">Marco <span>COAP_MAX_BLOCK_SZX</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MAX_BLOCK_SZX     6
+</code></pre>
+      <pre class="doc-comment">/**
+ * The largest value for the SZX component in a Block option.
+ */</pre>
+
+      <h4 id="COAP_OPT_BLOCK_LAST(opt)">Marco <span>COAP_OPT_BLOCK_LAST(opt)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPT_BLOCK_LAST(opt) \
+ (coap_opt_length(opt) ? (coap_opt_value(opt) + (coap_opt_length(opt)-1)) : 0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * Returns the value of the least significant byte of a Block option @p opt.
+ * For zero-length options (i.e. num == m == szx == 0), COAP_OPT_BLOCK_LAST
+ * returns @c NULL.
+ */</pre>
+
+      <h4 id="COAP_OPT_BLOCK_MORE(opt)">Marco <span>COAP_OPT_BLOCK_MORE(opt)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPT_BLOCK_MORE(opt) \
+ (coap_opt_length(opt) ? (*COAP_OPT_BLOCK_LAST(opt) & 8) : 0)
+</code></pre>
+      <pre class="doc-comment">/** Returns the value of the More-bit of a Block option @p opt. */</pre>
+
+      <h4 id="COAP_OPT_BLOCK_SZX(opt)">Marco <span>COAP_OPT_BLOCK_SZX(opt)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OPT_BLOCK_SZX(opt) \
+ (coap_opt_length(opt) ? (*COAP_OPT_BLOCK_LAST(opt) & 7) : 0)
+</code></pre>
+      <pre class="doc-comment">/** Returns the value of the SZX-field of a Block option @p opt. */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_opt_block_num">Func <span>coap_opt_block_num</span></h4>
+      <pre class="doc-declare"><code>unsigned int coap_opt_block_num(const coap_opt_t *block_opt);</code></pre>
+      <pre class="doc-comment">/**
+ * Returns the value of field @c num in the given block option @p block_opt.
+ */</pre>
+
+      <h4 id="coap_get_block">Func <span>coap_get_block</span></h4>
+      <pre class="doc-declare"><code>int coap_get_block(coap_pdu_t *pdu, uint16_t type, coap_block_t *block);</code></pre>
+      <pre class="doc-comment">/**
+ * Initializes @p block from @p pdu. @p type must be either COAP_OPTION_BLOCK1
+ * or COAP_OPTION_BLOCK2. When option @p type was found in @p pdu, @p block is
+ * initialized with values from this option and the function returns the value
+ * @c 1. Otherwise, @c 0 is returned.
+ *
+ * @param pdu   The pdu to search for option @p type.
+ * @param type  The option to search for (must be COAP_OPTION_BLOCK1 or
+ *              COAP_OPTION_BLOCK2).
+ * @param block The block structure to initilize.
+ *
+ * @return      @c 1 on success, @c 0 otherwise.
+ */</pre>
+
+      <h4 id="coap_write_block_opt">Func <span>coap_write_block_opt</span></h4>
+      <pre class="doc-declare"><code>int coap_write_block_opt(coap_block_t *block,
+                        uint16_t type,
+                        coap_pdu_t *pdu,
+                        size_t data_length);</code></pre>
+      <pre class="doc-comment">/**
+ * Writes a block option of type @p type to message @p pdu. If the requested
+ * block size is too large to fit in @p pdu, it is reduced accordingly. An
+ * exception is made for the final block when less space is required. The actual
+ * length of the resource is specified in @p data_length.
+ *
+ * This function may change *block to reflect the values written to @p pdu. As
+ * the function takes into consideration the remaining space @p pdu, no more
+ * options should be added after coap_write_block_opt() has returned.
+ *
+ * @param block       The block structure to use. On return, this object is
+ *                    updated according to the values that have been written to
+ *                    @p pdu.
+ * @param type        COAP_OPTION_BLOCK1 or COAP_OPTION_BLOCK2.
+ * @param pdu         The message where the block option should be written.
+ * @param data_length The length of the actual data that will be added the @p
+ *                    pdu by calling coap_add_block().
+ *
+ * @return            @c 1 on success, or a negative value on error.
+ */</pre>
+
+      <h4 id="coap_add_block">Func <span>coap_add_block</span></h4>
+      <pre class="doc-declare"><code>int coap_add_block(coap_pdu_t *pdu,
+                  unsigned int len,
+                  const uint8_t *data,
+                  unsigned int block_num,
+                  unsigned char block_szx);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds the @p block_num block of size 1 << (@p block_szx + 4) from source @p
+ * data to @p pdu.
+ *
+ * @param pdu       The message to add the block.
+ * @param len       The length of @p data.
+ * @param data      The source data to fill the block with.
+ * @param block_num The actual block number.
+ * @param block_szx Encoded size of block @p block_number.
+ *
+ * @return          @c 1 on success, @c 0 otherwise.
+ */</pre>
+
+      <h4 id="coap_add_data_blocked_response">Func <span>coap_add_data_blocked_response</span></h4>
+      <pre class="doc-declare"><code>void
+coap_add_data_blocked_response(struct coap_resource_t *resource,
+                              struct coap_session_t *session,
+                              coap_pdu_t *request,
+                              coap_pdu_t *response,
+                              const coap_binary_t *token,
+                              uint16_t media_type,
+                              int maxage,
+                              size_t length,
+                              const uint8_t* data);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds the appropriate part of @p data to the @p response pdu.  If blocks are
+ * required, then the appropriate block will be added to the PDU and sent.
+ * Adds a ETAG option that is the hash of the entire data if the data is to be
+ * split into blocks
+ * Used by a GET request handler.
+ *
+ * @param resource   The resource the data is associated with.
+ * @param session    The coap session.
+ * @param request    The requesting pdu.
+ * @param response   The response pdu.
+ * @param token      The token taken from the (original) requesting pdu.
+ * @param media_type The format of the data.
+ * @param maxage     The maxmimum life of the data. If @c -1, then there
+ *                   is no maxage.
+ * @param length     The total length of the data.
+ * @param data       The entire data block to transmit.
+ *
+ */</pre>
+
+      <h4 id="coap_dm_add_data_response">Func <span>coap_dm_add_data_response</span></h4>
+      <pre class="doc-declare"><code>void
+coap_dm_add_data_response(struct coap_resource_t *resource,
+                     struct coap_session_t *session,
+                     coap_pdu_t *request,
+                     coap_pdu_t *response,
+                     const coap_binary_t *token,
+                     uint16_t media_type,
+                     int maxage,
+                     size_t length,
+                     const uint8_t* data);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_resource_t">Variable <span>coap_resource_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_resource_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_session_t;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_block_t;
+">Typedef <span>coap_block_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ unsigned int num;      /**< block number */
+ unsigned int m:1;      /**< 1 if more blocks follow, 0 otherwise */
+ unsigned int szx:3;    /**< block size */
+} coap_block_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Structure of Block options.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

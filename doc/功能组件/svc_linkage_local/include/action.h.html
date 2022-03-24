@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#mem_pool.h" class="nav-sub-label">mem_pool.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_cJSON.h" class="nav-sub-label">ty_cJSON.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__ACTION_H" class="nav-sub-label">__ACTION_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#__ACTION_EXT" class="nav-sub-label">__ACTION_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__ACTION_EXT" class="nav-sub-label">__ACTION_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#RULE_ID_LEN" class="nav-sub-label">RULE_ID_LEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#actions_set_gw_vid" class="nav-sub-label">actions_set_gw_vid</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__ACTION_EXT" class="nav-sub-label">__ACTION_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__ACTION_EXT" class="nav-sub-label">__ACTION_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__ACTION_EXT" class="nav-sub-label">__ACTION_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__ACTION_EXT" class="nav-sub-label">__ACTION_EXT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ACTION_TP_T" class="nav-sub-label">ACTION_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_DP_SID_GID_S;" class="nav-sub-label">AT_DP_SID_GID_S;</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_DP_ISSUE_S;
+" class="nav-sub-label">AT_DP_ISSUE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_RULE_TRIGGER_S;
+" class="nav-sub-label">AT_RULE_TRIGGER_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_DELAY_S;
+" class="nav-sub-label">AT_DELAY_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ACTION_VAL_U;
+" class="nav-sub-label">ACTION_VAL_U;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_MULTI_S;
+" class="nav-sub-label">AT_MULTI_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_TOGGLE_S;
+" class="nav-sub-label">AT_TOGGLE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_SECURE_MODE_S;
+" class="nav-sub-label">AT_SECURE_MODE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_STEP_TYPE_E;
+" class="nav-sub-label">DP_STEP_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_DPSTEP_S;
+" class="nav-sub-label">AT_DPSTEP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#AT_GROUP_S;
+" class="nav-sub-label">AT_GROUP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ACTION_U;
+" class="nav-sub-label">ACTION_U;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ACTION_S;
+" class="nav-sub-label">ACTION_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ACTION_SET_S;
+" class="nav-sub-label">ACTION_SET_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DELAY_ACTION_SET_S;
+" class="nav-sub-label">DELAY_ACTION_SET_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ACTION_CHECK_GW_ID_FUNC" class="nav-sub-label">ACTION_CHECK_GW_ID_FUNC</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="mem_pool.h"><span>mem_pool.h</span></h4>
+      <pre class="doc-declare"><code>#include "mem_pool.h"
+</code></pre>
+      <pre class="doc-comment">#include "mem_pool.h"
+</pre>
+
+      <h4 id="ty_cJSON.h"><span>ty_cJSON.h</span></h4>
+      <pre class="doc-declare"><code>#include "ty_cJSON.h"
+</code></pre>
+      <pre class="doc-comment">#include "ty_cJSON.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__ACTION_H">Marco <span>__ACTION_H</span></h4>
+      <pre class="doc-declare"><code>#define __ACTION_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__ACTION_EXT">Marco <span>__ACTION_EXT</span></h4>
+      <pre class="doc-declare"><code>#define __ACTION_EXT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__ACTION_EXT">Marco <span>__ACTION_EXT</span></h4>
+      <pre class="doc-declare"><code>#define __ACTION_EXT extern
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RULE_ID_LEN">Marco <span>RULE_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define RULE_ID_LEN 20
+</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*************************micro define***********************
+***********************************************************/</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="actions_set_gw_vid">Func <span>actions_set_gw_vid</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET actions_set_gw_vid(IN CHAR_T *gw_vid);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="__ACTION_EXT">Variable <span>__ACTION_EXT</span></h4>
+      <pre class="doc-declare"><code>__ACTION_EXT \
+OPERATE_RET actions_parse(IN ty_cJSON *root,OUT ACTION_SET_S **act_set);</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*  Function: actions_parse
+*  Input: root
+*  Output: cond_set 
+*  Return: OPERATE_RET
+***********************************************************/</pre>
+
+      <h4 id="__ACTION_EXT">Variable <span>__ACTION_EXT</span></h4>
+      <pre class="doc-declare"><code>__ACTION_EXT \
+VOID free_action_set(INOUT ACTION_SET_S *action_set);</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*  Function: free_action_set
+*  Input: action_set
+*  Output: action_set 
+*  Return: OPERATE_RET
+***********************************************************/</pre>
+
+      <h4 id="__ACTION_EXT">Variable <span>__ACTION_EXT</span></h4>
+      <pre class="doc-declare"><code>__ACTION_EXT \
+VOID actions_dump_print(ACTION_SET_S *p_act_set);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__ACTION_EXT">Variable <span>__ACTION_EXT</span></h4>
+      <pre class="doc-declare"><code>__ACTION_EXT \
+OPERATE_RET actions_check_gw_id(IN CONST ty_cJSON *root, IN ACTION_CHECK_GW_ID_FUNC check_func);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="ACTION_TP_T">Typedef <span>ACTION_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T ACTION_TP_T;
+#define AT_DP      1 // dp issue
+#define AT_RULE    2 // rule trigger
+#define AT_DELAY   3 // delay event
+#define AT_MULTI   4 // multi event
+#define AT_TOGGLE  5 // toggle event
+#define AT_SECURE_MODE 6 //secure mode 
+#define AT_DP_STEP 7 // dp step event
+#define AT_GROUP   8  //group 
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AT_DP_SID_GID_S;">Typedef <span>AT_DP_SID_GID_S;</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *gid;
+   CHAR_T *sid;
+}AT_DP_SID_GID_S;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AT_DP_ISSUE_S;
+">Typedef <span>AT_DP_ISSUE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *mlk_dp_cmd; // {"cid":"xxx",dps:{"1":true,"2":100}}
+#if defined(LOCAL_SCENE) && (LOCAL_SCENE==1)
+   BOOL_T is_gs;//gid ,sid
+   AT_DP_SID_GID_S gs_id;
+#endif
+}AT_DP_ISSUE_S;
+</code></pre>
+      <pre class="doc-comment">// dp issue</pre>
+
+      <h4 id="AT_RULE_TRIGGER_S;
+">Typedef <span>AT_RULE_TRIGGER_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T id[RULE_ID_LEN+1]; //后续改成指针，外部复制
+}AT_RULE_TRIGGER_S;
+</code></pre>
+      <pre class="doc-comment">// rule trigger</pre>
+
+      <h4 id="AT_DELAY_S;
+">Typedef <span>AT_DELAY_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T msecond;
+}AT_DELAY_S;
+</code></pre>
+      <pre class="doc-comment">// delay event</pre>
+
+      <h4 id="ACTION_VAL_U;
+">Typedef <span>ACTION_VAL_U;
+</span></h4>
+      <pre class="doc-declare"><code>typedef union {
+   BOOL_T bl;
+   INT_T val; // notice:bitmap dp maxlen <= 31
+   CHAR_T *str;
+}ACTION_VAL_U;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AT_MULTI_S;
+">Typedef <span>AT_MULTI_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T cid[DEV_ID_LEN+1];
+   CHAR_T dp_id;
+   ACTION_VAL_U dp_val;
+   INT_T type;
+   CHAR_T flag;// first
+}AT_MULTI_S;
+</code></pre>
+      <pre class="doc-comment">// multi event</pre>
+
+      <h4 id="AT_TOGGLE_S;
+">Typedef <span>AT_TOGGLE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T cid[DEV_ID_LEN+1]; // device id
+   BYTE_T dp_id;
+}AT_TOGGLE_S;
+</code></pre>
+      <pre class="doc-comment">// toggle event</pre>
+
+      <h4 id="AT_SECURE_MODE_S;
+">Typedef <span>AT_SECURE_MODE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   //CHAR_T cid[DEV_ID_LEN+1]; // device id
+   INT_T mode;
+}AT_SECURE_MODE_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DP_STEP_TYPE_E;
+">Typedef <span>DP_STEP_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ DP_STEP_TYPE_LOW,
+ DP_STEP_TYPE_HIGH,
+}DP_STEP_TYPE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AT_DPSTEP_S;
+">Typedef <span>AT_DPSTEP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ CHAR_T cid[DEV_ID_LEN+1];
+ BYTE_T dp_id;
+ INT_T min;
+ INT_T max;
+ INT_T step;
+ DP_STEP_TYPE_E type;
+}AT_DPSTEP_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AT_GROUP_S;
+">Typedef <span>AT_GROUP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *mlk_dp_cmd; // {"cid":"000d6ffffe6d7101","ctype":2,"dps":{"3":false},"mbid":"10020"}
+}AT_GROUP_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ACTION_U;
+">Typedef <span>ACTION_U;
+</span></h4>
+      <pre class="doc-declare"><code>typedef union {
+   AT_DP_ISSUE_S dp_isu;
+   AT_RULE_TRIGGER_S rule_trig;
+   AT_DELAY_S delay;
+   AT_MULTI_S multi;
+   AT_TOGGLE_S dp_toggle;
+   AT_SECURE_MODE_S secure_mode;
+   AT_GROUP_S group;
+   AT_DPSTEP_S dp_step;
+}ACTION_U;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ACTION_S;
+">Typedef <span>ACTION_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   ACTION_TP_T ac_tp;
+   ACTION_U ac;
+   BOOL_T is_check;   //检查状态是否跟设置的一样，双控环路检查
+#if defined(ENABLE_LAN_LINKAGE_MASTER) && (ENABLE_LAN_LINKAGE_MASTER==1) 
+ CHAR_T *gw_id;			//当局域网联动时不为空，Malloc出来，记录网关ID或WIFI设备的虚拟ID
+ DP_PROP_TP_E dp_tp; 		//多控关联时，需要记录dp点的类型
+   DP_PROP_ENUM_S prop_enum;	//类型是枚举时，枚举值
+#endif   
+}ACTION_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ACTION_SET_S;
+">Typedef <span>ACTION_SET_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct s_action {
+   INT_T ruleType;
+   USHORT_T num;
+   ACTION_S action[0];
+}ACTION_SET_S;
+</code></pre>
+      <pre class="doc-comment">// action set </pre>
+
+      <h4 id="DELAY_ACTION_SET_S;
+">Typedef <span>DELAY_ACTION_SET_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   INT_T ruleType;
+   UINT_T index;
+   //ACTION_SET_S *action_set;
+   CHAR_T rule_id[RULE_ID_LEN+1];
+   BYTE_T ruleTypeLocal; //LINKAGE_RULE_LOCAL or LINKAGE_RULE_LAN
+ USHORT_T seq_no;	//rule seqno
+}DELAY_ACTION_SET_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ACTION_CHECK_GW_ID_FUNC">Typedef <span>ACTION_CHECK_GW_ID_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*ACTION_CHECK_GW_ID_FUNC)(IN CONST CHAR_T *gw_id);
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

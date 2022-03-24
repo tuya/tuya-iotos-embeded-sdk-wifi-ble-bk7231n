@@ -158,6 +158,8 @@ typedef struct {
      * accepted.
      */
     const char *resource;
+    /** initialzied redirect count, default is zero */
+    unsigned char redirect_cnt;
     /** The HTTP Protocol Version */
     http_ver_t version;
     /** Pointer to data buffer. NULL if GET request */
@@ -192,6 +194,8 @@ typedef struct {
         status_code is 200
     */
     const char *reason_phrase;
+    /** HTTP "Location" header field value */
+    const char *location;
     /** HTTP "Server" header field value */
     const char *server;
     /** Accept-Ranges */
@@ -302,6 +306,13 @@ enum wm_httpc_errno {
 #define HTTP_NOT_AUTH 401
 #define HTTP_FORBIDDEN 403
 #define HTTP_NOT_FOUND 404
+
+/* max redirect count */
+#define REDIRECT_CNT_MAX      5
+/* default redirect count */
+#define REDIRECT_CNT_DEFAULT  3
+/* zero means disable http redirect */
+#define REDIRECT_CNT_DISABLED 0
 
 /**
  * If the given URL has a scheme field, and it is https then the http
@@ -722,6 +733,23 @@ int httpc_write_chunked(http_session_t handle, const char *data, int len);
  */
 void http_close_session(http_session_t *handle);
 
+/**
+ * @brief This API is used to SET HTTP Redirect Limit Count
+ *
+ * @param[in] cnt The count of redirect, the max value should <= REDIRECT_CNT_MAX
+ *                  Set as zero, means disable http redirect function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET http_redirect_limit_set(IN UINT8_T cnt);
 
+/**
+ * @brief This API is used to GET HTTP Redirect Limit Count
+ *
+ * @param[in]
+ *
+ * @return count of http redirect
+ */
+UINT8_T http_redirect_limit_get(void);
 
 #endif /* _HTTPC_H_ */

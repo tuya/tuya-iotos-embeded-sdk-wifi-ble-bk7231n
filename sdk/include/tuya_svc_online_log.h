@@ -12,34 +12,51 @@
 #ifndef __TUYA_SVC_ONLINE_LOG_H__
 #define __TUYA_SVC_ONLINE_LOG_H__
 
+#include "tuya_cloud_types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /**
- * @brief 用户运行状态log上传
+ * @brief online log module initialization
  * 
- * @param[in] p_log: log字符串 
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @param[in] p_env: the online log enviroment, used to report to cloud 
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h
  */
-int tuya_svc_online_log_upload_runstat(const char *p_log);
+OPERATE_RET tuya_svc_online_log_init(const char *p_env);
 
 /**
- * @brief 用户实时log上传
+ * @brief online log module activate
  * 
- * @param[in] p_log: log字符串  
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h
  */
-int tuya_svc_online_log_upload_realtime(const char *p_log);
+OPERATE_RET tuya_svc_online_log_active(VOID);
+
+/**
+ * @brief upload user runtime status log
+ * 
+ * @param[in] p_log: the log string 
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_online_log_upload_runstat(const char *p_log);
+
+/**
+ * @brief upload user realtime log
+ * 
+ * @param[in] p_log: the log string 
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_online_log_upload_realtime(const char *p_log);
 
 
 /**
- * @brief 用户log seq上传
+ * @brief upload user sequnence log 
  * 
- * @param[in] p_log: custom seq log字符串  
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @param[in] p_log: custom sequnence log string  
+ * @return OPRT_OK on success, others on failed, please refer to tuya_error_code.h
  */
-int tuya_svc_online_log_upload_custom_seq_log(const char *p_log);
+OPERATE_RET tuya_svc_online_log_upload_custom_seq_log(const char *p_log);
 
 #ifdef __cplusplus
 }

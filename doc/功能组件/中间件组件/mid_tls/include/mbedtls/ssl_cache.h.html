@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ssl.h" class="nav-sub-label">ssl.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#threading.h" class="nav-sub-label">threading.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_SSL_CACHE_H" class="nav-sub-label">MBEDTLS_SSL_CACHE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT" class="nav-sub-label">MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES" class="nav-sub-label">MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_ssl_cache_init" class="nav-sub-label">mbedtls_ssl_cache_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_cache_get" class="nav-sub-label">mbedtls_ssl_cache_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_cache_set" class="nav-sub-label">mbedtls_ssl_cache_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_cache_set_timeout" class="nav-sub-label">mbedtls_ssl_cache_set_timeout</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_cache_set_max_entries" class="nav-sub-label">mbedtls_ssl_cache_set_max_entries</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_cache_free" class="nav-sub-label">mbedtls_ssl_cache_free</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_ssl_cache_context" class="nav-sub-label">mbedtls_ssl_cache_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_cache_entry" class="nav-sub-label">mbedtls_ssl_cache_entry</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="ssl.h"><span>ssl.h</span></h4>
+      <pre class="doc-declare"><code>#include "ssl.h"
+</code></pre>
+      <pre class="doc-comment">#include "ssl.h"
+</pre>
+
+      <h4 id="threading.h"><span>threading.h</span></h4>
+      <pre class="doc-declare"><code>#include "threading.h"
+</code></pre>
+      <pre class="doc-comment">#include "threading.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_SSL_CACHE_H">Marco <span>MBEDTLS_SSL_CACHE_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_SSL_CACHE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT">Marco <span>MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT      86400  /*!< 1 day  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES">Marco <span>MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES     50  /*!< Maximum entries in cache */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_ssl_cache_init">Func <span>mbedtls_ssl_cache_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_ssl_cache_init( mbedtls_ssl_cache_context *cache );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize an SSL cache context
+ *
+ * \param cache    SSL cache context
+ */</pre>
+
+      <h4 id="mbedtls_ssl_cache_get">Func <span>mbedtls_ssl_cache_get</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ssl_cache_get( void *data, mbedtls_ssl_session *session );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Cache get callback implementation
+ *                 (Thread-safe if MBEDTLS_THREADING_C is enabled)
+ *
+ * \param data     SSL cache context
+ * \param session  session to retrieve entry for
+ */</pre>
+
+      <h4 id="mbedtls_ssl_cache_set">Func <span>mbedtls_ssl_cache_set</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ssl_cache_set( void *data, const mbedtls_ssl_session *session );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Cache set callback implementation
+ *                 (Thread-safe if MBEDTLS_THREADING_C is enabled)
+ *
+ * \param data     SSL cache context
+ * \param session  session to store entry for
+ */</pre>
+
+      <h4 id="mbedtls_ssl_cache_set_timeout">Func <span>mbedtls_ssl_cache_set_timeout</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_ssl_cache_set_timeout( mbedtls_ssl_cache_context *cache, int timeout );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Set the cache timeout
+ *                 (Default: MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT (1 day))
+ *
+ *                 A timeout of 0 indicates no timeout.
+ *
+ * \param cache    SSL cache context
+ * \param timeout  cache entry timeout in seconds
+ */</pre>
+
+      <h4 id="mbedtls_ssl_cache_set_max_entries">Func <span>mbedtls_ssl_cache_set_max_entries</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_ssl_cache_set_max_entries( mbedtls_ssl_cache_context *cache, int max );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Set the maximum number of cache entries
+ *                 (Default: MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES (50))
+ *
+ * \param cache    SSL cache context
+ * \param max      cache entry maximum
+ */</pre>
+
+      <h4 id="mbedtls_ssl_cache_free">Func <span>mbedtls_ssl_cache_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_ssl_cache_free( mbedtls_ssl_cache_context *cache );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Free referenced items in a cache context and clear memory
+ *
+ * \param cache    SSL cache context
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_ssl_cache_context">Typedef <span>mbedtls_ssl_cache_context</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_ssl_cache_context mbedtls_ssl_cache_context;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_ssl_cache_entry">Typedef <span>mbedtls_ssl_cache_entry</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_ssl_cache_entry mbedtls_ssl_cache_entry;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

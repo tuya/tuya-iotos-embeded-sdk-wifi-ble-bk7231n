@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_base_defs.h" class="nav-sub-label">tuya_cloud_base_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_com_api.h" class="nav-sub-label">tuya_iot_com_api.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_IOT_BASE_API_H" class="nav-sub-label">__TUYA_IOT_BASE_API_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_soc_init(cbs, product_key, sw_ver)" class="nav-sub-label">tuya_iot_soc_init(cbs, product_key, sw_ver)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_reg_get_nw_stat_cb(nw_stat_cb)" class="nav-sub-label">tuya_iot_reg_get_nw_stat_cb(nw_stat_cb)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_set_gw_prod_info" class="nav-sub-label">tuya_iot_set_gw_prod_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dev_init" class="nav-sub-label">tuya_iot_dev_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_mcu_dev_init" class="nav-sub-label">tuya_iot_mcu_dev_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_soc_init_param" class="nav-sub-label">tuya_iot_soc_init_param</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_gw_unactive" class="nav-sub-label">tuya_iot_gw_unactive</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_gw_reset" class="nav-sub-label">tuya_iot_gw_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_reg_get_nw_stat_cb_params" class="nav-sub-label">tuya_iot_reg_get_nw_stat_cb_params</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_base_defs.h"><span>tuya_cloud_base_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_base_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_base_defs.h"
+</pre>
+
+      <h4 id="tuya_iot_com_api.h"><span>tuya_iot_com_api.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_com_api.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_com_api.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_IOT_BASE_API_H">Marco <span>__TUYA_IOT_BASE_API_H</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_IOT_BASE_API_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_soc_init(cbs, product_key, sw_ver)">Marco <span>tuya_iot_soc_init(cbs, product_key, sw_ver)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_soc_init(cbs, product_key, sw_ver) \
+       tuya_iot_soc_init_param(cbs, product_key, NULL, sw_ver)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_reg_get_nw_stat_cb(nw_stat_cb)">Marco <span>tuya_iot_reg_get_nw_stat_cb(nw_stat_cb)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_reg_get_nw_stat_cb(nw_stat_cb) \
+   tuya_iot_reg_get_nw_stat_cb_params(nw_stat_cb, 1);
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_iot_set_gw_prod_info">Func <span>tuya_iot_set_gw_prod_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_gw_prod_info(IN CONST GW_PROD_INFO_S *prod_info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_gw_prod_info 
+ * @desc set tuya-sdk product info (wired version)
+ *
+ * @param prod_info: tuya-sdk product info
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_dev_init">Func <span>tuya_iot_dev_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_init(IN CONST TY_IOT_CBS_S *cbs, IN CONST CHAR_T *firmware_key,
+                               IN CONST CHAR_T *product_key, IN CONST CHAR_T *sw_ver,IN CONST DEV_TYPE_T tp,
+                               IN CONST GW_ATTACH_ATTR_T *attr, IN CONST UINT_T attr_num);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_dev_init 
+ *
+ * @param cbs: tuya sdk user callbacks
+ * @param firmware_key
+ * @param product_key: product key/proudct id,get from tuya open platform
+ * @param sw_ver: netlink module software version format:xx.xx.xx (0<=x<=9)
+ * @param attr
+ * @param attr_num
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_mcu_dev_init">Func <span>tuya_iot_mcu_dev_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_mcu_dev_init(IN CONST TY_IOT_CBS_S *cbs,IN CONST CHAR_T *product_key, IN CONST CHAR_T *p_firmware_key,\
+                                           IN CONST CHAR_T *sw_ver,IN CONST CHAR_T *mcu_sw_ver);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_mcu_dev_init 
+ * @desc init tuya-sdk (wired version, [mcu] mode)
+ *
+ * @param cbs: tuya-sdk user callbacks
+ * @param product_key: product key
+ * @param p_firmware_key
+ * @param sw_ver: netlink module version.format:xx.xx.xx (0<=x<=9)
+ * @param mcu_sw_ver: mcu version format:xx.xx.xx (0<=x<=9)
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_soc_init_param">Func <span>tuya_iot_soc_init_param</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_soc_init_param(IN CONST TY_IOT_CBS_S *cbs,IN CONST CHAR_T *product_key,IN CONST CHAR_T *firmware_key,\
+                                     IN CONST CHAR_T *sw_ver);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_soc_init_param 
+ * @desc init tuya-sdk (wired version, [soc] mode)
+ *
+ * @param cbs: tuya-sdk user callbacks
+ * @param product_key: product key
+ * @param firmware_key: firmware key
+ * @param sw_ver: soc version.format:xx.xx.xx (0<=x<=9)
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_gw_unactive">Func <span>tuya_iot_gw_unactive</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_gw_unactive(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_gw_unactive 
+ * @desc unactive this hardware from tuya-cloud
+ *
+ * @param VOID
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_gw_reset">Func <span>tuya_iot_gw_reset</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_gw_reset(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_gw_reset 
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_reg_get_nw_stat_cb_params">Func <span>tuya_iot_reg_get_nw_stat_cb_params</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_reg_get_nw_stat_cb_params(IN CONST GET_NW_STAT_CB nw_stat_cb, IN CONST INT_T min_interval_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_reg_get_nw_stat_cb_params 
+ * @desc enable tuya-sdk network check. sdk will check the
+ *       network every 1 second. if network change, sdk
+ *       will notify by calling nw_stat_cb
+ *
+ * @param nw_stat_cb: network change callback
+ * @param min_interval_s
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

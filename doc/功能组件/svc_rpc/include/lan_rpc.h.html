@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#rpc_udp.h" class="nav-sub-label">rpc_udp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__LAN_RPC_H__" class="nav-sub-label">__LAN_RPC_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_ID_LEN" class="nav-sub-label">LAN_RPC_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_KEY_LEN" class="nav-sub-label">LAN_RPC_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_TIMEOUT" class="nav-sub-label">LAN_RPC_NODE_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_ADD" class="nav-sub-label">LAN_RPC_NODE_ADD</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_DEL" class="nav-sub-label">LAN_RPC_NODE_DEL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_REJOIN" class="nav-sub-label">LAN_RPC_NODE_REJOIN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lan_rpc_fd_get" class="nav-sub-label">lan_rpc_fd_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_node_timeout_check" class="nav-sub-label">lan_rpc_node_timeout_check</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_node_add" class="nav-sub-label">lan_rpc_node_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_node_find_by_ip" class="nav-sub-label">lan_rpc_node_find_by_ip</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_node_find_ip_by_id" class="nav-sub-label">lan_rpc_node_find_ip_by_id</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_node_key_set" class="nav-sub-label">lan_rpc_node_key_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_node_output" class="nav-sub-label">lan_rpc_node_output</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_session_key_set" class="nav-sub-label">lan_rpc_session_key_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_init" class="nav-sub-label">lan_rpc_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_slave_call_sync" class="nav-sub-label">lan_rpc_slave_call_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_master_call_sync" class="nav-sub-label">lan_rpc_master_call_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_call_async" class="nav-sub-label">lan_rpc_call_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_recv" class="nav-sub-label">lan_rpc_recv</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc_method_register" class="nav-sub-label">lan_rpc_method_register</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LAN_RPC_TYPE;
+" class="nav-sub-label">LAN_RPC_TYPE;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_S;
+" class="nav-sub-label">LAN_RPC_NODE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_MASTER_S;
+" class="nav-sub-label">LAN_RPC_MASTER_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_MASTER_GET_CB" class="nav-sub-label">LAN_RPC_MASTER_GET_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_STAT_CB" class="nav-sub-label">LAN_RPC_NODE_STAT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_NODE_OUTPUT_CB" class="nav-sub-label">LAN_RPC_NODE_OUTPUT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_RPC_CFG_S;
+" class="nav-sub-label">LAN_RPC_CFG_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="rpc_udp.h"><span>rpc_udp.h</span></h4>
+      <pre class="doc-declare"><code>#include "rpc_udp.h"
+</code></pre>
+      <pre class="doc-comment">#include "rpc_udp.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__LAN_RPC_H__">Marco <span>__LAN_RPC_H__</span></h4>
+      <pre class="doc-declare"><code>#define __LAN_RPC_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_ID_LEN">Marco <span>LAN_RPC_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LAN_RPC_ID_LEN                 (GW_ID_LEN)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_KEY_LEN">Marco <span>LAN_RPC_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LAN_RPC_KEY_LEN                (LOCAL_KEY_LEN)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_TIMEOUT">Marco <span>LAN_RPC_NODE_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define LAN_RPC_NODE_TIMEOUT            20
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_ADD">Marco <span>LAN_RPC_NODE_ADD</span></h4>
+      <pre class="doc-declare"><code>#define LAN_RPC_NODE_ADD                0  
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_DEL">Marco <span>LAN_RPC_NODE_DEL</span></h4>
+      <pre class="doc-declare"><code>#define LAN_RPC_NODE_DEL                1 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_REJOIN">Marco <span>LAN_RPC_NODE_REJOIN</span></h4>
+      <pre class="doc-declare"><code>#define LAN_RPC_NODE_REJOIN             2
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="lan_rpc_fd_get">Func <span>lan_rpc_fd_get</span></h4>
+      <pre class="doc-declare"><code>INT_T lan_rpc_fd_get(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get fd
+ *
+ * @return fd value
+ */</pre>
+
+      <h4 id="lan_rpc_node_timeout_check">Func <span>lan_rpc_node_timeout_check</span></h4>
+      <pre class="doc-declare"><code>VOID lan_rpc_node_timeout_check(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check timeout
+ * 
+ */</pre>
+
+      <h4 id="lan_rpc_node_add">Func <span>lan_rpc_node_add</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_node_add(LAN_RPC_NODE_S *node);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief node add
+ * 
+ * @param[in] node node value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_node_find_by_ip">Func <span>lan_rpc_node_find_by_ip</span></h4>
+      <pre class="doc-declare"><code>BOOL_T lan_rpc_node_find_by_ip(UINT_T ip, LAN_RPC_NODE_S *node);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief found node by ip
+ * 
+ * @param[in] ip key ip
+ * @param[out] node result node
+ *
+ * @return found TRUE,else false
+ */</pre>
+
+      <h4 id="lan_rpc_node_find_ip_by_id">Func <span>lan_rpc_node_find_ip_by_id</span></h4>
+      <pre class="doc-declare"><code>BOOL_T lan_rpc_node_find_ip_by_id(UINT8_T *id, UINT_T *ip);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief found ip by id
+ * 
+ * @param[in] id node id
+ * @param[out] ip result ip
+ *
+ * @return found TRUE,else false
+ */</pre>
+
+      <h4 id="lan_rpc_node_key_set">Func <span>lan_rpc_node_key_set</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_node_key_set(UINT8_T *id, UINT8_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief node key set
+ * 
+ * @param[in] id node id
+ * @param[in] key key value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_node_output">Func <span>lan_rpc_node_output</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_node_output(LAN_RPC_NODE_OUTPUT_CB node_output_cb, VOID *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief node output
+ * 
+ * @param[in] node_output_cb refer to LAN_RPC_NODE_OUTPUT_CB
+ * @param[in] arg argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_session_key_set">Func <span>lan_rpc_session_key_set</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_session_key_set(UINT8_T *session_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set session key
+ * 
+ * @param[in] session_key key value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_init">Func <span>lan_rpc_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_init(LAN_RPC_CFG_S *cfg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rpc init
+ * 
+ * @param[in] cfg refer to LAN_RPC_CFG_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_slave_call_sync">Func <span>lan_rpc_slave_call_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_slave_call_sync(JRPC_MSG_S *requset, JRPC_MSG_S *result, UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief slave rpc sync
+ * 
+ * @param[in] requset refer to JRPC_MSG_S
+ * @param[in] result refer to JRPC_MSG_S
+ * @param[in] timeout timeout
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_master_call_sync">Func <span>lan_rpc_master_call_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_master_call_sync(UINT8_T *id, JRPC_MSG_S *requset, JRPC_MSG_S *result, UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief master rpc sync
+ * 
+ * @param[in] id node id
+ * @param[in] requset refer to JRPC_MSG_S
+ * @param[in] result refer to JRPC_MSG_S
+ * @param[in] timeout timeout
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_call_async">Func <span>lan_rpc_call_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_call_async(UINT8_T *id, JRPC_MSG_S *requset, RPC_RET_CB cb, VOID *cb_param, UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rpc sync
+ * 
+ * @param[in] id node id
+ * @param[in] requset refer to JRPC_MSG_S
+ * @param[in] cb callback function
+ * @param[in] cb_param callback argument
+ * @param[in] timeout timeout
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_recv">Func <span>lan_rpc_recv</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_recv(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief rpc receive
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="lan_rpc_method_register">Func <span>lan_rpc_method_register</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_rpc_method_register(CHAR_T *name, RPC_METHOD_CB cb, VOID *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan rpc method register
+ * 
+ * @param[in] name key name
+ * @param[in] cb callback function
+ * @param[in] arg callback argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="LAN_RPC_TYPE;
+">Typedef <span>LAN_RPC_TYPE;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   LAN_RPC_SLAVER,
+   LAN_RPC_MASTER,
+} LAN_RPC_TYPE;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_S;
+">Typedef <span>LAN_RPC_NODE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T             ip;
+   INT_T              seqno;
+   USHORT_T           cap;
+   UINT8_T            id[LAN_RPC_ID_LEN + 1];
+   UINT8_T            key[LAN_RPC_KEY_LEN + 1]; //key是非字符串的
+} LAN_RPC_NODE_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_MASTER_S;
+">Typedef <span>LAN_RPC_MASTER_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT8_T            owner;
+   UINT8_T            stat;
+   LAN_RPC_NODE_S     node;
+} LAN_RPC_MASTER_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_MASTER_GET_CB">Typedef <span>LAN_RPC_MASTER_GET_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_RPC_MASTER_GET_CB)(LAN_RPC_MASTER_S *master);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_STAT_CB">Typedef <span>LAN_RPC_NODE_STAT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_RPC_NODE_STAT_CB)(UINT8_T stat, LAN_RPC_NODE_S *node);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_NODE_OUTPUT_CB">Typedef <span>LAN_RPC_NODE_OUTPUT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*LAN_RPC_NODE_OUTPUT_CB)(LAN_RPC_NODE_S *node, UINT16_T num, VOID *arg);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_RPC_CFG_S;
+">Typedef <span>LAN_RPC_CFG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT8_T                type;
+   LAN_RPC_NODE_STAT_CB   node_stat_cb;
+   LAN_RPC_MASTER_GET_CB  master_get_cb;
+} LAN_RPC_CFG_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

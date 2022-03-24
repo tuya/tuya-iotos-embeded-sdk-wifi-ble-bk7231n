@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/memp.h" class="nav-sub-label">lwip/memp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_MEM_H_" class="nav-sub-label">COAP_MEM_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_malloc_type(type, size)" class="nav-sub-label">coap_malloc_type(type, size)</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_free_type(type, p)" class="nav-sub-label">coap_free_type(type, p)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_memory_init" class="nav-sub-label">coap_memory_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_malloc_type" class="nav-sub-label">coap_malloc_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_free_type" class="nav-sub-label">coap_free_type</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_memory_tag_t;
+" class="nav-sub-label">coap_memory_tag_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h>
+</pre>
+
+      <h4 id="lwip/memp.h"><span>lwip/memp.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;lwip/memp.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <lwip/memp.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_MEM_H_">Marco <span>COAP_MEM_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_MEM_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_malloc_type(type, size)">Marco <span>coap_malloc_type(type, size)</span></h4>
+      <pre class="doc-declare"><code>#define coap_malloc_type(type, size) memp_malloc(MEMP_ ## type)
+</code></pre>
+      <pre class="doc-comment">/* It would be nice to check that size equals the size given at the memp
+ * declaration, but i currently don't see a standard way to check that without
+ * sourcing the custom memp pools and becoming dependent of its syntax
+ */</pre>
+
+      <h4 id="coap_free_type(type, p)">Marco <span>coap_free_type(type, p)</span></h4>
+      <pre class="doc-declare"><code>#define coap_free_type(type, p) memp_free(MEMP_ ## type, p)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_memory_init">Func <span>coap_memory_init</span></h4>
+      <pre class="doc-declare"><code>void coap_memory_init(void);</code></pre>
+      <pre class="doc-comment">/**
+ * Initializes libcoap's memory management.
+ * This function must be called once before coap_malloc() can be used on
+ * constrained devices.
+ */</pre>
+
+      <h4 id="coap_malloc_type">Func <span>coap_malloc_type</span></h4>
+      <pre class="doc-declare"><code>void *coap_malloc_type(coap_memory_tag_t type, size_t size);</code></pre>
+      <pre class="doc-comment">/**
+ * Allocates a chunk of @p size bytes and returns a pointer to the newly
+ * allocated memory. The @p type is used to select the appropriate storage
+ * container on constrained devices. The storage allocated by coap_malloc_type()
+ * must be released with coap_free_type().
+ *
+ * @param type The type of object to be stored.
+ * @param size The number of bytes requested.
+ * @return     A pointer to the allocated storage or @c NULL on error.
+ */</pre>
+
+      <h4 id="coap_free_type">Func <span>coap_free_type</span></h4>
+      <pre class="doc-declare"><code>void coap_free_type(coap_memory_tag_t type, void *p);</code></pre>
+      <pre class="doc-comment">/**
+ * Releases the memory that was allocated by coap_malloc_type(). The type tag @p
+ * type must be the same that was used for allocating the object pointed to by
+ * @p .
+ *
+ * @param type The type of the object to release.
+ * @param p    A pointer to memory that was allocated by coap_malloc_type().
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_memory_tag_t;
+">Typedef <span>coap_memory_tag_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ COAP_STRING,
+ COAP_ATTRIBUTE_NAME,
+ COAP_ATTRIBUTE_VALUE,
+ COAP_PACKET,
+ COAP_NODE,
+ COAP_CONTEXT,
+ COAP_ENDPOINT,
+ COAP_PDU,
+ COAP_PDU_BUF,
+ COAP_RESOURCE,
+ COAP_RESOURCEATTR,
+#ifdef HAVE_LIBTINYDTLS
+ COAP_DTLS_SESSION,
+#endif
+ COAP_SESSION,
+ COAP_OPTLIST,
+} coap_memory_tag_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Type specifiers for coap_malloc_type(). Memory objects can be typed to
+ * facilitate arrays of type objects to be used instead of dynamic memory
+ * management on constrained devices.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

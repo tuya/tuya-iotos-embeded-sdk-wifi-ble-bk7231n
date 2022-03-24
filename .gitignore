@@ -5,6 +5,7 @@
 *.asm
 *.axf
 *.bin
+platforms
 platforms/bk7231n/bk7231n_os/Debug
 platforms/bk7231n/bk7231n_os/tools/generate/config.json
 platforms/bk7231n/bk7231n_os/tools/generate/*.cpr

@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp.h" class="nav-sub-label">ppp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LCP_H" class="nav-sub-label">LCP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_VENDOR" class="nav-sub-label">CI_VENDOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MRU" class="nav-sub-label">CI_MRU</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_ASYNCMAP" class="nav-sub-label">CI_ASYNCMAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_AUTHTYPE" class="nav-sub-label">CI_AUTHTYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_QUALITY" class="nav-sub-label">CI_QUALITY</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MAGICNUMBER" class="nav-sub-label">CI_MAGICNUMBER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_PCOMPRESSION" class="nav-sub-label">CI_PCOMPRESSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_ACCOMPRESSION" class="nav-sub-label">CI_ACCOMPRESSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_FCSALTERN" class="nav-sub-label">CI_FCSALTERN</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_SDP" class="nav-sub-label">CI_SDP</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_NUMBERED" class="nav-sub-label">CI_NUMBERED</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_CALLBACK" class="nav-sub-label">CI_CALLBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MRRU" class="nav-sub-label">CI_MRRU</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_SSNHF" class="nav-sub-label">CI_SSNHF</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_EPDISC" class="nav-sub-label">CI_EPDISC</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MPPLUS" class="nav-sub-label">CI_MPPLUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_LDISC" class="nav-sub-label">CI_LDISC</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_LCPAUTH" class="nav-sub-label">CI_LCPAUTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_COBS" class="nav-sub-label">CI_COBS</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_PREFELIS" class="nav-sub-label">CI_PREFELIS</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MPHDRFMT" class="nav-sub-label">CI_MPHDRFMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_I18N" class="nav-sub-label">CI_I18N</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_SDL" class="nav-sub-label">CI_SDL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PROTREJ" class="nav-sub-label">PROTREJ</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECHOREQ" class="nav-sub-label">ECHOREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#ECHOREP" class="nav-sub-label">ECHOREP</a>
+              </li>
+      
+
+              <li>
+                <a href="#DISCREQ" class="nav-sub-label">DISCREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#IDENTIF" class="nav-sub-label">IDENTIF</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIMEREM" class="nav-sub-label">TIMEREM</a>
+              </li>
+      
+
+              <li>
+                <a href="#CBCP_OPT" class="nav-sub-label">CBCP_OPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEFMRU" class="nav-sub-label">DEFMRU</a>
+              </li>
+      
+
+              <li>
+                <a href="#MINMRU" class="nav-sub-label">MINMRU</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAXMRU" class="nav-sub-label">MAXMRU</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_ENDP_LEN" class="nav-sub-label">MAX_ENDP_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEFLOOPBACKFAIL" class="nav-sub-label">DEFLOOPBACKFAIL</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lcp_open" class="nav-sub-label">lcp_open</a>
+              </li>
+      
+
+              <li>
+                <a href="#lcp_close" class="nav-sub-label">lcp_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#lcp_lowerup" class="nav-sub-label">lcp_lowerup</a>
+              </li>
+      
+
+              <li>
+                <a href="#lcp_lowerdown" class="nav-sub-label">lcp_lowerdown</a>
+              </li>
+      
+
+              <li>
+                <a href="#lcp_sprotrej" class="nav-sub-label">lcp_sprotrej</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lcp_options;
+" class="nav-sub-label">lcp_options;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="ppp.h"><span>ppp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LCP_H">Marco <span>LCP_H</span></h4>
+      <pre class="doc-declare"><code>#define LCP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_VENDOR">Marco <span>CI_VENDOR</span></h4>
+      <pre class="doc-declare"><code>#define CI_VENDOR 0 /* Vendor Specific */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Options.
+ */</pre>
+
+      <h4 id="CI_MRU">Marco <span>CI_MRU</span></h4>
+      <pre class="doc-declare"><code>#define CI_MRU	1 /* Maximum Receive Unit */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_ASYNCMAP">Marco <span>CI_ASYNCMAP</span></h4>
+      <pre class="doc-declare"><code>#define CI_ASYNCMAP 2 /* Async Control Character Map */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_AUTHTYPE">Marco <span>CI_AUTHTYPE</span></h4>
+      <pre class="doc-declare"><code>#define CI_AUTHTYPE 3 /* Authentication Type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_QUALITY">Marco <span>CI_QUALITY</span></h4>
+      <pre class="doc-declare"><code>#define CI_QUALITY 4 /* Quality Protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MAGICNUMBER">Marco <span>CI_MAGICNUMBER</span></h4>
+      <pre class="doc-declare"><code>#define CI_MAGICNUMBER 5 /* Magic Number */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_PCOMPRESSION">Marco <span>CI_PCOMPRESSION</span></h4>
+      <pre class="doc-declare"><code>#define CI_PCOMPRESSION 7 /* Protocol Field Compression */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_ACCOMPRESSION">Marco <span>CI_ACCOMPRESSION</span></h4>
+      <pre class="doc-declare"><code>#define CI_ACCOMPRESSION 8 /* Address/Control Field Compression */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_FCSALTERN">Marco <span>CI_FCSALTERN</span></h4>
+      <pre class="doc-declare"><code>#define CI_FCSALTERN 9 /* FCS-Alternatives */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_SDP">Marco <span>CI_SDP</span></h4>
+      <pre class="doc-declare"><code>#define CI_SDP	10 /* Self-Describing-Pad */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_NUMBERED">Marco <span>CI_NUMBERED</span></h4>
+      <pre class="doc-declare"><code>#define CI_NUMBERED 11 /* Numbered-Mode */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_CALLBACK">Marco <span>CI_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>#define CI_CALLBACK 13 /* callback */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MRRU">Marco <span>CI_MRRU</span></h4>
+      <pre class="doc-declare"><code>#define CI_MRRU	17 /* max reconstructed receive unit; multilink */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_SSNHF">Marco <span>CI_SSNHF</span></h4>
+      <pre class="doc-declare"><code>#define CI_SSNHF 18 /* short sequence numbers for multilink */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_EPDISC">Marco <span>CI_EPDISC</span></h4>
+      <pre class="doc-declare"><code>#define CI_EPDISC 19 /* endpoint discriminator */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MPPLUS">Marco <span>CI_MPPLUS</span></h4>
+      <pre class="doc-declare"><code>#define CI_MPPLUS 22 /* Multi-Link-Plus-Procedure */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_LDISC">Marco <span>CI_LDISC</span></h4>
+      <pre class="doc-declare"><code>#define CI_LDISC 23 /* Link-Discriminator */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_LCPAUTH">Marco <span>CI_LCPAUTH</span></h4>
+      <pre class="doc-declare"><code>#define CI_LCPAUTH 24 /* LCP Authentication */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_COBS">Marco <span>CI_COBS</span></h4>
+      <pre class="doc-declare"><code>#define CI_COBS	25 /* Consistent Overhead Byte Stuffing */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_PREFELIS">Marco <span>CI_PREFELIS</span></h4>
+      <pre class="doc-declare"><code>#define CI_PREFELIS 26 /* Prefix Elision */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MPHDRFMT">Marco <span>CI_MPHDRFMT</span></h4>
+      <pre class="doc-declare"><code>#define CI_MPHDRFMT 27 /* MP Header Format */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_I18N">Marco <span>CI_I18N</span></h4>
+      <pre class="doc-declare"><code>#define CI_I18N	28 /* Internationalization */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_SDL">Marco <span>CI_SDL</span></h4>
+      <pre class="doc-declare"><code>#define CI_SDL	29 /* Simple Data Link */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PROTREJ">Marco <span>PROTREJ</span></h4>
+      <pre class="doc-declare"><code>#define PROTREJ	8 /* Protocol Reject */
+</code></pre>
+      <pre class="doc-comment">/*
+ * LCP-specific packet types (code numbers).
+ */</pre>
+
+      <h4 id="ECHOREQ">Marco <span>ECHOREQ</span></h4>
+      <pre class="doc-declare"><code>#define ECHOREQ	9 /* Echo Request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ECHOREP">Marco <span>ECHOREP</span></h4>
+      <pre class="doc-declare"><code>#define ECHOREP	10 /* Echo Reply */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DISCREQ">Marco <span>DISCREQ</span></h4>
+      <pre class="doc-declare"><code>#define DISCREQ	11 /* Discard Request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IDENTIF">Marco <span>IDENTIF</span></h4>
+      <pre class="doc-declare"><code>#define IDENTIF	12 /* Identification */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TIMEREM">Marco <span>TIMEREM</span></h4>
+      <pre class="doc-declare"><code>#define TIMEREM	13 /* Time Remaining */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CBCP_OPT">Marco <span>CBCP_OPT</span></h4>
+      <pre class="doc-declare"><code>#define CBCP_OPT 6 /* Use callback control protocol */
+</code></pre>
+      <pre class="doc-comment">/* Value used as data for CI_CALLBACK option */</pre>
+
+      <h4 id="DEFMRU">Marco <span>DEFMRU</span></h4>
+      <pre class="doc-declare"><code>#define DEFMRU 1500	/* Try for this */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MINMRU">Marco <span>MINMRU</span></h4>
+      <pre class="doc-declare"><code>#define MINMRU 128	/* No MRUs below this */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAXMRU">Marco <span>MAXMRU</span></h4>
+      <pre class="doc-declare"><code>#define MAXMRU 16384	/* Normally limit MRU to this */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_ENDP_LEN">Marco <span>MAX_ENDP_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MAX_ENDP_LEN 20 /* maximum length of discriminator value */
+</code></pre>
+      <pre class="doc-comment">/* An endpoint discriminator, used with multilink. */</pre>
+
+      <h4 id="DEFLOOPBACKFAIL">Marco <span>DEFLOOPBACKFAIL</span></h4>
+      <pre class="doc-declare"><code>#define DEFLOOPBACKFAIL 10
+</code></pre>
+      <pre class="doc-comment">/* Default number of times we receive our magic number from the peer
+   before deciding the link is looped-back. */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="lcp_open">Func <span>lcp_open</span></h4>
+      <pre class="doc-declare"><code>void lcp_open(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lcp_close">Func <span>lcp_close</span></h4>
+      <pre class="doc-declare"><code>void lcp_close(ppp_pcb *pcb, const char *reason);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lcp_lowerup">Func <span>lcp_lowerup</span></h4>
+      <pre class="doc-declare"><code>void lcp_lowerup(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lcp_lowerdown">Func <span>lcp_lowerdown</span></h4>
+      <pre class="doc-declare"><code>void lcp_lowerdown(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lcp_sprotrej">Func <span>lcp_sprotrej</span></h4>
+      <pre class="doc-declare"><code>void lcp_sprotrej(ppp_pcb *pcb, u_char *p, int len);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="lcp_options;
+">Typedef <span>lcp_options;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct lcp_options {
+   unsigned int passive          :1; /* Don't die if we don't get a response */
+   unsigned int silent           :1; /* Wait for the other end to start first */
+#if 0 /* UNUSED */
+   unsigned int restart          :1; /* Restart vs. exit after close */
+#endif /* UNUSED */
+   unsigned int neg_mru          :1; /* Negotiate the MRU? */
+   unsigned int neg_asyncmap     :1; /* Negotiate the async map? */
+#if PAP_SUPPORT
+   unsigned int neg_upap         :1; /* Ask for UPAP authentication? */
+#endif /* PAP_SUPPORT */
+#if CHAP_SUPPORT
+   unsigned int neg_chap         :1; /* Ask for CHAP authentication? */
+#endif /* CHAP_SUPPORT */
+#if EAP_SUPPORT
+   unsigned int neg_eap          :1; /* Ask for EAP authentication? */
+#endif /* EAP_SUPPORT */
+   unsigned int neg_magicnumber  :1; /* Ask for magic number? */
+   unsigned int neg_pcompression :1; /* HDLC Protocol Field Compression? */
+   unsigned int neg_accompression :1; /* HDLC Address/Control Field Compression? */
+#if LQR_SUPPORT
+   unsigned int neg_lqr          :1; /* Negotiate use of Link Quality Reports */
+#endif /* LQR_SUPPORT */
+   unsigned int neg_cbcp         :1; /* Negotiate use of CBCP */
+#ifdef HAVE_MULTILINK
+   unsigned int neg_mrru         :1; /* negotiate multilink MRRU */
+#endif /* HAVE_MULTILINK */
+   unsigned int neg_ssnhf        :1; /* negotiate short sequence numbers */
+   unsigned int neg_endpoint     :1; /* negotiate endpoint discriminator */
+
+   u16_t mru;		/* Value of MRU */
+#ifdef HAVE_MULTILINK
+   u16_t mrru;		/* Value of MRRU, and multilink enable */
+#endif /* MULTILINK */
+#if CHAP_SUPPORT
+   u8_t chap_mdtype;	/* which MD types (hashing algorithm) */
+#endif /* CHAP_SUPPORT */
+   u32_t asyncmap;	/* Value of async map */
+   u32_t magicnumber;
+   u8_t numloops;	/* Number of loops during magic number neg. */
+#if LQR_SUPPORT
+   u32_t lqr_period; /* Reporting period for LQR 1/100ths second */
+#endif /* LQR_SUPPORT */
+   struct epdisc endpoint; /* endpoint discriminator */
+} lcp_options;
+</code></pre>
+      <pre class="doc-comment">/*
+ * The state of options is described by an lcp_options structure.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

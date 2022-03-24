@@ -1,0 +1,1105 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_alt.h" class="nav-sub-label">aes_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_AES_H" class="nav-sub-label">MBEDTLS_AES_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_AES_ENCRYPT" class="nav-sub-label">MBEDTLS_AES_ENCRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_AES_DECRYPT" class="nav-sub-label">MBEDTLS_AES_DECRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_AES_INVALID_KEY_LENGTH" class="nav-sub-label">MBEDTLS_ERR_AES_INVALID_KEY_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH" class="nav-sub-label">MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_AES_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_AES_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_AES_FEATURE_UNAVAILABLE" class="nav-sub-label">MBEDTLS_ERR_AES_FEATURE_UNAVAILABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_AES_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_AES_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#inline" class="nav-sub-label">inline</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_aes_init" class="nav-sub-label">mbedtls_aes_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_free" class="nav-sub-label">mbedtls_aes_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_xts_init" class="nav-sub-label">mbedtls_aes_xts_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_xts_free" class="nav-sub-label">mbedtls_aes_xts_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_setkey_enc" class="nav-sub-label">mbedtls_aes_setkey_enc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_setkey_dec" class="nav-sub-label">mbedtls_aes_setkey_dec</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_xts_setkey_enc" class="nav-sub-label">mbedtls_aes_xts_setkey_enc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_xts_setkey_dec" class="nav-sub-label">mbedtls_aes_xts_setkey_dec</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_ecb" class="nav-sub-label">mbedtls_aes_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_cbc" class="nav-sub-label">mbedtls_aes_crypt_cbc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_xts" class="nav-sub-label">mbedtls_aes_crypt_xts</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_cfb128" class="nav-sub-label">mbedtls_aes_crypt_cfb128</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_cfb8" class="nav-sub-label">mbedtls_aes_crypt_cfb8</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_ofb" class="nav-sub-label">mbedtls_aes_crypt_ofb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_crypt_ctr" class="nav-sub-label">mbedtls_aes_crypt_ctr</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_aes_encrypt" class="nav-sub-label">mbedtls_internal_aes_encrypt</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_aes_decrypt" class="nav-sub-label">mbedtls_internal_aes_decrypt</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_self_test" class="nav-sub-label">mbedtls_aes_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_aes_context;
+" class="nav-sub-label">
+mbedtls_aes_context;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_xts_context;" class="nav-sub-label">mbedtls_aes_xts_context;</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="aes_alt.h"><span>aes_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "aes_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "aes_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_AES_H">Marco <span>MBEDTLS_AES_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AES_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_AES_ENCRYPT">Marco <span>MBEDTLS_AES_ENCRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AES_ENCRYPT    1 /**< AES encryption. */
+</code></pre>
+      <pre class="doc-comment">/* padlock.c and aesni.c rely on these values! */</pre>
+
+      <h4 id="MBEDTLS_AES_DECRYPT">Marco <span>MBEDTLS_AES_DECRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AES_DECRYPT    0 /**< AES decryption. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_AES_INVALID_KEY_LENGTH">Marco <span>MBEDTLS_ERR_AES_INVALID_KEY_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_AES_INVALID_KEY_LENGTH               -32 /**< Invalid key length. */
+</code></pre>
+      <pre class="doc-comment">/* Error codes in range 0x0020-0x0022 */</pre>
+
+      <h4 id="MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH">Marco <span>MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH             -34 /**< Invalid data input length. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_AES_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_AES_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_AES_BAD_INPUT_DATA                   -33 /**< Invalid input data. */
+</code></pre>
+      <pre class="doc-comment">/* Error codes in range 0x0021-0x0025 */</pre>
+
+      <h4 id="MBEDTLS_ERR_AES_FEATURE_UNAVAILABLE">Marco <span>MBEDTLS_ERR_AES_FEATURE_UNAVAILABLE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_AES_FEATURE_UNAVAILABLE              -35 /**< Feature not available. For example, an unsupported AES key size. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_AES_FEATURE_UNAVAILABLE is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_ERR_AES_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_AES_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_AES_HW_ACCEL_FAILED                  -37 /**< AES hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_AES_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="inline">Marco <span>inline</span></h4>
+      <pre class="doc-declare"><code>#define inline __inline
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_aes_init">Func <span>mbedtls_aes_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_aes_init( mbedtls_aes_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function initializes the specified AES context.
+ *
+ *                 It must be the first API called before using
+ *                 the context.
+ *
+ * \param ctx      The AES context to initialize. This must not be \c NULL.
+ */</pre>
+
+      <h4 id="mbedtls_aes_free">Func <span>mbedtls_aes_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_aes_free( mbedtls_aes_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function releases and clears the specified AES context.
+ *
+ * \param ctx      The AES context to clear.
+ *                 If this is \c NULL, this function does nothing.
+ *                 Otherwise, the context must have been at least initialized.
+ */</pre>
+
+      <h4 id="mbedtls_aes_xts_init">Func <span>mbedtls_aes_xts_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_aes_xts_init( mbedtls_aes_xts_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function initializes the specified AES XTS context.
+ *
+ *                 It must be the first API called before using
+ *                 the context.
+ *
+ * \param ctx      The AES XTS context to initialize. This must not be \c NULL.
+ */</pre>
+
+      <h4 id="mbedtls_aes_xts_free">Func <span>mbedtls_aes_xts_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_aes_xts_free( mbedtls_aes_xts_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function releases and clears the specified AES XTS context.
+ *
+ * \param ctx      The AES XTS context to clear.
+ *                 If this is \c NULL, this function does nothing.
+ *                 Otherwise, the context must have been at least initialized.
+ */</pre>
+
+      <h4 id="mbedtls_aes_setkey_enc">Func <span>mbedtls_aes_setkey_enc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_setkey_enc( mbedtls_aes_context *ctx, const unsigned char *key,
+                   unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function sets the encryption key.
+ *
+ * \param ctx      The AES context to which the key should be bound.
+ *                 It must be initialized.
+ * \param key      The encryption key.
+ *                 This must be a readable buffer of size \p keybits bits.
+ * \param keybits  The size of data passed in bits. Valid options are:
+ *                 <ul><li>128 bits</li>
+ *                 <li>192 bits</li>
+ *                 <li>256 bits</li></ul>
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_AES_INVALID_KEY_LENGTH on failure.
+ */</pre>
+
+      <h4 id="mbedtls_aes_setkey_dec">Func <span>mbedtls_aes_setkey_dec</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_setkey_dec( mbedtls_aes_context *ctx, const unsigned char *key,
+                   unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function sets the decryption key.
+ *
+ * \param ctx      The AES context to which the key should be bound.
+ *                 It must be initialized.
+ * \param key      The decryption key.
+ *                 This must be a readable buffer of size \p keybits bits.
+ * \param keybits  The size of data passed. Valid options are:
+ *                 <ul><li>128 bits</li>
+ *                 <li>192 bits</li>
+ *                 <li>256 bits</li></ul>
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_AES_INVALID_KEY_LENGTH on failure.
+ */</pre>
+
+      <h4 id="mbedtls_aes_xts_setkey_enc">Func <span>mbedtls_aes_xts_setkey_enc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_xts_setkey_enc( mbedtls_aes_xts_context *ctx,
+                               const unsigned char *key,
+                               unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function prepares an XTS context for encryption and
+ *                 sets the encryption key.
+ *
+ * \param ctx      The AES XTS context to which the key should be bound.
+ *                 It must be initialized.
+ * \param key      The encryption key. This is comprised of the XTS key1
+ *                 concatenated with the XTS key2.
+ *                 This must be a readable buffer of size \p keybits bits.
+ * \param keybits  The size of \p key passed in bits. Valid options are:
+ *                 <ul><li>256 bits (each of key1 and key2 is a 128-bit key)</li>
+ *                 <li>512 bits (each of key1 and key2 is a 256-bit key)</li></ul>
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_AES_INVALID_KEY_LENGTH on failure.
+ */</pre>
+
+      <h4 id="mbedtls_aes_xts_setkey_dec">Func <span>mbedtls_aes_xts_setkey_dec</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_xts_setkey_dec( mbedtls_aes_xts_context *ctx,
+                               const unsigned char *key,
+                               unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function prepares an XTS context for decryption and
+ *                 sets the decryption key.
+ *
+ * \param ctx      The AES XTS context to which the key should be bound.
+ *                 It must be initialized.
+ * \param key      The decryption key. This is comprised of the XTS key1
+ *                 concatenated with the XTS key2.
+ *                 This must be a readable buffer of size \p keybits bits.
+ * \param keybits  The size of \p key passed in bits. Valid options are:
+ *                 <ul><li>256 bits (each of key1 and key2 is a 128-bit key)</li>
+ *                 <li>512 bits (each of key1 and key2 is a 256-bit key)</li></ul>
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_AES_INVALID_KEY_LENGTH on failure.
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_ecb">Func <span>mbedtls_aes_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_ecb( mbedtls_aes_context *ctx,
+                   int mode,
+                   const unsigned char input[16],
+                   unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function performs an AES single-block encryption or
+ *                 decryption operation.
+ *
+ *                 It performs the operation defined in the \p mode parameter
+ *                 (encrypt or decrypt), on the input data buffer defined in
+ *                 the \p input parameter.
+ *
+ *                 mbedtls_aes_init(), and either mbedtls_aes_setkey_enc() or
+ *                 mbedtls_aes_setkey_dec() must be called before the first
+ *                 call to this API with the same context.
+ *
+ * \param ctx      The AES context to use for encryption or decryption.
+ *                 It must be initialized and bound to a key.
+ * \param mode     The AES operation: #MBEDTLS_AES_ENCRYPT or
+ *                 #MBEDTLS_AES_DECRYPT.
+ * \param input    The buffer holding the input data.
+ *                 It must be readable and at least \c 16 Bytes long.
+ * \param output   The buffer where the output data will be written.
+ *                 It must be writeable and at least \c 16 Bytes long.
+
+ * \return         \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_cbc">Func <span>mbedtls_aes_crypt_cbc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_cbc( mbedtls_aes_context *ctx,
+                   int mode,
+                   size_t length,
+                   unsigned char iv[16],
+                   const unsigned char *input,
+                   unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief  This function performs an AES-CBC encryption or decryption operation
+ *         on full blocks.
+ *
+ *         It performs the operation defined in the \p mode
+ *         parameter (encrypt/decrypt), on the input data buffer defined in
+ *         the \p input parameter.
+ *
+ *         It can be called as many times as needed, until all the input
+ *         data is processed. mbedtls_aes_init(), and either
+ *         mbedtls_aes_setkey_enc() or mbedtls_aes_setkey_dec() must be called
+ *         before the first call to this API with the same context.
+ *
+ * \note   This function operates on full blocks, that is, the input size
+ *         must be a multiple of the AES block size of \c 16 Bytes.
+ *
+ * \note   Upon exit, the content of the IV is updated so that you can
+ *         call the same function again on the next
+ *         block(s) of data and get the same result as if it was
+ *         encrypted in one call. This allows a "streaming" usage.
+ *         If you need to retain the contents of the IV, you should
+ *         either save it manually or use the cipher module instead.
+ *
+ *
+ * \param ctx      The AES context to use for encryption or decryption.
+ *                 It must be initialized and bound to a key.
+ * \param mode     The AES operation: #MBEDTLS_AES_ENCRYPT or
+ *                 #MBEDTLS_AES_DECRYPT.
+ * \param length   The length of the input data in Bytes. This must be a
+ *                 multiple of the block size (\c 16 Bytes).
+ * \param iv       Initialization vector (updated after use).
+ *                 It must be a readable and writeable buffer of \c 16 Bytes.
+ * \param input    The buffer holding the input data.
+ *                 It must be readable and of size \p length Bytes.
+ * \param output   The buffer holding the output data.
+ *                 It must be writeable and of size \p length Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH
+ *                 on failure.
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_xts">Func <span>mbedtls_aes_crypt_xts</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_xts( mbedtls_aes_xts_context *ctx,
+                          int mode,
+                          size_t length,
+                          const unsigned char data_unit[16],
+                          const unsigned char *input,
+                          unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief      This function performs an AES-XTS encryption or decryption
+ *             operation for an entire XTS data unit.
+ *
+ *             AES-XTS encrypts or decrypts blocks based on their location as
+ *             defined by a data unit number. The data unit number must be
+ *             provided by \p data_unit.
+ *
+ *             NIST SP 800-38E limits the maximum size of a data unit to 2^20
+ *             AES blocks. If the data unit is larger than this, this function
+ *             returns #MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH.
+ *
+ * \param ctx          The AES XTS context to use for AES XTS operations.
+ *                     It must be initialized and bound to a key.
+ * \param mode         The AES operation: #MBEDTLS_AES_ENCRYPT or
+ *                     #MBEDTLS_AES_DECRYPT.
+ * \param length       The length of a data unit in Bytes. This can be any
+ *                     length between 16 bytes and 2^24 bytes inclusive
+ *                     (between 1 and 2^20 block cipher blocks).
+ * \param data_unit    The address of the data unit encoded as an array of 16
+ *                     bytes in little-endian format. For disk encryption, this
+ *                     is typically the index of the block device sector that
+ *                     contains the data.
+ * \param input        The buffer holding the input data (which is an entire
+ *                     data unit). This function reads \p length Bytes from \p
+ *                     input.
+ * \param output       The buffer holding the output data (which is an entire
+ *                     data unit). This function writes \p length Bytes to \p
+ *                     output.
+ *
+ * \return             \c 0 on success.
+ * \return             #MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH if \p length is
+ *                     smaller than an AES block in size (16 Bytes) or if \p
+ *                     length is larger than 2^20 blocks (16 MiB).
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_cfb128">Func <span>mbedtls_aes_crypt_cfb128</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_cfb128( mbedtls_aes_context *ctx,
+                      int mode,
+                      size_t length,
+                      size_t *iv_off,
+                      unsigned char iv[16],
+                      const unsigned char *input,
+                      unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief This function performs an AES-CFB128 encryption or decryption
+ *        operation.
+ *
+ *        It performs the operation defined in the \p mode
+ *        parameter (encrypt or decrypt), on the input data buffer
+ *        defined in the \p input parameter.
+ *
+ *        For CFB, you must set up the context with mbedtls_aes_setkey_enc(),
+ *        regardless of whether you are performing an encryption or decryption
+ *        operation, that is, regardless of the \p mode parameter. This is
+ *        because CFB mode uses the same key schedule for encryption and
+ *        decryption.
+ *
+ * \note  Upon exit, the content of the IV is updated so that you can
+ *        call the same function again on the next
+ *        block(s) of data and get the same result as if it was
+ *        encrypted in one call. This allows a "streaming" usage.
+ *        If you need to retain the contents of the
+ *        IV, you must either save it manually or use the cipher
+ *        module instead.
+ *
+ *
+ * \param ctx      The AES context to use for encryption or decryption.
+ *                 It must be initialized and bound to a key.
+ * \param mode     The AES operation: #MBEDTLS_AES_ENCRYPT or
+ *                 #MBEDTLS_AES_DECRYPT.
+ * \param length   The length of the input data in Bytes.
+ * \param iv_off   The offset in IV (updated after use).
+ *                 It must point to a valid \c size_t.
+ * \param iv       The initialization vector (updated after use).
+ *                 It must be a readable and writeable buffer of \c 16 Bytes.
+ * \param input    The buffer holding the input data.
+ *                 It must be readable and of size \p length Bytes.
+ * \param output   The buffer holding the output data.
+ *                 It must be writeable and of size \p length Bytes.
+ *
+ * \return         \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_cfb8">Func <span>mbedtls_aes_crypt_cfb8</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_cfb8( mbedtls_aes_context *ctx,
+                   int mode,
+                   size_t length,
+                   unsigned char iv[16],
+                   const unsigned char *input,
+                   unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief This function performs an AES-CFB8 encryption or decryption
+ *        operation.
+ *
+ *        It performs the operation defined in the \p mode
+ *        parameter (encrypt/decrypt), on the input data buffer defined
+ *        in the \p input parameter.
+ *
+ *        Due to the nature of CFB, you must use the same key schedule for
+ *        both encryption and decryption operations. Therefore, you must
+ *        use the context initialized with mbedtls_aes_setkey_enc() for
+ *        both #MBEDTLS_AES_ENCRYPT and #MBEDTLS_AES_DECRYPT.
+ *
+ * \note  Upon exit, the content of the IV is updated so that you can
+ *        call the same function again on the next
+ *        block(s) of data and get the same result as if it was
+ *        encrypted in one call. This allows a "streaming" usage.
+ *        If you need to retain the contents of the
+ *        IV, you should either save it manually or use the cipher
+ *        module instead.
+ *
+ *
+ * \param ctx      The AES context to use for encryption or decryption.
+ *                 It must be initialized and bound to a key.
+ * \param mode     The AES operation: #MBEDTLS_AES_ENCRYPT or
+ *                 #MBEDTLS_AES_DECRYPT
+ * \param length   The length of the input data.
+ * \param iv       The initialization vector (updated after use).
+ *                 It must be a readable and writeable buffer of \c 16 Bytes.
+ * \param input    The buffer holding the input data.
+ *                 It must be readable and of size \p length Bytes.
+ * \param output   The buffer holding the output data.
+ *                 It must be writeable and of size \p length Bytes.
+ *
+ * \return         \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_ofb">Func <span>mbedtls_aes_crypt_ofb</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_ofb( mbedtls_aes_context *ctx,
+                      size_t length,
+                      size_t *iv_off,
+                      unsigned char iv[16],
+                      const unsigned char *input,
+                      unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       This function performs an AES-OFB (Output Feedback Mode)
+ *              encryption or decryption operation.
+ *
+ *              For OFB, you must set up the context with
+ *              mbedtls_aes_setkey_enc(), regardless of whether you are
+ *              performing an encryption or decryption operation. This is
+ *              because OFB mode uses the same key schedule for encryption and
+ *              decryption.
+ *
+ *              The OFB operation is identical for encryption or decryption,
+ *              therefore no operation mode needs to be specified.
+ *
+ * \note        Upon exit, the content of iv, the Initialisation Vector, is
+ *              updated so that you can call the same function again on the next
+ *              block(s) of data and get the same result as if it was encrypted
+ *              in one call. This allows a "streaming" usage, by initialising
+ *              iv_off to 0 before the first call, and preserving its value
+ *              between calls.
+ *
+ *              For non-streaming use, the iv should be initialised on each call
+ *              to a unique value, and iv_off set to 0 on each call.
+ *
+ *              If you need to retain the contents of the initialisation vector,
+ *              you must either save it manually or use the cipher module
+ *              instead.
+ *
+ * \warning     For the OFB mode, the initialisation vector must be unique
+ *              every encryption operation. Reuse of an initialisation vector
+ *              will compromise security.
+ *
+ * \param ctx      The AES context to use for encryption or decryption.
+ *                 It must be initialized and bound to a key.
+ * \param length   The length of the input data.
+ * \param iv_off   The offset in IV (updated after use).
+ *                 It must point to a valid \c size_t.
+ * \param iv       The initialization vector (updated after use).
+ *                 It must be a readable and writeable buffer of \c 16 Bytes.
+ * \param input    The buffer holding the input data.
+ *                 It must be readable and of size \p length Bytes.
+ * \param output   The buffer holding the output data.
+ *                 It must be writeable and of size \p length Bytes.
+ *
+ * \return         \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_aes_crypt_ctr">Func <span>mbedtls_aes_crypt_ctr</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_crypt_ctr( mbedtls_aes_context *ctx,
+                      size_t length,
+                      size_t *nc_off,
+                      unsigned char nonce_counter[16],
+                      unsigned char stream_block[16],
+                      const unsigned char *input,
+                      unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief      This function performs an AES-CTR encryption or decryption
+ *             operation.
+ *
+ *             This function performs the operation defined in the \p mode
+ *             parameter (encrypt/decrypt), on the input data buffer
+ *             defined in the \p input parameter.
+ *
+ *             Due to the nature of CTR, you must use the same key schedule
+ *             for both encryption and decryption operations. Therefore, you
+ *             must use the context initialized with mbedtls_aes_setkey_enc()
+ *             for both #MBEDTLS_AES_ENCRYPT and #MBEDTLS_AES_DECRYPT.
+ *
+ * \warning    You must never reuse a nonce value with the same key. Doing so
+ *             would void the encryption for the two messages encrypted with
+ *             the same nonce and key.
+ *
+ *             There are two common strategies for managing nonces with CTR:
+ *
+ *             1. You can handle everything as a single message processed over
+ *             successive calls to this function. In that case, you want to
+ *             set \p nonce_counter and \p nc_off to 0 for the first call, and
+ *             then preserve the values of \p nonce_counter, \p nc_off and \p
+ *             stream_block across calls to this function as they will be
+ *             updated by this function.
+ *
+ *             With this strategy, you must not encrypt more than 2**128
+ *             blocks of data with the same key.
+ *
+ *             2. You can encrypt separate messages by dividing the \p
+ *             nonce_counter buffer in two areas: the first one used for a
+ *             per-message nonce, handled by yourself, and the second one
+ *             updated by this function internally.
+ *
+ *             For example, you might reserve the first 12 bytes for the
+ *             per-message nonce, and the last 4 bytes for internal use. In that
+ *             case, before calling this function on a new message you need to
+ *             set the first 12 bytes of \p nonce_counter to your chosen nonce
+ *             value, the last 4 to 0, and \p nc_off to 0 (which will cause \p
+ *             stream_block to be ignored). That way, you can encrypt at most
+ *             2**96 messages of up to 2**32 blocks each with the same key.
+ *
+ *             The per-message nonce (or information sufficient to reconstruct
+ *             it) needs to be communicated with the ciphertext and must be unique.
+ *             The recommended way to ensure uniqueness is to use a message
+ *             counter. An alternative is to generate random nonces, but this
+ *             limits the number of messages that can be securely encrypted:
+ *             for example, with 96-bit random nonces, you should not encrypt
+ *             more than 2**32 messages with the same key.
+ *
+ *             Note that for both stategies, sizes are measured in blocks and
+ *             that an AES block is 16 bytes.
+ *
+ * \warning    Upon return, \p stream_block contains sensitive data. Its
+ *             content must not be written to insecure storage and should be
+ *             securely discarded as soon as it's no longer needed.
+ *
+ * \param ctx              The AES context to use for encryption or decryption.
+ *                         It must be initialized and bound to a key.
+ * \param length           The length of the input data.
+ * \param nc_off           The offset in the current \p stream_block, for
+ *                         resuming within the current cipher stream. The
+ *                         offset pointer should be 0 at the start of a stream.
+ *                         It must point to a valid \c size_t.
+ * \param nonce_counter    The 128-bit nonce and counter.
+ *                         It must be a readable-writeable buffer of \c 16 Bytes.
+ * \param stream_block     The saved stream block for resuming. This is
+ *                         overwritten by the function.
+ *                         It must be a readable-writeable buffer of \c 16 Bytes.
+ * \param input            The buffer holding the input data.
+ *                         It must be readable and of size \p length Bytes.
+ * \param output           The buffer holding the output data.
+ *                         It must be writeable and of size \p length Bytes.
+ *
+ * \return                 \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_internal_aes_encrypt">Func <span>mbedtls_internal_aes_encrypt</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_aes_encrypt( mbedtls_aes_context *ctx,
+                                 const unsigned char input[16],
+                                 unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Internal AES block encryption function. This is only
+ *                  exposed to allow overriding it using
+ *                  \c MBEDTLS_AES_ENCRYPT_ALT.
+ *
+ * \param ctx       The AES context to use for encryption.
+ * \param input     The plaintext block.
+ * \param output    The output (ciphertext) block.
+ *
+ * \return          \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_internal_aes_decrypt">Func <span>mbedtls_internal_aes_decrypt</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_aes_decrypt( mbedtls_aes_context *ctx,
+                                 const unsigned char input[16],
+                                 unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Internal AES block decryption function. This is only
+ *                  exposed to allow overriding it using see
+ *                  \c MBEDTLS_AES_DECRYPT_ALT.
+ *
+ * \param ctx       The AES context to use for decryption.
+ * \param input     The ciphertext block.
+ * \param output    The output (plaintext) block.
+ *
+ * \return          \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_aes_self_test">Func <span>mbedtls_aes_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine.
+ *
+ * \return         \c 0 on success.
+ * \return         \c 1 on failure.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_aes_encrypt( mbedtls_aes_context *ctx,
+                                            const unsigned char input[16],
+                                            unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Deprecated internal AES block encryption function
+ *                  without return value.
+ *
+ * \deprecated      Superseded by mbedtls_internal_aes_encrypt()
+ *
+ * \param ctx       The AES context to use for encryption.
+ * \param input     Plaintext block.
+ * \param output    Output (ciphertext) block.
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_aes_decrypt( mbedtls_aes_context *ctx,
+                                            const unsigned char input[16],
+                                            unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Deprecated internal AES block decryption function
+ *                  without return value.
+ *
+ * \deprecated      Superseded by mbedtls_internal_aes_decrypt()
+ *
+ * \param ctx       The AES context to use for decryption.
+ * \param input     Ciphertext block.
+ * \param output    Output (plaintext) block.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_aes_context;
+">Typedef <span>
+mbedtls_aes_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_aes_context
+{
+   int nr;                    /*!< The number of rounds. */
+   uint32_t *rk;              /*!< AES round keys. */
+   uint32_t buf[68];          /*!< Unaligned data buffer. This buffer can
+                                     hold 32 extra Bytes, which can be used for
+                                     one of the following purposes:
+                                     <ul><li>Alignment if VIA padlock is
+                                             used.</li>
+                                     <li>Simplifying key expansion in the 256-bit
+                                         case by generating an extra round key.
+                                         </li></ul> */
+}
+mbedtls_aes_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief The AES context-type definition.
+ */</pre>
+
+      <h4 id="mbedtls_aes_xts_context;">Typedef <span>mbedtls_aes_xts_context;</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_aes_xts_context
+{
+   mbedtls_aes_context crypt; /*!< The AES context to use for AES block
+                                        encryption or decryption. */
+   mbedtls_aes_context tweak; /*!< The AES context used for tweak
+                                        computation. */
+} mbedtls_aes_xts_context;</code></pre>
+      <pre class="doc-comment">/**
+ * \brief The AES XTS context-type definition.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,741 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/iana.h" class="nav-sub-label">lwip/prot/iana.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_HTTPD_OPTS_H" class="nav-sub-label">LWIP_HDR_APPS_HTTPD_OPTS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_CGI" class="nav-sub-label">LWIP_HTTPD_CGI</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_CGI_SSI" class="nav-sub-label">LWIP_HTTPD_CGI_SSI</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SSI" class="nav-sub-label">LWIP_HTTPD_SSI</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SSI_RAW" class="nav-sub-label">LWIP_HTTPD_SSI_RAW</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SSI_BY_FILE_EXTENSION" class="nav-sub-label">LWIP_HTTPD_SSI_BY_FILE_EXTENSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SUPPORT_POST" class="nav-sub-label">LWIP_HTTPD_SUPPORT_POST</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_MAX_CGI_PARAMETERS" class="nav-sub-label">LWIP_HTTPD_MAX_CGI_PARAMETERS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SSI_MULTIPART" class="nav-sub-label">LWIP_HTTPD_SSI_MULTIPART</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_MAX_TAG_NAME_LEN" class="nav-sub-label">LWIP_HTTPD_MAX_TAG_NAME_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_MAX_TAG_INSERT_LEN" class="nav-sub-label">LWIP_HTTPD_MAX_TAG_INSERT_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_POST_MANUAL_WND" class="nav-sub-label">LWIP_HTTPD_POST_MANUAL_WND</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_SERVER_AGENT" class="nav-sub-label">HTTPD_SERVER_AGENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_DYNAMIC_HEADERS" class="nav-sub-label">LWIP_HTTPD_DYNAMIC_HEADERS</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_DEBUG" class="nav-sub-label">HTTPD_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_USE_MEM_POOL" class="nav-sub-label">HTTPD_USE_MEM_POOL</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_SERVER_PORT" class="nav-sub-label">HTTPD_SERVER_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_SERVER_PORT_HTTPS" class="nav-sub-label">HTTPD_SERVER_PORT_HTTPS</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_ENABLE_HTTPS" class="nav-sub-label">HTTPD_ENABLE_HTTPS</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_MAX_RETRIES" class="nav-sub-label">HTTPD_MAX_RETRIES</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_POLL_INTERVAL" class="nav-sub-label">HTTPD_POLL_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_TCP_PRIO" class="nav-sub-label">HTTPD_TCP_PRIO</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_TIMING" class="nav-sub-label">LWIP_HTTPD_TIMING</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_DEBUG_TIMING" class="nav-sub-label">HTTPD_DEBUG_TIMING</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SUPPORT_EXTSTATUS" class="nav-sub-label">LWIP_HTTPD_SUPPORT_EXTSTATUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SUPPORT_V09" class="nav-sub-label">LWIP_HTTPD_SUPPORT_V09</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SUPPORT_11_KEEPALIVE" class="nav-sub-label">LWIP_HTTPD_SUPPORT_11_KEEPALIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SUPPORT_REQUESTLIST" class="nav-sub-label">LWIP_HTTPD_SUPPORT_REQUESTLIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_REQ_QUEUELEN" class="nav-sub-label">LWIP_HTTPD_REQ_QUEUELEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_REQ_BUFSIZE" class="nav-sub-label">LWIP_HTTPD_REQ_BUFSIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_MAX_REQ_LENGTH" class="nav-sub-label">LWIP_HTTPD_MAX_REQ_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_MAX_REQUEST_URI_LEN" class="nav-sub-label">LWIP_HTTPD_MAX_REQUEST_URI_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN" class="nav-sub-label">LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_SSI_INCLUDE_TAG" class="nav-sub-label">LWIP_HTTPD_SSI_INCLUDE_TAG</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR" class="nav-sub-label">LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED" class="nav-sub-label">LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI" class="nav-sub-label">LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_IS_TAG_VOLATILE(ptr)" class="nav-sub-label">HTTP_IS_TAG_VOLATILE(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_LIMIT_SENDING_TO_2MSS" class="nav-sub-label">HTTPD_LIMIT_SENDING_TO_2MSS</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_MAX_WRITE_LEN(pcb)" class="nav-sub-label">HTTPD_MAX_WRITE_LEN(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_CUSTOM_FILES" class="nav-sub-label">LWIP_HTTPD_CUSTOM_FILES</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_DYNAMIC_FILE_READ" class="nav-sub-label">LWIP_HTTPD_DYNAMIC_FILE_READ</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_FILE_STATE" class="nav-sub-label">LWIP_HTTPD_FILE_STATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_PRECALCULATED_CHECKSUM" class="nav-sub-label">HTTPD_PRECALCULATED_CHECKSUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HTTPD_FS_ASYNC_READ" class="nav-sub-label">LWIP_HTTPD_FS_ASYNC_READ</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_FSDATA_FILE" class="nav-sub-label">HTTPD_FSDATA_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTPD_FSDATA_FILE" class="nav-sub-label">HTTPD_FSDATA_FILE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/prot/iana.h"><span>lwip/prot/iana.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/iana.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/iana.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_HTTPD_OPTS_H">Marco <span>LWIP_HDR_APPS_HTTPD_OPTS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_HTTPD_OPTS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_CGI">Marco <span>LWIP_HTTPD_CGI</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_CGI           0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_CGI_SSI">Marco <span>LWIP_HTTPD_CGI_SSI</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_CGI_SSI       0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SSI">Marco <span>LWIP_HTTPD_SSI</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SSI           0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SSI_RAW">Marco <span>LWIP_HTTPD_SSI_RAW</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SSI_RAW       0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SSI_BY_FILE_EXTENSION">Marco <span>LWIP_HTTPD_SSI_BY_FILE_EXTENSION</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SSI_BY_FILE_EXTENSION 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SUPPORT_POST">Marco <span>LWIP_HTTPD_SUPPORT_POST</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SUPPORT_POST  0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_MAX_CGI_PARAMETERS">Marco <span>LWIP_HTTPD_MAX_CGI_PARAMETERS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_MAX_CGI_PARAMETERS 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SSI_MULTIPART">Marco <span>LWIP_HTTPD_SSI_MULTIPART</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SSI_MULTIPART   0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_MAX_TAG_NAME_LEN">Marco <span>LWIP_HTTPD_MAX_TAG_NAME_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_MAX_TAG_NAME_LEN 8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_MAX_TAG_INSERT_LEN">Marco <span>LWIP_HTTPD_MAX_TAG_INSERT_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_MAX_TAG_INSERT_LEN 192
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_POST_MANUAL_WND">Marco <span>LWIP_HTTPD_POST_MANUAL_WND</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_POST_MANUAL_WND 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_SERVER_AGENT">Marco <span>HTTPD_SERVER_AGENT</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_SERVER_AGENT "lwIP/" LWIP_VERSION_STRING " (http://savannah.nongnu.org/projects/lwip)"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_DYNAMIC_HEADERS">Marco <span>LWIP_HTTPD_DYNAMIC_HEADERS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_DYNAMIC_HEADERS 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_DEBUG">Marco <span>HTTPD_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_DEBUG        LWIP_DBG_OFF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_USE_MEM_POOL">Marco <span>HTTPD_USE_MEM_POOL</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_USE_MEM_POOL 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_SERVER_PORT">Marco <span>HTTPD_SERVER_PORT</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_SERVER_PORT                  LWIP_IANA_PORT_HTTP
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_SERVER_PORT_HTTPS">Marco <span>HTTPD_SERVER_PORT_HTTPS</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_SERVER_PORT_HTTPS            LWIP_IANA_PORT_HTTPS
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_ENABLE_HTTPS">Marco <span>HTTPD_ENABLE_HTTPS</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_ENABLE_HTTPS                 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_MAX_RETRIES">Marco <span>HTTPD_MAX_RETRIES</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_MAX_RETRIES                  4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_POLL_INTERVAL">Marco <span>HTTPD_POLL_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_POLL_INTERVAL                4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_TCP_PRIO">Marco <span>HTTPD_TCP_PRIO</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_TCP_PRIO                     TCP_PRIO_MIN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_TIMING">Marco <span>LWIP_HTTPD_TIMING</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_TIMING                  0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_DEBUG_TIMING">Marco <span>HTTPD_DEBUG_TIMING</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_DEBUG_TIMING                 LWIP_DBG_OFF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SUPPORT_EXTSTATUS">Marco <span>LWIP_HTTPD_SUPPORT_EXTSTATUS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SUPPORT_EXTSTATUS       0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SUPPORT_V09">Marco <span>LWIP_HTTPD_SUPPORT_V09</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SUPPORT_V09             1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SUPPORT_11_KEEPALIVE">Marco <span>LWIP_HTTPD_SUPPORT_11_KEEPALIVE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SUPPORT_11_KEEPALIVE    0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SUPPORT_REQUESTLIST">Marco <span>LWIP_HTTPD_SUPPORT_REQUESTLIST</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SUPPORT_REQUESTLIST     1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_REQ_QUEUELEN">Marco <span>LWIP_HTTPD_REQ_QUEUELEN</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_REQ_QUEUELEN            5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_REQ_BUFSIZE">Marco <span>LWIP_HTTPD_REQ_BUFSIZE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_REQ_BUFSIZE             LWIP_HTTPD_MAX_REQ_LENGTH
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_MAX_REQ_LENGTH">Marco <span>LWIP_HTTPD_MAX_REQ_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_MAX_REQ_LENGTH          LWIP_MIN(1023, (LWIP_HTTPD_REQ_QUEUELEN * PBUF_POOL_BUFSIZE))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_MAX_REQUEST_URI_LEN">Marco <span>LWIP_HTTPD_MAX_REQUEST_URI_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_MAX_REQUEST_URI_LEN     63
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN">Marco <span>LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN 63
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_SSI_INCLUDE_TAG">Marco <span>LWIP_HTTPD_SSI_INCLUDE_TAG</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_SSI_INCLUDE_TAG          1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR">Marco <span>LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED">Marco <span>LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI">Marco <span>LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_IS_TAG_VOLATILE(ptr)">Marco <span>HTTP_IS_TAG_VOLATILE(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_IS_TAG_VOLATILE(ptr) TCP_WRITE_FLAG_COPY
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_LIMIT_SENDING_TO_2MSS">Marco <span>HTTPD_LIMIT_SENDING_TO_2MSS</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_LIMIT_SENDING_TO_2MSS 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_MAX_WRITE_LEN(pcb)">Marco <span>HTTPD_MAX_WRITE_LEN(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_MAX_WRITE_LEN(pcb)   ((u16_t)(2 * altcp_mss(pcb)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_CUSTOM_FILES">Marco <span>LWIP_HTTPD_CUSTOM_FILES</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_CUSTOM_FILES      0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_DYNAMIC_FILE_READ">Marco <span>LWIP_HTTPD_DYNAMIC_FILE_READ</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_DYNAMIC_FILE_READ 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_FILE_STATE">Marco <span>LWIP_HTTPD_FILE_STATE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_FILE_STATE        0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_PRECALCULATED_CHECKSUM">Marco <span>HTTPD_PRECALCULATED_CHECKSUM</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_PRECALCULATED_CHECKSUM 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HTTPD_FS_ASYNC_READ">Marco <span>LWIP_HTTPD_FS_ASYNC_READ</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HTTPD_FS_ASYNC_READ     0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_FSDATA_FILE">Marco <span>HTTPD_FSDATA_FILE</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_FSDATA_FILE "fsdata_custom.c"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTPD_FSDATA_FILE">Marco <span>HTTPD_FSDATA_FILE</span></h4>
+      <pre class="doc-declare"><code>#define HTTPD_FSDATA_FILE "fsdata.c"
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

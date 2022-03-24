@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#asn1.h" class="nav-sub-label">asn1.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#md.h" class="nav-sub-label">md.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_PKCS5_H" class="nav-sub-label">MBEDTLS_PKCS5_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PKCS5_INVALID_FORMAT" class="nav-sub-label">MBEDTLS_ERR_PKCS5_INVALID_FORMAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PKCS5_FEATURE_UNAVAILABLE" class="nav-sub-label">MBEDTLS_ERR_PKCS5_FEATURE_UNAVAILABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PKCS5_PASSWORD_MISMATCH" class="nav-sub-label">MBEDTLS_ERR_PKCS5_PASSWORD_MISMATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PKCS5_DECRYPT" class="nav-sub-label">MBEDTLS_PKCS5_DECRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PKCS5_ENCRYPT" class="nav-sub-label">MBEDTLS_PKCS5_ENCRYPT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_pkcs5_pbes2" class="nav-sub-label">mbedtls_pkcs5_pbes2</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_pkcs5_pbkdf2_hmac" class="nav-sub-label">mbedtls_pkcs5_pbkdf2_hmac</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_pkcs5_self_test" class="nav-sub-label">mbedtls_pkcs5_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="asn1.h"><span>asn1.h</span></h4>
+      <pre class="doc-declare"><code>#include "asn1.h"
+</code></pre>
+      <pre class="doc-comment">#include "asn1.h"
+</pre>
+
+      <h4 id="md.h"><span>md.h</span></h4>
+      <pre class="doc-declare"><code>#include "md.h"
+</code></pre>
+      <pre class="doc-comment">#include "md.h"
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_PKCS5_H">Marco <span>MBEDTLS_PKCS5_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PKCS5_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA                 -12160 /**< Bad input parameters to function. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PKCS5_INVALID_FORMAT">Marco <span>MBEDTLS_ERR_PKCS5_INVALID_FORMAT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PKCS5_INVALID_FORMAT                 -12032 /**< Unexpected ASN.1 data. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PKCS5_FEATURE_UNAVAILABLE">Marco <span>MBEDTLS_ERR_PKCS5_FEATURE_UNAVAILABLE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PKCS5_FEATURE_UNAVAILABLE            -2e80 /**< Requested encryption or digest alg not available. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PKCS5_PASSWORD_MISMATCH">Marco <span>MBEDTLS_ERR_PKCS5_PASSWORD_MISMATCH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PKCS5_PASSWORD_MISMATCH              -2e00 /**< Given private key password does not allow for correct decryption. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PKCS5_DECRYPT">Marco <span>MBEDTLS_PKCS5_DECRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PKCS5_DECRYPT     0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PKCS5_ENCRYPT">Marco <span>MBEDTLS_PKCS5_ENCRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PKCS5_ENCRYPT     1
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_pkcs5_pbes2">Func <span>mbedtls_pkcs5_pbes2</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_pkcs5_pbes2( const mbedtls_asn1_buf *pbe_params, int mode,
+                const unsigned char *pwd, size_t pwdlen,
+                const unsigned char *data, size_t datalen,
+                unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          PKCS#5 PBES2 function
+ *
+ * \param pbe_params the ASN.1 algorithm parameters
+ * \param mode       either MBEDTLS_PKCS5_DECRYPT or MBEDTLS_PKCS5_ENCRYPT
+ * \param pwd        password to use when generating key
+ * \param pwdlen     length of password
+ * \param data       data to process
+ * \param datalen    length of data
+ * \param output     output buffer
+ *
+ * \returns        0 on success, or a MBEDTLS_ERR_XXX code if verification fails.
+ */</pre>
+
+      <h4 id="mbedtls_pkcs5_pbkdf2_hmac">Func <span>mbedtls_pkcs5_pbkdf2_hmac</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_pkcs5_pbkdf2_hmac( mbedtls_md_context_t *ctx, const unsigned char *password,
+                      size_t plen, const unsigned char *salt, size_t slen,
+                      unsigned int iteration_count,
+                      uint32_t key_length, unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          PKCS#5 PBKDF2 using HMAC
+ *
+ * \param ctx      Generic HMAC context
+ * \param password Password to use when generating key
+ * \param plen     Length of password
+ * \param salt     Salt to use when generating key
+ * \param slen     Length of salt
+ * \param iteration_count       Iteration count
+ * \param key_length            Length of generated key in bytes
+ * \param output   Generated key. Must be at least as big as key_length
+ *
+ * \returns        0 on success, or a MBEDTLS_ERR_XXX code if verification fails.
+ */</pre>
+
+      <h4 id="mbedtls_pkcs5_self_test">Func <span>mbedtls_pkcs5_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_pkcs5_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ * \return         0 if successful, or 1 if the test failed
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

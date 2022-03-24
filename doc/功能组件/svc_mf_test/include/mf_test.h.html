@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_wifi_defs.h" class="nav-sub-label">tuya_cloud_wifi_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__MF_TEST_H" class="nav-sub-label">__MF_TEST_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mf_init" class="nav-sub-label">mf_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mf_test_is_timeout" class="nav-sub-label">mf_test_is_timeout</a>
+              </li>
+      
+
+              <li>
+                <a href="#mf_user_param_cb_set" class="nav-sub-label">mf_user_param_cb_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#mf_cmd_product_send" class="nav-sub-label">mf_cmd_product_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#mf_test_ignore_close_flag" class="nav-sub-label">mf_test_ignore_close_flag</a>
+              </li>
+      
+
+              <li>
+                <a href="#mf_test_set_thread_priority" class="nav-sub-label">mf_test_set_thread_priority</a>
+              </li>
+      
+
+              <li>
+                <a href="#mf_test_facpin_get" class="nav-sub-label">mf_test_facpin_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_mf_test_close_if_write" class="nav-sub-label">wd_mf_test_close_if_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_mf_test_close_if_read" class="nav-sub-label">wd_mf_test_close_if_read</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MF_UART_INIT_CB" class="nav-sub-label">MF_UART_INIT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_UART_SEND_CB" class="nav-sub-label">MF_UART_SEND_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_UART_RECV_CB" class="nav-sub-label">MF_UART_RECV_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_GPIO_TEST_CB" class="nav-sub-label">MF_GPIO_TEST_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_PRE_GPIO_TEST_CB" class="nav-sub-label">MF_PRE_GPIO_TEST_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_USER_PRODUCT_TEST_CB" class="nav-sub-label">MF_USER_PRODUCT_TEST_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_UART_FREE_CB" class="nav-sub-label">MF_UART_FREE_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_USER_CALLBACK" class="nav-sub-label">MF_USER_CALLBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_IMPORT_INTF_S;
+" class="nav-sub-label">MF_IMPORT_INTF_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#MF_USER_PARAM_CB" class="nav-sub-label">MF_USER_PARAM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#APP_PROD_CB" class="nav-sub-label">APP_PROD_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_wifi_defs.h"><span>tuya_cloud_wifi_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_wifi_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_wifi_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__MF_TEST_H">Marco <span>__MF_TEST_H</span></h4>
+      <pre class="doc-declare"><code>#define __MF_TEST_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mf_init">Func <span>mf_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mf_init(IN CONST MF_IMPORT_INTF_S *intf,\
+                      IN CONST CHAR_T *file_name,IN CONST CHAR_T *file_ver,IN BOOL_T wrMacEn);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief mf test init fucntion
+ * 
+ * @param[in] intf mf test configure data
+ * @param[in] file_name APP bin name
+ * @param[in] file_ver User Software version
+ * @param[in] wrMacEn Need wirte MAC or not
+ *
+ * @note some fireware need write MAC when mf test
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mf_test_is_timeout">Func <span>mf_test_is_timeout</span></h4>
+      <pre class="doc-declare"><code>BOOL_T mf_test_is_timeout(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief judge if mf test is timeout
+ *
+ * @return TRUE/FALSE
+ */</pre>
+
+      <h4 id="mf_user_param_cb_set">Func <span>mf_user_param_cb_set</span></h4>
+      <pre class="doc-declare"><code>VOID mf_user_param_cb_set(MF_USER_PARAM_CB cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set callback function for product test
+ * 
+ * @param[in] cb 
+ *
+ */</pre>
+
+      <h4 id="mf_cmd_product_send">Func <span>mf_cmd_product_send</span></h4>
+      <pre class="doc-declare"><code>VOID mf_cmd_product_send(IN CONST USHORT_T cmd,IN CONST BYTE_T *data,IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief The entry of product test
+ * @param[in] cmd Test command
+ * @param[in] data Test data
+ * @param[in] len Test data len
+ *
+ */</pre>
+
+      <h4 id="mf_test_ignore_close_flag">Func <span>mf_test_ignore_close_flag</span></h4>
+      <pre class="doc-declare"><code>VOID mf_test_ignore_close_flag(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ignore mf test closed flag
+ *
+ */</pre>
+
+      <h4 id="mf_test_set_thread_priority">Func <span>mf_test_set_thread_priority</span></h4>
+      <pre class="doc-declare"><code>VOID mf_test_set_thread_priority(UINT_T pri);</code></pre>
+      <pre class="doc-comment">/***********************************************************
+*  Function: mf_test_set_thread_priority
+*  Input: none
+*  Output: none 
+*  Return: none
+***********************************************************/</pre>
+
+      <h4 id="mf_test_facpin_get">Func <span>mf_test_facpin_get</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mf_test_facpin_get(OUT CHAR_T facpin[20 + 1]);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get facpin
+ * 
+ * @param[out] facpin
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="wd_mf_test_close_if_write">Func <span>wd_mf_test_close_if_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_mf_test_close_if_write(IN BOOL_T mf_close);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief close mf test,save the flag in flash
+ * 
+ * @param[in] mf_close Close flag
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="wd_mf_test_close_if_read">Func <span>wd_mf_test_close_if_read</span></h4>
+      <pre class="doc-declare"><code>BOOL_T wd_mf_test_close_if_read(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read the flag in flash,to check if mf test closed
+ *
+ * @return TRUE/FLASE
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="MF_UART_INIT_CB">Typedef <span>MF_UART_INIT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MF_UART_INIT_CB)(UINT_T baud,UINT_T bufsz);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for URAT init function
+ * 
+ * @param[in] baud data bits:8bit,parity:none,stop bits:1
+ * @param[in] bufsz Size of buff
+ * 
+ */</pre>
+
+      <h4 id="MF_UART_SEND_CB">Typedef <span>MF_UART_SEND_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MF_UART_SEND_CB)(IN BYTE_T *data,IN CONST UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for URAT send function
+ * 
+ * @param[in] data Send data buf
+ * @param[in] len Send data buf len
+ * 
+ */</pre>
+
+      <h4 id="MF_UART_RECV_CB">Typedef <span>MF_UART_RECV_CB</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T (*MF_UART_RECV_CB)(OUT BYTE_T *buf,IN CONST UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for URAT receive function
+ * 
+ * @param[in] len buf len
+ * @param[out] buf Received data buf
+ * 
+ * @return read data len
+ */</pre>
+
+      <h4 id="MF_GPIO_TEST_CB">Typedef <span>MF_GPIO_TEST_CB</span></h4>
+      <pre class="doc-declare"><code>typedef BOOL_T (*MF_GPIO_TEST_CB)(IN CONST CHAR_T *in, OUT CHAR_T *out);
+#else
+typedef BOOL_T (*MF_GPIO_TEST_CB)(VOID);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MF_PRE_GPIO_TEST_CB">Typedef <span>MF_PRE_GPIO_TEST_CB</span></h4>
+      <pre class="doc-declare"><code>typedef BOOL_T (*MF_PRE_GPIO_TEST_CB)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for preposed GPIO test
+ *
+ * @return TRUE/FALSE
+ */</pre>
+
+      <h4 id="MF_USER_PRODUCT_TEST_CB">Typedef <span>MF_USER_PRODUCT_TEST_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*MF_USER_PRODUCT_TEST_CB)(USHORT_T cmd,UCHAR_T *data, UINT_T len, OUT UCHAR_T **ret_data,OUT USHORT_T *ret_len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for user product test
+ * 
+ * @param[in] cmd Test command
+ * @param[in] data Test data
+ * @param[in] len Test data len
+ * @param[out] ret_data Test return data
+ * @param[out] ret_len Test return data len
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="MF_UART_FREE_CB">Typedef <span>MF_UART_FREE_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MF_UART_FREE_CB)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for UART free function
+ *
+ */</pre>
+
+      <h4 id="MF_USER_CALLBACK">Typedef <span>MF_USER_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MF_USER_CALLBACK)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for user
+ *
+ */</pre>
+
+      <h4 id="MF_IMPORT_INTF_S;
+">Typedef <span>MF_IMPORT_INTF_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   MF_UART_INIT_CB uart_init;
+   MF_UART_FREE_CB uart_free;
+   MF_UART_SEND_CB uart_send;
+   MF_UART_RECV_CB uart_recv;
+   MF_GPIO_TEST_CB gpio_test;
+   MF_USER_PRODUCT_TEST_CB mf_user_product_test; 
+   MF_USER_CALLBACK user_callback;
+   MF_USER_CALLBACK user_enter_mf_callback;
+   MF_PRE_GPIO_TEST_CB user_pre_gpio_test;
+}MF_IMPORT_INTF_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of mf test init configure
+ */</pre>
+
+      <h4 id="MF_USER_PARAM_CB">Typedef <span>MF_USER_PARAM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*MF_USER_PARAM_CB)(IN CONST BYTE_T *data, IN CONST UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback after write user param finish
+ * 
+ * @param[in] data The data user in
+ * @param[in] len Data len
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="APP_PROD_CB">Typedef <span>APP_PROD_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID_T (*APP_PROD_CB)(BOOL_T flag, SCHAR_T rssi);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback for app product test
+ * 
+ * @param[in] flag 
+ * @param[in] rssi
+ *
+ */</pre>
+    </div>
+  </body>
+</html>
+            

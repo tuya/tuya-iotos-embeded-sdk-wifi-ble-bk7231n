@@ -1,8 +1,7 @@
 /**
  * @file base_event.h
- * @author maht@tuya.com
- * @brief tuya event,基于timer queue、message queue、work queue实现的事件中心
- * @version 0.1
+ * @brief tuya simple event module
+ * @version 1.0
  * @date 2019-10-30
  * 
  * @copyright Copyright (c) tuya.inc 2019
@@ -12,6 +11,7 @@
 #ifndef __BASE_EVENT_H__
 #define __BASE_EVENT_H__
 
+#include "tuya_iot_config.h"
 #include "tuya_os_adapter.h"
 #include "tuya_base_utilities.h"
 #include "base_event_info.h"
@@ -20,91 +20,115 @@
 extern "C" {
 #endif
 
-#define EVENT_NAME_MAX_LEN (16)
+/**
+ * @brief max length of event name
+ * 
+ */
+#ifndef EVENT_NAME_MAX_LEN
+#define EVENT_NAME_MAX_LEN (16)  // move to tuya_iot_config.h. use kconfig config. default is 16
+#endif
+
+/**
+ * @brief max length of event description
+ * 
+ */
 #define EVENT_DESC_MAX_LEN (32)
 
-// 事件传递数据，tlv结构，信息暂由事件发送、接收双方自行协商
+/**
+ * @brief subscriber type
+ * 
+ */
+typedef BYTE_T SUBSCRIBE_TYPE_E;
+#define SUBSCRIBE_TYPE_NORMAL    0  // normal type, dispatch by the subscribe order, remove when unsubscribe
+#define SUBSCRIBE_TYPE_EMERGENCY 1  // emergency type, dispatch first, remove when unsubscribe
+#define SUBSCRIBE_TYPE_ONETIME   2  // one time type, dispatch by the subscribe order, remove after first time dispath
+
+/**
+ * @brief the event dispatch raw data
+ * 
+ */
 typedef struct {
-    int type;           // 发送数据类型
-    int len;            // 发送数据总长度，包括type和len
-    char value[0];      // 占位，用于动态扩展后续的空间
+    int type;           // the data type
+    int len;            // the data length
+    char value[0];      // the data content
 }event_raw_data_t;
 
-// 定义了事件回调函数类型，所有的订阅回调都必须基于此类型实现
+/**
+ * @brief event subscribe callback function type
+ * 
+ */
 typedef int (*event_subscribe_cb)(void *data);
 
-// 定义了订阅节点
+/**
+ * @brief the subscirbe node
+ * 
+ */
 typedef struct {
-    char name[EVENT_NAME_MAX_LEN+1];// 名称，用于记录该node关注的事件信息
-    char desc[EVENT_DESC_MAX_LEN+1];// 描述，用于记录该node的相关信息用于定位问题
-    int emergency;                  // 是否紧急标志
-    event_subscribe_cb cb;          // 事件处理函数
-    struct tuya_list_head node;          // 用于挂接到事件subscribe_root
+    char name[EVENT_NAME_MAX_LEN+1];    // name, used to record the the event info
+    char desc[EVENT_DESC_MAX_LEN+1];    // description, used to record the subscribe info
+    SUBSCRIBE_TYPE_E type;              // the subscribe type
+    event_subscribe_cb cb;              // the subscribe callback function
+    struct tuya_list_head node;         // list node, used to attch to the event node
 }subscribe_node_t;
 
-// 定义了事件节点
+/**
+ * @brief the event node
+ * 
+ */
 typedef struct {
-    MUTEX_HANDLE mutex;                         // mutex, 用于保证event发布及订阅的一致性		
+    MUTEX_HANDLE mutex;                         // mutex, protection the event publish and subscribe	
 
-    char name[EVENT_NAME_MAX_LEN+1];            // 事件名称，唯一标识符    
-    struct tuya_list_head node;                      // 用于挂接到 event_manage
-    struct tuya_list_head subscribe_root;            // 订阅根，保存订阅者    
+    char name[EVENT_NAME_MAX_LEN+1];            // name, the event name  
+    struct tuya_list_head node;                 // list node, used to attach to the event manage module
+    struct tuya_list_head subscribe_root;       // subscibe root, used to manage the subscriber    
 }event_node_t;
 
-// 定义了事件管理
+/**
+ * @brief the event manage node
+ * 
+ */
 typedef struct {
     int inited;
-    MUTEX_HANDLE mutex;                     // mutex, 用于保证  event manage的一致性
-    int event_cnt;                          // 当前事件数量
-    struct tuya_list_head event_root;            // 事件链表
-    struct tuya_list_head free_subscribe_root;   // 空闲订阅者链表
+    MUTEX_HANDLE mutex;                             // mutex, used to protection event manage node
+    int event_cnt;                                  // current event number
+    struct tuya_list_head event_root;               // event root, used to manage the event
+    struct tuya_list_head free_subscribe_root;      // free subscriber list, used to manage the subscribe which not found the event
 }event_manage_t;
 
 /** 
- * @brief 事件初始化函数，将会根据事件描述表，支持动态未定义事件
+ * @brief event initialization
  * 
- * 
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */
 int ty_event_init(void);
 
 /** 
- * @brief: 发布指定事件，会通知所有订阅该事件的订阅者处理
+ * @brief: publish event
  *
- * @param[in] name: 事件名，事件标识，字符串，16字节长的
- * @param[in] data: 事件数据，数据和事件类型绑定，发布事件和订阅事件必须使用同一事件数据类型定义
- * @param[in] len: 事件数据长度
- *
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @param[in] name: event name
+ * @param[in] data: event data
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
  */
 int ty_publish_event(const char* name, void *data);
 
 /** 
- * @brief: 订阅指定事件，会通过回调函数处理消息发布内容
+ * @brief: subscribe event
  *
- * @param[in] name: 事件名，事件标识，字符串，16字节长的
- * @param[in] desc: 描述信息，表面订阅者身份、目的，32字节长度，方便定位问题
- * @param[in] cb: 事件处理回调函数
- * @param[in] is_emergency: 紧急事件，必须第一个处理
- *
- * @note： desc、cb构成了一个二元组，这个二元组标识一个唯一订阅者，同一个desc不同的cb，也会认为是不同的
- *      订阅。在事件发布之前就订阅的，可以收到事件；在事件发布之后订阅的，收不到之前发布的事件。
- *
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @param[in] name: event name
+ * @param[in] desc: subscribe description
+ * @param[in] cb: subscribe callback function
+ * @param[in] type: subscribe type
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
  */
-int ty_subscribe_event(const char *name, const char *desc, const event_subscribe_cb cb, int is_emergency);
+int ty_subscribe_event(const char *name, const char *desc, const event_subscribe_cb cb, SUBSCRIBE_TYPE_E type);
 
 /** 
- * @brief: 订阅指定事件，会通过回调函数处理消息发布内容
+ * @brief: unsubscribe event
  *
- * @param[in] name: 事件名，事件标识，字符串，16字节长的
- * @param[in] desc: 描述信息，订阅者身份、目的，32字节长度，方便定位问题
- * @param[in] cb: 事件处理回调函数
- *
- * @note： desc、cb构成了一个二元组，这个二元组标识一个唯一订阅者，同一个desc不同的cb，也会认为是不同的
- *      订阅
- *
- * @return int: 0成功，非0，请参照tuya error code描述文档 
+ * @param[in] name: event name
+ * @param[in] desc: subscribe description
+ * @param[in] cb: subscribe callback function
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
  */
 int ty_unsubscribe_event(const char *name, const char *desc, event_subscribe_cb cb);
 

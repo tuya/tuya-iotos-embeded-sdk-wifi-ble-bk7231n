@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#HAVE_ARPA_INET_H" class="nav-sub-label">HAVE_ARPA_INET_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_ASSERT_H" class="nav-sub-label">HAVE_ASSERT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_DLFCN_H" class="nav-sub-label">HAVE_DLFCN_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_GETADDRINFO" class="nav-sub-label">HAVE_GETADDRINFO</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_INTTYPES_H" class="nav-sub-label">HAVE_INTTYPES_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_LIMITS_H" class="nav-sub-label">HAVE_LIMITS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_MALLOC" class="nav-sub-label">HAVE_MALLOC</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_MEMORY_H" class="nav-sub-label">HAVE_MEMORY_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_MEMSET" class="nav-sub-label">HAVE_MEMSET</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_NETDB_H" class="nav-sub-label">HAVE_NETDB_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_NETINET_IN_H" class="nav-sub-label">HAVE_NETINET_IN_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SELECT" class="nav-sub-label">HAVE_SELECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SOCKET" class="nav-sub-label">HAVE_SOCKET</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STDINT_H" class="nav-sub-label">HAVE_STDINT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STDLIB_H" class="nav-sub-label">HAVE_STDLIB_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STRCASECMP" class="nav-sub-label">HAVE_STRCASECMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STRINGS_H" class="nav-sub-label">HAVE_STRINGS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STRING_H" class="nav-sub-label">HAVE_STRING_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STRNLEN" class="nav-sub-label">HAVE_STRNLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_STRRCHR" class="nav-sub-label">HAVE_STRRCHR</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYSLOG_H" class="nav-sub-label">HAVE_SYSLOG_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYS_IOCTL_H" class="nav-sub-label">HAVE_SYS_IOCTL_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYS_SOCKET_H" class="nav-sub-label">HAVE_SYS_SOCKET_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYS_STAT_H" class="nav-sub-label">HAVE_SYS_STAT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYS_TIME_H" class="nav-sub-label">HAVE_SYS_TIME_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYS_TYPES_H" class="nav-sub-label">HAVE_SYS_TYPES_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_SYS_UNISTD_H" class="nav-sub-label">HAVE_SYS_UNISTD_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_TIME_H" class="nav-sub-label">HAVE_TIME_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HAVE_UNISTD_H" class="nav-sub-label">HAVE_UNISTD_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LT_OBJDIR" class="nav-sub-label">LT_OBJDIR</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKAGE_BUGREPORT" class="nav-sub-label">PACKAGE_BUGREPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKAGE_NAME" class="nav-sub-label">PACKAGE_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKAGE_STRING" class="nav-sub-label">PACKAGE_STRING</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKAGE_TARNAME" class="nav-sub-label">PACKAGE_TARNAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKAGE_URL" class="nav-sub-label">PACKAGE_URL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKAGE_VERSION" class="nav-sub-label">PACKAGE_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#STDC_HEADERS" class="nav-sub-label">STDC_HEADERS</a>
+              </li>
+      
+
+              <li>
+                <a href="#WITH_TY_UNI_NETWORK" class="nav-sub-label">WITH_TY_UNI_NETWORK</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="HAVE_ARPA_INET_H">Marco <span>HAVE_ARPA_INET_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_ARPA_INET_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <arpa/inet.h> header file. */</pre>
+
+      <h4 id="HAVE_ASSERT_H">Marco <span>HAVE_ASSERT_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_ASSERT_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <assert.h> header file. */</pre>
+
+      <h4 id="HAVE_DLFCN_H">Marco <span>HAVE_DLFCN_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_DLFCN_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <dlfcn.h> header file. */</pre>
+
+      <h4 id="HAVE_GETADDRINFO">Marco <span>HAVE_GETADDRINFO</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_GETADDRINFO 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `getaddrinfo' function. */</pre>
+
+      <h4 id="HAVE_INTTYPES_H">Marco <span>HAVE_INTTYPES_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_INTTYPES_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <inttypes.h> header file. */</pre>
+
+      <h4 id="HAVE_LIMITS_H">Marco <span>HAVE_LIMITS_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_LIMITS_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <limits.h> header file. */</pre>
+
+      <h4 id="HAVE_MALLOC">Marco <span>HAVE_MALLOC</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_MALLOC 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `malloc' function. */</pre>
+
+      <h4 id="HAVE_MEMORY_H">Marco <span>HAVE_MEMORY_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_MEMORY_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <memory.h> header file. */</pre>
+
+      <h4 id="HAVE_MEMSET">Marco <span>HAVE_MEMSET</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_MEMSET 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `memset' function. */</pre>
+
+      <h4 id="HAVE_NETDB_H">Marco <span>HAVE_NETDB_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_NETDB_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <netdb.h> header file. */</pre>
+
+      <h4 id="HAVE_NETINET_IN_H">Marco <span>HAVE_NETINET_IN_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_NETINET_IN_H 1 // commeted by changcheng
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <netinet/in.h> header file. */</pre>
+
+      <h4 id="HAVE_SELECT">Marco <span>HAVE_SELECT</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SELECT 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `select' function. */</pre>
+
+      <h4 id="HAVE_SOCKET">Marco <span>HAVE_SOCKET</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SOCKET 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `socket' function. */</pre>
+
+      <h4 id="HAVE_STDINT_H">Marco <span>HAVE_STDINT_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STDINT_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <stdint.h> header file. */</pre>
+
+      <h4 id="HAVE_STDLIB_H">Marco <span>HAVE_STDLIB_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STDLIB_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <stdlib.h> header file. */</pre>
+
+      <h4 id="HAVE_STRCASECMP">Marco <span>HAVE_STRCASECMP</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STRCASECMP 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `strcasecmp' function. */</pre>
+
+      <h4 id="HAVE_STRINGS_H">Marco <span>HAVE_STRINGS_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STRINGS_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <strings.h> header file. */</pre>
+
+      <h4 id="HAVE_STRING_H">Marco <span>HAVE_STRING_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STRING_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <string.h> header file. */</pre>
+
+      <h4 id="HAVE_STRNLEN">Marco <span>HAVE_STRNLEN</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STRNLEN 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `strnlen' function. */</pre>
+
+      <h4 id="HAVE_STRRCHR">Marco <span>HAVE_STRRCHR</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_STRRCHR 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the `strrchr' function. */</pre>
+
+      <h4 id="HAVE_SYSLOG_H">Marco <span>HAVE_SYSLOG_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYSLOG_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <syslog.h> header file. */</pre>
+
+      <h4 id="HAVE_SYS_IOCTL_H">Marco <span>HAVE_SYS_IOCTL_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYS_IOCTL_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <sys/ioctl.h> header file. */</pre>
+
+      <h4 id="HAVE_SYS_SOCKET_H">Marco <span>HAVE_SYS_SOCKET_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYS_SOCKET_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <sys/socket.h> header file. */</pre>
+
+      <h4 id="HAVE_SYS_STAT_H">Marco <span>HAVE_SYS_STAT_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYS_STAT_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <sys/stat.h> header file. */</pre>
+
+      <h4 id="HAVE_SYS_TIME_H">Marco <span>HAVE_SYS_TIME_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYS_TIME_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <sys/time.h> header file. */</pre>
+
+      <h4 id="HAVE_SYS_TYPES_H">Marco <span>HAVE_SYS_TYPES_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYS_TYPES_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <sys/types.h> header file. */</pre>
+
+      <h4 id="HAVE_SYS_UNISTD_H">Marco <span>HAVE_SYS_UNISTD_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_SYS_UNISTD_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <sys/unistd.h> header file. */</pre>
+
+      <h4 id="HAVE_TIME_H">Marco <span>HAVE_TIME_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_TIME_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <time.h> header file. */</pre>
+
+      <h4 id="HAVE_UNISTD_H">Marco <span>HAVE_UNISTD_H</span></h4>
+      <pre class="doc-declare"><code>#define HAVE_UNISTD_H 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the <unistd.h> header file. */</pre>
+
+      <h4 id="LT_OBJDIR">Marco <span>LT_OBJDIR</span></h4>
+      <pre class="doc-declare"><code>#define LT_OBJDIR ".libs/"
+</code></pre>
+      <pre class="doc-comment">/* Define to the sub-directory where libtool stores uninstalled libraries. */</pre>
+
+      <h4 id="PACKAGE_BUGREPORT">Marco <span>PACKAGE_BUGREPORT</span></h4>
+      <pre class="doc-declare"><code>#define PACKAGE_BUGREPORT "libcoap-developers@lists.sourceforge.net"
+</code></pre>
+      <pre class="doc-comment">/* Define to the address where bug reports for this package should be sent. */</pre>
+
+      <h4 id="PACKAGE_NAME">Marco <span>PACKAGE_NAME</span></h4>
+      <pre class="doc-declare"><code>#define PACKAGE_NAME "libcoap"
+</code></pre>
+      <pre class="doc-comment">/* Define to the full name of this package. */</pre>
+
+      <h4 id="PACKAGE_STRING">Marco <span>PACKAGE_STRING</span></h4>
+      <pre class="doc-declare"><code>#define PACKAGE_STRING "libcoap 4.2.0rc4"
+</code></pre>
+      <pre class="doc-comment">/* Define to the full name and version of this package. */</pre>
+
+      <h4 id="PACKAGE_TARNAME">Marco <span>PACKAGE_TARNAME</span></h4>
+      <pre class="doc-declare"><code>#define PACKAGE_TARNAME "libcoap"
+</code></pre>
+      <pre class="doc-comment">/* Define to the one symbol short name of this package. */</pre>
+
+      <h4 id="PACKAGE_URL">Marco <span>PACKAGE_URL</span></h4>
+      <pre class="doc-declare"><code>#define PACKAGE_URL "https://libcoap.net/"
+</code></pre>
+      <pre class="doc-comment">/* Define to the home page for this package. */</pre>
+
+      <h4 id="PACKAGE_VERSION">Marco <span>PACKAGE_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define PACKAGE_VERSION "4.2.0"
+</code></pre>
+      <pre class="doc-comment">/* Define to the version of this package. */</pre>
+
+      <h4 id="STDC_HEADERS">Marco <span>STDC_HEADERS</span></h4>
+      <pre class="doc-declare"><code>#define STDC_HEADERS 1
+</code></pre>
+      <pre class="doc-comment">/* Define to 1 if you have the ANSI C header files. */</pre>
+
+      <h4 id="WITH_TY_UNI_NETWORK">Marco <span>WITH_TY_UNI_NETWORK</span></h4>
+      <pre class="doc-declare"><code>#define WITH_TY_UNI_NETWORK 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

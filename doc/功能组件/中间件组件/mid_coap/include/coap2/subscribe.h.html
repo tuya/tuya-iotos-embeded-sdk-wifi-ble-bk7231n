@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#address.h" class="nav-sub-label">address.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_io.h" class="nav-sub-label">coap_io.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#block.h" class="nav-sub-label">block.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_SUBSCRIBE_H_" class="nav-sub-label">COAP_SUBSCRIBE_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OBSERVE_ESTABLISH" class="nav-sub-label">COAP_OBSERVE_ESTABLISH</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OBSERVE_CANCEL" class="nav-sub-label">COAP_OBSERVE_CANCEL</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OBS_MAX_NON" class="nav-sub-label">COAP_OBS_MAX_NON</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_OBS_MAX_FAIL" class="nav-sub-label">COAP_OBS_MAX_FAIL</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_subscription_init" class="nav-sub-label">coap_subscription_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_subscription_t;
+" class="nav-sub-label">coap_subscription_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="address.h"><span>address.h</span></h4>
+      <pre class="doc-declare"><code>#include "address.h"
+</code></pre>
+      <pre class="doc-comment">#include "address.h"
+</pre>
+
+      <h4 id="coap_io.h"><span>coap_io.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_io.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_io.h"
+</pre>
+
+      <h4 id="block.h"><span>block.h</span></h4>
+      <pre class="doc-declare"><code>#include "block.h"
+</code></pre>
+      <pre class="doc-comment">#include "block.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_SUBSCRIBE_H_">Marco <span>COAP_SUBSCRIBE_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_SUBSCRIBE_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_OBSERVE_ESTABLISH">Marco <span>COAP_OBSERVE_ESTABLISH</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OBSERVE_ESTABLISH 0
+</code></pre>
+      <pre class="doc-comment">/**
+ * The value COAP_OBSERVE_ESTABLISH in a GET request indicates a new observe
+ * relationship for (sender address, token) is requested.
+ */</pre>
+
+      <h4 id="COAP_OBSERVE_CANCEL">Marco <span>COAP_OBSERVE_CANCEL</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OBSERVE_CANCEL 1
+</code></pre>
+      <pre class="doc-comment">/**
+ * The value COAP_OBSERVE_CANCEL in a GET request indicates that the observe
+ * relationship for (sender address, token) must be cancelled.
+ */</pre>
+
+      <h4 id="COAP_OBS_MAX_NON">Marco <span>COAP_OBS_MAX_NON</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OBS_MAX_NON  5
+</code></pre>
+      <pre class="doc-comment">/**
+ * Number of notifications that may be sent non-confirmable before a confirmable
+ * message is sent to detect if observers are alive. The maximum allowed value
+ * here is @c 15.
+ */</pre>
+
+      <h4 id="COAP_OBS_MAX_FAIL">Marco <span>COAP_OBS_MAX_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define COAP_OBS_MAX_FAIL 3
+</code></pre>
+      <pre class="doc-comment">/**
+ * Number of confirmable notifications that may fail (i.e. time out without
+ * being ACKed) before an observer is removed. The maximum value for
+ * COAP_OBS_MAX_FAIL is @c 3.
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_subscription_init">Func <span>coap_subscription_init</span></h4>
+      <pre class="doc-declare"><code>void coap_subscription_init(coap_subscription_t *);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_subscription_t;
+">Typedef <span>coap_subscription_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_subscription_t {
+ struct coap_subscription_t *next; /**< next element in linked list */
+ coap_session_t *session;         /**< subscriber session */
+
+ unsigned int non_cnt:4; /**< up to 15 non-confirmable notifies allowed */
+ unsigned int fail_cnt:2; /**< up to 3 confirmable notifies can fail */
+ unsigned int dirty:1;   /**< set if the notification temporarily could not be
+                            *   sent (in that case, the resource's partially
+                            *   dirty flag is set too) */
+ unsigned int has_block2:1; /**< GET request had Block2 definition */
+ coap_block_t block2;    /**< GET request Block2 definition */
+ size_t token_length;    /**< actual length of token */
+ unsigned char token[8]; /**< token used for subscription */
+ coap_string_t *query;   /**< query string used for subscription, if any */
+} coap_subscription_t;
+</code></pre>
+      <pre class="doc-comment">/** Subscriber information */</pre>
+    </div>
+  </body>
+</html>
+            

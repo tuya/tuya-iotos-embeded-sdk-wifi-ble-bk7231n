@@ -5,7 +5,7 @@
 ***********************************************************/
 #ifndef _WL_CFG_COM_H
 #define _WL_CFG_COM_H
-
+#include "netcfg_module.h"
 
 #ifdef __cplusplus
 	extern "C" {
@@ -30,7 +30,6 @@ typedef BYTE_T WL_NW_CFG_T;
 #define WNC_TLK_BC      1
 #define WNC_AIRKISS_BC  2
 
-#define WL_TOKEN_LEN 16
 #define WL_CHAN_NUM 14
 
 typedef struct {

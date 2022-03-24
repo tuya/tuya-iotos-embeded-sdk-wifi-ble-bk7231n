@@ -1,0 +1,1600 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#bignum.h" class="nav-sub-label">bignum.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#dhm_alt.h" class="nav-sub-label">dhm_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DHM_H" class="nav-sub-label">MBEDTLS_DHM_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_DHM_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_READ_PARAMS_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_READ_PARAMS_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_MAKE_PARAMS_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_MAKE_PARAMS_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_READ_PUBLIC_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_READ_PUBLIC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_MAKE_PUBLIC_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_MAKE_PUBLIC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_CALC_SECRET_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_CALC_SECRET_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_INVALID_FORMAT" class="nav-sub-label">MBEDTLS_ERR_DHM_INVALID_FORMAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_ALLOC_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_ALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_FILE_IO_ERROR" class="nav-sub-label">MBEDTLS_ERR_DHM_FILE_IO_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_DHM_SET_GROUP_FAILED" class="nav-sub-label">MBEDTLS_ERR_DHM_SET_GROUP_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC5114_MODP_2048_P" class="nav-sub-label">MBEDTLS_DHM_RFC5114_MODP_2048_P</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC5114_MODP_2048_G" class="nav-sub-label">MBEDTLS_DHM_RFC5114_MODP_2048_G</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_2048_P" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_2048_P</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_2048_G" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_2048_G</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_3072_P" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_3072_P</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_3072_G" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_3072_G</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_4096_P" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_4096_P</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_4096_G" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_4096_G</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_2048_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_2048_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_2048_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_2048_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_3072_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_3072_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_3072_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_3072_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_4096_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_4096_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC3526_MODP_4096_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC3526_MODP_4096_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE2048_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE2048_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE2048_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE2048_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE3072_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE3072_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE3072_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE3072_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE4096_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE4096_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE4096_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE4096_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE6144_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE6144_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE6144_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE6144_G_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE8192_P_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE8192_P_BIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DHM_RFC7919_FFDHE8192_G_BIN" class="nav-sub-label">MBEDTLS_DHM_RFC7919_FFDHE8192_G_BIN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_dhm_init" class="nav-sub-label">mbedtls_dhm_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_read_params" class="nav-sub-label">mbedtls_dhm_read_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_make_params" class="nav-sub-label">mbedtls_dhm_make_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_set_group" class="nav-sub-label">mbedtls_dhm_set_group</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_read_public" class="nav-sub-label">mbedtls_dhm_read_public</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_make_public" class="nav-sub-label">mbedtls_dhm_make_public</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_calc_secret" class="nav-sub-label">mbedtls_dhm_calc_secret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_free" class="nav-sub-label">mbedtls_dhm_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_parse_dhm" class="nav-sub-label">mbedtls_dhm_parse_dhm</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_parse_dhmfile" class="nav-sub-label">mbedtls_dhm_parse_dhmfile</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_dhm_self_test" class="nav-sub-label">mbedtls_dhm_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_dhm_context;
+" class="nav-sub-label">
+mbedtls_dhm_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="bignum.h"><span>bignum.h</span></h4>
+      <pre class="doc-declare"><code>#include "bignum.h"
+</code></pre>
+      <pre class="doc-comment">#include "bignum.h"
+</pre>
+
+      <h4 id="dhm_alt.h"><span>dhm_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "dhm_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "dhm_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_DHM_H">Marco <span>MBEDTLS_DHM_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_DHM_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_BAD_INPUT_DATA                   -12416 /**< Bad input parameters. */
+</code></pre>
+      <pre class="doc-comment">/*
+ * DHM Error codes
+ */</pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_READ_PARAMS_FAILED">Marco <span>MBEDTLS_ERR_DHM_READ_PARAMS_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_READ_PARAMS_FAILED               -12544 /**< Reading of the DHM parameters failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_MAKE_PARAMS_FAILED">Marco <span>MBEDTLS_ERR_DHM_MAKE_PARAMS_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_MAKE_PARAMS_FAILED               -12672 /**< Making of the DHM parameters failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_READ_PUBLIC_FAILED">Marco <span>MBEDTLS_ERR_DHM_READ_PUBLIC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_READ_PUBLIC_FAILED               -12800 /**< Reading of the public values failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_MAKE_PUBLIC_FAILED">Marco <span>MBEDTLS_ERR_DHM_MAKE_PUBLIC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_MAKE_PUBLIC_FAILED               -12928 /**< Making of the public value failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_CALC_SECRET_FAILED">Marco <span>MBEDTLS_ERR_DHM_CALC_SECRET_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_CALC_SECRET_FAILED               -13056 /**< Calculation of the DHM secret failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_INVALID_FORMAT">Marco <span>MBEDTLS_ERR_DHM_INVALID_FORMAT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_INVALID_FORMAT                   -13184 /**< The ASN.1 data is not formatted correctly. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_ALLOC_FAILED">Marco <span>MBEDTLS_ERR_DHM_ALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_ALLOC_FAILED                     -13312 /**< Allocation of memory failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_FILE_IO_ERROR">Marco <span>MBEDTLS_ERR_DHM_FILE_IO_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_FILE_IO_ERROR                    -13440 /**< Read or write of file failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_DHM_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_HW_ACCEL_FAILED                  -13568 /**< DHM hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_DHM_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_ERR_DHM_SET_GROUP_FAILED">Marco <span>MBEDTLS_ERR_DHM_SET_GROUP_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_DHM_SET_GROUP_FAILED                 -13696 /**< Setting the modulus and generator failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC5114_MODP_2048_P">Marco <span>MBEDTLS_DHM_RFC5114_MODP_2048_P</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC5114_MODP_2048_P                        \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT(                        \
+       "AD107E1E9123A9D0D660FAA79559C51FA20D64E5683B9FD1"     \
+       "B54B1597B61D0A75E6FA141DF95A56DBAF9A3C407BA1DF15"     \
+       "EB3D688A309C180E1DE6B85A1274A0A66D3F8152AD6AC212"     \
+       "9037C9EDEFDA4DF8D91E8FEF55B7394B7AD5B7D0B6C12207"     \
+       "C9F98D11ED34DBF6C6BA0B2C8BBC27BE6A00E0A0B9C49708"     \
+       "B3BF8A317091883681286130BC8985DB1602E714415D9330"     \
+       "278273C7DE31EFDC7310F7121FD5A07415987D9ADC0A486D"     \
+       "CDF93ACC44328387315D75E198C641A480CD86A1B9E587E8"     \
+       "BE60E69CC928B2B9C52172E413042E9B23F10B0E16E79763"     \
+       "C9B53DCF4BA80A29E3FB73C16B8E75B97EF363E2FFA31F71"     \
+       "CF9DE5384E71B81C0AC4DFFE0C10E64F" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the prime underlying the
+ * 2048-bit MODP Group with 224-bit Prime Order Subgroup, as defined
+ * in <em>RFC-5114: Additional Diffie-Hellman Groups for Use with
+ * IETF Standards</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC5114_MODP_2048_G">Marco <span>MBEDTLS_DHM_RFC5114_MODP_2048_G</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC5114_MODP_2048_G                        \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT(                        \
+       "AC4032EF4F2D9AE39DF30B5C8FFDAC506CDEBE7B89998CAF"     \
+       "74866A08CFE4FFE3A6824A4E10B9A6F0DD921F01A70C4AFA"     \
+       "AB739D7700C29F52C57DB17C620A8652BE5E9001A8D66AD7"     \
+       "C17669101999024AF4D027275AC1348BB8A762D0521BC98A"     \
+       "E247150422EA1ED409939D54DA7460CDB5F6C6B250717CBE"     \
+       "F180EB34118E98D119529A45D6F834566E3025E316A330EF"     \
+       "BB77A86F0C1AB15B051AE3D428C8F8ACB70A8137150B8EEB"     \
+       "10E183EDD19963DDD9E263E4770589EF6AA21E7F5F2FF381"     \
+       "B539CCE3409D13CD566AFBB48D6C019181E1BCFE94B30269"     \
+       "EDFE72FE9B6AA4BD7B5A0F1C71CFFF4C19C418E1F6EC0179"     \
+       "81BC087F2A7065B384B890D3191F2BFA" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the chosen generator of the 2048-bit MODP
+ * Group with 224-bit Prime Order Subgroup, as defined in <em>RFC-5114:
+ * Additional Diffie-Hellman Groups for Use with IETF Standards</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_2048_P">Marco <span>MBEDTLS_DHM_RFC3526_MODP_2048_P</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_2048_P                        \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT(                        \
+       "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1"     \
+       "29024E088A67CC74020BBEA63B139B22514A08798E3404DD"     \
+       "EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245"     \
+       "E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED"     \
+       "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3D"     \
+       "C2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F"     \
+       "83655D23DCA3AD961C62F356208552BB9ED529077096966D"     \
+       "670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B"     \
+       "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9"     \
+       "DE2BCBF6955817183995497CEA956AE515D2261898FA0510"     \
+       "15728E5A8AACAA68FFFFFFFFFFFFFFFF" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the prime underlying the 2048-bit MODP
+ * Group, as defined in <em>RFC-3526: More Modular Exponential (MODP)
+ * Diffie-Hellman groups for Internet Key Exchange (IKE)</em>.
+ *
+ * \deprecated The hex-encoded primes from RFC 3625 are deprecated and
+ *             superseded by the corresponding macros providing them as
+ *             binary constants. Their hex-encoded constants are likely
+ *             to be removed in a future version of the library.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_2048_G">Marco <span>MBEDTLS_DHM_RFC3526_MODP_2048_G</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_2048_G                        \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT( "02" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the chosen generator of the 2048-bit MODP
+ * Group, as defined in <em>RFC-3526: More Modular Exponential (MODP)
+ * Diffie-Hellman groups for Internet Key Exchange (IKE)</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_3072_P">Marco <span>MBEDTLS_DHM_RFC3526_MODP_3072_P</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_3072_P                        \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT(                        \
+       "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1"     \
+       "29024E088A67CC74020BBEA63B139B22514A08798E3404DD"     \
+       "EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245"     \
+       "E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED"     \
+       "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3D"     \
+       "C2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F"     \
+       "83655D23DCA3AD961C62F356208552BB9ED529077096966D"     \
+       "670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B"     \
+       "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9"     \
+       "DE2BCBF6955817183995497CEA956AE515D2261898FA0510"     \
+       "15728E5A8AAAC42DAD33170D04507A33A85521ABDF1CBA64"     \
+       "ECFB850458DBEF0A8AEA71575D060C7DB3970F85A6E1E4C7"     \
+       "ABF5AE8CDB0933D71E8C94E04A25619DCEE3D2261AD2EE6B"     \
+       "F12FFA06D98A0864D87602733EC86A64521F2B18177B200C"     \
+       "BBE117577A615D6C770988C0BAD946E208E24FA074E5AB31"     \
+       "43DB5BFCE0FD108E4B82D120A93AD2CAFFFFFFFFFFFFFFFF" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the prime underlying the 3072-bit MODP
+ * Group, as defined in <em>RFC-3072: More Modular Exponential (MODP)
+ * Diffie-Hellman groups for Internet Key Exchange (IKE)</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_3072_G">Marco <span>MBEDTLS_DHM_RFC3526_MODP_3072_G</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_3072_G                     \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT( "02" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the chosen generator of the 3072-bit MODP
+ * Group, as defined in <em>RFC-3526: More Modular Exponential (MODP)
+ * Diffie-Hellman groups for Internet Key Exchange (IKE)</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_4096_P">Marco <span>MBEDTLS_DHM_RFC3526_MODP_4096_P</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_4096_P                     \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT(                     \
+       "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1"  \
+       "29024E088A67CC74020BBEA63B139B22514A08798E3404DD"  \
+       "EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245"  \
+       "E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED"  \
+       "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3D"  \
+       "C2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F"  \
+       "83655D23DCA3AD961C62F356208552BB9ED529077096966D"  \
+       "670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B"  \
+       "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9"  \
+       "DE2BCBF6955817183995497CEA956AE515D2261898FA0510"  \
+       "15728E5A8AAAC42DAD33170D04507A33A85521ABDF1CBA64"  \
+       "ECFB850458DBEF0A8AEA71575D060C7DB3970F85A6E1E4C7"  \
+       "ABF5AE8CDB0933D71E8C94E04A25619DCEE3D2261AD2EE6B"  \
+       "F12FFA06D98A0864D87602733EC86A64521F2B18177B200C"  \
+       "BBE117577A615D6C770988C0BAD946E208E24FA074E5AB31"  \
+       "43DB5BFCE0FD108E4B82D120A92108011A723C12A787E6D7"  \
+       "88719A10BDBA5B2699C327186AF4E23C1A946834B6150BDA"  \
+       "2583E9CA2AD44CE8DBBBC2DB04DE8EF92E8EFC141FBECAA6"  \
+       "287C59474E6BC05D99B2964FA090C3A2233BA186515BE7ED"  \
+       "1F612970CEE2D7AFB81BDD762170481CD0069127D5B05AA9"  \
+       "93B4EA988D8FDDC186FFB7DC90A6C08F4DF435C934063199"  \
+       "FFFFFFFFFFFFFFFF" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the prime underlying the 4096-bit MODP
+ * Group, as defined in <em>RFC-3526: More Modular Exponential (MODP)
+ * Diffie-Hellman groups for Internet Key Exchange (IKE)</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_4096_G">Marco <span>MBEDTLS_DHM_RFC3526_MODP_4096_G</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_4096_G                     \
+   MBEDTLS_DEPRECATED_STRING_CONSTANT( "02" )
+</code></pre>
+      <pre class="doc-comment">/**
+ * The hexadecimal presentation of the chosen generator of the 4096-bit MODP
+ * Group, as defined in <em>RFC-3526: More Modular Exponential (MODP)
+ * Diffie-Hellman groups for Internet Key Exchange (IKE)</em>.
+ */</pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_2048_P_BIN">Marco <span>MBEDTLS_DHM_RFC3526_MODP_2048_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_2048_P_BIN {       \
+    255, 255, 255, 255, 255, 255, 255, 255, \
+    0xC9, 15, 0xDA, 0xA2, 33, 104, 0xC2, 52, \
+    0xC4, 0xC6, 98, 8B, 128, 0xDC, 1C, 0xD1, \
+    41, 2, 4E, 8, 8A, 103, 0xCC, 116, \
+    2, 0B, 0xBE, 0xA6, 3B, 19, 9B, 34, \
+    81, 4A, 8, 121, 8E, 52, 4, 0xDD, \
+    0xEF, 149, 25, 0xB3, 0xCD, 3A, 67, 1B, \
+    48, 2B, 0A, 6D, 242, 95, 20, 55, \
+    79, 0xE1, 53, 6D, 6D, 81, 0xC2, 69, \
+    0xE4, 133, 0xB5, 118, 98, 5E, 7E, 0xC6, \
+    244, 4C, 66, 0xE9, 0xA6, 55, 0xED, 6B, \
+    0B, 255, 5C, 0xB6, 244, 6, 0xB7, 0xED, \
+    0xEE, 56, 6B, 15B, 5A, 137, 159, 0xA5, \
+    0xAE, 159, 36, 17, 7C, 4B, 31, 0xE6, \
+    73, 40, 102, 81, 0xEC, 0xE4, 5B, 3D, \
+    0xC2, 0, 7C, 0xB8, 0xA1, 99, 0xBF, 5, \
+    152, 0xDA, 72, 54, 1C, 85, 0xD3, 9A, \
+    105, 22, 63, 0xA8, 15D, 36, 0xCF, 95, \
+    131, 101, 5D, 35, 0xDC, 0xA3, 0xAD, 150, \
+    1C, 98, 243, 86, 32, 133, 82, 0xBB, \
+    9E, 0xD5, 41, 7, 112, 150, 150, 6D, \
+    103, 0C, 53, 4E, 4A, 0xBC, 152, 4, \
+    241, 116, 6C, 8, 0xCA, 24, 33, 7C, \
+    50, 144, 5E, 70, 2E, 54, 0xCE, 3B, \
+    0xE3, 9E, 119, 2C, 24, 0E, 134, 3, \
+    9B, 39, 131, 0xA2, 0xEC, 7, 0xA2, 143, \
+    0xB5, 0xC5, 5D, 240, 111, 4C, 82, 0xC9, \
+    0xDE, 2B, 0xCB, 246, 149, 88, 23, 24, \
+    57, 149, 73, 7C, 0xEA, 149, 6A, 0xE5, \
+    21, 0xD2, 38, 24, 152, 15A, 5, 16, \
+    21, 114, 8E, 5A, 8A, 0xAC, 0xAA, 104, \
+    255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_2048_G_BIN">Marco <span>MBEDTLS_DHM_RFC3526_MODP_2048_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_2048_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_3072_P_BIN">Marco <span>MBEDTLS_DHM_RFC3526_MODP_3072_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_3072_P_BIN {      \
+   255, 255, 255, 255, 255, 255, 255, 255, \
+   0xC9, 15, 0xDA, 0xA2, 33, 104, 0xC2, 52, \
+   0xC4, 0xC6, 98, 8B, 128, 0xDC, 1C, 0xD1, \
+   41, 2, 4E, 8, 8A, 103, 0xCC, 116, \
+   2, 0B, 0xBE, 0xA6, 3B, 19, 9B, 34, \
+   81, 4A, 8, 121, 8E, 52, 4, 0xDD, \
+   0xEF, 149, 25, 0xB3, 0xCD, 3A, 67, 1B, \
+   48, 2B, 0A, 6D, 242, 95, 20, 55, \
+   79, 0xE1, 53, 6D, 6D, 81, 0xC2, 69, \
+   0xE4, 133, 0xB5, 118, 98, 5E, 7E, 0xC6, \
+   244, 4C, 66, 0xE9, 0xA6, 55, 0xED, 6B, \
+   0B, 255, 5C, 0xB6, 244, 6, 0xB7, 0xED, \
+   0xEE, 56, 6B, 15B, 5A, 137, 159, 0xA5, \
+   0xAE, 159, 36, 17, 7C, 4B, 31, 0xE6, \
+   73, 40, 102, 81, 0xEC, 0xE4, 5B, 3D, \
+   0xC2, 0, 7C, 0xB8, 0xA1, 99, 0xBF, 5, \
+   152, 0xDA, 72, 54, 1C, 85, 0xD3, 9A, \
+   105, 22, 63, 0xA8, 15D, 36, 0xCF, 95, \
+   131, 101, 5D, 35, 0xDC, 0xA3, 0xAD, 150, \
+   1C, 98, 243, 86, 32, 133, 82, 0xBB, \
+   9E, 0xD5, 41, 7, 112, 150, 150, 6D, \
+   103, 0C, 53, 4E, 4A, 0xBC, 152, 4, \
+   241, 116, 6C, 8, 0xCA, 24, 33, 7C, \
+   50, 144, 5E, 70, 2E, 54, 0xCE, 3B, \
+   0xE3, 9E, 119, 2C, 24, 0E, 134, 3, \
+   9B, 39, 131, 0xA2, 0xEC, 7, 0xA2, 143, \
+   0xB5, 0xC5, 5D, 240, 111, 4C, 82, 0xC9, \
+   0xDE, 2B, 0xCB, 246, 149, 88, 23, 24, \
+   57, 149, 73, 7C, 0xEA, 149, 6A, 0xE5, \
+   21, 0xD2, 38, 24, 152, 15A, 5, 16, \
+   21, 114, 8E, 5A, 8A, 0xAA, 0xC4, 2D, \
+   0xAD, 51, 23, 0D, 4, 80, 7A, 51, \
+   0xA8, 85, 33, 0xAB, 0xDF, 1C, 0xBA, 100, \
+   0xEC, 15B, 133, 4, 88, 0xDB, 0xEF, 0A, \
+   8A, 0xEA, 113, 87, 5D, 6, 0C, 7D, \
+   0xB3, 151, 15, 133, 0xA6, 0xE1, 0xE4, 0xC7, \
+   0xAB, 245, 0xAE, 8C, 0xDB, 9, 51, 0xD7, \
+   1E, 8C, 148, 0xE0, 4A, 37, 97, 9D, \
+   0xCE, 0xE3, 0xD2, 38, 1A, 0xD2, 0xEE, 6B, \
+   241, 47, 15A, 6, 0xD9, 8A, 8, 100, \
+   0xD8, 118, 2, 115, 3E, 0xC8, 6A, 100, \
+   82, 31, 2B, 24, 23, 7B, 32, 0C, \
+   0xBB, 0xE1, 23, 87, 7A, 97, 5D, 6C, \
+   119, 9, 136, 0xC0, 0xBA, 0xD9, 70, 0xE2, \
+   8, 0xE2, 79, 0xA0, 116, 0xE5, 0xAB, 49, \
+   67, 0xDB, 5B, 15C, 0xE0, 15D, 16, 8E, \
+   4B, 130, 0xD1, 32, 0xA9, 3A, 0xD2, 0xCA, \
+   255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_3072_G_BIN">Marco <span>MBEDTLS_DHM_RFC3526_MODP_3072_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_3072_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_4096_P_BIN">Marco <span>MBEDTLS_DHM_RFC3526_MODP_4096_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_4096_P_BIN {      \
+   255, 255, 255, 255, 255, 255, 255, 255, \
+   0xC9, 15, 0xDA, 0xA2, 33, 104, 0xC2, 52, \
+   0xC4, 0xC6, 98, 8B, 128, 0xDC, 1C, 0xD1, \
+   41, 2, 4E, 8, 8A, 103, 0xCC, 116, \
+   2, 0B, 0xBE, 0xA6, 3B, 19, 9B, 34, \
+   81, 4A, 8, 121, 8E, 52, 4, 0xDD, \
+   0xEF, 149, 25, 0xB3, 0xCD, 3A, 67, 1B, \
+   48, 2B, 0A, 6D, 242, 95, 20, 55, \
+   79, 0xE1, 53, 6D, 6D, 81, 0xC2, 69, \
+   0xE4, 133, 0xB5, 118, 98, 5E, 7E, 0xC6, \
+   244, 4C, 66, 0xE9, 0xA6, 55, 0xED, 6B, \
+   0B, 255, 5C, 0xB6, 244, 6, 0xB7, 0xED, \
+   0xEE, 56, 6B, 15B, 5A, 137, 159, 0xA5, \
+   0xAE, 159, 36, 17, 7C, 4B, 31, 0xE6, \
+   73, 40, 102, 81, 0xEC, 0xE4, 5B, 3D, \
+   0xC2, 0, 7C, 0xB8, 0xA1, 99, 0xBF, 5, \
+   152, 0xDA, 72, 54, 1C, 85, 0xD3, 9A, \
+   105, 22, 63, 0xA8, 15D, 36, 0xCF, 95, \
+   131, 101, 5D, 35, 0xDC, 0xA3, 0xAD, 150, \
+   1C, 98, 243, 86, 32, 133, 82, 0xBB, \
+   9E, 0xD5, 41, 7, 112, 150, 150, 6D, \
+   103, 0C, 53, 4E, 4A, 0xBC, 152, 4, \
+   241, 116, 6C, 8, 0xCA, 24, 33, 7C, \
+   50, 144, 5E, 70, 2E, 54, 0xCE, 3B, \
+   0xE3, 9E, 119, 2C, 24, 0E, 134, 3, \
+   9B, 39, 131, 0xA2, 0xEC, 7, 0xA2, 143, \
+   0xB5, 0xC5, 5D, 240, 111, 4C, 82, 0xC9, \
+   0xDE, 2B, 0xCB, 246, 149, 88, 23, 24, \
+   57, 149, 73, 7C, 0xEA, 149, 6A, 0xE5, \
+   21, 0xD2, 38, 24, 152, 15A, 5, 16, \
+   21, 114, 8E, 5A, 8A, 0xAA, 0xC4, 2D, \
+   0xAD, 51, 23, 0D, 4, 80, 7A, 51, \
+   0xA8, 85, 33, 0xAB, 0xDF, 1C, 0xBA, 100, \
+   0xEC, 15B, 133, 4, 88, 0xDB, 0xEF, 0A, \
+   8A, 0xEA, 113, 87, 5D, 6, 0C, 7D, \
+   0xB3, 151, 15, 133, 0xA6, 0xE1, 0xE4, 0xC7, \
+   0xAB, 245, 0xAE, 8C, 0xDB, 9, 51, 0xD7, \
+   1E, 8C, 148, 0xE0, 4A, 37, 97, 9D, \
+   0xCE, 0xE3, 0xD2, 38, 1A, 0xD2, 0xEE, 6B, \
+   241, 47, 15A, 6, 0xD9, 8A, 8, 100, \
+   0xD8, 118, 2, 115, 3E, 0xC8, 6A, 100, \
+   82, 31, 2B, 24, 23, 7B, 32, 0C, \
+   0xBB, 0xE1, 23, 87, 7A, 97, 5D, 6C, \
+   119, 9, 136, 0xC0, 0xBA, 0xD9, 70, 0xE2, \
+   8, 0xE2, 79, 0xA0, 116, 0xE5, 0xAB, 49, \
+   67, 0xDB, 5B, 15C, 0xE0, 15D, 16, 8E, \
+   4B, 130, 0xD1, 32, 0xA9, 33, 8, 1, \
+   1A, 114, 3C, 18, 0xA7, 135, 0xE6, 0xD7, \
+   136, 113, 9A, 16, 0xBD, 0xBA, 5B, 38, \
+   153, 0xC3, 39, 24, 6A, 244, 0xE2, 3C, \
+   1A, 148, 104, 52, 0xB6, 21, 0B, 0xDA, \
+   37, 131, 0xE9, 0xCA, 2A, 0xD4, 4C, 0xE8, \
+   0xDB, 0xBB, 0xC2, 0xDB, 4, 0xDE, 8E, 249, \
+   2E, 8E, 15C, 20, 31, 0xBE, 0xCA, 0xA6, \
+   40, 7C, 89, 71, 4E, 6B, 0xC0, 5D, \
+   153, 0xB2, 150, 79, 0xA0, 144, 0xC3, 0xA2, \
+   35, 3B, 0xA1, 134, 81, 5B, 0xE7, 0xED, \
+   31, 97, 41, 112, 0xCE, 0xE2, 0xD7, 0xAF, \
+   0xB8, 1B, 0xDD, 118, 33, 112, 72, 1C, \
+   0xD0, 6, 145, 39, 0xD5, 0xB0, 5A, 0xA9, \
+   147, 0xB4, 0xEA, 152, 8D, 143, 0xDD, 0xC1, \
+   134, 255, 0xB7, 0xDC, 144, 0xA6, 0xC0, 143, \
+   4D, 244, 53, 0xC9, 52, 6, 49, 153, \
+   255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC3526_MODP_4096_G_BIN">Marco <span>MBEDTLS_DHM_RFC3526_MODP_4096_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC3526_MODP_4096_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE2048_P_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE2048_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE2048_P_BIN {       \
+    255, 255, 255, 255, 255, 255, 255, 255, \
+    0xAD, 248, 84, 88, 0xA2, 0xBB, 4A, 9A, \
+    0xAF, 0xDC, 86, 32, 39, 3D, 3C, 241, \
+    0xD8, 0xB9, 0xC5, 131, 0xCE, 2D, 54, 149, \
+    0xA9, 0xE1, 54, 65, 20, 100, 51, 15B, \
+    0xCC, 147, 9D, 0xCE, 36, 9B, 3E, 249, \
+    7D, 47, 0xE3, 99, 99, 0C, 117, 0xD8, \
+    246, 129, 0xB2, 2, 0xAE, 0xC4, 97, 7A, \
+    0xD3, 0xDF, 1E, 0xD5, 0xD5, 15D, 101, 97, \
+    36, 51, 245, 31, 95, 6, 6E, 0xD0, \
+    133, 99, 101, 85, 3D, 0xED, 1A, 243, \
+    0xB5, 87, 19, 5E, 127, 87, 0xC9, 53, \
+    152, 79, 0C, 112, 0xE0, 0xE6, 8B, 119, \
+    0xE2, 0xA6, 137, 0xDA, 243, 0xEF, 0xE8, 114, \
+    1D, 241, 88, 0xA1, 54, 0xAD, 0xE7, 53, \
+    48, 0xAC, 0xCA, 79, 72, 3A, 121, 7A, \
+    0xBC, 0A, 0xB1, 130, 0xB3, 36, 15B, 97, \
+    0xD1, 8, 0xA9, 4B, 0xB2, 0xC8, 0xE3, 15B, \
+    0xB9, 6A, 0xDA, 0xB7, 96, 0xD7, 244, 104, \
+    1D, 79, 66, 0xA3, 0xDE, 57, 4D, 244, \
+    0xAE, 86, 0xED, 0xE7, 99, 114, 0xBB, 25, \
+    0B, 7, 0xA7, 0xC8, 0xEE, 0A, 6D, 112, \
+    9E, 2, 15C, 0xE1, 0xCD, 247, 0xE2, 0xEC, \
+    0xC0, 52, 4, 0xCD, 40, 52, 47, 97, \
+    145, 114, 15E, 9C, 0xE9, 133, 131, 255, \
+    8E, 79, 18, 50, 0xEE, 242, 129, 131, \
+    0xC3, 15E, 3B, 1B, 4C, 111, 0xAD, 115, \
+    3B, 0xB5, 15C, 0xBC, 2E, 0xC2, 32, 5, \
+    0xC5, 8E, 241, 131, 7D, 22, 131, 0xB2, \
+    0xC6, 243, 4A, 38, 0xC1, 0xB2, 0xEF, 15A, \
+    136, 6B, 66, 56, 97, 40, 5C, 151, \
+    255, 255, 255, 255, 255, 255, 255, 255, }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE2048_G_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE2048_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE2048_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE3072_P_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE3072_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE3072_P_BIN { \
+    255, 255, 255, 255, 255, 255, 255, 255, \
+    0xAD, 248, 84, 88, 0xA2, 0xBB, 4A, 9A, \
+    0xAF, 0xDC, 86, 32, 39, 3D, 3C, 241, \
+    0xD8, 0xB9, 0xC5, 131, 0xCE, 2D, 54, 149, \
+    0xA9, 0xE1, 54, 65, 20, 100, 51, 15B, \
+    0xCC, 147, 9D, 0xCE, 36, 9B, 3E, 249, \
+    7D, 47, 0xE3, 99, 99, 0C, 117, 0xD8, \
+    246, 129, 0xB2, 2, 0xAE, 0xC4, 97, 7A, \
+    0xD3, 0xDF, 1E, 0xD5, 0xD5, 15D, 101, 97, \
+    36, 51, 245, 31, 95, 6, 6E, 0xD0, \
+    133, 99, 101, 85, 3D, 0xED, 1A, 243, \
+    0xB5, 87, 19, 5E, 127, 87, 0xC9, 53, \
+    152, 79, 0C, 112, 0xE0, 0xE6, 8B, 119, \
+    0xE2, 0xA6, 137, 0xDA, 243, 0xEF, 0xE8, 114, \
+    1D, 241, 88, 0xA1, 54, 0xAD, 0xE7, 53, \
+    48, 0xAC, 0xCA, 79, 72, 3A, 121, 7A, \
+    0xBC, 0A, 0xB1, 130, 0xB3, 36, 15B, 97, \
+    0xD1, 8, 0xA9, 4B, 0xB2, 0xC8, 0xE3, 15B, \
+    0xB9, 6A, 0xDA, 0xB7, 96, 0xD7, 244, 104, \
+    1D, 79, 66, 0xA3, 0xDE, 57, 4D, 244, \
+    0xAE, 86, 0xED, 0xE7, 99, 114, 0xBB, 25, \
+    0B, 7, 0xA7, 0xC8, 0xEE, 0A, 6D, 112, \
+    9E, 2, 15C, 0xE1, 0xCD, 247, 0xE2, 0xEC, \
+    0xC0, 52, 4, 0xCD, 40, 52, 47, 97, \
+    145, 114, 15E, 9C, 0xE9, 133, 131, 255, \
+    8E, 79, 18, 50, 0xEE, 242, 129, 131, \
+    0xC3, 15E, 3B, 1B, 4C, 111, 0xAD, 115, \
+    3B, 0xB5, 15C, 0xBC, 2E, 0xC2, 32, 5, \
+    0xC5, 8E, 241, 131, 7D, 22, 131, 0xB2, \
+    0xC6, 243, 4A, 38, 0xC1, 0xB2, 0xEF, 15A, \
+    136, 6B, 66, 56, 97, 31, 0xCF, 0xDC, \
+    0xDE, 53, 5B, 3B, 101, 25, 3, 5B, \
+    0xBC, 52, 244, 0xDE, 249, 9C, 2, 56, \
+    97, 0xB4, 111, 0xC9, 0xD6, 0xE6, 0xC9, 7, \
+    7A, 0xD9, 1D, 38, 145, 247, 247, 0xEE, \
+    89, 8C, 0xB0, 15A, 0xC1, 134, 0xD9, 1C, \
+    0xAE, 15E, 19, 9, 133, 19, 146, 112, \
+    0xB4, 19, 0C, 147, 0xBC, 67, 121, 68, \
+    244, 15D, 68, 82, 0xE2, 0xD7, 4D, 0xD3, \
+    100, 242, 0xE2, 1E, 113, 245, 4B, 255, \
+    5C, 0xAE, 130, 0xAB, 9C, 9D, 246, 9E, \
+    0xE8, 6D, 2B, 0xC5, 34, 54, 3A, 0D, \
+    0xAB, 0xC5, 33, 151, 9B, 0D, 0xEA, 0xDA, \
+    1D, 0xBF, 9A, 66, 0xD5, 0xC4, 72, 4E, \
+    0A, 0xBC, 0xD0, 6B, 15A, 83, 0xDD, 0xEF, \
+    3C, 1B, 32, 0xEE, 63, 0xD5, 9D, 7C, \
+    37, 0xE4, 1D, 2B, 102, 0xC6, 2E, 55, \
+    255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE3072_G_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE3072_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE3072_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE4096_P_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE4096_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE4096_P_BIN {       \
+    255, 255, 255, 255, 255, 255, 255, 255, \
+    0xAD, 248, 84, 88, 0xA2, 0xBB, 4A, 9A, \
+    0xAF, 0xDC, 86, 32, 39, 3D, 3C, 241, \
+    0xD8, 0xB9, 0xC5, 131, 0xCE, 2D, 54, 149, \
+    0xA9, 0xE1, 54, 65, 20, 100, 51, 15B, \
+    0xCC, 147, 9D, 0xCE, 36, 9B, 3E, 249, \
+    7D, 47, 0xE3, 99, 99, 0C, 117, 0xD8, \
+    246, 129, 0xB2, 2, 0xAE, 0xC4, 97, 7A, \
+    0xD3, 0xDF, 1E, 0xD5, 0xD5, 15D, 101, 97, \
+    36, 51, 245, 31, 95, 6, 6E, 0xD0, \
+    133, 99, 101, 85, 3D, 0xED, 1A, 243, \
+    0xB5, 87, 19, 5E, 127, 87, 0xC9, 53, \
+    152, 79, 0C, 112, 0xE0, 0xE6, 8B, 119, \
+    0xE2, 0xA6, 137, 0xDA, 243, 0xEF, 0xE8, 114, \
+    1D, 241, 88, 0xA1, 54, 0xAD, 0xE7, 53, \
+    48, 0xAC, 0xCA, 79, 72, 3A, 121, 7A, \
+    0xBC, 0A, 0xB1, 130, 0xB3, 36, 15B, 97, \
+    0xD1, 8, 0xA9, 4B, 0xB2, 0xC8, 0xE3, 15B, \
+    0xB9, 6A, 0xDA, 0xB7, 96, 0xD7, 244, 104, \
+    1D, 79, 66, 0xA3, 0xDE, 57, 4D, 244, \
+    0xAE, 86, 0xED, 0xE7, 99, 114, 0xBB, 25, \
+    0B, 7, 0xA7, 0xC8, 0xEE, 0A, 6D, 112, \
+    9E, 2, 15C, 0xE1, 0xCD, 247, 0xE2, 0xEC, \
+    0xC0, 52, 4, 0xCD, 40, 52, 47, 97, \
+    145, 114, 15E, 9C, 0xE9, 133, 131, 255, \
+    8E, 79, 18, 50, 0xEE, 242, 129, 131, \
+    0xC3, 15E, 3B, 1B, 4C, 111, 0xAD, 115, \
+    3B, 0xB5, 15C, 0xBC, 2E, 0xC2, 32, 5, \
+    0xC5, 8E, 241, 131, 7D, 22, 131, 0xB2, \
+    0xC6, 243, 4A, 38, 0xC1, 0xB2, 0xEF, 15A, \
+    136, 6B, 66, 56, 97, 31, 0xCF, 0xDC, \
+    0xDE, 53, 5B, 3B, 101, 25, 3, 5B, \
+    0xBC, 52, 244, 0xDE, 249, 9C, 2, 56, \
+    97, 0xB4, 111, 0xC9, 0xD6, 0xE6, 0xC9, 7, \
+    7A, 0xD9, 1D, 38, 145, 247, 247, 0xEE, \
+    89, 8C, 0xB0, 15A, 0xC1, 134, 0xD9, 1C, \
+    0xAE, 15E, 19, 9, 133, 19, 146, 112, \
+    0xB4, 19, 0C, 147, 0xBC, 67, 121, 68, \
+    244, 15D, 68, 82, 0xE2, 0xD7, 4D, 0xD3, \
+    100, 242, 0xE2, 1E, 113, 245, 4B, 255, \
+    5C, 0xAE, 130, 0xAB, 9C, 9D, 246, 9E, \
+    0xE8, 6D, 2B, 0xC5, 34, 54, 3A, 0D, \
+    0xAB, 0xC5, 33, 151, 9B, 0D, 0xEA, 0xDA, \
+    1D, 0xBF, 9A, 66, 0xD5, 0xC4, 72, 4E, \
+    0A, 0xBC, 0xD0, 6B, 15A, 83, 0xDD, 0xEF, \
+    3C, 1B, 32, 0xEE, 63, 0xD5, 9D, 7C, \
+    37, 0xE4, 1D, 2B, 102, 9E, 1E, 241, \
+    6E, 111, 82, 0xC3, 22, 4D, 244, 15B, \
+    121, 48, 0xE9, 0xE4, 0xE5, 136, 87, 0xB6, \
+    0xAC, 7D, 95, 66, 0xD6, 159, 6D, 24, \
+    119, 99, 0xCF, 1D, 85, 3, 64, 4, \
+    135, 245, 5B, 0xA5, 7E, 49, 0xCC, 7A, \
+    113, 53, 0xC8, 134, 0xEF, 0xB4, 49, 8A, \
+    0xED, 6A, 1E, 1, 2D, 9E, 104, 50, \
+    0xA9, 7, 96, 0A, 145, 129, 48, 0xC4, \
+    6D, 0xC7, 120, 249, 113, 0xAD, 0, 56, \
+    9, 41, 153, 0xA3, 51, 0xCB, 8B, 7A, \
+    1A, 1D, 0xB9, 3D, 113, 64, 0, 3C, \
+    2A, 4E, 0xCE, 0xA9, 249, 8D, 0A, 0xCC, \
+    0A, 130, 145, 0xCD, 0xCE, 0xC9, 7D, 0xCF, \
+    8E, 0xC9, 0xB5, 5A, 127, 136, 0xA4, 6B, \
+    4D, 0xB5, 0xA8, 81, 244, 65, 130, 0xE1, \
+    0xC6, 8A, 0, 7E, 5E, 101, 95, 6A, \
+    255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE4096_G_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE4096_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE4096_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE6144_P_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE6144_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE6144_P_BIN {       \
+    255, 255, 255, 255, 255, 255, 255, 255, \
+    0xAD, 248, 84, 88, 0xA2, 0xBB, 4A, 9A, \
+    0xAF, 0xDC, 86, 32, 39, 3D, 3C, 241, \
+    0xD8, 0xB9, 0xC5, 131, 0xCE, 2D, 54, 149, \
+    0xA9, 0xE1, 54, 65, 20, 100, 51, 15B, \
+    0xCC, 147, 9D, 0xCE, 36, 9B, 3E, 249, \
+    7D, 47, 0xE3, 99, 99, 0C, 117, 0xD8, \
+    246, 129, 0xB2, 2, 0xAE, 0xC4, 97, 7A, \
+    0xD3, 0xDF, 1E, 0xD5, 0xD5, 15D, 101, 97, \
+    36, 51, 245, 31, 95, 6, 6E, 0xD0, \
+    133, 99, 101, 85, 3D, 0xED, 1A, 243, \
+    0xB5, 87, 19, 5E, 127, 87, 0xC9, 53, \
+    152, 79, 0C, 112, 0xE0, 0xE6, 8B, 119, \
+    0xE2, 0xA6, 137, 0xDA, 243, 0xEF, 0xE8, 114, \
+    1D, 241, 88, 0xA1, 54, 0xAD, 0xE7, 53, \
+    48, 0xAC, 0xCA, 79, 72, 3A, 121, 7A, \
+    0xBC, 0A, 0xB1, 130, 0xB3, 36, 15B, 97, \
+    0xD1, 8, 0xA9, 4B, 0xB2, 0xC8, 0xE3, 15B, \
+    0xB9, 6A, 0xDA, 0xB7, 96, 0xD7, 244, 104, \
+    1D, 79, 66, 0xA3, 0xDE, 57, 4D, 244, \
+    0xAE, 86, 0xED, 0xE7, 99, 114, 0xBB, 25, \
+    0B, 7, 0xA7, 0xC8, 0xEE, 0A, 6D, 112, \
+    9E, 2, 15C, 0xE1, 0xCD, 247, 0xE2, 0xEC, \
+    0xC0, 52, 4, 0xCD, 40, 52, 47, 97, \
+    145, 114, 15E, 9C, 0xE9, 133, 131, 255, \
+    8E, 79, 18, 50, 0xEE, 242, 129, 131, \
+    0xC3, 15E, 3B, 1B, 4C, 111, 0xAD, 115, \
+    3B, 0xB5, 15C, 0xBC, 2E, 0xC2, 32, 5, \
+    0xC5, 8E, 241, 131, 7D, 22, 131, 0xB2, \
+    0xC6, 243, 4A, 38, 0xC1, 0xB2, 0xEF, 15A, \
+    136, 6B, 66, 56, 97, 31, 0xCF, 0xDC, \
+    0xDE, 53, 5B, 3B, 101, 25, 3, 5B, \
+    0xBC, 52, 244, 0xDE, 249, 9C, 2, 56, \
+    97, 0xB4, 111, 0xC9, 0xD6, 0xE6, 0xC9, 7, \
+    7A, 0xD9, 1D, 38, 145, 247, 247, 0xEE, \
+    89, 8C, 0xB0, 15A, 0xC1, 134, 0xD9, 1C, \
+    0xAE, 15E, 19, 9, 133, 19, 146, 112, \
+    0xB4, 19, 0C, 147, 0xBC, 67, 121, 68, \
+    244, 15D, 68, 82, 0xE2, 0xD7, 4D, 0xD3, \
+    100, 242, 0xE2, 1E, 113, 245, 4B, 255, \
+    5C, 0xAE, 130, 0xAB, 9C, 9D, 246, 9E, \
+    0xE8, 6D, 2B, 0xC5, 34, 54, 3A, 0D, \
+    0xAB, 0xC5, 33, 151, 9B, 0D, 0xEA, 0xDA, \
+    1D, 0xBF, 9A, 66, 0xD5, 0xC4, 72, 4E, \
+    0A, 0xBC, 0xD0, 6B, 15A, 83, 0xDD, 0xEF, \
+    3C, 1B, 32, 0xEE, 63, 0xD5, 9D, 7C, \
+    37, 0xE4, 1D, 2B, 102, 9E, 1E, 241, \
+    6E, 111, 82, 0xC3, 22, 4D, 244, 15B, \
+    121, 48, 0xE9, 0xE4, 0xE5, 136, 87, 0xB6, \
+    0xAC, 7D, 95, 66, 0xD6, 159, 6D, 24, \
+    119, 99, 0xCF, 1D, 85, 3, 64, 4, \
+    135, 245, 5B, 0xA5, 7E, 49, 0xCC, 7A, \
+    113, 53, 0xC8, 134, 0xEF, 0xB4, 49, 8A, \
+    0xED, 6A, 1E, 1, 2D, 9E, 104, 50, \
+    0xA9, 7, 96, 0A, 145, 129, 48, 0xC4, \
+    6D, 0xC7, 120, 249, 113, 0xAD, 0, 56, \
+    9, 41, 153, 0xA3, 51, 0xCB, 8B, 7A, \
+    1A, 1D, 0xB9, 3D, 113, 64, 0, 3C, \
+    2A, 4E, 0xCE, 0xA9, 249, 8D, 0A, 0xCC, \
+    0A, 130, 145, 0xCD, 0xCE, 0xC9, 7D, 0xCF, \
+    8E, 0xC9, 0xB5, 5A, 127, 136, 0xA4, 6B, \
+    4D, 0xB5, 0xA8, 81, 244, 65, 130, 0xE1, \
+    0xC6, 8A, 0, 7E, 5E, 0D, 0xD9, 2, \
+    0B, 15D, 100, 0xB6, 69, 3, 6C, 7A, \
+    4E, 103, 7D, 2C, 56, 83, 2A, 3A, \
+    35, 0xBA, 68, 66, 0xCA, 245, 3E, 0xA6, \
+    3B, 0xB4, 84, 50, 9B, 118, 36, 0xC8, \
+    145, 7B, 0xDD, 100, 0xB1, 0xC0, 15D, 4C, \
+    0xB3, 8E, 8C, 51, 4C, 112, 1C, 3A, \
+    0xCD, 0xAD, 6, 87, 15C, 0xCF, 0xEC, 113, \
+    9B, 31, 5C, 3E, 4E, 70, 4, 31, \
+    56, 129, 71, 15B, 4C, 15D, 0xB4, 119, \
+    0xA5, 36, 113, 247, 0xA9, 0xA9, 105, 16, \
+    0xB8, 85, 50, 2E, 0xDB, 99, 64, 0xD8, \
+    0xA0, 0E, 240, 146, 53, 5, 17, 0xE3, \
+    0A, 0xBE, 0xC1, 255, 249, 0xE3, 0xA2, 6E, \
+    127, 0xB2, 159, 8C, 24, 48, 35, 0xC3, \
+    88, 7E, 56, 0xDA, 0, 119, 0xD9, 0xB4, \
+    118, 3E, 4E, 4B, 148, 0xB2, 0xBB, 0xC1, \
+    148, 0xC6, 101, 1E, 119, 0xCA, 249, 146, \
+    0xEE, 0xAA, 0xC0, 35, 2A, 40, 1B, 246, \
+    0xB3, 0xA7, 57, 0xC1, 34, 97, 22, 130, \
+    0A, 0xE8, 0xDB, 88, 71, 0xA6, 7C, 0xBE, \
+    249, 0xC9, 9, 1B, 70, 2D, 83, 8C, \
+    0xD7, 2B, 3, 116, 6A, 0xE7, 127, 5E, \
+    98, 41, 2C, 49, 21, 98, 0xA8, 70, \
+    80, 5D, 0xC8, 2D, 0xB8, 84, 51, 8A, \
+    0xE4, 159, 82, 53, 0xC9, 5B, 145, 23, \
+    8C, 0xCF, 2D, 0xD5, 0xCA, 0xCE, 244, 3, \
+    0xEC, 9D, 24, 16, 0xC6, 39, 2B, 4, \
+    5B, 3B, 113, 249, 0xDC, 6B, 128, 0xD6, \
+    63, 0xDD, 4A, 8E, 9A, 0xDB, 1E, 105, \
+    98, 0xA6, 149, 38, 0xD4, 49, 97, 0xC1, \
+    0xA4, 1D, 87, 0D, 121, 56, 0xDA, 0xD4, \
+    0xA4, 0E, 50, 9C, 0xD0, 0xE4, 0E, 101, \
+    255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE6144_G_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE6144_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE6144_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE8192_P_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE8192_P_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE8192_P_BIN {       \
+    255, 255, 255, 255, 255, 255, 255, 255, \
+    0xAD, 248, 84, 88, 0xA2, 0xBB, 4A, 9A, \
+    0xAF, 0xDC, 86, 32, 39, 3D, 3C, 241, \
+    0xD8, 0xB9, 0xC5, 131, 0xCE, 2D, 54, 149, \
+    0xA9, 0xE1, 54, 65, 20, 100, 51, 15B, \
+    0xCC, 147, 9D, 0xCE, 36, 9B, 3E, 249, \
+    7D, 47, 0xE3, 99, 99, 0C, 117, 0xD8, \
+    246, 129, 0xB2, 2, 0xAE, 0xC4, 97, 7A, \
+    0xD3, 0xDF, 1E, 0xD5, 0xD5, 15D, 101, 97, \
+    36, 51, 245, 31, 95, 6, 6E, 0xD0, \
+    133, 99, 101, 85, 3D, 0xED, 1A, 243, \
+    0xB5, 87, 19, 5E, 127, 87, 0xC9, 53, \
+    152, 79, 0C, 112, 0xE0, 0xE6, 8B, 119, \
+    0xE2, 0xA6, 137, 0xDA, 243, 0xEF, 0xE8, 114, \
+    1D, 241, 88, 0xA1, 54, 0xAD, 0xE7, 53, \
+    48, 0xAC, 0xCA, 79, 72, 3A, 121, 7A, \
+    0xBC, 0A, 0xB1, 130, 0xB3, 36, 15B, 97, \
+    0xD1, 8, 0xA9, 4B, 0xB2, 0xC8, 0xE3, 15B, \
+    0xB9, 6A, 0xDA, 0xB7, 96, 0xD7, 244, 104, \
+    1D, 79, 66, 0xA3, 0xDE, 57, 4D, 244, \
+    0xAE, 86, 0xED, 0xE7, 99, 114, 0xBB, 25, \
+    0B, 7, 0xA7, 0xC8, 0xEE, 0A, 6D, 112, \
+    9E, 2, 15C, 0xE1, 0xCD, 247, 0xE2, 0xEC, \
+    0xC0, 52, 4, 0xCD, 40, 52, 47, 97, \
+    145, 114, 15E, 9C, 0xE9, 133, 131, 255, \
+    8E, 79, 18, 50, 0xEE, 242, 129, 131, \
+    0xC3, 15E, 3B, 1B, 4C, 111, 0xAD, 115, \
+    3B, 0xB5, 15C, 0xBC, 2E, 0xC2, 32, 5, \
+    0xC5, 8E, 241, 131, 7D, 22, 131, 0xB2, \
+    0xC6, 243, 4A, 38, 0xC1, 0xB2, 0xEF, 15A, \
+    136, 6B, 66, 56, 97, 31, 0xCF, 0xDC, \
+    0xDE, 53, 5B, 3B, 101, 25, 3, 5B, \
+    0xBC, 52, 244, 0xDE, 249, 9C, 2, 56, \
+    97, 0xB4, 111, 0xC9, 0xD6, 0xE6, 0xC9, 7, \
+    7A, 0xD9, 1D, 38, 145, 247, 247, 0xEE, \
+    89, 8C, 0xB0, 15A, 0xC1, 134, 0xD9, 1C, \
+    0xAE, 15E, 19, 9, 133, 19, 146, 112, \
+    0xB4, 19, 0C, 147, 0xBC, 67, 121, 68, \
+    244, 15D, 68, 82, 0xE2, 0xD7, 4D, 0xD3, \
+    100, 242, 0xE2, 1E, 113, 245, 4B, 255, \
+    5C, 0xAE, 130, 0xAB, 9C, 9D, 246, 9E, \
+    0xE8, 6D, 2B, 0xC5, 34, 54, 3A, 0D, \
+    0xAB, 0xC5, 33, 151, 9B, 0D, 0xEA, 0xDA, \
+    1D, 0xBF, 9A, 66, 0xD5, 0xC4, 72, 4E, \
+    0A, 0xBC, 0xD0, 6B, 15A, 83, 0xDD, 0xEF, \
+    3C, 1B, 32, 0xEE, 63, 0xD5, 9D, 7C, \
+    37, 0xE4, 1D, 2B, 102, 9E, 1E, 241, \
+    6E, 111, 82, 0xC3, 22, 4D, 244, 15B, \
+    121, 48, 0xE9, 0xE4, 0xE5, 136, 87, 0xB6, \
+    0xAC, 7D, 95, 66, 0xD6, 159, 6D, 24, \
+    119, 99, 0xCF, 1D, 85, 3, 64, 4, \
+    135, 245, 5B, 0xA5, 7E, 49, 0xCC, 7A, \
+    113, 53, 0xC8, 134, 0xEF, 0xB4, 49, 8A, \
+    0xED, 6A, 1E, 1, 2D, 9E, 104, 50, \
+    0xA9, 7, 96, 0A, 145, 129, 48, 0xC4, \
+    6D, 0xC7, 120, 249, 113, 0xAD, 0, 56, \
+    9, 41, 153, 0xA3, 51, 0xCB, 8B, 7A, \
+    1A, 1D, 0xB9, 3D, 113, 64, 0, 3C, \
+    2A, 4E, 0xCE, 0xA9, 249, 8D, 0A, 0xCC, \
+    0A, 130, 145, 0xCD, 0xCE, 0xC9, 7D, 0xCF, \
+    8E, 0xC9, 0xB5, 5A, 127, 136, 0xA4, 6B, \
+    4D, 0xB5, 0xA8, 81, 244, 65, 130, 0xE1, \
+    0xC6, 8A, 0, 7E, 5E, 0D, 0xD9, 2, \
+    0B, 15D, 100, 0xB6, 69, 3, 6C, 7A, \
+    4E, 103, 7D, 2C, 56, 83, 2A, 3A, \
+    35, 0xBA, 68, 66, 0xCA, 245, 3E, 0xA6, \
+    3B, 0xB4, 84, 50, 9B, 118, 36, 0xC8, \
+    145, 7B, 0xDD, 100, 0xB1, 0xC0, 15D, 4C, \
+    0xB3, 8E, 8C, 51, 4C, 112, 1C, 3A, \
+    0xCD, 0xAD, 6, 87, 15C, 0xCF, 0xEC, 113, \
+    9B, 31, 5C, 3E, 4E, 70, 4, 31, \
+    56, 129, 71, 15B, 4C, 15D, 0xB4, 119, \
+    0xA5, 36, 113, 247, 0xA9, 0xA9, 105, 16, \
+    0xB8, 85, 50, 2E, 0xDB, 99, 64, 0xD8, \
+    0xA0, 0E, 240, 146, 53, 5, 17, 0xE3, \
+    0A, 0xBE, 0xC1, 255, 249, 0xE3, 0xA2, 6E, \
+    127, 0xB2, 159, 8C, 24, 48, 35, 0xC3, \
+    88, 7E, 56, 0xDA, 0, 119, 0xD9, 0xB4, \
+    118, 3E, 4E, 4B, 148, 0xB2, 0xBB, 0xC1, \
+    148, 0xC6, 101, 1E, 119, 0xCA, 249, 146, \
+    0xEE, 0xAA, 0xC0, 35, 2A, 40, 1B, 246, \
+    0xB3, 0xA7, 57, 0xC1, 34, 97, 22, 130, \
+    0A, 0xE8, 0xDB, 88, 71, 0xA6, 7C, 0xBE, \
+    249, 0xC9, 9, 1B, 70, 2D, 83, 8C, \
+    0xD7, 2B, 3, 116, 6A, 0xE7, 127, 5E, \
+    98, 41, 2C, 49, 21, 98, 0xA8, 70, \
+    80, 5D, 0xC8, 2D, 0xB8, 84, 51, 8A, \
+    0xE4, 159, 82, 53, 0xC9, 5B, 145, 23, \
+    8C, 0xCF, 2D, 0xD5, 0xCA, 0xCE, 244, 3, \
+    0xEC, 9D, 24, 16, 0xC6, 39, 2B, 4, \
+    5B, 3B, 113, 249, 0xDC, 6B, 128, 0xD6, \
+    63, 0xDD, 4A, 8E, 9A, 0xDB, 1E, 105, \
+    98, 0xA6, 149, 38, 0xD4, 49, 97, 0xC1, \
+    0xA4, 1D, 87, 0D, 121, 56, 0xDA, 0xD4, \
+    0xA4, 0E, 50, 9C, 0xCF, 244, 6A, 0xAA, \
+    54, 0xAD, 0, 4C, 246, 0, 0xC8, 56, \
+    1E, 66, 5A, 49, 0xD9, 81, 0xAE, 100, \
+    15D, 0xB2, 63, 0xCE, 0xC9, 80, 9D, 67, \
+    104, 127, 0xEB, 105, 0xED, 0xD1, 0xCC, 5E, \
+    0B, 8C, 0xC3, 0xBD, 246, 4B, 16, 0xEF, \
+    134, 0xB6, 49, 66, 0xA3, 0xAB, 136, 41, \
+    85, 5B, 47, 116, 7C, 147, 38, 101, \
+    0xCB, 2C, 15, 1C, 0xC0, 1B, 0xD7, 2, \
+    41, 56, 136, 57, 0xD2, 0xAF, 5, 0xE4, \
+    84, 80, 4A, 0xC7, 8B, 117, 130, 130, \
+    40, 70, 0xC0, 0xBA, 53, 0xC3, 95, 5C, \
+    89, 22, 0C, 0xC0, 70, 15D, 130, 81, \
+    84, 31, 0xC6, 8C, 9C, 134, 0xB0, 34, \
+    0xBB, 112, 153, 135, 6A, 70, 0E, 116, \
+    81, 0xA8, 0xA9, 49, 9, 112, 63, 0xEE, \
+    1C, 33, 7E, 6C, 56, 38, 0xE5, 2C, \
+    81, 0xAA, 105, 1E, 0E, 66, 3C, 15C, \
+    153, 0xE9, 0xE3, 22, 80, 0xC1, 33, 7B, \
+    98, 72, 22, 0xCD, 0xAD, 9A, 149, 249, \
+    0xD5, 0xB8, 1, 148, 136, 0xD9, 0xC0, 0xA0, \
+    0xA1, 15E, 48, 117, 0xA5, 119, 0xE2, 49, \
+    131, 248, 1D, 4A, 63, 47, 0xA4, 87, \
+    1E, 15C, 8C, 0xE0, 0xBA, 8A, 79, 0xE8, \
+    0xB6, 133, 5D, 15E, 114, 0xB0, 0xA6, 6E, \
+    0xDE, 0xD2, 15B, 0xAB, 15B, 0xE5, 8A, 48, \
+    15A, 15A, 0xBE, 1C, 5D, 113, 0xA8, 7E, \
+    47, 116, 1E, 248, 0xC1, 15E, 134, 15E, \
+    0xA6, 0xBB, 15D, 0xE5, 48, 103, 127, 0D, \
+    151, 0xD1, 1D, 73, 247, 0xA8, 68, 3D, \
+    8, 34, 0xE5, 6, 0xA9, 244, 97, 4E, \
+    1, 1E, 2A, 148, 131, 143, 248, 8C, \
+    0xD6, 8C, 8B, 0xB7, 0xC5, 0xC6, 66, 4C, \
+    255, 255, 255, 255, 255, 255, 255, 255 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DHM_RFC7919_FFDHE8192_G_BIN">Marco <span>MBEDTLS_DHM_RFC7919_FFDHE8192_G_BIN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DHM_RFC7919_FFDHE8192_G_BIN { 2 }
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_dhm_init">Func <span>mbedtls_dhm_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_dhm_init( mbedtls_dhm_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function initializes the DHM context.
+ *
+ * \param ctx      The DHM context to initialize.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_read_params">Func <span>mbedtls_dhm_read_params</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_read_params( mbedtls_dhm_context *ctx,
+                            unsigned char **p,
+                            const unsigned char *end );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function parses the DHM parameters in a
+ *                 TLS ServerKeyExchange handshake message
+ *                 (DHM modulus, generator, and public key).
+ *
+ * \note           In a TLS handshake, this is the how the client
+ *                 sets up its DHM context from the server's public
+ *                 DHM key material.
+ *
+ * \param ctx      The DHM context to use. This must be initialized.
+ * \param p        On input, *p must be the start of the input buffer.
+ *                 On output, *p is updated to point to the end of the data
+ *                 that has been read. On success, this is the first byte
+ *                 past the end of the ServerKeyExchange parameters.
+ *                 On error, this is the point at which an error has been
+ *                 detected, which is usually not useful except to debug
+ *                 failures.
+ * \param end      The end of the input buffer.
+ *
+ * \return         \c 0 on success.
+ * \return         An \c MBEDTLS_ERR_DHM_XXX error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_make_params">Func <span>mbedtls_dhm_make_params</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_make_params( mbedtls_dhm_context *ctx, int x_size,
+                    unsigned char *output, size_t *olen,
+                    int (*f_rng)(void *, unsigned char *, size_t),
+                    void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function generates a DHM key pair and exports its
+ *                 public part together with the DHM parameters in the format
+ *                 used in a TLS ServerKeyExchange handshake message.
+ *
+ * \note           This function assumes that the DHM parameters \c ctx->P
+ *                 and \c ctx->G have already been properly set. For that, use
+ *                 mbedtls_dhm_set_group() below in conjunction with
+ *                 mbedtls_mpi_read_binary() and mbedtls_mpi_read_string().
+ *
+ * \note           In a TLS handshake, this is the how the server generates
+ *                 and exports its DHM key material.
+ *
+ * \param ctx      The DHM context to use. This must be initialized
+ *                 and have the DHM parameters set. It may or may not
+ *                 already have imported the peer's public key.
+ * \param x_size   The private key size in Bytes.
+ * \param olen     The address at which to store the number of Bytes
+ *                 written on success. This must not be \c NULL.
+ * \param output   The destination buffer. This must be a writable buffer of
+ *                 sufficient size to hold the reduced binary presentation of
+ *                 the modulus, the generator and the public key, each wrapped
+ *                 with a 2-byte length field. It is the responsibility of the
+ *                 caller to ensure that enough space is available. Refer to
+ *                 mbedtls_mpi_size() to computing the byte-size of an MPI.
+ * \param f_rng    The RNG function. Must not be \c NULL.
+ * \param p_rng    The RNG context to be passed to \p f_rng. This may be
+ *                 \c NULL if \p f_rng doesn't need a context parameter.
+ *
+ * \return         \c 0 on success.
+ * \return         An \c MBEDTLS_ERR_DHM_XXX error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_set_group">Func <span>mbedtls_dhm_set_group</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_set_group( mbedtls_dhm_context *ctx,
+                          const mbedtls_mpi *P,
+                          const mbedtls_mpi *G );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function sets the prime modulus and generator.
+ *
+ * \note           This function can be used to set \c ctx->P, \c ctx->G
+ *                 in preparation for mbedtls_dhm_make_params().
+ *
+ * \param ctx      The DHM context to configure. This must be initialized.
+ * \param P        The MPI holding the DHM prime modulus. This must be
+ *                 an initialized MPI.
+ * \param G        The MPI holding the DHM generator. This must be an
+ *                 initialized MPI.
+ *
+ * \return         \c 0 if successful.
+ * \return         An \c MBEDTLS_ERR_DHM_XXX error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_read_public">Func <span>mbedtls_dhm_read_public</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_read_public( mbedtls_dhm_context *ctx,
+                    const unsigned char *input, size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function imports the raw public value of the peer.
+ *
+ * \note           In a TLS handshake, this is the how the server imports
+ *                 the Client's public DHM key.
+ *
+ * \param ctx      The DHM context to use. This must be initialized and have
+ *                 its DHM parameters set, e.g. via mbedtls_dhm_set_group().
+ *                 It may or may not already have generated its own private key.
+ * \param input    The input buffer containing the \c G^Y value of the peer.
+ *                 This must be a readable buffer of size \p ilen Bytes.
+ * \param ilen     The size of the input buffer \p input in Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         An \c MBEDTLS_ERR_DHM_XXX error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_make_public">Func <span>mbedtls_dhm_make_public</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_make_public( mbedtls_dhm_context *ctx, int x_size,
+                    unsigned char *output, size_t olen,
+                    int (*f_rng)(void *, unsigned char *, size_t),
+                    void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function creates a DHM key pair and exports
+ *                 the raw public key in big-endian format.
+ *
+ * \note           The destination buffer is always fully written
+ *                 so as to contain a big-endian representation of G^X mod P.
+ *                 If it is larger than \c ctx->len, it is padded accordingly
+ *                 with zero-bytes at the beginning.
+ *
+ * \param ctx      The DHM context to use. This must be initialized and
+ *                 have the DHM parameters set. It may or may not already
+ *                 have imported the peer's public key.
+ * \param x_size   The private key size in Bytes.
+ * \param output   The destination buffer. This must be a writable buffer of
+ *                 size \p olen Bytes.
+ * \param olen     The length of the destination buffer. This must be at least
+ *                 equal to `ctx->len` (the size of \c P).
+ * \param f_rng    The RNG function. This must not be \c NULL.
+ * \param p_rng    The RNG context to be passed to \p f_rng. This may be \c NULL
+ *                 if \p f_rng doesn't need a context argument.
+ *
+ * \return         \c 0 on success.
+ * \return         An \c MBEDTLS_ERR_DHM_XXX error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_calc_secret">Func <span>mbedtls_dhm_calc_secret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_calc_secret( mbedtls_dhm_context *ctx,
+                    unsigned char *output, size_t output_size, size_t *olen,
+                    int (*f_rng)(void *, unsigned char *, size_t),
+                    void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function derives and exports the shared secret
+ *                 \c (G^Y)^X mod \c P.
+ *
+ * \note           If \p f_rng is not \c NULL, it is used to blind the input as
+ *                 a countermeasure against timing attacks. Blinding is used
+ *                 only if our private key \c X is re-used, and not used
+ *                 otherwise. We recommend always passing a non-NULL
+ *                 \p f_rng argument.
+ *
+ * \param ctx           The DHM context to use. This must be initialized
+ *                      and have its own private key generated and the peer's
+ *                      public key imported.
+ * \param output        The buffer to write the generated shared key to. This
+ *                      must be a writable buffer of size \p output_size Bytes.
+ * \param output_size   The size of the destination buffer. This must be at
+ *                      least the size of \c ctx->len (the size of \c P).
+ * \param olen          On exit, holds the actual number of Bytes written.
+ * \param f_rng         The RNG function, for blinding purposes. This may
+ *                      b \c NULL if blinding isn't needed.
+ * \param p_rng         The RNG context. This may be \c NULL if \p f_rng
+ *                      doesn't need a context argument.
+ *
+ * \return              \c 0 on success.
+ * \return              An \c MBEDTLS_ERR_DHM_XXX error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_free">Func <span>mbedtls_dhm_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_dhm_free( mbedtls_dhm_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function frees and clears the components
+ *                 of a DHM context.
+ *
+ * \param ctx      The DHM context to free and clear. This may be \c NULL,
+ *                 in which case this function is a no-op. If it is not \c NULL,
+ *                 it must point to an initialized DHM context.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_parse_dhm">Func <span>mbedtls_dhm_parse_dhm</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_parse_dhm( mbedtls_dhm_context *dhm, const unsigned char *dhmin,
+                          size_t dhminlen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief             This function parses DHM parameters in PEM or DER format.
+ *
+ * \param dhm         The DHM context to import the DHM parameters into.
+ *                    This must be initialized.
+ * \param dhmin       The input buffer. This must be a readable buffer of
+ *                    length \p dhminlen Bytes.
+ * \param dhminlen    The size of the input buffer \p dhmin, including the
+ *                    terminating \c NULL Byte for PEM data.
+ *
+ * \return            \c 0 on success.
+ * \return            An \c MBEDTLS_ERR_DHM_XXX or \c MBEDTLS_ERR_PEM_XXX error
+ *                    code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_parse_dhmfile">Func <span>mbedtls_dhm_parse_dhmfile</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_parse_dhmfile( mbedtls_dhm_context *dhm, const char *path );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function loads and parses DHM parameters from a file.
+ *
+ * \param dhm      The DHM context to load the parameters to.
+ *                 This must be initialized.
+ * \param path     The filename to read the DHM parameters from.
+ *                 This must not be \c NULL.
+ *
+ * \return         \c 0 on success.
+ * \return         An \c MBEDTLS_ERR_DHM_XXX or \c MBEDTLS_ERR_PEM_XXX
+ *                 error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_dhm_self_test">Func <span>mbedtls_dhm_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_dhm_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The DMH checkup routine.
+ *
+ * \return         \c 0 on success.
+ * \return         \c 1 on failure.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_dhm_context;
+">Typedef <span>
+mbedtls_dhm_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_dhm_context
+{
+   size_t len;        /*!<  The size of \p P in Bytes. */
+   mbedtls_mpi P;     /*!<  The prime modulus. */
+   mbedtls_mpi G;     /*!<  The generator. */
+   mbedtls_mpi X;     /*!<  Our secret value. */
+   mbedtls_mpi GX;    /*!<  Our public key = \c G^X mod \c P. */
+   mbedtls_mpi GY;    /*!<  The public key of the peer = \c G^Y mod \c P. */
+   mbedtls_mpi K;     /*!<  The shared secret = \c G^(XY) mod \c P. */
+   mbedtls_mpi RP;    /*!<  The cached value = \c R^2 mod \c P. */
+   mbedtls_mpi Vi;    /*!<  The blinding value. */
+   mbedtls_mpi Vf;    /*!<  The unblinding value. */
+   mbedtls_mpi pX;    /*!<  The previous \c X. */
+}
+mbedtls_dhm_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The DHM context structure.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

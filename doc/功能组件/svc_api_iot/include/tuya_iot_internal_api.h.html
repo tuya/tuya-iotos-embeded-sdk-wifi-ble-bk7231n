@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_cJSON.h" class="nav-sub-label">ty_cJSON.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_wifi_defs.h" class="nav-sub-label">tuya_cloud_wifi_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#thing_config.h" class="nav-sub-label">thing_config.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_TUYA_IOT_INTERNAL_API_H" class="nav-sub-label">_TUYA_IOT_INTERNAL_API_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#iot_httpc_common_post_no_remalloc" class="nav-sub-label">iot_httpc_common_post_no_remalloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_common_post" class="nav-sub-label">iot_httpc_common_post</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_common_post_simple" class="nav-sub-label">iot_httpc_common_post_simple</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_download_file" class="nav-sub-label">iot_httpc_download_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_mqc_app_register_cb" class="nav-sub-label">iot_mqc_app_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_mqc_send_custom_msg" class="nav-sub-label">iot_mqc_send_custom_msg</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_common_write" class="nav-sub-label">iot_wd_common_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_common_read" class="nav-sub-label">iot_wd_common_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_common_free_data" class="nav-sub-label">iot_wd_common_free_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_common_delete" class="nav-sub-label">iot_wd_common_delete</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_gw_desc_if_read" class="nav-sub-label">iot_wd_gw_desc_if_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_gw_write_country_code" class="nav-sub-label">iot_wd_gw_write_country_code</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_utils_serialize" class="nav-sub-label">iot_wd_utils_serialize</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_utils_free_outbuf" class="nav-sub-label">iot_wd_utils_free_outbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wd_utils_deserialize" class="nav-sub-label">iot_wd_utils_deserialize</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_gw_user_token_bind" class="nav-sub-label">iot_gw_user_token_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_put_cloud_config" class="nav-sub-label">iot_put_cloud_config</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_wf_gw_unactive_custom_mode" class="nav-sub-label">iot_wf_gw_unactive_custom_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_register_pre_gw_ug_cb" class="nav-sub-label">iot_register_pre_gw_ug_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_tls_set_ssl_verify" class="nav-sub-label">iot_tls_set_ssl_verify</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_tls_register_x509_crt_der" class="nav-sub-label">iot_tls_register_x509_crt_der</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_gw_update_versions" class="nav-sub-label">iot_gw_update_versions</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_post" class="nav-sub-label">iot_httpc_raw_post</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_get" class="nav-sub-label">iot_httpc_raw_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_put" class="nav-sub-label">iot_httpc_raw_put</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_write_content" class="nav-sub-label">iot_httpc_raw_write_content</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_read_resp_header" class="nav-sub-label">iot_httpc_raw_read_resp_header</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_read_content" class="nav-sub-label">iot_httpc_raw_read_content</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_httpc_raw_close" class="nav-sub-label">iot_httpc_raw_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_put_cloud_config" class="nav-sub-label">tuya_iot_put_cloud_config</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_thing_config_init" class="nav-sub-label">tuya_iot_thing_config_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_thing_config_start" class="nav-sub-label">tuya_iot_thing_config_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_thing_config_stop" class="nav-sub-label">tuya_iot_thing_config_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_compare_two_string" class="nav-sub-label">tuya_iot_compare_two_string</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_special_dp_register_cb" class="nav-sub-label">iot_special_dp_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_compare_two_string" class="nav-sub-label">tuya_iot_compare_two_string</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_json_safety_string" class="nav-sub-label">tuya_iot_get_json_safety_string</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#IOT_HTTP_GET_FILE_DATA_CB" class="nav-sub-label">IOT_HTTP_GET_FILE_DATA_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_mqc_protocol_handler_cb" class="nav-sub-label">iot_mqc_protocol_handler_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_mqc_publish_result_cb" class="nav-sub-label">iot_mqc_publish_result_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#IOT_VAR_TP_T" class="nav-sub-label">IOT_VAR_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#IOT_TY_DB_RW_S;
+" class="nav-sub-label">IOT_TY_DB_RW_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRE_GW_UG_INFORM_CB" class="nav-sub-label">PRE_GW_UG_INFORM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#IOT_RAW_HTTP_S" class="nav-sub-label">IOT_RAW_HTTP_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#iot_special_dp_cb" class="nav-sub-label">iot_special_dp_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="ty_cJSON.h"><span>ty_cJSON.h</span></h4>
+      <pre class="doc-declare"><code>#include "ty_cJSON.h"
+</code></pre>
+      <pre class="doc-comment">#include "ty_cJSON.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_wifi_defs.h"><span>tuya_cloud_wifi_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_wifi_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_wifi_defs.h"
+</pre>
+
+      <h4 id="thing_config.h"><span>thing_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "thing_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "thing_config.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_TUYA_IOT_INTERNAL_API_H">Marco <span>_TUYA_IOT_INTERNAL_API_H</span></h4>
+      <pre class="doc-declare"><code>#define _TUYA_IOT_INTERNAL_API_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="iot_httpc_common_post_no_remalloc">Func <span>iot_httpc_common_post_no_remalloc</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_common_post_no_remalloc(IN CONST CHAR_T *api_name, IN CONST CHAR_T *api_ver,
+                                             IN CONST CHAR_T *uuid, IN CONST CHAR_T *devid,
+                                             IN CHAR_T *post_data, IN UINT_T data_total_len,
+                                             IN CONST CHAR_T *p_head_other,
+                                             OUT ty_cJSON **pp_result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_common_post_no_remalloc 
+ * @desc http api
+ *
+ * @param[in] api_name
+ * @param[in] api_ver
+ * @param[in] uuid
+ * @param[in] devid
+ * @param[in] post_data
+ * @param[in] data_total_len
+ * @param[in] p_head_other
+ * @param[out] pp_result
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_common_post">Func <span>iot_httpc_common_post</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_common_post(IN CONST CHAR_T *api_name, IN CONST CHAR_T *api_ver,
+                                 IN CONST CHAR_T *uuid, IN CONST CHAR_T *devid,
+                                 IN CHAR_T *post_data,
+                                 IN CONST CHAR_T *p_head_other,
+                                 OUT ty_cJSON **pp_result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_common_post 
+ *
+ * @param[in] api_name
+ * @param[in] api_ver
+ * @param[in] uuid
+ * @param[in] devid
+ * @param[in] post_data
+ * @param[in] p_head_other
+ * @param[out] pp_result
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_common_post_simple">Func <span>iot_httpc_common_post_simple</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_common_post_simple(IN CONST CHAR_T *api_name, IN CONST CHAR_T *api_ver,
+                                        IN CHAR_T *post_data, IN CONST CHAR_T *p_head_other, OUT ty_cJSON **pp_result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_common_post_simple 
+ *
+ * @param[in] api_name
+ * @param[in] api_ver
+ * @param[in] post_data
+ * @param[in] p_head_other
+ * @param[out] pp_result
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_download_file">Func <span>iot_httpc_download_file</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_download_file(IN CONST CHAR_T *url,IN CONST UINT_T mlk_buf_len,\
+                                 IN CONST IOT_HTTP_GET_FILE_DATA_CB gfd_cb, IN PVOID_T priv_data, \
+                                 IN CONST UINT_T total_len, INOUT BYTE_T file_hmac[32]);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_download_file 
+ *
+ * @param[in] url
+ * @param[in] mlk_buf_len
+ * @param[in] gfd_cb
+ * @param[in] priv_data
+ * @param[in] total_len
+ * @param[in/out] file_hmac[32]
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_mqc_app_register_cb">Func <span>iot_mqc_app_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_mqc_app_register_cb(UINT_T mq_pro, iot_mqc_protocol_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_mqc_app_register_cb 
+ * @desc 注册mqtt事件回调函数
+ *
+ * @param[in] mq_pro
+ * @param[in] handler
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_mqc_send_custom_msg">Func <span>iot_mqc_send_custom_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_mqc_send_custom_msg(IN CONST UINT_T protocol,IN CONST CHAR_T *data,IN CONST BYTE_T qos,\
+                                   IN CONST UINT_T to_lmt,IN CONST iot_mqc_publish_result_cb cb,IN VOID *prv_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_mqc_send_custom_msg 
+ *
+ * @param[in] protocol
+ * @param[in] data
+ * @param[in] qos
+ * @param[in] to_lmt
+ * @param[in] cb
+ * @param[in] prv_data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_common_write">Func <span>iot_wd_common_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_common_write(IN CONST CHAR_T *key, IN CONST BYTE_T *value, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_common_write 
+ * @desc wd write
+ *
+ * @param[in] key
+ * @param[in] value
+ * @param[in] len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_common_read">Func <span>iot_wd_common_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_common_read(IN CONST CHAR_T *key, OUT BYTE_T **value, OUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_common_read 
+ * @desc wd read
+ *
+ * @param[in] key
+ * @param[out] value
+ * @param[out] p_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_common_free_data">Func <span>iot_wd_common_free_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_common_free_data(IN BYTE_T *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_common_free_data 
+ * @desc wd free
+ *
+ * @param[in] data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_common_delete">Func <span>iot_wd_common_delete</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_common_delete(IN CONST CHAR_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_common_delete 
+ * @desc wd delete
+ *
+ * @param[in] key
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_gw_desc_if_read">Func <span>iot_wd_gw_desc_if_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_gw_desc_if_read(OUT VOID *di);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_gw_desc_if_read 
+ * @desc wd read gateway information
+ *
+ * @param[out] di
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_gw_write_country_code">Func <span>iot_wd_gw_write_country_code</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_gw_write_country_code(CHAR_T *country_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_gw_write_country_code 
+ * @desc wd write country code
+ *
+ * @param[in] country_code
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_utils_serialize">Func <span>iot_wd_utils_serialize</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_utils_serialize(IN CONST IOT_TY_DB_RW_S *rw,IN CONST UINT_T rw_cnt,\
+                              OUT CHAR_T **out,OUT UINT_T *out_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_utils_serialize 
+ *
+ * @param[in] rw
+ * @param[in] rw_cnt
+ * @param[out] out
+ * @param[out] out_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_utils_free_outbuf">Func <span>iot_wd_utils_free_outbuf</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_utils_free_outbuf(IN CHAR_T *out_buf);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_utils_free_outbuf 
+ *
+ * @param[out] out_buf
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wd_utils_deserialize">Func <span>iot_wd_utils_deserialize</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wd_utils_deserialize(IN CONST CHAR_T *in,INOUT IOT_TY_DB_RW_S *rw,IN CONST UINT_T rw_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wd_utils_deserialize 
+ *
+ * @param[in] in
+ * @param[in] rw
+ * @param[in] rw_cnt
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_gw_user_token_bind">Func <span>iot_gw_user_token_bind</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_gw_user_token_bind(IN CONST CHAR_T *token);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_gw_user_token_bind 
+ *
+ * @param[in] token
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_put_cloud_config">Func <span>iot_put_cloud_config</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_put_cloud_config(IN CONST CHAR_T *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_put_cloud_config 
+ * @desc the project switches to the release, reporting configuration
+ *
+ * @param[in] data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_wf_gw_unactive_custom_mode">Func <span>iot_wf_gw_unactive_custom_mode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_wf_gw_unactive_custom_mode(GW_WF_START_MODE wifi_mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_wf_gw_unactive_custom_mode 
+ *
+ * @param[in] wifi_mode
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_register_pre_gw_ug_cb">Func <span>iot_register_pre_gw_ug_cb</span></h4>
+      <pre class="doc-declare"><code>VOID iot_register_pre_gw_ug_cb(IN PRE_GW_UG_INFORM_CB pre_ug_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_register_pre_gw_ug_cb 
+ *
+ * @param pre_ug_cb
+ *
+ * @return none
+ */</pre>
+
+      <h4 id="iot_tls_set_ssl_verify">Func <span>iot_tls_set_ssl_verify</span></h4>
+      <pre class="doc-declare"><code>VOID iot_tls_set_ssl_verify(IN CONST INT_T verify_mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_tls_set_ssl_verify 
+ *
+ * @param[in] verify_mode
+ *
+ * @return none
+ */</pre>
+
+      <h4 id="iot_tls_register_x509_crt_der">Func <span>iot_tls_register_x509_crt_der</span></h4>
+      <pre class="doc-declare"><code>INT_T iot_tls_register_x509_crt_der(VOID *p_ctx, UCHAR_T *p_der, UINT_T der_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_tls_register_x509_crt_der 
+ * @desc Parse one or more PEM certificates from a buffer and add them to the chained list
+ *
+ * @param[in] p_ctx
+ * @param[in] p_der
+ * @param[in] der_len
+ *
+ * @return result
+ */</pre>
+
+      <h4 id="iot_gw_update_versions">Func <span>iot_gw_update_versions</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_gw_update_versions(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_gw_update_versions 
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_raw_post">Func <span>iot_httpc_raw_post</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_raw_post(IN CONST CHAR_T *p_url, IN CONST UINT_T data_total_len, INOUT IOT_RAW_HTTP_S *pp_raw_http);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_post 
+ *
+ * @param[in] p_url
+ * @param[in] data_total_len
+ * @param[in/out] pp_raw_http
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_raw_get">Func <span>iot_httpc_raw_get</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_raw_get(IN CONST CHAR_T *p_url, INOUT IOT_RAW_HTTP_S *pp_raw_http, IN UINT_T offset, IN UINT_T total_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_get 
+ *
+ * @param[in] p_url
+ * @param[out] pp_raw_http
+ * @param[in] offset
+ * @param[in] total_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_raw_put">Func <span>iot_httpc_raw_put</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_raw_put(IN CONST CHAR_T *p_url, IN CONST UINT_T data_total_len, INOUT IOT_RAW_HTTP_S *pp_raw_http);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_put 
+ *
+ * @param[in] p_url
+ * @param[in] data_total_len
+ * @param[out] pp_raw_http
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_raw_write_content">Func <span>iot_httpc_raw_write_content</span></h4>
+      <pre class="doc-declare"><code>INT_T iot_httpc_raw_write_content(IN IOT_RAW_HTTP_S p_raw_http, IN CONST BYTE_T *buf, IN CONST UINT_T buf_len, BOOL_T chunked);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_write_content 
+ *
+ * @param[in] p_raw_http
+ * @param[in] buf
+ * @param[in] buf_len
+ * @param[in] chunked
+ *
+ * @return result
+ */</pre>
+
+      <h4 id="iot_httpc_raw_read_resp_header">Func <span>iot_httpc_raw_read_resp_header</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_raw_read_resp_header(INOUT IOT_RAW_HTTP_S p_raw_http, OUT INT_T *p_status_code, OUT BOOL_T *p_chunked, OUT UINT_T *p_content_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_read_resp_header 
+ *
+ * @param[in/out] p_raw_http
+ * @param[out] p_status_code
+ * @param[out] p_chunked
+ * @param[out] p_content_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="iot_httpc_raw_read_content">Func <span>iot_httpc_raw_read_content</span></h4>
+      <pre class="doc-declare"><code>INT_T iot_httpc_raw_read_content(IN IOT_RAW_HTTP_S p_raw_http, IN BYTE_T *buf, IN CONST UINT_T buf_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_read_content 
+ *
+ * @param[in] p_raw_http
+ * @param[in] buf
+ * @param[in] buf_len
+ *
+ * @return result
+ */</pre>
+
+      <h4 id="iot_httpc_raw_close">Func <span>iot_httpc_raw_close</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_httpc_raw_close(IN IOT_RAW_HTTP_S p_raw_http);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_httpc_raw_close 
+ *
+ * @param[in] p_raw_http
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_put_cloud_config">Func <span>tuya_iot_put_cloud_config</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_put_cloud_config(IN CONST CHAR_T *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_put_cloud_config 
+ *
+ * @param[in] data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_thing_config_init">Func <span>tuya_iot_thing_config_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_thing_config_init(IN THING_CONFIG_SOCKET_CB socket_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_thing_config_init 
+ *
+ * @param[in] socket_cb
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_thing_config_start">Func <span>tuya_iot_thing_config_start</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_thing_config_start(IN CONST CHAR_T *ssid, IN CONST CHAR_T *passwd, IN CONST CHAR_T *token, IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_thing_config_start 
+ *
+ * @param[in] ssid
+ * @param[in] passwd
+ * @param[in] token
+ * @param[in] timeout
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_thing_config_stop">Func <span>tuya_iot_thing_config_stop</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_thing_config_stop(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_thing_config_stop 
+ *
+ * @return none
+ */</pre>
+
+      <h4 id="tuya_iot_compare_two_string">Func <span>tuya_iot_compare_two_string</span></h4>
+      <pre class="doc-declare"><code>BOOL_T tuya_iot_compare_two_string(IN CONST CHAR_T *cString1, IN CONST CHAR_T *cString2);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_compare_two_string
+ *
+ * @param cString1
+ * @param cString2
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="iot_special_dp_register_cb">Func <span>iot_special_dp_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET iot_special_dp_register_cb(IN iot_special_dp_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief iot_special_dp_register_cb 
+ *
+ * @param[in] handler
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_compare_two_string">Func <span>tuya_iot_compare_two_string</span></h4>
+      <pre class="doc-declare"><code>BOOL_T tuya_iot_compare_two_string(IN CONST CHAR_T *cString1, IN CONST CHAR_T *cString2);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_compare_two_string 
+ *
+ * @param[in] cString1
+ * @param[in] cString2
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="tuya_iot_get_json_safety_string">Func <span>tuya_iot_get_json_safety_string</span></h4>
+      <pre class="doc-declare"><code>CHAR_T* tuya_iot_get_json_safety_string(IN CONST CHAR_T *json);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_json_safety_string 
+ * @desc will change the (") to the (\") in json file
+ *
+ * @param[in] json
+ *
+ * @return 
+ *
+ * @note user shoule free memory
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="IOT_HTTP_GET_FILE_DATA_CB">Typedef <span>IOT_HTTP_GET_FILE_DATA_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*IOT_HTTP_GET_FILE_DATA_CB)(IN PVOID_T priv_data, IN CONST UINT_T total_len,IN CONST UINT_T offset,\
+                                           IN CONST BYTE_T *data,IN CONST UINT_T len,OUT UINT_T *remain_len);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="iot_mqc_protocol_handler_cb">Typedef <span>iot_mqc_protocol_handler_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*iot_mqc_protocol_handler_cb)(IN ty_cJSON *root_json);
+</code></pre>
+      <pre class="doc-comment">/* mqtt api */</pre>
+
+      <h4 id="iot_mqc_publish_result_cb">Typedef <span>iot_mqc_publish_result_cb</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*iot_mqc_publish_result_cb)(IN CONST OPERATE_RET op_ret,IN CONST VOID *prv_data);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IOT_VAR_TP_T">Typedef <span>IOT_VAR_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T IOT_VAR_TP_T;
+#define VT_CHAR 0
+#define VT_BYTE 1
+#define VT_SHORT 2
+#define VT_USHORT 3
+#define VT_INT 4
+#define VT_BOOL 5
+#define VT_STRING 6
+#define VT_RAW 7
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IOT_TY_DB_RW_S;
+">Typedef <span>IOT_TY_DB_RW_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *key;
+   IOT_VAR_TP_T vt;
+   VOID *val;
+   USHORT_T len;
+}IOT_TY_DB_RW_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRE_GW_UG_INFORM_CB">Typedef <span>PRE_GW_UG_INFORM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*PRE_GW_UG_INFORM_CB)(INOUT BOOL_T *handled, IN CONST FW_UG_S *fw);
+</code></pre>
+      <pre class="doc-comment">/***********************************************************
+网关升级时增加的前置过滤处理函数
+如果*handled返回为TRUE,那么就不在通过正常的用户回调通知用户升级
+如果*handled返回为FALSE,那么仍然通过正常的用户回调通知用户升级
+***********************************************************/</pre>
+
+      <h4 id="IOT_RAW_HTTP_S">Typedef <span>IOT_RAW_HTTP_S</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T IOT_RAW_HTTP_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="iot_special_dp_cb">Typedef <span>iot_special_dp_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*iot_special_dp_cb)(IN CONST UINT16_T dpid, IN CONST ty_cJSON *dp_obj);
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

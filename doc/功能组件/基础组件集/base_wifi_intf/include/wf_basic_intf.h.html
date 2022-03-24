@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_wifi.h" class="nav-sub-label">tuya_hal_wifi.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_network.h" class="nav-sub-label">tuya_hal_network.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_WF_BASIC_INTF_H" class="nav-sub-label">_WF_BASIC_INTF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#__WF_BASIC_INTF_EXT" class="nav-sub-label">__WF_BASIC_INTF_EXT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_hal_wifi.h"><span>tuya_hal_wifi.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_wifi.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_wifi.h"
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_hal_network.h"><span>tuya_hal_network.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_network.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_network.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_WF_BASIC_INTF_H">Marco <span>_WF_BASIC_INTF_H</span></h4>
+      <pre class="doc-declare"><code>#define _WF_BASIC_INTF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Marco <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>#define __WF_BASIC_INTF_EXT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Marco <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>#define __WF_BASIC_INTF_EXT extern
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_all_ap_scan(OUT AP_IF_S **ap_ary,OUT UINT_T *num);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_assign_ap_scan(IN CONST CHAR_T *ssid,OUT AP_IF_S **ap);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief do wifi Scan with specificed SSID.
+ *
+ * @param[in] ssid the ssid to be scaned 
+ * @param[out] ap ap info of the ssid
+ *
+ * @note must set station mode first.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_release_ap(IN AP_IF_S *ap);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free ap memory.
+ *
+ * @param[in] ap the ap info to be free 
+ *
+ * @note called after wf_all_ap_scan or wf_assign_ap_scan
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_set_cur_channel(IN CONST BYTE_T chan);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_get_cur_channel(OUT BYTE_T *chan);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_sniffer_set(IN CONST BOOL_T en,IN CONST SNIFFER_CALLBACK cb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_get_ip(IN CONST WF_IF_E wf,OUT NW_IP_S *ip);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get wifi ip.
+ *
+ * @param[in] wf station or ap  
+ *
+ * @param[out] ip ip address of station or ap
+ *
+ * @note called in station mode or ap mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_get_mac(IN CONST WF_IF_E wf,OUT NW_MAC_S *mac);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get wifi mac address.
+ *
+ * @param[in] wf station or ap  
+ *
+ * @param[out] mac mac address of station or ap
+ *
+ * @note called in station mode or ap mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_set_mac(IN CONST WF_IF_E wf,IN CONST NW_MAC_S *mac);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_wk_mode_set(IN CONST WF_WK_MD_E mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set wifi work mode.
+ *
+ * @param[in] mode wifi work mode,such as station, soft ap...
+ *
+ * @note called before other wifi operation
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_wk_mode_get(OUT WF_WK_MD_E *mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get wifi work mode.
+ *
+ * @param[out] mode current wifi work mode
+ *
+ * @note 
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_get_connected_ap_info(OUT FAST_WF_CONNECTED_AP_INFO_V2_S **fast_ap_info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get connect ap info.
+ *
+ * @param[out] fast_ap_info the ap infomation of the connected ap
+ *
+ * @note called after wifi connection has established in station mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_fast_station_connect(IN FAST_WF_CONNECTED_AP_INFO_V2_S *fast_ap_info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief do fast wifi connect.
+ *
+ * @param[in] fast_ap_info the ap infomation of the ap to be connected
+ *
+ * @note called after wf_get_connected_ap_info is called
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_station_connect(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief do wifi connect in station mode.
+ *
+ * @param[in] ssid the ssid of the ap to be connected
+ *
+ * @param[in] passwd the passwd of the ap to be connected
+ *
+ * @note called in station mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_station_disconnect(VOID);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_station_get_conn_ap_rssi(OUT SCHAR_T *rssi);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get rssi of the connected ap.
+ *
+ * @param[out] rssi the rssi of the connected ap
+ *
+ * @note called after connection has established in station mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_station_stat_get(OUT WF_STATION_STAT_E *stat);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get wifi station stat.
+ *
+ * @param[out] stat the stat in the station mode,refer to WF_STATION_STAT_E 
+ *
+ * @note called after wf_station_connect
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_ap_start(IN CONST WF_AP_CFG_IF_S *cfg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief start ap in ap mode.
+ *
+ * @param[in] cfg the configuration of the ap 
+ *
+ * @note called in wifi ap mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_ap_stop(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief stop ap in ap mode.
+ *
+ * @note called in wifi ap mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_get_ap_mac(INOUT NW_MAC_S *mac);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the ap mac address.
+ *
+ * @note called in wifi ap mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_set_country_code(IN CONST CHAR_T *p_country_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set the wifi country code.
+ *
+ * @note called in wifi ap mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET wf_get_country_code(IN CONST CHAR_T *p_country_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the wifi country code.
+ *
+ * @note called after wf_set_country_code
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+VOID_T tuya_wifi_set_lps_dtim(const unsigned int dtim);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set the wifi low power dtim.
+ *
+ * @note called before enter wifi low power mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET tuya_wifi_lp_disable(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief disable the wifi low power mode.
+ *
+ * @note called when exiting wifi low power mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET tuya_wifi_lp_enable(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief enable the wifi low power mode.
+ *
+ * @note called when entering wifi low power mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET tuya_cpu_lp_disable(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief disable the cpu low power mode.
+ *
+ * @note called when exiting wifi low power mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+OPERATE_RET tuya_cpu_lp_enable(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief enable the cpu low power mode.
+ *
+ * @note called when entering wifi low power mode
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__WF_BASIC_INTF_EXT">Variable <span>__WF_BASIC_INTF_EXT</span></h4>
+      <pre class="doc-declare"><code>__WF_BASIC_INTF_EXT \
+BOOL_T wf_rf_calibrated(VOID_T);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

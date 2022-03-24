@@ -1,13 +1,12 @@
-/*******************************************************************
-*  File: tuya_OS_ADAPTER_error_code.h
-*  Author: auto generate by tuya code gen system
-*  Date: 2019-08-14
-*  Description:this file defined the error code of tuya IOT 
-*  Device OS module OS_ADAPTER, you can change it manully
-*  if needed
-*  Copyright(C),2018-2020, tuya inc, www.tuya.comm
-*******************************************************************/
-
+/**
+* @file tuya_os_adapter_error_code.h
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef TUYA_OS_ADAPTER_ERROR_CODE_H
 #define TUYA_OS_ADAPTER_ERROR_CODE_H
 
@@ -28,11 +27,9 @@ extern "C" {
 #define INOUT
 #endif
 
-//#define OPRT_OK                             (0)
-//#define OPRT_COM_ERROR                      (-1)
-
-
-/* tuya sdk definition of socket errno */
+/**
+ * @brief tuya sdk definition of socket errno
+ */
 typedef int UNW_ERRNO_T;
 #define UNW_SUCCESS       0
 #define UNW_FAIL          -1
@@ -65,12 +62,11 @@ typedef int UNW_ERRNO_T;
 #define UNW_ENOMEM        -28
 #define UNW_EMSGSIZE      -29
 
-#define OPRT_OS_INTF_INVALID   -200  //组件接口服务无效
+#define OPRT_OS_INTF_INVALID   -200  //Component interface service is invalid
 
-/****************************************************************************
-            the error code marco define for module OS_ADAPTER 
-****************************************************************************/
-//common reason
+/**
+ * @brief common error code
+ */
 #define OPRT_OS_ADAPTER_OK                      0
 #define OPRT_OS_ADAPTER_COM_ERROR               -1
 #define OPRT_OS_ADAPTER_INVALID_PARM            -2
@@ -78,49 +74,56 @@ typedef int UNW_ERRNO_T;
 #define OPRT_OS_ADAPTER_NOT_SUPPORTED           -4
 #define OPRT_OS_ADAPTER_NETWORK_ERROR           -5
 
-
-//mutex
+/**
+ * @brief error code of mutex
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_MUTEX           10100
 #define OPRT_OS_ADAPTER_MUTEX_CREAT_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_MUTEX + 1)
 #define OPRT_OS_ADAPTER_MUTEX_LOCK_FAILED       -(OPRT_OS_ADAPTER_ERRCODE_MUTEX + 2)
 #define OPRT_OS_ADAPTER_MUTEX_UNLOCK_FAILED     -(OPRT_OS_ADAPTER_ERRCODE_MUTEX + 3)
 #define OPRT_OS_ADAPTER_MUTEX_RELEASE_FAILED    -(OPRT_OS_ADAPTER_ERRCODE_MUTEX + 4)
 
-
-//semaphore
+/**
+ * @brief error code of semaphore
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_SEM             10110
 #define OPRT_OS_ADAPTER_SEM_CREAT_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_SEM + 1)
 #define OPRT_OS_ADAPTER_SEM_WAIT_FAILED         -(OPRT_OS_ADAPTER_ERRCODE_SEM + 2)
 #define OPRT_OS_ADAPTER_SEM_POST_FAILED         -(OPRT_OS_ADAPTER_ERRCODE_SEM + 3)
 #define OPRT_OS_ADAPTER_SEM_RELEASE_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_SEM + 4)
 
-
-//queue
+/**
+ * @brief error code of queue
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_QUEUE           10120
 #define OPRT_OS_ADAPTER_QUEUE_CREAT_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_QUEUE + 1)
 #define OPRT_OS_ADAPTER_QUEUE_SEND_FAIL         -(OPRT_OS_ADAPTER_ERRCODE_QUEUE + 2)
 #define OPRT_OS_ADAPTER_QUEUE_RECV_FAIL         -(OPRT_OS_ADAPTER_ERRCODE_QUEUE + 3)
 
-
-//thread
+/**
+ * @brief error code of thread
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_THRD            10130
 #define OPRT_OS_ADAPTER_THRD_CREAT_FAILED       -(OPRT_OS_ADAPTER_ERRCODE_THRD + 1)
 #define OPRT_OS_ADAPTER_THRD_RELEASE_FAILED     -(OPRT_OS_ADAPTER_ERRCODE_THRD + 2)
 #define OPRT_OS_ADAPTER_THRD_JUDGE_SELF_FAILED  -(OPRT_OS_ADAPTER_ERRCODE_THRD + 3)
 
-
-//system
+/**
+ * @brief error code of system
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_SYSTEM          10140
 #define OPRT_OS_ADAPTER_CPU_LPMODE_SET_FAILED   -(OPRT_OS_ADAPTER_ERRCODE_SYSTEM + 1)
 
-
-//output
+/**
+ * @brief error code of output
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_LOG             10150
 #define OPRT_OS_ADAPTER_LOG_CLOSE_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_LOG + 1)
 #define OPRT_OS_ADAPTER_LOG_OPEN_FAILED         -(OPRT_OS_ADAPTER_ERRCODE_LOG + 2)
 
-
-//wifi
+/**
+ * @brief error code of wifi
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_WIFI            10160
 #define OPRT_OS_ADAPTER_AP_NOT_FOUND            -(OPRT_OS_ADAPTER_ERRCODE_WIFI + 1)
 #define OPRT_OS_ADAPTER_AP_SCAN_FAILED          -(OPRT_OS_ADAPTER_ERRCODE_WIFI + 2)
@@ -147,15 +150,17 @@ typedef int UNW_ERRNO_T;
 #define OPRT_OS_ADAPTER_MGNT_REG_FAILED         -(OPRT_OS_ADAPTER_ERRCODE_WIFI + 23)
 #define OPRT_OS_ADAPTER_WF_LPMODE_SET_FAILED    -(OPRT_OS_ADAPTER_ERRCODE_WIFI + 24)
 
-
-//flash
+/**
+ * @brief error code of flash
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_FLASH           10210
 #define OPRT_OS_ADAPTER_FLASH_READ_FAILED       -(OPRT_OS_ADAPTER_ERRCODE_FLASH + 1)
 #define OPRT_OS_ADAPTER_FLASH_WRITE_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_FLASH + 2)
 #define OPRT_OS_ADAPTER_FLASH_ERASE_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_FLASH + 3)
 
-
-//ota
+/**
+ * @brief error code of ota
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_OTA             10220
 #define OPRT_OS_ADAPTER_OTA_START_INFORM_FAILED -(OPRT_OS_ADAPTER_ERRCODE_OTA + 1)
 #define OPRT_OS_ADAPTER_OTA_PKT_SIZE_FAILED     -(OPRT_OS_ADAPTER_ERRCODE_OTA + 2)
@@ -163,37 +168,42 @@ typedef int UNW_ERRNO_T;
 #define OPRT_OS_ADAPTER_OTA_VERIFY_FAILED       -(OPRT_OS_ADAPTER_ERRCODE_OTA + 4)
 #define OPRT_OS_ADAPTER_OTA_END_INFORM_FAILED   -(OPRT_OS_ADAPTER_ERRCODE_OTA + 5)
 
-
-//watchdog
+/**
+ * @brief error code of watchdog
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_WD              10230
 #define OPRT_OS_ADAPTER_WD_INIT_FAILED          -(OPRT_OS_ADAPTER_ERRCODE_WD + 1)
 
-
-//gpio
+/**
+ * @brief error code of gpio
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_GPIO            10240
 #define OPRT_OS_ADAPTER_GPIO_INOUT_SET_FAILED   -(OPRT_OS_ADAPTER_ERRCODE_GPIO + 1)
 #define OPRT_OS_ADAPTER_GPIO_MODE_SET_FAILED    -(OPRT_OS_ADAPTER_ERRCODE_GPIO + 2)
 #define OPRT_OS_ADAPTER_GPIO_WRITE_FAILED       -(OPRT_OS_ADAPTER_ERRCODE_GPIO + 3)
 #define OPRT_OS_ADAPTER_GPIO_IRQ_INIT_FAILED    -(OPRT_OS_ADAPTER_ERRCODE_GPIO + 4)
 
-
-//uart
+/**
+ * @brief error code of uart
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_UART            10250
 #define OPRT_OS_ADAPTER_UART_INIT_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_UART + 1)
 #define OPRT_OS_ADAPTER_UART_DEINIT_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_UART + 2)
 #define OPRT_OS_ADAPTER_UART_SEND_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_UART + 3)
 #define OPRT_OS_ADAPTER_UART_READ_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_UART + 4)
 
-
-//i2c
+/**
+ * @brief error code of i2c
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_I2C             10260
 #define OPRT_OS_ADAPTER_I2C_OPEN_FAILED         -(OPRT_OS_ADAPTER_ERRCODE_I2C + 1)
 #define OPRT_OS_ADAPTER_I2C_CLOSE_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_I2C + 2)
 #define OPRT_OS_ADAPTER_I2C_READ_FAILED         -(OPRT_OS_ADAPTER_ERRCODE_I2C + 3)
 #define OPRT_OS_ADAPTER_I2C_WRITE_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_I2C + 4)
 
-
-//bt
+/**
+ * @brief error code of bluetooth
+ */
 #define OPRT_OS_ADAPTER_ERRCODE_BT              10270
 #define OPRT_OS_ADAPTER_BT_INIT_FAILED          -(OPRT_OS_ADAPTER_ERRCODE_BT + 1)
 #define OPRT_OS_ADAPTER_BT_DEINIT_FAILED        -(OPRT_OS_ADAPTER_ERRCODE_BT + 2)
@@ -205,7 +215,6 @@ typedef int UNW_ERRNO_T;
 #define OPRT_OS_ADAPTER_BT_ADV_STOP_FAILED      -(OPRT_OS_ADAPTER_ERRCODE_BT + 8)
 #define OPRT_OS_ADAPTER_BT_SCAN_FAILED          -(OPRT_OS_ADAPTER_ERRCODE_BT + 9)
 
-//#define OPRT_OS_ADAPTER_ERRCODE_MAX_CNT 26
 #ifdef __cplusplus
 }
 #endif

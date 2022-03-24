@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#str.h" class="nav-sub-label">str.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_URI_H_" class="nav-sub-label">COAP_URI_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_URI_SCHEME_SECURE_MASK" class="nav-sub-label">COAP_URI_SCHEME_SECURE_MASK</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_split_uri" class="nav-sub-label">coap_split_uri</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_split_path" class="nav-sub-label">coap_split_path</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_split_query" class="nav-sub-label">coap_split_query</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_uri_t" class="nav-sub-label">coap_uri_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_uri_t" class="nav-sub-label">coap_uri_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_string_t" class="nav-sub-label">coap_string_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_string_t" class="nav-sub-label">coap_string_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_uri_t;
+" class="nav-sub-label">coap_uri_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="str.h"><span>str.h</span></h4>
+      <pre class="doc-declare"><code>#include "str.h"
+</code></pre>
+      <pre class="doc-comment">#include "str.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_URI_H_">Marco <span>COAP_URI_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_URI_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_URI_SCHEME_SECURE_MASK">Marco <span>COAP_URI_SCHEME_SECURE_MASK</span></h4>
+      <pre class="doc-declare"><code>#define COAP_URI_SCHEME_SECURE_MASK 1
+</code></pre>
+      <pre class="doc-comment">/** This mask can be used to check if a parsed URI scheme is secure. */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_split_uri">Func <span>coap_split_uri</span></h4>
+      <pre class="doc-declare"><code>int coap_split_uri(const uint8_t *str_var, size_t len, coap_uri_t *uri);</code></pre>
+      <pre class="doc-comment">/**
+ * Parses a given string into URI components. The identified syntactic
+ * components are stored in the result parameter @p uri. Optional URI
+ * components that are not specified will be set to { 0, 0 }, except for the
+ * port which is set to @c COAP_DEFAULT_PORT. This function returns @p 0 if
+ * parsing succeeded, a value less than zero otherwise.
+ *
+ * @param str_var The string to split up.
+ * @param len     The actual length of @p str_var
+ * @param uri     The coap_uri_t object to store the result.
+ * @return        @c 0 on success, or < 0 on error.
+ *
+ */</pre>
+
+      <h4 id="coap_split_path">Func <span>coap_split_path</span></h4>
+      <pre class="doc-declare"><code>int coap_split_path(const uint8_t *s,
+                   size_t length,
+                   unsigned char *buf,
+                   size_t *buflen);</code></pre>
+      <pre class="doc-comment">/**
+ * Splits the given URI path into segments. Each segment is preceded
+ * by an option pseudo-header with delta-value 0 and the actual length
+ * of the respective segment after percent-decoding.
+ *
+ * @param s      The path string to split.
+ * @param length The actual length of @p s.
+ * @param buf    Result buffer for parsed segments.
+ * @param buflen Maximum length of @p buf. Will be set to the actual number
+ *               of bytes written into buf on success.
+ *
+ * @return       The number of segments created or @c -1 on error.
+ */</pre>
+
+      <h4 id="coap_split_query">Func <span>coap_split_query</span></h4>
+      <pre class="doc-declare"><code>int coap_split_query(const uint8_t *s,
+                    size_t length,
+                    unsigned char *buf,
+                    size_t *buflen);</code></pre>
+      <pre class="doc-comment">/**
+ * Splits the given URI query into segments. Each segment is preceded
+ * by an option pseudo-header with delta-value 0 and the actual length
+ * of the respective query term.
+ *
+ * @param s      The query string to split.
+ * @param length The actual length of @p s.
+ * @param buf    Result buffer for parsed segments.
+ * @param buflen Maximum length of @p buf. Will be set to the actual number
+ *               of bytes written into buf on success.
+ *
+ * @return       The number of segments created or @c -1 on error.
+ *
+ * @bug This function does not reserve additional space for delta > 12.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_pdu_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_uri_t">Variable <span>coap_uri_t</span></h4>
+      <pre class="doc-declare"><code>coap_uri_t *coap_new_uri(const uint8_t *uri, unsigned int length);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new coap_uri_t object from the specified URI. Returns the new
+ * object or NULL on error. The memory allocated by the new coap_uri_t
+ * must be released using coap_free().
+ *
+ * @param uri The URI path to copy.
+ * @param length The length of uri.
+ *
+ * @return New URI object or NULL on error.
+ */</pre>
+
+      <h4 id="coap_uri_t">Variable <span>coap_uri_t</span></h4>
+      <pre class="doc-declare"><code>coap_uri_t *coap_clone_uri(const coap_uri_t *uri);</code></pre>
+      <pre class="doc-comment">/**
+ * Clones the specified coap_uri_t object. Thie function allocates sufficient
+ * memory to hold the coap_uri_t structure and its contents. The object must
+ * be released with coap_free(). */</pre>
+
+      <h4 id="coap_string_t">Variable <span>coap_string_t</span></h4>
+      <pre class="doc-declare"><code>coap_string_t *coap_get_query(const struct coap_pdu_t *request);</code></pre>
+      <pre class="doc-comment">/**
+ * Extract query string from request PDU according to escape rules in 6.5.8.
+ * @param request Request PDU.
+ * @return        Reconstructed and escaped query string part.
+ */</pre>
+
+      <h4 id="coap_string_t">Variable <span>coap_string_t</span></h4>
+      <pre class="doc-declare"><code>coap_string_t *coap_get_uri_path(const struct coap_pdu_t *request);</code></pre>
+      <pre class="doc-comment">/**
+ * Extract uri_path string from request PDU
+ * @param request Request PDU.
+ * @return        Reconstructed and escaped uri path string part.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_uri_t;
+">Typedef <span>coap_uri_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+ coap_str_const_t host; /**< host part of the URI */
+ uint16_t port;         /**< The port in host byte order */
+ coap_str_const_t path; /**< Beginning of the first path segment.
+                           Use coap_split_path() to create Uri-Path options */
+ coap_str_const_t query; /**<  The query part if present */
+
+ /** The parsed scheme specifier. */
+ enum coap_uri_scheme_t scheme;
+} coap_uri_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Representation of parsed URI. Components may be filled from a string with
+ * coap_split_uri() and can be used as input for option-creation functions.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#x509.h" class="nav-sub-label">x509.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_X509_CRL_H" class="nav-sub-label">MBEDTLS_X509_CRL_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_x509_crl_parse_der" class="nav-sub-label">mbedtls_x509_crl_parse_der</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_crl_parse" class="nav-sub-label">mbedtls_x509_crl_parse</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_crl_parse_file" class="nav-sub-label">mbedtls_x509_crl_parse_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_crl_info" class="nav-sub-label">mbedtls_x509_crl_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_crl_init" class="nav-sub-label">mbedtls_x509_crl_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_crl_free" class="nav-sub-label">mbedtls_x509_crl_free</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_x509_crl_entry;
+" class="nav-sub-label">
+mbedtls_x509_crl_entry;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#
+mbedtls_x509_crl;
+" class="nav-sub-label">
+mbedtls_x509_crl;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="x509.h"><span>x509.h</span></h4>
+      <pre class="doc-declare"><code>#include "x509.h"
+</code></pre>
+      <pre class="doc-comment">#include "x509.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_X509_CRL_H">Marco <span>MBEDTLS_X509_CRL_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_CRL_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_x509_crl_parse_der">Func <span>mbedtls_x509_crl_parse_der</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_crl_parse_der( mbedtls_x509_crl *chain,
+                       const unsigned char *buf, size_t buflen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Parse a DER-encoded CRL and append it to the chained list
+ *
+ * \param chain    points to the start of the chain
+ * \param buf      buffer holding the CRL data in DER format
+ * \param buflen   size of the buffer
+ *                 (including the terminating null byte for PEM data)
+ *
+ * \return         0 if successful, or a specific X509 or PEM error code
+ */</pre>
+
+      <h4 id="mbedtls_x509_crl_parse">Func <span>mbedtls_x509_crl_parse</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_crl_parse( mbedtls_x509_crl *chain, const unsigned char *buf, size_t buflen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Parse one or more CRLs and append them to the chained list
+ *
+ * \note           Mutliple CRLs are accepted only if using PEM format
+ *
+ * \param chain    points to the start of the chain
+ * \param buf      buffer holding the CRL data in PEM or DER format
+ * \param buflen   size of the buffer
+ *                 (including the terminating null byte for PEM data)
+ *
+ * \return         0 if successful, or a specific X509 or PEM error code
+ */</pre>
+
+      <h4 id="mbedtls_x509_crl_parse_file">Func <span>mbedtls_x509_crl_parse_file</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_crl_parse_file( mbedtls_x509_crl *chain, const char *path );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Load one or more CRLs and append them to the chained list
+ *
+ * \note           Mutliple CRLs are accepted only if using PEM format
+ *
+ * \param chain    points to the start of the chain
+ * \param path     filename to read the CRLs from (in PEM or DER encoding)
+ *
+ * \return         0 if successful, or a specific X509 or PEM error code
+ */</pre>
+
+      <h4 id="mbedtls_x509_crl_info">Func <span>mbedtls_x509_crl_info</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_crl_info( char *buf, size_t size, const char *prefix,
+                  const mbedtls_x509_crl *crl );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Returns an informational string about the CRL.
+ *
+ * \param buf      Buffer to write to
+ * \param size     Maximum size of buffer
+ * \param prefix   A line prefix
+ * \param crl      The X509 CRL to represent
+ *
+ * \return         The length of the string written (not including the
+ *                 terminated nul byte), or a negative error code.
+ */</pre>
+
+      <h4 id="mbedtls_x509_crl_init">Func <span>mbedtls_x509_crl_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_x509_crl_init( mbedtls_x509_crl *crl );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize a CRL (chain)
+ *
+ * \param crl      CRL chain to initialize
+ */</pre>
+
+      <h4 id="mbedtls_x509_crl_free">Func <span>mbedtls_x509_crl_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_x509_crl_free( mbedtls_x509_crl *crl );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Unallocate all CRL data
+ *
+ * \param crl      CRL chain to free
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_x509_crl_entry;
+">Typedef <span>
+mbedtls_x509_crl_entry;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_x509_crl_entry
+{
+   mbedtls_x509_buf raw;
+
+   mbedtls_x509_buf serial;
+
+   mbedtls_x509_time revocation_date;
+
+   mbedtls_x509_buf entry_ext;
+
+   struct mbedtls_x509_crl_entry *next;
+}
+mbedtls_x509_crl_entry;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Certificate revocation list entry.
+ * Contains the CA-specific serial numbers and revocation dates.
+ */</pre>
+
+      <h4 id="
+mbedtls_x509_crl;
+">Typedef <span>
+mbedtls_x509_crl;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_x509_crl
+{
+   mbedtls_x509_buf raw;          /**< The raw certificate data (DER). */
+   mbedtls_x509_buf tbs;          /**< The raw certificate body (DER). The part that is To Be Signed. */
+
+   int version;           /**< CRL version (1=v1, 2=v2) */
+   mbedtls_x509_buf sig_oid;      /**< CRL signature type identifier */
+
+   mbedtls_x509_buf issuer_raw;   /**< The raw issuer data (DER). */
+
+   mbedtls_x509_name issuer;      /**< The parsed issuer data (named information object). */
+
+   mbedtls_x509_time this_update;
+   mbedtls_x509_time next_update;
+
+   mbedtls_x509_crl_entry entry;  /**< The CRL entries containing the certificate revocation times for this CA. */
+
+   mbedtls_x509_buf crl_ext;
+
+   mbedtls_x509_buf sig_oid2;
+   mbedtls_x509_buf sig;
+   mbedtls_md_type_t sig_md;          /**< Internal representation of the MD algorithm of the signature algorithm, e.g. MBEDTLS_MD_SHA256 */
+   mbedtls_pk_type_t sig_pk;          /**< Internal representation of the Public Key algorithm of the signature algorithm, e.g. MBEDTLS_PK_RSA */
+   void *sig_opts;            /**< Signature options to be passed to mbedtls_pk_verify_ext(), e.g. for RSASSA-PSS */
+
+   struct mbedtls_x509_crl *next;
+}
+mbedtls_x509_crl;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Certificate revocation list structure.
+ * Every CRL may have multiple entries.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

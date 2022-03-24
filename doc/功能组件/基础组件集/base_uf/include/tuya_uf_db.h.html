@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_TUYA_UF_DB_H_" class="nav-sub-label">_TUYA_UF_DB_H_</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#uf_db_init" class="nav-sub-label">uf_db_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#uf_db_user_param_write" class="nav-sub-label">uf_db_user_param_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#uf_db_user_param_read" class="nav-sub-label">uf_db_user_param_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufinit" class="nav-sub-label">ufinit</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufopen" class="nav-sub-label">ufopen</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufclose" class="nav-sub-label">ufclose</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufdelete" class="nav-sub-label">ufdelete</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufwrite" class="nav-sub-label">ufwrite</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufread" class="nav-sub-label">ufread</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufseek" class="nav-sub-label">ufseek</a>
+              </li>
+      
+
+              <li>
+                <a href="#uftell" class="nav-sub-label">uftell</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufeof" class="nav-sub-label">ufeof</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufgetsize" class="nav-sub-label">ufgetsize</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufprintf" class="nav-sub-label">ufprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufscanf" class="nav-sub-label">ufscanf</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufexist" class="nav-sub-label">ufexist</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufaccess" class="nav-sub-label">ufaccess</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufflush" class="nav-sub-label">ufflush</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufsync" class="nav-sub-label">ufsync</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufileno" class="nav-sub-label">ufileno</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufgetc" class="nav-sub-label">ufgetc</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufgets" class="nav-sub-label">ufgets</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufformat" class="nav-sub-label">ufformat</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#uFILE" class="nav-sub-label">uFILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ufmode_t" class="nav-sub-label">ufmode_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_TUYA_UF_DB_H_">Marco <span>_TUYA_UF_DB_H_</span></h4>
+      <pre class="doc-declare"><code>#define _TUYA_UF_DB_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="uf_db_init">Func <span>uf_db_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uf_db_init(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya unique file database system initialization
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */</pre>
+
+      <h4 id="uf_db_user_param_write">Func <span>uf_db_user_param_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uf_db_user_param_write(IN CONST BYTE_T *data, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief write user parameter to unique file database
+ * 
+ * @param[in] data data write to user parameter database
+ * @param[in] len data length write to user parameter database
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note the user parameter database is a file named "user_param_key", and max size is 4096 byte
+ */</pre>
+
+      <h4 id="uf_db_user_param_read">Func <span>uf_db_user_param_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET uf_db_user_param_read(OUT BYTE_T **buf, OUT UINT_T *len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read user parameter from unique file database
+ * 
+ * @param[out] buf buffer of the data read from user parameter file database
+ * @param[out] len length of the data read from user parameter file database
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note the user parameter database is a file named "user_param_key", and max size is 4096 byte  
+ */</pre>
+
+      <h4 id="ufinit">Func <span>ufinit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ufinit(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unique file system initialization
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ * 
+ * @note it will call by uf_db_init
+ */</pre>
+
+      <h4 id="ufopen">Func <span>ufopen</span></h4>
+      <pre class="doc-declare"><code>uFILE* ufopen(IN CONST CHAR_T *filepath, IN CONST CHAR_T *mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief open a unique file
+ * 
+ * @param[in] filepath the full file path
+ * @param[in] mode the open mode
+ * @return the handle of the file
+ * 
+ * @note the mode is same as file system open mode, contains "r","r+","a","a+","w","w+", 
+ * and also support binary mode.
+ */</pre>
+
+      <h4 id="ufclose">Func <span>ufclose</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ufclose(IN uFILE *fd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief close a unique file
+ * 
+ * @param fd the file handle
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="ufdelete">Func <span>ufdelete</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ufdelete(IN CONST CHAR_T *filepath);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief delete the unique file
+ * 
+ * @param[in] filepath the full file path
+ * @return  OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="ufwrite">Func <span>ufwrite</span></h4>
+      <pre class="doc-declare"><code>UINT_T ufwrite(IN uFILE *fd, IN CONST UCHAR_T *buf, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief write to unique file
+ * 
+ * @param[in] fd the file handle
+ * @param[in] buf the buffer write to the unique file
+ * @param[in] len the length write to the unique file, in byte
+ * @return characters written to the unique file
+ */</pre>
+
+      <h4 id="ufread">Func <span>ufread</span></h4>
+      <pre class="doc-declare"><code>UINT_T ufread(IN uFILE *fd, IN UCHAR_T *buf, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read from unique file
+ * 
+ * @param[in] fd the file handle
+ * @param[in] buf the buffer used to save the data read from the unique file
+ * @param[in] len the length want to read
+ * @return the number of byte actually read from the unique file
+ * 
+ */</pre>
+
+      <h4 id="ufseek">Func <span>ufseek</span></h4>
+      <pre class="doc-declare"><code>INT_T ufseek(IN uFILE *fd, IN UINT_T offset, IN CONST ufmode_t uf_mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief seek to the offset of the unique file
+ * 
+ * @param[in] fd the file handle
+ * @param[in] offset the offset want to seek
+ * @param[in] uf_mode the seek mode
+ * @return the current offset after seek 
+ */</pre>
+
+      <h4 id="uftell">Func <span>uftell</span></h4>
+      <pre class="doc-declare"><code>INT_T uftell(IN uFILE *fd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get current offset of the unique file
+ * 
+ * @param fd the file handle 
+ * @return the current offset of the file
+ */</pre>
+
+      <h4 id="ufeof">Func <span>ufeof</span></h4>
+      <pre class="doc-declare"><code>BOOL_T ufeof(IN uFILE *fd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check if the current offset reach the end of the file
+ * 
+ * @param[in] fd the file handle
+ * @return TRUE on reach the EOF, FLASE on not reach the EOF.
+ */</pre>
+
+      <h4 id="ufgetsize">Func <span>ufgetsize</span></h4>
+      <pre class="doc-declare"><code>INT_T ufgetsize(IN CONST CHAR_T *filepath);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the size of the unique file
+ * 
+ * @param[in] filepath the full file path
+ * @return the size of the file 
+ */</pre>
+
+      <h4 id="ufprintf">Func <span>ufprintf</span></h4>
+      <pre class="doc-declare"><code>INT_T ufprintf(IN uFILE * stream, IN const char* pFmt, ...);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief write a specail format to unique file
+ * 
+ * @param[in] stream the file handle
+ * @param[in] pFmt the variable parameters format
+ * @param ... 
+ * @return the counts of written characters
+ */</pre>
+
+      <h4 id="ufscanf">Func <span>ufscanf</span></h4>
+      <pre class="doc-declare"><code>INT_T ufscanf(IN uFILE * stream, IN INT_T count, IN PCHAR_T pFmt,...);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read a special format from unique file
+ * 
+ * @param[in] stream the file handle
+ * @param[in] count the counts read from file
+ * @param[in] pFmt the variable parameters format
+ * @param ... 
+ * @return the items in the paramter list 
+ */</pre>
+
+      <h4 id="ufexist">Func <span>ufexist</span></h4>
+      <pre class="doc-declare"><code>BOOL_T ufexist(IN CONST CHAR_T *filepath);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check if unique file is exist
+ * 
+ * @param[in] filepath the full file path
+ * @return TRUE on existed, FLASE on not existed.
+ */</pre>
+
+      <h4 id="ufaccess">Func <span>ufaccess</span></h4>
+      <pre class="doc-declare"><code>INT_T ufaccess(IN CONST CHAR_T *filepath, IN INT_T mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief test the permission of the unique file
+ * 
+ * @param[in] filepath the full file path
+ * @param[in] mode check the access mode
+ * @return INT_T 
+ * 
+ * @note the access mode contains "R_OK": read permission,"W_OK": write permission,"X_OK":excute permission,"F_OK": existed,
+ * in flash unique file system, only support "F_OK" mode. 
+ */</pre>
+
+      <h4 id="ufflush">Func <span>ufflush</span></h4>
+      <pre class="doc-declare"><code>INT_T ufflush(IN uFILE * stream);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief flush the unique file, write the cache to physical disk
+ * 
+ * @param[in] stream the file handle
+ * @return 0 on success, others on failed
+ * 
+ * @note in flash unique file system, always return success because the data was write to flash directly. 
+ */</pre>
+
+      <h4 id="ufsync">Func <span>ufsync</span></h4>
+      <pre class="doc-declare"><code>INT_T ufsync(IN INT_T fd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief sync the unique file, write the file info to pysical disk
+ * 
+ * @param[in] fd the file handle
+ * @return 0 on success, others on failed 
+ * 
+ * @note in flash unique file system, always return success because the data was write to flash directly. 
+ */</pre>
+
+      <h4 id="ufileno">Func <span>ufileno</span></h4>
+      <pre class="doc-declare"><code>INT_T ufileno(IN uFILE * stream);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the file description
+ * 
+ * @param[in] stream the file handle
+ * @return the file description 
+ * 
+ * @note in flash unique file system, always return 0, it not support file description
+ */</pre>
+
+      <h4 id="ufgetc">Func <span>ufgetc</span></h4>
+      <pre class="doc-declare"><code>INT_T ufgetc(IN uFILE *stream);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read a character from unique file
+ * 
+ * @param[in] stream the file handle
+ * @return -1 on failed, others means success 
+ */</pre>
+
+      <h4 id="ufgets">Func <span>ufgets</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *ufgets(IN CHAR_T *s,IN INT_T n, IN uFILE *stream);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read a line from unique file
+ * 
+ * @param[in] s the buffer used to save the string
+ * @param[in] n the numbers want to get from the file
+ * @param[in] stream the file handle
+ * @return NULL on failed, others on success 
+ * 
+ * @note stop and return if reach the n or find "\n" character
+ */</pre>
+
+      <h4 id="ufformat">Func <span>ufformat</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ufformat(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief format uf flash
+ *
+ * @return  OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="uFILE">Typedef <span>uFILE</span></h4>
+      <pre class="doc-declare"><code>typedef VOID uFILE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unique file handle
+ * 
+ */</pre>
+
+      <h4 id="ufmode_t">Typedef <span>ufmode_t</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned char ufmode_t;
+#define UF_SEEK_SET 0  // seek from head of the file
+#define UF_SEEK_CUR 1  // seek from current position
+#define UF_SEEK_END 2  // seek from end of the file
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unique file mode
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_CLOUD_WIFI_DEFS_H" class="nav-sub-label">TUYA_CLOUD_WIFI_DEFS_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#GW_WF_CFG_MTHD_SEL" class="nav-sub-label">GW_WF_CFG_MTHD_SEL</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WF_START_MODE" class="nav-sub-label">GW_WF_START_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WF_NWC_STAT_T" class="nav-sub-label">GW_WF_NWC_STAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WF_NWC_FAST_STAT_T" class="nav-sub-label">GW_WF_NWC_FAST_STAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WIFI_NW_STAT_E" class="nav-sub-label">GW_WIFI_NW_STAT_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#NW_CFG_ERR_CODE_E" class="nav-sub-label">NW_CFG_ERR_CODE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#WF_RESET_TP_T" class="nav-sub-label">WF_RESET_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#WF_GW_PROD_INFO_S;
+" class="nav-sub-label">WF_GW_PROD_INFO_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEBUG_GW_PROD_INFO_S;
+" class="nav-sub-label">DEBUG_GW_PROD_INFO_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_WF_NW_STAT_CB" class="nav-sub-label">GET_WF_NW_STAT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#WF_NW_CFG_ERR_CODE_CB" class="nav-sub-label">WF_NW_CFG_ERR_CODE_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_CLOUD_WIFI_DEFS_H">Marco <span>TUYA_CLOUD_WIFI_DEFS_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CLOUD_WIFI_DEFS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="GW_WF_CFG_MTHD_SEL">Typedef <span>GW_WF_CFG_MTHD_SEL</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WF_CFG_MTHD_SEL; // wifi config method select
+#define GWCM_OLD               0  // do not have low power mode
+#define GWCM_LOW_POWER         1  // with low power mode
+#define GWCM_SPCL_MODE         2  // special with low power mode
+#define GWCM_OLD_PROD          3  // GWCM_OLD mode with product
+#define GWCM_LOW_POWER_AUTOCFG 4  // with low power mode && auto cfg
+#define GWCM_SPCL_AUTOCFG      5  // special with low power mode && auto cfg
+
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk definition of wifi work mode */</pre>
+
+      <h4 id="GW_WF_START_MODE">Typedef <span>GW_WF_START_MODE</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WF_START_MODE;
+#define WF_START_AP_ONLY       0  // only have ap-cfg mode
+#define WF_START_SMART_ONLY    1  // only have smart-cfg mode
+#define WF_START_AP_FIRST      2  // have both ap-cfg and smart-cfg. default is ap-cfg mode
+#define WF_START_SMART_FIRST   3  // have both ap-cfg and smart-cfg. default is smart-cfg mode
+#define WF_START_SMART_AP_CONCURRENT   4  //  ap-cfg and smart-cfg is concurrent
+#define WF_START_MODE_NULL     15  //  no wifi start mode
+
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk definition of wifi start mode */</pre>
+
+      <h4 id="GW_WF_NWC_STAT_T">Typedef <span>GW_WF_NWC_STAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WF_NWC_STAT_T;
+#define GWNS_LOWPOWER          0  // current in low power mode
+#define GWNS_UNCFG_SMC         1  // current in smart-cfg mode
+#define GWNS_UNCFG_AP          2  // current in ap-cfg mode
+#define GWNS_TY_SMARTCFG       3  // already get ssid && passwd from smart-cfg mode
+#define GWNS_TY_AP             4  // already get ssid && passwd from ap-cfg mode
+#define GWNS_WECHAT_AK         5  // already get ssid && passwd from wechat mode
+#define GWNS_OTHER_CFG         6  // already get ssid && passwd from other mode.for example:uart、bluetooth、qrcode and so on
+#define GWNS_NO_NEED_CFG       7  // no need config wifi
+#define GWNS_TY_SMART_AP_CFG 9 //already get ssid && passwd from smart-cfg and ap-cfg concurrent mode
+#define GWNS_UNCFG_SMC_AP	10	//current in smart-cfg and ap-cfg concurrent mode
+#define GWNS_BT_ACTIVED 		11	// bt actived
+#define GWNS_BT_CONFIG_WF	12	//in bt actived,has configed wifi
+
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk definition of wifi-config status */</pre>
+
+      <h4 id="GW_WF_NWC_FAST_STAT_T">Typedef <span>GW_WF_NWC_FAST_STAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WF_NWC_FAST_STAT_T;
+#define GWNS_FAST_LOWPOWER          0  // current in low power mode
+#define GWNS_FAST_UNCFG_SMC         1  // current in smart-cfg mode
+#define GWNS_FAST_UNCFG_AP          2  // current in ap-cfg mode
+#define GWNS_FAST_UNCFG_NORMAL      3  // current in normal mode
+
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk definition of wifi-config fast status */</pre>
+
+      <h4 id="GW_WIFI_NW_STAT_E">Typedef <span>GW_WIFI_NW_STAT_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WIFI_NW_STAT_E;
+#define STAT_LOW_POWER         0  // idle status,use to external config network
+#define STAT_UNPROVISION       1  // smart config status
+#define STAT_AP_STA_UNCFG      2  // ap WIFI config status
+#define STAT_AP_STA_DISC       3  // ap WIFI already config,station disconnect
+#define STAT_AP_STA_CONN       4  // ap station mode,station connect
+#define STAT_STA_DISC          5  // only station mode,disconnect
+#define STAT_STA_CONN          6  // station mode connect
+#define STAT_CLOUD_CONN        7  // cloud connect
+#define STAT_AP_CLOUD_CONN     8  // cloud connect and ap start
+#define STAT_REG_FAIL          9  // register fail
+#define STAT_OFFLINE           10  // offline
+#define STAT_MQTT_ONLINE       11
+#define STAT_MQTT_OFFLINE      12
+#define STAT_UNPROVISION_AP_STA_UNCFG	13 //smart-cfg and ap-cfg concurrent config status
+#define STAT_BT_ACTIVED        14
+
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk definition of wifi-net status */</pre>
+
+      <h4 id="NW_CFG_ERR_CODE_E">Typedef <span>NW_CFG_ERR_CODE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T NW_CFG_ERR_CODE_E;
+#define NW_CFG_INIT 				0  // initial state
+#define NW_CFG_ACTIVE_FAILED		1  // active failed
+#define NW_CFG_AP_NOT_FOUND		2  // ap not found
+#define NW_CFG_ERR_PASSWD			3  // password error
+#define NW_CFG_CANT_CONN_AP		4  // can not connect to ap
+#define NW_CFG_DHCP_FAILED			5  // dhcp failed
+#define NW_CFG_SUCC 				100 // succeed
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WF_RESET_TP_T">Typedef <span>WF_RESET_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T WF_RESET_TP_T;
+#define WRT_SMT_CFG            0
+#define WRT_AP                 1
+#define WRT_AUTO               2
+#define WRT_SMT_AP_CFG		3
+
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk definition of wifi-reset type */</pre>
+
+      <h4 id="WF_GW_PROD_INFO_S;
+">Typedef <span>WF_GW_PROD_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *uuid;      // strlen(uuid) <= 16,must not be null
+   CHAR_T *auth_key;  // strlen(auth_key) <= 32,must not be null
+   CHAR_T *ap_ssid;   // strlen(ap_ssid) <= 16,if ap_ssid is null ,then the default ssid is Smartlife_xxxx
+   CHAR_T *ap_passwd; // strlen(ap_passwd) <= 16,default null
+}WF_GW_PROD_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Definition of Wi-Fi product info
+ */</pre>
+
+      <h4 id="DEBUG_GW_PROD_INFO_S;
+">Typedef <span>DEBUG_GW_PROD_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   BOOL_T has_auth;	// authFlag
+   CHAR_T *ap_ssid;	// strlen(ap_ssid) <= 16,if ap_ssid is null ,then the default ssid is Smartlife_xxxx
+   CHAR_T *ap_passwd;	// strlen(ap_passwd) <= 16,default null
+}DEBUG_GW_PROD_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of product info (for debug)
+ */</pre>
+
+      <h4 id="GET_WF_NW_STAT_CB">Typedef <span>GET_WF_NW_STAT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*GET_WF_NW_STAT_CB)(IN CONST GW_WIFI_NW_STAT_E stat);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler when network connection error happens
+ *
+ * @param[in] stat State code, see GW_WIFI_NW_STAT_E
+ */</pre>
+
+      <h4 id="WF_NW_CFG_ERR_CODE_CB">Typedef <span>WF_NW_CFG_ERR_CODE_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*WF_NW_CFG_ERR_CODE_CB)(IN CONST NW_CFG_ERR_CODE_E err_code);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler when network configuration error happens
+ *
+ * @param[in] err_code Error code, see NW_CFG_ERR_CODE_E
+ */</pre>
+    </div>
+  </body>
+</html>
+            

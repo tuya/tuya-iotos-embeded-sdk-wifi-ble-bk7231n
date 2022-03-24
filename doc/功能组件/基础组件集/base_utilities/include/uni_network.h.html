@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_config.h" class="nav-sub-label">tuya_iot_config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_network.h" class="nav-sub-label">tuya_hal_network.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_BASE_UNI_DNS_CACHE_H__" class="nav-sub-label">__TUYA_BASE_UNI_DNS_CACHE_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_DOMAIN_NAME_LEN" class="nav-sub-label">MAX_DOMAIN_NAME_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DNS_SERVER_DOMAIN" class="nav-sub-label">HTTP_DNS_SERVER_DOMAIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DNS_SERVER_DOMAIN_WE" class="nav-sub-label">HTTP_DNS_SERVER_DOMAIN_WE</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DNS_SERVER_DOMAIN" class="nav-sub-label">HTTP_DNS_SERVER_DOMAIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DNS_SERVER_DOMAIN_WE" class="nav-sub-label">HTTP_DNS_SERVER_DOMAIN_WE</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DNS_SERVER_DOMAIN" class="nav-sub-label">HTTP_DNS_SERVER_DOMAIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_DNS_SERVER_DOMAIN_WE" class="nav-sub-label">HTTP_DNS_SERVER_DOMAIN_WE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#unw_gethostbyname" class="nav-sub-label">unw_gethostbyname</a>
+              </li>
+      
+
+              <li>
+                <a href="#unw_connect_to_domain" class="nav-sub-label">unw_connect_to_domain</a>
+              </li>
+      
+
+              <li>
+                <a href="#unw_init_dns_cache" class="nav-sub-label">unw_init_dns_cache</a>
+              </li>
+      
+
+              <li>
+                <a href="#unw_clear_all_dns_cache" class="nav-sub-label">unw_clear_all_dns_cache</a>
+              </li>
+      
+
+              <li>
+                <a href="#unw_clear_dns_cache" class="nav-sub-label">unw_clear_dns_cache</a>
+              </li>
+      
+
+              <li>
+                <a href="#unw_add_dns_cache" class="nav-sub-label">unw_add_dns_cache</a>
+              </li>
+      
+
+              <li>
+                <a href="#unm_set_dns_region" class="nav-sub-label">unm_set_dns_region</a>
+              </li>
+      
+
+              <li>
+                <a href="#unm_set_dns_cache_priority" class="nav-sub-label">unm_set_dns_cache_priority</a>
+              </li>
+      
+
+              <li>
+                <a href="#unm_get_dns_cache_priority" class="nav-sub-label">unm_get_dns_cache_priority</a>
+              </li>
+      
+
+              <li>
+                <a href="#unm_lower_dns_cache_priority" class="nav-sub-label">unm_lower_dns_cache_priority</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#REGION_E" class="nav-sub-label">REGION_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DNS_PRIO_T" class="nav-sub-label">TY_DNS_PRIO_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DNS_INFO_S;
+" class="nav-sub-label">TY_DNS_INFO_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_iot_config.h"><span>tuya_iot_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_config.h"
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_hal_network.h"><span>tuya_hal_network.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_network.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_network.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_BASE_UNI_DNS_CACHE_H__">Marco <span>__TUYA_BASE_UNI_DNS_CACHE_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_BASE_UNI_DNS_CACHE_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_DOMAIN_NAME_LEN">Marco <span>MAX_DOMAIN_NAME_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MAX_DOMAIN_NAME_LEN    128
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief max length of domain name
+ * 
+ */</pre>
+
+      <h4 id="HTTP_DNS_SERVER_DOMAIN">Marco <span>HTTP_DNS_SERVER_DOMAIN</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DNS_SERVER_DOMAIN   "h3.iot-dns.com"
+</code></pre>
+      <pre class="doc-comment">// TLS_MODE==TLS_TUYA_PSK_ONLY or TLS_MODE==TLS_TUYA_ECC_PSK</pre>
+
+      <h4 id="HTTP_DNS_SERVER_DOMAIN_WE">Marco <span>HTTP_DNS_SERVER_DOMAIN_WE</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DNS_SERVER_DOMAIN_WE "h3-we.iot-dns.com"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_DNS_SERVER_DOMAIN">Marco <span>HTTP_DNS_SERVER_DOMAIN</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DNS_SERVER_DOMAIN   "h4.iot-dns.com"
+</code></pre>
+      <pre class="doc-comment">// TLS_MODE==TLS_TUYA_ECC_CLIENT_AUTH</pre>
+
+      <h4 id="HTTP_DNS_SERVER_DOMAIN_WE">Marco <span>HTTP_DNS_SERVER_DOMAIN_WE</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DNS_SERVER_DOMAIN_WE "h4-we.iot-dns.com"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_DNS_SERVER_DOMAIN">Marco <span>HTTP_DNS_SERVER_DOMAIN</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DNS_SERVER_DOMAIN   "h2.iot-dns.com"
+</code></pre>
+      <pre class="doc-comment">// TLS_MODE==TLS_TUYA_PSK_ONLY or TLS_MODE==TLS_TUYA_ECC_ONLY_NOSTRIP</pre>
+
+      <h4 id="HTTP_DNS_SERVER_DOMAIN_WE">Marco <span>HTTP_DNS_SERVER_DOMAIN_WE</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_DNS_SERVER_DOMAIN_WE "h2-we.iot-dns.com"
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="unw_gethostbyname">Func <span>unw_gethostbyname</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unw_gethostbyname(CONST CHAR_T *domain, UNW_IP_ADDR_T *addr);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the domain ip address info by the domain name
+ * 
+ * @param[in] domain the domain name 
+ * @param[out] addr the ip address of the domain
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unw_connect_to_domain">Func <span>unw_connect_to_domain</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unw_connect_to_domain(INT_T *sockfd, CHAR_T *hostname, UINT16_T port, UINT_T retry_cnt, UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief connect to a domain with specific tcp port
+ * 
+ * @param[out] sockfd the socket fd
+ * @param[in] hostname the domian name
+ * @param[in] port the tcp port
+ * @param[in] retry_cnt retry count if tcp connect failed
+ * @param[in] timeout timeout in ms
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unw_init_dns_cache">Func <span>unw_init_dns_cache</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unw_init_dns_cache(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief init the dns module
+ * 
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unw_clear_all_dns_cache">Func <span>unw_clear_all_dns_cache</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unw_clear_all_dns_cache(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief clean all dynamic dns cache
+ * 
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unw_clear_dns_cache">Func <span>unw_clear_dns_cache</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unw_clear_dns_cache(CONST CHAR_T *domain);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief clear the specific domain dns cache
+ * 
+ * @param[in] domain the domian which need to clear
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unw_add_dns_cache">Func <span>unw_add_dns_cache</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unw_add_dns_cache(CONST CHAR_T *domain, CONST UNW_IP_ADDR_T ip);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief add dns information to dynamic dns cache
+ * 
+ * @param[in] domain the domian name
+ * @param[in] ip the ip address of the domain name
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unm_set_dns_region">Func <span>unm_set_dns_region</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unm_set_dns_region(REGION_E region);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set the dns current region
+ * 
+ * @param[in] region the new current region
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unm_set_dns_cache_priority">Func <span>unm_set_dns_cache_priority</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET unm_set_dns_cache_priority(TY_DNS_PRIO_T dns_prio);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set the dns priority
+ * 
+ * @param[in] dns_prio the new dns priority
+ * @return OPRT_OK: success, others: fail, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="unm_get_dns_cache_priority">Func <span>unm_get_dns_cache_priority</span></h4>
+      <pre class="doc-declare"><code>TY_DNS_PRIO_T unm_get_dns_cache_priority(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the dns current priority
+ * 
+ * @return REGION_E the current priority
+ */</pre>
+
+      <h4 id="unm_lower_dns_cache_priority">Func <span>unm_lower_dns_cache_priority</span></h4>
+      <pre class="doc-declare"><code>VOID unm_lower_dns_cache_priority(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief decrease the dns current priority
+ * 
+ * @note if the priority is DNS_PRIO_SYSTEM, lower dns priority will return to DNS_PRIO_REGION
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="REGION_E">Typedef <span>REGION_E</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T REGION_E;
+#define E_REGION_DYNAMIC 0     // no fixed region
+#define E_REGION_CN 1          // china region
+#define E_REGION_EU 2          // european region
+#define E_REGION_US 3          // american region
+#define E_REGION_UE 4          // west american region
+#define E_REGION_IN 5          // indian region
+#define E_REGION_WE 6          // west european region
+#define E_REGION_MAX 7         // region max
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief DNS region
+ * 
+ */</pre>
+
+      <h4 id="TY_DNS_PRIO_T">Typedef <span>TY_DNS_PRIO_T</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T TY_DNS_PRIO_T;
+#define DNS_PRIO_REGION 0  // default priority, use the dns server of current region
+#define DNS_PRIO_RANDOM 1  // select a random dns server of the regions except current region
+#define DNS_PRIO_SYSTEM 2  // use the system dns service of the router
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief DNS priority
+ * 
+ */</pre>
+
+      <h4 id="TY_DNS_INFO_S;
+">Typedef <span>TY_DNS_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   REGION_E       region; // the region of the DNS entry
+   CHAR_T         *domain;// the domain of the DNS entry
+   UNW_IP_ADDR_T  ip;    // the ip address of the DNS entry
+}TY_DNS_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief DNS entry info
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

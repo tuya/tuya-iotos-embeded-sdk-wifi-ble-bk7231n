@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_UART_LEGACY_H__" class="nav-sub-label">__TUYA_UART_LEGACY_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ty_uart_init" class="nav-sub-label">ty_uart_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_uart_flowctrl_init" class="nav-sub-label">ty_uart_flowctrl_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_uart_free" class="nav-sub-label">ty_uart_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_uart_send_data" class="nav-sub-label">ty_uart_send_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_uart_read_data" class="nav-sub-label">ty_uart_read_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_uart_read_data_size" class="nav-sub-label">ty_uart_read_data_size</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TY_UART_BAUD_E;
+" class="nav-sub-label">TY_UART_BAUD_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_UART_PORT_E;
+" class="nav-sub-label">TY_UART_PORT_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DATA_BIT_E;
+" class="nav-sub-label">TY_DATA_BIT_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_STOPBITS_E;
+" class="nav-sub-label">TY_STOPBITS_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_PARITY_E;
+" class="nav-sub-label">TY_PARITY_E;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_UART_LEGACY_H__">Marco <span>__TUYA_UART_LEGACY_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_UART_LEGACY_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ty_uart_init">Func <span>ty_uart_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_uart_init(IN CONST TY_UART_PORT_E port,IN CONST TY_UART_BAUD_E badu,\
+                           IN CONST TY_DATA_BIT_E bits,IN CONST TY_PARITY_E parity,\
+                           IN CONST TY_STOPBITS_E stop,IN CONST UINT_T bufsz,IN CONST BOOL_T unblock);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart init
+ * 
+ * @param[in] port refer to TY_UART_PORT_E
+ * @param[in] badu refer to TY_UART_BAUD_E
+ * @param[in] bits refer to TY_DATA_BIT_E
+ * @param[in] parity refer to TY_PARITY_E
+ * @param[in] stop refer to TY_STOPBITS_E
+ * @param[in] bufsz buf size
+ * @param[in] unblock block flag
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_uart_flowctrl_init">Func <span>ty_uart_flowctrl_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_uart_flowctrl_init(IN CONST TY_UART_PORT_E port, IN CONST TY_UART_BAUD_E badu,
+                        IN CONST TY_DATA_BIT_E bits, IN CONST TY_PARITY_E parity,
+                        IN CONST TY_STOPBITS_E stop, IN CONST UINT_T bufsz,IN CONST BOOL_T unblock,IN CONST BOOL_T flowctl);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart init
+ * 
+ * @param[in] port refer to TY_UART_PORT_E
+ * @param[in] badu refer to TY_UART_BAUD_E
+ * @param[in] bits refer to TY_DATA_BIT_E
+ * @param[in] parity refer to TY_PARITY_E
+ * @param[in] stop refer to TY_STOPBITS_E
+ * @param[in] bufsz buf size
+ * @param[in] unblock block flag
+ * @param[in] flowctl
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_uart_free">Func <span>ty_uart_free</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_uart_free(IN CONST TY_UART_PORT_E port);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart free
+ * 
+ * @param[in] port refer to TY_UART_PORT_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_uart_send_data">Func <span>ty_uart_send_data</span></h4>
+      <pre class="doc-declare"><code>VOID ty_uart_send_data(IN CONST TY_UART_PORT_E port,IN CONST BYTE_T *data,IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart send data
+ * 
+ * @param[in] port refer to TY_UART_PORT_E
+ * @param[in] data send buf
+ * @param[in] len send length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_uart_read_data">Func <span>ty_uart_read_data</span></h4>
+      <pre class="doc-declare"><code>UINT_T ty_uart_read_data(IN CONST TY_UART_PORT_E port,OUT BYTE_T *buf,IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart read data
+ * 
+ * @param[in] port refer to TY_UART_PORT_E
+ * @param[out] buf read buf
+ * @param[in] len read length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_uart_read_data_size">Func <span>ty_uart_read_data_size</span></h4>
+      <pre class="doc-declare"><code>INT_T ty_uart_read_data_size(IN CONST TY_UART_PORT_E port);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart data size
+ * 
+ * @param[in] port refer to TY_UART_PORT_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TY_UART_BAUD_E;
+">Typedef <span>TY_UART_BAUD_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TYU_RATE_300    = 300,
+   TYU_RATE_600    = 600,
+   TYU_RATE_1200   = 1200,
+   TYU_RATE_2400   = 2400,
+   TYU_RATE_4800   = 4800,
+   TYU_RATE_9600   = 9600,
+   TYU_RATE_19200  = 19200,
+   TYU_RATE_38400  = 38400,
+   TYU_RATE_57600  = 57600,
+   TYU_RATE_74880  = 74880,
+   TYU_RATE_115200 = 115200,
+   TYU_RATE_230400 = 230400,
+   TYU_RATE_460800 = 460800,
+   TYU_RATE_921600 = 921600,
+   TYU_RATE_1500000 = 1500000,
+   TYU_RATE_1843200 = 1843200,
+   TYU_RATE_3686400 = 3686400,
+}TY_UART_BAUD_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_UART_PORT_E;
+">Typedef <span>TY_UART_PORT_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TY_UART0 = 0,
+   TY_UART1,
+   TY_UART_NUM,
+}TY_UART_PORT_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_DATA_BIT_E;
+">Typedef <span>TY_DATA_BIT_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TYWL_5B = 0,
+   TYWL_6B = 1,
+   TYWL_7B = 2,
+   TYWL_8B = 3,
+}TY_DATA_BIT_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_STOPBITS_E;
+">Typedef <span>TY_STOPBITS_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TYS_STOPBIT1 = 1,
+   TYS_STOPBIT1_5 = 2,
+   TYS_STOPBIT2 = 3,
+}TY_STOPBITS_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_PARITY_E;
+">Typedef <span>TY_PARITY_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TYP_NONE = 0,  // parity disable
+   TYP_ODD = 1,   // odd parity enable
+   TYP_EVEN = 2,  // even paroty enable
+}TY_PARITY_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

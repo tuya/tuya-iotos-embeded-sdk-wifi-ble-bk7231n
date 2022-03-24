@@ -24,6 +24,10 @@
 #include "tuya_cloud_types.h"
 #include "coap_config.h"
 
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 #if defined(_WIN32)
 #pragma comment(lib,"Ws2_32.lib")
 #include <ws2tcpip.h>

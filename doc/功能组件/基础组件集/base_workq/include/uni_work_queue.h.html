@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_base_utilities.h" class="nav-sub-label">tuya_base_utilities.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_WORK_QUEUE_H" class="nav-sub-label">_UNI_WORK_QUEUE_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#work_queue_create" class="nav-sub-label">work_queue_create</a>
+              </li>
+      
+
+              <li>
+                <a href="#work_queue_add" class="nav-sub-label">work_queue_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#work_queue_check_and_del" class="nav-sub-label">work_queue_check_and_del</a>
+              </li>
+      
+
+              <li>
+                <a href="#work_queue_release" class="nav-sub-label">work_queue_release</a>
+              </li>
+      
+
+              <li>
+                <a href="#work_queue_get_depth" class="nav-sub-label">work_queue_get_depth</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#WORK_QUEUE_HANDLE" class="nav-sub-label">WORK_QUEUE_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#WK_CALLBACK" class="nav-sub-label">WK_CALLBACK</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_base_utilities.h"><span>tuya_base_utilities.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_base_utilities.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_base_utilities.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_WORK_QUEUE_H">Marco <span>_UNI_WORK_QUEUE_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_WORK_QUEUE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="work_queue_create">Func <span>work_queue_create</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET work_queue_create(OUT WORK_QUEUE_HANDLE *phand,\
+                                    IN CONST STACK_SIZE stack_size,\
+                                    IN CONST TRD_PRI pri,\
+                                    IN CONST UINT_T work_num);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create work queue
+ *
+ * @param[out] phand: pointer of the work queue handle
+ * @param[in] stack_size: stack depth of work queue's thread
+ * @param[in] pri: thread priority of work queue
+ * @param[in] work_num, thread num of work queue
+ *
+ * @note This API is used for creating work queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="work_queue_add">Func <span>work_queue_add</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET work_queue_add(IN CONST WORK_QUEUE_HANDLE hand,IN CONST WK_CALLBACK cb,\
+                                IN CONST VOID *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Add a task to work queue
+ *
+ * @param[in] hand: handle of the work queue
+ * @param[in] cb: callback function of task
+ * @param[in] data: data for callback function
+ *
+ * @note This API is used for creating work queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="work_queue_check_and_del">Func <span>work_queue_check_and_del</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET work_queue_check_and_del(IN CONST WORK_QUEUE_HANDLE hand, IN CONST VOID *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Check and delete a task from work queue
+ *
+ * @param[in] hand: handle of the work queue
+ * @param[in] cb: callback function of task
+ * @param[in] data: data for callback function
+ *
+ * @note This API is used to check and delete a task from work queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="work_queue_release">Func <span>work_queue_release</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET work_queue_release(IN CONST WORK_QUEUE_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Release a work queue
+ *
+ * @param[in] hand: handle of the work queue
+ *
+ * @note This API is used for releasing a work queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="work_queue_get_depth">Func <span>work_queue_get_depth</span></h4>
+      <pre class="doc-declare"><code>UINT_T work_queue_get_depth(IN CONST WORK_QUEUE_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get stack depth of the work queue
+ *
+ * @param[in] hand: handle of the work queue
+ *
+ * @note This API is used for getting stack depth of the work queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="WORK_QUEUE_HANDLE">Typedef <span>WORK_QUEUE_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T WORK_QUEUE_HANDLE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief handle of work queue
+ */</pre>
+
+      <h4 id="WK_CALLBACK">Typedef <span>WK_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*WK_CALLBACK)(VOID *data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief call back function of work queue
+ */</pre>
+    </div>
+  </body>
+</html>
+            

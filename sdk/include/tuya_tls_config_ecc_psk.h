@@ -34,7 +34,7 @@
 #define TUYA_ECP_MUL_COMB_ROM_TABLES 1		//使用ROM代替RAM
 //#define MBEDTLS_ECP_FIXED_POINT_OPTIM      0	//调试性能使用
 #define TUYA_TLS_DEBUG_THRDSHOLD    5			//TLS 调试等级
-
+#define TUYA_TLS_DYNAMIC_MEMORY_ALLOCATION 	1	//允许连接单独设置BUFF大小
 
 #include "tuya_iot_config.h"
 
@@ -1427,7 +1427,7 @@
  *
  * Comment this macro to disable support for the max_fragment_length extension
  */
-#define MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+//#define MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
 
 /**
  * \def MBEDTLS_SSL_PROTO_SSL3
@@ -2058,7 +2058,7 @@
  * This module enables the AES-CCM ciphersuites, if other requisites are
  * enabled as well.
  */
-//#define MBEDTLS_CCM_C
+#define MBEDTLS_CCM_C
 
 /**
  * \def MBEDTLS_CERTS_C
@@ -2195,7 +2195,7 @@
  *             See dhm.h for more details.
  *
  */
-//#define MBEDTLS_DHM_C
+#define MBEDTLS_DHM_C
 
 /**
  * \def MBEDTLS_ECDH_C
@@ -2740,7 +2740,7 @@
  *
  * This module adds support for SHA-384 and SHA-512.
  */
-//#define MBEDTLS_SHA512_C
+#define MBEDTLS_SHA512_C
 
 /**
  * \def MBEDTLS_SSL_CACHE_C
@@ -3124,10 +3124,16 @@
  * incoming and outgoing I/O buffers.
  */
 #if OPERATING_SYSTEM <= SYSTEM_SMALL_MEMORY_END
-#define MBEDTLS_SSL_MAX_CONTENT_LEN             5200 /**< Maxium fragment length in bytes, determines the size of each of the two internal I/O buffers */
+#define MBEDTLS_SSL_MAX_CONTENT_LEN             1024 /**< Maxium fragment length in bytes, determines the size of each of the two internal I/O buffers */
 #else
 #define MBEDTLS_SSL_MAX_CONTENT_LEN             16384
 #endif
+
+#if defined(TUYA_TLS_DYNAMIC_MEMORY_ALLOCATION)
+	#define MBEDTLS_SSL_IN_CONTENT_LEN (ssl->in_content_len)
+	#define MBEDTLS_SSL_OUT_CONTENT_LEN (ssl->out_content_len)
+#endif
+
 /** \def MBEDTLS_SSL_IN_CONTENT_LEN
  *
  * Maximum length (in bytes) of incoming plaintext fragments.

@@ -1,0 +1,1124 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/def.h" class="nav-sub-label">lwip/def.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/netif.h" class="nav-sub-label">lwip/netif.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip4.h" class="nav-sub-label">lwip/ip4.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6.h" class="nav-sub-label">lwip/ip6.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/ip.h" class="nav-sub-label">lwip/prot/ip.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_IP_H" class="nav-sub-label">LWIP_HDR_IP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_IP_HDRINCL" class="nav-sub-label">LWIP_IP_HDRINCL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p)" class="nav-sub-label">LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_PCB_NETIFHINT" class="nav-sub-label">IP_PCB_NETIFHINT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_PCB_NETIFHINT" class="nav-sub-label">IP_PCB_NETIFHINT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_PCB" class="nav-sub-label">IP_PCB</a>
+              </li>
+      
+
+              <li>
+                <a href="#SOF_REUSEADDR" class="nav-sub-label">SOF_REUSEADDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#SOF_KEEPALIVE" class="nav-sub-label">SOF_KEEPALIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SOF_BROADCAST" class="nav-sub-label">SOF_BROADCAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#SOF_INHERITED" class="nav-sub-label">SOF_INHERITED</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_netif()" class="nav-sub-label">ip_current_netif()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_input_netif()" class="nav-sub-label">ip_current_input_netif()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_header_tot_len()" class="nav-sub-label">ip_current_header_tot_len()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_src_addr()" class="nav-sub-label">ip_current_src_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_dest_addr()" class="nav-sub-label">ip_current_dest_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_current_header()" class="nav-sub-label">ip4_current_header()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_current_header()" class="nav-sub-label">ip6_current_header()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_is_v6()" class="nav-sub-label">ip_current_is_v6()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_current_src_addr()" class="nav-sub-label">ip6_current_src_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_current_dest_addr()" class="nav-sub-label">ip6_current_dest_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_header_proto()" class="nav-sub-label">ip_current_header_proto()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_next_header_ptr()" class="nav-sub-label">ip_next_header_ptr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_current_src_addr()" class="nav-sub-label">ip4_current_src_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_current_dest_addr()" class="nav-sub-label">ip4_current_dest_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_current_header()" class="nav-sub-label">ip4_current_header()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_is_v6()" class="nav-sub-label">ip_current_is_v6()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_header_proto()" class="nav-sub-label">ip_current_header_proto()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_next_header_ptr()" class="nav-sub-label">ip_next_header_ptr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_current_src_addr()" class="nav-sub-label">ip4_current_src_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_current_dest_addr()" class="nav-sub-label">ip4_current_dest_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_current_header()" class="nav-sub-label">ip6_current_header()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_is_v6()" class="nav-sub-label">ip_current_is_v6()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_header_proto()" class="nav-sub-label">ip_current_header_proto()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_next_header_ptr()" class="nav-sub-label">ip_next_header_ptr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_current_src_addr()" class="nav-sub-label">ip6_current_src_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_current_dest_addr()" class="nav-sub-label">ip6_current_dest_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_src_addr()" class="nav-sub-label">ip_current_src_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_current_dest_addr()" class="nav-sub-label">ip_current_dest_addr()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_get_option(pcb, opt)" class="nav-sub-label">ip_get_option(pcb, opt)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_set_option(pcb, opt)" class="nav-sub-label">ip_set_option(pcb, opt)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_reset_option(pcb, opt)" class="nav-sub-label">ip_reset_option(pcb, opt)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output(p, src, dest, ttl, tos, proto)" class="nav-sub-label">ip_output(p, src, dest, ttl, tos, proto)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if(p, src, dest, ttl, tos, proto, netif)" class="nav-sub-label">ip_output_if(p, src, dest, ttl, tos, proto, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if_src(p, src, dest, ttl, tos, proto, netif)" class="nav-sub-label">ip_output_if_src(p, src, dest, ttl, tos, proto, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if_hdrincl(p, src, dest, netif)" class="nav-sub-label">ip_output_if_hdrincl(p, src, dest, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)" class="nav-sub-label">ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_route(src, dest)" class="nav-sub-label">ip_route(src, dest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_netif_get_local_ip(netif, dest)" class="nav-sub-label">ip_netif_get_local_ip(netif, dest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_debug_print(is_ipv6, p)" class="nav-sub-label">ip_debug_print(is_ipv6, p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output(p, src, dest, ttl, tos, proto)" class="nav-sub-label">ip_output(p, src, dest, ttl, tos, proto)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if(p, src, dest, ttl, tos, proto, netif)" class="nav-sub-label">ip_output_if(p, src, dest, ttl, tos, proto, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if_src(p, src, dest, ttl, tos, proto, netif)" class="nav-sub-label">ip_output_if_src(p, src, dest, ttl, tos, proto, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)" class="nav-sub-label">ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if_hdrincl(p, src, dest, netif)" class="nav-sub-label">ip_output_if_hdrincl(p, src, dest, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_route(src, dest)" class="nav-sub-label">ip_route(src, dest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_netif_get_local_ip(netif, dest)" class="nav-sub-label">ip_netif_get_local_ip(netif, dest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_debug_print(is_ipv6, p)" class="nav-sub-label">ip_debug_print(is_ipv6, p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_input" class="nav-sub-label">ip_input</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output(p, src, dest, ttl, tos, proto)" class="nav-sub-label">ip_output(p, src, dest, ttl, tos, proto)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if(p, src, dest, ttl, tos, proto, netif)" class="nav-sub-label">ip_output_if(p, src, dest, ttl, tos, proto, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if_src(p, src, dest, ttl, tos, proto, netif)" class="nav-sub-label">ip_output_if_src(p, src, dest, ttl, tos, proto, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)" class="nav-sub-label">ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_output_if_hdrincl(p, src, dest, netif)" class="nav-sub-label">ip_output_if_hdrincl(p, src, dest, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_route(src, dest)" class="nav-sub-label">ip_route(src, dest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_netif_get_local_ip(netif, dest)" class="nav-sub-label">ip_netif_get_local_ip(netif, dest)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_debug_print(is_ipv6, p)" class="nav-sub-label">ip_debug_print(is_ipv6, p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_input" class="nav-sub-label">ip_input</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_route_get_local_ip(src, dest, netif, ipaddr)" class="nav-sub-label">ip_route_get_local_ip(src, dest, netif, ipaddr)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ip_input" class="nav-sub-label">ip_input</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/def.h"><span>lwip/def.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/def.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/def.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/netif.h"><span>lwip/netif.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/netif.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/netif.h"
+</pre>
+
+      <h4 id="lwip/ip4.h"><span>lwip/ip4.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip4.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip4.h"
+</pre>
+
+      <h4 id="lwip/ip6.h"><span>lwip/ip6.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6.h"
+</pre>
+
+      <h4 id="lwip/prot/ip.h"><span>lwip/prot/ip.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/ip.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/ip.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_IP_H">Marco <span>LWIP_HDR_IP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_IP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_IP_HDRINCL">Marco <span>LWIP_IP_HDRINCL</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_IP_HDRINCL NULL
+</code></pre>
+      <pre class="doc-comment">/* This is passed as the destination address to ip_output_if (not
+   to ip_output), meaning that an IP header already is constructed
+   in the pbuf. This is used when TCP retransmits. */</pre>
+
+      <h4 id="LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p)">Marco <span>LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p) LWIP_ASSERT("p->ref == 1", (p)->ref == 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_PCB_NETIFHINT">Marco <span>IP_PCB_NETIFHINT</span></h4>
+      <pre class="doc-declare"><code>#define IP_PCB_NETIFHINT ;struct netif_hint netif_hints
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_PCB_NETIFHINT">Marco <span>IP_PCB_NETIFHINT</span></h4>
+      <pre class="doc-declare"><code>#define IP_PCB_NETIFHINT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_PCB">Marco <span>IP_PCB</span></h4>
+      <pre class="doc-declare"><code>#define IP_PCB                            \
+ /* ip addresses in network byte order */ \
+ ip_addr_t local_ip;                     \
+ ip_addr_t remote_ip;                    \
+ /* Bound netif index */                 \
+ u8_t netif_idx;                         \
+ /* Socket options */                    \
+ u8_t so_options;                        \
+ /* Type Of Service */                   \
+ u8_t tos;                               \
+ /* Time To Live */                      \
+ u8_t ttl                                \
+ /* link layer address resolution hint */ \
+ IP_PCB_NETIFHINT
+</code></pre>
+      <pre class="doc-comment">/** This is the common part of all PCB types. It needs to be at the
+   beginning of a PCB type definition. It is located here so that
+   changes to this common part are made in one location instead of
+   having to change all PCB structs. */</pre>
+
+      <h4 id="SOF_REUSEADDR">Marco <span>SOF_REUSEADDR</span></h4>
+      <pre class="doc-declare"><code>#define SOF_REUSEADDR    0x04U /* allow local address reuse */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Option flags per-socket. These are the same like SO_XXX in sockets.h
+ */</pre>
+
+      <h4 id="SOF_KEEPALIVE">Marco <span>SOF_KEEPALIVE</span></h4>
+      <pre class="doc-declare"><code>#define SOF_KEEPALIVE    0x08U /* keep connections alive */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SOF_BROADCAST">Marco <span>SOF_BROADCAST</span></h4>
+      <pre class="doc-declare"><code>#define SOF_BROADCAST    0x20U /* permit to send and to receive broadcast messages (see IP_SOF_BROADCAST option) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SOF_INHERITED">Marco <span>SOF_INHERITED</span></h4>
+      <pre class="doc-declare"><code>#define SOF_INHERITED  (SOF_REUSEADDR|SOF_KEEPALIVE)
+</code></pre>
+      <pre class="doc-comment">/* These flags are inherited (e.g. from a listen-pcb to a connection-pcb): */</pre>
+
+      <h4 id="ip_current_netif()">Marco <span>ip_current_netif()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_netif()     (ip_data.current_netif)
+</code></pre>
+      <pre class="doc-comment">/** Get the interface that accepted the current packet.
+ * This may or may not be the receiving netif, depending on your netif/network setup.
+ * This function must only be called from a receive callback (udp_recv,
+ * raw_recv, tcp_accept). It will return NULL otherwise. */</pre>
+
+      <h4 id="ip_current_input_netif()">Marco <span>ip_current_input_netif()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_input_netif() (ip_data.current_input_netif)
+</code></pre>
+      <pre class="doc-comment">/** Get the interface that received the current packet.
+ * This function must only be called from a receive callback (udp_recv,
+ * raw_recv, tcp_accept). It will return NULL otherwise. */</pre>
+
+      <h4 id="ip_current_header_tot_len()">Marco <span>ip_current_header_tot_len()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_header_tot_len() (ip_data.current_ip_header_tot_len)
+</code></pre>
+      <pre class="doc-comment">/** Total header length of ip(6)_current_header() (i.e. after this, the UDP/TCP header starts) */</pre>
+
+      <h4 id="ip_current_src_addr()">Marco <span>ip_current_src_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_src_addr()  (&ip_data.current_iphdr_src)
+</code></pre>
+      <pre class="doc-comment">/** Source IP address of current_header */</pre>
+
+      <h4 id="ip_current_dest_addr()">Marco <span>ip_current_dest_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_dest_addr() (&ip_data.current_iphdr_dest)
+</code></pre>
+      <pre class="doc-comment">/** Destination IP address of current_header */</pre>
+
+      <h4 id="ip4_current_header()">Marco <span>ip4_current_header()</span></h4>
+      <pre class="doc-declare"><code>#define ip4_current_header()    ip_data.current_ip4_header
+</code></pre>
+      <pre class="doc-comment">/** Get the IPv4 header of the current packet.
+ * This function must only be called from a receive callback (udp_recv,
+ * raw_recv, tcp_accept). It will return NULL otherwise. */</pre>
+
+      <h4 id="ip6_current_header()">Marco <span>ip6_current_header()</span></h4>
+      <pre class="doc-declare"><code>#define ip6_current_header()     ((const struct ip6_hdr*)(ip_data.current_ip6_header))
+</code></pre>
+      <pre class="doc-comment">/** Get the IPv6 header of the current packet.
+ * This function must only be called from a receive callback (udp_recv,
+ * raw_recv, tcp_accept). It will return NULL otherwise. */</pre>
+
+      <h4 id="ip_current_is_v6()">Marco <span>ip_current_is_v6()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_is_v6()       (ip6_current_header() != NULL)
+</code></pre>
+      <pre class="doc-comment">/** Returns TRUE if the current IP input packet is IPv6, FALSE if it is IPv4 */</pre>
+
+      <h4 id="ip6_current_src_addr()">Marco <span>ip6_current_src_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip6_current_src_addr()   (ip_2_ip6(&ip_data.current_iphdr_src))
+</code></pre>
+      <pre class="doc-comment">/** Source IPv6 address of current_header */</pre>
+
+      <h4 id="ip6_current_dest_addr()">Marco <span>ip6_current_dest_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip6_current_dest_addr()  (ip_2_ip6(&ip_data.current_iphdr_dest))
+</code></pre>
+      <pre class="doc-comment">/** Destination IPv6 address of current_header */</pre>
+
+      <h4 id="ip_current_header_proto()">Marco <span>ip_current_header_proto()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_header_proto() (ip_current_is_v6() ? \
+                                  IP6H_NEXTH(ip6_current_header()) :\
+                                  IPH_PROTO(ip4_current_header()))
+</code></pre>
+      <pre class="doc-comment">/** Get the transport layer protocol */</pre>
+
+      <h4 id="ip_next_header_ptr()">Marco <span>ip_next_header_ptr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_next_header_ptr()    ((const void*)((ip_current_is_v6() ? \
+ (const u8_t*)ip6_current_header() : (const u8_t*)ip4_current_header()) + ip_current_header_tot_len()))
+</code></pre>
+      <pre class="doc-comment">/** Get the transport layer header */</pre>
+
+      <h4 id="ip4_current_src_addr()">Marco <span>ip4_current_src_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip4_current_src_addr()    (ip_2_ip4(&ip_data.current_iphdr_src))
+</code></pre>
+      <pre class="doc-comment">/** Source IP4 address of current_header */</pre>
+
+      <h4 id="ip4_current_dest_addr()">Marco <span>ip4_current_dest_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip4_current_dest_addr()   (ip_2_ip4(&ip_data.current_iphdr_dest))
+</code></pre>
+      <pre class="doc-comment">/** Destination IP4 address of current_header */</pre>
+
+      <h4 id="ip4_current_header()">Marco <span>ip4_current_header()</span></h4>
+      <pre class="doc-declare"><code>#define ip4_current_header()    ip_data.current_ip4_header
+</code></pre>
+      <pre class="doc-comment">/** Get the IPv4 header of the current packet.
+ * This function must only be called from a receive callback (udp_recv,
+ * raw_recv, tcp_accept). It will return NULL otherwise. */</pre>
+
+      <h4 id="ip_current_is_v6()">Marco <span>ip_current_is_v6()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_is_v6()       0
+</code></pre>
+      <pre class="doc-comment">/** Always returns FALSE when only supporting IPv4 only */</pre>
+
+      <h4 id="ip_current_header_proto()">Marco <span>ip_current_header_proto()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_header_proto() IPH_PROTO(ip4_current_header())
+</code></pre>
+      <pre class="doc-comment">/** Get the transport layer protocol */</pre>
+
+      <h4 id="ip_next_header_ptr()">Marco <span>ip_next_header_ptr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_next_header_ptr()    ((const void*)((const u8_t*)ip4_current_header() + ip_current_header_tot_len()))
+</code></pre>
+      <pre class="doc-comment">/** Get the transport layer header */</pre>
+
+      <h4 id="ip4_current_src_addr()">Marco <span>ip4_current_src_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip4_current_src_addr()    (&ip_data.current_iphdr_src)
+</code></pre>
+      <pre class="doc-comment">/** Source IP4 address of current_header */</pre>
+
+      <h4 id="ip4_current_dest_addr()">Marco <span>ip4_current_dest_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip4_current_dest_addr()   (&ip_data.current_iphdr_dest)
+</code></pre>
+      <pre class="doc-comment">/** Destination IP4 address of current_header */</pre>
+
+      <h4 id="ip6_current_header()">Marco <span>ip6_current_header()</span></h4>
+      <pre class="doc-declare"><code>#define ip6_current_header()     ((const struct ip6_hdr*)(ip_data.current_ip6_header))
+</code></pre>
+      <pre class="doc-comment">/** Get the IPv6 header of the current packet.
+ * This function must only be called from a receive callback (udp_recv,
+ * raw_recv, tcp_accept). It will return NULL otherwise. */</pre>
+
+      <h4 id="ip_current_is_v6()">Marco <span>ip_current_is_v6()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_is_v6()       1
+</code></pre>
+      <pre class="doc-comment">/** Always returns TRUE when only supporting IPv6 only */</pre>
+
+      <h4 id="ip_current_header_proto()">Marco <span>ip_current_header_proto()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_header_proto() IP6H_NEXTH(ip6_current_header())
+</code></pre>
+      <pre class="doc-comment">/** Get the transport layer protocol */</pre>
+
+      <h4 id="ip_next_header_ptr()">Marco <span>ip_next_header_ptr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_next_header_ptr()    ((const void*)(((const u8_t*)ip6_current_header()) + ip_current_header_tot_len()))
+</code></pre>
+      <pre class="doc-comment">/** Get the transport layer header */</pre>
+
+      <h4 id="ip6_current_src_addr()">Marco <span>ip6_current_src_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip6_current_src_addr()   (&ip_data.current_iphdr_src)
+</code></pre>
+      <pre class="doc-comment">/** Source IP6 address of current_header */</pre>
+
+      <h4 id="ip6_current_dest_addr()">Marco <span>ip6_current_dest_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip6_current_dest_addr()  (&ip_data.current_iphdr_dest)
+</code></pre>
+      <pre class="doc-comment">/** Destination IP6 address of current_header */</pre>
+
+      <h4 id="ip_current_src_addr()">Marco <span>ip_current_src_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_src_addr()   (&ip_data.current_iphdr_src)
+</code></pre>
+      <pre class="doc-comment">/** Union source address of current_header */</pre>
+
+      <h4 id="ip_current_dest_addr()">Marco <span>ip_current_dest_addr()</span></h4>
+      <pre class="doc-declare"><code>#define ip_current_dest_addr()  (&ip_data.current_iphdr_dest)
+</code></pre>
+      <pre class="doc-comment">/** Union destination address of current_header */</pre>
+
+      <h4 id="ip_get_option(pcb, opt)">Marco <span>ip_get_option(pcb, opt)</span></h4>
+      <pre class="doc-declare"><code>#define ip_get_option(pcb, opt)  ((pcb)->so_options & (opt))
+</code></pre>
+      <pre class="doc-comment">/** Gets an IP pcb option (SOF_* flags) */</pre>
+
+      <h4 id="ip_set_option(pcb, opt)">Marco <span>ip_set_option(pcb, opt)</span></h4>
+      <pre class="doc-declare"><code>#define ip_set_option(pcb, opt)  ((pcb)->so_options = (u8_t)((pcb)->so_options | (opt)))
+</code></pre>
+      <pre class="doc-comment">/** Sets an IP pcb option (SOF_* flags) */</pre>
+
+      <h4 id="ip_reset_option(pcb, opt)">Marco <span>ip_reset_option(pcb, opt)</span></h4>
+      <pre class="doc-declare"><code>#define ip_reset_option(pcb, opt) ((pcb)->so_options = (u8_t)((pcb)->so_options & ~(opt)))
+</code></pre>
+      <pre class="doc-comment">/** Resets an IP pcb option (SOF_* flags) */</pre>
+
+      <h4 id="ip_output(p, src, dest, ttl, tos, proto)">Marco <span>ip_output(p, src, dest, ttl, tos, proto)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output(p, src, dest, ttl, tos, proto) \
+       (IP_IS_V6(dest) ? \
+       ip6_output(p, ip_2_ip6(src), ip_2_ip6(dest), ttl, tos, proto) : \
+       ip4_output(p, ip_2_ip4(src), ip_2_ip4(dest), ttl, tos, proto))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup ip
+ * Output IP packet, netif is selected by source address
+ */</pre>
+
+      <h4 id="ip_output_if(p, src, dest, ttl, tos, proto, netif)">Marco <span>ip_output_if(p, src, dest, ttl, tos, proto, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if(p, src, dest, ttl, tos, proto, netif) \
+       (IP_IS_V6(dest) ? \
+       ip6_output_if(p, ip_2_ip6(src), ip_2_ip6(dest), ttl, tos, proto, netif) : \
+       ip4_output_if(p, ip_2_ip4(src), ip_2_ip4(dest), ttl, tos, proto, netif))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup ip
+ * Output IP packet to specified interface
+ */</pre>
+
+      <h4 id="ip_output_if_src(p, src, dest, ttl, tos, proto, netif)">Marco <span>ip_output_if_src(p, src, dest, ttl, tos, proto, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if_src(p, src, dest, ttl, tos, proto, netif) \
+       (IP_IS_V6(dest) ? \
+       ip6_output_if_src(p, ip_2_ip6(src), ip_2_ip6(dest), ttl, tos, proto, netif) : \
+       ip4_output_if_src(p, ip_2_ip4(src), ip_2_ip4(dest), ttl, tos, proto, netif))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup ip
+ * Output IP packet to interface specifying source address
+ */</pre>
+
+      <h4 id="ip_output_if_hdrincl(p, src, dest, netif)">Marco <span>ip_output_if_hdrincl(p, src, dest, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if_hdrincl(p, src, dest, netif) \
+       (IP_IS_V6(dest) ? \
+       ip6_output_if(p, ip_2_ip6(src), LWIP_IP_HDRINCL, 0, 0, 0, netif) : \
+       ip4_output_if(p, ip_2_ip4(src), LWIP_IP_HDRINCL, 0, 0, 0, netif))
+</code></pre>
+      <pre class="doc-comment">/** Output IP packet that already includes an IP header. */</pre>
+
+      <h4 id="ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)">Marco <span>ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint) \
+       (IP_IS_V6(dest) ? \
+       ip6_output_hinted(p, ip_2_ip6(src), ip_2_ip6(dest), ttl, tos, proto, netif_hint) : \
+       ip4_output_hinted(p, ip_2_ip4(src), ip_2_ip4(dest), ttl, tos, proto, netif_hint))
+</code></pre>
+      <pre class="doc-comment">/** Output IP packet with netif_hint */</pre>
+
+      <h4 id="ip_route(src, dest)">Marco <span>ip_route(src, dest)</span></h4>
+      <pre class="doc-declare"><code>#define ip_route(src, dest) \
+       (IP_IS_V6(dest) ? \
+       ip6_route(ip_2_ip6(src), ip_2_ip6(dest)) : \
+       ip4_route_src(ip_2_ip4(src), ip_2_ip4(dest)))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup ip
+ * Get netif for address combination. See \ref ip6_route and \ref ip4_route
+ */</pre>
+
+      <h4 id="ip_netif_get_local_ip(netif, dest)">Marco <span>ip_netif_get_local_ip(netif, dest)</span></h4>
+      <pre class="doc-declare"><code>#define ip_netif_get_local_ip(netif, dest) (IP_IS_V6(dest) ? \
+       ip6_netif_get_local_ip(netif, ip_2_ip6(dest)) : \
+       ip4_netif_get_local_ip(netif))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup ip
+ * Get netif for IP.
+ */</pre>
+
+      <h4 id="ip_debug_print(is_ipv6, p)">Marco <span>ip_debug_print(is_ipv6, p)</span></h4>
+      <pre class="doc-declare"><code>#define ip_debug_print(is_ipv6, p) ((is_ipv6) ? ip6_debug_print(p) : ip4_debug_print(p))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output(p, src, dest, ttl, tos, proto)">Marco <span>ip_output(p, src, dest, ttl, tos, proto)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output(p, src, dest, ttl, tos, proto) \
+       ip4_output(p, src, dest, ttl, tos, proto)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_if(p, src, dest, ttl, tos, proto, netif)">Marco <span>ip_output_if(p, src, dest, ttl, tos, proto, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if(p, src, dest, ttl, tos, proto, netif) \
+       ip4_output_if(p, src, dest, ttl, tos, proto, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_if_src(p, src, dest, ttl, tos, proto, netif)">Marco <span>ip_output_if_src(p, src, dest, ttl, tos, proto, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if_src(p, src, dest, ttl, tos, proto, netif) \
+       ip4_output_if_src(p, src, dest, ttl, tos, proto, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)">Marco <span>ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint) \
+       ip4_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_if_hdrincl(p, src, dest, netif)">Marco <span>ip_output_if_hdrincl(p, src, dest, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if_hdrincl(p, src, dest, netif) \
+       ip4_output_if(p, src, LWIP_IP_HDRINCL, 0, 0, 0, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_route(src, dest)">Marco <span>ip_route(src, dest)</span></h4>
+      <pre class="doc-declare"><code>#define ip_route(src, dest) \
+       ip4_route_src(src, dest)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_netif_get_local_ip(netif, dest)">Marco <span>ip_netif_get_local_ip(netif, dest)</span></h4>
+      <pre class="doc-declare"><code>#define ip_netif_get_local_ip(netif, dest) \
+       ip4_netif_get_local_ip(netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_debug_print(is_ipv6, p)">Marco <span>ip_debug_print(is_ipv6, p)</span></h4>
+      <pre class="doc-declare"><code>#define ip_debug_print(is_ipv6, p) ip4_debug_print(p)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_input">Marco <span>ip_input</span></h4>
+      <pre class="doc-declare"><code>#define ip_input ip4_input
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output(p, src, dest, ttl, tos, proto)">Marco <span>ip_output(p, src, dest, ttl, tos, proto)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output(p, src, dest, ttl, tos, proto) \
+       ip6_output(p, src, dest, ttl, tos, proto)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_if(p, src, dest, ttl, tos, proto, netif)">Marco <span>ip_output_if(p, src, dest, ttl, tos, proto, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if(p, src, dest, ttl, tos, proto, netif) \
+       ip6_output_if(p, src, dest, ttl, tos, proto, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_if_src(p, src, dest, ttl, tos, proto, netif)">Marco <span>ip_output_if_src(p, src, dest, ttl, tos, proto, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if_src(p, src, dest, ttl, tos, proto, netif) \
+       ip6_output_if_src(p, src, dest, ttl, tos, proto, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)">Marco <span>ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_hinted(p, src, dest, ttl, tos, proto, netif_hint) \
+       ip6_output_hinted(p, src, dest, ttl, tos, proto, netif_hint)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_output_if_hdrincl(p, src, dest, netif)">Marco <span>ip_output_if_hdrincl(p, src, dest, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip_output_if_hdrincl(p, src, dest, netif) \
+       ip6_output_if(p, src, LWIP_IP_HDRINCL, 0, 0, 0, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_route(src, dest)">Marco <span>ip_route(src, dest)</span></h4>
+      <pre class="doc-declare"><code>#define ip_route(src, dest) \
+       ip6_route(src, dest)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_netif_get_local_ip(netif, dest)">Marco <span>ip_netif_get_local_ip(netif, dest)</span></h4>
+      <pre class="doc-declare"><code>#define ip_netif_get_local_ip(netif, dest) \
+       ip6_netif_get_local_ip(netif, dest)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_debug_print(is_ipv6, p)">Marco <span>ip_debug_print(is_ipv6, p)</span></h4>
+      <pre class="doc-declare"><code>#define ip_debug_print(is_ipv6, p) ip6_debug_print(p)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_input">Marco <span>ip_input</span></h4>
+      <pre class="doc-declare"><code>#define ip_input ip6_input
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_route_get_local_ip(src, dest, netif, ipaddr)">Marco <span>ip_route_get_local_ip(src, dest, netif, ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip_route_get_local_ip(src, dest, netif, ipaddr) do { \
+ (netif) = ip_route(src, dest); \
+ (ipaddr) = ip_netif_get_local_ip(netif, dest); \
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ip_input">Func <span>ip_input</span></h4>
+      <pre class="doc-declare"><code>err_t ip_input(struct pbuf *p, struct netif *inp);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

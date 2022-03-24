@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha512_alt.h" class="nav-sub-label">sha512_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_SHA512_H" class="nav-sub-label">MBEDTLS_SHA512_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_SHA512_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_SHA512_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_SHA512_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_SHA512_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_sha512_init" class="nav-sub-label">mbedtls_sha512_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_free" class="nav-sub-label">mbedtls_sha512_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_clone" class="nav-sub-label">mbedtls_sha512_clone</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_starts_ret" class="nav-sub-label">mbedtls_sha512_starts_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_update_ret" class="nav-sub-label">mbedtls_sha512_update_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_finish_ret" class="nav-sub-label">mbedtls_sha512_finish_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_sha512_process" class="nav-sub-label">mbedtls_internal_sha512_process</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_ret" class="nav-sub-label">mbedtls_sha512_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha512_self_test" class="nav-sub-label">mbedtls_sha512_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_sha512_context;
+" class="nav-sub-label">
+mbedtls_sha512_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="sha512_alt.h"><span>sha512_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "sha512_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "sha512_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_SHA512_H">Marco <span>MBEDTLS_SHA512_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_SHA512_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_SHA512_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_SHA512_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_SHA512_HW_ACCEL_FAILED               -57 /**< SHA-512 hardware accelerator failed */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_SHA512_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_ERR_SHA512_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_SHA512_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_SHA512_BAD_INPUT_DATA                -117 /**< SHA-512 input data was malformed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_sha512_init">Func <span>mbedtls_sha512_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_sha512_init( mbedtls_sha512_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function initializes a SHA-512 context.
+ *
+ * \param ctx      The SHA-512 context to initialize. This must
+ *                 not be \c NULL.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_free">Func <span>mbedtls_sha512_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_sha512_free( mbedtls_sha512_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function clears a SHA-512 context.
+ *
+ * \param ctx      The SHA-512 context to clear. This may be \c NULL,
+ *                 in which case this function does nothing. If it
+ *                 is not \c NULL, it must point to an initialized
+ *                 SHA-512 context.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_clone">Func <span>mbedtls_sha512_clone</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_sha512_clone( mbedtls_sha512_context *dst,
+                          const mbedtls_sha512_context *src );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function clones the state of a SHA-512 context.
+ *
+ * \param dst      The destination context. This must be initialized.
+ * \param src      The context to clone. This must be initialized.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_starts_ret">Func <span>mbedtls_sha512_starts_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha512_starts_ret( mbedtls_sha512_context *ctx, int is384 );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function starts a SHA-384 or SHA-512 checksum
+ *                 calculation.
+ *
+ * \param ctx      The SHA-512 context to use. This must be initialized.
+ * \param is384    Determines which function to use. This must be
+ *                 either \c for SHA-512, or \c 1 for SHA-384.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_update_ret">Func <span>mbedtls_sha512_update_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha512_update_ret( mbedtls_sha512_context *ctx,
+                   const unsigned char *input,
+                   size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function feeds an input buffer into an ongoing
+ *                 SHA-512 checksum calculation.
+ *
+ * \param ctx      The SHA-512 context. This must be initialized
+ *                 and have a hash operation started.
+ * \param input    The buffer holding the input data. This must
+ *                 be a readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data in Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_finish_ret">Func <span>mbedtls_sha512_finish_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha512_finish_ret( mbedtls_sha512_context *ctx,
+                              unsigned char output[64] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function finishes the SHA-512 operation, and writes
+ *                 the result to the output buffer. This function is for
+ *                 internal use only.
+ *
+ * \param ctx      The SHA-512 context. This must be initialized
+ *                 and have a hash operation started.
+ * \param output   The SHA-384 or SHA-512 checksum result.
+ *                 This must be a writable buffer of length \c 64 Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_internal_sha512_process">Func <span>mbedtls_internal_sha512_process</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_sha512_process( mbedtls_sha512_context *ctx,
+                                    const unsigned char data[128] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function processes a single data block within
+ *                 the ongoing SHA-512 computation.
+ *
+ * \param ctx      The SHA-512 context. This must be initialized.
+ * \param data     The buffer holding one block of data. This
+ *                 must be a readable buffer of length \c 128 Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_ret">Func <span>mbedtls_sha512_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha512_ret( const unsigned char *input,
+                       size_t ilen,
+                       unsigned char output[64],
+                       int is384 );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the SHA-512 or SHA-384
+ *                 checksum of a buffer.
+ *
+ *                 The function allocates the context, performs the
+ *                 calculation, and frees the context.
+ *
+ *                 The SHA-512 result is calculated as
+ *                 output = SHA-512(input buffer).
+ *
+ * \param input    The buffer holding the input data. This must be
+ *                 a readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data in Bytes.
+ * \param output   The SHA-384 or SHA-512 checksum result.
+ *                 This must be a writable buffer of length \c 64 Bytes.
+ * \param is384    Determines which function to use. This must be either
+ *                 \c 0 for SHA-512, or \c 1 for SHA-384.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_sha512_self_test">Func <span>mbedtls_sha512_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha512_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The SHA-384 or SHA-512 checkup routine.
+ *
+ * \return         \c 0 on success.
+ * \return         \c 1 on failure.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha512_starts( mbedtls_sha512_context *ctx,
+                                              int is384 );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function starts a SHA-384 or SHA-512 checksum
+ *                 calculation.
+ *
+ * \deprecated     Superseded by mbedtls_sha512_starts_ret() in 2.7.0
+ *
+ * \param ctx      The SHA-512 context to use. This must be initialized.
+ * \param is384    Determines which function to use. This must be either
+ *                 \c 0 for SHA-512 or \c 1 for SHA-384.
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha512_update( mbedtls_sha512_context *ctx,
+                                              const unsigned char *input,
+                                              size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function feeds an input buffer into an ongoing
+ *                 SHA-512 checksum calculation.
+ *
+ * \deprecated     Superseded by mbedtls_sha512_update_ret() in 2.7.0.
+ *
+ * \param ctx      The SHA-512 context. This must be initialized
+ *                 and have a hash operation started.
+ * \param input    The buffer holding the data. This must be a readable
+ *                 buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data in Bytes.
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha512_finish( mbedtls_sha512_context *ctx,
+                                              unsigned char output[64] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function finishes the SHA-512 operation, and writes
+ *                 the result to the output buffer.
+ *
+ * \deprecated     Superseded by mbedtls_sha512_finish_ret() in 2.7.0.
+ *
+ * \param ctx      The SHA-512 context. This must be initialized
+ *                 and have a hash operation started.
+ * \param output   The SHA-384 or SHA-512 checksum result. This must
+ *                 be a writable buffer of size \c 64 Bytes.
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha512_process(
+                                           mbedtls_sha512_context *ctx,
+                                           const unsigned char data[128] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function processes a single data block within
+ *                 the ongoing SHA-512 computation. This function is for
+ *                 internal use only.
+ *
+ * \deprecated     Superseded by mbedtls_internal_sha512_process() in 2.7.0.
+ *
+ * \param ctx      The SHA-512 context. This must be initialized.
+ * \param data     The buffer holding one block of data. This must be
+ *                 a readable buffer of length \c 128 Bytes.
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha512( const unsigned char *input,
+                                       size_t ilen,
+                                       unsigned char output[64],
+                                       int is384 );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the SHA-512 or SHA-384
+ *                 checksum of a buffer.
+ *
+ *                 The function allocates the context, performs the
+ *                 calculation, and frees the context.
+ *
+ *                 The SHA-512 result is calculated as
+ *                 output = SHA-512(input buffer).
+ *
+ * \deprecated     Superseded by mbedtls_sha512_ret() in 2.7.0
+ *
+ * \param input    The buffer holding the data. This must be a
+ *                 readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data in Bytes.
+ * \param output   The SHA-384 or SHA-512 checksum result. This must
+ *                 be a writable buffer of length \c 64 Bytes.
+ * \param is384    Determines which function to use. This must be either
+ *                 \c 0 for SHA-512, or \c 1 for SHA-384.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_sha512_context;
+">Typedef <span>
+mbedtls_sha512_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_sha512_context
+{
+   uint64_t total[2];         /*!< The number of Bytes processed. */
+   uint64_t state[8];         /*!< The intermediate digest state. */
+   unsigned char buffer[128]; /*!< The data block being processed. */
+   int is384;                 /*!< Determines which function to use:
+                                     0: Use SHA-512, or 1: Use SHA-384. */
+}
+mbedtls_sha512_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The SHA-512 context structure.
+ *
+ *                 The structure is used both for SHA-384 and for SHA-512
+ *                 checksum calculations. The choice between these two is
+ *                 made in the call to mbedtls_sha512_starts_ret().
+ */</pre>
+    </div>
+  </body>
+</html>
+            

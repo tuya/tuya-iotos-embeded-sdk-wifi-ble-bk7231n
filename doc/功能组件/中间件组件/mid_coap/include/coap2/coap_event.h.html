@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#libcoap.h" class="nav-sub-label">libcoap.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_EVENT_H_" class="nav-sub-label">COAP_EVENT_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_DTLS_CLOSED" class="nav-sub-label">COAP_EVENT_DTLS_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_DTLS_CONNECTED" class="nav-sub-label">COAP_EVENT_DTLS_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_DTLS_RENEGOTIATE" class="nav-sub-label">COAP_EVENT_DTLS_RENEGOTIATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_DTLS_ERROR" class="nav-sub-label">COAP_EVENT_DTLS_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_TCP_CONNECTED" class="nav-sub-label">COAP_EVENT_TCP_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_TCP_CLOSED" class="nav-sub-label">COAP_EVENT_TCP_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_TCP_FAILED" class="nav-sub-label">COAP_EVENT_TCP_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_SESSION_CONNECTED" class="nav-sub-label">COAP_EVENT_SESSION_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_SESSION_CLOSED" class="nav-sub-label">COAP_EVENT_SESSION_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_EVENT_SESSION_FAILED" class="nav-sub-label">COAP_EVENT_SESSION_FAILED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_register_event_handler" class="nav-sub-label">coap_register_event_handler</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_context_t" class="nav-sub-label">coap_context_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session_t" class="nav-sub-label">coap_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEPRECATED" class="nav-sub-label">COAP_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_DEPRECATED" class="nav-sub-label">COAP_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_event_t" class="nav-sub-label">coap_event_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_event_handler_t" class="nav-sub-label">coap_event_handler_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="libcoap.h"><span>libcoap.h</span></h4>
+      <pre class="doc-declare"><code>#include "libcoap.h"
+</code></pre>
+      <pre class="doc-comment">#include "libcoap.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_EVENT_H_">Marco <span>COAP_EVENT_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_DTLS_CLOSED">Marco <span>COAP_EVENT_DTLS_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_DTLS_CLOSED       0
+</code></pre>
+      <pre class="doc-comment">/**
+ * (D)TLS events for COAP_PROTO_DTLS and COAP_PROTO_TLS
+ */</pre>
+
+      <h4 id="COAP_EVENT_DTLS_CONNECTED">Marco <span>COAP_EVENT_DTLS_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_DTLS_CONNECTED    1DE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_DTLS_RENEGOTIATE">Marco <span>COAP_EVENT_DTLS_RENEGOTIATE</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_DTLS_RENEGOTIATE  1DF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_DTLS_ERROR">Marco <span>COAP_EVENT_DTLS_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_DTLS_ERROR        512
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_TCP_CONNECTED">Marco <span>COAP_EVENT_TCP_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_TCP_CONNECTED     4097
+</code></pre>
+      <pre class="doc-comment">/**
+ * TCP events for COAP_PROTO_TCP and COAP_PROTO_TLS
+ */</pre>
+
+      <h4 id="COAP_EVENT_TCP_CLOSED">Marco <span>COAP_EVENT_TCP_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_TCP_CLOSED        4098
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_TCP_FAILED">Marco <span>COAP_EVENT_TCP_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_TCP_FAILED        4099
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_SESSION_CONNECTED">Marco <span>COAP_EVENT_SESSION_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_SESSION_CONNECTED 8193
+</code></pre>
+      <pre class="doc-comment">/**
+ * CSM exchange events for reliable protocols only
+ */</pre>
+
+      <h4 id="COAP_EVENT_SESSION_CLOSED">Marco <span>COAP_EVENT_SESSION_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_SESSION_CLOSED    8194
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_EVENT_SESSION_FAILED">Marco <span>COAP_EVENT_SESSION_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define COAP_EVENT_SESSION_FAILED    8195
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_register_event_handler">Func <span>coap_register_event_handler</span></h4>
+      <pre class="doc-declare"><code>void coap_register_event_handler(struct coap_context_t *context,
+                           coap_event_handler_t hnd);</code></pre>
+      <pre class="doc-comment">/**
+ * Registers the function @p hnd as callback for events from the given
+ * CoAP context @p context. Any event handler that has previously been
+ * registered with @p context will be overwritten by this operation.
+ *
+ * @param context The CoAP context to register the event handler with.
+ * @param hnd     The event handler to be registered.  @c NULL if to be
+ *                de-registered.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_context_t">Variable <span>coap_context_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_context_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_session_t">Variable <span>coap_session_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_session_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_DEPRECATED">Variable <span>COAP_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>COAP_DEPRECATED
+void coap_set_event_handler(struct coap_context_t *context,
+                           coap_event_handler_t hnd);</code></pre>
+      <pre class="doc-comment">/**
+ * Registers the function @p hnd as callback for events from the given
+ * CoAP context @p context. Any event handler that has previously been
+ * registered with @p context will be overwritten by this operation.
+ *
+ * @deprecated Use coap_register_event_handler() instead.
+ *
+ * @param context The CoAP context to register the event handler with.
+ * @param hnd     The event handler to be registered.
+ */</pre>
+
+      <h4 id="COAP_DEPRECATED">Variable <span>COAP_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>COAP_DEPRECATED
+void coap_clear_event_handler(struct coap_context_t *context);</code></pre>
+      <pre class="doc-comment">/**
+ * Clears the event handler registered with @p context.
+ *
+ * @deprecated Use coap_register_event_handler() instead with NULL for hnd.
+ *
+ * @param context The CoAP context whose event handler is to be removed.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_event_t">Typedef <span>coap_event_t</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int coap_event_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Scalar type to represent different events, e.g. DTLS events or
+ * retransmission timeouts.
+ */</pre>
+
+      <h4 id="coap_event_handler_t">Typedef <span>coap_event_handler_t</span></h4>
+      <pre class="doc-declare"><code>typedef int (*coap_event_handler_t)(struct coap_context_t *,
+                                   coap_event_t event,
+                                   struct coap_session_t *session);
+</code></pre>
+      <pre class="doc-comment">/**
+ * Type for event handler functions that can be registered with a CoAP
+ * context using the unction coap_set_event_handler(). When called by
+ * the library, the first argument will be the coap_context_t object
+ * where the handler function has been registered. The second argument
+ * is the event type that may be complemented by event-specific data
+ * passed as the third argument.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

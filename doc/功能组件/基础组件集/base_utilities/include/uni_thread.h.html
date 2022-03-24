@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_THREAD_H" class="nav-sub-label">_UNI_THREAD_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_THREAD_NAME_LEN" class="nav-sub-label">MAX_THREAD_NAME_LEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#CreateAndStart" class="nav-sub-label">CreateAndStart</a>
+              </li>
+      
+
+              <li>
+                <a href="#DeleteThrdHandle" class="nav-sub-label">DeleteThrdHandle</a>
+              </li>
+      
+
+              <li>
+                <a href="#ThreadRunSelfSpace" class="nav-sub-label">ThreadRunSelfSpace</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetThrdSta" class="nav-sub-label">GetThrdSta</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#P_THRD_FUNC" class="nav-sub-label">P_THRD_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#THRD_HANDLE" class="nav-sub-label">THRD_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#P_CONSTRUCT_FUNC" class="nav-sub-label">P_CONSTRUCT_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#P_EXTRACT_FUNC" class="nav-sub-label">P_EXTRACT_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#STACK_SIZE" class="nav-sub-label">STACK_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#THRD_STA" class="nav-sub-label">THRD_STA</a>
+              </li>
+      
+
+              <li>
+                <a href="#TRD_PRI" class="nav-sub-label">TRD_PRI</a>
+              </li>
+      
+
+              <li>
+                <a href="#THRD_PARAM_S;
+" class="nav-sub-label">THRD_PARAM_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_THREAD_H">Marco <span>_UNI_THREAD_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_THREAD_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_THREAD_NAME_LEN">Marco <span>MAX_THREAD_NAME_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MAX_THREAD_NAME_LEN    16
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief max length of thread name
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="CreateAndStart">Func <span>CreateAndStart</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET CreateAndStart(OUT THRD_HANDLE *pThrdHandle,\
+                          IN CONST P_CONSTRUCT_FUNC enter,\
+                          IN CONST P_EXTRACT_FUNC exit,\
+                          IN CONST P_THRD_FUNC pThrdFunc,\
+                          IN CONST PVOID_T pThrdFuncArg,\
+                          IN CONST THRD_PARAM_S *thrd_param);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create and start a tuya sdk thread
+ * 
+ * @param[in] enter: the function called before the thread process called.can be null
+ * @param[in] exit: the function called after the thread process called.can be null
+ * @param[in] pThrdFunc: the main thread process function
+ * @param[in] pThrdFuncArg: the args of the pThrdFunc.can be null
+ * @param[in] thrd_param: the param of creating a thread
+ * @param[out] pThrdHandle: the tuya sdk thread context
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="DeleteThrdHandle">Func <span>DeleteThrdHandle</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET DeleteThrdHandle(IN CONST THRD_HANDLE thrdHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief stop and free a tuya sdk thread
+ * 
+ * @param[in] thrdHandle: the input thread context
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="ThreadRunSelfSpace">Func <span>ThreadRunSelfSpace</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ThreadRunSelfSpace(IN CONST THRD_HANDLE thrdHandle,OUT BOOL_T *bl);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check the function caller is in the input thread context
+ * 
+ * @param[in] thrdHandle: the input thread context
+ * @param[in] bl: run in self space
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="GetThrdSta">Func <span>GetThrdSta</span></h4>
+      <pre class="doc-declare"><code>THRD_STA GetThrdSta(IN CONST THRD_HANDLE thrdHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the thread context running status
+ * 
+ * @param[in] thrdHandle: the input thread context
+ * @return the thread status
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="P_THRD_FUNC">Typedef <span>P_THRD_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*P_THRD_FUNC)(PVOID_T pArg);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread process function
+ * 
+ */</pre>
+
+      <h4 id="THRD_HANDLE">Typedef <span>THRD_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T THRD_HANDLE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread handle
+ * 
+ */</pre>
+
+      <h4 id="P_CONSTRUCT_FUNC">Typedef <span>P_CONSTRUCT_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(*P_CONSTRUCT_FUNC)(VOID); 
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread construct function
+ * 
+ */</pre>
+
+      <h4 id="P_EXTRACT_FUNC">Typedef <span>P_EXTRACT_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(*P_EXTRACT_FUNC)(VOID); // thread extract
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread extract function
+ * 
+ */</pre>
+
+      <h4 id="STACK_SIZE">Typedef <span>STACK_SIZE</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int STACK_SIZE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread stack size
+ * 
+ */</pre>
+
+      <h4 id="THRD_STA">Typedef <span>THRD_STA</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T THRD_STA;
+#define STATE_EMPTY 0      // thread is inited
+#define STATE_RUNNING 1    // thread is running
+#define STATE_STOP 2       // thread is stop
+#define STATE_DELETE 3     // thread delete status 
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread running status
+ * 
+ */</pre>
+
+      <h4 id="TRD_PRI">Typedef <span>TRD_PRI</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int TRD_PRI;
+#define TRD_PRIO_0    5   // high
+#define TRD_PRIO_1    4
+#define TRD_PRIO_2    3
+#define TRD_PRIO_3    2
+#define TRD_PRIO_4    1
+#define TRD_PRIO_5    0
+#define TRD_PRIO_6    0   // low
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread priority
+ * 
+ */</pre>
+
+      <h4 id="THRD_PARAM_S;
+">Typedef <span>THRD_PARAM_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   STACK_SIZE stackDepth; // stack size 
+   TRD_PRI priority;     // thread priority
+   CHAR_T *thrdname;     // thread name
+}THRD_PARAM_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief thread parameters
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

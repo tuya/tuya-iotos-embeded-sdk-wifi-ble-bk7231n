@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha512.h" class="nav-sub-label">sha512.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha256.h" class="nav-sub-label">sha256.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#threading.h" class="nav-sub-label">threading.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#havege.h" class="nav-sub-label">havege.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_H" class="nav-sub-label">MBEDTLS_ENTROPY_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_SHA512_ACCUMULATOR" class="nav-sub-label">MBEDTLS_ENTROPY_SHA512_ACCUMULATOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_SHA256_ACCUMULATOR" class="nav-sub-label">MBEDTLS_ENTROPY_SHA256_ACCUMULATOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_ENTROPY_SOURCE_FAILED" class="nav-sub-label">MBEDTLS_ERR_ENTROPY_SOURCE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_ENTROPY_MAX_SOURCES" class="nav-sub-label">MBEDTLS_ERR_ENTROPY_MAX_SOURCES</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_ENTROPY_NO_SOURCES_DEFINED" class="nav-sub-label">MBEDTLS_ERR_ENTROPY_NO_SOURCES_DEFINED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_ENTROPY_NO_STRONG_SOURCE" class="nav-sub-label">MBEDTLS_ERR_ENTROPY_NO_STRONG_SOURCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR" class="nav-sub-label">MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_MAX_SOURCES" class="nav-sub-label">MBEDTLS_ENTROPY_MAX_SOURCES</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_MAX_GATHER" class="nav-sub-label">MBEDTLS_ENTROPY_MAX_GATHER</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_BLOCK_SIZE" class="nav-sub-label">MBEDTLS_ENTROPY_BLOCK_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_BLOCK_SIZE" class="nav-sub-label">MBEDTLS_ENTROPY_BLOCK_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_MAX_SEED_SIZE" class="nav-sub-label">MBEDTLS_ENTROPY_MAX_SEED_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_SOURCE_MANUAL" class="nav-sub-label">MBEDTLS_ENTROPY_SOURCE_MANUAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_SOURCE_STRONG" class="nav-sub-label">MBEDTLS_ENTROPY_SOURCE_STRONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ENTROPY_SOURCE_WEAK" class="nav-sub-label">MBEDTLS_ENTROPY_SOURCE_WEAK</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_entropy_init" class="nav-sub-label">mbedtls_entropy_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_free" class="nav-sub-label">mbedtls_entropy_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_add_source" class="nav-sub-label">mbedtls_entropy_add_source</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_gather" class="nav-sub-label">mbedtls_entropy_gather</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_func" class="nav-sub-label">mbedtls_entropy_func</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_update_manual" class="nav-sub-label">mbedtls_entropy_update_manual</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_update_nv_seed" class="nav-sub-label">mbedtls_entropy_update_nv_seed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_write_seed_file" class="nav-sub-label">mbedtls_entropy_write_seed_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_update_seed_file" class="nav-sub-label">mbedtls_entropy_update_seed_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_self_test" class="nav-sub-label">mbedtls_entropy_self_test</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_entropy_source_self_test" class="nav-sub-label">mbedtls_entropy_source_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_entropy_f_source_ptr" class="nav-sub-label">mbedtls_entropy_f_source_ptr</a>
+              </li>
+      
+
+              <li>
+                <a href="#
+mbedtls_entropy_source_state;
+" class="nav-sub-label">
+mbedtls_entropy_source_state;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#
+mbedtls_entropy_context;
+" class="nav-sub-label">
+mbedtls_entropy_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="sha512.h"><span>sha512.h</span></h4>
+      <pre class="doc-declare"><code>#include "sha512.h"
+</code></pre>
+      <pre class="doc-comment">#include "sha512.h"
+</pre>
+
+      <h4 id="sha256.h"><span>sha256.h</span></h4>
+      <pre class="doc-declare"><code>#include "sha256.h"
+</code></pre>
+      <pre class="doc-comment">#include "sha256.h"
+</pre>
+
+      <h4 id="threading.h"><span>threading.h</span></h4>
+      <pre class="doc-declare"><code>#include "threading.h"
+</code></pre>
+      <pre class="doc-comment">#include "threading.h"
+</pre>
+
+      <h4 id="havege.h"><span>havege.h</span></h4>
+      <pre class="doc-declare"><code>#include "havege.h"
+</code></pre>
+      <pre class="doc-comment">#include "havege.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_ENTROPY_H">Marco <span>MBEDTLS_ENTROPY_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_SHA512_ACCUMULATOR">Marco <span>MBEDTLS_ENTROPY_SHA512_ACCUMULATOR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_SHA512_ACCUMULATOR
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_SHA256_ACCUMULATOR">Marco <span>MBEDTLS_ENTROPY_SHA256_ACCUMULATOR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_SHA256_ACCUMULATOR
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_ENTROPY_SOURCE_FAILED">Marco <span>MBEDTLS_ERR_ENTROPY_SOURCE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_ENTROPY_SOURCE_FAILED                -3C /**< Critical entropy source failure. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_ENTROPY_MAX_SOURCES">Marco <span>MBEDTLS_ERR_ENTROPY_MAX_SOURCES</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_ENTROPY_MAX_SOURCES                  -3E /**< No more sources can be added. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_ENTROPY_NO_SOURCES_DEFINED">Marco <span>MBEDTLS_ERR_ENTROPY_NO_SOURCES_DEFINED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_ENTROPY_NO_SOURCES_DEFINED           -64 /**< No sources have been added to poll. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_ENTROPY_NO_STRONG_SOURCE">Marco <span>MBEDTLS_ERR_ENTROPY_NO_STRONG_SOURCE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_ENTROPY_NO_STRONG_SOURCE             -3D /**< No strong sources have been added to poll. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR">Marco <span>MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR                -63 /**< Read/write error in file. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_MAX_SOURCES">Marco <span>MBEDTLS_ENTROPY_MAX_SOURCES</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_MAX_SOURCES    20     /**< Maximum number of sources supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_MAX_GATHER">Marco <span>MBEDTLS_ENTROPY_MAX_GATHER</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_MAX_GATHER     128    /**< Maximum amount requested from entropy sources */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_BLOCK_SIZE">Marco <span>MBEDTLS_ENTROPY_BLOCK_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_BLOCK_SIZE     64     /**< Block size of entropy accumulator (SHA-512) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_BLOCK_SIZE">Marco <span>MBEDTLS_ENTROPY_BLOCK_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_BLOCK_SIZE     32     /**< Block size of entropy accumulator (SHA-256) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_MAX_SEED_SIZE">Marco <span>MBEDTLS_ENTROPY_MAX_SEED_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_MAX_SEED_SIZE  1024   /**< Maximum size of seed we read from seed file */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_SOURCE_MANUAL">Marco <span>MBEDTLS_ENTROPY_SOURCE_MANUAL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_SOURCE_MANUAL  MBEDTLS_ENTROPY_MAX_SOURCES
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_SOURCE_STRONG">Marco <span>MBEDTLS_ENTROPY_SOURCE_STRONG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_SOURCE_STRONG  1      /**< Entropy source is strong   */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ENTROPY_SOURCE_WEAK">Marco <span>MBEDTLS_ENTROPY_SOURCE_WEAK</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ENTROPY_SOURCE_WEAK    0      /**< Entropy source is weak     */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_entropy_init">Func <span>mbedtls_entropy_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_entropy_init( mbedtls_entropy_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Initialize the context
+ *
+ * \param ctx       Entropy context to initialize
+ */</pre>
+
+      <h4 id="mbedtls_entropy_free">Func <span>mbedtls_entropy_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_entropy_free( mbedtls_entropy_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Free the data in the context
+ *
+ * \param ctx       Entropy context to free
+ */</pre>
+
+      <h4 id="mbedtls_entropy_add_source">Func <span>mbedtls_entropy_add_source</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_add_source( mbedtls_entropy_context *ctx,
+                       mbedtls_entropy_f_source_ptr f_source, void *p_source,
+                       size_t threshold, int strong );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Adds an entropy source to poll
+ *                  (Thread-safe if MBEDTLS_THREADING_C is enabled)
+ *
+ * \param ctx       Entropy context
+ * \param f_source  Entropy function
+ * \param p_source  Function data
+ * \param threshold Minimum required from source before entropy is released
+ *                  ( with mbedtls_entropy_func() ) (in bytes)
+ * \param strong    MBEDTLS_ENTROPY_SOURCE_STRONG or
+ *                  MBEDTLS_ENTROPY_SOURCE_WEAK.
+ *                  At least one strong source needs to be added.
+ *                  Weaker sources (such as the cycle counter) can be used as
+ *                  a complement.
+ *
+ * \return          0 if successful or MBEDTLS_ERR_ENTROPY_MAX_SOURCES
+ */</pre>
+
+      <h4 id="mbedtls_entropy_gather">Func <span>mbedtls_entropy_gather</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_gather( mbedtls_entropy_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Trigger an extra gather poll for the accumulator
+ *                  (Thread-safe if MBEDTLS_THREADING_C is enabled)
+ *
+ * \param ctx       Entropy context
+ *
+ * \return          0 if successful, or MBEDTLS_ERR_ENTROPY_SOURCE_FAILED
+ */</pre>
+
+      <h4 id="mbedtls_entropy_func">Func <span>mbedtls_entropy_func</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_func( void *data, unsigned char *output, size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Retrieve entropy from the accumulator
+ *                  (Maximum length: MBEDTLS_ENTROPY_BLOCK_SIZE)
+ *                  (Thread-safe if MBEDTLS_THREADING_C is enabled)
+ *
+ * \param data      Entropy context
+ * \param output    Buffer to fill
+ * \param len       Number of bytes desired, must be at most MBEDTLS_ENTROPY_BLOCK_SIZE
+ *
+ * \return          0 if successful, or MBEDTLS_ERR_ENTROPY_SOURCE_FAILED
+ */</pre>
+
+      <h4 id="mbedtls_entropy_update_manual">Func <span>mbedtls_entropy_update_manual</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_update_manual( mbedtls_entropy_context *ctx,
+                          const unsigned char *data, size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Add data to the accumulator manually
+ *                  (Thread-safe if MBEDTLS_THREADING_C is enabled)
+ *
+ * \param ctx       Entropy context
+ * \param data      Data to add
+ * \param len       Length of data
+ *
+ * \return          0 if successful
+ */</pre>
+
+      <h4 id="mbedtls_entropy_update_nv_seed">Func <span>mbedtls_entropy_update_nv_seed</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_update_nv_seed( mbedtls_entropy_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Trigger an update of the seed file in NV by using the
+ *                  current entropy pool.
+ *
+ * \param ctx       Entropy context
+ *
+ * \return          0 if successful
+ */</pre>
+
+      <h4 id="mbedtls_entropy_write_seed_file">Func <span>mbedtls_entropy_write_seed_file</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_write_seed_file( mbedtls_entropy_context *ctx, const char *path );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Write a seed file
+ *
+ * \param ctx           Entropy context
+ * \param path          Name of the file
+ *
+ * \return              0 if successful,
+ *                      MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR on file error, or
+ *                      MBEDTLS_ERR_ENTROPY_SOURCE_FAILED
+ */</pre>
+
+      <h4 id="mbedtls_entropy_update_seed_file">Func <span>mbedtls_entropy_update_seed_file</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_update_seed_file( mbedtls_entropy_context *ctx, const char *path );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               Read and update a seed file. Seed is added to this
+ *                      instance. No more than MBEDTLS_ENTROPY_MAX_SEED_SIZE bytes are
+ *                      read from the seed file. The rest is ignored.
+ *
+ * \param ctx           Entropy context
+ * \param path          Name of the file
+ *
+ * \return              0 if successful,
+ *                      MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR on file error,
+ *                      MBEDTLS_ERR_ENTROPY_SOURCE_FAILED
+ */</pre>
+
+      <h4 id="mbedtls_entropy_self_test">Func <span>mbedtls_entropy_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ *                 This module self-test also calls the entropy self-test,
+ *                 mbedtls_entropy_source_self_test();
+ *
+ * \return         0 if successful, or 1 if a test failed
+ */</pre>
+
+      <h4 id="mbedtls_entropy_source_self_test">Func <span>mbedtls_entropy_source_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_entropy_source_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ *                 Verifies the integrity of the hardware entropy source
+ *                 provided by the function 'mbedtls_hardware_poll()'.
+ *
+ *                 Note this is the only hardware entropy source that is known
+ *                 at link time, and other entropy sources configured
+ *                 dynamically at runtime by the function
+ *                 mbedtls_entropy_add_source() will not be tested.
+ *
+ * \return         0 if successful, or 1 if a test failed
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_entropy_f_source_ptr">Typedef <span>mbedtls_entropy_f_source_ptr</span></h4>
+      <pre class="doc-declare"><code>typedef int (*mbedtls_entropy_f_source_ptr)(void *data, unsigned char *output, size_t len,
+                           size_t *olen);
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Entropy poll callback pointer
+ *
+ * \param data      Callback-specific data pointer
+ * \param output    Data to fill
+ * \param len       Maximum size to provide
+ * \param olen      The actual amount of bytes put into the buffer (Can be 0)
+ *
+ * \return          0 if no critical failures occurred,
+ *                  MBEDTLS_ERR_ENTROPY_SOURCE_FAILED otherwise
+ */</pre>
+
+      <h4 id="
+mbedtls_entropy_source_state;
+">Typedef <span>
+mbedtls_entropy_source_state;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_entropy_source_state
+{
+   mbedtls_entropy_f_source_ptr   f_source;  /**< The entropy source callback */
+   void *         p_source;  /**< The callback data pointer */
+   size_t         size;      /**< Amount received in bytes */
+   size_t         threshold; /**< Minimum bytes required before release */
+   int            strong;    /**< Is the source strong? */
+}
+mbedtls_entropy_source_state;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Entropy source state
+ */</pre>
+
+      <h4 id="
+mbedtls_entropy_context;
+">Typedef <span>
+mbedtls_entropy_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_entropy_context
+{
+   int accumulator_started;
+#if defined(MBEDTLS_ENTROPY_SHA512_ACCUMULATOR)
+   mbedtls_sha512_context accumulator;
+#else
+   mbedtls_sha256_context accumulator;
+#endif
+   int            source_count;
+   mbedtls_entropy_source_state   source[MBEDTLS_ENTROPY_MAX_SOURCES];
+#if defined(MBEDTLS_HAVEGE_C)
+   mbedtls_havege_state   havege_data;
+#endif
+#if defined(MBEDTLS_THREADING_C)
+   mbedtls_threading_mutex_t mutex;   /*!< mutex                  */
+#endif
+#if defined(MBEDTLS_ENTROPY_NV_SEED)
+   int initial_entropy_run;
+#endif
+}
+mbedtls_entropy_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Entropy context structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

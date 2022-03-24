@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_FFS_CONFIG_H__" class="nav-sub-label">__TUYA_FFS_CONFIG_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_FFS_TEST_MODE" class="nav-sub-label">TUYA_FFS_TEST_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_FFS_MODE" class="nav-sub-label">TUYA_FFS_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_FFS_SUPPORT_MBEDTLS" class="nav-sub-label">TUYA_FFS_SUPPORT_MBEDTLS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_FFS_SUPPORT_OPENSSL" class="nav-sub-label">TUYA_FFS_SUPPORT_OPENSSL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_FFS_DSS_API_VERSION" class="nav-sub-label">TUYA_FFS_DSS_API_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_MANUFACTURER_NAME" class="nav-sub-label">FFS_MANUFACTURER_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_MODEL_NUMBER" class="nav-sub-label">FFS_MODEL_NUMBER</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_HARDWARE_REVISION" class="nav-sub-label">FFS_HARDWARE_REVISION</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_FIRMWARE_REVISION" class="nav-sub-label">FFS_FIRMWARE_REVISION</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_DEVICE_NAME" class="nav-sub-label">FFS_DEVICE_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_HTTPS_PORT" class="nav-sub-label">FFS_HTTPS_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_DSS_ENDPOINT_DEFAULT" class="nav-sub-label">FFS_DSS_ENDPOINT_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_DEFAULT_SSID" class="nav-sub-label">FFS_DEFAULT_SSID</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_TASK_STACK_DEPTH" class="nav-sub-label">FFS_TASK_STACK_DEPTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_TASK_PRIORITY" class="nav-sub-label">FFS_TASK_PRIORITY</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_CLIENT_NONCE_SIZE" class="nav-sub-label">FFS_CLIENT_NONCE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_DSS_NONCE_SIZE" class="nav-sub-label">FFS_DSS_NONCE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_PIN_SIZE" class="nav-sub-label">FFS_PIN_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_PID_SIZE" class="nav-sub-label">FFS_PID_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_SN_SIZE" class="nav-sub-label">FFS_SN_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_CONNECT_WIFI_TIMEOUT_SEC" class="nav-sub-label">FFS_CONNECT_WIFI_TIMEOUT_SEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_WIFI_SSID_LEN" class="nav-sub-label">FFS_WIFI_SSID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_WIFI_PASSWD_LEN" class="nav-sub-label">FFS_WIFI_PASSWD_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFS_CHECK_SUCCESS(ret)" class="nav-sub-label">FFS_CHECK_SUCCESS(ret)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_FFS_CONFIG_H__">Marco <span>__TUYA_FFS_CONFIG_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_FFS_CONFIG_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_FFS_TEST_MODE">Marco <span>TUYA_FFS_TEST_MODE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_FFS_TEST_MODE                 (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_FFS_MODE">Marco <span>TUYA_FFS_MODE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_FFS_MODE                      (1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_FFS_SUPPORT_MBEDTLS">Marco <span>TUYA_FFS_SUPPORT_MBEDTLS</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_FFS_SUPPORT_MBEDTLS           (1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_FFS_SUPPORT_OPENSSL">Marco <span>TUYA_FFS_SUPPORT_OPENSSL</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_FFS_SUPPORT_OPENSSL           (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_FFS_DSS_API_VERSION">Marco <span>TUYA_FFS_DSS_API_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_FFS_DSS_API_VERSION           ("v1")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_MANUFACTURER_NAME">Marco <span>FFS_MANUFACTURER_NAME</span></h4>
+      <pre class="doc-declare"><code>#define FFS_MANUFACTURER_NAME              ("Tuya")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_MODEL_NUMBER">Marco <span>FFS_MODEL_NUMBER</span></h4>
+      <pre class="doc-declare"><code>#define FFS_MODEL_NUMBER                   ("RTL8720DN")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_HARDWARE_REVISION">Marco <span>FFS_HARDWARE_REVISION</span></h4>
+      <pre class="doc-declare"><code>#define FFS_HARDWARE_REVISION              ("1.0.0")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_FIRMWARE_REVISION">Marco <span>FFS_FIRMWARE_REVISION</span></h4>
+      <pre class="doc-declare"><code>#define FFS_FIRMWARE_REVISION              ("1.0.0")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_DEVICE_NAME">Marco <span>FFS_DEVICE_NAME</span></h4>
+      <pre class="doc-declare"><code>#define FFS_DEVICE_NAME                    ("TestDevice")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_HTTPS_PORT">Marco <span>FFS_HTTPS_PORT</span></h4>
+      <pre class="doc-declare"><code>#define FFS_HTTPS_PORT                     (443)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_DSS_ENDPOINT_DEFAULT">Marco <span>FFS_DSS_ENDPOINT_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define FFS_DSS_ENDPOINT_DEFAULT           ("https://dp-sps-na.amazon.com")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_DEFAULT_SSID">Marco <span>FFS_DEFAULT_SSID</span></h4>
+      <pre class="doc-declare"><code>#define FFS_DEFAULT_SSID                   ("simple_setup")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_TASK_STACK_DEPTH">Marco <span>FFS_TASK_STACK_DEPTH</span></h4>
+      <pre class="doc-declare"><code>#define FFS_TASK_STACK_DEPTH               (2048)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_TASK_PRIORITY">Marco <span>FFS_TASK_PRIORITY</span></h4>
+      <pre class="doc-declare"><code>#define FFS_TASK_PRIORITY                  (TRD_PRIO_0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_CLIENT_NONCE_SIZE">Marco <span>FFS_CLIENT_NONCE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define FFS_CLIENT_NONCE_SIZE              (12)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_DSS_NONCE_SIZE">Marco <span>FFS_DSS_NONCE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define FFS_DSS_NONCE_SIZE                 (31)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_PIN_SIZE">Marco <span>FFS_PIN_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define FFS_PIN_SIZE                       (9)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_PID_SIZE">Marco <span>FFS_PID_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define FFS_PID_SIZE                       (4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_SN_SIZE">Marco <span>FFS_SN_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define FFS_SN_SIZE                        (15)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_CONNECT_WIFI_TIMEOUT_SEC">Marco <span>FFS_CONNECT_WIFI_TIMEOUT_SEC</span></h4>
+      <pre class="doc-declare"><code>#define FFS_CONNECT_WIFI_TIMEOUT_SEC       (10)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_WIFI_SSID_LEN">Marco <span>FFS_WIFI_SSID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define FFS_WIFI_SSID_LEN                  (32)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_WIFI_PASSWD_LEN">Marco <span>FFS_WIFI_PASSWD_LEN</span></h4>
+      <pre class="doc-declare"><code>#define FFS_WIFI_PASSWD_LEN                (64)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFS_CHECK_SUCCESS(ret)">Marco <span>FFS_CHECK_SUCCESS(ret)</span></h4>
+      <pre class="doc-declare"><code>#define FFS_CHECK_SUCCESS(ret) { \
+       if (OPRT_OK != ret) { \
+           PR_ERR("fail."); \
+           return ret; \
+       } \
+   }
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

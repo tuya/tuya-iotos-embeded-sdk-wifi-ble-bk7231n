@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6_addr.h" class="nav-sub-label">lwip/ip6_addr.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_NETBUF_H" class="nav-sub-label">LWIP_HDR_NETBUF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETBUF_FLAG_DESTADDR" class="nav-sub-label">NETBUF_FLAG_DESTADDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETBUF_FLAG_CHKSUM" class="nav-sub-label">NETBUF_FLAG_CHKSUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_copy_partial(buf, dataptr, len, offset)" class="nav-sub-label">netbuf_copy_partial(buf, dataptr, len, offset)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_copy(buf,dataptr,len)" class="nav-sub-label">netbuf_copy(buf,dataptr,len)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_take(buf, dataptr, len)" class="nav-sub-label">netbuf_take(buf, dataptr, len)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_len(buf)" class="nav-sub-label">netbuf_len(buf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_fromaddr(buf)" class="nav-sub-label">netbuf_fromaddr(buf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_set_fromaddr(buf, fromaddr)" class="nav-sub-label">netbuf_set_fromaddr(buf, fromaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_fromport(buf)" class="nav-sub-label">netbuf_fromport(buf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_destaddr(buf)" class="nav-sub-label">netbuf_destaddr(buf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_set_destaddr(buf, destaddr)" class="nav-sub-label">netbuf_set_destaddr(buf, destaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_destport(buf)" class="nav-sub-label">netbuf_destport(buf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_destport(buf)" class="nav-sub-label">netbuf_destport(buf)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_set_chksum(buf, chksum)" class="nav-sub-label">netbuf_set_chksum(buf, chksum)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netbuf" class="nav-sub-label">netbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_delete" class="nav-sub-label">netbuf_delete</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_alloc" class="nav-sub-label">netbuf_alloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_free" class="nav-sub-label">netbuf_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_ref" class="nav-sub-label">netbuf_ref</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_chain" class="nav-sub-label">netbuf_chain</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_data" class="nav-sub-label">netbuf_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_next" class="nav-sub-label">netbuf_next</a>
+              </li>
+      
+
+              <li>
+                <a href="#netbuf_first" class="nav-sub-label">netbuf_first</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/ip6_addr.h"><span>lwip/ip6_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6_addr.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_NETBUF_H">Marco <span>LWIP_HDR_NETBUF_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_NETBUF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NETBUF_FLAG_DESTADDR">Marco <span>NETBUF_FLAG_DESTADDR</span></h4>
+      <pre class="doc-declare"><code>#define NETBUF_FLAG_DESTADDR   1
+</code></pre>
+      <pre class="doc-comment">/** This netbuf has dest-addr/port set */</pre>
+
+      <h4 id="NETBUF_FLAG_CHKSUM">Marco <span>NETBUF_FLAG_CHKSUM</span></h4>
+      <pre class="doc-declare"><code>#define NETBUF_FLAG_CHKSUM     2
+</code></pre>
+      <pre class="doc-comment">/** This netbuf includes a checksum */</pre>
+
+      <h4 id="netbuf_copy_partial(buf, dataptr, len, offset)">Marco <span>netbuf_copy_partial(buf, dataptr, len, offset)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_copy_partial(buf, dataptr, len, offset) \
+ pbuf_copy_partial((buf)->p, (dataptr), (len), (offset))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_copy(buf,dataptr,len)">Marco <span>netbuf_copy(buf,dataptr,len)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_copy(buf,dataptr,len) netbuf_copy_partial(buf, dataptr, len, 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_take(buf, dataptr, len)">Marco <span>netbuf_take(buf, dataptr, len)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_take(buf, dataptr, len) pbuf_take((buf)->p, dataptr, len)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_len(buf)">Marco <span>netbuf_len(buf)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_len(buf)             ((buf)->p->tot_len)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_fromaddr(buf)">Marco <span>netbuf_fromaddr(buf)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_fromaddr(buf)        (&((buf)->addr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_set_fromaddr(buf, fromaddr)">Marco <span>netbuf_set_fromaddr(buf, fromaddr)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_set_fromaddr(buf, fromaddr) ip_addr_set(&((buf)->addr), fromaddr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_fromport(buf)">Marco <span>netbuf_fromport(buf)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_fromport(buf)        ((buf)->port)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_destaddr(buf)">Marco <span>netbuf_destaddr(buf)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_destaddr(buf)        (&((buf)->toaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_set_destaddr(buf, destaddr)">Marco <span>netbuf_set_destaddr(buf, destaddr)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_set_destaddr(buf, destaddr) ip_addr_set(&((buf)->toaddr), destaddr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_destport(buf)">Marco <span>netbuf_destport(buf)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_destport(buf)        (((buf)->flags & NETBUF_FLAG_DESTADDR) ? (buf)->toport_chksum : 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_destport(buf)">Marco <span>netbuf_destport(buf)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_destport(buf)        ((buf)->toport_chksum)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_set_chksum(buf, chksum)">Marco <span>netbuf_set_chksum(buf, chksum)</span></h4>
+      <pre class="doc-declare"><code>#define netbuf_set_chksum(buf, chksum) do { (buf)->flags = NETBUF_FLAG_CHKSUM; \
+                                           (buf)->toport_chksum = chksum; } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="netbuf">Variable <span>netbuf</span></h4>
+      <pre class="doc-declare"><code>struct netbuf *  netbuf_new     (void);</code></pre>
+      <pre class="doc-comment">/* Network buffer functions: */</pre>
+
+      <h4 id="netbuf_delete">Variable <span>netbuf_delete</span></h4>
+      <pre class="doc-declare"><code>void             netbuf_delete  (struct netbuf *buf);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_alloc">Variable <span>netbuf_alloc</span></h4>
+      <pre class="doc-declare"><code>void *           netbuf_alloc   (struct netbuf *buf, u16_t size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_free">Variable <span>netbuf_free</span></h4>
+      <pre class="doc-declare"><code>void             netbuf_free    (struct netbuf *buf);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_ref">Variable <span>netbuf_ref</span></h4>
+      <pre class="doc-declare"><code>err_t            netbuf_ref     (struct netbuf *buf,
+                                  const void *dataptr, u16_t size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_chain">Variable <span>netbuf_chain</span></h4>
+      <pre class="doc-declare"><code>void             netbuf_chain   (struct netbuf *head, struct netbuf *tail);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_data">Variable <span>netbuf_data</span></h4>
+      <pre class="doc-declare"><code>err_t            netbuf_data    (struct netbuf *buf,
+                                  void **dataptr, u16_t *len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_next">Variable <span>netbuf_next</span></h4>
+      <pre class="doc-declare"><code>s8_t             netbuf_next    (struct netbuf *buf);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netbuf_first">Variable <span>netbuf_first</span></h4>
+      <pre class="doc-declare"><code>void             netbuf_first   (struct netbuf *buf);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

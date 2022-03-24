@@ -3,6 +3,11 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "tuya_cloud_types.h"
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
 /*
 	wifi netcfg frame sniffer用于wifi sniffer共享管理，
 	需要通过wifi sniffer获取802.11数据包的组件都可以注册
@@ -17,7 +22,7 @@
 	SnifferUser:使用Sniffer组件的嗅探服务的用户组件
 
 */
-typedef int (*fnSnifferUserCallback_t)(void *ptrArgs,uint8_t *buf, uint16_t len, const int8_t rssi);
+typedef int (*fnSnifferUserCallback_t)(void *ptrArgs,uint8_t *buf, uint16_t len, const SCHAR_T rssi);
 typedef struct SnifferUserParameters_s{
 	fnSnifferUserCallback_t cb;	
 	void* ptrArgs;
@@ -71,4 +76,7 @@ int WifiNetcfgFrameSnifferSessionInit();
 int WifiNetcfgFrameSnifferSessionUnInit();
 
 
+#ifdef __cplusplus
+}
+#endif
 #endif
