@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp.h" class="nav-sub-label">ppp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#FSM_H" class="nav-sub-label">FSM_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#HEADERLEN" class="nav-sub-label">HEADERLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#CONFREQ" class="nav-sub-label">CONFREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#CONFACK" class="nav-sub-label">CONFACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#CONFNAK" class="nav-sub-label">CONFNAK</a>
+              </li>
+      
+
+              <li>
+                <a href="#CONFREJ" class="nav-sub-label">CONFREJ</a>
+              </li>
+      
+
+              <li>
+                <a href="#TERMREQ" class="nav-sub-label">TERMREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#TERMACK" class="nav-sub-label">TERMACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#CODEREJ" class="nav-sub-label">CODEREJ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_INITIAL" class="nav-sub-label">PPP_FSM_INITIAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_STARTING" class="nav-sub-label">PPP_FSM_STARTING</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_CLOSED" class="nav-sub-label">PPP_FSM_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_STOPPED" class="nav-sub-label">PPP_FSM_STOPPED</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_CLOSING" class="nav-sub-label">PPP_FSM_CLOSING</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_STOPPING" class="nav-sub-label">PPP_FSM_STOPPING</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_REQSENT" class="nav-sub-label">PPP_FSM_REQSENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_ACKRCVD" class="nav-sub-label">PPP_FSM_ACKRCVD</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_ACKSENT" class="nav-sub-label">PPP_FSM_ACKSENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PPP_FSM_OPENED" class="nav-sub-label">PPP_FSM_OPENED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPT_PASSIVE" class="nav-sub-label">OPT_PASSIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPT_RESTART" class="nav-sub-label">OPT_RESTART</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPT_SILENT" class="nav-sub-label">OPT_SILENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEFTIMEOUT" class="nav-sub-label">DEFTIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEFMAXTERMREQS" class="nav-sub-label">DEFMAXTERMREQS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEFMAXCONFREQS" class="nav-sub-label">DEFMAXCONFREQS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEFMAXNAKLOOPS" class="nav-sub-label">DEFMAXNAKLOOPS</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#fsm_init" class="nav-sub-label">fsm_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_lowerup" class="nav-sub-label">fsm_lowerup</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_lowerdown" class="nav-sub-label">fsm_lowerdown</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_open" class="nav-sub-label">fsm_open</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_close" class="nav-sub-label">fsm_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_input" class="nav-sub-label">fsm_input</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_protreject" class="nav-sub-label">fsm_protreject</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_sdata" class="nav-sub-label">fsm_sdata</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#fsm;
+" class="nav-sub-label">fsm;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#fsm_callbacks;
+" class="nav-sub-label">fsm_callbacks;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="ppp.h"><span>ppp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="FSM_H">Marco <span>FSM_H</span></h4>
+      <pre class="doc-declare"><code>#define FSM_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HEADERLEN">Marco <span>HEADERLEN</span></h4>
+      <pre class="doc-declare"><code>#define HEADERLEN 4
+</code></pre>
+      <pre class="doc-comment">/*
+ * Packet header = Code, id, length.
+ */</pre>
+
+      <h4 id="CONFREQ">Marco <span>CONFREQ</span></h4>
+      <pre class="doc-declare"><code>#define CONFREQ	1 /* Configuration Request */
+</code></pre>
+      <pre class="doc-comment">/*
+ *  CP (LCP, IPCP, etc.) codes.
+ */</pre>
+
+      <h4 id="CONFACK">Marco <span>CONFACK</span></h4>
+      <pre class="doc-declare"><code>#define CONFACK	2 /* Configuration Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CONFNAK">Marco <span>CONFNAK</span></h4>
+      <pre class="doc-declare"><code>#define CONFNAK	3 /* Configuration Nak */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CONFREJ">Marco <span>CONFREJ</span></h4>
+      <pre class="doc-declare"><code>#define CONFREJ	4 /* Configuration Reject */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TERMREQ">Marco <span>TERMREQ</span></h4>
+      <pre class="doc-declare"><code>#define TERMREQ	5 /* Termination Request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TERMACK">Marco <span>TERMACK</span></h4>
+      <pre class="doc-declare"><code>#define TERMACK	6 /* Termination Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CODEREJ">Marco <span>CODEREJ</span></h4>
+      <pre class="doc-declare"><code>#define CODEREJ	7 /* Code Reject */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_INITIAL">Marco <span>PPP_FSM_INITIAL</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_INITIAL	0 /* Down, hasn't been opened */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Link states.
+ */</pre>
+
+      <h4 id="PPP_FSM_STARTING">Marco <span>PPP_FSM_STARTING</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_STARTING 1 /* Down, been opened */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_CLOSED">Marco <span>PPP_FSM_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_CLOSED	2 /* Up, hasn't been opened */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_STOPPED">Marco <span>PPP_FSM_STOPPED</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_STOPPED	3 /* Open, waiting for down event */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_CLOSING">Marco <span>PPP_FSM_CLOSING</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_CLOSING	4 /* Terminating the connection, not open */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_STOPPING">Marco <span>PPP_FSM_STOPPING</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_STOPPING 5 /* Terminating, but open */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_REQSENT">Marco <span>PPP_FSM_REQSENT</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_REQSENT	6 /* We've sent a Config Request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_ACKRCVD">Marco <span>PPP_FSM_ACKRCVD</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_ACKRCVD	7 /* We've received a Config Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_ACKSENT">Marco <span>PPP_FSM_ACKSENT</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_ACKSENT	8 /* We've sent a Config Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PPP_FSM_OPENED">Marco <span>PPP_FSM_OPENED</span></h4>
+      <pre class="doc-declare"><code>#define PPP_FSM_OPENED	9 /* Connection available */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPT_PASSIVE">Marco <span>OPT_PASSIVE</span></h4>
+      <pre class="doc-declare"><code>#define OPT_PASSIVE 1 /* Don't die if we don't get a response */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Flags - indicate options controlling FSM operation
+ */</pre>
+
+      <h4 id="OPT_RESTART">Marco <span>OPT_RESTART</span></h4>
+      <pre class="doc-declare"><code>#define OPT_RESTART 2 /* Treat 2nd OPEN as DOWN, UP */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPT_SILENT">Marco <span>OPT_SILENT</span></h4>
+      <pre class="doc-declare"><code>#define OPT_SILENT 4 /* Wait for peer to speak first */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEFTIMEOUT">Marco <span>DEFTIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define DEFTIMEOUT 3 /* Timeout time in seconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEFMAXTERMREQS">Marco <span>DEFMAXTERMREQS</span></h4>
+      <pre class="doc-declare"><code>#define DEFMAXTERMREQS 2 /* Maximum Terminate-Request transmissions */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEFMAXCONFREQS">Marco <span>DEFMAXCONFREQS</span></h4>
+      <pre class="doc-declare"><code>#define DEFMAXCONFREQS 10 /* Maximum Configure-Request transmissions */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEFMAXNAKLOOPS">Marco <span>DEFMAXNAKLOOPS</span></h4>
+      <pre class="doc-declare"><code>#define DEFMAXNAKLOOPS 5 /* Maximum number of nak loops */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="fsm_init">Func <span>fsm_init</span></h4>
+      <pre class="doc-declare"><code>void fsm_init(fsm *f);</code></pre>
+      <pre class="doc-comment">/*
+ * Prototypes
+ */</pre>
+
+      <h4 id="fsm_lowerup">Func <span>fsm_lowerup</span></h4>
+      <pre class="doc-declare"><code>void fsm_lowerup(fsm *f);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fsm_lowerdown">Func <span>fsm_lowerdown</span></h4>
+      <pre class="doc-declare"><code>void fsm_lowerdown(fsm *f);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fsm_open">Func <span>fsm_open</span></h4>
+      <pre class="doc-declare"><code>void fsm_open(fsm *f);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fsm_close">Func <span>fsm_close</span></h4>
+      <pre class="doc-declare"><code>void fsm_close(fsm *f, const char *reason);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fsm_input">Func <span>fsm_input</span></h4>
+      <pre class="doc-declare"><code>void fsm_input(fsm *f, u_char *inpacket, int l);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fsm_protreject">Func <span>fsm_protreject</span></h4>
+      <pre class="doc-declare"><code>void fsm_protreject(fsm *f);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fsm_sdata">Func <span>fsm_sdata</span></h4>
+      <pre class="doc-declare"><code>void fsm_sdata(fsm *f, u_char code, u_char id, const u_char *data, int datalen);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="fsm;
+">Typedef <span>fsm;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct fsm {
+   ppp_pcb *pcb;	/* PPP Interface */
+   const struct fsm_callbacks *callbacks; /* Callback routines */
+   const char *term_reason; /* Reason for closing protocol */
+   u8_t seen_ack;	/* Have received valid Ack/Nak/Rej to Req */
+			  /* -- This is our only flag, we might use u_int :1 if we have more flags */
+   u16_t protocol;	/* Data Link Layer Protocol field value */
+   u8_t state;		/* State */
+   u8_t flags;		/* Contains option bits */
+   u8_t id;		/* Current id */
+   u8_t reqid;		/* Current request id */
+   u8_t retransmits;	/* Number of retransmissions left */
+   u8_t nakloops;	/* Number of nak loops since last ack */
+   u8_t rnakloops;	/* Number of naks received */
+   u8_t maxnakloops;	/* Maximum number of nak loops tolerated
+				   (necessary because IPCP require a custom large max nak loops value) */
+   u8_t term_reason_len; /* Length of term_reason */
+} fsm;
+</code></pre>
+      <pre class="doc-comment">/*
+ * Each FSM is described by an fsm structure and fsm callbacks.
+ */</pre>
+
+      <h4 id="fsm_callbacks;
+">Typedef <span>fsm_callbacks;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct fsm_callbacks {
+   void (*resetci)	/* Reset our Configuration Information */
+	(fsm *);
+   int (*cilen)	/* Length of our Configuration Information */
+	(fsm *);
+   void (*addci)		/* Add our Configuration Information */
+	(fsm *, u_char *, int *);
+   int (*ackci)	/* ACK our Configuration Information */
+	(fsm *, u_char *, int);
+   int (*nakci)	/* NAK our Configuration Information */
+	(fsm *, u_char *, int, int);
+   int (*rejci)	/* Reject our Configuration Information */
+	(fsm *, u_char *, int);
+   int (*reqci)	/* Request peer's Configuration Information */
+	(fsm *, u_char *, int *, int);
+   void (*up)		/* Called when fsm reaches PPP_FSM_OPENED state */
+	(fsm *);
+   void (*down)	/* Called when fsm leaves PPP_FSM_OPENED state */
+	(fsm *);
+   void (*starting)	/* Called when we want the lower layer */
+	(fsm *);
+   void (*finished)	/* Called when we don't want the lower layer */
+	(fsm *);
+   void (*protreject)	/* Called when Protocol-Reject received */
+	(int);
+   void (*retransmit)	/* Retransmission is necessary */
+	(fsm *);
+   int (*extcode)	/* Called when unknown code received */
+	(fsm *, int, int, u_char *, int);
+   const char *proto_name; /* String name for protocol (for messages) */
+} fsm_callbacks;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

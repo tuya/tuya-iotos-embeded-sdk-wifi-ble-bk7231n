@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/apps/snmp_opts.h" class="nav-sub-label">lwip/apps/snmp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_SNMP_V3_H" class="nav-sub-label">LWIP_HDR_APPS_SNMP_V3_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#snmpv3_get_engine_id" class="nav-sub-label">snmpv3_get_engine_id</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_set_engine_id" class="nav-sub-label">snmpv3_set_engine_id</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_get_engine_boots" class="nav-sub-label">snmpv3_get_engine_boots</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_set_engine_boots" class="nav-sub-label">snmpv3_set_engine_boots</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_get_engine_time" class="nav-sub-label">snmpv3_get_engine_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_reset_engine_time" class="nav-sub-label">snmpv3_reset_engine_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_get_user" class="nav-sub-label">snmpv3_get_user</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_get_amount_of_users" class="nav-sub-label">snmpv3_get_amount_of_users</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_get_user_storagetype" class="nav-sub-label">snmpv3_get_user_storagetype</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_get_username" class="nav-sub-label">snmpv3_get_username</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_engine_id_changed" class="nav-sub-label">snmpv3_engine_id_changed</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_password_to_key_md5" class="nav-sub-label">snmpv3_password_to_key_md5</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_password_to_key_sha" class="nav-sub-label">snmpv3_password_to_key_sha</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#s32_t" class="nav-sub-label">s32_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#snmpv3_auth_algo_t;
+" class="nav-sub-label">snmpv3_auth_algo_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_priv_algo_t;
+" class="nav-sub-label">snmpv3_priv_algo_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmpv3_user_storagetype_t;
+" class="nav-sub-label">snmpv3_user_storagetype_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/apps/snmp_opts.h"><span>lwip/apps/snmp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/apps/snmp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/apps/snmp_opts.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_SNMP_V3_H">Marco <span>LWIP_HDR_APPS_SNMP_V3_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_SNMP_V3_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="snmpv3_get_engine_id">Func <span>snmpv3_get_engine_id</span></h4>
+      <pre class="doc-declare"><code>void snmpv3_get_engine_id(const char **id, u8_t *len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_set_engine_id">Func <span>snmpv3_set_engine_id</span></h4>
+      <pre class="doc-declare"><code>err_t snmpv3_set_engine_id(const char* id, u8_t len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_get_engine_boots">Func <span>snmpv3_get_engine_boots</span></h4>
+      <pre class="doc-declare"><code>u32_t snmpv3_get_engine_boots(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_set_engine_boots">Func <span>snmpv3_set_engine_boots</span></h4>
+      <pre class="doc-declare"><code>void snmpv3_set_engine_boots(u32_t boots);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_get_engine_time">Func <span>snmpv3_get_engine_time</span></h4>
+      <pre class="doc-declare"><code>u32_t snmpv3_get_engine_time(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_reset_engine_time">Func <span>snmpv3_reset_engine_time</span></h4>
+      <pre class="doc-declare"><code>void snmpv3_reset_engine_time(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_get_user">Func <span>snmpv3_get_user</span></h4>
+      <pre class="doc-declare"><code>err_t snmpv3_get_user(const char* username, snmpv3_auth_algo_t *auth_algo, u8_t *auth_key, snmpv3_priv_algo_t *priv_algo, u8_t *priv_key);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_get_amount_of_users">Func <span>snmpv3_get_amount_of_users</span></h4>
+      <pre class="doc-declare"><code>u8_t snmpv3_get_amount_of_users(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_get_user_storagetype">Func <span>snmpv3_get_user_storagetype</span></h4>
+      <pre class="doc-declare"><code>err_t snmpv3_get_user_storagetype(const char *username, snmpv3_user_storagetype_t *storagetype);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_get_username">Func <span>snmpv3_get_username</span></h4>
+      <pre class="doc-declare"><code>err_t snmpv3_get_username(char *username, u8_t index);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_engine_id_changed">Func <span>snmpv3_engine_id_changed</span></h4>
+      <pre class="doc-declare"><code>void snmpv3_engine_id_changed(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_password_to_key_md5">Func <span>snmpv3_password_to_key_md5</span></h4>
+      <pre class="doc-declare"><code>void snmpv3_password_to_key_md5(
+   const u8_t *password,    /* IN */
+   size_t     passwordlen, /* IN */
+   const u8_t *engineID,    /* IN  - pointer to snmpEngineID  */
+   u8_t       engineLength, /* IN  - length of snmpEngineID */
+   u8_t      *key);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_password_to_key_sha">Func <span>snmpv3_password_to_key_sha</span></h4>
+      <pre class="doc-declare"><code>void snmpv3_password_to_key_sha(
+   const u8_t *password,    /* IN */
+   size_t     passwordlen, /* IN */
+   const u8_t *engineID,    /* IN  - pointer to snmpEngineID  */
+   u8_t       engineLength, /* IN  - length of snmpEngineID */
+   u8_t      *key);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="s32_t">Variable <span>s32_t</span></h4>
+      <pre class="doc-declare"><code>s32_t snmpv3_get_engine_time_internal(void);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="snmpv3_auth_algo_t;
+">Typedef <span>snmpv3_auth_algo_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+ SNMP_V3_AUTH_ALGO_INVAL = 0,
+ SNMP_V3_AUTH_ALGO_MD5  = 1,
+ SNMP_V3_AUTH_ALGO_SHA  = 2
+} snmpv3_auth_algo_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_priv_algo_t;
+">Typedef <span>snmpv3_priv_algo_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+ SNMP_V3_PRIV_ALGO_INVAL = 0,
+ SNMP_V3_PRIV_ALGO_DES  = 1,
+ SNMP_V3_PRIV_ALGO_AES  = 2
+} snmpv3_priv_algo_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmpv3_user_storagetype_t;
+">Typedef <span>snmpv3_user_storagetype_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+ SNMP_V3_USER_STORAGETYPE_OTHER      = 1,
+ SNMP_V3_USER_STORAGETYPE_VOLATILE   = 2,
+ SNMP_V3_USER_STORAGETYPE_NONVOLATILE = 3,
+ SNMP_V3_USER_STORAGETYPE_PERMANENT  = 4,
+ SNMP_V3_USER_STORAGETYPE_READONLY   = 5
+} snmpv3_user_storagetype_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

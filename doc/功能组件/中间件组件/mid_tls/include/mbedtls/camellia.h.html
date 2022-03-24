@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#platform_util.h" class="nav-sub-label">platform_util.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#camellia_alt.h" class="nav-sub-label">camellia_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_CAMELLIA_H" class="nav-sub-label">MBEDTLS_CAMELLIA_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CAMELLIA_ENCRYPT" class="nav-sub-label">MBEDTLS_CAMELLIA_ENCRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CAMELLIA_DECRYPT" class="nav-sub-label">MBEDTLS_CAMELLIA_DECRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_CAMELLIA_INVALID_KEY_LENGTH" class="nav-sub-label">MBEDTLS_ERR_CAMELLIA_INVALID_KEY_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_CAMELLIA_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_CAMELLIA_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_CAMELLIA_INVALID_INPUT_LENGTH" class="nav-sub-label">MBEDTLS_ERR_CAMELLIA_INVALID_INPUT_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_CAMELLIA_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_CAMELLIA_HW_ACCEL_FAILED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_camellia_init" class="nav-sub-label">mbedtls_camellia_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_free" class="nav-sub-label">mbedtls_camellia_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_setkey_enc" class="nav-sub-label">mbedtls_camellia_setkey_enc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_setkey_dec" class="nav-sub-label">mbedtls_camellia_setkey_dec</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_crypt_ecb" class="nav-sub-label">mbedtls_camellia_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_crypt_cbc" class="nav-sub-label">mbedtls_camellia_crypt_cbc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_crypt_cfb128" class="nav-sub-label">mbedtls_camellia_crypt_cfb128</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_crypt_ctr" class="nav-sub-label">mbedtls_camellia_crypt_ctr</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_camellia_self_test" class="nav-sub-label">mbedtls_camellia_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_camellia_context;
+" class="nav-sub-label">
+mbedtls_camellia_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="platform_util.h"><span>platform_util.h</span></h4>
+      <pre class="doc-declare"><code>#include "platform_util.h"
+</code></pre>
+      <pre class="doc-comment">#include "platform_util.h"
+</pre>
+
+      <h4 id="camellia_alt.h"><span>camellia_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "camellia_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "camellia_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_CAMELLIA_H">Marco <span>MBEDTLS_CAMELLIA_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CAMELLIA_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CAMELLIA_ENCRYPT">Marco <span>MBEDTLS_CAMELLIA_ENCRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CAMELLIA_ENCRYPT    1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CAMELLIA_DECRYPT">Marco <span>MBEDTLS_CAMELLIA_DECRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CAMELLIA_DECRYPT    0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_CAMELLIA_INVALID_KEY_LENGTH">Marco <span>MBEDTLS_ERR_CAMELLIA_INVALID_KEY_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_CAMELLIA_INVALID_KEY_LENGTH  MBEDTLS_DEPRECATED_NUMERIC_CONSTANT( -36 )
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_CAMELLIA_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_CAMELLIA_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_CAMELLIA_BAD_INPUT_DATA -36 /**< Bad input data. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_CAMELLIA_INVALID_INPUT_LENGTH">Marco <span>MBEDTLS_ERR_CAMELLIA_INVALID_INPUT_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_CAMELLIA_INVALID_INPUT_LENGTH -38 /**< Invalid data input length. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_CAMELLIA_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_CAMELLIA_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_CAMELLIA_HW_ACCEL_FAILED             -39 /**< Camellia hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_CAMELLIA_HW_ACCEL_FAILED is deprecated and should not be used.
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_camellia_init">Func <span>mbedtls_camellia_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_camellia_init( mbedtls_camellia_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize a CAMELLIA context.
+ *
+ * \param ctx      The CAMELLIA context to be initialized.
+ *                 This must not be \c NULL.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_free">Func <span>mbedtls_camellia_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_camellia_free( mbedtls_camellia_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Clear a CAMELLIA context.
+ *
+ * \param ctx      The CAMELLIA context to be cleared. This may be \c NULL,
+ *                 in which case this function returns immediately. If it is not
+ *                 \c NULL, it must be initialized.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_setkey_enc">Func <span>mbedtls_camellia_setkey_enc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_setkey_enc( mbedtls_camellia_context *ctx,
+                                const unsigned char *key,
+                                unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a CAMELLIA key schedule operation for encryption.
+ *
+ * \param ctx      The CAMELLIA context to use. This must be initialized.
+ * \param key      The encryption key to use. This must be a readable buffer
+ *                 of size \p keybits Bits.
+ * \param keybits  The length of \p key in Bits. This must be either \c 128,
+ *                 \c 192 or \c 256.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_setkey_dec">Func <span>mbedtls_camellia_setkey_dec</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_setkey_dec( mbedtls_camellia_context *ctx,
+                                const unsigned char *key,
+                                unsigned int keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a CAMELLIA key schedule operation for decryption.
+ *
+ * \param ctx      The CAMELLIA context to use. This must be initialized.
+ * \param key      The decryption key. This must be a readable buffer
+ *                 of size \p keybits Bits.
+ * \param keybits  The length of \p key in Bits. This must be either \c 128,
+ *                 \c 192 or \c 256.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_crypt_ecb">Func <span>mbedtls_camellia_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_crypt_ecb( mbedtls_camellia_context *ctx,
+                   int mode,
+                   const unsigned char input[16],
+                   unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a CAMELLIA-ECB block encryption/decryption operation.
+ *
+ * \param ctx      The CAMELLIA context to use. This must be initialized
+ *                 and bound to a key.
+ * \param mode     The mode of operation. This must be either
+ *                 #MBEDTLS_CAMELLIA_ENCRYPT or #MBEDTLS_CAMELLIA_DECRYPT.
+ * \param input    The input block. This must be a readable buffer
+ *                 of size \c 16 Bytes.
+ * \param output   The output block. This must be a writable buffer
+ *                 of size \c 16 Bytes.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_crypt_cbc">Func <span>mbedtls_camellia_crypt_cbc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_crypt_cbc( mbedtls_camellia_context *ctx,
+                   int mode,
+                   size_t length,
+                   unsigned char iv[16],
+                   const unsigned char *input,
+                   unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a CAMELLIA-CBC buffer encryption/decryption operation.
+ *
+ * \note           Upon exit, the content of the IV is updated so that you can
+ *                 call the function same function again on the following
+ *                 block(s) of data and get the same result as if it was
+ *                 encrypted in one call. This allows a "streaming" usage.
+ *                 If on the other hand you need to retain the contents of the
+ *                 IV, you should either save it manually or use the cipher
+ *                 module instead.
+ *
+ * \param ctx      The CAMELLIA context to use. This must be initialized
+ *                 and bound to a key.
+ * \param mode     The mode of operation. This must be either
+ *                 #MBEDTLS_CAMELLIA_ENCRYPT or #MBEDTLS_CAMELLIA_DECRYPT.
+ * \param length   The length in Bytes of the input data \p input.
+ *                 This must be a multiple of \c 16 Bytes.
+ * \param iv       The initialization vector. This must be a read/write buffer
+ *                 of length \c 16 Bytes. It is updated to allow streaming
+ *                 use as explained above.
+ * \param input    The buffer holding the input data. This must point to a
+ *                 readable buffer of length \p length Bytes.
+ * \param output   The buffer holding the output data. This must point to a
+ *                 writable buffer of length \p length Bytes.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_crypt_cfb128">Func <span>mbedtls_camellia_crypt_cfb128</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_crypt_cfb128( mbedtls_camellia_context *ctx,
+                      int mode,
+                      size_t length,
+                      size_t *iv_off,
+                      unsigned char iv[16],
+                      const unsigned char *input,
+                      unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Perform a CAMELLIA-CFB128 buffer encryption/decryption
+ *                 operation.
+ *
+ * \note           Due to the nature of CFB mode, you should use the same
+ *                 key for both encryption and decryption. In particular, calls
+ *                 to this function should be preceded by a key-schedule via
+ *                 mbedtls_camellia_setkey_enc() regardless of whether \p mode
+ *                 is #MBEDTLS_CAMELLIA_ENCRYPT or #MBEDTLS_CAMELLIA_DECRYPT.
+ *
+ * \note           Upon exit, the content of the IV is updated so that you can
+ *                 call the function same function again on the following
+ *                 block(s) of data and get the same result as if it was
+ *                 encrypted in one call. This allows a "streaming" usage.
+ *                 If on the other hand you need to retain the contents of the
+ *                 IV, you should either save it manually or use the cipher
+ *                 module instead.
+ *
+ * \param ctx      The CAMELLIA context to use. This must be initialized
+ *                 and bound to a key.
+ * \param mode     The mode of operation. This must be either
+ *                 #MBEDTLS_CAMELLIA_ENCRYPT or #MBEDTLS_CAMELLIA_DECRYPT.
+ * \param length   The length of the input data \p input. Any value is allowed.
+ * \param iv_off   The current offset in the IV. This must be smaller
+ *                 than \c 16 Bytes. It is updated after this call to allow
+ *                 the aforementioned streaming usage.
+ * \param iv       The initialization vector. This must be a read/write buffer
+ *                 of length \c 16 Bytes. It is updated after this call to
+ *                 allow the aforementioned streaming usage.
+ * \param input    The buffer holding the input data. This must be a readable
+ *                 buffer of size \p length Bytes.
+ * \param output   The buffer to hold the output data. This must be a writable
+ *                 buffer of length \p length Bytes.
+ *
+ * \return         \c 0 if successful.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_crypt_ctr">Func <span>mbedtls_camellia_crypt_ctr</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_crypt_ctr( mbedtls_camellia_context *ctx,
+                      size_t length,
+                      size_t *nc_off,
+                      unsigned char nonce_counter[16],
+                      unsigned char stream_block[16],
+                      const unsigned char *input,
+                      unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief      Perform a CAMELLIA-CTR buffer encryption/decryption operation.
+ *
+ * *note       Due to the nature of CTR mode, you should use the same
+ *             key for both encryption and decryption. In particular, calls
+ *             to this function should be preceded by a key-schedule via
+ *             mbedtls_camellia_setkey_enc() regardless of whether \p mode
+ *             is #MBEDTLS_CAMELLIA_ENCRYPT or #MBEDTLS_CAMELLIA_DECRYPT.
+ *
+ * \warning    You must never reuse a nonce value with the same key. Doing so
+ *             would void the encryption for the two messages encrypted with
+ *             the same nonce and key.
+ *
+ *             There are two common strategies for managing nonces with CTR:
+ *
+ *             1. You can handle everything as a single message processed over
+ *             successive calls to this function. In that case, you want to
+ *             set \p nonce_counter and \p nc_off to 0 for the first call, and
+ *             then preserve the values of \p nonce_counter, \p nc_off and \p
+ *             stream_block across calls to this function as they will be
+ *             updated by this function.
+ *
+ *             With this strategy, you must not encrypt more than 2**128
+ *             blocks of data with the same key.
+ *
+ *             2. You can encrypt separate messages by dividing the \p
+ *             nonce_counter buffer in two areas: the first one used for a
+ *             per-message nonce, handled by yourself, and the second one
+ *             updated by this function internally.
+ *
+ *             For example, you might reserve the first \c 12 Bytes for the
+ *             per-message nonce, and the last \c 4 Bytes for internal use.
+ *             In that case, before calling this function on a new message you
+ *             need to set the first \c 12 Bytes of \p nonce_counter to your
+ *             chosen nonce value, the last four to \c 0, and \p nc_off to \c 0
+ *             (which will cause \p stream_block to be ignored). That way, you
+ *             can encrypt at most \c 2**96 messages of up to \c 2**32 blocks
+ *             each  with the same key.
+ *
+ *             The per-message nonce (or information sufficient to reconstruct
+ *             it) needs to be communicated with the ciphertext and must be
+ *             unique. The recommended way to ensure uniqueness is to use a
+ *             message counter. An alternative is to generate random nonces,
+ *             but this limits the number of messages that can be securely
+ *             encrypted: for example, with 96-bit random nonces, you should
+ *             not encrypt more than 2**32 messages with the same key.
+ *
+ *             Note that for both stategies, sizes are measured in blocks and
+ *             that a CAMELLIA block is \c 16 Bytes.
+ *
+ * \warning    Upon return, \p stream_block contains sensitive data. Its
+ *             content must not be written to insecure storage and should be
+ *             securely discarded as soon as it's no longer needed.
+ *
+ * \param ctx           The CAMELLIA context to use. This must be initialized
+ *                      and bound to a key.
+ * \param length        The length of the input data \p input in Bytes.
+ *                      Any value is allowed.
+ * \param nc_off        The offset in the current \p stream_block (for resuming
+ *                      within current cipher stream). The offset pointer to
+ *                      should be \c 0 at the start of a stream. It is updated
+ *                      at the end of this call.
+ * \param nonce_counter The 128-bit nonce and counter. This must be a read/write
+ *                      buffer of length \c 16 Bytes.
+ * \param stream_block  The saved stream-block for resuming. This must be a
+ *                      read/write buffer of length \c 16 Bytes.
+ * \param input         The input data stream. This must be a readable buffer of
+ *                      size \p length Bytes.
+ * \param output        The output data stream. This must be a writable buffer
+ *                      of size \p length Bytes.
+ *
+ * \return              \c 0 if successful.
+ * \return              A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_camellia_self_test">Func <span>mbedtls_camellia_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_camellia_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ * \return         0 if successful, or 1 if the test failed
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_camellia_context;
+">Typedef <span>
+mbedtls_camellia_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_camellia_context
+{
+   int nr;                    /*!<  number of rounds  */
+   uint32_t rk[68];           /*!<  CAMELLIA round keys    */
+}
+mbedtls_camellia_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          CAMELLIA context structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,766 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ssl.h" class="nav-sub-label">ssl.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_NET_SOCKETS_H" class="nav-sub-label">MBEDTLS_NET_SOCKETS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_SOCKET_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_SOCKET_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_CONNECT_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_CONNECT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_BIND_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_BIND_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_LISTEN_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_LISTEN_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_ACCEPT_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_ACCEPT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_RECV_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_RECV_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_SEND_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_SEND_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_CONN_RESET" class="nav-sub-label">MBEDTLS_ERR_NET_CONN_RESET</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_UNKNOWN_HOST" class="nav-sub-label">MBEDTLS_ERR_NET_UNKNOWN_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_BUFFER_TOO_SMALL" class="nav-sub-label">MBEDTLS_ERR_NET_BUFFER_TOO_SMALL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_INVALID_CONTEXT" class="nav-sub-label">MBEDTLS_ERR_NET_INVALID_CONTEXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_POLL_FAILED" class="nav-sub-label">MBEDTLS_ERR_NET_POLL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_NET_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_NET_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_NET_LISTEN_BACKLOG" class="nav-sub-label">MBEDTLS_NET_LISTEN_BACKLOG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_NET_PROTO_TCP" class="nav-sub-label">MBEDTLS_NET_PROTO_TCP</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_NET_PROTO_UDP" class="nav-sub-label">MBEDTLS_NET_PROTO_UDP</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_NET_POLL_READ" class="nav-sub-label">MBEDTLS_NET_POLL_READ</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_NET_POLL_WRITE" class="nav-sub-label">MBEDTLS_NET_POLL_WRITE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_net_init" class="nav-sub-label">mbedtls_net_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_connect" class="nav-sub-label">mbedtls_net_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_bind" class="nav-sub-label">mbedtls_net_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_accept" class="nav-sub-label">mbedtls_net_accept</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_poll" class="nav-sub-label">mbedtls_net_poll</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_set_block" class="nav-sub-label">mbedtls_net_set_block</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_set_nonblock" class="nav-sub-label">mbedtls_net_set_nonblock</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_usleep" class="nav-sub-label">mbedtls_net_usleep</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_recv" class="nav-sub-label">mbedtls_net_recv</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_send" class="nav-sub-label">mbedtls_net_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_recv_timeout" class="nav-sub-label">mbedtls_net_recv_timeout</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_net_free" class="nav-sub-label">mbedtls_net_free</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_net_context;
+" class="nav-sub-label">
+mbedtls_net_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="ssl.h"><span>ssl.h</span></h4>
+      <pre class="doc-declare"><code>#include "ssl.h"
+</code></pre>
+      <pre class="doc-comment">#include "ssl.h"
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_NET_SOCKETS_H">Marco <span>MBEDTLS_NET_SOCKETS_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NET_SOCKETS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_SOCKET_FAILED">Marco <span>MBEDTLS_ERR_NET_SOCKET_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_SOCKET_FAILED                    -66 /**< Failed to open a socket. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_CONNECT_FAILED">Marco <span>MBEDTLS_ERR_NET_CONNECT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_CONNECT_FAILED                   -68 /**< The connection to the given server / port failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_BIND_FAILED">Marco <span>MBEDTLS_ERR_NET_BIND_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_BIND_FAILED                      -70 /**< Binding of the socket failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_LISTEN_FAILED">Marco <span>MBEDTLS_ERR_NET_LISTEN_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_LISTEN_FAILED                    -72 /**< Could not listen on the socket. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_ACCEPT_FAILED">Marco <span>MBEDTLS_ERR_NET_ACCEPT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_ACCEPT_FAILED                    -4A /**< Could not accept the incoming connection. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_RECV_FAILED">Marco <span>MBEDTLS_ERR_NET_RECV_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_RECV_FAILED                      -4C /**< Reading information from the socket failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_SEND_FAILED">Marco <span>MBEDTLS_ERR_NET_SEND_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_SEND_FAILED                      -4E /**< Sending information through the socket failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_CONN_RESET">Marco <span>MBEDTLS_ERR_NET_CONN_RESET</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_CONN_RESET                       -80 /**< Connection was reset by peer. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_UNKNOWN_HOST">Marco <span>MBEDTLS_ERR_NET_UNKNOWN_HOST</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_UNKNOWN_HOST                     -82 /**< Failed to get an IP address for the given hostname. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_BUFFER_TOO_SMALL">Marco <span>MBEDTLS_ERR_NET_BUFFER_TOO_SMALL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_BUFFER_TOO_SMALL                 -67 /**< Buffer is too small to hold the data. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_INVALID_CONTEXT">Marco <span>MBEDTLS_ERR_NET_INVALID_CONTEXT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_INVALID_CONTEXT                  -69 /**< The context is invalid, eg because it was free()ed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_POLL_FAILED">Marco <span>MBEDTLS_ERR_NET_POLL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_POLL_FAILED                      -71 /**< Polling the net context failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_NET_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_NET_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_NET_BAD_INPUT_DATA                   -73 /**< Input invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_NET_LISTEN_BACKLOG">Marco <span>MBEDTLS_NET_LISTEN_BACKLOG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NET_LISTEN_BACKLOG        10 /**< The backlog that listen() should use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_NET_PROTO_TCP">Marco <span>MBEDTLS_NET_PROTO_TCP</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NET_PROTO_TCP 0 /**< The TCP transport protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_NET_PROTO_UDP">Marco <span>MBEDTLS_NET_PROTO_UDP</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NET_PROTO_UDP 1 /**< The UDP transport protocol */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_NET_POLL_READ">Marco <span>MBEDTLS_NET_POLL_READ</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NET_POLL_READ 1 /**< Used in \c mbedtls_net_poll to check for pending data  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_NET_POLL_WRITE">Marco <span>MBEDTLS_NET_POLL_WRITE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_NET_POLL_WRITE 2 /**< Used in \c mbedtls_net_poll to check if write possible */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_net_init">Func <span>mbedtls_net_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_net_init( mbedtls_net_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize a context
+ *                 Just makes the context ready to be used or freed safely.
+ *
+ * \param ctx      Context to initialize
+ */</pre>
+
+      <h4 id="mbedtls_net_connect">Func <span>mbedtls_net_connect</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host, const char *port, int proto );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initiate a connection with host:port in the given protocol
+ *
+ * \param ctx      Socket to use
+ * \param host     Host to connect to
+ * \param port     Port to connect to
+ * \param proto    Protocol: MBEDTLS_NET_PROTO_TCP or MBEDTLS_NET_PROTO_UDP
+ *
+ * \return         0 if successful, or one of:
+ *                      MBEDTLS_ERR_NET_SOCKET_FAILED,
+ *                      MBEDTLS_ERR_NET_UNKNOWN_HOST,
+ *                      MBEDTLS_ERR_NET_CONNECT_FAILED
+ *
+ * \note           Sets the socket in connected mode even with UDP.
+ */</pre>
+
+      <h4 id="mbedtls_net_bind">Func <span>mbedtls_net_bind</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_bind( mbedtls_net_context *ctx, const char *bind_ip, const char *port, int proto );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Create a receiving socket on bind_ip:port in the chosen
+ *                 protocol. If bind_ip == NULL, all interfaces are bound.
+ *
+ * \param ctx      Socket to use
+ * \param bind_ip  IP to bind to, can be NULL
+ * \param port     Port number to use
+ * \param proto    Protocol: MBEDTLS_NET_PROTO_TCP or MBEDTLS_NET_PROTO_UDP
+ *
+ * \return         0 if successful, or one of:
+ *                      MBEDTLS_ERR_NET_SOCKET_FAILED,
+ *                      MBEDTLS_ERR_NET_BIND_FAILED,
+ *                      MBEDTLS_ERR_NET_LISTEN_FAILED
+ *
+ * \note           Regardless of the protocol, opens the sockets and binds it.
+ *                 In addition, make the socket listening if protocol is TCP.
+ */</pre>
+
+      <h4 id="mbedtls_net_accept">Func <span>mbedtls_net_accept</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_accept( mbedtls_net_context *bind_ctx,
+                       mbedtls_net_context *client_ctx,
+                       void *client_ip, size_t buf_size, size_t *ip_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Accept a connection from a remote client
+ *
+ * \param bind_ctx  Relevant socket
+ * \param client_ctx Will contain the connected client socket
+ * \param client_ip Will contain the client IP address, can be NULL
+ * \param buf_size  Size of the client_ip buffer
+ * \param ip_len    Will receive the size of the client IP written,
+ *                  can be NULL if client_ip is null
+ *
+ * \return          0 if successful, or
+ *                  MBEDTLS_ERR_NET_ACCEPT_FAILED, or
+ *                  MBEDTLS_ERR_NET_BUFFER_TOO_SMALL if buf_size is too small,
+ *                  MBEDTLS_ERR_SSL_WANT_READ if bind_fd was set to
+ *                  non-blocking and accept() would block.
+ */</pre>
+
+      <h4 id="mbedtls_net_poll">Func <span>mbedtls_net_poll</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_poll( mbedtls_net_context *ctx, uint32_t rw, uint32_t timeout );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Check and wait for the context to be ready for read/write
+ *
+ * \param ctx      Socket to check
+ * \param rw       Bitflag composed of MBEDTLS_NET_POLL_READ and
+ *                 MBEDTLS_NET_POLL_WRITE specifying the events
+ *                 to wait for:
+ *                 - If MBEDTLS_NET_POLL_READ is set, the function
+ *                   will return as soon as the net context is available
+ *                   for reading.
+ *                 - If MBEDTLS_NET_POLL_WRITE is set, the function
+ *                   will return as soon as the net context is available
+ *                   for writing.
+ * \param timeout  Maximal amount of time to wait before returning,
+ *                 in milliseconds. If \c timeout is zero, the
+ *                 function returns immediately. If \c timeout is
+ *                 -1u, the function blocks potentially indefinitely.
+ *
+ * \return         Bitmask composed of MBEDTLS_NET_POLL_READ/WRITE
+ *                 on success or timeout, or a negative return code otherwise.
+ */</pre>
+
+      <h4 id="mbedtls_net_set_block">Func <span>mbedtls_net_set_block</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_set_block( mbedtls_net_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Set the socket blocking
+ *
+ * \param ctx      Socket to set
+ *
+ * \return         0 if successful, or a non-zero error code
+ */</pre>
+
+      <h4 id="mbedtls_net_set_nonblock">Func <span>mbedtls_net_set_nonblock</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_set_nonblock( mbedtls_net_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Set the socket non-blocking
+ *
+ * \param ctx      Socket to set
+ *
+ * \return         0 if successful, or a non-zero error code
+ */</pre>
+
+      <h4 id="mbedtls_net_usleep">Func <span>mbedtls_net_usleep</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_net_usleep( unsigned long usec );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Portable usleep helper
+ *
+ * \param usec     Amount of microseconds to sleep
+ *
+ * \note           Real amount of time slept will not be less than
+ *                 select()'s timeout granularity (typically, 10ms).
+ */</pre>
+
+      <h4 id="mbedtls_net_recv">Func <span>mbedtls_net_recv</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Read at most 'len' characters. If no error occurs,
+ *                 the actual amount read is returned.
+ *
+ * \param ctx      Socket
+ * \param buf      The buffer to write to
+ * \param len      Maximum length of the buffer
+ *
+ * \return         the number of bytes received,
+ *                 or a non-zero error code; with a non-blocking socket,
+ *                 MBEDTLS_ERR_SSL_WANT_READ indicates read() would block.
+ */</pre>
+
+      <h4 id="mbedtls_net_send">Func <span>mbedtls_net_send</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Write at most 'len' characters. If no error occurs,
+ *                 the actual amount read is returned.
+ *
+ * \param ctx      Socket
+ * \param buf      The buffer to read from
+ * \param len      The length of the buffer
+ *
+ * \return         the number of bytes sent,
+ *                 or a non-zero error code; with a non-blocking socket,
+ *                 MBEDTLS_ERR_SSL_WANT_WRITE indicates write() would block.
+ */</pre>
+
+      <h4 id="mbedtls_net_recv_timeout">Func <span>mbedtls_net_recv_timeout</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_net_recv_timeout( void *ctx, unsigned char *buf, size_t len,
+                     uint32_t timeout );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Read at most 'len' characters, blocking for at most
+ *                 'timeout' seconds. If no error occurs, the actual amount
+ *                 read is returned.
+ *
+ * \param ctx      Socket
+ * \param buf      The buffer to write to
+ * \param len      Maximum length of the buffer
+ * \param timeout  Maximum number of milliseconds to wait for data
+ *                 0 means no timeout (wait forever)
+ *
+ * \return         the number of bytes received,
+ *                 or a non-zero error code:
+ *                 MBEDTLS_ERR_SSL_TIMEOUT if the operation timed out,
+ *                 MBEDTLS_ERR_SSL_WANT_READ if interrupted by a signal.
+ *
+ * \note           This function will block (until data becomes available or
+ *                 timeout is reached) even if the socket is set to
+ *                 non-blocking. Handling timeouts with non-blocking reads
+ *                 requires a different strategy.
+ */</pre>
+
+      <h4 id="mbedtls_net_free">Func <span>mbedtls_net_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_net_free( mbedtls_net_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Gracefully shutdown the connection and free associated data
+ *
+ * \param ctx      The context to free
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_net_context;
+">Typedef <span>
+mbedtls_net_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_net_context
+{
+   int fd;            /**< The underlying file descriptor                 */
+}
+mbedtls_net_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Wrapper type for sockets.
+ *
+ * Currently backed by just a file descriptor, but might be more in the future
+ * (eg two file descriptors for combined IPv4 + IPv6 support, or additional
+ * structures for hand-made UDP demultiplexing).
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -24,7 +24,7 @@ OPERATE_RET tuya_ffs_adapter_encode_base64(const tuya_ffs_stream_t *data_stream,
 
 OPERATE_RET tuya_ffs_adapter_encode_base85(const tuya_ffs_stream_t *data_stream, tuya_ffs_stream_t *base85_stream);
 
-OPERATE_RET tuya_ffs_adapter_connect_ap(const CHAR_T *ssid, const CHAR_T *passwd, UINT_T timeout_sec);
+OPERATE_RET tuya_ffs_adapter_connect_ap(tuya_ffs_info_t *ffs_info,const CHAR_T *ssid, const CHAR_T *passwd, UINT_T timeout_sec);
 
 OPERATE_RET tuya_ffs_adapter_scan_ssid(const CHAR_T *ssid);
 

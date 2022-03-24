@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_TIME_QUEUE_H" class="nav-sub-label">_UNI_TIME_QUEUE_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#CreateTimerQueAndInit" class="nav-sub-label">CreateTimerQueAndInit</a>
+              </li>
+      
+
+              <li>
+                <a href="#AddTimerToQueue" class="nav-sub-label">AddTimerToQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#DeleteTimerFromQueue" class="nav-sub-label">DeleteTimerFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#StartTimerFromQueue" class="nav-sub-label">StartTimerFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#TriggerTimerFromQueue" class="nav-sub-label">TriggerTimerFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#StopTimerFromQueue" class="nav-sub-label">StopTimerFromQueue</a>
+              </li>
+      
+
+              <li>
+                <a href="#DispatchTimerFromQuene" class="nav-sub-label">DispatchTimerFromQuene</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetTimerNodeNum" class="nav-sub-label">GetTimerNodeNum</a>
+              </li>
+      
+
+              <li>
+                <a href="#ReleaseTimerQue" class="nav-sub-label">ReleaseTimerQue</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetIdleTimerIdRapid" class="nav-sub-label">GetIdleTimerIdRapid</a>
+              </li>
+      
+
+              <li>
+                <a href="#IsThisTimerRun" class="nav-sub-label">IsThisTimerRun</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TIMER_QUE_HANDLE" class="nav-sub-label">TIMER_QUE_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIMER_ID" class="nav-sub-label">TIMER_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#P_TIMER_FUNC" class="nav-sub-label">P_TIMER_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIMER_TYPE;
+" class="nav-sub-label">TIMER_TYPE;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_TIME_QUEUE_H">Marco <span>_UNI_TIME_QUEUE_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_TIME_QUEUE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="CreateTimerQueAndInit">Func <span>CreateTimerQueAndInit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET CreateTimerQueAndInit(OUT TIMER_QUE_HANDLE *pTimerQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create and init the system timer queue
+ *
+ * @param[in] pTimerQueHandle: the handle of the timer queue
+ *
+ * @note This API is used for initializing the system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="AddTimerToQueue">Func <span>AddTimerToQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET AddTimerToQueue(IN CONST TIMER_QUE_HANDLE timerQueHandle,\
+                                 IN CONST TIME_MS timeCycle,\
+                                 IN CONST P_TIMER_FUNC pTimerFunc,\
+                                 OUT TIMER_ID *timerID,\
+                                 IN CONST PVOID_T pTimerArg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Add timer to queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[in] timeCycle: cycle of the timer
+ * @param[in] pTimerFunc: processing function of the timer
+ * @param[out] timerID: timer id
+ * @param[in] pTimerArg: the parameter of the timer's processing function
+ *
+ * @note This API is used for adding a timer to the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="DeleteTimerFromQueue">Func <span>DeleteTimerFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET DeleteTimerFromQueue(IN CONST TIMER_QUE_HANDLE timerQueHandle, IN CONST TIMER_ID timerID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Delete timer from queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used for deleting a timer from the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="StartTimerFromQueue">Func <span>StartTimerFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET StartTimerFromQueue(IN CONST TIMER_QUE_HANDLE timerQueHandle,\
+                                       IN CONST TIMER_ID timerID,\
+                                       IN CONST TIME_MS timeCycle,\
+                                       IN CONST TIMER_TYPE timer_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start the timer in the queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[in] timerID: timer id
+ * @param[in] timeCycle: cycle of the timer
+ * @param[in] timer_type: type of the timer
+ *
+ * @note This API is used for starting the timer in the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="TriggerTimerFromQueue">Func <span>TriggerTimerFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET TriggerTimerFromQueue(IN CONST TIMER_QUE_HANDLE timerQueHandle, IN CONST TIMER_ID timerID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Trigger the timer in the queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used for triggering the timer in the queue instantly.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="StopTimerFromQueue">Func <span>StopTimerFromQueue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET StopTimerFromQueue(IN CONST TIMER_QUE_HANDLE timerQueHandle, IN CONST TIMER_ID timerID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Stop the timer in the queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used for stopping the timer in the queue.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="DispatchTimerFromQuene">Func <span>DispatchTimerFromQuene</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET DispatchTimerFromQuene(IN CONST TIMER_QUE_HANDLE timerQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Dispatch all timers in the queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ *
+ * @note This API is used for dispatching all timers in the queue.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GetTimerNodeNum">Func <span>GetTimerNodeNum</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET GetTimerNodeNum(IN CONST TIMER_QUE_HANDLE timerQueHandle, OUT PINT_T pTimerNodeNum);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get the timer node count of the queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[out] pTimerNodeNum: the timer node count of the queue
+ *
+ * @note This API is used for getting the timer node count of the queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ReleaseTimerQue">Func <span>ReleaseTimerQue</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ReleaseTimerQue(IN CONST TIMER_QUE_HANDLE timerQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Release the timer queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ *
+ * @note This API is used for releasing all resouce of the timer queue
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GetIdleTimerIdRapid">Func <span>GetIdleTimerIdRapid</span></h4>
+      <pre class="doc-declare"><code>TIMER_ID GetIdleTimerIdRapid(IN CONST TIMER_QUE_HANDLE timerQueHandle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get an idle timer of the queue
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ *
+ * @note This API is used for getting an idle timer of the queue
+ *
+ * @return the timer id
+ */</pre>
+
+      <h4 id="IsThisTimerRun">Func <span>IsThisTimerRun</span></h4>
+      <pre class="doc-declare"><code>BOOL_T IsThisTimerRun(IN CONST TIMER_QUE_HANDLE timerQueHandle, IN CONST TIMER_ID timer_id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Identify the timer is running
+ *
+ * @param[in] timerQueHandle: the handle of the timer queue
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used to identify wheather the timer is running
+ *
+ * @return TRUE or FALSE
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TIMER_QUE_HANDLE">Typedef <span>TIMER_QUE_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T TIMER_QUE_HANDLE; 
+</code></pre>
+      <pre class="doc-comment">//the handle of the timer queue</pre>
+
+      <h4 id="TIMER_ID">Typedef <span>TIMER_ID</span></h4>
+      <pre class="doc-declare"><code>typedef WORD_T TIMER_ID; // 定时器ID
+</code></pre>
+      <pre class="doc-comment">//timer id</pre>
+
+      <h4 id="P_TIMER_FUNC">Typedef <span>P_TIMER_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (* P_TIMER_FUNC)(UINT_T timerID,PVOID_T pTimerArg);
+</code></pre>
+      <pre class="doc-comment">//the timer's processing function</pre>
+
+      <h4 id="TIMER_TYPE;
+">Typedef <span>TIMER_TYPE;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TIMER_ONCE = 0,
+   TIMER_CYCLE,
+}TIMER_TYPE;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief the type of timer
+ */</pre>
+    </div>
+  </body>
+</html>
+            

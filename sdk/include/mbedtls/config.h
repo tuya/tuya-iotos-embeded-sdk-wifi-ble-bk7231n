@@ -40,7 +40,12 @@
 #endif
 
 #if defined(TLS_MODE) && (TLS_MODE==TLS_TUYA_ECC_PSK)
+#if defined(TUYA_CAT1) && (TUYA_CAT1==1)
+#define unix
+#include "tuya_tls_config_ecc_psk_cat1.h"
+#else
 #include "tuya_tls_config_ecc_psk.h"
+#endif
 #endif
 
 #if defined(TLS_MODE) && (TLS_MODE==TLS_TUYA_ECC_ONLY)
@@ -48,6 +53,8 @@
 #include "tuya_tls_config_ecc_only_ipc.h"
 #elif defined(ENABLE_NXP_SE050) && (ENABLE_NXP_SE050==1)
 #include "tuya_tls_config_ecc_only_nxp_se050.h"
+#elif defined(ENABLE_HOMEKIT_ADK) && (ENABLE_HOMEKIT_ADK==1)
+#include "tuya_tls_config_ecc_only_homekit.h"
 #else
 #include "tuya_tls_config_ecc_only.h"
 #endif

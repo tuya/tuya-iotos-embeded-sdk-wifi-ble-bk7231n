@@ -37,8 +37,7 @@
 *  Return: OPERATE_RET
 ***********************************************************/
 __TLINK_BC_MODULE_EXT \
-OPERATE_RET tlk_bc_init(IN CONST LOCK_CHAN_CALLBACK lc_cb,IN CONST FN_NETCFG_CB ncf_cb,IN CONST int netcfg_type);//,\
-                             //IN CONST BYTE_T scan_ap_num);
+OPERATE_RET tlk_bc_init(IN CONST LOCK_CHAN_CALLBACK lc_cb,IN CONST FN_NETCFG_CB ncf_cb,IN CONST int netcfg_type);
 
 /***********************************************************
 *  Function: tlk_bc_parse

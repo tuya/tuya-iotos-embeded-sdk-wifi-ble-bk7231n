@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_config.h" class="nav-sub-label">tuya_iot_config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_base_utilities.h" class="nav-sub-label">tuya_base_utilities.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#base_event_info.h" class="nav-sub-label">base_event_info.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__BASE_EVENT_H__" class="nav-sub-label">__BASE_EVENT_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_NAME_MAX_LEN" class="nav-sub-label">EVENT_NAME_MAX_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_DESC_MAX_LEN" class="nav-sub-label">EVENT_DESC_MAX_LEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ty_event_init" class="nav-sub-label">ty_event_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_publish_event" class="nav-sub-label">ty_publish_event</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_subscribe_event" class="nav-sub-label">ty_subscribe_event</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_unsubscribe_event" class="nav-sub-label">ty_unsubscribe_event</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#SUBSCRIBE_TYPE_E" class="nav-sub-label">SUBSCRIBE_TYPE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#event_raw_data_t;
+" class="nav-sub-label">event_raw_data_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#event_subscribe_cb" class="nav-sub-label">event_subscribe_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#subscribe_node_t;
+" class="nav-sub-label">subscribe_node_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#event_node_t;
+" class="nav-sub-label">event_node_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#event_manage_t;
+" class="nav-sub-label">event_manage_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_iot_config.h"><span>tuya_iot_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_config.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="tuya_base_utilities.h"><span>tuya_base_utilities.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_base_utilities.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_base_utilities.h"
+</pre>
+
+      <h4 id="base_event_info.h"><span>base_event_info.h</span></h4>
+      <pre class="doc-declare"><code>#include "base_event_info.h"
+</code></pre>
+      <pre class="doc-comment">#include "base_event_info.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__BASE_EVENT_H__">Marco <span>__BASE_EVENT_H__</span></h4>
+      <pre class="doc-declare"><code>#define __BASE_EVENT_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_NAME_MAX_LEN">Marco <span>EVENT_NAME_MAX_LEN</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_NAME_MAX_LEN (16) // move to tuya_iot_config.h. use kconfig config. default is 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_DESC_MAX_LEN">Marco <span>EVENT_DESC_MAX_LEN</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_DESC_MAX_LEN (32)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief max length of event description
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ty_event_init">Func <span>ty_event_init</span></h4>
+      <pre class="doc-declare"><code>int ty_event_init(void);</code></pre>
+      <pre class="doc-comment">/** 
+ * @brief event initialization
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ty_publish_event">Func <span>ty_publish_event</span></h4>
+      <pre class="doc-declare"><code>int ty_publish_event(const char* name, void *data);</code></pre>
+      <pre class="doc-comment">/** 
+ * @brief: publish event
+ *
+ * @param[in] name: event name
+ * @param[in] data: event data
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ */</pre>
+
+      <h4 id="ty_subscribe_event">Func <span>ty_subscribe_event</span></h4>
+      <pre class="doc-declare"><code>int ty_subscribe_event(const char *name, const char *desc, const event_subscribe_cb cb, SUBSCRIBE_TYPE_E type);</code></pre>
+      <pre class="doc-comment">/** 
+ * @brief: subscribe event
+ *
+ * @param[in] name: event name
+ * @param[in] desc: subscribe description
+ * @param[in] cb: subscribe callback function
+ * @param[in] type: subscribe type
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ */</pre>
+
+      <h4 id="ty_unsubscribe_event">Func <span>ty_unsubscribe_event</span></h4>
+      <pre class="doc-declare"><code>int ty_unsubscribe_event(const char *name, const char *desc, event_subscribe_cb cb);</code></pre>
+      <pre class="doc-comment">/** 
+ * @brief: unsubscribe event
+ *
+ * @param[in] name: event name
+ * @param[in] desc: subscribe description
+ * @param[in] cb: subscribe callback function
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="SUBSCRIBE_TYPE_E">Typedef <span>SUBSCRIBE_TYPE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T SUBSCRIBE_TYPE_E;
+#define SUBSCRIBE_TYPE_NORMAL   0 // normal type, dispatch by the subscribe order, remove when unsubscribe
+#define SUBSCRIBE_TYPE_EMERGENCY 1 // emergency type, dispatch first, remove when unsubscribe
+#define SUBSCRIBE_TYPE_ONETIME  2 // one time type, dispatch by the subscribe order, remove after first time dispath
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief subscriber type
+ * 
+ */</pre>
+
+      <h4 id="event_raw_data_t;
+">Typedef <span>event_raw_data_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int type;          // the data type
+   int len;           // the data length
+   char value[0];     // the data content
+}event_raw_data_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief the event dispatch raw data
+ * 
+ */</pre>
+
+      <h4 id="event_subscribe_cb">Typedef <span>event_subscribe_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*event_subscribe_cb)(void *data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief event subscribe callback function type
+ * 
+ */</pre>
+
+      <h4 id="subscribe_node_t;
+">Typedef <span>subscribe_node_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   char name[EVENT_NAME_MAX_LEN+1];   // name, used to record the the event info
+   char desc[EVENT_DESC_MAX_LEN+1];   // description, used to record the subscribe info
+   SUBSCRIBE_TYPE_E type;             // the subscribe type
+   event_subscribe_cb cb;             // the subscribe callback function
+   struct tuya_list_head node;        // list node, used to attch to the event node
+}subscribe_node_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief the subscirbe node
+ * 
+ */</pre>
+
+      <h4 id="event_node_t;
+">Typedef <span>event_node_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   MUTEX_HANDLE mutex;                        // mutex, protection the event publish and subscribe	
+
+   char name[EVENT_NAME_MAX_LEN+1];           // name, the event name  
+   struct tuya_list_head node;                // list node, used to attach to the event manage module
+   struct tuya_list_head subscribe_root;      // subscibe root, used to manage the subscriber    
+}event_node_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief the event node
+ * 
+ */</pre>
+
+      <h4 id="event_manage_t;
+">Typedef <span>event_manage_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int inited;
+   MUTEX_HANDLE mutex;                            // mutex, used to protection event manage node
+   int event_cnt;                                 // current event number
+   struct tuya_list_head event_root;              // event root, used to manage the event
+   struct tuya_list_head free_subscribe_root;     // free subscriber list, used to manage the subscribe which not found the event
+}event_manage_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief the event manage node
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

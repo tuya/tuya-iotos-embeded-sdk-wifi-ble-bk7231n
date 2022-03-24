@@ -1,0 +1,1312 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_IOT_COM_API_H" class="nav-sub-label">__TUYA_IOT_COM_API_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_init(fs_storge_path)" class="nav-sub-label">tuya_iot_init(fs_storge_path)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_kv_flash_init" class="nav-sub-label">tuya_iot_kv_flash_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upgrade_gw(fw, get_file_cb, upgrd_nofity_cb, pri_data)" class="nav-sub-label">tuya_iot_upgrade_gw(fw, get_file_cb, upgrd_nofity_cb, pri_data)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upgrade_dev(devid, fw, get_file_cb, upgrd_nofity_cb, pri_data)" class="nav-sub-label">tuya_iot_upgrade_dev(devid, fw, get_file_cb, upgrd_nofity_cb, pri_data)</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_raw_sync(dev_id, dpid, data, len, timeout)" class="nav-sub-label">dev_report_dp_raw_sync(dev_id, dpid, data, len, timeout)</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_raw_sync_with_time(dev_id, dpid, data, len, timeout, time_str)" class="nav-sub-label">dev_report_dp_raw_sync_with_time(dev_id, dpid, data, len, timeout, time_str)</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_stat_sync(dev_id, dp_data, cnt, timeout)" class="nav-sub-label">dev_report_dp_stat_sync(dev_id, dp_data, cnt, timeout)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upload_layout_buffer(map_id, buffer, len)" class="nav-sub-label">tuya_iot_upload_layout_buffer(map_id, buffer, len)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upload_route_buffer(map_id, buffer, len)" class="nav-sub-label">tuya_iot_upload_route_buffer(map_id, buffer, len)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upload_layout_file(map_id, local_file_name)" class="nav-sub-label">tuya_iot_upload_layout_file(map_id, local_file_name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upload_route_file(map_id, local_file_name)" class="nav-sub-label">tuya_iot_upload_route_file(map_id, local_file_name)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_get_sdk_info" class="nav-sub-label">tuya_iot_get_sdk_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_os_adapt_info" class="nav-sub-label">tuya_iot_get_os_adapt_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_init_params" class="nav-sub-label">tuya_iot_init_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_kv_flash_init_param" class="nav-sub-label">tuya_iot_kv_flash_init_param</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_oem_set" class="nav-sub-label">tuya_iot_oem_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_udf_parameter" class="nav-sub-label">tuya_iot_set_udf_parameter</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upload_rst_log_set" class="nav-sub-label">tuya_iot_upload_rst_log_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_ignore_upgrade_set" class="nav-sub-label">tuya_iot_ignore_upgrade_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_mqtt_disconnect" class="nav-sub-label">tuya_iot_mqtt_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_mqtt_restart" class="nav-sub-label">tuya_iot_mqtt_restart</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upgrade_gw_notify" class="nav-sub-label">tuya_iot_upgrade_gw_notify</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_refuse_upgrade" class="nav-sub-label">tuya_iot_refuse_upgrade</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_reset_upgrade_detect_timer" class="nav-sub-label">tuya_iot_reset_upgrade_detect_timer</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upgrade_dev_notify" class="nav-sub-label">tuya_iot_upgrade_dev_notify</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dev_upgd_progress_rept" class="nav-sub-label">tuya_iot_dev_upgd_progress_rept</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dev_upgd_result_report" class="nav-sub-label">tuya_iot_dev_upgd_result_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_regist_dp_rept_cb" class="nav-sub-label">tuya_iot_regist_dp_rept_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_json_async" class="nav-sub-label">dev_report_dp_json_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_json_async_force" class="nav-sub-label">dev_report_dp_json_async_force</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_query_dp_json_async" class="nav-sub-label">dev_query_dp_json_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_query_dp_json_async_force" class="nav-sub-label">dev_query_dp_json_async_force</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_raw_sync_extend" class="nav-sub-label">dev_report_dp_raw_sync_extend</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_raw_sync_extend_with_time" class="nav-sub-label">dev_report_dp_raw_sync_extend_with_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_report_dp_stat_sync_extend" class="nav-sub-label">dev_report_dp_stat_sync_extend</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_wakeup_data" class="nav-sub-label">tuya_iot_get_wakeup_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_heartbeat_data" class="nav-sub-label">tuya_iot_get_heartbeat_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_heartbeat_interval" class="nav-sub-label">tuya_iot_get_heartbeat_interval</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_book_wakeup_topic" class="nav-sub-label">tuya_iot_book_wakeup_topic</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_mqtt_socket_fd" class="nav-sub-label">tuya_iot_get_mqtt_socket_fd</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_send_custom_mqtt_msg" class="nav-sub-label">tuya_iot_send_custom_mqtt_msg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_upload_incre_data" class="nav-sub-label">tuya_iot_upload_incre_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_media_data_report" class="nav-sub-label">tuya_iot_media_data_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_media_data_report_v2" class="nav-sub-label">tuya_iot_media_data_report_v2</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_map_cleaner_upload_buffer" class="nav-sub-label">tuya_iot_map_cleaner_upload_buffer</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_map_cleaner_upload_file" class="nav-sub-label">tuya_iot_map_cleaner_upload_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_map_record_upload_buffer" class="nav-sub-label">tuya_iot_map_record_upload_buffer</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_map_record_upload_buffer_with_filename" class="nav-sub-label">tuya_iot_map_record_upload_buffer_with_filename</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_gw_id" class="nav-sub-label">tuya_iot_get_gw_id</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_region_info" class="nav-sub-label">tuya_iot_get_region_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_custom_cfg" class="nav-sub-label">tuya_iot_get_custom_cfg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_release_custom_cfg" class="nav-sub-label">tuya_iot_release_custom_cfg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_location_info" class="nav-sub-label">tuya_iot_get_location_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_log_attr" class="nav-sub-label">tuya_iot_set_log_attr</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_log_bool_time" class="nav-sub-label">tuya_iot_set_log_bool_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_custom_data_report_sync" class="nav-sub-label">tuya_iot_custom_data_report_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_custom_data_report_async" class="nav-sub-label">tuya_iot_custom_data_report_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_active_stat" class="nav-sub-label">tuya_iot_get_active_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_app_cbs_init" class="nav-sub-label">tuya_iot_app_cbs_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_dp_low_power_query" class="nav-sub-label">tuya_iot_dp_low_power_query</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_third_cloud_ca" class="nav-sub-label">tuya_iot_get_third_cloud_ca</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#DP_DESC_IF_S" class="nav-sub-label">DP_DESC_IF_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_VALUE_U" class="nav-sub-label">DP_PROP_VALUE_U</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_IOT_COM_API_H">Marco <span>__TUYA_IOT_COM_API_H</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_IOT_COM_API_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_init(fs_storge_path)">Marco <span>tuya_iot_init(fs_storge_path)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_init(fs_storge_path) \
+   tuya_iot_init_params(fs_storge_path, NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_kv_flash_init">Marco <span>tuya_iot_kv_flash_init</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_kv_flash_init    tuya_iot_kv_flash_init_param
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_upgrade_gw(fw, get_file_cb, upgrd_nofity_cb, pri_data)">Marco <span>tuya_iot_upgrade_gw(fw, get_file_cb, upgrd_nofity_cb, pri_data)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_upgrade_gw(fw, get_file_cb, upgrd_nofity_cb, pri_data) \
+   tuya_iot_upgrade_gw_notify(fw, get_file_cb, upgrd_nofity_cb, pri_data, TRUE, 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_upgrade_dev(devid, fw, get_file_cb, upgrd_nofity_cb, pri_data)">Marco <span>tuya_iot_upgrade_dev(devid, fw, get_file_cb, upgrd_nofity_cb, pri_data)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_upgrade_dev(devid, fw, get_file_cb, upgrd_nofity_cb, pri_data) \
+   tuya_iot_upgrade_dev_notify(devid, fw, get_file_cb, upgrd_nofity_cb, pri_data, TRUE, 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dev_report_dp_raw_sync(dev_id, dpid, data, len, timeout)">Marco <span>dev_report_dp_raw_sync(dev_id, dpid, data, len, timeout)</span></h4>
+      <pre class="doc-declare"><code>#define dev_report_dp_raw_sync(dev_id, dpid, data, len, timeout) \
+   dev_report_dp_raw_sync_extend(dev_id, dpid, data, len, timeout, TRUE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dev_report_dp_raw_sync_with_time(dev_id, dpid, data, len, timeout, time_str)">Marco <span>dev_report_dp_raw_sync_with_time(dev_id, dpid, data, len, timeout, time_str)</span></h4>
+      <pre class="doc-declare"><code>#define dev_report_dp_raw_sync_with_time(dev_id, dpid, data, len, timeout, time_str) \
+   dev_report_dp_raw_sync_extend_with_time(dev_id, dpid, data, len, timeout, TRUE, time_str)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dev_report_dp_stat_sync(dev_id, dp_data, cnt, timeout)">Marco <span>dev_report_dp_stat_sync(dev_id, dp_data, cnt, timeout)</span></h4>
+      <pre class="doc-declare"><code>#define dev_report_dp_stat_sync(dev_id, dp_data, cnt, timeout) \
+   dev_report_dp_stat_sync_extend(dev_id, dp_data, cnt, timeout, TRUE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_upload_layout_buffer(map_id, buffer, len)">Marco <span>tuya_iot_upload_layout_buffer(map_id, buffer, len)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_upload_layout_buffer(map_id, buffer, len) \
+   tuya_iot_map_cleaner_upload_buffer(map_id, buffer, len, "layout/lay.bin", UP_CLEANER_MAP)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_upload_route_buffer(map_id, buffer, len)">Marco <span>tuya_iot_upload_route_buffer(map_id, buffer, len)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_upload_route_buffer(map_id, buffer, len) \
+   tuya_iot_map_cleaner_upload_buffer(map_id, buffer, len, "route/rou.bin", UP_CLEANER_PATH)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_upload_layout_file(map_id, local_file_name)">Marco <span>tuya_iot_upload_layout_file(map_id, local_file_name)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_upload_layout_file(map_id, local_file_name) \
+   tuya_iot_map_cleaner_upload_file(map_id, local_file_name, "layout/lay.bin", UP_CLEANER_MAP)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_upload_route_file(map_id, local_file_name)">Marco <span>tuya_iot_upload_route_file(map_id, local_file_name)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_upload_route_file(map_id, local_file_name) \
+   tuya_iot_map_cleaner_upload_file(map_id, local_file_name, "route/rou.bin", UP_CLEANER_PATH)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_iot_get_sdk_info">Func <span>tuya_iot_get_sdk_info</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *tuya_iot_get_sdk_info(VOID);</code></pre>
+      <pre class="doc-comment">/**
+* @brief tuya_iot_get_sdk_info 
+*
+* @return sdk information
+*/</pre>
+
+      <h4 id="tuya_iot_get_os_adapt_info">Func <span>tuya_iot_get_os_adapt_info</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *tuya_iot_get_os_adapt_info(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_os_adapt_info 
+ *
+ * @return os adapter information
+ */</pre>
+
+      <h4 id="tuya_iot_init_params">Func <span>tuya_iot_init_params</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_init_params(IN CONST CHAR_T *fs_storge_path, IN CONST TY_INIT_PARAMS_S *p_param);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_init_params 
+ * @desc init tuya_iot_sdk
+ *
+ * @param[in] fs_storge_path: filesystem read write storge path
+ *            (if os have no fs,then fs_storge_path is invalid)
+ * @param[in] p_param: custom init params
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_kv_flash_init_param">Func <span>tuya_iot_kv_flash_init_param</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_kv_flash_init_param(IN CONST CHAR_T *fs_storge_path);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_kv_flash_init_param 
+ * @desc init kv flash
+ *
+ * @param[in] fs_storge_path: filesystem read write storge path
+ *            (if os have no fs,then fs_storge_path is invalid)
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_oem_set">Func <span>tuya_iot_oem_set</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_oem_set(IN CONST BOOL_T oem);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_oem_set 
+ * @desc set oem mode
+ *
+ * @param[in] oem
+ *
+ * @return none
+ */</pre>
+
+      <h4 id="tuya_iot_set_udf_parameter">Func <span>tuya_iot_set_udf_parameter</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_udf_parameter(IN CONST CHAR_T *udf);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_udf_parameter 
+ * @desc set user defined funtions
+ *
+ * @param[in] udf: user defined funtions(json), max length: 255
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note call before init
+ */</pre>
+
+      <h4 id="tuya_iot_upload_rst_log_set">Func <span>tuya_iot_upload_rst_log_set</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_upload_rst_log_set(IN CONST BOOL_T upload);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_upload_rst_log_set 
+ * @desc set rst log upload mode
+ *
+ * @param[in] upload
+ *
+ * @return none
+ *
+ * @note must call first
+ */</pre>
+
+      <h4 id="tuya_iot_ignore_upgrade_set">Func <span>tuya_iot_ignore_upgrade_set</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_ignore_upgrade_set(IN CONST BOOL_T ignore);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_ignore_upgrade_set 
+ * @desc set rst log upload mode
+ *
+ * @param[in] ignore
+ *
+ * @return none
+ *
+ * @note must call first
+ */</pre>
+
+      <h4 id="tuya_iot_mqtt_disconnect">Func <span>tuya_iot_mqtt_disconnect</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_mqtt_disconnect(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_mqtt_disconnect 
+ * @desc force disconnect MQTT 
+ *
+ * @return none
+ *
+ * @note must call first
+ */</pre>
+
+      <h4 id="tuya_iot_mqtt_restart">Func <span>tuya_iot_mqtt_restart</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_mqtt_restart(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_mqtt_restart 
+ * @desc restart MQTT 
+ *
+ * @return 
+ *
+ * @note must call first
+ */</pre>
+
+      <h4 id="tuya_iot_upgrade_gw_notify">Func <span>tuya_iot_upgrade_gw_notify</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_upgrade_gw_notify(IN CONST FW_UG_S *fw,
+                                      IN CONST GET_FILE_DATA_CB get_file_cb,\
+                                      IN CONST UPGRADE_NOTIFY_CB upgrd_nofity_cb,\
+                                      IN CONST PVOID_T pri_data,\
+                                      BOOL_T notify, UINT_T download_buf_size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_upgrade_gw_notify 
+ * @desc upgrage gateway firmware
+ *
+ * @param[in] fw: firmware info
+ * @param[in] get_file_cb: download content storage callback
+ * @param[in] upgrd_nofity_cb: firmware download finish callback
+ * @param[in] pri_data: private param of get_file_cb && upgrd_nofity_cb
+ * @param[in] notify: notify app the upgrade status
+ * @param[in] download_buf_size: max download buffer size when downloading
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_refuse_upgrade">Func <span>tuya_iot_refuse_upgrade</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_refuse_upgrade(IN CONST FW_UG_S *fw, IN CONST CHAR_T *dev_id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_refuse_upgrade 
+ *
+ * @param[in] fw
+ * @param[in] dev_id
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_reset_upgrade_detect_timer">Func <span>tuya_iot_reset_upgrade_detect_timer</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_reset_upgrade_detect_timer(IN CONST INT_T time_ms);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_reset_upgrade_detect_timer 
+ * @desc reset the upgrade detect time
+ *
+ * @param[in] time_ms: the time you want start the detect 
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_upgrade_dev_notify">Func <span>tuya_iot_upgrade_dev_notify</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_upgrade_dev_notify(IN CONST CHAR_T *devid,
+                                       IN CONST FW_UG_S *fw, \
+                                       IN CONST GET_FILE_DATA_CB get_file_cb,\
+                                       IN CONST UPGRADE_NOTIFY_CB upgrd_nofity_cb,\
+                                       IN CONST PVOID_T pri_data,\
+                                       BOOL_T notify, UINT_T download_buf_size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_upgrade_dev_notify 
+ * @desc upgrage sub-device/soc/mcu firmware
+ *
+ * @param[in] devid: if upgrade sub-device, then devid = sub-device_id
+ *                   if upgrade soc/mcu, then devid = NULL
+ * @param[in] fw: firmware info
+ * @param[in] get_file_cb: download content storage callback
+ * @param[in] upgrd_nofity_cb: firmware download finish callback
+ * @param[in] pri_data: private param of get_file_cb && upgrd_nofity_cb
+ * @param[in] notify
+ * @param[in] download_buf_size
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_dev_upgd_progress_rept">Func <span>tuya_iot_dev_upgd_progress_rept</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_upgd_progress_rept(IN CONST UINT_T percent, IN CONST CHAR_T *devid, IN CONST DEV_TYPE_T tp);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_dev_upgd_progress_rept 
+ *
+ * @param[in] percent
+ * @param[in] devid
+ * @param[in] tp
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_dev_upgd_result_report">Func <span>tuya_iot_dev_upgd_result_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dev_upgd_result_report(IN CONST CHAR_T *dev_id, IN CONST DEV_TYPE_T type, IN CONST INT_T result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_dev_upgd_result_report 
+ *
+ * @param[in] dev_id
+ * @param[in] type
+ * @param[in] result
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_regist_dp_rept_cb">Func <span>tuya_iot_regist_dp_rept_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_regist_dp_rept_cb(IN DP_REPT_HADLE_CB_S* dp_rept_cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_regist_dp_rept_cb 
+ *
+ * @param[in] dp_rept_cbs
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="dev_report_dp_json_async">Func <span>dev_report_dp_json_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_report_dp_json_async(IN CONST        CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_report_dp_json_async 
+ * @desc report dp info a-synced.
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] dp_data: dp array header
+ * @param[in] cnt: dp array count
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="dev_report_dp_json_async_force">Func <span>dev_report_dp_json_async_force</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_report_dp_json_async_force(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_report_dp_json_async_force 
+ * @desc report dp info a-synced.
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] dp_data: dp array header
+ * @param[in] cnt: dp array count
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="dev_query_dp_json_async">Func <span>dev_query_dp_json_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_query_dp_json_async(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_query_dp_json_async 
+ * @desc report dp info a-synced.
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] dp_data: dp array header
+ * @param[in] cnt: dp array count
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="dev_query_dp_json_async_force">Func <span>dev_query_dp_json_async_force</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_query_dp_json_async_force(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_query_dp_json_async_force 
+ * @desc report dp info a-synced.
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] dp_data: dp array header
+ * @param[in] cnt: dp array count
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="dev_report_dp_raw_sync_extend">Func <span>dev_report_dp_raw_sync_extend</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_report_dp_raw_sync_extend(IN CONST CHAR_T *dev_id,IN CONST BYTE_T dpid,\
+                                                     IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                                     IN CONST UINT_T timeout, IN CONST BOOL_T enable_auto_retrans);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_report_dp_raw_sync_extend 
+ * @desc report dp raw info synced.
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] dpid: raw dp id
+ * @param[in] data: raw data
+ * @param[in] len: len of raw data
+ * @param[in] timeout: function blocks until timeout seconds
+ * @param[in] enable_auto_retrans
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="dev_report_dp_raw_sync_extend_with_time">Func <span>dev_report_dp_raw_sync_extend_with_time</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_report_dp_raw_sync_extend_with_time(IN CONST CHAR_T *dev_id,IN CONST BYTE_T dpid,\
+                                                   IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                                   IN CONST UINT_T timeout, IN CONST BOOL_T enable_auto_retrans,\
+                                                   IN CONST CHAR_T *time_str);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_report_dp_raw_sync_extend_with_time 
+ * @desc report dp raw info synced.
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                if gateway/soc/mcu, then devid = NULL
+ * @param[in] dpid: raw dp id
+ * @param[in] data: raw data
+ * @param[in] len: len of raw data
+ * @param[in] timeout: function blocks until timeout seconds
+ * @param[in] enable_auto_retrans
+ * @param[in] time_str
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="dev_report_dp_stat_sync_extend">Func <span>dev_report_dp_stat_sync_extend</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET dev_report_dp_stat_sync_extend(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,\
+                                   IN CONST UINT_T cnt,IN CONST UINT_T timeout, IN CONST BOOL_T enable_auto_retrans);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dev_report_dp_stat_sync_extend 
+ * @desc: report dp status info synced.
+ *        if time_stamp==0, time_stamp = time of msg arrival of the server
+ *
+ * @param[in] dev_id: if sub-device, then devid = sub-device_id
+ *                    if gateway/soc/mcu, then devid = NULL
+ * @param[in] dp_data: dp status array header
+ * @param[in] cnt: dp status array count
+ * @param[in] timeout: function blocks until timeout seconds
+ * @param[in] enable_auto_retrans
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_get_wakeup_data">Func <span>tuya_iot_get_wakeup_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_get_wakeup_data(INOUT BYTE_T *wakeup_data_arr, INOUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_wakeup_data 
+ * @desc get mqtt wakeup string pattern
+ *
+ * @param[in/out] wakeup_data_arr: wakeup string arr
+ * @param[in/out] p_len: wakeup string len
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_get_heartbeat_data">Func <span>tuya_iot_get_heartbeat_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_get_heartbeat_data(INOUT BYTE_T *heartbeat_data_arr, INOUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_heartbeat_data 
+ * @desc get mqtt heartbeat string pattern
+ *
+ * @param[in/out] heartbeat_data_arr: heartbeat string arr
+ * @param[in/out] p_len: heartbeat string len
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_get_heartbeat_interval">Func <span>tuya_iot_get_heartbeat_interval</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_iot_get_heartbeat_interval(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_heartbeat_interval 
+ * @desc get mqtt heartbeat interval
+ *
+ * @return interval value
+ */</pre>
+
+      <h4 id="tuya_iot_book_wakeup_topic">Func <span>tuya_iot_book_wakeup_topic</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_book_wakeup_topic(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_book_wakeup_topic 
+ * @desc unscribe mqtt msg topic and subscribe wakeup topic
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_get_mqtt_socket_fd">Func <span>tuya_iot_get_mqtt_socket_fd</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_iot_get_mqtt_socket_fd(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_mqtt_socket_fd 
+ * @desc get curr mqtt socket fd
+ *
+ * @return mqtt socket fd
+ */</pre>
+
+      <h4 id="tuya_iot_send_custom_mqtt_msg">Func <span>tuya_iot_send_custom_mqtt_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_send_custom_mqtt_msg(IN CONST UINT_T protocol, IN CONST BYTE_T *p_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_send_custom_mqtt_msg 
+ * @desc send a custom protocol mqtt msg
+ *
+ * @param protocol: mqtt protocol
+ * @param p_data: mqtt msg
+ *
+ * @return OPRT_OK: success  Other: fail
+ */</pre>
+
+      <h4 id="tuya_iot_upload_incre_data">Func <span>tuya_iot_upload_incre_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_upload_incre_data(IN CONST USHORT_T map_id,IN CONST UINT_T offset,IN CONST BYTE_T *pbuffer, IN CONST USHORT_T buf_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_upload_incre_data 
+ *
+ * @param[in] map_id: Each map has an Id
+ * @param[in] offset: Map data offset
+ * @param[in] pbuffer: Map data cache pointer
+ * @param[in] buf_len: Map data cache length
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_media_data_report">Func <span>tuya_iot_media_data_report</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_media_data_report(IN CONST FLOW_BODY_ST *dt_body,IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_media_data_report 
+ *
+ * @param[in] dt_body: media data
+ * @param[in] timeout: need report time
+ *
+ * @return OPERATE_RET
+ *
+ * @warning please dont use tuya_iot_media_data_report and tuya_iot_media_data_report_v2 in one application
+ */</pre>
+
+      <h4 id="tuya_iot_media_data_report_v2">Func <span>tuya_iot_media_data_report_v2</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_media_data_report_v2(IN CONST FLOW_BODY_V2_ST *dt_body,IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_media_data_report_v2 
+ *
+ * @param[in] dt_body: media data version 2
+ * @param[in] timeout: need report time
+ *
+ * @return OPERATE_RET
+ *
+ * @waring please dont use tuya_iot_media_data_report and tuya_iot_media_data_report_v2 in one application
+ */</pre>
+
+      <h4 id="tuya_iot_map_cleaner_upload_buffer">Func <span>tuya_iot_map_cleaner_upload_buffer</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_map_cleaner_upload_buffer(IN CONST INT_T map_id, IN CONST BYTE_T *buffer, IN CONST UINT_T len, \
+                                              IN CONST CHAR_T *cloud_file_name, IN CONST UP_MAP_TYPE_E map_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_map_cleaner_upload_buffer 
+ * @desc sweeper function. upload cleaner map info
+ *
+ * @param[in] map_id
+ * @param[in] buffer
+ * @param[in] len
+ * @param[in] cloud_file_name
+ * @param[in] map_type
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_map_cleaner_upload_file">Func <span>tuya_iot_map_cleaner_upload_file</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_map_cleaner_upload_file(IN CONST INT_T map_id, IN CONST CHAR_T *local_file_name, \
+                                            IN CONST CHAR_T *cloud_file_name, IN CONST UP_MAP_TYPE_E map_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_map_cleaner_upload_file 
+ * @desc sweeper function. upload cleaner map info
+ *
+ * @param[in] map_id
+ * @param[in] local_file_name
+ * @param[in] cloud_file_name
+ * @param[in] map_type
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_map_record_upload_buffer">Func <span>tuya_iot_map_record_upload_buffer</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_map_record_upload_buffer(IN CONST INT_T map_id, IN CONST BYTE_T *buffer, IN CONST UINT_T len, IN CONST CHAR_T *descript);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_map_record_upload_buffer 
+ * @desc sweeper function. upload record map info
+ *
+ * @param[in] map_id
+ * @param[in] buffer
+ * @param[in] len
+ * @param[in] descript
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_map_record_upload_buffer_with_filename">Func <span>tuya_iot_map_record_upload_buffer_with_filename</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_map_record_upload_buffer_with_filename(IN CONST INT_T map_id, IN CONST BYTE_T *buffer, IN CONST UINT_T len, IN CONST CHAR_T *cloud_file_name, IN CONST CHAR_T *descript);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_map_record_upload_buffer_with_filename 
+ * @desc sweeper function. upload record map info
+ *
+ * @param[in] map_id
+ * @param[in] buffer
+ * @param[in] len
+ * @param[in] cloud_file_name
+ * @param[in] descript
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_get_gw_id">Func <span>tuya_iot_get_gw_id</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *tuya_iot_get_gw_id(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_gw_id 
+ *
+ * @return device id
+ */</pre>
+
+      <h4 id="tuya_iot_get_region_info">Func <span>tuya_iot_get_region_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_get_region_info(INOUT TY_IOT_REGION_INFO_S *p_region_info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_region_info 
+ *
+ * @param[in/out] p_region_info
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_get_custom_cfg">Func <span>tuya_iot_get_custom_cfg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_get_custom_cfg(IN CONST TY_CUSTOM_CFG_E type, OUT CHAR_T **pp_cfg_str);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_custom_cfg 
+ *
+ * @param[in] type
+ * @param[out] pp_cfg_str
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_release_custom_cfg">Func <span>tuya_iot_release_custom_cfg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_release_custom_cfg(IN CHAR_T *p_cfg_str);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_release_custom_cfg 
+ *
+ * @param[in] p_cfg_str
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_get_location_info">Func <span>tuya_iot_get_location_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_get_location_info(INOUT TY_LOCATION_INFO_S *p_location);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_location_info 
+ *
+ * @param[in] p_location
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_set_log_attr">Func <span>tuya_iot_set_log_attr</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_log_attr(IN CONST INT_T log_level);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_log_attr 
+ *
+ * @param[in] log_level
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_set_log_bool_time">Func <span>tuya_iot_set_log_bool_time</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_log_bool_time(BOOL_T if_ms_level);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_log_bool_time 
+ *
+ * @param[in] if_ms_level
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_custom_data_report_sync">Func <span>tuya_iot_custom_data_report_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_custom_data_report_sync(IN CONST BYTE_T *data, IN CONST INT_T len, IN CONST CHAR_T *topic, 
+                                                       IN CONST BYTE_T qos, IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_custom_data_report_sync 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] topic
+ * @param[in] qos
+ * @param[in] timeout
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_custom_data_report_async">Func <span>tuya_iot_custom_data_report_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_custom_data_report_async(IN CONST BYTE_T *data, IN CONST INT_T len, IN CONST CHAR_T *topic, 
+                                                           IN CONST BYTE_T qos, IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_custom_data_report_async 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] topic
+ * @param[in] qos
+ * @param[in] timeout
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_get_active_stat">Func <span>tuya_iot_get_active_stat</span></h4>
+      <pre class="doc-declare"><code>BYTE_T tuya_iot_get_active_stat(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_active_stat 
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="tuya_iot_app_cbs_init">Func <span>tuya_iot_app_cbs_init</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_app_cbs_init(IN CONST TY_IOT_APP_CBS_S *app_cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_app_cbs_init 
+ *
+ * @param[in] app_cbs
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="tuya_iot_dp_low_power_query">Func <span>tuya_iot_dp_low_power_query</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_dp_low_power_query(IN CONST UCHAR_T *dps, IN CONST UINT_T cnt,
+                                   OUT TY_RECV_OBJ_DP_S **obj_dps, OUT TY_RECV_RAW_DP_S **raw_dps);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_dp_low_power_query 
+ *
+ * @param[in] dps: data of DP
+ * @param[in] cnt: count of DP
+ * @param[out] obj_dps: get object type DP
+ * @param[out] raw_dps: get raw type DP
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="tuya_iot_get_third_cloud_ca">Func <span>tuya_iot_get_third_cloud_ca</span></h4>
+      <pre class="doc-declare"><code>void tuya_iot_get_third_cloud_ca(CHAR_T *p_url);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief according url get third cloud ca 
+ * 
+ * @param[in] url Third cloud url
+ *
+ * @return
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="DP_DESC_IF_S">Variable <span>DP_DESC_IF_S</span></h4>
+      <pre class="doc-declare"><code>DP_DESC_IF_S *tuya_iot_get_dp_desc(IN CONST CHAR_T *dev_id,IN CONST BYTE_T dpid);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_dp_desc 
+ * @desc get dp info of a sub-device and a dp id
+ *
+ * @param[in] dev_id: sub-device id
+ * @param[in] dpid: dp id
+ *
+ * @return (DP_DESC_IF_S *): success  NULL: fail
+ */</pre>
+
+      <h4 id="DP_PROP_VALUE_U">Variable <span>DP_PROP_VALUE_U</span></h4>
+      <pre class="doc-declare"><code>DP_PROP_VALUE_U *tuya_iot_get_dp_prop_value(IN CONST CHAR_T *dev_id,IN CONST BYTE_T dpid);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_dp_prop_value 
+ * @desc get dp value of a sub-device and a dp id
+ *
+ * @param[in] dev_id: sub-device id
+ * @param[in] dpid: dp id
+ *
+ * @return (DP_PROP_VALUE_U *): success  NULL: fail
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

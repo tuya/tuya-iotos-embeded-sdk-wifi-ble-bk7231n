@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#string.h" class="nav-sub-label">string.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_PRNG_H_" class="nav-sub-label">COAP_PRNG_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng(Buf,Length)" class="nav-sub-label">prng(Buf,Length)</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng_init(Value)" class="nav-sub-label">prng_init(Value)</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng(Buf,Length)" class="nav-sub-label">prng(Buf,Length)</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng_init" class="nav-sub-label">prng_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng_init" class="nav-sub-label">prng_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng(Buf,Length)" class="nav-sub-label">prng(Buf,Length)</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng_init(Value)" class="nav-sub-label">prng_init(Value)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#memcpy" class="nav-sub-label">memcpy</a>
+              </li>
+      
+
+              <li>
+                <a href="#memcpy" class="nav-sub-label">memcpy</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#return" class="nav-sub-label">return</a>
+              </li>
+      
+
+              <li>
+                <a href="#return" class="nav-sub-label">return</a>
+              </li>
+      
+
+              <li>
+                <a href="#errno_t" class="nav-sub-label">errno_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#len" class="nav-sub-label">len</a>
+              </li>
+      
+
+              <li>
+                <a href="#return" class="nav-sub-label">return</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="string.h"><span>string.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;string.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <string.h>
+</pre>
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_PRNG_H_">Marco <span>COAP_PRNG_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PRNG_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="prng(Buf,Length)">Marco <span>prng(Buf,Length)</span></h4>
+      <pre class="doc-declare"><code>#define prng(Buf,Length) contiki_prng_impl((Buf), (Length))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="prng_init(Value)">Marco <span>prng_init(Value)</span></h4>
+      <pre class="doc-declare"><code>#define prng_init(Value) random_init((uint16_t)(Value))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="prng(Buf,Length)">Marco <span>prng(Buf,Length)</span></h4>
+      <pre class="doc-declare"><code>#define prng(Buf,Length) lwip_prng_impl((Buf), (Length))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="prng_init">Marco <span>prng_init</span></h4>
+      <pre class="doc-declare"><code>#define prng_init(Value)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="prng_init">Marco <span>prng_init</span></h4>
+      <pre class="doc-declare"><code>#define prng_init(Value)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="prng(Buf,Length)">Marco <span>prng(Buf,Length)</span></h4>
+      <pre class="doc-declare"><code>#define prng(Buf,Length) coap_prng_impl((Buf), (Length))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Fills \p Buf with \p Length bytes of random data.
+ *
+ * @hideinitializer
+ */</pre>
+
+      <h4 id="prng_init(Value)">Marco <span>prng_init(Value)</span></h4>
+      <pre class="doc-declare"><code>#define prng_init(Value) srand((unsigned long)(Value))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Called to set the PRNG seed. You may want to re-define this to allow for a
+ * better PRNG.
+ *
+ * @hideinitializer
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="memcpy">Func <span>memcpy</span></h4>
+      <pre class="doc-declare"><code>memcpy(buf, &v, len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memcpy">Func <span>memcpy</span></h4>
+      <pre class="doc-declare"><code>memcpy(buf, &v, len);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="return">Variable <span>return</span></h4>
+      <pre class="doc-declare"><code>return 1;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="return">Variable <span>return</span></h4>
+      <pre class="doc-declare"><code>return 1;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="errno_t">Variable <span>errno_t</span></h4>
+      <pre class="doc-declare"><code>errno_t __cdecl rand_s( _Out_ unsigned int* _RandomValue );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="len">Variable <span>len</span></h4>
+      <pre class="doc-declare"><code>len -= i;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="return">Variable <span>return</span></h4>
+      <pre class="doc-declare"><code>return 1;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

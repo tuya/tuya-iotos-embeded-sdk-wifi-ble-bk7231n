@@ -1,0 +1,923 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#platform_time.h" class="nav-sub-label">platform_time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdio.h" class="nav-sub-label">stdio.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#time.h" class="nav-sub-label">time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_MEM_HDR" class="nav-sub-label">MBEDTLS_PLATFORM_STD_MEM_HDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdio.h" class="nav-sub-label">stdio.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#platform_alt.h" class="nav-sub-label">platform_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_H" class="nav-sub-label">MBEDTLS_PLATFORM_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PLATFORM_FEATURE_UNSUPPORTED" class="nav-sub-label">MBEDTLS_ERR_PLATFORM_FEATURE_UNSUPPORTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_SNPRINTF" class="nav-sub-label">MBEDTLS_PLATFORM_STD_SNPRINTF</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_SNPRINTF" class="nav-sub-label">MBEDTLS_PLATFORM_STD_SNPRINTF</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_PRINTF" class="nav-sub-label">MBEDTLS_PLATFORM_STD_PRINTF</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_FPRINTF" class="nav-sub-label">MBEDTLS_PLATFORM_STD_FPRINTF</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_CALLOC" class="nav-sub-label">MBEDTLS_PLATFORM_STD_CALLOC</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_FREE" class="nav-sub-label">MBEDTLS_PLATFORM_STD_FREE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_EXIT" class="nav-sub-label">MBEDTLS_PLATFORM_STD_EXIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_TIME" class="nav-sub-label">MBEDTLS_PLATFORM_STD_TIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_EXIT_SUCCESS" class="nav-sub-label">MBEDTLS_PLATFORM_STD_EXIT_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_EXIT_FAILURE" class="nav-sub-label">MBEDTLS_PLATFORM_STD_EXIT_FAILURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_NV_SEED_READ" class="nav-sub-label">MBEDTLS_PLATFORM_STD_NV_SEED_READ</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_NV_SEED_WRITE" class="nav-sub-label">MBEDTLS_PLATFORM_STD_NV_SEED_WRITE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_PLATFORM_STD_NV_SEED_FILE" class="nav-sub-label">MBEDTLS_PLATFORM_STD_NV_SEED_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_free" class="nav-sub-label">mbedtls_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_calloc" class="nav-sub-label">mbedtls_calloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_free" class="nav-sub-label">mbedtls_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_calloc" class="nav-sub-label">mbedtls_calloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_fprintf" class="nav-sub-label">mbedtls_fprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_fprintf" class="nav-sub-label">mbedtls_fprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_printf" class="nav-sub-label">mbedtls_printf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_printf" class="nav-sub-label">mbedtls_printf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_snprintf" class="nav-sub-label">mbedtls_snprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_snprintf" class="nav-sub-label">mbedtls_snprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_exit" class="nav-sub-label">mbedtls_exit</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_exit" class="nav-sub-label">mbedtls_exit</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_EXIT_SUCCESS" class="nav-sub-label">MBEDTLS_EXIT_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_EXIT_SUCCESS" class="nav-sub-label">MBEDTLS_EXIT_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_EXIT_FAILURE" class="nav-sub-label">MBEDTLS_EXIT_FAILURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_EXIT_FAILURE" class="nav-sub-label">MBEDTLS_EXIT_FAILURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nv_seed_read" class="nav-sub-label">mbedtls_nv_seed_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nv_seed_write" class="nav-sub-label">mbedtls_nv_seed_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nv_seed_read" class="nav-sub-label">mbedtls_nv_seed_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_nv_seed_write" class="nav-sub-label">mbedtls_nv_seed_write</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_platform_set_calloc_free" class="nav-sub-label">mbedtls_platform_set_calloc_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_set_fprintf" class="nav-sub-label">mbedtls_platform_set_fprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_set_printf" class="nav-sub-label">mbedtls_platform_set_printf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_win32_snprintf" class="nav-sub-label">mbedtls_platform_win32_snprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_set_snprintf" class="nav-sub-label">mbedtls_platform_set_snprintf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_set_exit" class="nav-sub-label">mbedtls_platform_set_exit</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_std_nv_seed_read" class="nav-sub-label">mbedtls_platform_std_nv_seed_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_std_nv_seed_write" class="nav-sub-label">mbedtls_platform_std_nv_seed_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_set_nv_seed" class="nav-sub-label">mbedtls_platform_set_nv_seed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_setup" class="nav-sub-label">mbedtls_platform_setup</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_platform_teardown" class="nav-sub-label">mbedtls_platform_teardown</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_platform_context;
+" class="nav-sub-label">
+mbedtls_platform_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="platform_time.h"><span>platform_time.h</span></h4>
+      <pre class="doc-declare"><code>#include "platform_time.h"
+</code></pre>
+      <pre class="doc-comment">#include "platform_time.h"
+</pre>
+
+      <h4 id="stdio.h"><span>stdio.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdio.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdio.h>
+</pre>
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h>
+</pre>
+
+      <h4 id="time.h"><span>time.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;time.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <time.h>
+</pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_MEM_HDR"><span>MBEDTLS_PLATFORM_STD_MEM_HDR</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_PLATFORM_STD_MEM_HDR
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_PLATFORM_STD_MEM_HDR
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdio.h"><span>stdio.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdio.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdio.h>
+</pre>
+
+      <h4 id="platform_alt.h"><span>platform_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "platform_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "platform_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_PLATFORM_H">Marco <span>MBEDTLS_PLATFORM_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED    -112 /**< Hardware accelerator failed */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PLATFORM_FEATURE_UNSUPPORTED">Marco <span>MBEDTLS_ERR_PLATFORM_FEATURE_UNSUPPORTED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PLATFORM_FEATURE_UNSUPPORTED -114 /**< The requested feature is not supported by the platform */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_SNPRINTF">Marco <span>MBEDTLS_PLATFORM_STD_SNPRINTF</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_SNPRINTF  mbedtls_platform_win32_snprintf /**< The default \c snprintf function to use.  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_SNPRINTF">Marco <span>MBEDTLS_PLATFORM_STD_SNPRINTF</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_SNPRINTF  snprintf /**< The default \c snprintf function to use.  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_PRINTF">Marco <span>MBEDTLS_PLATFORM_STD_PRINTF</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_PRINTF  printf /**< The default \c printf function to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_FPRINTF">Marco <span>MBEDTLS_PLATFORM_STD_FPRINTF</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_FPRINTF fprintf /**< The default \c fprintf function to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_CALLOC">Marco <span>MBEDTLS_PLATFORM_STD_CALLOC</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_CALLOC  calloc /**< The default \c calloc function to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_FREE">Marco <span>MBEDTLS_PLATFORM_STD_FREE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_FREE      free /**< The default \c free function to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_EXIT">Marco <span>MBEDTLS_PLATFORM_STD_EXIT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_EXIT     exit /**< The default \c exit function to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_TIME">Marco <span>MBEDTLS_PLATFORM_STD_TIME</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_TIME      time   /**< The default \c time function to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_EXIT_SUCCESS">Marco <span>MBEDTLS_PLATFORM_STD_EXIT_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_EXIT_SUCCESS EXIT_SUCCESS /**< The default exit value to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_EXIT_FAILURE">Marco <span>MBEDTLS_PLATFORM_STD_EXIT_FAILURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_EXIT_FAILURE EXIT_FAILURE /**< The default exit value to use. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_NV_SEED_READ">Marco <span>MBEDTLS_PLATFORM_STD_NV_SEED_READ</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_NV_SEED_READ  mbedtls_platform_std_nv_seed_read
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_NV_SEED_WRITE">Marco <span>MBEDTLS_PLATFORM_STD_NV_SEED_WRITE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_NV_SEED_WRITE mbedtls_platform_std_nv_seed_write
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_PLATFORM_STD_NV_SEED_FILE">Marco <span>MBEDTLS_PLATFORM_STD_NV_SEED_FILE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PLATFORM_STD_NV_SEED_FILE  "seedfile"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_free">Marco <span>mbedtls_free</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_free      MBEDTLS_PLATFORM_FREE_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_calloc">Marco <span>mbedtls_calloc</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_calloc    MBEDTLS_PLATFORM_CALLOC_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_free">Marco <span>mbedtls_free</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_free      free
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_calloc">Marco <span>mbedtls_calloc</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_calloc    calloc
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_fprintf">Marco <span>mbedtls_fprintf</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_fprintf   MBEDTLS_PLATFORM_FPRINTF_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_fprintf">Marco <span>mbedtls_fprintf</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_fprintf   fprintf
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_printf">Marco <span>mbedtls_printf</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_printf    MBEDTLS_PLATFORM_PRINTF_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_printf">Marco <span>mbedtls_printf</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_printf    printf
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_snprintf">Marco <span>mbedtls_snprintf</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_snprintf  MBEDTLS_PLATFORM_SNPRINTF_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_snprintf">Marco <span>mbedtls_snprintf</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_snprintf  MBEDTLS_PLATFORM_STD_SNPRINTF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_exit">Marco <span>mbedtls_exit</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_exit  MBEDTLS_PLATFORM_EXIT_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_exit">Marco <span>mbedtls_exit</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_exit  exit
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_EXIT_SUCCESS">Marco <span>MBEDTLS_EXIT_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_EXIT_SUCCESS MBEDTLS_PLATFORM_STD_EXIT_SUCCESS
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_EXIT_SUCCESS">Marco <span>MBEDTLS_EXIT_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_EXIT_SUCCESS 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_EXIT_FAILURE">Marco <span>MBEDTLS_EXIT_FAILURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_EXIT_FAILURE MBEDTLS_PLATFORM_STD_EXIT_FAILURE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_EXIT_FAILURE">Marco <span>MBEDTLS_EXIT_FAILURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_EXIT_FAILURE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_nv_seed_read">Marco <span>mbedtls_nv_seed_read</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_nv_seed_read   MBEDTLS_PLATFORM_NV_SEED_READ_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_nv_seed_write">Marco <span>mbedtls_nv_seed_write</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_nv_seed_write  MBEDTLS_PLATFORM_NV_SEED_WRITE_MACRO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_nv_seed_read">Marco <span>mbedtls_nv_seed_read</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_nv_seed_read   mbedtls_platform_std_nv_seed_read
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_nv_seed_write">Marco <span>mbedtls_nv_seed_write</span></h4>
+      <pre class="doc-declare"><code>#define mbedtls_nv_seed_write  mbedtls_platform_std_nv_seed_write
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_platform_set_calloc_free">Func <span>mbedtls_platform_set_calloc_free</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_set_calloc_free( void * (*calloc_func)( size_t, size_t ),
+                             void (*free_func)( void * ) );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function dynamically sets the memory-management
+ *                      functions used by the library, during runtime.
+ *
+ * \param calloc_func   The \c calloc function implementation.
+ * \param free_func     The \c free function implementation.
+ *
+ * \return              \c 0.
+ */</pre>
+
+      <h4 id="mbedtls_platform_set_fprintf">Func <span>mbedtls_platform_set_fprintf</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_set_fprintf( int (*fprintf_func)( FILE *stream, const char *,
+                                              ... ) );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief                This function dynamically configures the fprintf
+ *                       function that is called when the
+ *                       mbedtls_fprintf() function is invoked by the library.
+ *
+ * \param fprintf_func   The \c fprintf function implementation.
+ *
+ * \return               \c 0.
+ */</pre>
+
+      <h4 id="mbedtls_platform_set_printf">Func <span>mbedtls_platform_set_printf</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_set_printf( int (*printf_func)( const char *, ... ) );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function dynamically configures the snprintf
+ *                      function that is called when the mbedtls_snprintf()
+ *                      function is invoked by the library.
+ *
+ * \param printf_func   The \c printf function implementation.
+ *
+ * \return              \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_platform_win32_snprintf">Func <span>mbedtls_platform_win32_snprintf</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_win32_snprintf( char *s, size_t n, const char *fmt, ... );</code></pre>
+      <pre class="doc-comment">/* For Windows (inc. MSYS2), we provide our own fixed implementation */</pre>
+
+      <h4 id="mbedtls_platform_set_snprintf">Func <span>mbedtls_platform_set_snprintf</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_set_snprintf( int (*snprintf_func)( char * s, size_t n,
+                                                const char * format, ... ) );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief                 This function allows configuring a custom
+ *                        \c snprintf function pointer.
+ *
+ * \param snprintf_func   The \c snprintf function implementation.
+ *
+ * \return                \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_platform_set_exit">Func <span>mbedtls_platform_set_exit</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_set_exit( void (*exit_func)( int status ) );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief             This function dynamically configures the exit
+ *                    function that is called when the mbedtls_exit()
+ *                    function is invoked by the library.
+ *
+ * \param exit_func   The \c exit function implementation.
+ *
+ * \return            \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_platform_std_nv_seed_read">Func <span>mbedtls_platform_std_nv_seed_read</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_std_nv_seed_read( unsigned char *buf, size_t buf_len );</code></pre>
+      <pre class="doc-comment">/* Internal standard platform definitions */</pre>
+
+      <h4 id="mbedtls_platform_std_nv_seed_write">Func <span>mbedtls_platform_std_nv_seed_write</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_std_nv_seed_write( unsigned char *buf, size_t buf_len );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_platform_set_nv_seed">Func <span>mbedtls_platform_set_nv_seed</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_set_nv_seed(
+           int (*nv_seed_read_func)( unsigned char *buf, size_t buf_len ),
+           int (*nv_seed_write_func)( unsigned char *buf, size_t buf_len )
+           );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief   This function allows configuring custom seed file writing and
+ *          reading functions.
+ *
+ * \param   nv_seed_read_func   The seed reading function implementation.
+ * \param   nv_seed_write_func  The seed writing function implementation.
+ *
+ * \return  \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_platform_setup">Func <span>mbedtls_platform_setup</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_platform_setup( mbedtls_platform_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief   This function performs any platform-specific initialization
+ *          operations.
+ *
+ * \note    This function should be called before any other library functions.
+ *
+ *          Its implementation is platform-specific, and unless
+ *          platform-specific code is provided, it does nothing.
+ *
+ * \note    The usage and necessity of this function is dependent on the platform.
+ *
+ * \param   ctx     The platform context.
+ *
+ * \return  \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_platform_teardown">Func <span>mbedtls_platform_teardown</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_platform_teardown( mbedtls_platform_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief   This function performs any platform teardown operations.
+ *
+ * \note    This function should be called after every other Mbed TLS module
+ *          has been correctly freed using the appropriate free function.
+ *
+ *          Its implementation is platform-specific, and unless
+ *          platform-specific code is provided, it does nothing.
+ *
+ * \note    The usage and necessity of this function is dependent on the platform.
+ *
+ * \param   ctx     The platform context.
+ *
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_platform_context;
+">Typedef <span>
+mbedtls_platform_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_platform_context
+{
+   char dummy; /**< A placeholder member, as empty structs are not portable. */
+}
+mbedtls_platform_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief   The platform context structure.
+ *
+ * \note    This structure may be used to assist platform-specific
+ *          setup or teardown operations.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

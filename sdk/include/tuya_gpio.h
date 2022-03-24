@@ -1,26 +1,22 @@
- /*============================================================================
- *                                                                            *
- * Copyright (C) by Tuya Inc                                                  *
- * All rights reserved                                                        *
- *                                                                            *
- =============================================================================*/
+ /**
+ * @file tuya_gpio.h
+ * @brief Common process - gpio
+ * @version 0.1
+ * @date 2018-09-01
+ *
+ * @copyright Copyright 2018-2021 Tuya Inc. All Rights Reserved.
+ *
+ */
 
 #ifndef __TUYA_GPIO_H__
 #define __TUYA_GPIO_H__
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
-#ifdef  __TUYA_GPIO_GLOBALS
-    #define __TUYA_GPIO_EXT
-#else
-    #define __TUYA_GPIO_EXT extern
-#endif
-/*============================ INCLUDES ======================================*/
 #include "tuya_cloud_types.h"
 
-/*============================ MACROS =========================================*/
 typedef enum {
     TY_GPIOA_0 = 0,
     TY_GPIOA_1,
@@ -89,11 +85,11 @@ typedef enum {
 }TY_GPIO_PORT_E;
 
 typedef enum {
-    TY_GPIO_PULLUP,                    /*!< Pad pull up            */
-    TY_GPIO_PULLDOWN,                  /*!< Pad pull down          */
-    TY_GPIO_PULLUP_PULLDOWN,           /*!< Pad pull up + pull down*/
-    TY_GPIO_OPENDRAIN,                 /*!< Pad open drain         */
-    TY_GPIO_FLOATING,                  /*!< Pad floating           */
+    TY_GPIO_PULLUP,                    // Pad pull up 
+    TY_GPIO_PULLDOWN,                  // Pad pull down
+    TY_GPIO_PULLUP_PULLDOWN,           // Pad pull up + pull down
+    TY_GPIO_OPENDRAIN,                 // Pad open drain
+    TY_GPIO_FLOATING,                  // Pad floating
 } TY_GPIO_MODE_E;
 
 typedef enum {
@@ -109,80 +105,75 @@ typedef enum {
     /** IRQ occurs when line is high */
     TY_IRQ_LOW
 } TY_GPIO_IRQ_TRIG_E;
-/*============================ MACROFIED FUNCTIONS ===========================*/
-/*============================ PROTOTUYAPES ===================================*/
-/***********************************************************
-*  Function: tuya_gpio_inout_set
-*  Input: port
-*         in->TRUE:in
-*             FALSE:out
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__TUYA_GPIO_EXT \
+
+/**
+ * @brief gpio inout set
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] in TRUE:in,FALSE:out
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_gpio_inout_set(IN CONST TY_GPIO_PORT_E port, IN CONST BOOL_T in);
 
-/***********************************************************
-*  Function: tuya_gpio_inout_set_select
-*  Input: port
-*          in->TRUE:in
-*              FALSE:out
-          high->TRUE
-               FALSE
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
+/**
+ * @brief gpio inout select
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] in TRUE:in,FALSE:out
+ * @param[in] high TRUE/FALSE
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_gpio_inout_set_select(IN CONST TY_GPIO_PORT_E port,IN CONST BOOL_T in,IN CONST BOOL_T high);
 
-/***********************************************************
-*  Function: tuya_gpio_mode_set
-*  Input: port
-*         in->  TY_GPIO_PULLUP,
-*               TY_GPIO_PULLDOWN,
-*               TY_GPIO_PULLUP_PULLDOWN,
-*               TY_GPIO_OPENDRAIN,
-*               TY_GPIO_FLOATING
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__TUYA_GPIO_EXT \
+/**
+ * @brief gpio mode set
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] mode refer to TY_GPIO_MODE_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_gpio_mode_set(IN CONST TY_GPIO_PORT_E port, IN CONST TY_GPIO_MODE_E mode);
 
-/***********************************************************
-*  Function: tuya_gpio_read
-*  Input: port
-*         in->TRUE:in
-*             FALSE:out
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__TUYA_GPIO_EXT \
+/**
+ * @brief gpio read
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 INT_T tuya_gpio_read(IN CONST TY_GPIO_PORT_E port);
 
-/***********************************************************
-*  Function: tuya_gpio_write
-*  Input: port
-*         high->TRUE:high
-*               FALSE:low
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__TUYA_GPIO_EXT \
+/**
+ * @brief gpio wriet
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] high TRUE:high,FALSE:low
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_gpio_write(IN CONST TY_GPIO_PORT_E port, IN CONST BOOL_T high);
 
-
-/***********************************************************
-*  Function: tuya_gpio_write
-*  Input: port
-*         gpio_irq_cb   
-*         trig_type
-*         arg
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
+/**
+ * @brief gpio irq callback
+ * 
+ * @param[in] args argument
+ *
+ */
 typedef VOID (*TY_GPIO_IRQ_CB)(VOID *args);
 
-__TUYA_GPIO_EXT \
+/**
+ * @brief gpio irq init
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] gpio_irq_cb callback
+ * @param[in] trig_type refer to TY_GPIO_IRQ_TRIG_E
+ * @param[in] id irq number
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_gpio_irq_init(IN CONST TY_GPIO_PORT_E port,IN CONST TY_GPIO_IRQ_CB gpio_irq_cb, IN CONST TY_GPIO_IRQ_TRIG_E trig_type, UINT_T id);
 
 #ifdef __cplusplus

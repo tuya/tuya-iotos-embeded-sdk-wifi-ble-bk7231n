@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_network.h" class="nav-sub-label">tuya_hal_network.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_wifi.h" class="nav-sub-label">tuya_hal_wifi.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__WIFI_NETCFG_FRAME_TRANSPORTER_H__" class="nav-sub-label">__WIFI_NETCFG_FRAME_TRANSPORTER_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#wifiNetcfgFrameTransporterChannelInitAndStart" class="nav-sub-label">wifiNetcfgFrameTransporterChannelInitAndStart</a>
+              </li>
+      
+
+              <li>
+                <a href="#destroyWifiNetcfgFrameTransporter" class="nav-sub-label">destroyWifiNetcfgFrameTransporter</a>
+              </li>
+      
+
+              <li>
+                <a href="#WifiNetcfgFrameTransporterSessionInit" class="nav-sub-label">WifiNetcfgFrameTransporterSessionInit</a>
+              </li>
+      
+
+              <li>
+                <a href="#WifiNetcfgFrameTransporterSessionUninit" class="nav-sub-label">WifiNetcfgFrameTransporterSessionUninit</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ptrWifiNetcfgFrameTransporter_t" class="nav-sub-label">ptrWifiNetcfgFrameTransporter_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#fnProbeRequestTransportCallBack_t" class="nav-sub-label">fnProbeRequestTransportCallBack_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnAuthTransportCallBack_t" class="nav-sub-label">fnAuthTransportCallBack_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnBeaconTransportCallBack_t" class="nav-sub-label">fnBeaconTransportCallBack_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#TransporteeParameters_t,*ptrTransporteeParameters_t;
+" class="nav-sub-label">TransporteeParameters_t,*ptrTransporteeParameters_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnRegister" class="nav-sub-label">fnRegister</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnStart" class="nav-sub-label">fnStart</a>
+              </li>
+      
+
+              <li>
+                <a href="#bool" class="nav-sub-label">bool</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnUnregister" class="nav-sub-label">fnUnregister</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnLock" class="nav-sub-label">fnLock</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnStartTransporter" class="nav-sub-label">fnStartTransporter</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnStopTransporter" class="nav-sub-label">fnStopTransporter</a>
+              </li>
+      
+
+              <li>
+                <a href="#fnGetApInfo" class="nav-sub-label">fnGetApInfo</a>
+              </li>
+      
+
+              <li>
+                <a href="#*ptrWifiNetcfgFrameTransporter_t;
+" class="nav-sub-label">*ptrWifiNetcfgFrameTransporter_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_hal_network.h"><span>tuya_hal_network.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_network.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_network.h"
+</pre>
+
+      <h4 id="tuya_hal_wifi.h"><span>tuya_hal_wifi.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_wifi.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_wifi.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__WIFI_NETCFG_FRAME_TRANSPORTER_H__">Marco <span>__WIFI_NETCFG_FRAME_TRANSPORTER_H__</span></h4>
+      <pre class="doc-declare"><code>#define __WIFI_NETCFG_FRAME_TRANSPORTER_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="wifiNetcfgFrameTransporterChannelInitAndStart">Func <span>wifiNetcfgFrameTransporterChannelInitAndStart</span></h4>
+      <pre class="doc-declare"><code>int wifiNetcfgFrameTransporterChannelInitAndStart();</code></pre>
+      <pre class="doc-comment">/*配网开始时，执行信道初始化*/</pre>
+
+      <h4 id="destroyWifiNetcfgFrameTransporter">Func <span>destroyWifiNetcfgFrameTransporter</span></h4>
+      <pre class="doc-declare"><code>void destroyWifiNetcfgFrameTransporter();</code></pre>
+      <pre class="doc-comment">/*
+	销毁wifi_netcfg_frame_transporter实例，释放内存
+*/</pre>
+
+      <h4 id="WifiNetcfgFrameTransporterSessionInit">Func <span>WifiNetcfgFrameTransporterSessionInit</span></h4>
+      <pre class="doc-declare"><code>int WifiNetcfgFrameTransporterSessionInit();</code></pre>
+      <pre class="doc-comment">/*配网模块全局初始化，创建并初始化TransporterSession，必须在getTransporter之前调用*/</pre>
+
+      <h4 id="WifiNetcfgFrameTransporterSessionUninit">Func <span>WifiNetcfgFrameTransporterSessionUninit</span></h4>
+      <pre class="doc-declare"><code>int WifiNetcfgFrameTransporterSessionUninit();</code></pre>
+      <pre class="doc-comment">/*配网模块全局销毁，在配网活动结束之后调用*/</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="ptrWifiNetcfgFrameTransporter_t">Variable <span>ptrWifiNetcfgFrameTransporter_t</span></h4>
+      <pre class="doc-declare"><code>ptrWifiNetcfgFrameTransporter_t getWifiNetcfgFrameTransporter();</code></pre>
+      <pre class="doc-comment">/*
+	获取或创建wifi_netcfg_frame_transporter的实例，线程安全
+*/</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="fnProbeRequestTransportCallBack_t">Typedef <span>fnProbeRequestTransportCallBack_t</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnProbeRequestTransportCallBack_t)(void* ptrArgs, BYTE_T channel);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnAuthTransportCallBack_t">Typedef <span>fnAuthTransportCallBack_t</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnAuthTransportCallBack_t)(void* ptrArgs, BYTE_T channel);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnBeaconTransportCallBack_t">Typedef <span>fnBeaconTransportCallBack_t</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnBeaconTransportCallBack_t)(void* ptrArgs, BYTE_T channel);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TransporteeParameters_t,*ptrTransporteeParameters_t;
+">Typedef <span>TransporteeParameters_t,*ptrTransporteeParameters_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct TransporteeParameters_s{
+ fnProbeRequestTransportCallBack_t fnProbeRequestTransport;
+ fnAuthTransportCallBack_t fnAuthTransport;
+ fnBeaconTransportCallBack_t fnBeaconTransport;
+ void* ptrArgs;
+}TransporteeParameters_t,*ptrTransporteeParameters_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnRegister">Typedef <span>fnRegister</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnRegister)(int netcfg_type, ptrTransporteeParameters_t pParam);
+</code></pre>
+      <pre class="doc-comment">/*
+	transportee: 
+		register->start->ungister
+		isRun
+	transporter:
+		transporter is inited and started in WifiNetcfgFrameTransporterSessionInit
+		and will be:
+		lock->stop 
+		getApInfo
+		in transportee.
+*/</pre>
+
+      <h4 id="fnStart">Typedef <span>fnStart</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnStart)(int netcfg_type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bool">Typedef <span>bool</span></h4>
+      <pre class="doc-declare"><code>typedef bool (*fnIsRun)(int netcfg_type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnUnregister">Typedef <span>fnUnregister</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnUnregister)(int netcfg_type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnLock">Typedef <span>fnLock</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnLock)(bool lockState);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnStartTransporter">Typedef <span>fnStartTransporter</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnStartTransporter)();
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnStopTransporter">Typedef <span>fnStopTransporter</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnStopTransporter)();
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="fnGetApInfo">Typedef <span>fnGetApInfo</span></h4>
+      <pre class="doc-declare"><code>typedef int (*fnGetApInfo)(AP_IF_S **ppApArray, uint32_t * pApNum);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*ptrWifiNetcfgFrameTransporter_t;
+">Typedef <span>*ptrWifiNetcfgFrameTransporter_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct WifiNetcfgFrameTransporter_s{
+ fnRegister		registerTransporteeFn;
+ fnStart		startTransporteeFn;
+ fnIsRun		isRunTransporteeFn;
+ fnUnregister unregisterTransporteeFn;
+ 
+ fnLock		lockTransporterChannelFn;
+   fnStartTransporter        startTransporterFn;
+ fnStopTransporter		stopTransporterFn;
+ fnGetApInfo	getApInfoFn;
+}WifiNetcfgFrameTransporter_t, *ptrWifiNetcfgFrameTransporter_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

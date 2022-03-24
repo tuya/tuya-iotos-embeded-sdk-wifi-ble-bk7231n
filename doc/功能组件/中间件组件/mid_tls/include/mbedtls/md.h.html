@@ -1,0 +1,937 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_MD_H" class="nav-sub-label">MBEDTLS_MD_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE" class="nav-sub-label">MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_MD_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_MD_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_MD_ALLOC_FAILED" class="nav-sub-label">MBEDTLS_ERR_MD_ALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_MD_FILE_IO_ERROR" class="nav-sub-label">MBEDTLS_ERR_MD_FILE_IO_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_MD_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_MD_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_MD_MAX_SIZE" class="nav-sub-label">MBEDTLS_MD_MAX_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_MD_MAX_SIZE" class="nav-sub-label">MBEDTLS_MD_MAX_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_md_init" class="nav-sub-label">mbedtls_md_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_free" class="nav-sub-label">mbedtls_md_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_init_ctx" class="nav-sub-label">mbedtls_md_init_ctx</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_setup" class="nav-sub-label">mbedtls_md_setup</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_clone" class="nav-sub-label">mbedtls_md_clone</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_starts" class="nav-sub-label">mbedtls_md_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_update" class="nav-sub-label">mbedtls_md_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_finish" class="nav-sub-label">mbedtls_md_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md" class="nav-sub-label">mbedtls_md</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_file" class="nav-sub-label">mbedtls_md_file</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_hmac_starts" class="nav-sub-label">mbedtls_md_hmac_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_hmac_update" class="nav-sub-label">mbedtls_md_hmac_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_hmac_finish" class="nav-sub-label">mbedtls_md_hmac_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_hmac_reset" class="nav-sub-label">mbedtls_md_hmac_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_hmac" class="nav-sub-label">mbedtls_md_hmac</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_process" class="nav-sub-label">mbedtls_md_process</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_type_t" class="nav-sub-label">mbedtls_md_type_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_md_type_t;
+" class="nav-sub-label">mbedtls_md_type_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_info_t" class="nav-sub-label">mbedtls_md_info_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md_context_t;
+" class="nav-sub-label">mbedtls_md_context_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_MD_H">Marco <span>MBEDTLS_MD_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_MD_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE">Marco <span>MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE               -20608 /**< The selected feature is not available. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_MD_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_MD_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_MD_BAD_INPUT_DATA                    -20736 /**< Bad input parameters to function. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_MD_ALLOC_FAILED">Marco <span>MBEDTLS_ERR_MD_ALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_MD_ALLOC_FAILED                      -20864 /**< Failed to allocate memory. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_MD_FILE_IO_ERROR">Marco <span>MBEDTLS_ERR_MD_FILE_IO_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_MD_FILE_IO_ERROR                     -20992 /**< Opening or reading of file failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_MD_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_MD_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_MD_HW_ACCEL_FAILED                   -21120 /**< MD hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_MD_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_MD_MAX_SIZE">Marco <span>MBEDTLS_MD_MAX_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_MD_MAX_SIZE        64 /* longest known is SHA512 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_MD_MAX_SIZE">Marco <span>MBEDTLS_MD_MAX_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_MD_MAX_SIZE        32 /* longest known is SHA256 or less */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED   __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_md_init">Func <span>mbedtls_md_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_md_init( mbedtls_md_context_t *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function initializes a message-digest context without
+ *                  binding it to a particular message-digest algorithm.
+ *
+ *                  This function should always be called first. It prepares the
+ *                  context for mbedtls_md_setup() for binding it to a
+ *                  message-digest algorithm.
+ */</pre>
+
+      <h4 id="mbedtls_md_free">Func <span>mbedtls_md_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_md_free( mbedtls_md_context_t *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function clears the internal structure of \p ctx and
+ *                  frees any embedded internal structure, but does not free
+ *                  \p ctx itself.
+ *
+ *                  If you have called mbedtls_md_setup() on \p ctx, you must
+ *                  call mbedtls_md_free() when you are no longer using the
+ *                  context.
+ *                  Calling this function if you have previously
+ *                  called mbedtls_md_init() and nothing else is optional.
+ *                  You must not call this function if you have not called
+ *                  mbedtls_md_init().
+ */</pre>
+
+      <h4 id="mbedtls_md_init_ctx">Func <span>mbedtls_md_init_ctx</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_init_ctx( mbedtls_md_context_t *ctx, const mbedtls_md_info_t *md_info ) MBEDTLS_DEPRECATED;</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function selects the message digest algorithm to use,
+ *                  and allocates internal structures.
+ *
+ *                  It should be called after mbedtls_md_init() or mbedtls_md_free().
+ *                  Makes it necessary to call mbedtls_md_free() later.
+ *
+ * \deprecated      Superseded by mbedtls_md_setup() in 2.0.0
+ *
+ * \param ctx       The context to set up.
+ * \param md_info   The information structure of the message-digest algorithm
+ *                  to use.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ * \return          #MBEDTLS_ERR_MD_ALLOC_FAILED on memory-allocation failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_setup">Func <span>mbedtls_md_setup</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_setup( mbedtls_md_context_t *ctx, const mbedtls_md_info_t *md_info, int hmac );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function selects the message digest algorithm to use,
+ *                  and allocates internal structures.
+ *
+ *                  It should be called after mbedtls_md_init() or
+ *                  mbedtls_md_free(). Makes it necessary to call
+ *                  mbedtls_md_free() later.
+ *
+ * \param ctx       The context to set up.
+ * \param md_info   The information structure of the message-digest algorithm
+ *                  to use.
+ * \param hmac      Defines if HMAC is used. 0: HMAC is not used (saves some memory),
+ *                  or non-zero: HMAC is used with this context.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ * \return          #MBEDTLS_ERR_MD_ALLOC_FAILED on memory-allocation failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_clone">Func <span>mbedtls_md_clone</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_clone( mbedtls_md_context_t *dst,
+                     const mbedtls_md_context_t *src );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function clones the state of an message-digest
+ *                  context.
+ *
+ * \note            You must call mbedtls_md_setup() on \c dst before calling
+ *                  this function.
+ *
+ * \note            The two contexts must have the same type,
+ *                  for example, both are SHA-256.
+ *
+ * \warning         This function clones the message-digest state, not the
+ *                  HMAC state.
+ *
+ * \param dst       The destination context.
+ * \param src       The context to be cloned.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_starts">Func <span>mbedtls_md_starts</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_starts( mbedtls_md_context_t *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function starts a message-digest computation.
+ *
+ *                  You must call this function after setting up the context
+ *                  with mbedtls_md_setup(), and before passing data with
+ *                  mbedtls_md_update().
+ *
+ * \param ctx       The generic message-digest context.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_update">Func <span>mbedtls_md_update</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_update( mbedtls_md_context_t *ctx, const unsigned char *input, size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function feeds an input buffer into an ongoing
+ *                  message-digest computation.
+ *
+ *                  You must call mbedtls_md_starts() before calling this
+ *                  function. You may call this function multiple times.
+ *                  Afterwards, call mbedtls_md_finish().
+ *
+ * \param ctx       The generic message-digest context.
+ * \param input     The buffer holding the input data.
+ * \param ilen      The length of the input data.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_finish">Func <span>mbedtls_md_finish</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_finish( mbedtls_md_context_t *ctx, unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function finishes the digest operation,
+ *                  and writes the result to the output buffer.
+ *
+ *                  Call this function after a call to mbedtls_md_starts(),
+ *                  followed by any number of calls to mbedtls_md_update().
+ *                  Afterwards, you may either clear the context with
+ *                  mbedtls_md_free(), or call mbedtls_md_starts() to reuse
+ *                  the context for another digest operation with the same
+ *                  algorithm.
+ *
+ * \param ctx       The generic message-digest context.
+ * \param output    The buffer for the generic message-digest checksum result.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md">Func <span>mbedtls_md</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md( const mbedtls_md_info_t *md_info, const unsigned char *input, size_t ilen,
+       unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the message-digest of a buffer,
+ *                 with respect to a configurable message-digest algorithm
+ *                 in a single call.
+ *
+ *                 The result is calculated as
+ *                 Output = message_digest(input buffer).
+ *
+ * \param md_info  The information structure of the message-digest algorithm
+ *                 to use.
+ * \param input    The buffer holding the data.
+ * \param ilen     The length of the input data.
+ * \param output   The generic message-digest checksum result.
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                 failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_file">Func <span>mbedtls_md_file</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_file( const mbedtls_md_info_t *md_info, const char *path,
+                    unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the message-digest checksum
+ *                 result of the contents of the provided file.
+ *
+ *                 The result is calculated as
+ *                 Output = message_digest(file contents).
+ *
+ * \param md_info  The information structure of the message-digest algorithm
+ *                 to use.
+ * \param path     The input file name.
+ * \param output   The generic message-digest checksum result.
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_MD_FILE_IO_ERROR on an I/O error accessing
+ *                 the file pointed by \p path.
+ * \return         #MBEDTLS_ERR_MD_BAD_INPUT_DATA if \p md_info was NULL.
+ */</pre>
+
+      <h4 id="mbedtls_md_hmac_starts">Func <span>mbedtls_md_hmac_starts</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_hmac_starts( mbedtls_md_context_t *ctx, const unsigned char *key,
+                   size_t keylen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function sets the HMAC key and prepares to
+ *                  authenticate a new message.
+ *
+ *                  Call this function after mbedtls_md_setup(), to use
+ *                  the MD context for an HMAC calculation, then call
+ *                  mbedtls_md_hmac_update() to provide the input data, and
+ *                  mbedtls_md_hmac_finish() to get the HMAC value.
+ *
+ * \param ctx       The message digest context containing an embedded HMAC
+ *                  context.
+ * \param key       The HMAC secret key.
+ * \param keylen    The length of the HMAC key in Bytes.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_hmac_update">Func <span>mbedtls_md_hmac_update</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_hmac_update( mbedtls_md_context_t *ctx, const unsigned char *input,
+                   size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function feeds an input buffer into an ongoing HMAC
+ *                  computation.
+ *
+ *                  Call mbedtls_md_hmac_starts() or mbedtls_md_hmac_reset()
+ *                  before calling this function.
+ *                  You may call this function multiple times to pass the
+ *                  input piecewise.
+ *                  Afterwards, call mbedtls_md_hmac_finish().
+ *
+ * \param ctx       The message digest context containing an embedded HMAC
+ *                  context.
+ * \param input     The buffer holding the input data.
+ * \param ilen      The length of the input data.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_hmac_finish">Func <span>mbedtls_md_hmac_finish</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_hmac_finish( mbedtls_md_context_t *ctx, unsigned char *output);</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function finishes the HMAC operation, and writes
+ *                  the result to the output buffer.
+ *
+ *                  Call this function after mbedtls_md_hmac_starts() and
+ *                  mbedtls_md_hmac_update() to get the HMAC value. Afterwards
+ *                  you may either call mbedtls_md_free() to clear the context,
+ *                  or call mbedtls_md_hmac_reset() to reuse the context with
+ *                  the same HMAC key.
+ *
+ * \param ctx       The message digest context containing an embedded HMAC
+ *                  context.
+ * \param output    The generic HMAC checksum result.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_hmac_reset">Func <span>mbedtls_md_hmac_reset</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_hmac_reset( mbedtls_md_context_t *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function prepares to authenticate a new message with
+ *                  the same key as the previous HMAC operation.
+ *
+ *                  You may call this function after mbedtls_md_hmac_finish().
+ *                  Afterwards call mbedtls_md_hmac_update() to pass the new
+ *                  input.
+ *
+ * \param ctx       The message digest context containing an embedded HMAC
+ *                  context.
+ *
+ * \return          \c 0 on success.
+ * \return          #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                  failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_hmac">Func <span>mbedtls_md_hmac</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_hmac( const mbedtls_md_info_t *md_info, const unsigned char *key, size_t keylen,
+               const unsigned char *input, size_t ilen,
+               unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the full generic HMAC
+ *                 on the input buffer with the provided key.
+ *
+ *                 The function allocates the context, performs the
+ *                 calculation, and frees the context.
+ *
+ *                 The HMAC result is calculated as
+ *                 output = generic HMAC(hmac key, input buffer).
+ *
+ * \param md_info  The information structure of the message-digest algorithm
+ *                 to use.
+ * \param key      The HMAC secret key.
+ * \param keylen   The length of the HMAC secret key in Bytes.
+ * \param input    The buffer holding the input data.
+ * \param ilen     The length of the input data.
+ * \param output   The generic HMAC result.
+ *
+ * \return         \c 0 on success.
+ * \return         #MBEDTLS_ERR_MD_BAD_INPUT_DATA on parameter-verification
+ *                 failure.
+ */</pre>
+
+      <h4 id="mbedtls_md_process">Func <span>mbedtls_md_process</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md_process( mbedtls_md_context_t *ctx, const unsigned char *data );</code></pre>
+      <pre class="doc-comment">/* Internal use */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char mbedtls_md_get_size( const mbedtls_md_info_t *md_info );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function extracts the message-digest size from the
+ *                  message-digest information structure.
+ *
+ * \param md_info   The information structure of the message-digest algorithm
+ *                  to use.
+ *
+ * \return          The size of the message-digest output in Bytes.
+ */</pre>
+
+      <h4 id="mbedtls_md_type_t">Variable <span>mbedtls_md_type_t</span></h4>
+      <pre class="doc-declare"><code>mbedtls_md_type_t mbedtls_md_get_type( const mbedtls_md_info_t *md_info );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function extracts the message-digest type from the
+ *                  message-digest information structure.
+ *
+ * \param md_info   The information structure of the message-digest algorithm
+ *                  to use.
+ *
+ * \return          The type of the message digest.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const int *mbedtls_md_list( void );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function returns the list of digests supported by the
+ *                  generic digest module.
+ *
+ * \return          A statically allocated array of digests. Each element
+ *                  in the returned list is an integer belonging to the
+ *                  message-digest enumeration #mbedtls_md_type_t.
+ *                  The last entry is 0.
+ */</pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const mbedtls_md_info_t *mbedtls_md_info_from_string( const char *md_name );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function returns the message-digest information
+ *                  associated with the given digest name.
+ *
+ * \param md_name   The name of the digest to search for.
+ *
+ * \return          The message-digest information associated with \p md_name.
+ * \return          NULL if the associated message-digest information is not found.
+ */</pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const mbedtls_md_info_t *mbedtls_md_info_from_type( mbedtls_md_type_t md_type );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function returns the message-digest information
+ *                  associated with the given digest type.
+ *
+ * \param md_type   The type of digest to search for.
+ *
+ * \return          The message-digest information associated with \p md_type.
+ * \return          NULL if the associated message-digest information is not found.
+ */</pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char *mbedtls_md_get_name( const mbedtls_md_info_t *md_info );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function extracts the message-digest name from the
+ *                  message-digest information structure.
+ *
+ * \param md_info   The information structure of the message-digest algorithm
+ *                  to use.
+ *
+ * \return          The name of the message digest.
+ */</pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_md_type_t;
+">Typedef <span>mbedtls_md_type_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   MBEDTLS_MD_NONE=0,   /**< None. */
+   MBEDTLS_MD_MD2,      /**< The MD2 message digest. */
+   MBEDTLS_MD_MD4,      /**< The MD4 message digest. */
+   MBEDTLS_MD_MD5,      /**< The MD5 message digest. */
+   MBEDTLS_MD_SHA1,     /**< The SHA-1 message digest. */
+   MBEDTLS_MD_SHA224,   /**< The SHA-224 message digest. */
+   MBEDTLS_MD_SHA256,   /**< The SHA-256 message digest. */
+   MBEDTLS_MD_SHA384,   /**< The SHA-384 message digest. */
+   MBEDTLS_MD_SHA512,   /**< The SHA-512 message digest. */
+   MBEDTLS_MD_RIPEMD160, /**< The RIPEMD-160 message digest. */
+} mbedtls_md_type_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief     Supported message digests.
+ *
+ * \warning   MD2, MD4, MD5 and SHA-1 are considered weak message digests and
+ *            their use constitutes a security risk. We recommend considering
+ *            stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md_info_t">Typedef <span>mbedtls_md_info_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_md_info_t mbedtls_md_info_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Opaque struct defined in md_internal.h.
+ */</pre>
+
+      <h4 id="mbedtls_md_context_t;
+">Typedef <span>mbedtls_md_context_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_md_context_t
+{
+   /** Information about the associated message digest. */
+   const mbedtls_md_info_t *md_info;
+
+   /** The digest-specific context. */
+   void *md_ctx;
+
+   /** The HMAC part of the context. */
+   void *hmac_ctx;
+} mbedtls_md_context_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * The generic message-digest context.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

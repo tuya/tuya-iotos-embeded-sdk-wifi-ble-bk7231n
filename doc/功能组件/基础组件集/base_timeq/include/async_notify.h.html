@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sys_timer.h" class="nav-sub-label">sys_timer.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_ASYNC_NOTIFY_H" class="nav-sub-label">_ASYNC_NOTIFY_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#create_notify_handle" class="nav-sub-label">create_notify_handle</a>
+              </li>
+      
+
+              <li>
+                <a href="#delete_notify_handle" class="nav-sub-label">delete_notify_handle</a>
+              </li>
+      
+
+              <li>
+                <a href="#register_notify_handle" class="nav-sub-label">register_notify_handle</a>
+              </li>
+      
+
+              <li>
+                <a href="#notify_handle_finish" class="nav-sub-label">notify_handle_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#notify_handle_error" class="nav-sub-label">notify_handle_error</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#NOTIFY_HANDLE" class="nav-sub-label">NOTIFY_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#NOTIFY_PARAM" class="nav-sub-label">NOTIFY_PARAM</a>
+              </li>
+      
+
+              <li>
+                <a href="#NOTIFY_TIME_MS" class="nav-sub-label">NOTIFY_TIME_MS</a>
+              </li>
+      
+
+              <li>
+                <a href="#NOTIFY_TYPE_E;
+" class="nav-sub-label">NOTIFY_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#P_NOTIFY_FUNC" class="nav-sub-label">P_NOTIFY_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#NOTIFY_HANDLE_S;
+" class="nav-sub-label">NOTIFY_HANDLE_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="sys_timer.h"><span>sys_timer.h</span></h4>
+      <pre class="doc-declare"><code>#include "sys_timer.h"
+</code></pre>
+      <pre class="doc-comment">#include "sys_timer.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_ASYNC_NOTIFY_H">Marco <span>_ASYNC_NOTIFY_H</span></h4>
+      <pre class="doc-declare"><code>#define _ASYNC_NOTIFY_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="create_notify_handle">Func <span>create_notify_handle</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET create_notify_handle(OUT NOTIFY_HANDLE *p_handle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create notify handle.
+ *
+ * @param[out] p_handle: the notify handle
+ *
+ * @note This API is used for creating the notify handle
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="delete_notify_handle">Func <span>delete_notify_handle</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET delete_notify_handle(IN NOTIFY_HANDLE *p_handle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Delete notify handle.
+ *
+ * @param[in] p_handle: the notify handle
+ *
+ * @note This API is used for deleting the notify handle
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="register_notify_handle">Func <span>register_notify_handle</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET register_notify_handle(IN NOTIFY_HANDLE handle, \
+                                           IN CONST P_NOTIFY_FUNC func, \
+                                           IN CONST NOTIFY_PARAM param, \
+                                           IN CONST NOTIFY_TIME_MS time_ms);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register notify handle information.
+ *
+ * @param[in] handle: the notify handle
+ * @param[in] func: the notify callback function
+ * @param[in] param: the notify call back param
+ * @param[in] time_ms: after time in MS, the notification will be trigged 
+ *
+ * @note This API is used for creating the notify handle
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="notify_handle_finish">Func <span>notify_handle_finish</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET notify_handle_finish(IN NOTIFY_HANDLE handle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Finish notify handle.
+ *
+ * @param[in] handle: the notify handle
+ *
+ * @note This API is used for telling the caller the notification is finished.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="notify_handle_error">Func <span>notify_handle_error</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET notify_handle_error(IN NOTIFY_HANDLE handle);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Finish notify handle.
+ *
+ * @param[in] handle: the notify handle
+ *
+ * @note This API is used for telling the caller the notification is error.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="NOTIFY_HANDLE">Typedef <span>NOTIFY_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T NOTIFY_HANDLE;
+</code></pre>
+      <pre class="doc-comment">//notify handle</pre>
+
+      <h4 id="NOTIFY_PARAM">Typedef <span>NOTIFY_PARAM</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T NOTIFY_PARAM;
+</code></pre>
+      <pre class="doc-comment">//notify param</pre>
+
+      <h4 id="NOTIFY_TIME_MS">Typedef <span>NOTIFY_TIME_MS</span></h4>
+      <pre class="doc-declare"><code>typedef DWORD_T NOTIFY_TIME_MS;
+</code></pre>
+      <pre class="doc-comment">//notify time(ms)</pre>
+
+      <h4 id="NOTIFY_TYPE_E;
+">Typedef <span>NOTIFY_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+   NOTIFY_FINISH = 0,
+   NOTIFY_ERROR,
+   NOTIFY_OVERTIME,
+}NOTIFY_TYPE_E;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of notify type
+ */</pre>
+
+      <h4 id="P_NOTIFY_FUNC">Typedef <span>P_NOTIFY_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*P_NOTIFY_FUNC)(IN CONST NOTIFY_TYPE_E type, IN NOTIFY_PARAM param);
+</code></pre>
+      <pre class="doc-comment">//notify callback function definition</pre>
+
+      <h4 id="NOTIFY_HANDLE_S;
+">Typedef <span>NOTIFY_HANDLE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   TIMER_ID timer;       //timer
+   P_NOTIFY_FUNC func;   //callback function
+   NOTIFY_PARAM param;   //param
+   NOTIFY_TIME_MS time_ms;//time(ms)
+}NOTIFY_HANDLE_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief notify handle info
+ */</pre>
+    </div>
+  </body>
+</html>
+            

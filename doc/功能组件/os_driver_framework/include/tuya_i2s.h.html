@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver.h" class="nav-sub-label">tuya_driver.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_I2S_H__" class="nav-sub-label">__TUYA_I2S_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_I2S_CFG(__I2S, __MODE, __FREQ, __DATABIT, __CHANNEL, __STANDARD)" class="nav-sub-label">TUYA_I2S_CFG(__I2S, __MODE, __FREQ, __DATABIT, __CHANNEL, __STANDARD)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_i2s_init" class="nav-sub-label">tuya_i2s_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_start" class="nav-sub-label">tuya_i2s_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_stop" class="nav-sub-label">tuya_i2s_stop</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_i2s_write" class="nav-sub-label">tuya_i2s_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_read" class="nav-sub-label">tuya_i2s_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_control" class="nav-sub-label">tuya_i2s_control</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_deinit" class="nav-sub-label">tuya_i2s_deinit</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_i2s_port_t;
+" class="nav-sub-label">tuya_i2s_port_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_freq_t;
+" class="nav-sub-label">tuya_i2s_freq_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2c_databit_t;
+" class="nav-sub-label">tuya_i2c_databit_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_channel_t;
+" class="nav-sub-label">tuya_i2s_channel_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_standard_t;
+" class="nav-sub-label">tuya_i2s_standard_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_mode_t;
+" class="nav-sub-label">tuya_i2s_mode_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_cmd_t;
+" class="nav-sub-label">tuya_i2s_cmd_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_cfg_t;
+" class="nav-sub-label">tuya_i2s_cfg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_t" class="nav-sub-label">tuya_i2s_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_i2s_ops_t;
+" class="nav-sub-label">tuya_i2s_ops_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_driver.h"><span>tuya_driver.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_driver.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_driver.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_I2S_H__">Marco <span>__TUYA_I2S_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_I2S_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_I2S_CFG(__I2S, __MODE, __FREQ, __DATABIT, __CHANNEL, __STANDARD)">Marco <span>TUYA_I2S_CFG(__I2S, __MODE, __FREQ, __DATABIT, __CHANNEL, __STANDARD)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_I2S_CFG(__I2S, __MODE, __FREQ, __DATABIT, __CHANNEL, __STANDARD)  \
+   (__I2S)->cfg.mode     = __MODE;                                           \
+   (__I2S)->cfg.freq     = __FREQ;                                           \
+   (__I2S)->cfg.cahnnel  = __DATABIT;                                        \
+   (__I2S)->cfg.standard = __CHANNEL;                                        \
+   (__I2S)->cfg.databits = __STANDARD                                        
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_i2s_init">Func <span>tuya_i2s_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_init(tuya_i2s_t *i2s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s init
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2s_start">Func <span>tuya_i2s_start</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_start(tuya_i2s_t *i2s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s start
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2s_stop">Func <span>tuya_i2s_stop</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_stop(tuya_i2s_t *i2s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s stop
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_i2s_write">Variable <span>tuya_i2s_write</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_write    (tuya_i2s_t *i2s, void *data, uint32_t length);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s write
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ * @param[in] data buffer
+ * @param[in] length buffer length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2s_read">Variable <span>tuya_i2s_read</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_read    (tuya_i2s_t *i2s, void *data, uint32_t length);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s read
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ * @param[out] data buffer
+ * @param[out] length buffer length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2s_control">Variable <span>tuya_i2s_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_control     (tuya_i2s_t *i2s, UINT8_T cmd, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s control
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ * @param[in] cmd control command
+ * @param[in] arg command argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_i2s_deinit">Variable <span>tuya_i2s_deinit</span></h4>
+      <pre class="doc-declare"><code>int tuya_i2s_deinit     (tuya_i2s_t *i2s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief i2s deinit
+ * 
+ * @param[in] i2s refer to tuya_i2s_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_i2s_port_t;
+">Typedef <span>tuya_i2s_port_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S0 = 0,                 
+   TUYA_I2S1,      
+} tuya_i2s_port_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_freq_t;
+">Typedef <span>tuya_i2s_freq_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S_FREQ_8K        = 8000,       
+   TUYA_I2S_FREQ_16K       = 16000,                 
+   TUYA_I2S_FREQ_22K       = 22050, 
+   TUYA_I2S_FREQ_32K       = 32000, 
+   TUYA_I2S_FREQ_44K       = 44100, 
+   TUYA_I2S_FREQ_48K       = 48000, 
+} tuya_i2s_freq_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2c_databit_t;
+">Typedef <span>tuya_i2c_databit_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S_DATA_BIT8       = 8,                 
+   TUYA_I2S_DATA_BIT16      = 16,
+   TUYA_I2S_DATA_BIT24      = 24,     
+   TUYA_I2S_DATA_BIT32      = 32,       
+} tuya_i2c_databit_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_channel_t;
+">Typedef <span>tuya_i2s_channel_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S_CHANNEL_MONO    = 1,                 
+   TUYA_I2S_CHANNEL_STEREO  = 2,
+} tuya_i2s_channel_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_standard_t;
+">Typedef <span>tuya_i2s_standard_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S_STANDARD_PHILIPS = 1,              
+   TUYA_I2S_STANDARD_MSB,
+   TUYA_I2S_STANDARD_LSB,
+} tuya_i2s_standard_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_mode_t;
+">Typedef <span>tuya_i2s_mode_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S_MODE_TX = 1,              
+   TUYA_I2S_MODE_RX,
+   TUYA_I2S_MODE_TXRX,
+} tuya_i2s_mode_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_cmd_t;
+">Typedef <span>tuya_i2s_cmd_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_I2S_START_CMD = 32,              
+   TUYA_I2S_STOP_CMD,
+} tuya_i2s_cmd_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_cfg_t;
+">Typedef <span>tuya_i2s_cfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   tuya_i2s_mode_t      mode;
+   tuya_i2s_freq_t      freq;
+   tuya_i2s_channel_t   cahnnel;
+   tuya_i2s_standard_t  standard;
+   tuya_i2c_databit_t   databits;
+} tuya_i2s_cfg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_t">Typedef <span>tuya_i2s_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct tuya_i2s tuya_i2s_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_i2s_ops_t;
+">Typedef <span>tuya_i2s_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int (*init)        (tuya_i2s_t *i2s, tuya_i2s_cfg_t *cfg);
+   int (*write)       (tuya_i2s_t *i2s, void *data, uint32_t length);
+   int (*read)        (tuya_i2s_t *i2s, void *data, uint32_t length);
+   int (*control)     (tuya_i2s_t *i2s, uint32_t cmd, void *arg);
+   int (*deinit)      (tuya_i2s_t *i2s);
+} tuya_i2s_ops_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

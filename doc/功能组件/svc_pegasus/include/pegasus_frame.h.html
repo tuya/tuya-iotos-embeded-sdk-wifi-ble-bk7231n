@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdbool.h" class="nav-sub-label">stdbool.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__PEGASUS_FRAME_H__" class="nav-sub-label">__PEGASUS_FRAME_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_FRAME_LEN_MAX" class="nav-sub-label">PEGASUS_FRAME_LEN_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_LEN_MAX" class="nav-sub-label">PEGASUS_DATA_LEN_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_MAC_LEN" class="nav-sub-label">PEGASUS_MAC_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#WNC_PEGASUS" class="nav-sub-label">WNC_PEGASUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PEGASUS_BEACON" class="nav-sub-label">TUYA_PEGASUS_BEACON</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PEGASUS_SSID" class="nav-sub-label">TUYA_PEGASUS_SSID</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_CMD" class="nav-sub-label">PEGASUS_TYPE_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_PRODUCT_ID" class="nav-sub-label">PEGASUS_TYPE_PRODUCT_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_DEV_ID" class="nav-sub-label">PEGASUS_TYPE_DEV_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_DEV_MAC" class="nav-sub-label">PEGASUS_TYPE_DEV_MAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_RA_UUID_HMAC" class="nav-sub-label">PEGASUS_TYPE_RA_UUID_HMAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_RA_AES" class="nav-sub-label">PEGASUS_TYPE_RA_AES</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_RA_HMAC" class="nav-sub-label">PEGASUS_TYPE_RA_HMAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_RB_AES" class="nav-sub-label">PEGASUS_TYPE_RB_AES</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_RB_HMAC" class="nav-sub-label">PEGASUS_TYPE_RB_HMAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_UUID_HMAC" class="nav-sub-label">PEGASUS_TYPE_UUID_HMAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_AP_MAC" class="nav-sub-label">PEGASUS_TYPE_AP_MAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#WFC_TYPE_TAG" class="nav-sub-label">WFC_TYPE_TAG</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_CRC32" class="nav-sub-label">PEGASUS_TYPE_CRC32</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_TYPE_DATA" class="nav-sub-label">PEGASUS_TYPE_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_CLIENT_FIRST_REQ" class="nav-sub-label">PEGASUS_CMD_CLIENT_FIRST_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_CLIENT_SECOND_REQ" class="nav-sub-label">PEGASUS_CMD_CLIENT_SECOND_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_SERVER_FIRST_SECOND_REQ_ACK" class="nav-sub-label">PEGASUS_CMD_SERVER_FIRST_SECOND_REQ_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_SERVER_RECHECK_REQ" class="nav-sub-label">PEGASUS_CMD_SERVER_RECHECK_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_CLIENT_RECHECK_ACK" class="nav-sub-label">PEGASUS_CMD_CLIENT_RECHECK_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_SERVER_CONFIG_CANCEL" class="nav-sub-label">PEGASUS_CMD_SERVER_CONFIG_CANCEL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_SERVER_FIRST_CONFIG_RSP" class="nav-sub-label">PEGASUS_CMD_SERVER_FIRST_CONFIG_RSP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_SERVER_SECOND_CONFIG_RSP" class="nav-sub-label">PEGASUS_CMD_SERVER_SECOND_CONFIG_RSP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_CMD_CLIENT_NET_CONFIG_ACK" class="nav-sub-label">PEGASUS_CMD_CLIENT_NET_CONFIG_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_TYPE_SSID" class="nav-sub-label">PEGASUS_DATA_TYPE_SSID</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_TYPE_SECURITY_MODE" class="nav-sub-label">PEGASUS_DATA_TYPE_SECURITY_MODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_TYPE_PASSWD" class="nav-sub-label">PEGASUS_DATA_TYPE_PASSWD</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_TYPE_CHANNEL" class="nav-sub-label">PEGASUS_DATA_TYPE_CHANNEL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_TYPE_BSSID" class="nav-sub-label">PEGASUS_DATA_TYPE_BSSID</a>
+              </li>
+      
+
+              <li>
+                <a href="#PEGASUS_DATA_TYPE_TOKEN" class="nav-sub-label">PEGASUS_DATA_TYPE_TOKEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#pegasus_frame_malloc" class="nav-sub-label">pegasus_frame_malloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#pegasus_frame_free" class="nav-sub-label">pegasus_frame_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#pegasus_frame_data_set" class="nav-sub-label">pegasus_frame_data_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#pegasus_frame_crc_set" class="nav-sub-label">pegasus_frame_crc_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#pegasus_frame_crc_check" class="nav-sub-label">pegasus_frame_crc_check</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include "stdint.h"
+</code></pre>
+      <pre class="doc-comment">#include "stdint.h"
+</pre>
+
+      <h4 id="stdbool.h"><span>stdbool.h</span></h4>
+      <pre class="doc-declare"><code>#include "stdbool.h"
+</code></pre>
+      <pre class="doc-comment">#include "stdbool.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__PEGASUS_FRAME_H__">Marco <span>__PEGASUS_FRAME_H__</span></h4>
+      <pre class="doc-declare"><code>#define __PEGASUS_FRAME_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_FRAME_LEN_MAX">Marco <span>PEGASUS_FRAME_LEN_MAX</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_FRAME_LEN_MAX                  512
+</code></pre>
+      <pre class="doc-comment">/*============================ MACROS ========================================*/</pre>
+
+      <h4 id="PEGASUS_DATA_LEN_MAX">Marco <span>PEGASUS_DATA_LEN_MAX</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_LEN_MAX                   256
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_MAC_LEN">Marco <span>PEGASUS_MAC_LEN</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_MAC_LEN                        6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WNC_PEGASUS">Marco <span>WNC_PEGASUS</span></h4>
+      <pre class="doc-declare"><code>#define WNC_PEGASUS                            4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PEGASUS_BEACON">Marco <span>TUYA_PEGASUS_BEACON</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PEGASUS_BEACON                    "pegasus"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PEGASUS_SSID">Marco <span>TUYA_PEGASUS_SSID</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PEGASUS_SSID                      NULL
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_CMD">Marco <span>PEGASUS_TYPE_CMD</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_CMD                       1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_PRODUCT_ID">Marco <span>PEGASUS_TYPE_PRODUCT_ID</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_PRODUCT_ID                2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_DEV_ID">Marco <span>PEGASUS_TYPE_DEV_ID</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_DEV_ID                    3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_DEV_MAC">Marco <span>PEGASUS_TYPE_DEV_MAC</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_DEV_MAC                   4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_RA_UUID_HMAC">Marco <span>PEGASUS_TYPE_RA_UUID_HMAC</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_RA_UUID_HMAC              5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_RA_AES">Marco <span>PEGASUS_TYPE_RA_AES</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_RA_AES                    6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_RA_HMAC">Marco <span>PEGASUS_TYPE_RA_HMAC</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_RA_HMAC                   7
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_RB_AES">Marco <span>PEGASUS_TYPE_RB_AES</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_RB_AES                    8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_RB_HMAC">Marco <span>PEGASUS_TYPE_RB_HMAC</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_RB_HMAC                   9
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_UUID_HMAC">Marco <span>PEGASUS_TYPE_UUID_HMAC</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_UUID_HMAC                 0xa
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_AP_MAC">Marco <span>PEGASUS_TYPE_AP_MAC</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_AP_MAC                    0xb
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WFC_TYPE_TAG">Marco <span>WFC_TYPE_TAG</span></h4>
+      <pre class="doc-declare"><code>#define WFC_TYPE_TAG                           253
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_CRC32">Marco <span>PEGASUS_TYPE_CRC32</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_CRC32                     254
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_TYPE_DATA">Marco <span>PEGASUS_TYPE_DATA</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_TYPE_DATA                      255
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_CMD_CLIENT_FIRST_REQ">Marco <span>PEGASUS_CMD_CLIENT_FIRST_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_CLIENT_FIRST_REQ                  0
+</code></pre>
+      <pre class="doc-comment">//1.1 Client Request First Config</pre>
+
+      <h4 id="PEGASUS_CMD_CLIENT_SECOND_REQ">Marco <span>PEGASUS_CMD_CLIENT_SECOND_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_CLIENT_SECOND_REQ                 1
+</code></pre>
+      <pre class="doc-comment">//1.1 Client Request Second Config</pre>
+
+      <h4 id="PEGASUS_CMD_SERVER_FIRST_SECOND_REQ_ACK">Marco <span>PEGASUS_CMD_SERVER_FIRST_SECOND_REQ_ACK</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_SERVER_FIRST_SECOND_REQ_ACK       130
+</code></pre>
+      <pre class="doc-comment">//1.2 Server Ack to Client Request</pre>
+
+      <h4 id="PEGASUS_CMD_SERVER_RECHECK_REQ">Marco <span>PEGASUS_CMD_SERVER_RECHECK_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_SERVER_RECHECK_REQ                131
+</code></pre>
+      <pre class="doc-comment">//2.1 Server Request Check</pre>
+
+      <h4 id="PEGASUS_CMD_CLIENT_RECHECK_ACK">Marco <span>PEGASUS_CMD_CLIENT_RECHECK_ACK</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_CLIENT_RECHECK_ACK                3
+</code></pre>
+      <pre class="doc-comment">//2.2 Clien Ack to Server Check</pre>
+
+      <h4 id="PEGASUS_CMD_SERVER_CONFIG_CANCEL">Marco <span>PEGASUS_CMD_SERVER_CONFIG_CANCEL</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_SERVER_CONFIG_CANCEL              132
+</code></pre>
+      <pre class="doc-comment">/*cancel pegasus netcfg ,go to concurrent共存配网*/</pre>
+
+      <h4 id="PEGASUS_CMD_SERVER_FIRST_CONFIG_RSP">Marco <span>PEGASUS_CMD_SERVER_FIRST_CONFIG_RSP</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_SERVER_FIRST_CONFIG_RSP           128
+</code></pre>
+      <pre class="doc-comment">//3.1 Server Send ssid&passwd&token First Config</pre>
+
+      <h4 id="PEGASUS_CMD_SERVER_SECOND_CONFIG_RSP">Marco <span>PEGASUS_CMD_SERVER_SECOND_CONFIG_RSP</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_SERVER_SECOND_CONFIG_RSP          129
+</code></pre>
+      <pre class="doc-comment">//3.1 Server Send ssid&passwd&token Second Config</pre>
+
+      <h4 id="PEGASUS_CMD_CLIENT_NET_CONFIG_ACK">Marco <span>PEGASUS_CMD_CLIENT_NET_CONFIG_ACK</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_CMD_CLIENT_NET_CONFIG_ACK             2
+</code></pre>
+      <pre class="doc-comment">//3.2 Client Ack to Server Send ssid&passwd&token</pre>
+
+      <h4 id="PEGASUS_DATA_TYPE_SSID">Marco <span>PEGASUS_DATA_TYPE_SSID</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_TYPE_SSID                 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_DATA_TYPE_SECURITY_MODE">Marco <span>PEGASUS_DATA_TYPE_SECURITY_MODE</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_TYPE_SECURITY_MODE        2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_DATA_TYPE_PASSWD">Marco <span>PEGASUS_DATA_TYPE_PASSWD</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_TYPE_PASSWD               3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_DATA_TYPE_CHANNEL">Marco <span>PEGASUS_DATA_TYPE_CHANNEL</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_TYPE_CHANNEL              4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_DATA_TYPE_BSSID">Marco <span>PEGASUS_DATA_TYPE_BSSID</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_TYPE_BSSID                5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PEGASUS_DATA_TYPE_TOKEN">Marco <span>PEGASUS_DATA_TYPE_TOKEN</span></h4>
+      <pre class="doc-declare"><code>#define PEGASUS_DATA_TYPE_TOKEN                6
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="pegasus_frame_malloc">Func <span>pegasus_frame_malloc</span></h4>
+      <pre class="doc-declare"><code>int pegasus_frame_malloc(uint8_t **frame);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pegasus_frame_free">Func <span>pegasus_frame_free</span></h4>
+      <pre class="doc-declare"><code>void pegasus_frame_free(uint8_t *frame);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pegasus_frame_data_set">Func <span>pegasus_frame_data_set</span></h4>
+      <pre class="doc-declare"><code>uint32_t pegasus_frame_data_set(uint8_t    *frame, 
+                               uint32_t   offset, 
+                               uint8_t    type, 
+                               uint8_t    *data, 
+                               uint32_t   len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pegasus_frame_crc_set">Func <span>pegasus_frame_crc_set</span></h4>
+      <pre class="doc-declare"><code>uint32_t pegasus_frame_crc_set(uint8_t *frame, uint32_t offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pegasus_frame_crc_check">Func <span>pegasus_frame_crc_check</span></h4>
+      <pre class="doc-declare"><code>int pegasus_frame_crc_check(uint8_t *frame, int frame_len);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

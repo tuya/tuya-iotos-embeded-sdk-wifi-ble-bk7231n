@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_MIX_METHOD_H" class="nav-sub-label">_MIX_METHOD_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_strncasecmp" class="nav-sub-label">tuya_strncasecmp</a>
+              </li>
+      
+
+              <li>
+                <a href="#ascs2hex" class="nav-sub-label">ascs2hex</a>
+              </li>
+      
+
+              <li>
+                <a href="#hex2str" class="nav-sub-label">hex2str</a>
+              </li>
+      
+
+              <li>
+                <a href="#byte2str" class="nav-sub-label">byte2str</a>
+              </li>
+      
+
+              <li>
+                <a href="#str_revr_find_ch" class="nav-sub-label">str_revr_find_ch</a>
+              </li>
+      
+
+              <li>
+                <a href="#byte_sort" class="nav-sub-label">byte_sort</a>
+              </li>
+      
+
+              <li>
+                <a href="#is_valid_version" class="nav-sub-label">is_valid_version</a>
+              </li>
+      
+
+              <li>
+                <a href="#string2mac" class="nav-sub-label">string2mac</a>
+              </li>
+      
+
+              <li>
+                <a href="#versionString2int" class="nav-sub-label">versionString2int</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_isalpha" class="nav-sub-label">tuya_isalpha</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tolower" class="nav-sub-label">tuya_tolower</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_toupper" class="nav-sub-label">tuya_toupper</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_MIX_METHOD_H">Marco <span>_MIX_METHOD_H</span></h4>
+      <pre class="doc-declare"><code>#define _MIX_METHOD_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_strncasecmp">Func <span>tuya_strncasecmp</span></h4>
+      <pre class="doc-declare"><code>int tuya_strncasecmp(const char *s1, const char *s2, size_t n);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief compare the first n characters of two string
+ * 
+ * @param[in] s1 the string 1
+ * @param[in] s2 the string 2
+ * @param[in] n the first n characters
+ * 
+ * @return 0 one equal, 1 on s1 longer than s2, -1 on s2 longer than s1
+ */</pre>
+
+      <h4 id="ascs2hex">Func <span>ascs2hex</span></h4>
+      <pre class="doc-declare"><code>void ascs2hex(unsigned char *hex,unsigned char *ascs,int srclen);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief convert the character array to hex array
+ * 
+ * @param[out] hex the out hex array
+ * @param[in] ascs the input character array
+ * @param[in] srclen the length of input character array
+ */</pre>
+
+      <h4 id="hex2str">Func <span>hex2str</span></h4>
+      <pre class="doc-declare"><code>void hex2str(unsigned char *pbDest, unsigned char *pbSrc, int nLen);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief convert the input hex array to string array
+ * 
+ * @param[out] pbDest the out string array
+ * @param[in] pbSrc the input hex array
+ * @param[in] nLen the length of input hex array
+ * 
+ * @note the size of <pbDest> must >= nLen * 2, convert example 00-ff -> "00"-"FF"
+ */</pre>
+
+      <h4 id="byte2str">Func <span>byte2str</span></h4>
+      <pre class="doc-declare"><code>void byte2str(unsigned char *pbDest, unsigned char *pbSrc, int nLen, bool_t upper);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="str_revr_find_ch">Func <span>str_revr_find_ch</span></h4>
+      <pre class="doc-declare"><code>int str_revr_find_ch(const char *str,const int revr_index,const char ch);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief find <ch> in <str>, start find in index <revr_index>, find in reverse order.
+ * 
+ * @param[in] str the string for find
+ * @param[in] revr_index the start index to find
+ * @param[in] ch the character to find
+ * @return -2 on not found, -1 on invalid parameter, >=0 on the position of the character to find 
+ */</pre>
+
+      <h4 id="byte_sort">Func <span>byte_sort</span></h4>
+      <pre class="doc-declare"><code>void byte_sort(unsigned char is_ascend, unsigned char *buf, int buf_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief sort the char in the buf according ascii value
+ * 
+ * @param[in] is_ascend sort in sacend order
+ * @param[in] buf the buffer need to sort
+ * @param[in] buf_cnt the character counts in buffer
+ */</pre>
+
+      <h4 id="is_valid_version">Func <span>is_valid_version</span></h4>
+      <pre class="doc-declare"><code>int is_valid_version(char *ver);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check the version input is valid
+ * 
+ * @param[in] ver the version string
+ * @return 1 on valid, 0 on invalid 
+ */</pre>
+
+      <h4 id="string2mac">Func <span>string2mac</span></h4>
+      <pre class="doc-declare"><code>int string2mac(const char *str, char mac[6]);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief convert mac address string to mac address array
+ * 
+ * @param[in] str the input mac address string
+ * @param[out] mac the mac address array
+ * @return 0 on success, others on failed.
+ * 
+ * @warning now only support valid mac address string: xxxxxxxxxxxx / xx-xx-xx-xx-xx-xx
+ */</pre>
+
+      <h4 id="versionString2int">Func <span>versionString2int</span></h4>
+      <pre class="doc-declare"><code>int versionString2int(const char* versionString);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief convert version string to integer
+ * 
+ * @param[in] versionString the input version string
+ * @return a integer version
+ * 
+ * @note  can support version string format x.y.z or x.y, for example: "1.0.1" to 0x010001 and "40.00" t0 0x2800
+
+ */</pre>
+
+      <h4 id="tuya_isalpha">Func <span>tuya_isalpha</span></h4>
+      <pre class="doc-declare"><code>int tuya_isalpha(int c);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_tolower">Func <span>tuya_tolower</span></h4>
+      <pre class="doc-declare"><code>int tuya_tolower(int c);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_toupper">Func <span>tuya_toupper</span></h4>
+      <pre class="doc-declare"><code>int tuya_toupper(int c);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char asc2hex(char asccode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief convert character to hex, if '0'-'f'/'F' -> 0-15, else 0
+ * 
+ * @param[in] asccode the input character
+ * @return the hex value
+ */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *mm_strdup(const char *str);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  duplicate input string, will malloc a new block of memory
+ * 
+ * @param[in] str the input string need to duplicate
+ * @return new string  
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

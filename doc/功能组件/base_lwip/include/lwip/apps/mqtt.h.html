@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/apps/mqtt_opts.h" class="nav-sub-label">lwip/apps/mqtt_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/iana.h" class="nav-sub-label">lwip/prot/iana.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_MQTT_CLIENT_H" class="nav-sub-label">LWIP_HDR_APPS_MQTT_CLIENT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_PORT" class="nav-sub-label">MQTT_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_TLS_PORT" class="nav-sub-label">MQTT_TLS_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_subscribe(client, topic, qos, cb, arg)" class="nav-sub-label">mqtt_subscribe(client, topic, qos, cb, arg)</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_unsubscribe(client, topic, cb, arg)" class="nav-sub-label">mqtt_unsubscribe(client, topic, cb, arg)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mqtt_client_connect" class="nav-sub-label">mqtt_client_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_disconnect" class="nav-sub-label">mqtt_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_client_new" class="nav-sub-label">mqtt_client_new</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_client_free" class="nav-sub-label">mqtt_client_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_client_is_connected" class="nav-sub-label">mqtt_client_is_connected</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_set_inpub_callback" class="nav-sub-label">mqtt_set_inpub_callback</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_sub_unsub" class="nav-sub-label">mqtt_sub_unsub</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_publish" class="nav-sub-label">mqtt_publish</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#altcp_tls_config" class="nav-sub-label">altcp_tls_config</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mqtt_client_t" class="nav-sub-label">mqtt_client_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_connection_status_t;
+" class="nav-sub-label">mqtt_connection_status_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_connection_cb_t" class="nav-sub-label">mqtt_connection_cb_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_incoming_data_cb_t" class="nav-sub-label">mqtt_incoming_data_cb_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_incoming_publish_cb_t" class="nav-sub-label">mqtt_incoming_publish_cb_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_request_cb_t" class="nav-sub-label">mqtt_request_cb_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/apps/mqtt_opts.h"><span>lwip/apps/mqtt_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/apps/mqtt_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/apps/mqtt_opts.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/prot/iana.h"><span>lwip/prot/iana.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/iana.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/iana.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_MQTT_CLIENT_H">Marco <span>LWIP_HDR_APPS_MQTT_CLIENT_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_MQTT_CLIENT_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_PORT">Marco <span>MQTT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_PORT    LWIP_IANA_PORT_MQTT
+</code></pre>
+      <pre class="doc-comment">/** @ingroup mqtt
+ * Default MQTT port (non-TLS) */</pre>
+
+      <h4 id="MQTT_TLS_PORT">Marco <span>MQTT_TLS_PORT</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_TLS_PORT LWIP_IANA_PORT_SECURE_MQTT
+</code></pre>
+      <pre class="doc-comment">/** @ingroup mqtt
+ * Default MQTT TLS port */</pre>
+
+      <h4 id="mqtt_subscribe(client, topic, qos, cb, arg)">Marco <span>mqtt_subscribe(client, topic, qos, cb, arg)</span></h4>
+      <pre class="doc-declare"><code>#define mqtt_subscribe(client, topic, qos, cb, arg) mqtt_sub_unsub(client, topic, qos, cb, arg, 1)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup mqtt
+ *Subscribe to topic */</pre>
+
+      <h4 id="mqtt_unsubscribe(client, topic, cb, arg)">Marco <span>mqtt_unsubscribe(client, topic, cb, arg)</span></h4>
+      <pre class="doc-declare"><code>#define mqtt_unsubscribe(client, topic, cb, arg) mqtt_sub_unsub(client, topic, 0, cb, arg, 0)
+</code></pre>
+      <pre class="doc-comment">/** @ingroup mqtt
+ *  Unsubscribe to topic */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mqtt_client_connect">Func <span>mqtt_client_connect</span></h4>
+      <pre class="doc-declare"><code>err_t mqtt_client_connect(mqtt_client_t *client, const ip_addr_t *ipaddr, u16_t port, mqtt_connection_cb_t cb, void *arg,
+                  const struct mqtt_connect_client_info_t *client_info);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_disconnect">Func <span>mqtt_disconnect</span></h4>
+      <pre class="doc-declare"><code>void mqtt_disconnect(mqtt_client_t *client);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_client_new">Func <span>mqtt_client_new</span></h4>
+      <pre class="doc-declare"><code>mqtt_client_t *mqtt_client_new(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_client_free">Func <span>mqtt_client_free</span></h4>
+      <pre class="doc-declare"><code>void mqtt_client_free(mqtt_client_t* client);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_client_is_connected">Func <span>mqtt_client_is_connected</span></h4>
+      <pre class="doc-declare"><code>u8_t mqtt_client_is_connected(mqtt_client_t *client);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_set_inpub_callback">Func <span>mqtt_set_inpub_callback</span></h4>
+      <pre class="doc-declare"><code>void mqtt_set_inpub_callback(mqtt_client_t *client, mqtt_incoming_publish_cb_t,
+                            mqtt_incoming_data_cb_t data_cb, void *arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_sub_unsub">Func <span>mqtt_sub_unsub</span></h4>
+      <pre class="doc-declare"><code>err_t mqtt_sub_unsub(mqtt_client_t *client, const char *topic, u8_t qos, mqtt_request_cb_t cb, void *arg, u8_t sub);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_publish">Func <span>mqtt_publish</span></h4>
+      <pre class="doc-declare"><code>err_t mqtt_publish(mqtt_client_t *client, const char *topic, const void *payload, u16_t payload_length, u8_t qos, u8_t retain,
+                                   mqtt_request_cb_t cb, void *arg);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="altcp_tls_config">Variable <span>altcp_tls_config</span></h4>
+      <pre class="doc-declare"><code>struct altcp_tls_config;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mqtt_client_t">Typedef <span>mqtt_client_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct mqtt_client_s mqtt_client_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mqtt_connection_status_t;
+">Typedef <span>mqtt_connection_status_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+ /** Accepted */
+ MQTT_CONNECT_ACCEPTED                = 0,
+ /** Refused protocol version */
+ MQTT_CONNECT_REFUSED_PROTOCOL_VERSION = 1,
+ /** Refused identifier */
+ MQTT_CONNECT_REFUSED_IDENTIFIER      = 2,
+ /** Refused server */
+ MQTT_CONNECT_REFUSED_SERVER          = 3,
+ /** Refused user credentials */
+ MQTT_CONNECT_REFUSED_USERNAME_PASS   = 4,
+ /** Refused not authorized */
+ MQTT_CONNECT_REFUSED_NOT_AUTHORIZED_ = 5,
+ /** Disconnected */
+ MQTT_CONNECT_DISCONNECTED            = 256,
+ /** Timeout */
+ MQTT_CONNECT_TIMEOUT                 = 257
+} mqtt_connection_status_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mqtt
+ * Connection status codes */</pre>
+
+      <h4 id="mqtt_connection_cb_t">Typedef <span>mqtt_connection_cb_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*mqtt_connection_cb_t)(mqtt_client_t *client, void *arg, mqtt_connection_status_t status);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mqtt
+ * Function prototype for mqtt connection status callback. Called when
+ * client has connected to the server after initiating a mqtt connection attempt by
+ * calling mqtt_client_connect() or when connection is closed by server or an error
+ *
+ * @param client MQTT client itself
+ * @param arg Additional argument to pass to the callback function
+ * @param status Connect result code or disconnection notification @see mqtt_connection_status_t
+ *
+ */</pre>
+
+      <h4 id="mqtt_incoming_data_cb_t">Typedef <span>mqtt_incoming_data_cb_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*mqtt_incoming_data_cb_t)(void *arg, const u8_t *data, u16_t len, u8_t flags);
+</code></pre>
+      <pre class="doc-comment">/** 
+ * @ingroup mqtt
+ * Function prototype for MQTT incoming publish data callback function. Called when data
+ * arrives to a subscribed topic @see mqtt_subscribe
+ *
+ * @param arg Additional argument to pass to the callback function
+ * @param data User data, pointed object, data may not be referenced after callback return,
+          NULL is passed when all publish data are delivered
+ * @param len Length of publish data fragment
+ * @param flags MQTT_DATA_FLAG_LAST set when this call contains the last part of data from publish message
+ *
+ */</pre>
+
+      <h4 id="mqtt_incoming_publish_cb_t">Typedef <span>mqtt_incoming_publish_cb_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*mqtt_incoming_publish_cb_t)(void *arg, const char *topic, u32_t tot_len);
+</code></pre>
+      <pre class="doc-comment">/** 
+ * @ingroup mqtt
+ * Function prototype for MQTT incoming publish function. Called when an incoming publish
+ * arrives to a subscribed topic @see mqtt_subscribe
+ *
+ * @param arg Additional argument to pass to the callback function
+ * @param topic Zero terminated Topic text string, topic may not be referenced after callback return
+ * @param tot_len Total length of publish data, if set to 0 (no publish payload) data callback will not be invoked
+ */</pre>
+
+      <h4 id="mqtt_request_cb_t">Typedef <span>mqtt_request_cb_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*mqtt_request_cb_t)(void *arg, err_t err);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mqtt
+ * Function prototype for mqtt request callback. Called when a subscribe, unsubscribe
+ * or publish request has completed
+ * @param arg Pointer to user data supplied when invoking request
+ * @param err ERR_OK on success
+ *            ERR_TIMEOUT if no response was received within timeout,
+ *            ERR_ABRT if (un)subscribe was denied
+ */</pre>
+    </div>
+  </body>
+</html>
+            

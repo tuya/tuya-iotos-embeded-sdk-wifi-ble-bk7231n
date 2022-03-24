@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_SNMP_OPTS_H" class="nav-sub-label">LWIP_HDR_SNMP_OPTS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SNMP" class="nav-sub-label">LWIP_SNMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_USE_NETCONN" class="nav-sub-label">SNMP_USE_NETCONN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_USE_RAW" class="nav-sub-label">SNMP_USE_RAW</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_STACK_SIZE" class="nav-sub-label">SNMP_STACK_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_THREAD_PRIO" class="nav-sub-label">SNMP_THREAD_PRIO</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_TRAP_DESTINATIONS" class="nav-sub-label">SNMP_TRAP_DESTINATIONS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_SAFE_REQUESTS" class="nav-sub-label">SNMP_SAFE_REQUESTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MAX_OCTET_STRING_LEN" class="nav-sub-label">SNMP_MAX_OCTET_STRING_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MAX_OBJ_ID_LEN" class="nav-sub-label">SNMP_MAX_OBJ_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MIN_VALUE_SIZE" class="nav-sub-label">SNMP_MIN_VALUE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MAX_VALUE_SIZE" class="nav-sub-label">SNMP_MAX_VALUE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_COMMUNITY" class="nav-sub-label">SNMP_COMMUNITY</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_COMMUNITY_WRITE" class="nav-sub-label">SNMP_COMMUNITY_WRITE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_COMMUNITY_TRAP" class="nav-sub-label">SNMP_COMMUNITY_TRAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MAX_COMMUNITY_STR_LEN" class="nav-sub-label">SNMP_MAX_COMMUNITY_STR_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_ENTERPRISE_OID" class="nav-sub-label">SNMP_LWIP_ENTERPRISE_OID</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_DEVICE_ENTERPRISE_OID" class="nav-sub-label">SNMP_DEVICE_ENTERPRISE_OID</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_DEVICE_ENTERPRISE_OID_LEN" class="nav-sub-label">SNMP_DEVICE_ENTERPRISE_OID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_DEBUG" class="nav-sub-label">SNMP_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MIB_DEBUG" class="nav-sub-label">SNMP_MIB_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_MIB2" class="nav-sub-label">SNMP_LWIP_MIB2</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_MIB2_SYSDESC" class="nav-sub-label">SNMP_LWIP_MIB2_SYSDESC</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_MIB2_SYSNAME" class="nav-sub-label">SNMP_LWIP_MIB2_SYSNAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_MIB2_SYSCONTACT" class="nav-sub-label">SNMP_LWIP_MIB2_SYSCONTACT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_MIB2_SYSLOCATION" class="nav-sub-label">SNMP_LWIP_MIB2_SYSLOCATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_LWIP_GETBULK_MAX_REPETITIONS" class="nav-sub-label">SNMP_LWIP_GETBULK_MAX_REPETITIONS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SNMP_V3" class="nav-sub-label">LWIP_SNMP_V3</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SNMP_V3_MBEDTLS" class="nav-sub-label">LWIP_SNMP_V3_MBEDTLS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SNMP_V3_CRYPTO" class="nav-sub-label">LWIP_SNMP_V3_CRYPTO</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SNMP_CONFIGURE_VERSIONS" class="nav-sub-label">LWIP_SNMP_CONFIGURE_VERSIONS</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_SNMP_OPTS_H">Marco <span>LWIP_HDR_SNMP_OPTS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_SNMP_OPTS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SNMP">Marco <span>LWIP_SNMP</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SNMP                      0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_USE_NETCONN">Marco <span>SNMP_USE_NETCONN</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_USE_NETCONN          0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_USE_RAW">Marco <span>SNMP_USE_RAW</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_USE_RAW              1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_STACK_SIZE">Marco <span>SNMP_STACK_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_STACK_SIZE           DEFAULT_THREAD_STACKSIZE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_THREAD_PRIO">Marco <span>SNMP_THREAD_PRIO</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_THREAD_PRIO          DEFAULT_THREAD_PRIO
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_TRAP_DESTINATIONS">Marco <span>SNMP_TRAP_DESTINATIONS</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_TRAP_DESTINATIONS         1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_SAFE_REQUESTS">Marco <span>SNMP_SAFE_REQUESTS</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_SAFE_REQUESTS             1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_MAX_OCTET_STRING_LEN">Marco <span>SNMP_MAX_OCTET_STRING_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MAX_OCTET_STRING_LEN      127
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_MAX_OBJ_ID_LEN">Marco <span>SNMP_MAX_OBJ_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MAX_OBJ_ID_LEN            50
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_MIN_VALUE_SIZE">Marco <span>SNMP_MIN_VALUE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MIN_VALUE_SIZE            (2 * sizeof(u32_t*)) /* size required to store the basic types (8 bytes for counter64) */
+</code></pre>
+      <pre class="doc-comment">/**
+ * The minimum size of a value.
+ */</pre>
+
+      <h4 id="SNMP_MAX_VALUE_SIZE">Marco <span>SNMP_MAX_VALUE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MAX_VALUE_SIZE            LWIP_MAX(LWIP_MAX((SNMP_MAX_OCTET_STRING_LEN), sizeof(u32_t)*(SNMP_MAX_OBJ_ID_LEN)), SNMP_MIN_VALUE_SIZE)
+</code></pre>
+      <pre class="doc-comment">/**
+ * The maximum size of a value.
+ */</pre>
+
+      <h4 id="SNMP_COMMUNITY">Marco <span>SNMP_COMMUNITY</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_COMMUNITY                 "public"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_COMMUNITY_WRITE">Marco <span>SNMP_COMMUNITY_WRITE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_COMMUNITY_WRITE           "private"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_COMMUNITY_TRAP">Marco <span>SNMP_COMMUNITY_TRAP</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_COMMUNITY_TRAP            "public"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_MAX_COMMUNITY_STR_LEN">Marco <span>SNMP_MAX_COMMUNITY_STR_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MAX_COMMUNITY_STR_LEN LWIP_MAX(LWIP_MAX(sizeof(SNMP_COMMUNITY), sizeof(SNMP_COMMUNITY_WRITE)), sizeof(SNMP_COMMUNITY_TRAP))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_ENTERPRISE_OID">Marco <span>SNMP_LWIP_ENTERPRISE_OID</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_ENTERPRISE_OID 26381
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_DEVICE_ENTERPRISE_OID">Marco <span>SNMP_DEVICE_ENTERPRISE_OID</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_DEVICE_ENTERPRISE_OID {1, 3, 6, 1, 4, 1, SNMP_LWIP_ENTERPRISE_OID}
+</code></pre>
+      <pre class="doc-comment">/**
+ * IANA assigned enterprise ID for lwIP is 26381
+ * @see http://www.iana.org/assignments/enterprise-numbers
+ *
+ * @note this enterprise ID is assigned to the lwIP project,
+ * all object identifiers living under this ID are assigned
+ * by the lwIP maintainers!
+ * @note don't change this define, use snmp_set_device_enterprise_oid()
+ *
+ * If you need to create your own private MIB you'll need
+ * to apply for your own enterprise ID with IANA:
+ * http://www.iana.org/numbers.html
+ */</pre>
+
+      <h4 id="SNMP_DEVICE_ENTERPRISE_OID_LEN">Marco <span>SNMP_DEVICE_ENTERPRISE_OID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_DEVICE_ENTERPRISE_OID_LEN 7
+</code></pre>
+      <pre class="doc-comment">/**
+ * Length of SNMP_DEVICE_ENTERPRISE_OID
+ */</pre>
+
+      <h4 id="SNMP_DEBUG">Marco <span>SNMP_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_DEBUG                     LWIP_DBG_OFF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_MIB_DEBUG">Marco <span>SNMP_MIB_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MIB_DEBUG                 LWIP_DBG_OFF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_MIB2">Marco <span>SNMP_LWIP_MIB2</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_MIB2                     LWIP_SNMP
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_MIB2_SYSDESC">Marco <span>SNMP_LWIP_MIB2_SYSDESC</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_MIB2_SYSDESC             "lwIP"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_MIB2_SYSNAME">Marco <span>SNMP_LWIP_MIB2_SYSNAME</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_MIB2_SYSNAME             "FQDN-unk"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_MIB2_SYSCONTACT">Marco <span>SNMP_LWIP_MIB2_SYSCONTACT</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_MIB2_SYSCONTACT          ""
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_MIB2_SYSLOCATION">Marco <span>SNMP_LWIP_MIB2_SYSLOCATION</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_MIB2_SYSLOCATION         ""
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_LWIP_GETBULK_MAX_REPETITIONS">Marco <span>SNMP_LWIP_GETBULK_MAX_REPETITIONS</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_LWIP_GETBULK_MAX_REPETITIONS 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SNMP_V3">Marco <span>LWIP_SNMP_V3</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SNMP_V3              0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SNMP_V3_MBEDTLS">Marco <span>LWIP_SNMP_V3_MBEDTLS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SNMP_V3_MBEDTLS      LWIP_SNMP_V3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SNMP_V3_CRYPTO">Marco <span>LWIP_SNMP_V3_CRYPTO</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SNMP_V3_CRYPTO       LWIP_SNMP_V3_MBEDTLS
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SNMP_CONFIGURE_VERSIONS">Marco <span>LWIP_SNMP_CONFIGURE_VERSIONS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SNMP_CONFIGURE_VERSIONS 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

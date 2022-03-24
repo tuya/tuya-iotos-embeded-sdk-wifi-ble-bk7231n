@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_PEM_H" class="nav-sub-label">MBEDTLS_PEM_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT" class="nav-sub-label">MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_INVALID_DATA" class="nav-sub-label">MBEDTLS_ERR_PEM_INVALID_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_ALLOC_FAILED" class="nav-sub-label">MBEDTLS_ERR_PEM_ALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_INVALID_ENC_IV" class="nav-sub-label">MBEDTLS_ERR_PEM_INVALID_ENC_IV</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_UNKNOWN_ENC_ALG" class="nav-sub-label">MBEDTLS_ERR_PEM_UNKNOWN_ENC_ALG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_PASSWORD_REQUIRED" class="nav-sub-label">MBEDTLS_ERR_PEM_PASSWORD_REQUIRED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_PASSWORD_MISMATCH" class="nav-sub-label">MBEDTLS_ERR_PEM_PASSWORD_MISMATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_FEATURE_UNAVAILABLE" class="nav-sub-label">MBEDTLS_ERR_PEM_FEATURE_UNAVAILABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_PEM_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_PEM_BAD_INPUT_DATA</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_pem_init" class="nav-sub-label">mbedtls_pem_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_pem_read_buffer" class="nav-sub-label">mbedtls_pem_read_buffer</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_pem_free" class="nav-sub-label">mbedtls_pem_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_pem_write_buffer" class="nav-sub-label">mbedtls_pem_write_buffer</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_pem_context;
+" class="nav-sub-label">
+mbedtls_pem_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_PEM_H">Marco <span>MBEDTLS_PEM_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_PEM_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT">Marco <span>MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT         -4224 /**< No PEM header or footer found. */
+</code></pre>
+      <pre class="doc-comment">/**
+ * \name PEM Error codes
+ * These error codes are returned in case of errors reading the
+ * PEM data.
+ * \{
+ */</pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_INVALID_DATA">Marco <span>MBEDTLS_ERR_PEM_INVALID_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_INVALID_DATA                     -4352 /**< PEM string is not as expected. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_ALLOC_FAILED">Marco <span>MBEDTLS_ERR_PEM_ALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_ALLOC_FAILED                     -4480 /**< Failed to allocate memory. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_INVALID_ENC_IV">Marco <span>MBEDTLS_ERR_PEM_INVALID_ENC_IV</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_INVALID_ENC_IV                   -4608 /**< RSA IV is not in hex-format. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_UNKNOWN_ENC_ALG">Marco <span>MBEDTLS_ERR_PEM_UNKNOWN_ENC_ALG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_UNKNOWN_ENC_ALG                  -4736 /**< Unsupported key encryption algorithm. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_PASSWORD_REQUIRED">Marco <span>MBEDTLS_ERR_PEM_PASSWORD_REQUIRED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_PASSWORD_REQUIRED                -4864 /**< Private key password can't be empty. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_PASSWORD_MISMATCH">Marco <span>MBEDTLS_ERR_PEM_PASSWORD_MISMATCH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_PASSWORD_MISMATCH                -4992 /**< Given private key password does not allow for correct decryption. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_FEATURE_UNAVAILABLE">Marco <span>MBEDTLS_ERR_PEM_FEATURE_UNAVAILABLE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_FEATURE_UNAVAILABLE              -5120 /**< Unavailable feature, e.g. hashing/encryption combination. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_PEM_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_PEM_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_PEM_BAD_INPUT_DATA                   -5248 /**< Bad input parameters to function. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_pem_init">Func <span>mbedtls_pem_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_pem_init( mbedtls_pem_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       PEM context setup
+ *
+ * \param ctx   context to be initialized
+ */</pre>
+
+      <h4 id="mbedtls_pem_read_buffer">Func <span>mbedtls_pem_read_buffer</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_pem_read_buffer( mbedtls_pem_context *ctx, const char *header, const char *footer,
+                    const unsigned char *data,
+                    const unsigned char *pwd,
+                    size_t pwdlen, size_t *use_len );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       Read a buffer for PEM information and store the resulting
+ *              data into the specified context buffers.
+ *
+ * \param ctx       context to use
+ * \param header    header string to seek and expect
+ * \param footer    footer string to seek and expect
+ * \param data      source data to look in (must be nul-terminated)
+ * \param pwd       password for decryption (can be NULL)
+ * \param pwdlen    length of password
+ * \param use_len   destination for total length used (set after header is
+ *                  correctly read, so unless you get
+ *                  MBEDTLS_ERR_PEM_BAD_INPUT_DATA or
+ *                  MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT, use_len is
+ *                  the length to skip)
+ *
+ * \note            Attempts to check password correctness by verifying if
+ *                  the decrypted text starts with an ASN.1 sequence of
+ *                  appropriate length
+ *
+ * \return          0 on success, or a specific PEM error code
+ */</pre>
+
+      <h4 id="mbedtls_pem_free">Func <span>mbedtls_pem_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_pem_free( mbedtls_pem_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       PEM context memory freeing
+ *
+ * \param ctx   context to be freed
+ */</pre>
+
+      <h4 id="mbedtls_pem_write_buffer">Func <span>mbedtls_pem_write_buffer</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_pem_write_buffer( const char *header, const char *footer,
+                     const unsigned char *der_data, size_t der_len,
+                     unsigned char *buf, size_t buf_len, size_t *olen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Write a buffer of PEM information from a DER encoded
+ *                  buffer.
+ *
+ * \param header    header string to write
+ * \param footer    footer string to write
+ * \param der_data  DER data to write
+ * \param der_len   length of the DER data
+ * \param buf       buffer to write to
+ * \param buf_len   length of output buffer
+ * \param olen      total length written / required (if buf_len is not enough)
+ *
+ * \return          0 on success, or a specific PEM or BASE64 error code. On
+ *                  MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL olen is the required
+ *                  size.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_pem_context;
+">Typedef <span>
+mbedtls_pem_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_pem_context
+{
+   unsigned char *buf;    /*!< buffer for decoded data             */
+   size_t buflen;         /*!< length of the buffer                */
+   unsigned char *info;   /*!< buffer for extra header information */
+}
+mbedtls_pem_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief       PEM context structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

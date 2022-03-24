@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_MALLOC_MEMPOOL(num, size)" class="nav-sub-label">LWIP_MALLOC_MEMPOOL(num, size)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MALLOC_MEMPOOL_START" class="nav-sub-label">LWIP_MALLOC_MEMPOOL_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MALLOC_MEMPOOL_END" class="nav-sub-label">LWIP_MALLOC_MEMPOOL_END</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PBUF_MEMPOOL(name, num, payload, desc)" class="nav-sub-label">LWIP_PBUF_MEMPOOL(name, num, payload, desc)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_MEMPOOL" class="nav-sub-label">LWIP_MEMPOOL</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_MALLOC_MEMPOOL(num, size)">Marco <span>LWIP_MALLOC_MEMPOOL(num, size)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MALLOC_MEMPOOL(num, size) LWIP_MEMPOOL(POOL_##size, num, (size + LWIP_MEM_ALIGN_SIZE(sizeof(struct memp_malloc_helper))), "MALLOC_"#size)
+</code></pre>
+      <pre class="doc-comment">/* This treats "malloc pools" just like any other pool.
+   The pools are a little bigger to provide 'size' as the amount of user data. */</pre>
+
+      <h4 id="LWIP_MALLOC_MEMPOOL_START">Marco <span>LWIP_MALLOC_MEMPOOL_START</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MALLOC_MEMPOOL_START
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MALLOC_MEMPOOL_END">Marco <span>LWIP_MALLOC_MEMPOOL_END</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MALLOC_MEMPOOL_END
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PBUF_MEMPOOL(name, num, payload, desc)">Marco <span>LWIP_PBUF_MEMPOOL(name, num, payload, desc)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PBUF_MEMPOOL(name, num, payload, desc) LWIP_MEMPOOL(name, num, (LWIP_MEM_ALIGN_SIZE(sizeof(struct pbuf)) + LWIP_MEM_ALIGN_SIZE(payload)), desc)
+</code></pre>
+      <pre class="doc-comment">/* This treats "pbuf pools" just like any other pool.
+ * Allocates buffers for a pbuf struct AND a payload size */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="LWIP_MEMPOOL">Func <span>LWIP_MEMPOOL</span></h4>
+      <pre class="doc-declare"><code>LWIP_MEMPOOL(RAW_PCB,       MEMP_NUM_RAW_PCB,        sizeof(struct raw_pcb),       "RAW_PCB")
+#endif /* LWIP_RAW */
+
+#if LWIP_UDP
+LWIP_MEMPOOL(UDP_PCB,       MEMP_NUM_UDP_PCB,        sizeof(struct udp_pcb),       "UDP_PCB")
+#endif /* LWIP_UDP */
+
+#if LWIP_TCP
+LWIP_MEMPOOL(TCP_PCB,       MEMP_NUM_TCP_PCB,        sizeof(struct tcp_pcb),       "TCP_PCB")
+LWIP_MEMPOOL(TCP_PCB_LISTEN, MEMP_NUM_TCP_PCB_LISTEN, sizeof(struct tcp_pcb_listen), "TCP_PCB_LISTEN")
+LWIP_MEMPOOL(TCP_SEG,       MEMP_NUM_TCP_SEG,        sizeof(struct tcp_seg),       "TCP_SEG")
+#endif /* LWIP_TCP */
+
+#if LWIP_ALTCP && LWIP_TCP
+LWIP_MEMPOOL(ALTCP_PCB,     MEMP_NUM_ALTCP_PCB,      sizeof(struct altcp_pcb),     "ALTCP_PCB")
+#endif /* LWIP_ALTCP && LWIP_TCP */
+
+#if LWIP_IPV4 && IP_REASSEMBLY
+LWIP_MEMPOOL(REASSDATA,     MEMP_NUM_REASSDATA,      sizeof(struct ip_reassdata),  "REASSDATA")
+#endif /* LWIP_IPV4 && IP_REASSEMBLY */
+#if (IP_FRAG && !LWIP_NETIF_TX_SINGLE_PBUF) || (LWIP_IPV6 && LWIP_IPV6_FRAG)
+LWIP_MEMPOOL(FRAG_PBUF,     MEMP_NUM_FRAG_PBUF,      sizeof(struct pbuf_custom_ref),"FRAG_PBUF")
+#endif /* IP_FRAG && !LWIP_NETIF_TX_SINGLE_PBUF || (LWIP_IPV6 && LWIP_IPV6_FRAG) */
+
+#if LWIP_NETCONN || LWIP_SOCKET
+LWIP_MEMPOOL(NETBUF,        MEMP_NUM_NETBUF,         sizeof(struct netbuf),        "NETBUF")
+LWIP_MEMPOOL(NETCONN,       MEMP_NUM_NETCONN,        sizeof(struct netconn),       "NETCONN")
+#endif /* LWIP_NETCONN || LWIP_SOCKET */
+
+#if NO_SYS==0
+LWIP_MEMPOOL(TCPIP_MSG_API, MEMP_NUM_TCPIP_MSG_API,  sizeof(struct tcpip_msg),     "TCPIP_MSG_API")
+#if LWIP_MPU_COMPATIBLE
+LWIP_MEMPOOL(API_MSG,       MEMP_NUM_API_MSG,        sizeof(struct api_msg),       "API_MSG")
+#if LWIP_DNS
+LWIP_MEMPOOL(DNS_API_MSG,   MEMP_NUM_DNS_API_MSG,    sizeof(struct dns_api_msg),   "DNS_API_MSG")
+#endif
+#if LWIP_SOCKET && !LWIP_TCPIP_CORE_LOCKING
+LWIP_MEMPOOL(SOCKET_SETGETSOCKOPT_DATA, MEMP_NUM_SOCKET_SETGETSOCKOPT_DATA, sizeof(struct lwip_setgetsockopt_data), "SOCKET_SETGETSOCKOPT_DATA")
+#endif
+#if LWIP_SOCKET && (LWIP_SOCKET_SELECT || LWIP_SOCKET_POLL)
+LWIP_MEMPOOL(SELECT_CB,     MEMP_NUM_SELECT_CB,      sizeof(struct lwip_select_cb), "SELECT_CB")
+#endif /* LWIP_SOCKET && (LWIP_SOCKET_SELECT || LWIP_SOCKET_POLL) */
+#if LWIP_NETIF_API
+LWIP_MEMPOOL(NETIFAPI_MSG,  MEMP_NUM_NETIFAPI_MSG,   sizeof(struct netifapi_msg),  "NETIFAPI_MSG")
+#endif
+#endif /* LWIP_MPU_COMPATIBLE */
+#if !LWIP_TCPIP_CORE_LOCKING_INPUT
+LWIP_MEMPOOL(TCPIP_MSG_INPKT,MEMP_NUM_TCPIP_MSG_INPKT, sizeof(struct tcpip_msg),     "TCPIP_MSG_INPKT")
+#endif /* !LWIP_TCPIP_CORE_LOCKING_INPUT */
+#endif /* NO_SYS==0 */
+
+#if LWIP_IPV4 && LWIP_ARP && ARP_QUEUEING
+LWIP_MEMPOOL(ARP_QUEUE,     MEMP_NUM_ARP_QUEUE,      sizeof(struct etharp_q_entry), "ARP_QUEUE")
+#endif /* LWIP_IPV4 && LWIP_ARP && ARP_QUEUEING */
+
+#if LWIP_IGMP
+LWIP_MEMPOOL(IGMP_GROUP,    MEMP_NUM_IGMP_GROUP,     sizeof(struct igmp_group),    "IGMP_GROUP")
+#endif /* LWIP_IGMP */
+
+#if LWIP_TIMERS && !LWIP_TIMERS_CUSTOM
+LWIP_MEMPOOL(SYS_TIMEOUT,   MEMP_NUM_SYS_TIMEOUT,    sizeof(struct sys_timeo),     "SYS_TIMEOUT")
+#endif /* LWIP_TIMERS && !LWIP_TIMERS_CUSTOM */
+
+#if LWIP_DNS && LWIP_SOCKET
+LWIP_MEMPOOL(NETDB,         MEMP_NUM_NETDB,          NETDB_ELEM_SIZE,              "NETDB")
+#endif /* LWIP_DNS && LWIP_SOCKET */
+#if LWIP_DNS && DNS_LOCAL_HOSTLIST && DNS_LOCAL_HOSTLIST_IS_DYNAMIC
+LWIP_MEMPOOL(LOCALHOSTLIST, MEMP_NUM_LOCALHOSTLIST,  LOCALHOSTLIST_ELEM_SIZE,      "LOCALHOSTLIST")
+#endif /* LWIP_DNS && DNS_LOCAL_HOSTLIST && DNS_LOCAL_HOSTLIST_IS_DYNAMIC */
+
+#if LWIP_IPV6 && LWIP_ND6_QUEUEING
+LWIP_MEMPOOL(ND6_QUEUE,     MEMP_NUM_ND6_QUEUE,      sizeof(struct nd6_q_entry),   "ND6_QUEUE")
+#endif /* LWIP_IPV6 && LWIP_ND6_QUEUEING */
+
+#if LWIP_IPV6 && LWIP_IPV6_REASS
+LWIP_MEMPOOL(IP6_REASSDATA, MEMP_NUM_REASSDATA,      sizeof(struct ip6_reassdata), "IP6_REASSDATA")
+#endif /* LWIP_IPV6 && LWIP_IPV6_REASS */
+
+#if LWIP_IPV6 && LWIP_IPV6_MLD
+LWIP_MEMPOOL(MLD6_GROUP,    MEMP_NUM_MLD6_GROUP,     sizeof(struct mld_group),     "MLD6_GROUP")
+#endif /* LWIP_IPV6 && LWIP_IPV6_MLD */
+
+
+/*
+ * A list of pools of pbuf's used by LWIP.
+ *
+ * LWIP_PBUF_MEMPOOL(pool_name, number_elements, pbuf_payload_size, pool_description)
+ *     creates a pool name MEMP_pool_name. description is used in stats.c
+ *     This allocates enough space for the pbuf struct and a payload.
+ *     (Example: pbuf_payload_size=0 allocates only size for the struct)
+ */
+LWIP_MEMPOOL(PBUF,          MEMP_NUM_PBUF,           sizeof(struct pbuf),          "PBUF_REF/ROM")
+LWIP_PBUF_MEMPOOL(PBUF_POOL, PBUF_POOL_SIZE,          PBUF_POOL_BUFSIZE,            "PBUF_POOL")
+
+
+/*
+ * Allow for user-defined pools; this must be explicitly set in lwipopts.h
+ * since the default is to NOT look for lwippools.h
+ */
+#if MEMP_USE_CUSTOM_POOLS
+#include "lwippools.h"
+#endif /* MEMP_USE_CUSTOM_POOLS */
+
+/*
+ * REQUIRED CLEANUP: Clear up so we don't get "multiply defined" error later
+ * (#undef is ignored for something that is not defined)
+ */
+#undef LWIP_MEMPOOL
+#undef LWIP_MALLOC_MEMPOOL
+#undef LWIP_MALLOC_MEMPOOL_START
+#undef LWIP_MALLOC_MEMPOOL_END
+#undef LWIP_PBUF_MEMPOOL
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

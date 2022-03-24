@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#cipher.h" class="nav-sub-label">cipher.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#cmac_alt.h" class="nav-sub-label">cmac_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_CMAC_H" class="nav-sub-label">MBEDTLS_CMAC_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_CMAC_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_CMAC_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_AES_BLOCK_SIZE" class="nav-sub-label">MBEDTLS_AES_BLOCK_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DES3_BLOCK_SIZE" class="nav-sub-label">MBEDTLS_DES3_BLOCK_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CIPHER_BLKSIZE_MAX" class="nav-sub-label">MBEDTLS_CIPHER_BLKSIZE_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CIPHER_BLKSIZE_MAX" class="nav-sub-label">MBEDTLS_CIPHER_BLKSIZE_MAX</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_cipher_cmac_starts" class="nav-sub-label">mbedtls_cipher_cmac_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_cipher_cmac_update" class="nav-sub-label">mbedtls_cipher_cmac_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_cipher_cmac_finish" class="nav-sub-label">mbedtls_cipher_cmac_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_cipher_cmac_reset" class="nav-sub-label">mbedtls_cipher_cmac_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_cipher_cmac" class="nav-sub-label">mbedtls_cipher_cmac</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_aes_cmac_prf_128" class="nav-sub-label">mbedtls_aes_cmac_prf_128</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_cmac_self_test" class="nav-sub-label">mbedtls_cmac_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="cipher.h"><span>cipher.h</span></h4>
+      <pre class="doc-declare"><code>#include "cipher.h"
+</code></pre>
+      <pre class="doc-comment">#include "cipher.h"
+</pre>
+
+      <h4 id="cmac_alt.h"><span>cmac_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "cmac_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "cmac_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_CMAC_H">Marco <span>MBEDTLS_CMAC_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CMAC_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_CMAC_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_CMAC_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_CMAC_HW_ACCEL_FAILED -7A /**< CMAC hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_CMAC_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_AES_BLOCK_SIZE">Marco <span>MBEDTLS_AES_BLOCK_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_AES_BLOCK_SIZE         16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DES3_BLOCK_SIZE">Marco <span>MBEDTLS_DES3_BLOCK_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DES3_BLOCK_SIZE        8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CIPHER_BLKSIZE_MAX">Marco <span>MBEDTLS_CIPHER_BLKSIZE_MAX</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CIPHER_BLKSIZE_MAX     16 /**< The longest block used by CMAC is that of AES. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CIPHER_BLKSIZE_MAX">Marco <span>MBEDTLS_CIPHER_BLKSIZE_MAX</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CIPHER_BLKSIZE_MAX     8  /**< The longest block used by CMAC is that of 3DES. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_cipher_cmac_starts">Func <span>mbedtls_cipher_cmac_starts</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_cipher_cmac_starts( mbedtls_cipher_context_t *ctx,
+                               const unsigned char *key, size_t keybits );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function sets the CMAC key, and prepares to authenticate
+ *                      the input data.
+ *                      Must be called with an initialized cipher context.
+ *
+ * \param ctx           The cipher context used for the CMAC operation, initialized
+ *                      as one of the following types: MBEDTLS_CIPHER_AES_128_ECB,
+ *                      MBEDTLS_CIPHER_AES_192_ECB, MBEDTLS_CIPHER_AES_256_ECB,
+ *                      or MBEDTLS_CIPHER_DES_EDE3_ECB.
+ * \param key           The CMAC key.
+ * \param keybits       The length of the CMAC key in bits.
+ *                      Must be supported by the cipher.
+ *
+ * \return              \c 0 on success.
+ * \return              A cipher-specific error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_cipher_cmac_update">Func <span>mbedtls_cipher_cmac_update</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_cipher_cmac_update( mbedtls_cipher_context_t *ctx,
+                               const unsigned char *input, size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function feeds an input buffer into an ongoing CMAC
+ *                      computation.
+ *
+ *                      It is called between mbedtls_cipher_cmac_starts() or
+ *                      mbedtls_cipher_cmac_reset(), and mbedtls_cipher_cmac_finish().
+ *                      Can be called repeatedly.
+ *
+ * \param ctx           The cipher context used for the CMAC operation.
+ * \param input         The buffer holding the input data.
+ * \param ilen          The length of the input data.
+ *
+ * \return             \c 0 on success.
+ * \return             #MBEDTLS_ERR_MD_BAD_INPUT_DATA
+ *                     if parameter verification fails.
+ */</pre>
+
+      <h4 id="mbedtls_cipher_cmac_finish">Func <span>mbedtls_cipher_cmac_finish</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_cipher_cmac_finish( mbedtls_cipher_context_t *ctx,
+                               unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function finishes the CMAC operation, and writes
+ *                      the result to the output buffer.
+ *
+ *                      It is called after mbedtls_cipher_cmac_update().
+ *                      It can be followed by mbedtls_cipher_cmac_reset() and
+ *                      mbedtls_cipher_cmac_update(), or mbedtls_cipher_free().
+ *
+ * \param ctx           The cipher context used for the CMAC operation.
+ * \param output        The output buffer for the CMAC checksum result.
+ *
+ * \return              \c 0 on success.
+ * \return              #MBEDTLS_ERR_MD_BAD_INPUT_DATA
+ *                      if parameter verification fails.
+ */</pre>
+
+      <h4 id="mbedtls_cipher_cmac_reset">Func <span>mbedtls_cipher_cmac_reset</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_cipher_cmac_reset( mbedtls_cipher_context_t *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function prepares the authentication of another
+ *                      message with the same key as the previous CMAC
+ *                      operation.
+ *
+ *                      It is called after mbedtls_cipher_cmac_finish()
+ *                      and before mbedtls_cipher_cmac_update().
+ *
+ * \param ctx           The cipher context used for the CMAC operation.
+ *
+ * \return              \c 0 on success.
+ * \return              #MBEDTLS_ERR_MD_BAD_INPUT_DATA
+ *                      if parameter verification fails.
+ */</pre>
+
+      <h4 id="mbedtls_cipher_cmac">Func <span>mbedtls_cipher_cmac</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_cipher_cmac( const mbedtls_cipher_info_t *cipher_info,
+                        const unsigned char *key, size_t keylen,
+                        const unsigned char *input, size_t ilen,
+                        unsigned char *output );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief               This function calculates the full generic CMAC
+ *                      on the input buffer with the provided key.
+ *
+ *                      The function allocates the context, performs the
+ *                      calculation, and frees the context.
+ *
+ *                      The CMAC result is calculated as
+ *                      output = generic CMAC(cmac key, input buffer).
+ *
+ *
+ * \param cipher_info   The cipher information.
+ * \param key           The CMAC key.
+ * \param keylen        The length of the CMAC key in bits.
+ * \param input         The buffer holding the input data.
+ * \param ilen          The length of the input data.
+ * \param output        The buffer for the generic CMAC result.
+ *
+ * \return              \c 0 on success.
+ * \return              #MBEDTLS_ERR_MD_BAD_INPUT_DATA
+ *                      if parameter verification fails.
+ */</pre>
+
+      <h4 id="mbedtls_aes_cmac_prf_128">Func <span>mbedtls_aes_cmac_prf_128</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_aes_cmac_prf_128( const unsigned char *key, size_t key_len,
+                             const unsigned char *input, size_t in_len,
+                             unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           This function implements the AES-CMAC-PRF-128 pseudorandom
+ *                  function, as defined in
+ *                  <em>RFC-4615: The Advanced Encryption Standard-Cipher-based
+ *                  Message Authentication Code-Pseudo-Random Function-128
+ *                  (AES-CMAC-PRF-128) Algorithm for the Internet Key
+ *                  Exchange Protocol (IKE).</em>
+ *
+ * \param key       The key to use.
+ * \param key_len   The key length in Bytes.
+ * \param input     The buffer holding the input data.
+ * \param in_len    The length of the input data in Bytes.
+ * \param output    The buffer holding the generated 16 Bytes of
+ *                  pseudorandom output.
+ *
+ * \return          \c 0 on success.
+ */</pre>
+
+      <h4 id="mbedtls_cmac_self_test">Func <span>mbedtls_cmac_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_cmac_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The CMAC checkup routine.
+ *
+ * \return         \c 0 on success.
+ * \return         \c 1 on failure.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

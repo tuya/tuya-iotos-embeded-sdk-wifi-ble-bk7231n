@@ -11,107 +11,104 @@
 
 #include "tuya_hal_network.h"
 #include "tuya_hal_wired.h"
+#include "tuya_cloud_types.h"
 
-#ifdef  __BASE_NW_INTF_GLOBALS
-    #define __BASE_NW_INTF_EXT
-#else
-    #define __BASE_NW_INTF_EXT extern
-#endif
+/**
+ * @brief bnw_get_ip 
+ * @desc get the ip address of the wired network interface
+ *
+ * @param[out] ip: the ip address
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note this api can used when in wired or wired&wifi mode
+ */
+OPERATE_RET bnw_get_ip(OUT NW_IP_S *ip);
 
-#ifndef IN
-    #define IN
-#endif
+/**
+ * @brief bnw_set_station_connect 
+ * @desc connect to a special ap
+ *
+ * @param[in] ssid: the ap ssid
+ * @param[in] passwd: the ap password
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note this api only can used when in wired&wifi mode
+ */
+OPERATE_RET bnw_set_station_connect(IN const char *ssid,IN const char *passwd);
 
-#ifndef OUT
-    #define OUT
-#endif
 
-#ifndef INOUT
-    #define INOUT
-#endif
+/**
+ * @brief bnw_station_get_conn_ap_rssi 
+ * @desc get the connected ap rssi infomation
+ *
+ * @param[OUT] rssi: the ap rssi, rssi=99 if in wired mode, rssi=actually rssi if in wired&wifi mode
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note this api can used when in wired or wired&wifi mode
+ */
+OPERATE_RET bnw_station_get_conn_ap_rssi(OUT int8_t *rssi);
 
-/***********************************************************
-*************************macro define***********************
-***********************************************************/
+/**
+ * @brief bnw_get_mac 
+ * @desc get the mac address of the wired network interface
+ *
+ * @param[OUT] mac: the mac address
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note this api can used when in wired or wired&wifi mode
+ */
+OPERATE_RET bnw_get_mac(OUT NW_MAC_S *mac);
 
-/***********************************************************
-*************************variable define********************
-***********************************************************/
+/**
+ * @brief bnw_set_mac 
+ * @desc set the mac address of the wired network interface
+ *
+ * @param[in] mac: the mac address
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note this api can used when in wired or wired&wifi mode
+ */
+OPERATE_RET bnw_set_mac(IN const NW_MAC_S *mac);
 
-/***********************************************************
-*************************function define********************
-***********************************************************/
-/***********************************************************
-*  Function: bnw_get_ip 
-*  Input: none
-*  Output: ip
-*  Return: OPERATE_RET
-***********************************************************/
-__BASE_NW_INTF_EXT \
-int bnw_get_ip(OUT NW_IP_S *ip);
+/**
+ * @brief bnw_if_wired_connect_net 
+ * @desc get the status of the wired network interface
+ *
+ * @param[out] status: the connection status, TRUE means connected, FALSE means not connected
+ *
+ * @return OPRT_OK: success  Other: fail
+ *
+ * @note this api can used when in wired or wired&wifi mode
+ */
+OPERATE_RET bnw_if_wired_connect_net(BOOL_T *status);
 
-/***********************************************************
-*  Function: bnw_station_conn 
-*  Input: none
-*  Output: none
-*  Return: bool
-***********************************************************/
-__BASE_NW_INTF_EXT \
-bool bnw_station_conn(void);
+/**
+ * @brief bnw_station_conn 
+ * @desc get the status of the wifi network interface
+ *
+ * @return TRUE： connected, FALSE： not connected
+ *
+ * @note this api can used when in wired or wired&wifi mode
+ */
+BOOL_T bnw_station_conn(void);
 
-/***********************************************************
-*  Function: bnw_set_station_connect
-*  Input: ssid passwd
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__BASE_NW_INTF_EXT \
-int bnw_set_station_connect(IN const char *ssid,IN const char *passwd);
+/**
+ * @brief bnw_need_wifi_cfg 
+ * @desc check if need config wifi
+ *
+ * @return TRUE： connected, FALSE： not connected
+ *
+ * @note this api can used when in wired or wired&wifi mode, 
+ * it will used to add a wf_cfg infomation in lan discocery packet, 
+ * and support set wifi ssid and passwd from lan.
+ */
+BOOL_T bnw_need_wifi_cfg(void);
 
-/***********************************************************
-*  Function: bnw_need_wifi_cfg
-*  Input: none
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__BASE_NW_INTF_EXT \
-bool bnw_need_wifi_cfg(void);
-
-/***********************************************************
-*  Function: bnw_station_get_conn_ap_rssi
-*  Input: none
-*  Output: rssi
-*  Return: OPERATE_RET
-*  Note: 仅有线返回99,无线+有线/无线，返回实际无线信号
-***********************************************************/
-__BASE_NW_INTF_EXT \
-int bnw_station_get_conn_ap_rssi(OUT int8_t *rssi);
-
-/***********************************************************
-*  Function: bnw_get_mac
-*  Input: none
-*  Output: mac
-*  Return: OPERATE_RET
-***********************************************************/
-__BASE_NW_INTF_EXT \
-int bnw_get_mac(OUT NW_MAC_S *mac);
-
-/***********************************************************
-*  Function: bnw_set_mac
-*  Input: mac
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-__BASE_NW_INTF_EXT \
-int bnw_set_mac(IN const NW_MAC_S *mac);
-
-/***********************************************************
-*  Function: bnw_if_wired_connect_net
-*  Input: status
-*  Output: status
-*  Return: OPERATE_RET
-***********************************************************/
-int bnw_if_wired_connect_net(bool *status);
 
 #ifdef __cplusplus
 }

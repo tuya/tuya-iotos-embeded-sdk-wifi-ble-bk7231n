@@ -1,0 +1,1720 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_base_utilities.h" class="nav-sub-label">tuya_base_utilities.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_msg_queue.h" class="nav-sub-label">uni_msg_queue.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_wifi_defs.h" class="nav-sub-label">tuya_cloud_wifi_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_wifi.h" class="nav-sub-label">tuya_hal_wifi.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_base_defs.h" class="nav-sub-label">tuya_cloud_base_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_internal_api.h" class="nav-sub-label">tuya_iot_internal_api.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_error_code.h" class="nav-sub-label">tuya_error_code.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap.h" class="nav-sub-label">hashmap.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_activate.h" class="nav-sub-label">tuya_devos_activate.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_entry.h" class="nav-sub-label">tuya_devos_entry.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_netcfg.h" class="nav-sub-label">tuya_devos_netcfg.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_netlink.h" class="nav-sub-label">tuya_devos_netlink.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_reset.h" class="nav-sub-label">tuya_devos_reset.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_devos_utils.h" class="nav-sub-label">tuya_devos_utils.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_GW_INTF_H" class="nav-sub-label">_GW_INTF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SERIAL_NO_STR_LEN" class="nav-sub-label">SERIAL_NO_STR_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_ACCESS_TOKEN_INTERVAL" class="nav-sub-label">GET_ACCESS_TOKEN_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_WIFI" class="nav-sub-label">CLOUD_CAPABILITY_WIFI</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_CABLE" class="nav-sub-label">CLOUD_CAPABILITY_CABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_GPRS" class="nav-sub-label">CLOUD_CAPABILITY_GPRS</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_NBIOT" class="nav-sub-label">CLOUD_CAPABILITY_NBIOT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_BLUETOOTH" class="nav-sub-label">CLOUD_CAPABILITY_BLUETOOTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_BLEMESH" class="nav-sub-label">CLOUD_CAPABILITY_BLEMESH</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_ZIGBEE" class="nav-sub-label">CLOUD_CAPABILITY_ZIGBEE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_INFRARED" class="nav-sub-label">CLOUD_CAPABILITY_INFRARED</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_SUBPIECES" class="nav-sub-label">CLOUD_CAPABILITY_SUBPIECES</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_SIGMESH" class="nav-sub-label">CLOUD_CAPABILITY_SIGMESH</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLOUD_CAPABILITY_MCU" class="nav-sub-label">CLOUD_CAPABILITY_MCU</a>
+              </li>
+      
+
+              <li>
+                <a href="#GRP_LMT" class="nav-sub-label">GRP_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_LMT" class="nav-sub-label">SCENE_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOG_PHAT_MAX_LEN" class="nav-sub-label">LOG_PHAT_MAX_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#IS_STRIDE_PID_KEY" class="nav-sub-label">IS_STRIDE_PID_KEY</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#gw_cntl_init" class="nav-sub-label">gw_cntl_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_wifi_modify_and_conn" class="nav-sub-label">gw_wifi_modify_and_conn</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_register_cbs" class="nav-sub-label">gw_register_cbs</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_gw_dev_cntl" class="nav-sub-label">get_gw_dev_cntl</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_dev_cntl" class="nav-sub-label">get_dev_cntl</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_gw_auth_status" class="nav-sub-label">get_gw_auth_status</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_register_mqc_cb" class="nav-sub-label">gw_register_mqc_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_get_schema" class="nav-sub-label">tuya_get_schema</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_get_dp_info" class="nav-sub-label">tuya_get_dp_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_get_gpd_type" class="nav-sub-label">gw_get_gpd_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_set_ext_attribute" class="nav-sub-label">gw_set_ext_attribute</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_get_ext_attribute" class="nav-sub-label">gw_get_ext_attribute</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_create_dev_cntl" class="nav-sub-label">gw_create_dev_cntl</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_destroy_dev_cntl" class="nav-sub-label">gw_destroy_dev_cntl</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_dup_dev_cntl" class="nav-sub-label">gw_dup_dev_cntl</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_subdev_dev_cntl_get_register_cb" class="nav-sub-label">gw_subdev_dev_cntl_get_register_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#GW_DESC_IF_S" class="nav-sub-label">GW_DESC_IF_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_CNTL_S" class="nav-sub-label">DP_CNTL_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_CNTL_S" class="nav-sub-label">GW_CNTL_S</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#SECURITY_CHIP_S;
+" class="nav-sub-label">SECURITY_CHIP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_AUTH_INFO_S;" class="nav-sub-label">GW_AUTH_INFO_S;</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_CFG_S;
+" class="nav-sub-label">GW_CFG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_BASE_IF_S;
+" class="nav-sub-label">GW_BASE_IF_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WF_MD_T" class="nav-sub-label">GW_WF_MD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WORK_STAT_T" class="nav-sub-label">GW_WORK_STAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_WORK_STAT_MAG_S;
+" class="nav-sub-label">GW_WORK_STAT_MAG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_DESC_IF_S;
+" class="nav-sub-label">GW_DESC_IF_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_STRIDE_UPDATE_S;
+" class="nav-sub-label">GW_STRIDE_UPDATE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_ACTV_IF_S;
+" class="nav-sub-label">GW_ACTV_IF_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PV_STAT_E" class="nav-sub-label">DP_PV_STAT_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEVICE_ACTIVE_STAGE_E" class="nav-sub-label">DEVICE_ACTIVE_STAGE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_FLOW_CTRL_UNIT;
+" class="nav-sub-label">DP_REPT_FLOW_CTRL_UNIT;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_FLOW_CTRL;
+" class="nav-sub-label">DP_REPT_FLOW_CTRL;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_CUR_SET_REPT_CNTL_S;" class="nav-sub-label">DP_CUR_SET_REPT_CNTL_S;</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_CNTL_S;
+" class="nav-sub-label">DP_CNTL_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCHEMA_OTHER_ATTR_S;
+" class="nav-sub-label">SCHEMA_OTHER_ATTR_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GRP_REC_S;
+" class="nav-sub-label">GRP_REC_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_REC_S;
+" class="nav-sub-label">SCENE_REC_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GRP_MAG_S;
+" class="nav-sub-label">GRP_MAG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_MAG_S;
+" class="nav-sub-label">SCENE_MAG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ACTV_ATTR_S;
+" class="nav-sub-label">DEV_ACTV_ATTR_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_CNTL_N_S;
+" class="nav-sub-label">DEV_CNTL_N_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_CNTL_N_S" class="nav-sub-label">DEV_CNTL_N_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_CNTL_S;
+" class="nav-sub-label">GW_CNTL_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RESET_TP_T" class="nav-sub-label">GW_RESET_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RESET_S;
+" class="nav-sub-label">GW_RESET_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_RESET_S;
+" class="nav-sub-label">DEV_RESET_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_COUNTRY_CODE_E;
+" class="nav-sub-label">TUYA_COUNTRY_CODE_E;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="tuya_base_utilities.h"><span>tuya_base_utilities.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_base_utilities.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_base_utilities.h"
+</pre>
+
+      <h4 id="uni_msg_queue.h"><span>uni_msg_queue.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_msg_queue.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_msg_queue.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_wifi_defs.h"><span>tuya_cloud_wifi_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_wifi_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_wifi_defs.h"
+</pre>
+
+      <h4 id="tuya_hal_wifi.h"><span>tuya_hal_wifi.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_wifi.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_wifi.h"
+</pre>
+
+      <h4 id="tuya_cloud_base_defs.h"><span>tuya_cloud_base_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_base_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_base_defs.h"
+</pre>
+
+      <h4 id="tuya_iot_internal_api.h"><span>tuya_iot_internal_api.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_internal_api.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_internal_api.h"
+</pre>
+
+      <h4 id="tuya_error_code.h"><span>tuya_error_code.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_error_code.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_error_code.h"
+</pre>
+
+      <h4 id="hashmap.h"><span>hashmap.h</span></h4>
+      <pre class="doc-declare"><code>#include "hashmap.h"
+</code></pre>
+      <pre class="doc-comment">#include "hashmap.h"
+</pre>
+
+      <h4 id="tuya_devos_activate.h"><span>tuya_devos_activate.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_devos_activate.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_devos_activate.h"
+</pre>
+
+      <h4 id="tuya_devos_entry.h"><span>tuya_devos_entry.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_devos_entry.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_devos_entry.h"
+</pre>
+
+      <h4 id="tuya_devos_netcfg.h"><span>tuya_devos_netcfg.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_devos_netcfg.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_devos_netcfg.h"
+</pre>
+
+      <h4 id="tuya_devos_netlink.h"><span>tuya_devos_netlink.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_devos_netlink.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_devos_netlink.h"
+</pre>
+
+      <h4 id="tuya_devos_reset.h"><span>tuya_devos_reset.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_devos_reset.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_devos_reset.h"
+</pre>
+
+      <h4 id="tuya_devos_utils.h"><span>tuya_devos_utils.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_devos_utils.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_devos_utils.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_GW_INTF_H">Marco <span>_GW_INTF_H</span></h4>
+      <pre class="doc-declare"><code>#define _GW_INTF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SERIAL_NO_STR_LEN">Marco <span>SERIAL_NO_STR_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SERIAL_NO_STR_LEN 32   // max string length of sn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_ACCESS_TOKEN_INTERVAL">Marco <span>GET_ACCESS_TOKEN_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define GET_ACCESS_TOKEN_INTERVAL (300 * 1000) //5min
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_WIFI">Marco <span>CLOUD_CAPABILITY_WIFI</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_WIFI        0    // wifi
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Denifition of capability in cloud
+*/</pre>
+
+      <h4 id="CLOUD_CAPABILITY_CABLE">Marco <span>CLOUD_CAPABILITY_CABLE</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_CABLE       1    // cable
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_GPRS">Marco <span>CLOUD_CAPABILITY_GPRS</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_GPRS        2    // gprs
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_NBIOT">Marco <span>CLOUD_CAPABILITY_NBIOT</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_NBIOT       3    // nb-iot
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_BLUETOOTH">Marco <span>CLOUD_CAPABILITY_BLUETOOTH</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_BLUETOOTH   10   // bt
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_BLEMESH">Marco <span>CLOUD_CAPABILITY_BLEMESH</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_BLEMESH     11   // blemesh
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_ZIGBEE">Marco <span>CLOUD_CAPABILITY_ZIGBEE</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_ZIGBEE      12   // zigbee
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_INFRARED">Marco <span>CLOUD_CAPABILITY_INFRARED</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_INFRARED    13   // infrared
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_SUBPIECES">Marco <span>CLOUD_CAPABILITY_SUBPIECES</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_SUBPIECES   14   // subpieces
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_SIGMESH">Marco <span>CLOUD_CAPABILITY_SIGMESH</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_SIGMESH     15   // sigmesh
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLOUD_CAPABILITY_MCU">Marco <span>CLOUD_CAPABILITY_MCU</span></h4>
+      <pre class="doc-declare"><code>#define CLOUD_CAPABILITY_MCU         16   // mcu
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GRP_LMT">Marco <span>GRP_LMT</span></h4>
+      <pre class="doc-declare"><code>#define GRP_LMT 64 // group limit
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCENE_LMT">Marco <span>SCENE_LMT</span></h4>
+      <pre class="doc-declare"><code>#define SCENE_LMT 64 // scene limit
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOG_PHAT_MAX_LEN">Marco <span>LOG_PHAT_MAX_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LOG_PHAT_MAX_LEN 64
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IS_STRIDE_PID_KEY">Marco <span>IS_STRIDE_PID_KEY</span></h4>
+      <pre class="doc-declare"><code>#define IS_STRIDE_PID_KEY "is_stride" // kv for stride
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="gw_cntl_init">Func <span>gw_cntl_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_cntl_init(IN CONST GW_CFG_S *cfg,IN CONST CHAR_T *product_key,IN CONST CHAR_T *firmware_key,
+                              IN CONST CHAR_T *sw_ver,IN CONST DEV_TYPE_T tp,IN CONST GW_ATTACH_ATTR_T *attr,IN CONST UINT_T attr_num);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief IoT device initialization
+ * 
+ * @param[in] cfg Network configuration, see GW_CFG_S
+ * @param[in] product_key KEY of product, assigned by TUYA
+ * @param[in] firmware_key KEY of firmware, assigned by TUYA
+ * @param[in] sw_ver Software version of fimeware
+ * @param[in] attr Attach module attributes
+ * @param[in] attr_num Count of attach module
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_wifi_modify_and_conn">Func <span>gw_wifi_modify_and_conn</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_wifi_modify_and_conn(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set new ssid and password
+ * 
+ * @param[in] ssid SSID to connect
+ * @param[in] passwd Password of AP
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_register_cbs">Func <span>gw_register_cbs</span></h4>
+      <pre class="doc-declare"><code>VOID gw_register_cbs(IN CONST TY_IOT_CBS_S *cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register handlers to gateway
+ * 
+ * @param[in] cbs Callbacks, see TY_IOT_CBS_S
+ */</pre>
+
+      <h4 id="get_gw_dev_cntl">Func <span>get_gw_dev_cntl</span></h4>
+      <pre class="doc-declare"><code>DEV_CNTL_N_S *get_gw_dev_cntl(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get gateway device cntl
+ * 
+ * @return Gateway device cntl, see DEV_CNTL_N_S
+ */</pre>
+
+      <h4 id="get_dev_cntl">Func <span>get_dev_cntl</span></h4>
+      <pre class="doc-declare"><code>DEV_CNTL_N_S *get_dev_cntl(IN CHAR_T *id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get device cntl
+ * 
+ * @param[in] id Device id, NULL indicates gateway
+ * 
+ * @return Device cntl, see DEV_CNTL_N_S
+ */</pre>
+
+      <h4 id="get_gw_auth_status">Func <span>get_gw_auth_status</span></h4>
+      <pre class="doc-declare"><code>BOOL_T get_gw_auth_status(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get gateway's authentication status
+ * 
+ * @return TRUE if authorized, otherwise return FALSE
+ */</pre>
+
+      <h4 id="gw_register_mqc_cb">Func <span>gw_register_mqc_cb</span></h4>
+      <pre class="doc-declare"><code>void gw_register_mqc_cb(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register gateway MQTT callback(s)
+ */</pre>
+
+      <h4 id="tuya_get_schema">Func <span>tuya_get_schema</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *tuya_get_schema(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get device schema info
+ * 
+ * @param[in] dev_id Device id
+ * @param[in] dp_num Count of dp
+ * @param[out] dp_info DP info
+ * 
+ * @note Caller shall free the returned memory explictly
+ * 
+ * @return Schema info, NULL on fail
+ */</pre>
+
+      <h4 id="tuya_get_dp_info">Func <span>tuya_get_dp_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_get_dp_info(IN CONST CHAR_T *dev_id, INT_T* dp_num, DP_CNTL_S** dp_info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get device dp info
+ * 
+ * @param[in] dev_id Device id
+ * @param[in] dp_num Count of dp
+ * @param[out] dp_info DP info
+ * 
+ * @note Caller shall free the memory of dp_info explictly
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_get_gpd_type">Func <span>gw_get_gpd_type</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_get_gpd_type(IN CONST UINT_T type, OUT GW_PERMIT_DEV_TP_T *gpd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get device ota channel
+ * 
+ * @param[in] type Device type
+ * @param[out] gpd Device ota channel
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_set_ext_attribute">Func <span>gw_set_ext_attribute</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_set_ext_attribute(UINT_T attr);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set device extension attribute
+ * 
+ * @param[in] attr Device extension attribute
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_get_ext_attribute">Func <span>gw_get_ext_attribute</span></h4>
+      <pre class="doc-declare"><code>UINT_T gw_get_ext_attribute(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get device extension attribute
+ * 
+ * @return Device extension attribute
+ */</pre>
+
+      <h4 id="gw_create_dev_cntl">Func <span>gw_create_dev_cntl</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_create_dev_cntl(IN CONST CHAR_T * dev_id, IN CONST CHAR_T * sch_json, OUT DEV_CNTL_N_S **dev_cnt_out);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Create device cntl instance
+ * 
+ * @param[in] dev_id Device ID
+ * @param[in] sch_json Device schema
+ * @param[out] dev_cnt Device cntl
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_destroy_dev_cntl">Func <span>gw_destroy_dev_cntl</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_destroy_dev_cntl( IN DEV_CNTL_N_S *dev_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Destroy device cntl instance
+ * 
+ * @param[in] dev_cnt Device cntl
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_dup_dev_cntl">Func <span>gw_dup_dev_cntl</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_dup_dev_cntl( IN DEV_CNTL_N_S *dev_cnt_src, OUT DEV_CNTL_N_S **dev_cnt_out);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Duplicate device cntl
+ * 
+ * @param[in] dev_cnt_src Original device cntl
+ * @param[out] dev_cnt_out New device cntl
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_subdev_dev_cntl_get_register_cb">Func <span>gw_subdev_dev_cntl_get_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_subdev_dev_cntl_get_register_cb(IN subdev_dev_cntl_get_cb cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register handler to get sub-device cntl
+ * 
+ * @param[in] cb Callback to get sub-device cntl
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="GW_DESC_IF_S">Variable <span>GW_DESC_IF_S</span></h4>
+      <pre class="doc-declare"><code>GW_DESC_IF_S *get_gw_dev_if(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get gateway description
+ * 
+ * @return Gateway description, see GW_DESC_IF_S
+ */</pre>
+
+      <h4 id="DP_CNTL_S">Variable <span>DP_CNTL_S</span></h4>
+      <pre class="doc-declare"><code>DP_CNTL_S *get_dev_dp_cntl(IN CHAR_T *id,IN CONST BYTE_T dpid);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get DP cntl
+ * 
+ * @param[in] id Device id
+ * @param[in] dpid DP id
+ * 
+ * @return DP cntl, see DP_CNTL_S
+ */</pre>
+
+      <h4 id="GW_CNTL_S">Variable <span>GW_CNTL_S</span></h4>
+      <pre class="doc-declare"><code>GW_CNTL_S *get_gw_cntl(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get gateway cntl
+ * 
+ * @return Gateway cntl, see GW_CNTL_S
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="SECURITY_CHIP_S;
+">Typedef <span>SECURITY_CHIP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   /** chip id */
+   CHAR_T chipId1[32 + 1];
+   /** security Code 1 */
+   CHAR_T securityCode1[16 + 1];
+   /** random A */
+   CHAR_T randomA[8 + 1];
+   /** Temp Key */
+   CHAR_T getTempKey[32];
+   /** cbc iv */
+   CHAR_T cbc_iv[16];
+}SECURITY_CHIP_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of security chip info
+ */</pre>
+
+      <h4 id="GW_AUTH_INFO_S;">Typedef <span>GW_AUTH_INFO_S;</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** uuid */
+   CHAR_T uuid[GW_UUID_LEN+1];
+   /** auth_key */
+   CHAR_T auth_key[AUTH_KEY_LEN+1];
+   /** whether get data from security chip */
+   BOOL_T is_security_chip_ok;
+}GW_AUTH_INFO_S;</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gw BASE information
+ */</pre>
+
+      <h4 id="GW_CFG_S;
+">Typedef <span>GW_CFG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** device ability, see GW_ABI */
+   GW_ABI abi;
+#if defined(WIFI_GW) && (WIFI_GW==1)
+   /** network config type, see GW_WF_CFG_MTHD_SEL */
+   GW_WF_CFG_MTHD_SEL mthd;
+   /** enable station-ap or not */
+   BOOL_T enable_station_ap;
+   /** Wi-Fi start mod, see GW_WF_START_MODE */
+   GW_WF_START_MODE wifi_start_mode;
+#endif
+#if defined(GW_SUPPORT_WIRED_WIFI) && (GW_SUPPORT_WIRED_WIFI==1)
+   /** network mode, see IOT_GW_NET_TYPE_T */
+   IOT_GW_NET_TYPE_T net_mode;
+#endif
+}GW_CFG_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gateway network attribute decribe
+ */</pre>
+
+      <h4 id="GW_BASE_IF_S;
+">Typedef <span>GW_BASE_IF_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** uuid, assigned by TUYA */
+ CHAR_T uuid[GW_UUID_LEN+1];
+   /** psk key */
+ CHAR_T psk_key[PSK_KEY_LEN+1];
+#if !TY_SECURITY_CHIP
+   /** auth key */
+   CHAR_T auth_key[AUTH_KEY_LEN+1]; 
+#else
+   /** has auth or not */
+   BOOL_T has_auth;
+#endif
+#if defined(WIFI_GW) && (WIFI_GW==1)
+   /** ap ssid info */
+   CHAR_T ap_ssid[WIFI_SSID_LEN+1];
+   /** ap passwd info */
+   CHAR_T ap_passwd[WIFI_PASSWD_LEN+1];
+   
+#endif
+#if (defined(WIFI_GW) && (WIFI_GW==1)) || (defined(GW_SUPPORT_COUNTRY_CODE) && (GW_SUPPORT_COUNTRY_CODE==1))
+   /** country code */
+ CHAR_T country_code[COUNTRY_CODE_LEN];
+#endif
+#if defined(GPRS_GW) && (GPRS_GW==1)
+   /** imei */
+   CHAR_T imei[TUYA_IMEI_LEN+1];
+   /** sn */
+   CHAR_T sn[TUYA_SN_LEN+1];
+#endif
+   /** production test */
+   BOOL_T prod_test;
+#if defined(TY_BT_MOD) && TY_BT_MOD == 1
+   /** bt mac */
+   CHAR_T bt_mac[BT_MAC_LEN+1];
+   /** bt hid */
+   CHAR_T bt_hid[BT_HID_LEN+1];
+#endif
+   /** fac_pin == pid */
+   CHAR_T fac_pin[20 + 1];
+}GW_BASE_IF_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition gw BASE information
+ */</pre>
+
+      <h4 id="GW_WF_MD_T">Typedef <span>GW_WF_MD_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WF_MD_T;
+#define GWM_NORMAL				0  // Normal
+#define GWM_SPECIAL_SMT_CFG	1  // special smart cfg
+#define GWM_SPECIAL_AP_CFG		2  // special ap cfg
+#define GWM_SPECIAL_SMT_AP_CFG	3  // special smart and ap cfg</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_WORK_STAT_T">Typedef <span>GW_WORK_STAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_WORK_STAT_T;
+#define UNREGISTERED 0 // unregistered
+#define REGISTERED 1 // registered & activate start
+#define ACTIVATED 2 // already active
+#define BLE_ACTIVING   (3)//start ble active
+#define BLE_ACTIVATED  (4) // ble actived
+
+</code></pre>
+      <pre class="doc-comment">// gw register status</pre>
+
+      <h4 id="GW_WORK_STAT_MAG_S;
+">Typedef <span>GW_WORK_STAT_MAG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+#if defined(WIFI_GW) && (WIFI_GW==1)
+   /** see GW_WF_NWC_STAT_T, valid when gateway is wireless */
+   GW_WF_NWC_STAT_T nc_tp;
+   /** see GW_WF_MD_T */
+   GW_WF_MD_T md;
+   /** ssid */
+   CHAR_T ssid[WIFI_SSID_LEN+1];
+   /** passwd */
+   CHAR_T passwd[WIFI_PASSWD_LEN+1];
+   /** used to save airkiss random */
+   BYTE_T random;
+#endif
+   /** dns priority, see TY_DNS_PRIO_T */
+   TY_DNS_PRIO_T dns_prio;
+   /** work state, see GW_WORK_STAT_T */
+   GW_WORK_STAT_T stat;
+   /** token, recvive from app */
+   CHAR_T token[TOKEN_LEN+1];
+   /** region, recvive from app */
+   CHAR_T region[REGION_LEN + 1];
+   /** regist key, recvive from app */
+   CHAR_T regist_key[REGIST_KEY_LEN + 1];
+}GW_WORK_STAT_MAG_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of device work state
+ */</pre>
+
+      <h4 id="GW_DESC_IF_S;
+">Typedef <span>GW_DESC_IF_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** ability, see GW_ABI */
+   GW_ABI abi;
+   /** virtual id */
+   CHAR_T id[GW_ID_LEN+1];
+   /** firmware ver, format xx.xx.xx */
+   CHAR_T sw_ver[SW_VER_LEN+1];
+   /** base version xx.xx */
+   CHAR_T bs_ver[SW_VER_LEN+1];
+   /** protocol version */
+   CHAR_T prtl_ver[SW_VER_LEN+1];
+   /** lan protocol version */
+   CHAR_T lan_prtl_ver[SW_VER_LEN+1];
+   /** cad version */
+   CHAR_T cad_ver[SW_VER_LEN+1];
+   /** cd version */
+   CHAR_T cd_ver[SW_VER_LEN+1];
+   /** KEY of product */
+   CHAR_T product_key[PRODUCT_KEY_LEN+1];
+   /** KEY of firmware */
+   CHAR_T firmware_key[PRODUCT_KEY_LEN+1];
+
+   /** networklink module single device struct */
+   CHAR_T dev_sw_ver[SW_VER_LEN+1];
+   /** schema id */
+   CHAR_T schema_id[SCHEMA_ID_LEN+1];
+   /** device ota channel */
+   DEV_TYPE_T tp;
+
+   /** count of GW attach attribute */
+   BYTE_T attr_num;
+   /** GW attach attribute */
+   GW_ATTACH_ATTR_T attr[GW_ATTACH_ATTR_LMT];
+
+   /** need sync or not */
+   BOOL_T sync;
+#if defined(TUYA_GW_OPERATOR) && (TUYA_GW_OPERATOR==1)
+   /** operator info */
+   CH_CODE_ST ch_dminfo;
+#endif
+}GW_DESC_IF_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of device description info
+ */</pre>
+
+      <h4 id="GW_STRIDE_UPDATE_S;
+">Typedef <span>GW_STRIDE_UPDATE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** KEY of product */
+   CHAR_T product_key[PRODUCT_KEY_LEN+1];
+   /** KEY of firmware */
+   CHAR_T firmware_key[PRODUCT_KEY_LEN+1];
+}GW_STRIDE_UPDATE_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of stride update info
+ */</pre>
+
+      <h4 id="GW_ACTV_IF_S;
+">Typedef <span>GW_ACTV_IF_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** key used by HTTP */
+   CHAR_T key[SEC_KEY_LEN+1];
+   /** key used by lan/mqtt/... */
+   CHAR_T local_key[LOCAL_KEY_LEN+1];
+   /** psk21 */
+   CHAR_T psk21_key[TUYA_PSK21_LEN+1];
+   /** domain of http */
+   CHAR_T http_url[HTTP_URL_LMT+1];
+   /** ip of http */
+   CHAR_T http_ip[HTTP_URL_LMT+1];
+   /** domain of https */
+   CHAR_T https_url[HTTP_URL_LMT+1];
+   /** ip of https */
+   CHAR_T https_ip[HTTP_URL_LMT+1];
+   /** domain of https-psk */
+   CHAR_T httpsPSK_url[HTTP_URL_LMT+1];
+   /** ip of https-psk */
+   CHAR_T httpsPSK_ip[HTTP_URL_LMT+1];
+
+   /** domain of mqtt psk */
+   CHAR_T mq_psk_url[MQ_URL_LMT+1];
+   /** ip of mqtt psk */
+   CHAR_T mq_psk_ip[MQ_URL_LMT+1];
+   /** domain of mqtts */
+   CHAR_T mq_tls_url[MQ_URL_LMT+1];
+   /** ip of mqtts */
+   CHAR_T mq_tls_ip[MQ_URL_LMT+1];
+   /** domain of mqtt */
+   CHAR_T mq_proto_url[MQ_URL_LMT+1];
+   /** ip of mqtt */
+   CHAR_T mq_proto_ip[MQ_URL_LMT+1];
+   /** domain of ai speech */
+   CHAR_T ai_speech_url[HTTP_URL_LMT+1];
+   /** ip of ai speech */
+   CHAR_T ai_speech_ip[HTTP_URL_LMT+1];
+   /** domain of lowpower */
+   CHAR_T lowpower_url[MQ_URL_LMT+1];
+   /** ip of lowpower */
+   CHAR_T lowpower_ip[MQ_URL_LMT+1];
+
+   /** timezone */
+   CHAR_T time_zone[TIME_ZONE_LEN+1];
+   /** summer timezone */
+   CHAR_T summer_time_zone[SUMMER_TM_ZONE_LEN+1];
+
+   /** app id, assigned by WX */
+   CHAR_T wx_app_id[WXAPPID_LEN+1];
+   /** uuid of wx */
+   CHAR_T wx_uuid[WXUUID_LEN+1];
+   /** cloud capability */
+   INT_T cloud_capability;
+
+   /** 0:invalid 1:disable 2:psk_only 3:ecc_psk 4:ecc_only 6:client auth */
+   BYTE_T dynamic_tls_mode;
+}GW_ACTV_IF_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of active info
+ */</pre>
+
+      <h4 id="DP_PV_STAT_E">Typedef <span>DP_PV_STAT_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_PV_STAT_E;
+#define INVALID 0      // dp is invalid
+#define VALID_LC 1     // dp is valid in local
+#define VALID_ULING 2  // dp is uploading to cloud
+#define VALID_CLOUD 3  // dp is synced with cloud
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definiton of DP status
+ */</pre>
+
+      <h4 id="DEVICE_ACTIVE_STAGE_E">Typedef <span>DEVICE_ACTIVE_STAGE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DEVICE_ACTIVE_STAGE_E;
+#define DEV_NW_CFG_INITED        (1)  // inited
+#define DEV_NW_CFG_STARTED     (2)    // network config started
+#define DEV_NW_CONNNECTING     (3)    // network config complete, connecting
+#define DEV_ACTIVE_GET_URL     (4)    // connected, getting url
+#define DEV_WIFI_ACTIVE_ING         (5) // got url, activating
+#define DEV_WIFI_ACTIVE_DONE        (6) // activated
+#define DEV_BLE_ACTIVE_START   (7)    // ble activaing start
+#define DEV_BLE_ACTIVE_DONE    (8)    // ble activated
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definiton of status when network config and activate
+ */</pre>
+
+      <h4 id="DP_REPT_FLOW_CTRL_UNIT;
+">Typedef <span>DP_REPT_FLOW_CTRL_UNIT;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T  period; // long filter period
+   UINT_T  limit; // dpcount limit in long filter period
+   UINT_T  rept_cnt; // report counter
+   TIME_S  fir_rept_timestamp;//the first report success timestamp
+}DP_REPT_FLOW_CTRL_UNIT;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of dp report flow control unit
+ */</pre>
+
+      <h4 id="DP_REPT_FLOW_CTRL;
+">Typedef <span>DP_REPT_FLOW_CTRL;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct { 
+   DP_REPT_FLOW_CTRL_UNIT filter_short;//flow control rules for short period
+   DP_REPT_FLOW_CTRL_UNIT filter_long;//flow control rules for long period
+}DP_REPT_FLOW_CTRL;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of dp report flow control
+ */</pre>
+
+      <h4 id="DP_CUR_SET_REPT_CNTL_S;">Typedef <span>DP_CUR_SET_REPT_CNTL_S;</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** cur set time */
+   TIME_S cur_set_time;
+   /** cur set rept num */
+   UINT_T cur_set_rept_num;
+}DP_CUR_SET_REPT_CNTL_S;</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of dp current set report control
+ */</pre>
+
+      <h4 id="DP_CNTL_S;
+">Typedef <span>DP_CNTL_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** see DP_DESC_IF_S */
+   DP_DESC_IF_S dp_desc;
+   /** see DP_PROP_VALUE_U */
+   DP_PROP_VALUE_U prop;
+   /** cache status, see DP_PV_STAT_E */
+   DP_PV_STAT_E pv_stat;
+   /** see DP_REPT_FLOW_CTRL */
+   DP_REPT_FLOW_CTRL rept_flow_ctrl;
+#if defined(RELIABLE_TRANSFER) && (RELIABLE_TRANSFER==1)
+   /** see TIME_S */
+   TIME_S rept_new_time;
+   /** current dp cmd value, see DP_PROP_VALUE_U  */
+   DP_PROP_VALUE_U cur_set;
+   /** see DP_CUR_SET_REPT_CNTL_S */
+   DP_CUR_SET_REPT_CNTL_S cur_set_rept;
+   /** whether to check consistency between dp cmd value and actual state */
+   BYTE_T is_set_flag;//是否要检查当前下发的值与实际状态是否一样
+#endif
+}DP_CNTL_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of dp  control
+ */</pre>
+
+      <h4 id="SCHEMA_OTHER_ATTR_S;
+">Typedef <span>SCHEMA_OTHER_ATTR_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** need preprecess or not */
+   BOOL_T preprocess;
+} SCHEMA_OTHER_ATTR_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of schema other attribute
+ */</pre>
+
+      <h4 id="GRP_REC_S;
+">Typedef <span>GRP_REC_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** group id */
+   CHAR_T gid[GRP_ID_LEN+1];
+}GRP_REC_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of group info
+ */</pre>
+
+      <h4 id="SCENE_REC_S;
+">Typedef <span>SCENE_REC_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** secene id */
+   CHAR_T s_id[SCENE_ID_LEN+1];
+   /** group id */
+   CHAR_T g_id[GRP_ID_LEN+1];
+}SCENE_REC_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of scene info
+ */</pre>
+
+      <h4 id="GRP_MAG_S;
+">Typedef <span>GRP_MAG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** group info */
+   GRP_REC_S g_rec[GRP_LMT];
+   /** group count */
+   BYTE_T cnt;
+}GRP_MAG_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of group management
+ */</pre>
+
+      <h4 id="SCENE_MAG_S;
+">Typedef <span>SCENE_MAG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** secene info */
+   SCENE_REC_S s_rec[SCENE_LMT];
+   /** secene count */
+   BYTE_T cnt;
+}SCENE_MAG_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of scene management
+ */</pre>
+
+      <h4 id="DEV_ACTV_ATTR_S;
+">Typedef <span>DEV_ACTV_ATTR_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** is attach dp info or not */
+   BOOL_T attach_dp_if;
+   /** need preprecess or not */
+   BOOL_T preprocess;
+}DEV_ACTV_ATTR_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_CNTL_N_S;
+">Typedef <span>DEV_CNTL_N_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct dev_cntl_n_s {
+   /** virtual id */
+   CHAR_T id[DEV_ID_LEN+1];
+   /** device attribute, see DEV_ACTV_ATTR_S */
+   DEV_ACTV_ATTR_S attr;
+#if defined(RELIABLE_TRANSFER) && (RELIABLE_TRANSFER==1)
+   /** support reliable transfer or not */
+   BYTE_T reliable_transfer_flag;//1表示要可靠性检测
+#endif
+
+   /** exclusive access to dp */
+   MUTEX_HANDLE dp_mutex;//dp本地缓存互斥锁
+   /** count of dp */
+   BYTE_T dp_num;
+   /** dp info */
+   DP_CNTL_S dp[0];
+} DEV_CNTL_N_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of device control info
+ */</pre>
+
+      <h4 id="DEV_CNTL_N_S">Typedef <span>DEV_CNTL_N_S</span></h4>
+      <pre class="doc-declare"><code>typedef DEV_CNTL_N_S * (*subdev_dev_cntl_get_cb)(IN CHAR_T *id);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to get sub-device control info
+ * 
+ * @param[in] id Virtual id of sub-device
+ * 
+ * @return See DEV_CNTL_N_S, NULL on error
+ */</pre>
+
+      <h4 id="GW_CNTL_S;
+">Typedef <span>GW_CNTL_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** serial num */
+   CHAR_T *serial_no;
+   /** see DEV_ATTRIBUTE */
+   UINT_T ext_attribute;
+
+   /** Wi-Fi network config method, see GW_WF_CFG_MTHD_SEL */
+   GW_WF_CFG_MTHD_SEL mthd;
+   /** Enable station ap or not */
+   BOOL_T enable_station_ap;
+   /** Wi-Fi start mode, see GW_WF_START_MODE */
+   GW_WF_START_MODE wifi_start_mode;
+
+   /** Extension state, see GW_EXT_STAT_T */
+   GW_EXT_STAT_T ext_stat;
+
+   /** Is oem device or not */
+   BOOL_T is_oem;
+   /** Inited or not */
+   BOOL_T is_init;
+   /** Is stride(pid/key) or not */
+   BOOL_T is_stride;
+   /** Is need recovery or not */
+   BOOL_T is_need_recovery;
+
+#if TY_SECURITY_CHIP
+   /** see GW_AUTH_INFO_S */
+   GW_AUTH_INFO_S secu_auth_info;
+#endif
+
+   /** device base info, see GW_BASE_IF_S */
+   GW_BASE_IF_S gw_base;
+   /** device work state management, see GW_WORK_STAT_MAG_S */
+   GW_WORK_STAT_MAG_S gw_wsm;
+   /** device description info, see GW_DESC_IF_S */
+   GW_DESC_IF_S gw_if;
+   /** device active info, see GW_ACTV_IF_S */
+   GW_ACTV_IF_S gw_actv;
+
+   /** device manage */
+   DEV_CNTL_N_S *dev_cntl; 
+
+   /** nofity callback */
+   TY_IOT_CBS_S cbs;
+
+   /** network linkage monitor */
+   TM_MSG_S *nw_stat_moni_tm;
+
+#if defined(TY_BT_MOD) && (TY_BT_MOD==1) && defined(BT_ACTIVE) && (BT_ACTIVE==1)
+   /** see DEVICE_ACTIVE_STAGE_E */
+   DEVICE_ACTIVE_STAGE_E dev_nw_cfg_active_stage;
+#endif
+
+#if defined(WIFI_GW) && (WIFI_GW==1)
+   /** handler for network state change */
+   GET_WF_NW_STAT_CB get_wf_nw_stat_cb;
+   /** handler when network configuration error happens */
+ WF_NW_CFG_ERR_CODE_CB wf_nw_err_code_cb;
+   /** error code for network config  */
+ NW_CFG_ERR_CODE_E wf_nw_cfg_err_code;
+#if defined(GW_SUPPORT_WIRED_WIFI) && (GW_SUPPORT_WIRED_WIFI==1)
+   /** network mode, see IOT_GW_NET_TYPE_T */
+   IOT_GW_NET_TYPE_T net_mode;
+   /** network status, see CUR_NET_STATUS_T */
+   CUR_NET_STATUS_T current_net;
+   /** handler for network state */
+   GET_NW_STAT_CB get_nw_stat_cb;
+#endif
+#else
+   /** handler for network state */
+   GET_NW_STAT_CB get_nw_stat_cb;
+#endif
+
+   /** global data update time */
+   TIME_S data_update_time;
+   /** sub-device related info */
+   subdev_dev_cntl_get_cb subdev_dev_get_cb;
+}GW_CNTL_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of core device management
+ */</pre>
+
+      <h4 id="GW_RESET_TP_T">Typedef <span>GW_RESET_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_RESET_TP_T;
+#define GRT_LOCAL 0    // reset is triggerd by device itself
+#define GRT_REMOTE 1   // reset is triggerd by cloud/app
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_RESET_S;
+">Typedef <span>GW_RESET_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** reset type, see GW_RESET_TP_T */
+   GW_RESET_TP_T gw_rst_tp;
+}GW_RESET_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of gateway device reset info
+ */</pre>
+
+      <h4 id="DEV_RESET_S;
+">Typedef <span>DEV_RESET_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** reset type, see GW_RESET_TP_T */
+   GW_RESET_TP_T tp;
+   /** virtual id of sub-device */
+   CHAR_T dev_id[DEV_ID_LEN+1];
+}DEV_RESET_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of sub-device reset info
+ */</pre>
+
+      <h4 id="TUYA_COUNTRY_CODE_E;
+">Typedef <span>TUYA_COUNTRY_CODE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   /** China */
+   TY_COUNTRY_CODE_CN,
+   /** USA */
+   TY_COUNTRY_CODE_US,
+   /** Japan */
+   TY_COUNTRY_CODE_JP,
+   /** Europe */
+   TY_COUNTRY_CODE_EU
+} TUYA_COUNTRY_CODE_E;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition Wi-Fi country code
+ */</pre>
+    </div>
+  </body>
+</html>
+            

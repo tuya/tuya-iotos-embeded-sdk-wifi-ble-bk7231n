@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_ENCODE_H_" class="nav-sub-label">COAP_ENCODE_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#Nn" class="nav-sub-label">Nn</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENCODE_HEADER_SIZE" class="nav-sub-label">ENCODE_HEADER_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#HIBIT" class="nav-sub-label">HIBIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EMASK" class="nav-sub-label">EMASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#MMASK" class="nav-sub-label">MMASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_VALUE" class="nav-sub-label">MAX_VALUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PSEUDOFP_DECODE_8_4(r)" class="nav-sub-label">COAP_PSEUDOFP_DECODE_8_4(r)</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_fls(i)" class="nav-sub-label">coap_fls(i)</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_flsll(i)" class="nav-sub-label">coap_flsll(i)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PSEUDOFP_ENCODE_8_4_DOWN(v,ls)" class="nav-sub-label">COAP_PSEUDOFP_ENCODE_8_4_DOWN(v,ls)</a>
+              </li>
+      
+
+              <li>
+                <a href="#COAP_PSEUDOFP_ENCODE_8_4_UP(v,ls,s)" class="nav-sub-label">COAP_PSEUDOFP_ENCODE_8_4_UP(v,ls,s)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_decode_var_bytes" class="nav-sub-label">coap_decode_var_bytes</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_encode_var_safe" class="nav-sub-label">coap_encode_var_safe</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_ENCODE_H_">Marco <span>COAP_ENCODE_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ENCODE_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="Nn">Marco <span>Nn</span></h4>
+      <pre class="doc-declare"><code>#define Nn 8 /* duplicate definition of N if built on sky motes */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENCODE_HEADER_SIZE">Marco <span>ENCODE_HEADER_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define ENCODE_HEADER_SIZE 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HIBIT">Marco <span>HIBIT</span></h4>
+      <pre class="doc-declare"><code>#define HIBIT (1 << (Nn - 1))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EMASK">Marco <span>EMASK</span></h4>
+      <pre class="doc-declare"><code>#define EMASK ((1 << ENCODE_HEADER_SIZE) - 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MMASK">Marco <span>MMASK</span></h4>
+      <pre class="doc-declare"><code>#define MMASK ((1 << Nn) - 1 - EMASK)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_VALUE">Marco <span>MAX_VALUE</span></h4>
+      <pre class="doc-declare"><code>#define MAX_VALUE ( (1 << Nn) - (1 << ENCODE_HEADER_SIZE) ) * (1 << ((1 << ENCODE_HEADER_SIZE) - 1))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PSEUDOFP_DECODE_8_4(r)">Marco <span>COAP_PSEUDOFP_DECODE_8_4(r)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PSEUDOFP_DECODE_8_4(r) (r < HIBIT ? r : (r & MMASK) << (r & EMASK))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_fls(i)">Marco <span>coap_fls(i)</span></h4>
+      <pre class="doc-declare"><code>#define coap_fls(i) fls(i)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_flsll(i)">Marco <span>coap_flsll(i)</span></h4>
+      <pre class="doc-declare"><code>#define coap_flsll(i) flsll(i)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COAP_PSEUDOFP_ENCODE_8_4_DOWN(v,ls)">Marco <span>COAP_PSEUDOFP_ENCODE_8_4_DOWN(v,ls)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PSEUDOFP_ENCODE_8_4_DOWN(v,ls) (v < HIBIT ? v : (ls = coap_fls(v) - Nn, (v >> ls) & MMASK) + ls)
+</code></pre>
+      <pre class="doc-comment">/* ls and s must be integer variables */</pre>
+
+      <h4 id="COAP_PSEUDOFP_ENCODE_8_4_UP(v,ls,s)">Marco <span>COAP_PSEUDOFP_ENCODE_8_4_UP(v,ls,s)</span></h4>
+      <pre class="doc-declare"><code>#define COAP_PSEUDOFP_ENCODE_8_4_UP(v,ls,s) (v < HIBIT ? v : (ls = coap_fls(v) - Nn, (s = (((v + ((1<<ENCODE_HEADER_SIZE<<ls)-1)) >> ls) & MMASK)), s == 0 ? HIBIT + ls + 1 : s + ls))
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_decode_var_bytes">Func <span>coap_decode_var_bytes</span></h4>
+      <pre class="doc-declare"><code>unsigned int coap_decode_var_bytes(const uint8_t *buf, unsigned int length);</code></pre>
+      <pre class="doc-comment">/**
+ * Decodes multiple-length byte sequences. @p buf points to an input byte
+ * sequence of length @p length. Returns the decoded value.
+ *
+ * @param buf The input byte sequence to decode from
+ * @param length The length of the input byte sequence
+ *
+ * @return      The decoded value
+ */</pre>
+
+      <h4 id="coap_encode_var_safe">Func <span>coap_encode_var_safe</span></h4>
+      <pre class="doc-declare"><code>unsigned int coap_encode_var_safe(uint8_t *buf,
+                                 size_t length,
+                                 unsigned int value);</code></pre>
+      <pre class="doc-comment">/**
+ * Encodes multiple-length byte sequences. @p buf points to an output buffer of
+ * sufficient length to store the encoded bytes. @p value is the value to
+ * encode.
+ * Returns the number of bytes used to encode @p value or 0 on error.
+ *
+ * @param buf    The output buffer to decode into
+ * @param length The output buffer size to encode into (must be sufficient)
+ * @param value  The value to encode into the buffer
+ *
+ * @return       The number of bytes used to encode @p value or @c 0 on error.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

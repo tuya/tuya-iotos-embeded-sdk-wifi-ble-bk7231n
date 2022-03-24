@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_FFC_APP_H__" class="nav-sub-label">__TUYA_FFC_APP_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFC_MASTER" class="nav-sub-label">FFC_MASTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFC_SLAVER" class="nav-sub-label">FFC_SLAVER</a>
+              </li>
+      
+
+              <li>
+                <a href="#FFC_LOWPOWER_EVENT" class="nav-sub-label">FFC_LOWPOWER_EVENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_init" class="nav-sub-label">ffc_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_bind" class="nav-sub-label">ffc_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_unbind" class="nav-sub-label">ffc_unbind</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_send" class="nav-sub-label">ffc_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_control" class="nav-sub-label">ffc_control</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_wifi_ffc_init" class="nav-sub-label">tuya_iot_wifi_ffc_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wifi_ffc_bind" class="nav-sub-label">tuya_iot_wifi_ffc_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wifi_ffc_unbind" class="nav-sub-label">tuya_iot_wifi_ffc_unbind</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wifi_ffc_send" class="nav-sub-label">tuya_iot_wifi_ffc_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wifi_ffc_control" class="nav-sub-label">tuya_iot_wifi_ffc_control</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ffc_cb_state_t;
+" class="nav-sub-label">ffc_cb_state_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_status_cb" class="nav-sub-label">ffc_status_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_recv_cb" class="nav-sub-label">ffc_recv_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_master_type_t;
+" class="nav-sub-label">ffc_master_type_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_fittings_event_t;
+" class="nav-sub-label">ffc_fittings_event_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_fittings_msg_t;
+" class="nav-sub-label">ffc_fittings_msg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_fittings_cb" class="nav-sub-label">ffc_fittings_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_group_t;
+" class="nav-sub-label">ffc_group_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_flag_t;
+" class="nav-sub-label">ffc_flag_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_cfg_t;
+" class="nav-sub-label">ffc_cfg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_ops_t;
+" class="nav-sub-label">ffc_ops_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#ffc_cb_t;
+" class="nav-sub-label">ffc_cb_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_FFC_APP_H__">Marco <span>__TUYA_FFC_APP_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_FFC_APP_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFC_MASTER">Marco <span>FFC_MASTER</span></h4>
+      <pre class="doc-declare"><code>#define FFC_MASTER                   1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFC_SLAVER">Marco <span>FFC_SLAVER</span></h4>
+      <pre class="doc-declare"><code>#define FFC_SLAVER                   2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FFC_LOWPOWER_EVENT">Marco <span>FFC_LOWPOWER_EVENT</span></h4>
+      <pre class="doc-declare"><code>#define FFC_LOWPOWER_EVENT           "ffc.lowpower"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_init">Marco <span>ffc_init</span></h4>
+      <pre class="doc-declare"><code>#define ffc_init       tuya_iot_wifi_ffc_init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_bind">Marco <span>ffc_bind</span></h4>
+      <pre class="doc-declare"><code>#define ffc_bind       tuya_iot_wifi_ffc_bind
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_unbind">Marco <span>ffc_unbind</span></h4>
+      <pre class="doc-declare"><code>#define ffc_unbind     tuya_iot_wifi_ffc_unbind
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_send">Marco <span>ffc_send</span></h4>
+      <pre class="doc-declare"><code>#define ffc_send       tuya_iot_wifi_ffc_send
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_control">Marco <span>ffc_control</span></h4>
+      <pre class="doc-declare"><code>#define ffc_control    tuya_iot_wifi_ffc_control
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_iot_wifi_ffc_init">Func <span>tuya_iot_wifi_ffc_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_iot_wifi_ffc_init(uint8_t role, ffc_status_cb *status_cb, ffc_recv_cb *recv_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc init function,must called first
+ *
+ * @param[in] role master or slaver
+ * @param[in] status_cb user status callback
+ * @param[in] recv_cb user received callback
+ *
+ * @return OPRT_OK on success. Others error, please refer to tuya_error_code.h
+ *
+ */</pre>
+
+      <h4 id="tuya_iot_wifi_ffc_bind">Func <span>tuya_iot_wifi_ffc_bind</span></h4>
+      <pre class="doc-declare"><code>int tuya_iot_wifi_ffc_bind(uint16_t timeout_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc bind function
+ *
+ * @param[in] timeout_s time out
+ *
+ * @return OPRT_OK on success. Others error, please refer to tuya_error_code.h
+ *
+ */</pre>
+
+      <h4 id="tuya_iot_wifi_ffc_unbind">Func <span>tuya_iot_wifi_ffc_unbind</span></h4>
+      <pre class="doc-declare"><code>int tuya_iot_wifi_ffc_unbind(uint16_t timeout_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc unbind function
+ *
+ * @param[in] timeout_s time out
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ *
+ */</pre>
+
+      <h4 id="tuya_iot_wifi_ffc_send">Func <span>tuya_iot_wifi_ffc_send</span></h4>
+      <pre class="doc-declare"><code>int tuya_iot_wifi_ffc_send(uint8_t *data, uint16_t len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc send
+ *
+ * @param[in] data send buf
+ * @param[in] len send length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ *
+ */</pre>
+
+      <h4 id="tuya_iot_wifi_ffc_control">Func <span>tuya_iot_wifi_ffc_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_iot_wifi_ffc_control(int flag, void *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc control
+ *
+ * @param[in] flag control flag
+ * @param[in] data control data
+ *
+ * @return OPRT_OK on success. Others error, please refer to tuya_error_code.h
+ *
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="ffc_cb_state_t;
+">Typedef <span>ffc_cb_state_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   FFC_INIT_STATE = 0,
+   FFC_CONTROL_STATE,
+   FFC_BINDING_BEGIN_STATE,
+   FFC_BINDING_SUCCESS_STATE,
+   FFC_BINDING_FINSH_STATE,
+} ffc_cb_state_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_status_cb">Typedef <span>ffc_status_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*ffc_status_cb)(ffc_cb_state_t state);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_recv_cb">Typedef <span>ffc_recv_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*ffc_recv_cb)(uint8_t *data_cmd, uint16_t data_len);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_master_type_t;
+">Typedef <span>ffc_master_type_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   FFC_MASTER_TYPE_LOCAL   = 0,
+   FFC_MASTER_TYPE_FITTINGS = 1,
+   FFC_MASTER_TYPE_DEVICE  = 2,
+   FFC_MASTER_TYPE_ONLINE  = FFC_MASTER_TYPE_DEVICE,
+   FFC_MASTER_TYPE_MAX,
+} ffc_master_type_t;
+</code></pre>
+      <pre class="doc-comment">//! FFC_MASTER_TYPE_LOCAL -> FFC_MASTER_TYPE_FITTINGS</pre>
+
+      <h4 id="ffc_fittings_event_t;
+">Typedef <span>ffc_fittings_event_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   FFC_FITTINGS_SYNC_EVENT,
+   FFC_FITTINGS_ACTIVE_EVENT,
+} ffc_fittings_event_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_fittings_msg_t;
+">Typedef <span>ffc_fittings_msg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   ffc_fittings_event_t   event;
+   ffc_master_type_t      type;
+   uint8_t                mac[6];
+   uint8_t                key[16];
+   uint16_t               seq;
+   uint8_t                uuid[25 + 1];
+   uint8_t                pid[20 + 1];
+} ffc_fittings_msg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_fittings_cb">Typedef <span>ffc_fittings_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*ffc_fittings_cb)(ffc_fittings_msg_t *msg);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_group_t;
+">Typedef <span>ffc_group_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   FFC_GROUP_0 = 0,
+   FFC_GROUP_1,
+   FFC_GROUP_2,
+   FFC_GROUP_3,
+   FFC_GROUP_MAX,
+} ffc_group_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_flag_t;
+">Typedef <span>ffc_flag_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   FFC_CHANNEL_SCAN_FLAG  = 1,
+   FFC_MASTER_GROUP_SET_FLAG,
+   FFC_MASTER_TYPE_SET_FLAG,
+} ffc_flag_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ffc_cfg_t;
+">Typedef <span>ffc_cfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** uuid,assigned by TUYA */
+   uint8_t    uuid[25 + 1];
+   /** pid,assigned by TUYA */
+   uint8_t    pid[20 + 1];
+   /** auzkey,assigned by TUYA */
+   uint8_t    auzkey[32 + 1];
+   /** mac address */
+   uint8_t    mac[6];
+   /** wifi channel */
+   uint8_t    channel[13];
+   /** channel count */
+   uint8_t    channel_count;
+   /** flag */
+   uint32_t   flag;
+} ffc_cfg_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc configure struct
+ */</pre>
+
+      <h4 id="ffc_ops_t;
+">Typedef <span>ffc_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** new channel set */
+   int (*channel_set)(uint8_t new_channel);
+   /** one channel get */
+   uint8_t (*channel_get)(void);
+   /** set frame */
+   int (*send_frame)(uint8_t *frame, uint16_t frame_len, uint8_t src_mac[6], uint8_t dst_mac[6]);
+} ffc_ops_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ffc operation struct
+ */</pre>
+
+      <h4 id="ffc_cb_t;
+">Typedef <span>ffc_cb_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** user status call back */
+   ffc_status_cb  status_cb;
+   /** user received callback */
+   ffc_recv_cb    recv_cb;
+   /** ffc active cb */
+   ffc_fittings_cb fittings_cb;
+} ffc_cb_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief callback define when ffc init
+ */</pre>
+    </div>
+  </body>
+</html>
+            

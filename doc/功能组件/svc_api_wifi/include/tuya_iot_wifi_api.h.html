@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_wifi_defs.h" class="nav-sub-label">tuya_cloud_wifi_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_com_api.h" class="nav-sub-label">tuya_iot_com_api.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_TUYA_IOT_WIFI_API_H" class="nav-sub-label">_TUYA_IOT_WIFI_API_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_soc_dev_init(cfg, start_mode,cbs,product_key,wf_sw_ver)" class="nav-sub-label">tuya_iot_wf_soc_dev_init(cfg, start_mode,cbs,product_key,wf_sw_ver)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_reg_get_wf_nw_stat_cb(wf_nw_stat_cb)" class="nav-sub-label">tuya_iot_reg_get_wf_nw_stat_cb(wf_nw_stat_cb)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_set_wf_gw_prod_info" class="nav-sub-label">tuya_iot_set_wf_gw_prod_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_wf_gw_debug_info" class="nav-sub-label">tuya_iot_set_wf_gw_debug_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_timeout_set" class="nav-sub-label">tuya_iot_wf_timeout_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_dev_init" class="nav-sub-label">tuya_iot_wf_dev_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_mcu_dev_init" class="nav-sub-label">tuya_iot_wf_mcu_dev_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_soc_dev_init_param" class="nav-sub-label">tuya_iot_wf_soc_dev_init_param</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_reg_get_wf_nw_stat_cb_params" class="nav-sub-label">tuya_iot_reg_get_wf_nw_stat_cb_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_wf_cfg_err_code_cb" class="nav-sub-label">tuya_iot_set_wf_cfg_err_code_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_gw_unactive" class="nav-sub-label">tuya_iot_wf_gw_unactive</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_gw_reset" class="nav-sub-label">tuya_iot_wf_gw_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_gw_fast_unactive" class="nav-sub-label">tuya_iot_wf_gw_fast_unactive</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_wf_fast_get_nc_type" class="nav-sub-label">tuya_iot_wf_fast_get_nc_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_user_def_ap_if" class="nav-sub-label">tuya_iot_set_user_def_ap_if</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_get_dev_ap_if" class="nav-sub-label">tuya_iot_get_dev_ap_if</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_gw_wf_user_cfg" class="nav-sub-label">tuya_iot_gw_wf_user_cfg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_max_sta_conn" class="nav-sub-label">tuya_iot_set_max_sta_conn</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_iot_set_nw_ip" class="nav-sub-label">tuya_iot_set_nw_ip</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_wifi_defs.h"><span>tuya_cloud_wifi_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_wifi_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_wifi_defs.h"
+</pre>
+
+      <h4 id="tuya_iot_com_api.h"><span>tuya_iot_com_api.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_com_api.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_com_api.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_TUYA_IOT_WIFI_API_H">Marco <span>_TUYA_IOT_WIFI_API_H</span></h4>
+      <pre class="doc-declare"><code>#define _TUYA_IOT_WIFI_API_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_wf_soc_dev_init(cfg, start_mode,cbs,product_key,wf_sw_ver)">Marco <span>tuya_iot_wf_soc_dev_init(cfg, start_mode,cbs,product_key,wf_sw_ver)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_wf_soc_dev_init(cfg, start_mode,cbs,product_key,wf_sw_ver) \
+       tuya_iot_wf_soc_dev_init_param(cfg, start_mode,cbs,NULL,product_key,wf_sw_ver)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_iot_reg_get_wf_nw_stat_cb(wf_nw_stat_cb)">Marco <span>tuya_iot_reg_get_wf_nw_stat_cb(wf_nw_stat_cb)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_iot_reg_get_wf_nw_stat_cb(wf_nw_stat_cb) \
+   tuya_iot_reg_get_wf_nw_stat_cb_params(wf_nw_stat_cb, 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_iot_set_wf_gw_prod_info">Func <span>tuya_iot_set_wf_gw_prod_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_wf_gw_prod_info(IN CONST WF_GW_PROD_INFO_S *wf_prod_info);</code></pre>
+      <pre class="doc-comment">/**
+* @brief tuya_iot_set_wf_gw_prod_info 
+*
+* @param[in] wf_prod_info
+*
+* @return OPERATE_RET
+*/</pre>
+
+      <h4 id="tuya_iot_set_wf_gw_debug_info">Func <span>tuya_iot_set_wf_gw_debug_info</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_wf_gw_debug_info(IN CONST DEBUG_GW_PROD_INFO_S *debug_info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_wf_gw_debug_info 
+ * @desc safe version set debug information
+ *
+ * @param debug_info
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_timeout_set">Func <span>tuya_iot_wf_timeout_set</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_wf_timeout_set(IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_timeout_set 
+ * @desc set wifi timeout
+ *
+ * @param[in] timeout: time in sec
+ *
+ * @return none
+ *
+ * @note must call first
+ */</pre>
+
+      <h4 id="tuya_iot_wf_dev_init">Func <span>tuya_iot_wf_dev_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_dev_init(IN CONST GW_WF_CFG_MTHD_SEL cfg, IN CONST GW_WF_START_MODE start_mode,
+                               IN CONST TY_IOT_CBS_S *cbs, IN CONST CHAR_T *firmware_key,
+                               IN CONST CHAR_T *product_key, IN CONST CHAR_T *wf_sw_ver,IN CONST DEV_TYPE_T tp,
+                               IN CONST GW_ATTACH_ATTR_T *attr, IN CONST UINT_T attr_num);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_dev_init 
+ *
+ * @param[in] cfg
+ * @param[in] start_mode
+ * @param[in] cbs: tuya wifi sdk user callbacks
+ * @param[in] firmware_key
+ * @param[in] product_key: product key/proudct id,get from tuya open platform
+ * @param[in] wf_sw_ver: wifi module software version format:xx.xx.xx (0<=x<=9)
+ * @param[in] attr
+ * @param[in] attr_num
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_mcu_dev_init">Func <span>tuya_iot_wf_mcu_dev_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_mcu_dev_init(IN CONST GW_WF_CFG_MTHD_SEL cfg, IN CONST GW_WF_START_MODE start_mode,
+                                    IN CONST TY_IOT_CBS_S *cbs, IN CONST CHAR_T *p_firmware_key,
+                                    IN CONST CHAR_T *product_key,IN CONST CHAR_T *wf_sw_ver,IN CONST CHAR_T *mcu_sw_ver);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_mcu_dev_init 
+ *
+ * @param[in] cfg
+ * @param[in] start_mode
+ * @param[in] cbs: tuya wifi sdk user callbacks
+ * @param[in] p_firmware_key
+ * @param[in] product_key: product key/proudct id,get from tuya open platform
+ * @param[in] wf_sw_ver: wifi module software version format:xx.xx.xx (0<=x<=9)
+ * @param[in] mcu_sw_ver: mcu software version format:xx.xx.xx (0<=x<=9)
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_soc_dev_init_param">Func <span>tuya_iot_wf_soc_dev_init_param</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_soc_dev_init_param(IN CONST GW_WF_CFG_MTHD_SEL cfg, IN CONST GW_WF_START_MODE start_mode,
+                                    IN CONST TY_IOT_CBS_S *cbs,IN CONST CHAR_T *firmware_key,
+                                    IN CONST CHAR_T *product_key,IN CONST CHAR_T *wf_sw_ver);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_soc_dev_init_param 
+ *
+ * @param[in] cfg
+ * @param[in] start_mode
+ * @param[in] cbs: tuya wifi sdk user callbacks,note cbs->dev_ug_cb is useless
+ * @param[in] firmware_key
+ * @param[in] product_key: product key/proudct id,get from tuya open platform
+ * @param[in] wf_sw_ver: wifi module software version format:xx.xx.xx (0<=x<=9)
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_reg_get_wf_nw_stat_cb_params">Func <span>tuya_iot_reg_get_wf_nw_stat_cb_params</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_reg_get_wf_nw_stat_cb_params(IN CONST GET_WF_NW_STAT_CB wf_nw_stat_cb, IN CONST INT_T min_interval_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_reg_get_wf_nw_stat_cb_params 
+ *
+ * @param wf_nw_stat_cb
+ * @param min_interval_s
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="tuya_iot_set_wf_cfg_err_code_cb">Func <span>tuya_iot_set_wf_cfg_err_code_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_wf_cfg_err_code_cb(IN CONST WF_NW_CFG_ERR_CODE_CB wf_nw_cfg_err_code_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_wf_cfg_err_code_cb 
+ *
+ * @param wf_nw_cfg_err_code_cb
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_gw_unactive">Func <span>tuya_iot_wf_gw_unactive</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_gw_unactive(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_gw_unactive 
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_gw_reset">Func <span>tuya_iot_wf_gw_reset</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_gw_reset(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_gw_reset 
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_gw_fast_unactive">Func <span>tuya_iot_wf_gw_fast_unactive</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_gw_fast_unactive(IN CONST GW_WF_CFG_MTHD_SEL mthd,IN CONST GW_WF_START_MODE wifi_start_mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_gw_fast_unactive 
+ *
+ * @param[in] mthd
+ * @param[in] wifi_start_mode
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_wf_fast_get_nc_type">Func <span>tuya_iot_wf_fast_get_nc_type</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_wf_fast_get_nc_type(GW_WF_NWC_FAST_STAT_T *nc_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_wf_fast_get_nc_type 
+ *
+ * @param[in] nc_type
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="tuya_iot_set_user_def_ap_if">Func <span>tuya_iot_set_user_def_ap_if</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_set_user_def_ap_if(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_user_def_ap_if 
+ *
+ * @param[in] ssid
+ * @param[in] passwd
+ *
+ * @return OPERATE_RET
+ *
+ * @note need call before tuya_iot_wf_xxx_init
+ */</pre>
+
+      <h4 id="tuya_iot_get_dev_ap_if">Func <span>tuya_iot_get_dev_ap_if</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_get_dev_ap_if(OUT CHAR_T *ssid,OUT CHAR_T *passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_get_dev_ap_if 
+ *
+ * @param[in] ssid
+ * @param[in] passwd
+ *
+ * @return OPERATE_RET
+ *
+ * @note need call before tuya_iot_wf_xxx_init
+ */</pre>
+
+      <h4 id="tuya_iot_gw_wf_user_cfg">Func <span>tuya_iot_gw_wf_user_cfg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_iot_gw_wf_user_cfg(IN CONST CHAR_T *ssid,IN CONST CHAR_T *passwd,IN CONST CHAR_T *token);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_gw_wf_user_cfg 
+ *
+ * @param[in] ssid
+ * @param[in] passwd
+ * @param[in] token
+ *
+ * @return OPERATE_RET
+ *
+ * @note use to TY_APP_CFG_WF mode
+ */</pre>
+
+      <h4 id="tuya_iot_set_max_sta_conn">Func <span>tuya_iot_set_max_sta_conn</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_set_max_sta_conn(IN CONST UCHAR_T max_conn);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_max_sta_conn 
+ *
+ * @param[in] max_conn
+ *
+ * @return 
+ *
+ * @note need call before tuya_iot_wf_xxx_init
+ */</pre>
+
+      <h4 id="tuya_iot_set_nw_ip">Func <span>tuya_iot_set_nw_ip</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_iot_set_nw_ip(IN CONST CHAR_T* ip, IN CONST CHAR_T* mask, IN CONST CHAR_T* gw);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_iot_set_nw_ip 
+ *
+ * @param[in] ip
+ * @param[in] mask
+ * @param[in] gw
+ *
+ * @return none
+ *
+ * @note need call before tuya_iot_wf_xxx_init
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

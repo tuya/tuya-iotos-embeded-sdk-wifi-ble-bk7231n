@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__HASHMAP_H__" class="nav-sub-label">__HASHMAP_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAP_MISSING" class="nav-sub-label">MAP_MISSING</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAP_OMEM" class="nav-sub-label">MAP_OMEM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAP_OK" class="nav-sub-label">MAP_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#HASHMAP_FOR_EACH_DATA(in, key, data_iter)" class="nav-sub-label">HASHMAP_FOR_EACH_DATA(in, key, data_iter)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#hashmap_new" class="nav-sub-label">hashmap_new</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap_put" class="nav-sub-label">hashmap_put</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap_get" class="nav-sub-label">hashmap_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap_data_traversal" class="nav-sub-label">hashmap_data_traversal</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap_remove" class="nav-sub-label">hashmap_remove</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap_free" class="nav-sub-label">hashmap_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#hashmap_length" class="nav-sub-label">hashmap_length</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#*any_t" class="nav-sub-label">*any_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#map_t" class="nav-sub-label">map_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#*any_t_iter" class="nav-sub-label">*any_t_iter</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__HASHMAP_H__">Marco <span>__HASHMAP_H__</span></h4>
+      <pre class="doc-declare"><code>#define __HASHMAP_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAP_MISSING">Marco <span>MAP_MISSING</span></h4>
+      <pre class="doc-declare"><code>#define MAP_MISSING -2 /* No such element */
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief define some special error code for hashmap module
+ * 
+ */</pre>
+
+      <h4 id="MAP_OMEM">Marco <span>MAP_OMEM</span></h4>
+      <pre class="doc-declare"><code>#define MAP_OMEM -1	/* Out of Memory */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAP_OK">Marco <span>MAP_OK</span></h4>
+      <pre class="doc-declare"><code>#define MAP_OK 0	/* OK */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HASHMAP_FOR_EACH_DATA(in, key, data_iter)">Marco <span>HASHMAP_FOR_EACH_DATA(in, key, data_iter)</span></h4>
+      <pre class="doc-declare"><code>#define HASHMAP_FOR_EACH_DATA(in, key, data_iter) \
+   for(data_iter = NULL; hashmap_data_traversal(in, key, (any_t_iter *)&data_iter) == MAP_OK; /*empty*/)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse all data with same key
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="hashmap_new">Func <span>hashmap_new</span></h4>
+      <pre class="doc-declare"><code>map_t hashmap_new(unsigned int table_size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create a new empty hashmap
+ * 
+ * @param[in] table_size the hash table size
+ * @return a new empty hashmap 
+ */</pre>
+
+      <h4 id="hashmap_put">Func <span>hashmap_put</span></h4>
+      <pre class="doc-declare"><code>int hashmap_put(map_t in, const char* key ,const any_t data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Add an element to the hashmap
+ * 
+ * @param[in] in the hashmap
+ * @param[in] key the key of hash element
+ * @param[in] data the data of hash element
+ * @return MAP_OK on success, others on failed, please refer to the define of hashmap error code 
+ * 
+ * @note For same key, it does not replace it. it is inserted in the head of the list
+ */</pre>
+
+      <h4 id="hashmap_get">Func <span>hashmap_get</span></h4>
+      <pre class="doc-declare"><code>int hashmap_get(map_t in, const char* key, any_t *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get an element from the hashmap
+ * 
+ * @param[in] in the hashmap
+ * @param[in] key the key of the element
+ * @param[out] arg the first value that the key matches
+ * @return MAP_OK on success, others on failed, please refer to the define of hashmap error code  
+ */</pre>
+
+      <h4 id="hashmap_data_traversal">Func <span>hashmap_data_traversal</span></h4>
+      <pre class="doc-declare"><code>int hashmap_data_traversal(map_t in, const char* key, any_t_iter *arg_iterator);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse all data with same key
+ * 
+ * @param[in] in the hashmap
+ * @param[in] key the key of element
+ * @param[inout] arg_iterator the traverse iterator
+ * @return MAP_OK on success, others on failed, please refer to the define of hashmap error code  
+ * 
+ * @note if arg_iterator is NULL, fetch the first element, otherwise, fetch the next element
+ */</pre>
+
+      <h4 id="hashmap_remove">Func <span>hashmap_remove</span></h4>
+      <pre class="doc-declare"><code>int hashmap_remove(map_t in, char* key, any_t data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief remove an element from the hashmap
+ * 
+ * @param[in] in the hashmap
+ * @param[in] key the key of element
+ * @param[in] data the data of the element
+ * @return MAP_OK on success, others on failed, please refer to the define of hashmap error code  
+ * 
+ * @note if data is NULL,then delete the first note match key.if data is not null, then delete the node match key and data.
+ */</pre>
+
+      <h4 id="hashmap_free">Func <span>hashmap_free</span></h4>
+      <pre class="doc-declare"><code>void hashmap_free(map_t in);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free the hashmap
+ * 
+ * @param[in] in the hashmap need to free
+ * 
+ * @warning must remove all element first, otherwise, it will cause element leak
+ */</pre>
+
+      <h4 id="hashmap_length">Func <span>hashmap_length</span></h4>
+      <pre class="doc-declare"><code>int hashmap_length(map_t in);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get current size of the hashmap
+ * 
+ * @param[in] in the hashmap
+ * @return the current size
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="*any_t">Typedef <span>*any_t</span></h4>
+      <pre class="doc-declare"><code>typedef void *any_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief any_t is a pointer.  This allows you to put arbitrary structures in
+ * the hashmap.
+ */</pre>
+
+      <h4 id="map_t">Typedef <span>map_t</span></h4>
+      <pre class="doc-declare"><code>typedef any_t map_t;   
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief map_t is a pointer to an internally maintained data structure.
+ * Clients of this package do not need to know how hashmaps are
+ * represented.  They see and manipulate only map_t's.
+ */</pre>
+
+      <h4 id="*any_t_iter">Typedef <span>*any_t_iter</span></h4>
+      <pre class="doc-declare"><code>typedef any_t *any_t_iter;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief any_t_iter is a iterator which used to traverse the hashmap
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

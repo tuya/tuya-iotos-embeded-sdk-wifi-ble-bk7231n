@@ -54,6 +54,7 @@ void ascs2hex(unsigned char *hex,unsigned char *ascs,int srclen);
  * @note the size of <pbDest> must >= nLen * 2, convert example 00-ff -> "00"-"FF"
  */
 void hex2str(unsigned char *pbDest, unsigned char *pbSrc, int nLen);
+void byte2str(unsigned char *pbDest, unsigned char *pbSrc, int nLen, bool_t upper);
 
 /**
  * @brief find <ch> in <str>, start find in index <revr_index>, find in reverse order.
@@ -111,6 +112,10 @@ int string2mac(const char *str, char mac[6]);
 
  */
 int versionString2int(const char* versionString);
+
+int tuya_isalpha(int c);
+int tuya_tolower(int c);
+int tuya_toupper(int c);
 
 #ifdef __cplusplus
 }

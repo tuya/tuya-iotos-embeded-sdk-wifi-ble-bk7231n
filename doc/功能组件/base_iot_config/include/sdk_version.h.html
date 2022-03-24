@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_config.h" class="nav-sub-label">tuya_iot_config.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_SDK_VERSION_H" class="nav-sub-label">_SDK_VERSION_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#BS_VER" class="nav-sub-label">BS_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#PT_VER" class="nav-sub-label">PT_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PRO_VER" class="nav-sub-label">LAN_PRO_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PRO_VER" class="nav-sub-label">LAN_PRO_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CAD_VER" class="nav-sub-label">CAD_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#CD_VER" class="nav-sub-label">CD_VER</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_THINGCONFIG" class="nav-sub-label">DEV_ATTR_THINGCONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_THINGCONFIG" class="nav-sub-label">DEV_ATTR_THINGCONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_LOCAL_DEV_DP_QUERY" class="nav-sub-label">DEV_ATTR_LOCAL_DEV_DP_QUERY</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_LOCAL_SCENE_LINKAGE" class="nav-sub-label">DEV_ATTR_LOCAL_SCENE_LINKAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_LOCAL_SCENE_LINKAGE" class="nav-sub-label">DEV_ATTR_LOCAL_SCENE_LINKAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_WIFI_SCAN_SUPPORT" class="nav-sub-label">DEV_WIFI_SCAN_SUPPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_WIFI_SCAN_SUPPORT" class="nav-sub-label">DEV_WIFI_SCAN_SUPPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_GOOGLE_LOCAL_HOME" class="nav-sub-label">DEV_ATTR_GOOGLE_LOCAL_HOME</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_GOOGLE_LOCAL_HOME" class="nav-sub-label">DEV_ATTR_GOOGLE_LOCAL_HOME</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_PEGASUS_CONFIG" class="nav-sub-label">DEV_ATTR_PEGASUS_CONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_PEGASUS_CONFIG" class="nav-sub-label">DEV_ATTR_PEGASUS_CONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_BLT_CONTROL" class="nav-sub-label">DEV_ATTR_BLT_CONTROL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_BLT_CONTROL" class="nav-sub-label">DEV_ATTR_BLT_CONTROL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_HOME_SECURITY" class="nav-sub-label">DEV_ATTR_HOME_SECURITY</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_HOME_SECURITY" class="nav-sub-label">DEV_ATTR_HOME_SECURITY</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_ASTRO_TIMER" class="nav-sub-label">DEV_ATTR_ASTRO_TIMER</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_ASTRO_TIMER" class="nav-sub-label">DEV_ATTR_ASTRO_TIMER</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_WIFI_PROTECT" class="nav-sub-label">DEV_ATTR_WIFI_PROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_WIFI_PROTECT" class="nav-sub-label">DEV_ATTR_WIFI_PROTECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTR_OTA" class="nav-sub-label">DEV_ATTR_OTA</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ATTRIBUTE" class="nav-sub-label">DEV_ATTRIBUTE</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT2STR(NUM)" class="nav-sub-label">INT2STR(NUM)</a>
+              </li>
+      
+
+              <li>
+                <a href="#I2S(R)" class="nav-sub-label">I2S(R)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SDK_INFO_1" class="nav-sub-label">SDK_INFO_1</a>
+              </li>
+      
+
+              <li>
+                <a href="#SDK_INFO_2" class="nav-sub-label">SDK_INFO_2</a>
+              </li>
+      
+
+              <li>
+                <a href="#SDK_IOT_ATTR" class="nav-sub-label">SDK_IOT_ATTR</a>
+              </li>
+      
+
+              <li>
+                <a href="#SDK_INFO" class="nav-sub-label">SDK_INFO</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_iot_config.h"><span>tuya_iot_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_config.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_SDK_VERSION_H">Marco <span>_SDK_VERSION_H</span></h4>
+      <pre class="doc-declare"><code>#define _SDK_VERSION_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BS_VER">Marco <span>BS_VER</span></h4>
+      <pre class="doc-declare"><code>#define BS_VER "40.00"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PT_VER">Marco <span>PT_VER</span></h4>
+      <pre class="doc-declare"><code>#define PT_VER "2.2"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_PRO_VER">Marco <span>LAN_PRO_VER</span></h4>
+      <pre class="doc-declare"><code>#define LAN_PRO_VER "3.4"  //必须3.3版本及以上才支持局域网加密功能
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_PRO_VER">Marco <span>LAN_PRO_VER</span></h4>
+      <pre class="doc-declare"><code>#define LAN_PRO_VER "3.2"  //3.3以下不支持局域网加密
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CAD_VER">Marco <span>CAD_VER</span></h4>
+      <pre class="doc-declare"><code>#define CAD_VER "1.0.5" 
+</code></pre>
+      <pre class="doc-comment">//1.0.5:支持mqtt和蓝牙通道同时在线时;互斥上报DP业务;云端对蓝牙上报数据不再过滤(解决数据去重问题).</pre>
+
+      <h4 id="CD_VER">Marco <span>CD_VER</span></h4>
+      <pre class="doc-declare"><code>#define CD_VER "1.0.0" //固件支持mqtt消息确认
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_THINGCONFIG">Marco <span>DEV_ATTR_THINGCONFIG</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_THINGCONFIG       (1 << 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_THINGCONFIG">Marco <span>DEV_ATTR_THINGCONFIG</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_THINGCONFIG       (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_LOCAL_DEV_DP_QUERY">Marco <span>DEV_ATTR_LOCAL_DEV_DP_QUERY</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_LOCAL_DEV_DP_QUERY          (1<<1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_LOCAL_SCENE_LINKAGE">Marco <span>DEV_ATTR_LOCAL_SCENE_LINKAGE</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_LOCAL_SCENE_LINKAGE     (1<<2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_LOCAL_SCENE_LINKAGE">Marco <span>DEV_ATTR_LOCAL_SCENE_LINKAGE</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_LOCAL_SCENE_LINKAGE     (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_WIFI_SCAN_SUPPORT">Marco <span>DEV_WIFI_SCAN_SUPPORT</span></h4>
+      <pre class="doc-declare"><code>#define DEV_WIFI_SCAN_SUPPORT            (1<<3)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_WIFI_SCAN_SUPPORT">Marco <span>DEV_WIFI_SCAN_SUPPORT</span></h4>
+      <pre class="doc-declare"><code>#define DEV_WIFI_SCAN_SUPPORT            (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_GOOGLE_LOCAL_HOME">Marco <span>DEV_ATTR_GOOGLE_LOCAL_HOME</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_GOOGLE_LOCAL_HOME          (1<<4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_GOOGLE_LOCAL_HOME">Marco <span>DEV_ATTR_GOOGLE_LOCAL_HOME</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_GOOGLE_LOCAL_HOME          (0<<4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_PEGASUS_CONFIG">Marco <span>DEV_ATTR_PEGASUS_CONFIG</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_PEGASUS_CONFIG    (1 << 5)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_PEGASUS_CONFIG">Marco <span>DEV_ATTR_PEGASUS_CONFIG</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_PEGASUS_CONFIG    (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_BLT_CONTROL">Marco <span>DEV_ATTR_BLT_CONTROL</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_BLT_CONTROL       (1 << 6)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_BLT_CONTROL">Marco <span>DEV_ATTR_BLT_CONTROL</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_BLT_CONTROL       (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_HOME_SECURITY">Marco <span>DEV_ATTR_HOME_SECURITY</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_HOME_SECURITY          (1<<7)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_HOME_SECURITY">Marco <span>DEV_ATTR_HOME_SECURITY</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_HOME_SECURITY          (0<<7)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_ASTRO_TIMER">Marco <span>DEV_ATTR_ASTRO_TIMER</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_ASTRO_TIMER               (1<<9)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_ASTRO_TIMER">Marco <span>DEV_ATTR_ASTRO_TIMER</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_ASTRO_TIMER               (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_WIFI_PROTECT">Marco <span>DEV_ATTR_WIFI_PROTECT</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_WIFI_PROTECT              (1<<12)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_WIFI_PROTECT">Marco <span>DEV_ATTR_WIFI_PROTECT</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_WIFI_PROTECT              (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTR_OTA">Marco <span>DEV_ATTR_OTA</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTR_OTA               (1<<11)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ATTRIBUTE">Marco <span>DEV_ATTRIBUTE</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ATTRIBUTE              (DEV_ATTR_THINGCONFIG | DEV_ATTR_LOCAL_DEV_DP_QUERY | DEV_ATTR_LOCAL_SCENE_LINKAGE | DEV_WIFI_SCAN_SUPPORT | DEV_ATTR_BLT_CONTROL | DEV_ATTR_GOOGLE_LOCAL_HOME | DEV_ATTR_ASTRO_TIMER | DEV_ATTR_PEGASUS_CONFIG | DEV_ATTR_WIFI_PROTECT)
+</code></pre>
+      <pre class="doc-comment">//设备属性,采用按位与方式</pre>
+
+      <h4 id="INT2STR(NUM)">Marco <span>INT2STR(NUM)</span></h4>
+      <pre class="doc-declare"><code>#define INT2STR(NUM) #NUM
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="I2S(R)">Marco <span>I2S(R)</span></h4>
+      <pre class="doc-declare"><code>#define I2S(R) INT2STR(R)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SDK_INFO_1">Marco <span>SDK_INFO_1</span></h4>
+      <pre class="doc-declare"><code>#define SDK_INFO_1 "< TUYA IOT SDK V:"IOT_SDK_VER" BS:"BS_VER"_PT:"PT_VER"_LAN:"LAN_PRO_VER"_CAD:"CAD_VER"_CD:"CD_VER" >"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SDK_INFO_2">Marco <span>SDK_INFO_2</span></h4>
+      <pre class="doc-declare"><code>#define SDK_INFO_2 "< BUILD AT:"BUILD_DATE"_"BUILD_TIME" BY "GIT_USER" FOR "PROJECT_NAME" AT "TARGET_PLATFORM" >"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SDK_IOT_ATTR">Marco <span>SDK_IOT_ATTR</span></h4>
+      <pre class="doc-declare"><code>#define SDK_IOT_ATTR "IOT DEFS <"\
+" WIFI_GW:"I2S(WIFI_GW)\
+" DEBUG:"I2S(TUYA_IOT_DEBUG)\
+" KV_FILE:"I2S(KV_FILE)\
+" SHUTDOWN_MODE:"I2S(SHUTDOWN_MODE)\
+" LITTLE_END:"I2S(LITTLE_END)\
+" TLS_MODE:"I2S(TLS_MODE)\
+" ENABLE_CLOUD_OPERATION:"I2S(ENABLE_CLOUD_OPERATION)\
+" OPERATING_SYSTEM:"I2S(OPERATING_SYSTEM)\
+" ENABLE_SYS_RPC:"I2S(ENABLE_SYS_RPC)\
+" RELIABLE_TRANSFER:"I2S(RELIABLE_TRANSFER)\
+" ENABLE_LAN_ENCRYPTION:"I2S(ENABLE_LAN_ENCRYPTION)\
+" ENABLE_LAN_LINKAGE:"I2S(ENABLE_LAN_LINKAGE)\
+" ENABLE_LAN_DEV:"I2S(ENABLE_LAN_DEV)\
+" >"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SDK_INFO">Marco <span>SDK_INFO</span></h4>
+      <pre class="doc-declare"><code>#define SDK_INFO SDK_INFO_1"\r\n"SDK_INFO_2"\r\n"SDK_IOT_ATTR"\r\n"
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

@@ -23,7 +23,7 @@
 *************************function define********************
 ***********************************************************/
 
-VOID lan_dev_base_master_on_mqtt_onlie(IN BOOL_T online);
+VOID lan_dev_base_master_on_mqtt_online(IN BOOL_T online);
 
 #ifdef __cplusplus
 }

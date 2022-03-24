@@ -1,3 +1,13 @@
+/**
+* @file lan_protocol.h
+* @brief Common process - lan protocol
+* @version 0.1
+* @date 2019-08-20
+*
+* @copyright Copyright 2019-2021 Tuya Inc. All Rights Reserved.
+*
+*/
+
 #ifndef  __LAN_PROTOCOL__
 #define __LAN_PROTOCOL__
 
@@ -7,9 +17,9 @@
 #include "mem_pool.h" 
 #include "aes_inf.h"
 #include "mix_method.h"
-#include "crc32i.h"
+
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif 
 
 // lan protocol
@@ -30,16 +40,16 @@
 #define FRM_SCENE_EXEC 0x11
 #define FRM_LAN_QUERY_DP 0x12
 
+#define FRM_SECURITY_TYPE3 0x03
+#define FRM_SECURITY_TYPE4 0x04
+#define FRM_SECURITY_TYPE5 0x05
+
+#define FRM_LAN_EXT_STREAM 0x40
 #if defined(ENABLE_LAN_ENCRYPTION) && (ENABLE_LAN_ENCRYPTION==1)
 #define FR_TYPE_ENCRYPTION 0x13
 #define FRM_AP_CFG_WF_V40 0x14
+#define FR_TYPE_BOARDCAST_LPV34 0x23
 #endif
-
-#if defined(ENABLE_IPC) && (ENABLE_IPC == 1)
-#define FRM_LAN_P2P 0x20
-#endif
-
-
 
 typedef int AP_CFG_ERR_CODE;
 #define AP_CFG_SUCC  0
@@ -49,10 +59,15 @@ typedef int AP_CFG_ERR_CODE;
 #define AP_CFG_CANT_CONN_AP 4
 #define AP_CFG_DHCP_FAILED 5
 #define AP_CFG_CONN_CLOUD_FAILED 6
+#define AP_CFG_GET_URL_FAILED 7
+#define AP_CFG_GW_ACTIVE_FAILED 8
+#define AP_CFG_GW_ACTIVE_SUCCESS 9
 
 
 #pragma pack(1)
-// lan protocol app head
+/**
+ * @brief lan protocol app head
+ */
 typedef struct
 {
     UINT_T head; // 0x55aa
@@ -67,7 +82,14 @@ typedef struct {
     UINT_T tail; // 0xaa55
 }LAN_PRO_TAIL_S;
 
-// lan protocol gateway head
+typedef struct {
+    BYTE_T hmac[32];
+    UINT_T tail; // 0xaa55
+}LAN_PRO_TAIL_V34_S;
+
+/**
+ * @brief lan protocol gateway head
+ */
 typedef struct
 {
     UINT_T head; // 0x55aa
@@ -81,91 +103,49 @@ typedef struct
 
 
 #if defined(ENABLE_LAN_ENCRYPTION) && (ENABLE_LAN_ENCRYPTION==1)
+/**
+ * @brief decrypt data
+ * 
+ * @param[in] data encry data
+ * @param[in] len encry data length
+ * @param[in] key decrypt key
+ * @param[out] out_data origin data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET __lan_parse_data(IN BYTE_T *data,IN CONST INT_T len,IN CONST BYTE_T *key,OUT CHAR_T **out_data);
 
-STATIC OPERATE_RET __lan_parse_data(IN CONST BYTE_T *data,IN CONST INT_T len,IN CONST BYTE_T *key,OUT CHAR_T **out_data)
-{
-    BYTE_T *ec_data = NULL;
-    UINT_T ec_len = 0;
-    OPERATE_RET op_ret = OPRT_OK;
-
-    op_ret = aes128_ecb_decode(data,len,&ec_data,&ec_len,key);
-    if(OPRT_OK != op_ret)
-    {
-        PR_ERR("aes128_ecb_decode error:%d",op_ret);
-        return op_ret;
-    }
-
-    // delete useless char
-    int offset = str_revr_find_ch((CHAR_T *)ec_data,0,'}');
-    if(offset < 0)
-    {
-        PR_ERR("find last } fails %d %s", offset, (CHAR_T *)ec_data);
-        Free(ec_data);
-        return OPRT_COM_ERROR;
-    }
-    ec_data[offset+1] = 0;
-    PR_TRACE("lan parse decode buf:%s", ec_data);
-
-    *out_data = (CHAR_T *)ec_data;
-
-    return OPRT_OK;
-}
-
-
-STATIC OPERATE_RET encrpt_lan_msg(IN CONST BYTE_T *data,IN CONST UINT_T len,
-                                      OUT BYTE_T **ec_data,OUT UINT_T *ec_len,IN CONST BYTE_T *key)
-{
-    OPERATE_RET op_ret = OPRT_OK;
-    op_ret = aes128_ecb_encode(data,len,ec_data,ec_len,key);
-
-    if(OPRT_OK != op_ret)
-    {
-        PR_ERR("aes128_ecb_encode error:%d",op_ret);
-        return op_ret;
-    }
-
-    return OPRT_OK;
-}
-
+/**
+ * @brief encry lan message
+ * 
+ * @param[in] data origin data
+ * @param[in] len origin data length
+ * @param[in] ec_data encode data
+ * @param[in] ec_len encode data length
+ * @param[in] key encry key
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET encrpt_lan_msg(IN CONST BYTE_T *data,IN CONST UINT_T len,OUT BYTE_T **ec_data,OUT UINT_T *ec_len,IN CONST BYTE_T *key);
 #endif
 
-/* 数据前后封装55aa */
-STATIC BYTE_T *__mlp_gw_send_da(IN CONST UINT_T fr_num,IN CONST UINT_T fr_type,\
+/**
+ * @brief lan protocol send data, the date will package 0x55aa
+ * 
+ * @param[in] fr_num refer to LAN_PRO_HEAD_GW_S
+ * @param[in] fr_type refer to LAN_PRO_HEAD_GW_S
+ * @param[in] ret_code refer to LAN_PRO_HEAD_GW_S
+ * @param[in] data refer to LAN_PRO_HEAD_GW_S
+ * @param[in] len refer to LAN_PRO_HEAD_GW_S
+ * @param[in] s_len send data length
+ *
+ * @return send data buf point
+ */
+BYTE_T *__mlp_gw_send_da(IN CONST UINT_T fr_num,IN CONST UINT_T fr_type,\
                               IN CONST UINT_T ret_code,IN CONST BYTE_T *data,\
-                              IN CONST UINT_T len,OUT UINT_T *s_len)
-{
-    UINT_T send_da_len = sizeof(LAN_PRO_HEAD_GW_S) + len + sizeof(LAN_PRO_TAIL_S);
-    BYTE_T *send_da = Malloc(send_da_len);
-    if(send_da == NULL)
-    {
-        PR_ERR("Malloc Fails %d", send_da_len);
-        return NULL;
-    }
-
-    UINT_T p = 0x55aa;
-    LAN_PRO_HEAD_GW_S *head_gw = (LAN_PRO_HEAD_GW_S *)send_da;
-    head_gw->head = UNI_HTONL(p);
-    head_gw->fr_num = UNI_HTONL(fr_num);
-    head_gw->fr_type = UNI_HTONL(fr_type);
-    head_gw->len = UNI_HTONL(len+sizeof(LAN_PRO_TAIL_S)+sizeof(ret_code));
-    head_gw->ret_code = UNI_HTONL(ret_code);
-    memcpy(head_gw->data,data,len);
-
-    UINT_T crc = 0;
-    crc = hash_crc32i_total(send_da,(send_da_len-sizeof(LAN_PRO_TAIL_S)));
-
-    LAN_PRO_TAIL_S *pro_tail = (LAN_PRO_TAIL_S *)(send_da + sizeof(LAN_PRO_HEAD_GW_S) + len);
-    pro_tail->crc = UNI_HTONL(crc);
-    p = 0xaa55;
-    pro_tail->tail = UNI_HTONL(p);
-    *s_len = send_da_len;
-
-    return send_da;
-}
+                              IN CONST UINT_T len,OUT UINT_T *s_len);
 
 #ifdef __cplusplus
-		}
+}
 #endif 
-
-
 #endif

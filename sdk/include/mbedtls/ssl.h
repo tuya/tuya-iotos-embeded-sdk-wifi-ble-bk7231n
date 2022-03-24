@@ -123,6 +123,7 @@
 #define MBEDTLS_ERR_SSL_ASYNC_IN_PROGRESS                 -0x6500  /**< The asynchronous operation is not completed yet. */
 #define MBEDTLS_ERR_SSL_EARLY_MESSAGE                     -0x6480  /**< Internal-only message signaling that a message arrived early. */
 #define MBEDTLS_ERR_SSL_CRYPTO_IN_PROGRESS                -0x7000  /**< A cryptographic operation is in progress. Try again later. */
+#define MBEDTLS_ERR_SSL_QUIT_FORCED                       -0x5900
 
 /*
  * Various constants
@@ -1075,6 +1076,11 @@ struct mbedtls_ssl_config
     unsigned int dtls_srtp_mki_support : 1; /* support having mki_value
                                                in the use_srtp extension     */
 #endif
+
+#if defined(TUYA_TLS_DYNAMIC_MEMORY_ALLOCATION)
+    size_t in_content_len;
+    size_t out_content_len;
+#endif
 };
 
 #if defined(TLS_MODE)
@@ -1257,6 +1263,7 @@ struct mbedtls_ssl_context
     char own_verify_data[MBEDTLS_SSL_VERIFY_DATA_MAX_LEN]; /*!<  previous handshake verify data */
     char peer_verify_data[MBEDTLS_SSL_VERIFY_DATA_MAX_LEN]; /*!<  previous handshake verify data */
 #endif /* MBEDTLS_SSL_RENEGOTIATION */
+    int isquit;
 };
 
 #if defined(MBEDTLS_SSL_HW_RECORD_ACCEL)

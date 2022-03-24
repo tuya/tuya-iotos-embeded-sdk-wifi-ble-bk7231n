@@ -1,0 +1,2605 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#pk.h" class="nav-sub-label">pk.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#cipher.h" class="nav-sub-label">cipher.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#md.h" class="nav-sub-label">md.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_SSL_CIPHERSUITES_H" class="nav-sub-label">MBEDTLS_SSL_CIPHERSUITES_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_NULL_MD5" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_NULL_MD5</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_RC4_128_MD5" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_RC4_128_MD5</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_NULL_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_NULL_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_NULL_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_NULL_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_NULL_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_NULL_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_128_CCM" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_128_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_256_CCM" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_256_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_128_CCM_8" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_128_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_WITH_AES_256_CCM_8" class="nav-sub-label">MBEDTLS_TLS_RSA_WITH_AES_256_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM_8" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM_8" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_128_CCM" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_128_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_256_CCM" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_256_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_128_CCM_8" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_128_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_AES_256_CCM_8" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_AES_256_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM_8" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM_8" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8" class="nav-sub-label">MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_PSK_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_PSK_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256" class="nav-sub-label">MBEDTLS_TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__WITH_CERT__ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__WITH_CERT__ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__CERT_REQ_ALLOWED__ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__CERT_REQ_ALLOWED__ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__WITH_SERVER_SIGNATURE__ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__WITH_SERVER_SIGNATURE__ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__SOME__ECDH_ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__SOME__ECDH_ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__SOME_NON_PFS__ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__SOME_NON_PFS__ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__SOME_PFS__ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__SOME_PFS__ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__SOME__PSK_ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__SOME__PSK_ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__SOME__DHE_ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__SOME__DHE_ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_KEY_EXCHANGE__SOME__ECDHE_ENABLED" class="nav-sub-label">MBEDTLS_KEY_EXCHANGE__SOME__ECDHE_ENABLED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CIPHERSUITE_WEAK" class="nav-sub-label">MBEDTLS_CIPHERSUITE_WEAK</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CIPHERSUITE_SHORT_TAG" class="nav-sub-label">MBEDTLS_CIPHERSUITE_SHORT_TAG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CIPHERSUITE_NODTLS" class="nav-sub-label">MBEDTLS_CIPHERSUITE_NODTLS</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_ssl_ciphersuite_uses_ec" class="nav-sub-label">mbedtls_ssl_ciphersuite_uses_ec</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_ciphersuite_uses_psk" class="nav-sub-label">mbedtls_ssl_ciphersuite_uses_psk</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_pk_type_t" class="nav-sub-label">mbedtls_pk_type_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_pk_type_t" class="nav-sub-label">mbedtls_pk_type_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_key_exchange_type_t;
+" class="nav-sub-label">mbedtls_key_exchange_type_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_ssl_ciphersuite_t" class="nav-sub-label">mbedtls_ssl_ciphersuite_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="pk.h"><span>pk.h</span></h4>
+      <pre class="doc-declare"><code>#include "pk.h"
+</code></pre>
+      <pre class="doc-comment">#include "pk.h"
+</pre>
+
+      <h4 id="cipher.h"><span>cipher.h</span></h4>
+      <pre class="doc-declare"><code>#include "cipher.h"
+</code></pre>
+      <pre class="doc-comment">#include "cipher.h"
+</pre>
+
+      <h4 id="md.h"><span>md.h</span></h4>
+      <pre class="doc-declare"><code>#include "md.h"
+</code></pre>
+      <pre class="doc-comment">#include "md.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_SSL_CIPHERSUITES_H">Marco <span>MBEDTLS_SSL_CIPHERSUITES_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_SSL_CIPHERSUITES_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_NULL_MD5">Marco <span>MBEDTLS_TLS_RSA_WITH_NULL_MD5</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_NULL_MD5                   1  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Supported ciphersuites (Official IANA names)
+ */</pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_NULL_SHA                   2  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_RC4_128_MD5">Marco <span>MBEDTLS_TLS_RSA_WITH_RC4_128_MD5</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_RC4_128_MD5                4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_RC4_128_SHA                5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA                9  /**< Weak! Not in TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA           0A
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA            21  /**< Weak! Not in TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA       22
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_PSK_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_NULL_SHA                   2C  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA               2D  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA               2E  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA            47
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA        51
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA            53
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA        57
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_NULL_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_NULL_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_NULL_SHA256                3B  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256         3C  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256         3D  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA       65
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA   69
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256     103  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256     6B  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA       132
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA   136
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_PSK_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_RC4_128_SHA                8A
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA           8B
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA            8C
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA            8D
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA            8E
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA       143
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA        144
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA        145
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA            146
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA       147
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA        148
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA        149
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256         9C  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384         9D  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256     9E  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384     159  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256         0xA8  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384         0xA9  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256     0xAA  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384     0xAB  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256     0xAC  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384     0xAD  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256         0xAE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384         0xAF
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_NULL_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_NULL_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_NULL_SHA256                0xB0  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_NULL_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_NULL_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_NULL_SHA384                0xB1  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256     0xB2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384     0xB3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256            0xB4  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384            0xB5  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256     0xB6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384     0xB7
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256            0xB8  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384            0xB9  /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256    0xBA  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 0xBE  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256    0xC0  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 0xC4  /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA            0xC001 /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA         0xC002 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA    0xC003 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA     0xC004 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA     0xC005 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA           0xC006 /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA        0xC007 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA   0xC008 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA    0xC009 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA    0xC00A /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA              0xC00B /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA           0xC00C /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA      0xC00D /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA       0xC00E /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA       0xC00F /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA             0xC010 /**< Weak! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA          0xC011 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA     0xC012 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA      0xC013 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA      0xC014 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 0xC023 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 0xC024 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256  0xC025 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384  0xC026 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256   0xC027 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384   0xC028 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256    0xC029 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384    0xC02A /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 0xC02B /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 0xC02C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256  0xC02D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384  0xC02E /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256   0xC02F /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384   0xC030 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256    0xC031 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384    0xC032 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA          0xC033 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA     0xC034 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA      0xC035 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA      0xC036 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256   0xC037 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384   0xC038 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA             0xC039 /**< Weak! No SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256          0xC03A /**< Weak! No SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384          0xC03B /**< Weak! No SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_ARIA_128_CBC_SHA256        0xC03C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_RSA_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_ARIA_256_CBC_SHA384        0xC03D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256    0xC044 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384    0xC045 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 0xC048 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 0xC049 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256 0xC04A /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384 0xC04B /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256  0xC04C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384  0xC04D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256   0xC04E /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384   0xC04F /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_ARIA_128_GCM_SHA256        0xC050 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_RSA_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_ARIA_256_GCM_SHA384        0xC051 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256    0xC052 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384    0xC053 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256 0xC05C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384 0xC05D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256 0xC05E /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384 0xC05F /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256  0xC060 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384  0xC061 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256   0xC062 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384   0xC063 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_ARIA_128_CBC_SHA256        0xC064 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_ARIA_256_CBC_SHA384        0xC065 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256    0xC066 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384    0xC067 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256    0xC068 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384    0xC069 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_ARIA_128_GCM_SHA256        0xC06A /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_ARIA_256_GCM_SHA384        0xC06B /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256    0xC06C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384    0xC06D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256    0xC06E /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384    0xC06F /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256  0xC070 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384  0xC071 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256 0xC072 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384 0xC073 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256 0xC074 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384 0xC075 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256  0xC076 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384  0xC077 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256   0xC078 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384   0xC079 /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256        0xC07A /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384        0xC07B /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256    0xC07C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384    0xC07D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256 0xC086 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384 0xC087 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256 0xC088 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384 0xC089 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256  0xC08A /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384  0xC08B /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256   0xC08C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384   0xC08D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256      0xC08E /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384      0xC08F /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256  0xC090 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384  0xC091 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256  0xC092 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384  0xC093 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256      0xC094
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384      0xC095
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256  0xC096
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384  0xC097
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256  0xC098
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384  0xC099
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256 0xC09A /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384 0xC09B /**< Not in SSL3! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_128_CCM">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_128_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_128_CCM               0xC09C /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_256_CCM">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_256_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_256_CCM               0xC09D /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM           0xC09E /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM           0xC09F /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_128_CCM_8">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_128_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_128_CCM_8             0xC0A0 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_WITH_AES_256_CCM_8">Marco <span>MBEDTLS_TLS_RSA_WITH_AES_256_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_WITH_AES_256_CCM_8             0xC0A1 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM_8">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CCM_8         0xC0A2 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM_8">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CCM_8         0xC0A3 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_128_CCM">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_128_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_128_CCM               0xC0A4 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_256_CCM">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_256_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_256_CCM               0xC0A5 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM           0xC0A6 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM           0xC0A7 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_128_CCM_8">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_128_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_128_CCM_8             0xC0A8 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_AES_256_CCM_8">Marco <span>MBEDTLS_TLS_PSK_WITH_AES_256_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_AES_256_CCM_8             0xC0A9 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM_8">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CCM_8         0xC0AA /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM_8">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CCM_8         0xC0AB /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM       0xC0AC /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM       0xC0AD /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8     0xC0AE /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8     0xC0AF /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8">Marco <span>MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8         0xC0FF /**< experimental */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  0xCCA8 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment">/* RFC 7905 */</pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 0xCCA9 /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    0xCCAA /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_PSK_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_PSK_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_PSK_WITH_CHACHA20_POLY1305_SHA256        0xCCAB /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  0xCCAC /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    0xCCAD /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256">Marco <span>MBEDTLS_TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256    0xCCAE /**< TLS 1.2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__WITH_CERT__ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__WITH_CERT__ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__WITH_CERT__ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__CERT_REQ_ALLOWED__ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__CERT_REQ_ALLOWED__ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__CERT_REQ_ALLOWED__ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__WITH_SERVER_SIGNATURE__ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__WITH_SERVER_SIGNATURE__ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__WITH_SERVER_SIGNATURE__ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__SOME__ECDH_ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__SOME__ECDH_ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__SOME__ECDH_ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__SOME_NON_PFS__ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__SOME_NON_PFS__ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__SOME_NON_PFS__ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__SOME_PFS__ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__SOME_PFS__ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__SOME_PFS__ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__SOME__PSK_ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__SOME__PSK_ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__SOME__PSK_ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__SOME__DHE_ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__SOME__DHE_ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__SOME__DHE_ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_KEY_EXCHANGE__SOME__ECDHE_ENABLED">Marco <span>MBEDTLS_KEY_EXCHANGE__SOME__ECDHE_ENABLED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_KEY_EXCHANGE__SOME__ECDHE_ENABLED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CIPHERSUITE_WEAK">Marco <span>MBEDTLS_CIPHERSUITE_WEAK</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CIPHERSUITE_WEAK      1   /**< Weak ciphersuite flag  */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CIPHERSUITE_SHORT_TAG">Marco <span>MBEDTLS_CIPHERSUITE_SHORT_TAG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CIPHERSUITE_SHORT_TAG 2   /**< Short authentication tag,
+                                                     eg for CCM_8 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_CIPHERSUITE_NODTLS">Marco <span>MBEDTLS_CIPHERSUITE_NODTLS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_CIPHERSUITE_NODTLS    4   /**< Can't be used with DTLS */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_ssl_ciphersuite_uses_ec">Func <span>mbedtls_ssl_ciphersuite_uses_ec</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ssl_ciphersuite_uses_ec( const mbedtls_ssl_ciphersuite_t *info );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_ssl_ciphersuite_uses_psk">Func <span>mbedtls_ssl_ciphersuite_uses_psk</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_ssl_ciphersuite_uses_psk( const mbedtls_ssl_ciphersuite_t *info );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="mbedtls_pk_type_t">Variable <span>mbedtls_pk_type_t</span></h4>
+      <pre class="doc-declare"><code>mbedtls_pk_type_t mbedtls_ssl_get_ciphersuite_sig_pk_alg( const mbedtls_ssl_ciphersuite_t *info );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_pk_type_t">Variable <span>mbedtls_pk_type_t</span></h4>
+      <pre class="doc-declare"><code>mbedtls_pk_type_t mbedtls_ssl_get_ciphersuite_sig_alg( const mbedtls_ssl_ciphersuite_t *info );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const int *mbedtls_ssl_list_ciphersuites( void );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const mbedtls_ssl_ciphersuite_t *mbedtls_ssl_ciphersuite_from_string( const char *ciphersuite_name );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const mbedtls_ssl_ciphersuite_t *mbedtls_ssl_ciphersuite_from_id( int ciphersuite_id );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_key_exchange_type_t;
+">Typedef <span>mbedtls_key_exchange_type_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   MBEDTLS_KEY_EXCHANGE_NONE = 0,
+   MBEDTLS_KEY_EXCHANGE_RSA,
+   MBEDTLS_KEY_EXCHANGE_DHE_RSA,
+   MBEDTLS_KEY_EXCHANGE_ECDHE_RSA,
+   MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA,
+   MBEDTLS_KEY_EXCHANGE_PSK,
+   MBEDTLS_KEY_EXCHANGE_DHE_PSK,
+   MBEDTLS_KEY_EXCHANGE_RSA_PSK,
+   MBEDTLS_KEY_EXCHANGE_ECDHE_PSK,
+   MBEDTLS_KEY_EXCHANGE_ECDH_RSA,
+   MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA,
+   MBEDTLS_KEY_EXCHANGE_ECJPAKE,
+} mbedtls_key_exchange_type_t;
+</code></pre>
+      <pre class="doc-comment">/* Reminder: update mbedtls_ssl_premaster_secret when adding a new key exchange.
+ * Reminder: update MBEDTLS_KEY_EXCHANGE__xxx below
+ */</pre>
+
+      <h4 id="mbedtls_ssl_ciphersuite_t">Typedef <span>mbedtls_ssl_ciphersuite_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_ssl_ciphersuite_t mbedtls_ssl_ciphersuite_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

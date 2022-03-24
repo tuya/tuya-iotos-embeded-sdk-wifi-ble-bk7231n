@@ -1,11 +1,12 @@
 /**
- * @file tuya_hal_wifi.h
- * @brief WIFI设备操作接口
- * 
- * @copyright Copyright(C),2018-2020, 涂鸦科技 www.tuya.com
- * 
- */
-
+* @file tuya_hal_wifi.h
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef __TUYA_HAL_WIFI_H__
 #define __TUYA_HAL_WIFI_H__
 
@@ -235,9 +236,30 @@ OPERATE_RET tuya_hal_set_wifi_lp_mode(CONST BOOL_T en, CONST UINT_T dtim);
 ***********************************************************/
 BOOL_T tuya_hal_wifi_rf_calibrated(VOID_T);
 
-/* add begin: by sunkz, interface regist */
+
+/***********************************************************
+*  Function: tuya_hal_wifi_send_beacon
+* 
+* @param[in]       channel         beacon's channel
+* @param[in]       ssid            beacon's ssid
+* @param[in]       ssid_len        ssid length
+*
+*  Output: none
+*  Return:BOOL
+***********************************************************/
+
+OPERATE_RET tuya_hal_wifi_send_beacon(uint8_t channel, uint8_t *ssid, uint8_t ssid_len);
+
+/**
+ * @brief Wifi interface initialization
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialization of wifi interface.
+ *
+ * @return VOID
+ */
 VOID_T tuya_os_wifi_intf_init(VOID_T);
-/* add end */
 
 
 #ifdef __cplusplus

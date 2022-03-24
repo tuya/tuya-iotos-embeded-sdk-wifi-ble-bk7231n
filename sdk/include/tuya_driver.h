@@ -1,15 +1,18 @@
- /*============================================================================
- *                                                                            *
- * Copyright (C) by Tuya Inc                                                  *
- * All rights reserved                                                        *
- *                                                                            *
- =============================================================================*/
+ /**
+ * @file tuya_driver.h
+ * @brief Common process - driver
+ * @version 0.1
+ * @date 2018-09-01
+ *
+ * @copyright Copyright 2018-2021 Tuya Inc. All Rights Reserved.
+ *
+ */
  
 #ifndef __TUYA_DRV_H__
 #define __TUYA_DRV_H__
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
 #include "stdint.h"
@@ -17,19 +20,14 @@
 #include "tuya_cloud_types.h"
 #include "tuya_hal_mutex.h"
 #include "tuya_hal_semaphore.h"
+#include "uni_log.h"
 
-#ifndef PR_DEBUG
-#define PR_DEBUG(...) __VA_ARGS__
-#endif
-#ifndef PR_ERR
-#define PR_ERR(...) __VA_ARGS__
-#endif
 
 #define TUYA_DRV_ASSRET(__EXPRESS)                      \
     if (!(__EXPRESS))  {                                \
         PR_ERR("TUYA DRV ASSERT "#__EXPRESS"");         \
-        while(1);                                       \
-    }                                    
+        return OPRT_INVALID_PARM;                          \
+    }
 
 typedef enum {
     TUYA_DRV_INT_RX_FLAG     = 0x01,
@@ -58,7 +56,6 @@ typedef enum {
     TUYA_DRV_ADC,          
     TUYA_DRV_I2C,
     TUYA_DRV_RTC,
-    TUYA_DRV_SPI,
     TUYA_DRV_CUSTOM,
 } tuya_drv_type_t;
 
@@ -80,12 +77,29 @@ typedef struct {
 } tuya_drv_node_t;
 
 
+/**
+ * @brief driver find
+ * 
+ * @param[in] type node type
+ * @param[in] port node port
+ *
+ */
 void *tuya_driver_find(uint8_t type, uint8_t port);
+
+/**
+ * @brief driver register
+ * 
+ * @param[in] node refer to tuya_drv_node_t
+ * @param[in] type node type
+ * @param[in] port node port
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 int tuya_driver_register(tuya_drv_node_t *node, uint8_t type, uint8_t port);
 
 
 #ifdef __cplusplus
-} // extern "C"
+}
 #endif
 
 #endif

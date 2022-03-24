@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#assert.h" class="nav-sub-label">assert.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#string.h" class="nav-sub-label">string.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sys/types.h" class="nav-sub-label">sys/types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#libcoap.h" class="nav-sub-label">libcoap.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uip.h" class="nav-sub-label">uip.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_ADDRESS_H_" class="nav-sub-label">COAP_ADDRESS_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_address_equals_impl(A, B)" class="nav-sub-label">_coap_address_equals_impl(A, B)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_address_isany_impl(A)" class="nav-sub-label">_coap_address_isany_impl(A)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_is_mcast_impl(Address)" class="nav-sub-label">_coap_is_mcast_impl(Address)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_address_equals_impl(A,B)" class="nav-sub-label">_coap_address_equals_impl(A,B)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_address_isany_impl(A)" class="nav-sub-label">_coap_address_isany_impl(A)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_is_mcast_impl(Address)" class="nav-sub-label">_coap_is_mcast_impl(Address)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_addr_cmp(addr1, addr2)" class="nav-sub-label">ip_addr_cmp(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_addr_isany(addr1)" class="nav-sub-label">ip_addr_isany(addr1)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_addr_ismulticast(addr1)" class="nav-sub-label">ip_addr_ismulticast(addr1)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_address_equals_impl(A, B)" class="nav-sub-label">_coap_address_equals_impl(A, B)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_address_isany_impl(A)" class="nav-sub-label">_coap_address_isany_impl(A)</a>
+              </li>
+      
+
+              <li>
+                <a href="#_coap_is_mcast_impl(Address)" class="nav-sub-label">_coap_is_mcast_impl(Address)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_address_equals" class="nav-sub-label">coap_address_equals</a>
+              </li>
+      
+
+              <li>
+                <a href="#memcpy" class="nav-sub-label">memcpy</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_is_mcast" class="nav-sub-label">coap_is_mcast</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#uint16_t" class="nav-sub-label">uint16_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#return" class="nav-sub-label">return</a>
+              </li>
+      
+
+              <li>
+                <a href="#dst" class="nav-sub-label">dst</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_address_t;
+" class="nav-sub-label">coap_address_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_address_t;
+" class="nav-sub-label">coap_address_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#addr;
+" class="nav-sub-label">addr;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#addr;
+" class="nav-sub-label">addr;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="assert.h"><span>assert.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;assert.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <assert.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="string.h"><span>string.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;string.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <string.h>
+</pre>
+
+      <h4 id="sys/types.h"><span>sys/types.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;sys/types.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <sys/types.h>
+</pre>
+
+      <h4 id="libcoap.h"><span>libcoap.h</span></h4>
+      <pre class="doc-declare"><code>#include "libcoap.h"
+</code></pre>
+      <pre class="doc-comment">#include "libcoap.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;lwip/ip_addr.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <lwip/ip_addr.h>
+</pre>
+
+      <h4 id="uip.h"><span>uip.h</span></h4>
+      <pre class="doc-declare"><code>#include "uip.h"
+</code></pre>
+      <pre class="doc-comment">#include "uip.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_ADDRESS_H_">Marco <span>COAP_ADDRESS_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_ADDRESS_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_address_equals_impl(A, B)">Marco <span>_coap_address_equals_impl(A, B)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_address_equals_impl(A, B) \
+       ((A)->port == (B)->port       \
+       && (!!ip_addr_cmp(&(A)->addr,&(B)->addr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_address_isany_impl(A)">Marco <span>_coap_address_isany_impl(A)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_address_isany_impl(A) ip_addr_isany(&(A)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_is_mcast_impl(Address)">Marco <span>_coap_is_mcast_impl(Address)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_is_mcast_impl(Address) ip_addr_ismulticast(&(Address)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_address_equals_impl(A,B)">Marco <span>_coap_address_equals_impl(A,B)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_address_equals_impl(A,B) \
+       ((A)->port == (B)->port       \
+       && uip_ipaddr_cmp(&((A)->addr),&((B)->addr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_address_isany_impl(A)">Marco <span>_coap_address_isany_impl(A)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_address_isany_impl(A) 0
+</code></pre>
+      <pre class="doc-comment">/** @todo implementation of _coap_address_isany_impl() for Contiki */</pre>
+
+      <h4 id="_coap_is_mcast_impl(Address)">Marco <span>_coap_is_mcast_impl(Address)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_is_mcast_impl(Address) uip_is_addr_mcast(&((Address)->addr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_addr_cmp(addr1, addr2)">Marco <span>ip_addr_cmp(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip_addr_cmp(addr1, addr2) ((addr1)->addr == (addr2)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_addr_isany(addr1)">Marco <span>ip_addr_isany(addr1)</span></h4>
+      <pre class="doc-declare"><code>#define ip_addr_isany(addr1) ((addr1) == NULL || (addr1)->addr == TY_IPADDR_ANY)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_addr_ismulticast(addr1)">Marco <span>ip_addr_ismulticast(addr1)</span></h4>
+      <pre class="doc-declare"><code>#define ip_addr_ismulticast(addr1) (((addr1)->addr & UNI_HTONL(0xf0000000UL)) == UNI_HTONL(0xe0000000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_address_equals_impl(A, B)">Marco <span>_coap_address_equals_impl(A, B)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_address_equals_impl(A, B) \
+       ((A)->port == (B)->port       \
+       && (!!ip_addr_cmp(&(A)->addr,&(B)->addr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_address_isany_impl(A)">Marco <span>_coap_address_isany_impl(A)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_address_isany_impl(A) ip_addr_isany(&(A)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="_coap_is_mcast_impl(Address)">Marco <span>_coap_is_mcast_impl(Address)</span></h4>
+      <pre class="doc-declare"><code>#define _coap_is_mcast_impl(Address) ip_addr_ismulticast(&(Address)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_address_equals">Func <span>coap_address_equals</span></h4>
+      <pre class="doc-declare"><code>int coap_address_equals(const coap_address_t *a, const coap_address_t *b);</code></pre>
+      <pre class="doc-comment">/**
+ * Compares given address objects @p a and @p b. This function returns @c 1 if
+ * addresses are equal, @c 0 otherwise. The parameters @p a and @p b must not be
+ * @c NULL;
+ */</pre>
+
+      <h4 id="memcpy">Func <span>memcpy</span></h4>
+      <pre class="doc-declare"><code>memcpy( &dst->addr, &src->addr, src->size );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_is_mcast">Func <span>coap_is_mcast</span></h4>
+      <pre class="doc-declare"><code>int coap_is_mcast(const coap_address_t *a);</code></pre>
+      <pre class="doc-comment">/**
+ * Checks if given address @p a denotes a multicast address. This function
+ * returns @c 1 if @p a is multicast, @c 0 otherwise.
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="uint16_t">Variable <span>uint16_t</span></h4>
+      <pre class="doc-declare"><code>uint16_t port;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="return">Variable <span>return</span></h4>
+      <pre class="doc-declare"><code>return 0;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dst">Variable <span>dst</span></h4>
+      <pre class="doc-declare"><code>dst->addr.sin = src->addr.sin;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_address_t;
+">Typedef <span>coap_address_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_address_t {
+ uint16_t port;
+ ip_addr_t addr;
+} coap_address_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_address_t;
+">Typedef <span>coap_address_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_address_t {
+ uip_ipaddr_t addr;
+ uint16_t port;
+} coap_address_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="addr;
+">Typedef <span>addr;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_address_t {
+ struct {
+   UNW_IP_ADDR_T addr;
+ } addr;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="addr;
+">Typedef <span>addr;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_address_t {
+ socklen_t size;          /**< size of addr */
+ union {
+   struct sockaddr        sa;
+   struct sockaddr_in     sin;
+   struct sockaddr_in6    sin6;
+ } addr;
+</code></pre>
+      <pre class="doc-comment">/** multi-purpose address abstraction */</pre>
+    </div>
+  </body>
+</html>
+            

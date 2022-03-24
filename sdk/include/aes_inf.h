@@ -222,7 +222,7 @@ OPERATE_RET aes_free_data(IN BYTE_T *data);
  * @param[in] dec_data
  * @param[in] dec_data_len
  *
- * @return 
+ * @return actural length of dec_data, negative on error
  */
 INT_T aes_get_actual_length(IN CONST BYTE_T *dec_data,IN CONST UINT_T dec_data_len);
 

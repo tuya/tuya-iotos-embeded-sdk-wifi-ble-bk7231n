@@ -1,0 +1,1328 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/mem.h" class="nav-sub-label">lwip/mem.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/memp.h" class="nav-sub-label">lwip/memp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_STATS_H" class="nav-sub-label">LWIP_HDR_STATS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_STATS_LARGE" class="nav-sub-label">LWIP_STATS_LARGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#STAT_COUNTER" class="nav-sub-label">STAT_COUNTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#STAT_COUNTER_F" class="nav-sub-label">STAT_COUNTER_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#STAT_COUNTER" class="nav-sub-label">STAT_COUNTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#STAT_COUNTER_F" class="nav-sub-label">STAT_COUNTER_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_INC(x)" class="nav-sub-label">STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_DEC(x)" class="nav-sub-label">STATS_DEC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_INC_USED(x, y, type)" class="nav-sub-label">STATS_INC_USED(x, y, type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_GET(x)" class="nav-sub-label">STATS_GET(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_init" class="nav-sub-label">stats_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_INC" class="nav-sub-label">STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_DEC" class="nav-sub-label">STATS_DEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATS_INC_USED" class="nav-sub-label">STATS_INC_USED</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_STATS_INC(x)" class="nav-sub-label">TCP_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_STATS_DISPLAY()" class="nav-sub-label">TCP_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_STATS_INC" class="nav-sub-label">TCP_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_STATS_DISPLAY" class="nav-sub-label">TCP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#UDP_STATS_INC(x)" class="nav-sub-label">UDP_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UDP_STATS_DISPLAY()" class="nav-sub-label">UDP_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#UDP_STATS_INC" class="nav-sub-label">UDP_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#UDP_STATS_DISPLAY" class="nav-sub-label">UDP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP_STATS_INC(x)" class="nav-sub-label">ICMP_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP_STATS_DISPLAY()" class="nav-sub-label">ICMP_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP_STATS_INC" class="nav-sub-label">ICMP_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP_STATS_DISPLAY" class="nav-sub-label">ICMP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#IGMP_STATS_INC(x)" class="nav-sub-label">IGMP_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IGMP_STATS_DISPLAY()" class="nav-sub-label">IGMP_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#IGMP_STATS_INC" class="nav-sub-label">IGMP_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#IGMP_STATS_DISPLAY" class="nav-sub-label">IGMP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_STATS_INC(x)" class="nav-sub-label">IP_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_STATS_DISPLAY()" class="nav-sub-label">IP_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_STATS_INC" class="nav-sub-label">IP_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_STATS_DISPLAY" class="nav-sub-label">IP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPFRAG_STATS_INC(x)" class="nav-sub-label">IPFRAG_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPFRAG_STATS_DISPLAY()" class="nav-sub-label">IPFRAG_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPFRAG_STATS_INC" class="nav-sub-label">IPFRAG_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPFRAG_STATS_DISPLAY" class="nav-sub-label">IPFRAG_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETHARP_STATS_INC(x)" class="nav-sub-label">ETHARP_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETHARP_STATS_DISPLAY()" class="nav-sub-label">ETHARP_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETHARP_STATS_INC" class="nav-sub-label">ETHARP_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ETHARP_STATS_DISPLAY" class="nav-sub-label">ETHARP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINK_STATS_INC(x)" class="nav-sub-label">LINK_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINK_STATS_DISPLAY()" class="nav-sub-label">LINK_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINK_STATS_INC" class="nav-sub-label">LINK_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#LINK_STATS_DISPLAY" class="nav-sub-label">LINK_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_AVAIL(x, y)" class="nav-sub-label">MEM_STATS_AVAIL(x, y)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_INC(x)" class="nav-sub-label">MEM_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_INC_USED(x, y)" class="nav-sub-label">MEM_STATS_INC_USED(x, y)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_DEC_USED(x, y)" class="nav-sub-label">MEM_STATS_DEC_USED(x, y)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_DISPLAY()" class="nav-sub-label">MEM_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_AVAIL" class="nav-sub-label">MEM_STATS_AVAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_INC" class="nav-sub-label">MEM_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_INC_USED" class="nav-sub-label">MEM_STATS_INC_USED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_DEC_USED" class="nav-sub-label">MEM_STATS_DEC_USED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEM_STATS_DISPLAY" class="nav-sub-label">MEM_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_STATS_DEC(x, i)" class="nav-sub-label">MEMP_STATS_DEC(x, i)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_STATS_DISPLAY(i)" class="nav-sub-label">MEMP_STATS_DISPLAY(i)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_STATS_GET(x, i)" class="nav-sub-label">MEMP_STATS_GET(x, i)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_STATS_DEC" class="nav-sub-label">MEMP_STATS_DEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_STATS_DISPLAY" class="nav-sub-label">MEMP_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_STATS_GET(x, i)" class="nav-sub-label">MEMP_STATS_GET(x, i)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_INC(x)" class="nav-sub-label">SYS_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_DEC(x)" class="nav-sub-label">SYS_STATS_DEC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_INC_USED(x)" class="nav-sub-label">SYS_STATS_INC_USED(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_DISPLAY()" class="nav-sub-label">SYS_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_INC" class="nav-sub-label">SYS_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_DEC" class="nav-sub-label">SYS_STATS_DEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_INC_USED" class="nav-sub-label">SYS_STATS_INC_USED</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_STATS_DISPLAY" class="nav-sub-label">SYS_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_STATS_INC(x)" class="nav-sub-label">IP6_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_STATS_DISPLAY()" class="nav-sub-label">IP6_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_STATS_INC" class="nav-sub-label">IP6_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_STATS_DISPLAY" class="nav-sub-label">IP6_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP6_STATS_INC(x)" class="nav-sub-label">ICMP6_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP6_STATS_DISPLAY()" class="nav-sub-label">ICMP6_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP6_STATS_INC" class="nav-sub-label">ICMP6_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ICMP6_STATS_DISPLAY" class="nav-sub-label">ICMP6_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_FRAG_STATS_INC(x)" class="nav-sub-label">IP6_FRAG_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_FRAG_STATS_DISPLAY()" class="nav-sub-label">IP6_FRAG_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_FRAG_STATS_INC" class="nav-sub-label">IP6_FRAG_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_FRAG_STATS_DISPLAY" class="nav-sub-label">IP6_FRAG_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MLD6_STATS_INC(x)" class="nav-sub-label">MLD6_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MLD6_STATS_DISPLAY()" class="nav-sub-label">MLD6_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#MLD6_STATS_INC" class="nav-sub-label">MLD6_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#MLD6_STATS_DISPLAY" class="nav-sub-label">MLD6_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#ND6_STATS_INC(x)" class="nav-sub-label">ND6_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ND6_STATS_DISPLAY()" class="nav-sub-label">ND6_STATS_DISPLAY()</a>
+              </li>
+      
+
+              <li>
+                <a href="#ND6_STATS_INC" class="nav-sub-label">ND6_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#ND6_STATS_DISPLAY" class="nav-sub-label">ND6_STATS_DISPLAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_STATS_INC(x)" class="nav-sub-label">MIB2_STATS_INC(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIB2_STATS_INC" class="nav-sub-label">MIB2_STATS_INC</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display" class="nav-sub-label">stats_display</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_proto" class="nav-sub-label">stats_display_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_igmp" class="nav-sub-label">stats_display_igmp</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_mem" class="nav-sub-label">stats_display_mem</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_memp" class="nav-sub-label">stats_display_memp</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_sys" class="nav-sub-label">stats_display_sys</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stats_init" class="nav-sub-label">stats_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display" class="nav-sub-label">stats_display</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_proto" class="nav-sub-label">stats_display_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_igmp" class="nav-sub-label">stats_display_igmp</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_mem" class="nav-sub-label">stats_display_mem</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_memp" class="nav-sub-label">stats_display_memp</a>
+              </li>
+      
+
+              <li>
+                <a href="#stats_display_sys" class="nav-sub-label">stats_display_sys</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/mem.h"><span>lwip/mem.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/mem.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/mem.h"
+</pre>
+
+      <h4 id="lwip/memp.h"><span>lwip/memp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/memp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/memp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_STATS_H">Marco <span>LWIP_HDR_STATS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_STATS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_STATS_LARGE">Marco <span>LWIP_STATS_LARGE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_STATS_LARGE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STAT_COUNTER">Marco <span>STAT_COUNTER</span></h4>
+      <pre class="doc-declare"><code>#define STAT_COUNTER    u32_t
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STAT_COUNTER_F">Marco <span>STAT_COUNTER_F</span></h4>
+      <pre class="doc-declare"><code>#define STAT_COUNTER_F  U32_F
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STAT_COUNTER">Marco <span>STAT_COUNTER</span></h4>
+      <pre class="doc-declare"><code>#define STAT_COUNTER    u16_t
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STAT_COUNTER_F">Marco <span>STAT_COUNTER_F</span></h4>
+      <pre class="doc-declare"><code>#define STAT_COUNTER_F  U16_F
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_INC(x)">Marco <span>STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define STATS_INC(x) ++lwip_stats.x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_DEC(x)">Marco <span>STATS_DEC(x)</span></h4>
+      <pre class="doc-declare"><code>#define STATS_DEC(x) --lwip_stats.x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_INC_USED(x, y, type)">Marco <span>STATS_INC_USED(x, y, type)</span></h4>
+      <pre class="doc-declare"><code>#define STATS_INC_USED(x, y, type) do { lwip_stats.x.used = (type)(lwip_stats.x.used + y); \
+                               if (lwip_stats.x.max < lwip_stats.x.used) { \
+                                   lwip_stats.x.max = lwip_stats.x.used; \
+                               } \
+                            } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_GET(x)">Marco <span>STATS_GET(x)</span></h4>
+      <pre class="doc-declare"><code>#define STATS_GET(x) lwip_stats.x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_init">Marco <span>stats_init</span></h4>
+      <pre class="doc-declare"><code>#define stats_init()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_INC">Marco <span>STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_DEC">Marco <span>STATS_DEC</span></h4>
+      <pre class="doc-declare"><code>#define STATS_DEC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATS_INC_USED">Marco <span>STATS_INC_USED</span></h4>
+      <pre class="doc-declare"><code>#define STATS_INC_USED(x, y, type)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_STATS_INC(x)">Marco <span>TCP_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_STATS_DISPLAY()">Marco <span>TCP_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define TCP_STATS_DISPLAY() stats_display_proto(&lwip_stats.tcp, "TCP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_STATS_INC">Marco <span>TCP_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define TCP_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_STATS_DISPLAY">Marco <span>TCP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define TCP_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UDP_STATS_INC(x)">Marco <span>UDP_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define UDP_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UDP_STATS_DISPLAY()">Marco <span>UDP_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define UDP_STATS_DISPLAY() stats_display_proto(&lwip_stats.udp, "UDP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UDP_STATS_INC">Marco <span>UDP_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define UDP_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UDP_STATS_DISPLAY">Marco <span>UDP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define UDP_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP_STATS_INC(x)">Marco <span>ICMP_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define ICMP_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP_STATS_DISPLAY()">Marco <span>ICMP_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define ICMP_STATS_DISPLAY() stats_display_proto(&lwip_stats.icmp, "ICMP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP_STATS_INC">Marco <span>ICMP_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define ICMP_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP_STATS_DISPLAY">Marco <span>ICMP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define ICMP_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IGMP_STATS_INC(x)">Marco <span>IGMP_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define IGMP_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IGMP_STATS_DISPLAY()">Marco <span>IGMP_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define IGMP_STATS_DISPLAY() stats_display_igmp(&lwip_stats.igmp, "IGMP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IGMP_STATS_INC">Marco <span>IGMP_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define IGMP_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IGMP_STATS_DISPLAY">Marco <span>IGMP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define IGMP_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_STATS_INC(x)">Marco <span>IP_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define IP_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_STATS_DISPLAY()">Marco <span>IP_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define IP_STATS_DISPLAY() stats_display_proto(&lwip_stats.ip, "IP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_STATS_INC">Marco <span>IP_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define IP_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_STATS_DISPLAY">Marco <span>IP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define IP_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPFRAG_STATS_INC(x)">Marco <span>IPFRAG_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define IPFRAG_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPFRAG_STATS_DISPLAY()">Marco <span>IPFRAG_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define IPFRAG_STATS_DISPLAY() stats_display_proto(&lwip_stats.ip_frag, "IP_FRAG")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPFRAG_STATS_INC">Marco <span>IPFRAG_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define IPFRAG_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPFRAG_STATS_DISPLAY">Marco <span>IPFRAG_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define IPFRAG_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETHARP_STATS_INC(x)">Marco <span>ETHARP_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define ETHARP_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETHARP_STATS_DISPLAY()">Marco <span>ETHARP_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define ETHARP_STATS_DISPLAY() stats_display_proto(&lwip_stats.etharp, "ETHARP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETHARP_STATS_INC">Marco <span>ETHARP_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define ETHARP_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ETHARP_STATS_DISPLAY">Marco <span>ETHARP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define ETHARP_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINK_STATS_INC(x)">Marco <span>LINK_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define LINK_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINK_STATS_DISPLAY()">Marco <span>LINK_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define LINK_STATS_DISPLAY() stats_display_proto(&lwip_stats.link, "LINK")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINK_STATS_INC">Marco <span>LINK_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define LINK_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LINK_STATS_DISPLAY">Marco <span>LINK_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define LINK_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_AVAIL(x, y)">Marco <span>MEM_STATS_AVAIL(x, y)</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_AVAIL(x, y) lwip_stats.mem.x = y
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_INC(x)">Marco <span>MEM_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_INC(x) STATS_INC(mem.x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_INC_USED(x, y)">Marco <span>MEM_STATS_INC_USED(x, y)</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_INC_USED(x, y) STATS_INC_USED(mem, y, mem_size_t)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_DEC_USED(x, y)">Marco <span>MEM_STATS_DEC_USED(x, y)</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_DEC_USED(x, y) lwip_stats.mem.x = (mem_size_t)((lwip_stats.mem.x) - (y))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_DISPLAY()">Marco <span>MEM_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_DISPLAY() stats_display_mem(&lwip_stats.mem, "HEAP")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_AVAIL">Marco <span>MEM_STATS_AVAIL</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_AVAIL(x, y)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_INC">Marco <span>MEM_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_INC_USED">Marco <span>MEM_STATS_INC_USED</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_INC_USED(x, y)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_DEC_USED">Marco <span>MEM_STATS_DEC_USED</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_DEC_USED(x, y)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEM_STATS_DISPLAY">Marco <span>MEM_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define MEM_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_STATS_DEC(x, i)">Marco <span>MEMP_STATS_DEC(x, i)</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_STATS_DEC(x, i) STATS_DEC(memp[i]->x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_STATS_DISPLAY(i)">Marco <span>MEMP_STATS_DISPLAY(i)</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_STATS_DISPLAY(i) stats_display_memp(lwip_stats.memp[i], i)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_STATS_GET(x, i)">Marco <span>MEMP_STATS_GET(x, i)</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_STATS_GET(x, i) STATS_GET(memp[i]->x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_STATS_DEC">Marco <span>MEMP_STATS_DEC</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_STATS_DEC(x, i)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_STATS_DISPLAY">Marco <span>MEMP_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_STATS_DISPLAY(i)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_STATS_GET(x, i)">Marco <span>MEMP_STATS_GET(x, i)</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_STATS_GET(x, i) 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_INC(x)">Marco <span>SYS_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_INC(x) STATS_INC(sys.x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_DEC(x)">Marco <span>SYS_STATS_DEC(x)</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_DEC(x) STATS_DEC(sys.x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_INC_USED(x)">Marco <span>SYS_STATS_INC_USED(x)</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_INC_USED(x) STATS_INC_USED(sys.x, 1, STAT_COUNTER)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_DISPLAY()">Marco <span>SYS_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_DISPLAY() stats_display_sys(&lwip_stats.sys)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_INC">Marco <span>SYS_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_DEC">Marco <span>SYS_STATS_DEC</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_DEC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_INC_USED">Marco <span>SYS_STATS_INC_USED</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_INC_USED(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_STATS_DISPLAY">Marco <span>SYS_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define SYS_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_STATS_INC(x)">Marco <span>IP6_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_STATS_DISPLAY()">Marco <span>IP6_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define IP6_STATS_DISPLAY() stats_display_proto(&lwip_stats.ip6, "IPv6")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_STATS_INC">Marco <span>IP6_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define IP6_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_STATS_DISPLAY">Marco <span>IP6_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define IP6_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP6_STATS_INC(x)">Marco <span>ICMP6_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define ICMP6_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP6_STATS_DISPLAY()">Marco <span>ICMP6_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define ICMP6_STATS_DISPLAY() stats_display_proto(&lwip_stats.icmp6, "ICMPv6")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP6_STATS_INC">Marco <span>ICMP6_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define ICMP6_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ICMP6_STATS_DISPLAY">Marco <span>ICMP6_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define ICMP6_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_FRAG_STATS_INC(x)">Marco <span>IP6_FRAG_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_FRAG_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_FRAG_STATS_DISPLAY()">Marco <span>IP6_FRAG_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define IP6_FRAG_STATS_DISPLAY() stats_display_proto(&lwip_stats.ip6_frag, "IPv6 FRAG")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_FRAG_STATS_INC">Marco <span>IP6_FRAG_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define IP6_FRAG_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_FRAG_STATS_DISPLAY">Marco <span>IP6_FRAG_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define IP6_FRAG_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MLD6_STATS_INC(x)">Marco <span>MLD6_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define MLD6_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MLD6_STATS_DISPLAY()">Marco <span>MLD6_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define MLD6_STATS_DISPLAY() stats_display_igmp(&lwip_stats.mld6, "MLDv1")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MLD6_STATS_INC">Marco <span>MLD6_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define MLD6_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MLD6_STATS_DISPLAY">Marco <span>MLD6_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define MLD6_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ND6_STATS_INC(x)">Marco <span>ND6_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define ND6_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ND6_STATS_DISPLAY()">Marco <span>ND6_STATS_DISPLAY()</span></h4>
+      <pre class="doc-declare"><code>#define ND6_STATS_DISPLAY() stats_display_proto(&lwip_stats.nd6, "ND")
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ND6_STATS_INC">Marco <span>ND6_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define ND6_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ND6_STATS_DISPLAY">Marco <span>ND6_STATS_DISPLAY</span></h4>
+      <pre class="doc-declare"><code>#define ND6_STATS_DISPLAY()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_STATS_INC(x)">Marco <span>MIB2_STATS_INC(x)</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_STATS_INC(x) STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIB2_STATS_INC">Marco <span>MIB2_STATS_INC</span></h4>
+      <pre class="doc-declare"><code>#define MIB2_STATS_INC(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display">Marco <span>stats_display</span></h4>
+      <pre class="doc-declare"><code>#define stats_display()
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_proto">Marco <span>stats_display_proto</span></h4>
+      <pre class="doc-declare"><code>#define stats_display_proto(proto, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_igmp">Marco <span>stats_display_igmp</span></h4>
+      <pre class="doc-declare"><code>#define stats_display_igmp(igmp, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_mem">Marco <span>stats_display_mem</span></h4>
+      <pre class="doc-declare"><code>#define stats_display_mem(mem, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_memp">Marco <span>stats_display_memp</span></h4>
+      <pre class="doc-declare"><code>#define stats_display_memp(mem, index)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_sys">Marco <span>stats_display_sys</span></h4>
+      <pre class="doc-declare"><code>#define stats_display_sys(sys)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="stats_init">Func <span>stats_init</span></h4>
+      <pre class="doc-declare"><code>void stats_init(void);</code></pre>
+      <pre class="doc-comment">/** Init statistics */</pre>
+
+      <h4 id="stats_display">Func <span>stats_display</span></h4>
+      <pre class="doc-declare"><code>void stats_display(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_proto">Func <span>stats_display_proto</span></h4>
+      <pre class="doc-declare"><code>void stats_display_proto(struct stats_proto *proto, const char *name);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_igmp">Func <span>stats_display_igmp</span></h4>
+      <pre class="doc-declare"><code>void stats_display_igmp(struct stats_igmp *igmp, const char *name);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_mem">Func <span>stats_display_mem</span></h4>
+      <pre class="doc-declare"><code>void stats_display_mem(struct stats_mem *mem, const char *name);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_memp">Func <span>stats_display_memp</span></h4>
+      <pre class="doc-declare"><code>void stats_display_memp(struct stats_mem *mem, int index);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="stats_display_sys">Func <span>stats_display_sys</span></h4>
+      <pre class="doc-declare"><code>void stats_display_sys(struct stats_sys *sys);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

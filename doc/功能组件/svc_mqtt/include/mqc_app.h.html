@@ -1,0 +1,1386 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_client.h" class="nav-sub-label">mqtt_client.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_intf.h" class="nav-sub-label">gw_intf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_rfc.h" class="nav-sub-label">uni_rfc.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_MQC_APP_H" class="nav-sub-label">_MQC_APP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DATA_PUSH" class="nav-sub-label">PRO_DATA_PUSH</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_CMD" class="nav-sub-label">PRO_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_UNBIND" class="nav-sub-label">PRO_DEV_UNBIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_GW_RESET" class="nav-sub-label">PRO_GW_RESET</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_TIMER_UG_INF" class="nav-sub-label">PRO_TIMER_UG_INF</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_UPGD_REQ" class="nav-sub-label">PRO_UPGD_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_UPGE_PUSH" class="nav-sub-label">PRO_UPGE_PUSH</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_IOT_DA_REQ" class="nav-sub-label">PRO_IOT_DA_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_IOT_DA_RESP" class="nav-sub-label">PRO_IOT_DA_RESP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_LINE_STAT_UPDATE" class="nav-sub-label">PRO_DEV_LINE_STAT_UPDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_CMD_ACK" class="nav-sub-label">PRO_CMD_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_EXT_CFG_INF" class="nav-sub-label">PRO_MQ_EXT_CFG_INF</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_BLE_RAW_CMD" class="nav-sub-label">PRO_MQ_BLE_RAW_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_QUERY_DP" class="nav-sub-label">PRO_MQ_QUERY_DP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_GW_SIGMESH_TOPO_UPDATE" class="nav-sub-label">PRO_GW_SIGMESH_TOPO_UPDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_UG_SUMMER_TABLE" class="nav-sub-label">PRO_UG_SUMMER_TABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_GW_UPLOAD_LOG" class="nav-sub-label">PRO_GW_UPLOAD_LOG</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_GW_LINKAGE_UPDATE" class="nav-sub-label">PRO_GW_LINKAGE_UPDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_THINGCONFIG" class="nav-sub-label">PRO_MQ_THINGCONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_PEGASUS_CONFIG" class="nav-sub-label">PRO_MQ_PEGASUS_CONFIG</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_APP_PROTOCOL_RX" class="nav-sub-label">PRO_MQ_APP_PROTOCOL_RX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_APP_PROTOCOL_TX" class="nav-sub-label">PRO_MQ_APP_PROTOCOL_TX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_NG_DEV_EVENT" class="nav-sub-label">PRO_MQ_NG_DEV_EVENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_WAKEUP" class="nav-sub-label">PRO_DEV_WAKEUP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_COMMON" class="nav-sub-label">PRO_MQ_COMMON</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_EN_GW_ADD_DEV_REQ" class="nav-sub-label">PRO_MQ_EN_GW_ADD_DEV_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_EN_GW_ADD_DEV_RESP" class="nav-sub-label">PRO_MQ_EN_GW_ADD_DEV_RESP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_LC_GROUP_OPER" class="nav-sub-label">PRO_DEV_LC_GROUP_OPER</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_LC_GROUP_OPER_RESP" class="nav-sub-label">PRO_DEV_LC_GROUP_OPER_RESP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_LC_SENCE_OPER" class="nav-sub-label">PRO_DEV_LC_SENCE_OPER</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_LC_SENCE_OPER_RESP" class="nav-sub-label">PRO_DEV_LC_SENCE_OPER_RESP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_LC_SENCE_EXEC" class="nav-sub-label">PRO_DEV_LC_SENCE_EXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_CLOUD_STORAGE_ORDER_REQ" class="nav-sub-label">PRO_CLOUD_STORAGE_ORDER_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_3RD_PARTY_STREAMING_REQ" class="nav-sub-label">PRO_3RD_PARTY_STREAMING_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_RTC_REQ" class="nav-sub-label">PRO_RTC_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_AI_DETECT_DATA_SYNC_REQ" class="nav-sub-label">PRO_AI_DETECT_DATA_SYNC_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_FACE_DETECT_DATA_SYNC" class="nav-sub-label">PRO_FACE_DETECT_DATA_SYNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_CLOUD_STORAGE_EVENT_REQ" class="nav-sub-label">PRO_CLOUD_STORAGE_EVENT_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DOORBELL_STATUS_REQ" class="nav-sub-label">PRO_DOORBELL_STATUS_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_MQ_CLOUD_STREAM_GATEWAY" class="nav-sub-label">PRO_MQ_CLOUD_STREAM_GATEWAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_GW_COM_SENCE_EXE" class="nav-sub-label">PRO_GW_COM_SENCE_EXE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_ALARM_DOWN" class="nav-sub-label">PRO_DEV_ALARM_DOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRO_DEV_ALARM_UP" class="nav-sub-label">PRO_DEV_ALARM_UP</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mqc_app_init" class="nav-sub-label">mqc_app_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_start" class="nav-sub-label">mqc_app_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_disconnect" class="nav-sub-label">mqc_app_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_quit" class="nav-sub-label">mqc_app_quit</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_close" class="nav-sub-label">mqc_app_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_mqc_conn_stat" class="nav-sub-label">get_mqc_conn_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_very_pcmcd_mcd" class="nav-sub-label">mqc_very_pcmcd_mcd</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_dp_report_async" class="nav-sub-label">mqc_dp_report_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_obj_dp_query" class="nav-sub-label">mqc_obj_dp_query</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_upgd_progress_rept_v41" class="nav-sub-label">mqc_upgd_progress_rept_v41</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_prot_data_rept_seq" class="nav-sub-label">mqc_prot_data_rept_seq</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_get_wakeup_data" class="nav-sub-label">mqc_get_wakeup_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_get_heartbeat_data" class="nav-sub-label">mqc_get_heartbeat_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_book_wakeup_topic" class="nav-sub-label">mqc_book_wakeup_topic</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_book_additional_topic" class="nav-sub-label">mqc_book_additional_topic</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_subscribe_multi_topics" class="nav-sub-label">mqc_subscribe_multi_topics</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_unsubscribe_multi_topics" class="nav-sub-label">mqc_unsubscribe_multi_topics</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_get_alive_time_s" class="nav-sub-label">mqc_get_alive_time_s</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_get_mqtt_socket_fd" class="nav-sub-label">mqc_get_mqtt_socket_fd</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_restart" class="nav-sub-label">mqc_restart</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_get_mqtt_socket_ip" class="nav-sub-label">mqc_get_mqtt_socket_ip</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_send_custom_mqtt_msg" class="nav-sub-label">mqc_send_custom_mqtt_msg</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_send_mqtt_msg_with_topic" class="nav-sub-label">mqc_send_mqtt_msg_with_topic</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_register_cb" class="nav-sub-label">mqc_app_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_media_pub_async" class="nav-sub-label">mqc_media_pub_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_media_pub_sync" class="nav-sub-label">mqc_media_pub_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_media_pub_sync_v2" class="nav-sub-label">mqc_media_pub_sync_v2</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_media_pub_data_sync" class="nav-sub-label">mqc_media_pub_data_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_custom_pub_async" class="nav-sub-label">mqc_custom_pub_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_custom_pub_sync" class="nav-sub-label">mqc_custom_pub_sync</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_reg_ext_proto" class="nav-sub-label">mqc_app_reg_ext_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_unreg_ext_proto" class="nav-sub-label">mqc_app_unreg_ext_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_app_ext_proto_data_rept" class="nav-sub-label">mqc_app_ext_proto_data_rept</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_sdk_reg_ext_proto" class="nav-sub-label">mqc_sdk_reg_ext_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_sdk_unreg_ext_proto" class="nav-sub-label">mqc_sdk_unreg_ext_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_sdk_ext_proto_data_rept" class="nav-sub-label">mqc_sdk_ext_proto_data_rept</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_ng_reg_ext_proto" class="nav-sub-label">mqc_ng_reg_ext_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_ng_unreg_ext_proto" class="nav-sub-label">mqc_ng_unreg_ext_proto</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_ng_ext_proto_data_rept" class="nav-sub-label">mqc_ng_ext_proto_data_rept</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_set_connection_permit_cb" class="nav-sub-label">mqc_set_connection_permit_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mqc_protocol_handler_cb" class="nav-sub-label">mqc_protocol_handler_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqc_con_permit_cb" class="nav-sub-label">mqc_con_permit_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="mqtt_client.h"><span>mqtt_client.h</span></h4>
+      <pre class="doc-declare"><code>#include "mqtt_client.h"
+</code></pre>
+      <pre class="doc-comment">#include "mqtt_client.h"
+</pre>
+
+      <h4 id="gw_intf.h"><span>gw_intf.h</span></h4>
+      <pre class="doc-declare"><code>#include "gw_intf.h"
+</code></pre>
+      <pre class="doc-comment">#include "gw_intf.h"
+</pre>
+
+      <h4 id="uni_rfc.h"><span>uni_rfc.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_rfc.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_rfc.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_MQC_APP_H">Marco <span>_MQC_APP_H</span></h4>
+      <pre class="doc-declare"><code>#define _MQC_APP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DATA_PUSH">Marco <span>PRO_DATA_PUSH</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DATA_PUSH              4  /* dev -> cloud push dp data */
+</code></pre>
+      <pre class="doc-comment">// mqtt protocol</pre>
+
+      <h4 id="PRO_CMD">Marco <span>PRO_CMD</span></h4>
+      <pre class="doc-declare"><code>#define PRO_CMD                    5  /* cloud -> dev send dp data */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_UNBIND">Marco <span>PRO_DEV_UNBIND</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_UNBIND             8  /* cloud -> dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_GW_RESET">Marco <span>PRO_GW_RESET</span></h4>
+      <pre class="doc-declare"><code>#define PRO_GW_RESET               11 /* cloud -> dev reset dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_TIMER_UG_INF">Marco <span>PRO_TIMER_UG_INF</span></h4>
+      <pre class="doc-declare"><code>#define PRO_TIMER_UG_INF           13 /* cloud -> dev update timer */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_UPGD_REQ">Marco <span>PRO_UPGD_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_UPGD_REQ               15 /* cloud -> dev update dev/gw */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_UPGE_PUSH">Marco <span>PRO_UPGE_PUSH</span></h4>
+      <pre class="doc-declare"><code>#define PRO_UPGE_PUSH              16 /* dev -> cloud update upgrade percent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_IOT_DA_REQ">Marco <span>PRO_IOT_DA_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_IOT_DA_REQ             22 /* cloud -> dev send data req */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_IOT_DA_RESP">Marco <span>PRO_IOT_DA_RESP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_IOT_DA_RESP            23 /* dev -> cloud send data resp */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_LINE_STAT_UPDATE">Marco <span>PRO_DEV_LINE_STAT_UPDATE</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_LINE_STAT_UPDATE   25 /* dev -> sub device online status update */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_CMD_ACK">Marco <span>PRO_CMD_ACK</span></h4>
+      <pre class="doc-declare"><code>#define PRO_CMD_ACK                26 /* dev -> cloud  dev send ackId to cloud */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_EXT_CFG_INF">Marco <span>PRO_MQ_EXT_CFG_INF</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_EXT_CFG_INF         27 /* cloud -> dev runtime cfg update */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_BLE_RAW_CMD">Marco <span>PRO_MQ_BLE_RAW_CMD</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_BLE_RAW_CMD         28 /* cloud -> ble dev RAW data */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_QUERY_DP">Marco <span>PRO_MQ_QUERY_DP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_QUERY_DP            31 /* cloud -> dev query dp stat */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_GW_SIGMESH_TOPO_UPDATE">Marco <span>PRO_GW_SIGMESH_TOPO_UPDATE</span></h4>
+      <pre class="doc-declare"><code>#define PRO_GW_SIGMESH_TOPO_UPDATE 33 /* cloud -> dev sigmesh topo update */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_UG_SUMMER_TABLE">Marco <span>PRO_UG_SUMMER_TABLE</span></h4>
+      <pre class="doc-declare"><code>#define PRO_UG_SUMMER_TABLE        41 // ug sumer timer table
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_GW_UPLOAD_LOG">Marco <span>PRO_GW_UPLOAD_LOG</span></h4>
+      <pre class="doc-declare"><code>#define PRO_GW_UPLOAD_LOG          45 /* dev -> cloud, upload log*/
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_GW_LINKAGE_UPDATE">Marco <span>PRO_GW_LINKAGE_UPDATE</span></h4>
+      <pre class="doc-declare"><code>#define PRO_GW_LINKAGE_UPDATE      49 /* cloud -> dev 场景更新推送 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_THINGCONFIG">Marco <span>PRO_MQ_THINGCONFIG</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_THINGCONFIG         51 /* 设备免密配网 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_PEGASUS_CONFIG">Marco <span>PRO_MQ_PEGASUS_CONFIG</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_PEGASUS_CONFIG      63 /* 闪电配网 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_APP_PROTOCOL_RX">Marco <span>PRO_MQ_APP_PROTOCOL_RX</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_APP_PROTOCOL_RX     64 /* 应用用户自定义协议 cloud->dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_APP_PROTOCOL_TX">Marco <span>PRO_MQ_APP_PROTOCOL_TX</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_APP_PROTOCOL_TX     65 /* 应用用户自定义协议 dev->cloud */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_NG_DEV_EVENT">Marco <span>PRO_MQ_NG_DEV_EVENT</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_NG_DEV_EVENT        55 /* NG下发的设备事件 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_WAKEUP">Marco <span>PRO_DEV_WAKEUP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_WAKEUP             102 /* cloud -> dev, 更新子设备待唤醒标志 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_COMMON">Marco <span>PRO_MQ_COMMON</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_COMMON              100 /* cloud -> dev common protocol*/
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_EN_GW_ADD_DEV_REQ">Marco <span>PRO_MQ_EN_GW_ADD_DEV_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_EN_GW_ADD_DEV_REQ   200 // gw enable add sub device request
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_EN_GW_ADD_DEV_RESP">Marco <span>PRO_MQ_EN_GW_ADD_DEV_RESP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_EN_GW_ADD_DEV_RESP  201 // gw enable add sub device respond
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_LC_GROUP_OPER">Marco <span>PRO_DEV_LC_GROUP_OPER</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_LC_GROUP_OPER      202 /* cloud -> dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_LC_GROUP_OPER_RESP">Marco <span>PRO_DEV_LC_GROUP_OPER_RESP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_LC_GROUP_OPER_RESP 203 /* dev -> cloud */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_LC_SENCE_OPER">Marco <span>PRO_DEV_LC_SENCE_OPER</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_LC_SENCE_OPER      204 /* cloud -> dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_LC_SENCE_OPER_RESP">Marco <span>PRO_DEV_LC_SENCE_OPER_RESP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_LC_SENCE_OPER_RESP 205 /* dev -> cloud */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_LC_SENCE_EXEC">Marco <span>PRO_DEV_LC_SENCE_EXEC</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_LC_SENCE_EXEC      206 /* cloud -> dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_CLOUD_STORAGE_ORDER_REQ">Marco <span>PRO_CLOUD_STORAGE_ORDER_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_CLOUD_STORAGE_ORDER_REQ 300 /* 云存储订单 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_3RD_PARTY_STREAMING_REQ">Marco <span>PRO_3RD_PARTY_STREAMING_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_3RD_PARTY_STREAMING_REQ 301 /* echo show/chromecast request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_RTC_REQ">Marco <span>PRO_RTC_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_RTC_REQ                302 /* cloud -> dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_AI_DETECT_DATA_SYNC_REQ">Marco <span>PRO_AI_DETECT_DATA_SYNC_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_AI_DETECT_DATA_SYNC_REQ 304 /* 本地AI数据更新，当前用于人脸检测样本数据更新(新增/删除/变更) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_FACE_DETECT_DATA_SYNC">Marco <span>PRO_FACE_DETECT_DATA_SYNC</span></h4>
+      <pre class="doc-declare"><code>#define PRO_FACE_DETECT_DATA_SYNC  306 /* 人脸识别数据同步通知,门禁设备使用 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_CLOUD_STORAGE_EVENT_REQ">Marco <span>PRO_CLOUD_STORAGE_EVENT_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_CLOUD_STORAGE_EVENT_REQ 307 /* 联动触发云存储 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DOORBELL_STATUS_REQ">Marco <span>PRO_DOORBELL_STATUS_REQ</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DOORBELL_STATUS_REQ    308 /* 门铃请求被用户处理，接听或者拒绝 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_MQ_CLOUD_STREAM_GATEWAY">Marco <span>PRO_MQ_CLOUD_STREAM_GATEWAY</span></h4>
+      <pre class="doc-declare"><code>#define PRO_MQ_CLOUD_STREAM_GATEWAY 312
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_GW_COM_SENCE_EXE">Marco <span>PRO_GW_COM_SENCE_EXE</span></h4>
+      <pre class="doc-declare"><code>#define PRO_GW_COM_SENCE_EXE       403 /* cloud -> dev 原云端场景放到本地执行 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_ALARM_DOWN">Marco <span>PRO_DEV_ALARM_DOWN</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_ALARM_DOWN   		701 /* cloud -> dev */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRO_DEV_ALARM_UP">Marco <span>PRO_DEV_ALARM_UP</span></h4>
+      <pre class="doc-declare"><code>#define PRO_DEV_ALARM_UP     		702 /* dev -> cloud */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mqc_app_init">Func <span>mqc_app_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_init(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  MQTT service initialization, will start after call to mqc_app_start
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_start">Func <span>mqc_app_start</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_start(BOOL_T enable_time_check);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Start MQTT service
+ * 
+ * @param[in] enable_time_check Enable replay check or not
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_disconnect">Func <span>mqc_app_disconnect</span></h4>
+      <pre class="doc-declare"><code>VOID mqc_app_disconnect(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Disconnect MQTT client from broker, will re-connect later
+ */</pre>
+
+      <h4 id="mqc_app_quit">Func <span>mqc_app_quit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_quit(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Disconnect MQTT client from broker, delete MQTT client thread
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_close">Func <span>mqc_app_close</span></h4>
+      <pre class="doc-declare"><code>VOID mqc_app_close(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Close MQTT client socket fd, will re-connect later
+ */</pre>
+
+      <h4 id="get_mqc_conn_stat">Func <span>get_mqc_conn_stat</span></h4>
+      <pre class="doc-declare"><code>BOOL_T get_mqc_conn_stat(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get MQTT broker connection status
+ * 
+ * @return TRUE on connected, FALSE on disconnected
+ */</pre>
+
+      <h4 id="mqc_very_pcmcd_mcd">Func <span>mqc_very_pcmcd_mcd</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_very_pcmcd_mcd(IN CONST UINT_T cmd_from,IN CONST UINT_T seq);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief MQTT data replay check
+ * 
+ * @param[in] cmd_from Cmd origin
+ * @param[in] seq Data sequence
+ * 
+ * @return OPRT_OK on success. OPRT_SVC_MQTT_CMD_NOT_EXEC on error
+ */</pre>
+
+      <h4 id="mqc_dp_report_async">Func <span>mqc_dp_report_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_dp_report_async(RFC_DATA_S *rfc_da, IN CONST UINT_T to_lmt, IN CONST MQ_PUB_ASYNC_IFM_CB cb,IN VOID *prv_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish dp report data to MQTT broker
+ * 
+ * @param[in] rfc_da The data
+ * @param[in] to_lmt Timeout to get ACK or else report error (default: 3s)
+ * @param[in] cb Callback when ACK got or timeout
+ * @param[in] prv_data Private data to callback
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_obj_dp_query">Func <span>mqc_obj_dp_query</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_obj_dp_query(RFC_DATA_S *rfc_da);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish dp query data to MQTT broker
+ * 
+ * @param[in] rfc_da The data
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_upgd_progress_rept_v41">Func <span>mqc_upgd_progress_rept_v41</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_upgd_progress_rept_v41(IN CONST UINT_T percent,IN CONST CHAR_T *devid, IN CONST DEV_TYPE_T tp);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Upload upgrade progress to broker
+ * 
+ * @param[in] percent Protocol ID, see PRO_XX defined above
+ * @param[in] devid Device ID that is in upgrade
+ * @param[in] tp OTA channel, see DEV_TYPE_T
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_prot_data_rept_seq">Func <span>mqc_prot_data_rept_seq</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_prot_data_rept_seq(IN CONST UINT_T pro,IN CONST CHAR_T *data,IN CONST BYTE_T qos,
+                                  IN CONST UINT_T to_lmt,IN CONST MQ_PUB_ASYNC_IFM_CB cb,IN VOID *prv_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish data to MQTT broker asynchronously
+ * 
+ * @param[in] pro Protocol ID, see PRO_XX defined above
+ * @param[in] data The data
+ * @param[in] qos Quality of Service (values: 0, 1)
+ * @param[in] to_lmt Timeout to get ACK or else report error (default: 3s)
+ * @param[in] cb Callback when ACK got or timeout
+ * @param[in] prv_data Private data to callback
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_get_wakeup_data">Func <span>mqc_get_wakeup_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_get_wakeup_data(INOUT BYTE_T *wakeup_data_arr, INOUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get default wakeup data
+ * 
+ * @param[in,out] wakeup_data_arr Buffer to wakeup data
+ * @param[in,out] p_len Buffer length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_get_heartbeat_data">Func <span>mqc_get_heartbeat_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_get_heartbeat_data(INOUT BYTE_T *heartbeat_data_arr, INOUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get default heartbeat data
+ * 
+ * @param[in,out] heartbeat_data_arr Buffer to heartbeat data
+ * @param[in,out] p_len Buffer length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_book_wakeup_topic">Func <span>mqc_book_wakeup_topic</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_book_wakeup_topic(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe a wakeup topic for lowpower device
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_book_additional_topic">Func <span>mqc_book_additional_topic</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_book_additional_topic(IN CHAR_T *topic);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe an addition topic
+ * 
+ * @param[in] topic Topic to subscribe
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_subscribe_multi_topics">Func <span>mqc_subscribe_multi_topics</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_subscribe_multi_topics(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe multiple topics within one MQTT request
+ * 
+ * @param[in] topics Array of topics to subscribe
+ * @param[in] cnt Count of topics to subscribe
+ * @param[in] msg_cb Callback when MQTT msgs recv. If msg_cb is NULL, 
+ * msgs will transfer to default recv_cb of MQTT client
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_unsubscribe_multi_topics">Func <span>mqc_unsubscribe_multi_topics</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_unsubscribe_multi_topics(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Unsubcribe multiple topics within one MQTT request
+ * 
+ * @param[in] topics Array of topics to unsubscribe
+ * @param[in] cnt Count of topics to unsubscribe
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_get_alive_time_s">Func <span>mqc_get_alive_time_s</span></h4>
+      <pre class="doc-declare"><code>INT_T mqc_get_alive_time_s(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get MQTT client hearbeat interval
+ * 
+ * @param[in] hand Handler of MQTT client
+ *
+ * @return Heartbeat interval (unit sec), -1 on error
+ */</pre>
+
+      <h4 id="mqc_get_mqtt_socket_fd">Func <span>mqc_get_mqtt_socket_fd</span></h4>
+      <pre class="doc-declare"><code>INT_T mqc_get_mqtt_socket_fd(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get MQTT client socket fd
+ *
+ * @return MQTT client socket fd on success, -1 on error.
+ */</pre>
+
+      <h4 id="mqc_restart">Func <span>mqc_restart</span></h4>
+      <pre class="doc-declare"><code>VOID mqc_restart(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Restart MQTT client
+ */</pre>
+
+      <h4 id="mqc_get_mqtt_socket_ip">Func <span>mqc_get_mqtt_socket_ip</span></h4>
+      <pre class="doc-declare"><code>UINT_T mqc_get_mqtt_socket_ip(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get MQTT client's IP
+ *
+ * @return UNW_IP_ADDR_T format
+ */</pre>
+
+      <h4 id="mqc_send_custom_mqtt_msg">Func <span>mqc_send_custom_mqtt_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_send_custom_mqtt_msg(IN CONST UINT_T protocol, IN CONST BYTE_T *p_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish protocol data to the default topic
+ * 
+ * @param[in] protocol Protocol ID, see PRO_XX defined above
+ * @param[in] p_data The data to be published
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_send_mqtt_msg_with_topic">Func <span>mqc_send_mqtt_msg_with_topic</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_send_mqtt_msg_with_topic(IN CONST CHAR_T* topic, IN CONST UINT_T protocol, IN CONST BYTE_T *p_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish protocol data to the specific topic
+ * 
+ * @param[in] topic Destination topic name
+ * @param[in] protocol Protocol ID, see PRO_XX defined above
+ * @param[in] p_data The data to be published
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_register_cb">Func <span>mqc_app_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_register_cb(UINT_T mq_pro, mqc_protocol_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register handler for specific protocol
+ * 
+ * @param[in] mq_pro Protocol ID, see PRO_XX defined above
+ * @param[in] handler Callback when protocol data got
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_media_pub_async">Func <span>mqc_media_pub_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_media_pub_async(IN CONST FLOW_BODY_ST *dt_body,
+                               IN CONST UINT_T to_lmt, IN CONST MQ_PUB_ASYNC_IFM_CB cb,IN VOID *prv_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish map data to MQTT broker asynchronously
+ * 
+ * @param[in] dt_body Map data defined by FLOW_BODY_ST
+ * @param[in] to_lmt Timeout to get ACK or else report error (default: 3s)
+ * @param[in] cb Callback when ACK got or timeout
+ * @param[in] prv_data Private data to callback
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_media_pub_sync">Func <span>mqc_media_pub_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_media_pub_sync(IN CONST FLOW_BODY_ST *dt_body,IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish map data to MQTT broker synchronously
+ * 
+ * @param[in] dt_body Map data defined by FLOW_BODY_ST
+ * @param[in] timeout Timeout to get ACK or else report error
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_media_pub_sync_v2">Func <span>mqc_media_pub_sync_v2</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_media_pub_sync_v2(IN CONST FLOW_BODY_V2_ST *dt_body,IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish map data to MQTT broker synchronously
+ * 
+ * @param[in] dt_body Map data defined by FLOW_BODY_V2_ST
+ * @param[in] timeout Timeout to get ACK or else report error
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_media_pub_data_sync">Func <span>mqc_media_pub_data_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_media_pub_data_sync(IN CONST USHORT_T map_id,IN CONST UINT_T offset,IN CONST BYTE_T *pbuffer, IN CONST USHORT_T buf_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish map data to MQTT broker synchronously
+ * 
+ * @param[in] map_id Map ID
+ * @param[in] offset Offset
+ * @param[in] pbuffer Map data
+ * @param[in] buf_len Data length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_custom_pub_async">Func <span>mqc_custom_pub_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_custom_pub_async(IN CONST BYTE_T *data, IN CONST INT_T len, IN CONST CHAR_T *topic,
+                                IN CONST BYTE_T qos, IN CONST UINT_T timeout, IN CONST MQ_PUB_ASYNC_IFM_CB cb,
+                                IN VOID *prv_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish customized data to MQTT broker asynchronously
+ * 
+ * @param[in] data Customized data
+ * @param[in] len Data length
+ * @param[in] topic Destination topic name
+ * @param[in] qos Quality of Service (values: 0, 1)
+ * @param[in] timeout Timeout to get ACK or else report error
+ * @param[in] cb Callback when ACK got or timeout
+ * @param[in] prv_data Private data to callback
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_custom_pub_sync">Func <span>mqc_custom_pub_sync</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_custom_pub_sync(IN CONST BYTE_T *data, IN CONST INT_T len, IN CONST CHAR_T *topic,
+                               IN CONST BYTE_T qos, IN CONST UINT_T timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish customized data to MQTT broker synchronously
+ * 
+ * @param[in] data Customized data
+ * @param[in] len Data length
+ * @param[in] topic Destination topic name
+ * @param[in] qos Quality of Service (values: 0, 1)
+ * @param[in] timeout Timeout to get ACK or else report error
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_reg_ext_proto">Func <span>mqc_app_reg_ext_proto</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_reg_ext_proto(CONST CHAR_T *sub_mq_pro, mqc_protocol_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register APP extension protocol
+ * 
+ * @param[in] sub_mq_pro APP extension protocol
+ * @param[in] handler Hander when extension protocol data got
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_unreg_ext_proto">Func <span>mqc_app_unreg_ext_proto</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_unreg_ext_proto(CONST CHAR_T *sub_mq_pro);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Unregister APP extension protocol
+ * 
+ * @param[in] sub_mq_pro APP extension protocol
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_app_ext_proto_data_rept">Func <span>mqc_app_ext_proto_data_rept</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_app_ext_proto_data_rept(CONST CHAR_T *data, CONST BYTE_T qos);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish APP extension protocol data to MQTT broker
+ * 
+ * @param[in] data APP extension protocol data
+ * @param[in] qos Quality of Service (values: 0, 1)
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_sdk_reg_ext_proto">Func <span>mqc_sdk_reg_ext_proto</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_sdk_reg_ext_proto(CONST CHAR_T *sub_mq_pro, mqc_protocol_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register SDK extension protocol
+ * 
+ * @param[in] sub_mq_pro SDK extension protocol
+ * @param[in] handler Hander when extension protocol data got
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_sdk_unreg_ext_proto">Func <span>mqc_sdk_unreg_ext_proto</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_sdk_unreg_ext_proto(CONST CHAR_T *sub_mq_pro);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Unregister SDK extension protocol
+ * 
+ * @param[in] sub_mq_pro SDK extension protocol
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_sdk_ext_proto_data_rept">Func <span>mqc_sdk_ext_proto_data_rept</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_sdk_ext_proto_data_rept(CONST CHAR_T *data, CONST BYTE_T qos);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish SDK extension protocol data to MQTT broker
+ * 
+ * @param[in] data SDK extension protocol data
+ * @param[in] qos QOS level(only 0/1 )
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_ng_reg_ext_proto">Func <span>mqc_ng_reg_ext_proto</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_ng_reg_ext_proto(CONST CHAR_T *ext_mq_pro, mqc_protocol_handler_cb handler);</code></pre>
+      <pre class="doc-comment">/** 
+ *  @brief Register NG extension protocol
+ *
+ * @param[in] ext_mq_pro NG extension protocol
+ * @param[in] handler Hander when extension protocol data got
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_ng_unreg_ext_proto">Func <span>mqc_ng_unreg_ext_proto</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_ng_unreg_ext_proto(IN CONST CHAR_T *ext_mq_pro);</code></pre>
+      <pre class="doc-comment">/** 
+ * @brief Unregister SDK extension protocol
+ *
+ * @param[in] ext_mq_pro SDK extension protocol
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_ng_ext_proto_data_rept">Func <span>mqc_ng_ext_proto_data_rept</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_ng_ext_proto_data_rept(CONST CHAR_T *data, CONST BYTE_T qos);</code></pre>
+      <pre class="doc-comment">/** 
+ * @brief Publish NG extension protocol data to MQTT broker
+ * @param[in] data NG extension protocol data
+ * @param[in] qos QOS level(only 0/1 )
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_set_connection_permit_cb">Func <span>mqc_set_connection_permit_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_set_connection_permit_cb(mqc_con_permit_cb cb_permit);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set additional hook to check permission for MQTT broker
+ * 
+ * @param[in] cb_permit Callback when permission is checking
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mqc_protocol_handler_cb">Typedef <span>mqc_protocol_handler_cb</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*mqc_protocol_handler_cb)(IN ty_cJSON *root_json);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Callback to handle protocol data
+ * 
+ * @param[in] root_json Json encoded protocol data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqc_con_permit_cb">Typedef <span>mqc_con_permit_cb</span></h4>
+      <pre class="doc-declare"><code>typedef BOOL_T (*mqc_con_permit_cb)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief MQTT client is permited or not to connect to broker
+ *
+ * @return TRUE on permited, FALSE on denied
+ */</pre>
+    </div>
+  </body>
+</html>
+            

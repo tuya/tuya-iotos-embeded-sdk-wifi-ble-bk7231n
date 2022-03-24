@@ -59,7 +59,7 @@ typedef struct {
 }tuya_ffs_info_t;
 
 
-OPERATE_RET tuya_ffs_init(const tuya_ffs_config_t *config);
+OPERATE_RET tuya_ffs_init(tuya_ffs_config_t *config);
 
 OPERATE_RET tuya_ffs_start(FN_NETCFG_CB cb);
 

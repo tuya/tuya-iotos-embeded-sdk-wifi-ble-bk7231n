@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#wifi_netcfg_frame_sniffer.h" class="nav-sub-label">wifi_netcfg_frame_sniffer.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_inc.h" class="nav-sub-label">tuya_ffs_inc.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stream.h" class="nav-sub-label">tuya_ffs_stream.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#wifi_netcfg_frame_transporter.h" class="nav-sub-label">wifi_netcfg_frame_transporter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_manager.h" class="nav-sub-label">http_manager.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time_queue.h" class="nav-sub-label">uni_time_queue.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_FFS_H__" class="nav-sub-label">__TUYA_FFS_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_ffs_init" class="nav-sub-label">tuya_ffs_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_start" class="nav-sub-label">tuya_ffs_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stop" class="nav-sub-label">tuya_ffs_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_destory" class="nav-sub-label">tuya_ffs_destory</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_ffs_status_e;
+" class="nav-sub-label">tuya_ffs_status_e;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#*ptrProbeRequestTransportParam_t;
+" class="nav-sub-label">*ptrProbeRequestTransportParam_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_info_t;
+" class="nav-sub-label">tuya_ffs_info_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="wifi_netcfg_frame_sniffer.h"><span>wifi_netcfg_frame_sniffer.h</span></h4>
+      <pre class="doc-declare"><code>#include "wifi_netcfg_frame_sniffer.h"
+</code></pre>
+      <pre class="doc-comment">#include "wifi_netcfg_frame_sniffer.h"
+</pre>
+
+      <h4 id="tuya_ffs_inc.h"><span>tuya_ffs_inc.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_ffs_inc.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_ffs_inc.h"
+</pre>
+
+      <h4 id="tuya_ffs_stream.h"><span>tuya_ffs_stream.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_ffs_stream.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_ffs_stream.h"
+</pre>
+
+      <h4 id="wifi_netcfg_frame_transporter.h"><span>wifi_netcfg_frame_transporter.h</span></h4>
+      <pre class="doc-declare"><code>#include "wifi_netcfg_frame_transporter.h"
+</code></pre>
+      <pre class="doc-comment">#include "wifi_netcfg_frame_transporter.h"
+</pre>
+
+      <h4 id="http_manager.h"><span>http_manager.h</span></h4>
+      <pre class="doc-declare"><code>#include "http_manager.h"
+</code></pre>
+      <pre class="doc-comment">#include "http_manager.h"
+</pre>
+
+      <h4 id="uni_time_queue.h"><span>uni_time_queue.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_time_queue.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_time_queue.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_FFS_H__">Marco <span>__TUYA_FFS_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_FFS_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_ffs_init">Func <span>tuya_ffs_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_init(tuya_ffs_config_t *config);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_start">Func <span>tuya_ffs_start</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_start(FN_NETCFG_CB cb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_stop">Func <span>tuya_ffs_stop</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_stop();</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_destory">Func <span>tuya_ffs_destory</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_destory();</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_ffs_status_e;
+">Typedef <span>tuya_ffs_status_e;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_FFS_STATUS_IDLE,
+   TUYA_FFS_STATUS_COMPUTE_SSID_PWD,
+   TUYA_FFS_STATUS_SCAN_AP,
+   TUYA_FFS_STATUS_CONNECT_NETWORK,
+   TUYA_FFS_STATUS_START_DSS,
+   TUYA_FFS_STATUS_PRE_ACTIVE,
+   TUYA_FFS_STATUS_CONNECT_TUYA_MQTT,
+   TUYA_FFS_STATUS_FINISHED,
+   TUYA_FFS_STATUS_STOPED,
+}tuya_ffs_status_e;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*ptrProbeRequestTransportParam_t;
+">Typedef <span>*ptrProbeRequestTransportParam_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct probeRequestTransportParam_s{ 
+   char ffsSsid[FFS_WIFI_SSID_LEN+1];
+}ProbeRequestTransportParam_t, *ptrProbeRequestTransportParam_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_info_t;
+">Typedef <span>tuya_ffs_info_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   uint8_t status; // ref tuya_ffs_status_e.
+   char ssid[FFS_WIFI_SSID_LEN+1];
+   char passwd[FFS_WIFI_PASSWD_LEN+1];
+   char nonce[FFS_CLIENT_NONCE_SIZE];
+   char *session_token;
+   char *gw_endpoint;
+   FN_NETCFG_CB cb;
+   TIMER_ID netcfg_timeout_timer;/*ffs配网超时*/
+
+   mbedtls_pk_context cloudPublicKey;			//!< Cloud public key.
+   mbedtls_pk_context devicePrivateKey;			//!< Device private key.
+   BOOL_T found_ffs_ssid;
+ uint32_t dss_port;/*echo:8888; simple_setup:443*/
+
+   tuya_ffs_config_t config;
+
+ 
+ ptrWifiNetcfgFrameTransporter_t ptrWifiTransporter;
+ ProbeRequestTransportParam_t ProbeRequestTransportParameter;
+ TransporteeParameters_t TransporteeParameter;
+
+ 
+ ptrWifiNetcfgFrameSniffer_t ptrWifiSniffer;
+ SnifferUserParameters_t SnifferUserParammeter;
+}tuya_ffs_info_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

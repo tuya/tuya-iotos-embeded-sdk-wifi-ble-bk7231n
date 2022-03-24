@@ -2056,7 +2056,7 @@
  * This module enables the AES-CCM ciphersuites, if other requisites are
  * enabled as well.
  */
-//#define MBEDTLS_CCM_C
+#define MBEDTLS_CCM_C
 
 /**
  * \def MBEDTLS_CERTS_C
@@ -2735,7 +2735,7 @@
  *
  * This module adds support for SHA-384 and SHA-512.
  */
-//#define MBEDTLS_SHA512_C
+#define MBEDTLS_SHA512_C
 
 /**
  * \def MBEDTLS_SSL_CACHE_C
@@ -2999,7 +2999,7 @@
 
 /* MPI / BIGNUM options */
 #define MBEDTLS_MPI_WINDOW_SIZE           1 /**< Maximum windows size used. */
-#define MBEDTLS_MPI_MAX_SIZE            256 /**< Maximum number of bytes for usable MPIs. */
+#define MBEDTLS_MPI_MAX_SIZE            1024 /**< Maximum number of bytes for usable MPIs. */
 
 /* CTR_DRBG options */
 //#define MBEDTLS_CTR_DRBG_ENTROPY_LEN               48 /**< Amount of entropy used per seed by default (48 with SHA-512, 32 with SHA-256) */
@@ -3119,7 +3119,7 @@
  * incoming and outgoing I/O buffers.
  */
 #if OPERATING_SYSTEM <= SYSTEM_SMALL_MEMORY_END
-#define MBEDTLS_SSL_MAX_CONTENT_LEN             1024 /**< Maxium fragment length in bytes, determines the size of each of the two internal I/O buffers */
+#define MBEDTLS_SSL_MAX_CONTENT_LEN             16384 /**< Maxium fragment length in bytes, determines the size of each of the two internal I/O buffers */
 #else
 #define MBEDTLS_SSL_MAX_CONTENT_LEN             16384
 #endif

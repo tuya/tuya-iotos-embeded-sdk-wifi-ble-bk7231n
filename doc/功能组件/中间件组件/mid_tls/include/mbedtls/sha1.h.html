@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sha1_alt.h" class="nav-sub-label">sha1_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_SHA1_H" class="nav-sub-label">MBEDTLS_SHA1_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_SHA1_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_SHA1_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_SHA1_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_SHA1_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_sha1_init" class="nav-sub-label">mbedtls_sha1_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_free" class="nav-sub-label">mbedtls_sha1_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_clone" class="nav-sub-label">mbedtls_sha1_clone</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_starts_ret" class="nav-sub-label">mbedtls_sha1_starts_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_update_ret" class="nav-sub-label">mbedtls_sha1_update_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_finish_ret" class="nav-sub-label">mbedtls_sha1_finish_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_sha1_process" class="nav-sub-label">mbedtls_internal_sha1_process</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_ret" class="nav-sub-label">mbedtls_sha1_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_sha1_self_test" class="nav-sub-label">mbedtls_sha1_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_sha1_context;
+" class="nav-sub-label">
+mbedtls_sha1_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="sha1_alt.h"><span>sha1_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "sha1_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "sha1_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_SHA1_H">Marco <span>MBEDTLS_SHA1_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_SHA1_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_SHA1_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_SHA1_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_SHA1_HW_ACCEL_FAILED                 -53 /**< SHA-1 hardware accelerator failed */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_SHA1_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_ERR_SHA1_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_SHA1_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_SHA1_BAD_INPUT_DATA                  -115 /**< SHA-1 input data was malformed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_sha1_init">Func <span>mbedtls_sha1_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_sha1_init( mbedtls_sha1_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function initializes a SHA-1 context.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param ctx      The SHA-1 context to initialize.
+ *                 This must not be \c NULL.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_sha1_free">Func <span>mbedtls_sha1_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_sha1_free( mbedtls_sha1_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function clears a SHA-1 context.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param ctx      The SHA-1 context to clear. This may be \c NULL,
+ *                 in which case this function does nothing. If it is
+ *                 not \c NULL, it must point to an initialized
+ *                 SHA-1 context.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_sha1_clone">Func <span>mbedtls_sha1_clone</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_sha1_clone( mbedtls_sha1_context *dst,
+                        const mbedtls_sha1_context *src );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function clones the state of a SHA-1 context.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param dst      The SHA-1 context to clone to. This must be initialized.
+ * \param src      The SHA-1 context to clone from. This must be initialized.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_sha1_starts_ret">Func <span>mbedtls_sha1_starts_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha1_starts_ret( mbedtls_sha1_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function starts a SHA-1 checksum calculation.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param ctx      The SHA-1 context to initialize. This must be initialized.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_sha1_update_ret">Func <span>mbedtls_sha1_update_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha1_update_ret( mbedtls_sha1_context *ctx,
+                            const unsigned char *input,
+                            size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function feeds an input buffer into an ongoing SHA-1
+ *                 checksum calculation.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param ctx      The SHA-1 context. This must be initialized
+ *                 and have a hash operation started.
+ * \param input    The buffer holding the input data.
+ *                 This must be a readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data \p input in Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_sha1_finish_ret">Func <span>mbedtls_sha1_finish_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha1_finish_ret( mbedtls_sha1_context *ctx,
+                            unsigned char output[20] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function finishes the SHA-1 operation, and writes
+ *                 the result to the output buffer.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param ctx      The SHA-1 context to use. This must be initialized and
+ *                 have a hash operation started.
+ * \param output   The SHA-1 checksum result. This must be a writable
+ *                 buffer of length \c 20 Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ */</pre>
+
+      <h4 id="mbedtls_internal_sha1_process">Func <span>mbedtls_internal_sha1_process</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_sha1_process( mbedtls_sha1_context *ctx,
+                                  const unsigned char data[64] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          SHA-1 process data block (internal use only).
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param ctx      The SHA-1 context to use. This must be initialized.
+ * \param data     The data block being processed. This must be a
+ *                 readable buffer of length \c 64 Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_sha1_ret">Func <span>mbedtls_sha1_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha1_ret( const unsigned char *input,
+                     size_t ilen,
+                     unsigned char output[20] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the SHA-1 checksum of a buffer.
+ *
+ *                 The function allocates the context, performs the
+ *                 calculation, and frees the context.
+ *
+ *                 The SHA-1 result is calculated as
+ *                 output = SHA-1(input buffer).
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \param input    The buffer holding the input data.
+ *                 This must be a readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data \p input in Bytes.
+ * \param output   The SHA-1 checksum result.
+ *                 This must be a writable buffer of length \c 20 Bytes.
+ *
+ * \return         \c 0 on success.
+ * \return         A negative error code on failure.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_sha1_self_test">Func <span>mbedtls_sha1_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_sha1_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The SHA-1 checkup routine.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \return         \c 0 on success.
+ * \return         \c 1 on failure.
+ *
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha1_starts( mbedtls_sha1_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function starts a SHA-1 checksum calculation.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \deprecated     Superseded by mbedtls_sha1_starts_ret() in 2.7.0.
+ *
+ * \param ctx      The SHA-1 context to initialize. This must be initialized.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha1_update( mbedtls_sha1_context *ctx,
+                                            const unsigned char *input,
+                                            size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function feeds an input buffer into an ongoing SHA-1
+ *                 checksum calculation.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \deprecated     Superseded by mbedtls_sha1_update_ret() in 2.7.0.
+ *
+ * \param ctx      The SHA-1 context. This must be initialized and
+ *                 have a hash operation started.
+ * \param input    The buffer holding the input data.
+ *                 This must be a readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data \p input in Bytes.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha1_finish( mbedtls_sha1_context *ctx,
+                                            unsigned char output[20] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function finishes the SHA-1 operation, and writes
+ *                 the result to the output buffer.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \deprecated     Superseded by mbedtls_sha1_finish_ret() in 2.7.0.
+ *
+ * \param ctx      The SHA-1 context. This must be initialized and
+ *                 have a hash operation started.
+ * \param output   The SHA-1 checksum result.
+ *                 This must be a writable buffer of length \c 20 Bytes.
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha1_process( mbedtls_sha1_context *ctx,
+                                             const unsigned char data[64] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          SHA-1 process data block (internal use only).
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \deprecated     Superseded by mbedtls_internal_sha1_process() in 2.7.0.
+ *
+ * \param ctx      The SHA-1 context. This must be initialized.
+ * \param data     The data block being processed.
+ *                 This must be a readable buffer of length \c 64 bytes.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_sha1( const unsigned char *input,
+                                     size_t ilen,
+                                     unsigned char output[20] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          This function calculates the SHA-1 checksum of a buffer.
+ *
+ *                 The function allocates the context, performs the
+ *                 calculation, and frees the context.
+ *
+ *                 The SHA-1 result is calculated as
+ *                 output = SHA-1(input buffer).
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ * \deprecated     Superseded by mbedtls_sha1_ret() in 2.7.0
+ *
+ * \param input    The buffer holding the input data.
+ *                 This must be a readable buffer of length \p ilen Bytes.
+ * \param ilen     The length of the input data \p input in Bytes.
+ * \param output   The SHA-1 checksum result. This must be a writable
+ *                 buffer of size \c 20 Bytes.
+ *
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_sha1_context;
+">Typedef <span>
+mbedtls_sha1_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_sha1_context
+{
+   uint32_t total[2];         /*!< The number of Bytes processed.  */
+   uint32_t state[5];         /*!< The intermediate digest state.  */
+   unsigned char buffer[64];  /*!< The data block being processed. */
+}
+mbedtls_sha1_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          The SHA-1 context structure.
+ *
+ * \warning        SHA-1 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver.h" class="nav-sub-label">tuya_driver.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_PWM_H__" class="nav-sub-label">__TUYA_PWM_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PWM_FREQUENCY(__PWM)" class="nav-sub-label">TUYA_PWM_FREQUENCY(__PWM)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PWM_PERCENT(__PWM)" class="nav-sub-label">TUYA_PWM_PERCENT(__PWM)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PWM_CFG(__PWM, __PIN, __FREQUENCY, __PERCENT)" class="nav-sub-label">TUYA_PWM_CFG(__PWM, __PIN, __FREQUENCY, __PERCENT)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_pwm_frequency_set" class="nav-sub-label">tuya_pwm_frequency_set</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_pwm_init" class="nav-sub-label">tuya_pwm_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_start" class="nav-sub-label">tuya_pwm_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_stop" class="nav-sub-label">tuya_pwm_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_control" class="nav-sub-label">tuya_pwm_control</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_deinit" class="nav-sub-label">tuya_pwm_deinit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_set" class="nav-sub-label">tuya_pwm_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_duty_set" class="nav-sub-label">tuya_pwm_duty_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_polarity_set" class="nav-sub-label">tuya_pwm_polarity_set</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_pwm_port_t;
+" class="nav-sub-label">tuya_pwm_port_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_polarity_t;
+" class="nav-sub-label">tuya_pwm_polarity_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_cmd_t;
+" class="nav-sub-label">tuya_pwm_cmd_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_cfg_t;
+" class="nav-sub-label">tuya_pwm_cfg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_t" class="nav-sub-label">tuya_pwm_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pwm_ops_t;
+" class="nav-sub-label">tuya_pwm_ops_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_driver.h"><span>tuya_driver.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_driver.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_driver.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_PWM_H__">Marco <span>__TUYA_PWM_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_PWM_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PWM_FREQUENCY(__PWM)">Marco <span>TUYA_PWM_FREQUENCY(__PWM)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PWM_FREQUENCY(__PWM)  ((uint32_t)(1000000000 / (__PWM)->cfg.period_ns))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PWM_PERCENT(__PWM)">Marco <span>TUYA_PWM_PERCENT(__PWM)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PWM_PERCENT(__PWM)    ((__PWM)->cfg.percent)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PWM_CFG(__PWM, __PIN, __FREQUENCY, __PERCENT)">Marco <span>TUYA_PWM_CFG(__PWM, __PIN, __FREQUENCY, __PERCENT)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PWM_CFG(__PWM, __PIN, __FREQUENCY, __PERCENT)                     \
+   (__PWM)->cfg.pin      = __PIN;                                            \
+   (__PWM)->cfg.period_ns = (uint32_t)1000000000 / (__FREQUENCY);             \
+   (__PWM)->cfg.percent  = __PERCENT;                                        \
+   (__PWM)->cfg.pulse_ns = (uint32_t)((__PWM)->cfg.period_ns * (__PERCENT)); \
+   (__PWM)->cfg.polarity = TUYA_PWM_POSITIVE
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_pwm_frequency_set">Func <span>tuya_pwm_frequency_set</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_frequency_set (tuya_pwm_t *pwm, float frequency);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set frequency
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ * @param[in] frequency frequency
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_pwm_init">Variable <span>tuya_pwm_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_init    (tuya_pwm_t *pwm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pwm init
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_start">Variable <span>tuya_pwm_start</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_start    (tuya_pwm_t *pwm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pwm start
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_stop">Variable <span>tuya_pwm_stop</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_stop    (tuya_pwm_t *pwm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pwm stop
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_control">Variable <span>tuya_pwm_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_control     (tuya_pwm_t *pwm, uint8_t cmd, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pwm control
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ * @param[in] cmd control command
+ * @param[in] arg command argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_deinit">Variable <span>tuya_pwm_deinit</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_deinit    (tuya_pwm_t *pwm);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pwm deinit
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_set">Variable <span>tuya_pwm_set</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_set   (tuya_pwm_t *pwm, float frequency, float percent);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pwm set
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ * @param[in] frequency frequency
+ * @param[in] percent percent
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_duty_set">Variable <span>tuya_pwm_duty_set</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_duty_set     (tuya_pwm_t *pwm, float percent);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set duty
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ * @param[in] percent percent
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pwm_polarity_set">Variable <span>tuya_pwm_polarity_set</span></h4>
+      <pre class="doc-declare"><code>int tuya_pwm_polarity_set  (tuya_pwm_t *pwm, tuya_pwm_polarity_t polarity);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set polarity
+ * 
+ * @param[in] pwm refer to tuya_pwm_t
+ * @param[in] polarity refer to tuya_pwm_polarity_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_pwm_port_t;
+">Typedef <span>tuya_pwm_port_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PWM0 = 0,
+   TUYA_PWM1,
+   TUYA_PWM2,
+   TUYA_PWM3,
+   TUYA_PWM4,
+   TUYA_PWM5,
+   TUYA_PWM6,
+   TUYA_PWM7,
+   TUYA_PWM8,
+} tuya_pwm_port_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pwm_polarity_t;
+">Typedef <span>tuya_pwm_polarity_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PWM_POSITIVE = 0,
+   TUYA_PWM_NEGATIVE,
+} tuya_pwm_polarity_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pwm_cmd_t;
+">Typedef <span>tuya_pwm_cmd_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PWM_SET_CMD       = TUYA_DRV_CUSTOM_CMD,
+   TUYA_PWM_PERIOD_SET_CMD,
+   TUYA_PWM_PULSE_SET_CMD,
+   TUYA_PWM_POLARIITY_SET_CMD,
+} tuya_pwm_cmd_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pwm_cfg_t;
+">Typedef <span>tuya_pwm_cfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   uint8_t        pin;
+   uint8_t        polarity;
+   uint32_t       period_ns;
+   uint32_t       pulse_ns;
+   float          percent;
+} tuya_pwm_cfg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pwm_t">Typedef <span>tuya_pwm_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct tuya_pwm tuya_pwm_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pwm_ops_t;
+">Typedef <span>tuya_pwm_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int (*init)    (tuya_pwm_t *pwm, tuya_pwm_cfg_t *cfg);
+   int (*start)   (tuya_pwm_t *pwm);
+   int (*stop)    (tuya_pwm_t *pwm);
+   int (*control) (tuya_pwm_t *pwm, uint8_t cmd, void *arg);
+   int (*deinit)  (tuya_pwm_t *pwm);
+} tuya_pwm_ops_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

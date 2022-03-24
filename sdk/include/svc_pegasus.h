@@ -25,6 +25,7 @@
 #if WIFI_GW
 #include "wifi_netcfg_frame_sniffer.h"
 #include "wifi_netcfg_frame_transporter.h"
+#include "netcfg_module.h"
 #endif
 /*============================ MACROS ========================================*/
 /*============================ MACROFIED FUNCTIONS ===========================*/
@@ -56,7 +57,8 @@ typedef enum {
 typedef struct {
     bool                ack;
     int                 count;
-    uint8_t             dev_mac[6];
+    uint8_t             dev_mac[6];    
+    uint8_t             ap_mac[6];
     char                pid[PRODUCT_KEY_LEN + 1];
     char                uuid[GW_UUID_LEN + 1];
     uint8_t             ra_uuid_hmac[TY_DEV_SHA256_DIGEST_SIZE];   
@@ -74,6 +76,7 @@ typedef struct {
 int  pegasus_server_mqc_handle(ty_cJSON *root_json);
 int  pegasus_server_second_start(uint32_t timeout_s);
 int pegasus_recv_data_handle_cb(void *ptrArgs,uint8_t *buffer, uint16_t length, const int8_t rssi);
+int pegasus_server_add_device(char *token, char*uuid);
 typedef void (*fnLockChanCb)(void);
 
 #if WIFI_GW
@@ -81,9 +84,10 @@ typedef void (*fnLockChanCb)(void);
 int tuya_scan_all_ap(AP_IF_S **ap_ary, uint8_t *num, uint8_t *oui,  AP_IF_S **oui_ap);
 int pegasus_beacon_info_get(uint8_t *buf, uint16_t len, char rssi, AP_IF_S *ap_info);
 typedef int (*pegasus_second_connect_cb)(char *ssid, char *passwd);
-int pegasus_init(IN CONST fnLockChanCb lc_cb, IN CONST NW_CFG_FIN_CALLBACK ncf_cb, ptrWifiNetcfgFrameSniffer_t pSniffer,ptrWifiNetcfgFrameTransporter_t pTransporter);
+int pegasus_init(IN CONST fnLockChanCb lc_cb, IN CONST FN_NETCFG_CB ncf_cb, ptrWifiNetcfgFrameSniffer_t pSniffer,ptrWifiNetcfgFrameTransporter_t pTransporter);
 int pegasus_second_init(pegasus_second_connect_cb connect_cb, AP_IF_S  *pegasus_ap);
 int pegasus_uninit(void);
+WLAN_MANAGEMENT_S *pegasus_find_oui(uint8_t *buf, int buf_len, uint8_t *oui);
 #endif
 
 #ifdef __cplusplus

@@ -1,14 +1,13 @@
 /**
- * @file tuya_svc_timer_task.h
- * @author anby (you@domain.com)
- * @brief tuya定时服务外部接口
- * @version 0.1
- * @date 2019-08-29
- * 
- * @copyright Copyright (c) tuya.inc 2019
- * 
- */
-
+* @file tuya_svc_timer_task.h
+* @author liukang@tuya.com
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef __TUYA_SVC_TIME_TASK_H__
 #define __TUYA_SVC_TIME_TASK_H__
 
@@ -19,33 +18,99 @@ extern "C" {
 #endif
 
 /**
- * @brief tuya 本地定时服务初始化
- * 
- * @param increase_unit: 定时任务每次申请increase_unit
- * @return OPERATE_RET： 0成功，非0，请参照tuya error code描述文档 
+ * @brief Init a timer task.
+ *
+ * @param[in] increase_unit: increase unit
+ *
+ * @note This API is used for initializing the timer task. 
+ * when the task queue is full, it will expand the size with the unit user input. 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */
 OPERATE_RET tuya_svc_timer_task_init(UINT_T increase_unit);
 
-/** 
- * @brief tuya 本地定时服务重置，清空
- * 
- * @return OPERATE_RET： 0成功，非0，请参照tuya error code描述文档 
+/**
+ * @brief Reset the timer task.
+ *
+ * @param VOID
+ *
+ * @note This API is used to reset the timer task. the resource of timer task will be released. 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */
 OPERATE_RET tuya_svc_timer_task_reset(VOID_T);
 
-/*
-删除flash中已保存的本地定时数据
-未初始化timer_task前调用
-*/
+/**
+ * @brief Clear up the timer task data in flash.
+ *
+ * @param VOID
+ *
+ * @note This API is used to clear up the timer task data in flash.
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET tuya_svc_timer_task_clear_db(VOID_T);
 
-/** 
- * @brief tuya 获取定时任务个数
- * 
- * @return UINT_T：返回定时器任务个数
+/**
+ * @brief Get the count of timer task.
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting the count of timer task.
+ * @return the count of timer task.
  */
 UINT_T tuya_svc_timer_get_task_count(VOID_T);
 
+#if defined(BT_TIMER) && (BT_TIMER == 1)
+/**
+ * @brief Get the num of timer task.
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting the num of timer task.
+ * @return the capacity of timer task.
+ */
+UINT_T tuya_svc_timer_get_num(VOID_T);
+
+/**
+ * @brief Get the capacity of timer task.
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting the capacity of timer task.
+ * @return the capacity of timer task.
+ */
+UINT_T tuya_svc_timer_get_capacity(VOID_T);
+
+/**
+ * @brief delete timer task.
+ *
+ * @param[in] timer_id: timer id
+ * @param[in] update_flash: if need update timer to flash
+ *
+ * @note This API is used for deleting the timer task.
+ * @return void
+ */
+VOID_T tuya_svc_timer_delete(uint32_t timer_id, BOOL_T update_flash);
+
+/**
+ * @brief get timer task data.
+ *
+ * @param[out] timer_data: timer id and crc32
+ *
+ * @note This API is used for getting timer task data.
+ * @return void
+ */
+VOID_T tuya_svc_timer_get_data(uint8_t *timer_data);
+
+/**
+ * @brief add timer task.
+ *
+ * @param[in] data: timer data
+ * @param[in] len: data len
+ *
+ * @note This API is used for adding timer task.
+ * @return void
+ */
+VOID_T tuya_svc_timer_add(uint8_t* data, uint16_t len);
+#endif
 
 #ifdef __cplusplus
 }

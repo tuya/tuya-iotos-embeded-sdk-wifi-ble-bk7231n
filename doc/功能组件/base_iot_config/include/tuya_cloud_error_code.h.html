@@ -1,0 +1,1930 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_error_code.h" class="nav-sub-label">tuya_error_code.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_CLOUD_ERROR_CODE_H" class="nav-sub-label">TUYA_CLOUD_ERROR_CODE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INIT_MUTEX_ATTR_FAILED" class="nav-sub-label">OPRT_INIT_MUTEX_ATTR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SET_MUTEX_ATTR_FAILED" class="nav-sub-label">OPRT_SET_MUTEX_ATTR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DESTROY_MUTEX_ATTR_FAILED" class="nav-sub-label">OPRT_DESTROY_MUTEX_ATTR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INIT_MUTEX_FAILED" class="nav-sub-label">OPRT_INIT_MUTEX_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MUTEX_LOCK_FAILED" class="nav-sub-label">OPRT_MUTEX_LOCK_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MUTEX_TRYLOCK_FAILED" class="nav-sub-label">OPRT_MUTEX_TRYLOCK_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MUTEX_LOCK_BUSY" class="nav-sub-label">OPRT_MUTEX_LOCK_BUSY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MUTEX_UNLOCK_FAILED" class="nav-sub-label">OPRT_MUTEX_UNLOCK_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MUTEX_RELEASE_FAILED" class="nav-sub-label">OPRT_MUTEX_RELEASE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MEM_PARTITION_EMPTY" class="nav-sub-label">OPRT_MEM_PARTITION_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MEM_PARTITION_FULL" class="nav-sub-label">OPRT_MEM_PARTITION_FULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MEM_PARTITION_NOT_FOUND" class="nav-sub-label">OPRT_MEM_PARTITION_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DONOT_FOUND_MODULE" class="nav-sub-label">OPRT_DONOT_FOUND_MODULE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INIT_SEM_FAILED" class="nav-sub-label">OPRT_INIT_SEM_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WAIT_SEM_FAILED" class="nav-sub-label">OPRT_WAIT_SEM_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_POST_SEM_FAILED" class="nav-sub-label">OPRT_POST_SEM_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_THRD_STA_UNVALID" class="nav-sub-label">OPRT_THRD_STA_UNVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_THRD_CR_FAILED" class="nav-sub-label">OPRT_THRD_CR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_THRD_JOIN_FAILED" class="nav-sub-label">OPRT_THRD_JOIN_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_THRD_SELF_CAN_NOT_JOIN" class="nav-sub-label">OPRT_THRD_SELF_CAN_NOT_JOIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_TIMERID_EXIST" class="nav-sub-label">OPRT_TIMERID_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_TIMERID_NOT_FOUND" class="nav-sub-label">OPRT_TIMERID_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_TIMERID_UNVALID" class="nav-sub-label">OPRT_TIMERID_UNVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_GET_IDLE_TIMERID_ERROR" class="nav-sub-label">OPRT_GET_IDLE_TIMERID_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MSG_NOT_FOUND" class="nav-sub-label">OPRT_MSG_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MSG_LIST_EMPTY" class="nav-sub-label">OPRT_MSG_LIST_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WIFI_SCAN_FAIL" class="nav-sub-label">OPRT_WIFI_SCAN_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_MAC_SET_FAIL" class="nav-sub-label">OPRT_WF_MAC_SET_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_CONN_FAIL" class="nav-sub-label">OPRT_WF_CONN_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_NW_CFG_FAIL" class="nav-sub-label">OPRT_WF_NW_CFG_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_AP_SACN_FAIL" class="nav-sub-label">OPRT_WF_AP_SACN_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_NOT_FIND_ASS_AP" class="nav-sub-label">OPRT_WF_NOT_FIND_ASS_AP</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DISCONNECTED_WITH_ROUTER" class="nav-sub-label">OPRT_DISCONNECTED_WITH_ROUTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BUF_NOT_ENOUGH" class="nav-sub-label">OPRT_BUF_NOT_ENOUGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_URL_PARAM_OUT_LIMIT" class="nav-sub-label">OPRT_URL_PARAM_OUT_LIMIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_OS_ERROR" class="nav-sub-label">OPRT_HTTP_OS_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_PR_REQ_ERROR" class="nav-sub-label">OPRT_HTTP_PR_REQ_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_SD_REQ_ERROR" class="nav-sub-label">OPRT_HTTP_SD_REQ_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_RD_ERROR" class="nav-sub-label">OPRT_HTTP_RD_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_AD_HD_ERROR" class="nav-sub-label">OPRT_HTTP_AD_HD_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_GET_RESP_ERROR" class="nav-sub-label">OPRT_HTTP_GET_RESP_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_AES_INIT_ERR" class="nav-sub-label">OPRT_HTTP_AES_INIT_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_AES_OPEN_ERR" class="nav-sub-label">OPRT_HTTP_AES_OPEN_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_AES_SET_KEY_ERR" class="nav-sub-label">OPRT_HTTP_AES_SET_KEY_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_AES_ENCRYPT_ERR" class="nav-sub-label">OPRT_HTTP_AES_ENCRYPT_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CR_HTTP_URL_H_ERR" class="nav-sub-label">OPRT_CR_HTTP_URL_H_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTPS_HANDLE_FAIL" class="nav-sub-label">OPRT_HTTPS_HANDLE_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTPS_RESP_UNVALID" class="nav-sub-label">OPRT_HTTPS_RESP_UNVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTPS_NO_SUPPORT_RANGE" class="nav-sub-label">OPRT_HTTPS_NO_SUPPORT_RANGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTPS_NOT_ENCRYPT_RET" class="nav-sub-label">OPRT_HTTPS_NOT_ENCRYPT_RET</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_FILL_URL_H_ERR" class="nav-sub-label">OPRT_HTTP_FILL_URL_H_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_FILL_URL_FULL_ERR" class="nav-sub-label">OPRT_HTTP_FILL_URL_FULL_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_FILL_DATA_ERR" class="nav-sub-label">OPRT_HTTP_FILL_DATA_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_URL_CFG_AI_SPEAKER_ERR" class="nav-sub-label">OPRT_HTTP_URL_CFG_AI_SPEAKER_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_URL_CFG_URL_ERR" class="nav-sub-label">OPRT_HTTP_URL_CFG_URL_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_URL_CFG_URL2IP_ERR" class="nav-sub-label">OPRT_HTTP_URL_CFG_URL2IP_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_URL_CFG_URL2IP_SELF_ERR" class="nav-sub-label">OPRT_HTTP_URL_CFG_URL2IP_SELF_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_HTTP_URL_CFG_URL2IP_PSK_ERR" class="nav-sub-label">OPRT_HTTP_URL_CFG_URL2IP_PSK_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DP_ATTR_ILLEGAL" class="nav-sub-label">OPRT_DP_ATTR_ILLEGAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DP_TYPE_PROP_ILLEGAL" class="nav-sub-label">OPRT_DP_TYPE_PROP_ILLEGAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DP_REPORT_CLOUD_ERR" class="nav-sub-label">OPRT_DP_REPORT_CLOUD_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NO_NEED_SET_PRODINFO" class="nav-sub-label">OPRT_NO_NEED_SET_PRODINFO</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NW_INVALID" class="nav-sub-label">OPRT_NW_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SELECT_ERR" class="nav-sub-label">OPRT_SELECT_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SELECT_TM" class="nav-sub-label">OPRT_SELECT_TM</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEV_NOT_BIND" class="nav-sub-label">OPRT_DEV_NOT_BIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_FW_UG_FAILED" class="nav-sub-label">OPRT_FW_UG_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_VER_FMT_ERR" class="nav-sub-label">OPRT_VER_FMT_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_FW_NOT_EXIST" class="nav-sub-label">OPRT_FW_NOT_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SEM_CR_ERR" class="nav-sub-label">OPRT_SEM_CR_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SELECT_TIMEOUT" class="nav-sub-label">OPRT_SELECT_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_GW_MQ_OFFLILNE" class="nav-sub-label">OPRT_GW_MQ_OFFLILNE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NOT_SPT_CLX_DP" class="nav-sub-label">OPRT_NOT_SPT_CLX_DP</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_UG_PKG_NOT_ENOUGH" class="nav-sub-label">OPRT_UG_PKG_NOT_ENOUGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SCMA_INVALID" class="nav-sub-label">OPRT_SCMA_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_PRODECT_KEY_NULL" class="nav-sub-label">OPRT_PRODECT_KEY_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEVICE_VER_NULL" class="nav-sub-label">OPRT_DEVICE_VER_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MSG_OUT_OF_LMT" class="nav-sub-label">OPRT_MSG_OUT_OF_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NOT_FOUND_AUTH_SSID" class="nav-sub-label">OPRT_NOT_FOUND_AUTH_SSID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SOCKET_FAULT" class="nav-sub-label">OPRT_SOCKET_FAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MQ_PUBLISH_TIMEOUT" class="nav-sub-label">OPRT_MQ_PUBLISH_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_GW_NOT_EXIST" class="nav-sub-label">OPRT_GW_NOT_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_GW_SCHEMA_SIZE_LMT_OUT" class="nav-sub-label">OPRT_GW_SCHEMA_SIZE_LMT_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEV_DP_CNT_INVALID" class="nav-sub-label">OPRT_DEV_DP_CNT_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_TOKEN_OVERTIME" class="nav-sub-label">OPRT_TOKEN_OVERTIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_NW_CFG_RECV_CONTINUE" class="nav-sub-label">OPRT_WF_NW_CFG_RECV_CONTINUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SERV_VRFY_FAIL" class="nav-sub-label">OPRT_SERV_VRFY_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NO_AUTHENTICATION" class="nav-sub-label">OPRT_NO_AUTHENTICATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CMD_OUT_OF_TIME_NOT_EXEC" class="nav-sub-label">OPRT_CMD_OUT_OF_TIME_NOT_EXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CMD_NOT_EXEC" class="nav-sub-label">OPRT_CMD_NOT_EXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LAN_NO_CLIENT" class="nav-sub-label">OPRT_LAN_NO_CLIENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_INTF_LACK_REG_CB" class="nav-sub-label">OPRT_WF_INTF_LACK_REG_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WF_INTF_NO_REG_CB" class="nav-sub-label">OPRT_WF_INTF_NO_REG_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_STORAGE_UPLOAD" class="nav-sub-label">OPRT_STORAGE_UPLOAD</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DP_ID_NOT_FOUND" class="nav-sub-label">OPRT_DP_ID_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DP_TP_NOT_MATCH" class="nav-sub-label">OPRT_DP_TP_NOT_MATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEV_NEED_REGISTER" class="nav-sub-label">OPRT_DEV_NEED_REGISTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEV_RESET_FACTORY" class="nav-sub-label">OPRT_DEV_RESET_FACTORY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_API_VERSION_WRONG" class="nav-sub-label">OPRT_API_VERSION_WRONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEV_ALREADY_BIND" class="nav-sub-label">OPRT_DEV_ALREADY_BIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_API_DECODE_FAILED" class="nav-sub-label">OPRT_API_DECODE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_API_TOKEN_EXPIRE" class="nav-sub-label">OPRT_API_TOKEN_EXPIRE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NOT_EXISTS" class="nav-sub-label">OPRT_NOT_EXISTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DP_ALREADY_PROCESS" class="nav-sub-label">OPRT_DP_ALREADY_PROCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_API_VERIFY_FAILED" class="nav-sub-label">OPRT_API_VERIFY_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_FILE_IS_FULL" class="nav-sub-label">OPRT_FILE_IS_FULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WRITE_FILE_FAILED" class="nav-sub-label">OPRT_WRITE_FILE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_OPEN_FILE_FAILED" class="nav-sub-label">OPRT_OPEN_FILE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_PRINT_LOG_LEVEL_HIGHER" class="nav-sub-label">OPRT_PRINT_LOG_LEVEL_HIGHER</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_FORMAT_STRING_FAILED" class="nav-sub-label">OPRT_FORMAT_STRING_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_STRING_TOO_LONG" class="nav-sub-label">OPRT_STRING_TOO_LONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WR_FLASH_ERROR" class="nav-sub-label">OPRT_WR_FLASH_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_ROUTER_NOT_FIND" class="nav-sub-label">OPRT_ROUTER_NOT_FIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SECURITY_VERIFY_NOT_OK" class="nav-sub-label">OPRT_SECURITY_VERIFY_NOT_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_FLASH_NOT_ENOUGH_PAGE" class="nav-sub-label">OPRT_FLASH_NOT_ENOUGH_PAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_ERASE_FLASH_ERROR" class="nav-sub-label">OPRT_ERASE_FLASH_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_OSS_OPERATION_INIT_FAILED" class="nav-sub-label">OPRT_OSS_OPERATION_INIT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_OSS_OPERATION_UPDATE_FAILED" class="nav-sub-label">OPRT_OSS_OPERATION_UPDATE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_OSS_OPERATION_UPLOAD_FAILED" class="nav-sub-label">OPRT_OSS_OPERATION_UPLOAD_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MOTION_DETECTION_ALARM_PACK_REPORT_FAILED" class="nav-sub-label">OPRT_MOTION_DETECTION_ALARM_PACK_REPORT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_TRANSFER_INIT_FAILED" class="nav-sub-label">OPRT_TRANSFER_INIT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LOG_SEQ_LOCKED" class="nav-sub-label">OPRT_LOG_SEQ_LOCKED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LOG_SEQ_DONT_LOCKED" class="nav-sub-label">OPRT_LOG_SEQ_DONT_LOCKED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LOCAL_LINK_IGNORE" class="nav-sub-label">OPRT_LOCAL_LINK_IGNORE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LOCAL_LINK_CONTINUE" class="nav-sub-label">OPRT_LOCAL_LINK_CONTINUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_IMG_PROC_IMG_TYPE" class="nav-sub-label">OPRT_IMG_PROC_IMG_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_IMG_PROC_IMG_SIZE" class="nav-sub-label">OPRT_IMG_PROC_IMG_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_IMG_PROC_PTR_NULL" class="nav-sub-label">OPRT_IMG_PROC_PTR_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_IMG_PROC_ARRAY_SIZE" class="nav-sub-label">OPRT_IMG_PROC_ARRAY_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_IMG_PROC_SCALE_SIZE" class="nav-sub-label">OPRT_IMG_PROC_SCALE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_IMG_PROC_PARA_ERROR" class="nav-sub-label">OPRT_IMG_PROC_PARA_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_EVENT_STATUS_INVALID" class="nav-sub-label">OPRT_EVENT_STATUS_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_ENCRYPT_KEY_UPDATED" class="nav-sub-label">OPRT_ENCRYPT_KEY_UPDATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_ORDER_EXPIRE" class="nav-sub-label">OPRT_ORDER_EXPIRE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NO_MORE_DATA" class="nav-sub-label">OPRT_NO_MORE_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CLOUD_STORAGE_OFF" class="nav-sub-label">OPRT_CLOUD_STORAGE_OFF</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CLOUD_STORAGE_STATUS_INVALID" class="nav-sub-label">OPRT_CLOUD_STORAGE_STATUS_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_REMOTE_API_RUN_UNKNOW_FAILED" class="nav-sub-label">OPRT_REMOTE_API_RUN_UNKNOW_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEVICE_REMOVED" class="nav-sub-label">OPRT_DEVICE_REMOVED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SIGNATURE_ERROR" class="nav-sub-label">OPRT_SIGNATURE_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEVICE_NOT_WRONG" class="nav-sub-label">OPRT_DEVICE_NOT_WRONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WORK_NUM_EXIST" class="nav-sub-label">OPRT_WORK_NUM_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SERVER_NOT_CONNECTED" class="nav-sub-label">OPRT_SERVER_NOT_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_AUTH_FAIL" class="nav-sub-label">OPRT_AUTH_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LOCAL_AI_FACE_NOT_INIT" class="nav-sub-label">OPRT_LOCAL_AI_FACE_NOT_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_LOCAL_AI_FACE_DB_ERROR" class="nav-sub-label">OPRT_LOCAL_AI_FACE_DB_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_UPLOAD_INTERRUPT_ERROR" class="nav-sub-label">OPRT_UPLOAD_INTERRUPT_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_DEVICE_IS_SUB_NODE_OR_IN_ELECTION" class="nav-sub-label">OPRT_DEVICE_IS_SUB_NODE_OR_IN_ELECTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WARN_LIVING_CHROMECAST" class="nav-sub-label">OPRT_WARN_LIVING_CHROMECAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_WARN_LIVING_ECHOSHOW" class="nav-sub-label">OPRT_WARN_LIVING_ECHOSHOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INFO_QUIT_CHROMECAST" class="nav-sub-label">OPRT_INFO_QUIT_CHROMECAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INFO_QUIT_ECHOSHOW" class="nav-sub-label">OPRT_INFO_QUIT_ECHOSHOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_DEF_ERR" class="nav-sub-label">MQTT_DEF_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_INVALID_PARM" class="nav-sub-label">MQTT_INVALID_PARM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_MALLOC_FAILED" class="nav-sub-label">MQTT_MALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_DNS_PARSED_FAILED" class="nav-sub-label">MQTT_DNS_PARSED_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_SOCK_CREAT_FAILED" class="nav-sub-label">MQTT_SOCK_CREAT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_SOCK_CET_FAILED" class="nav-sub-label">MQTT_SOCK_CET_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_TCP_CONNECD_FAILED" class="nav-sub-label">MQTT_TCP_CONNECD_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_TCP_TLS_CONNECD_FAILED" class="nav-sub-label">MQTT_TCP_TLS_CONNECD_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_PACK_SEND_FAILED" class="nav-sub-label">MQTT_PACK_SEND_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_RECV_DATA_FORMAT_WRONG" class="nav-sub-label">MQTT_RECV_DATA_FORMAT_WRONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_RECV_DATA_MSGID_NOT_MATCH" class="nav-sub-label">MQTT_RECV_DATA_MSGID_NOT_MATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_START_TM_MSG_ERR" class="nav-sub-label">MQTT_START_TM_MSG_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_OVER_MAX_MESSAGE_LEN" class="nav-sub-label">MQTT_OVER_MAX_MESSAGE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQTT_PING_SEND_ERR" class="nav-sub-label">MQTT_PING_SEND_ERR</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_error_code.h"><span>tuya_error_code.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_error_code.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_error_code.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_CLOUD_ERROR_CODE_H">Marco <span>TUYA_CLOUD_ERROR_CODE_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CLOUD_ERROR_CODE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INIT_MUTEX_ATTR_FAILED">Marco <span>OPRT_INIT_MUTEX_ATTR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INIT_MUTEX_ATTR_FAILED        (-101)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SET_MUTEX_ATTR_FAILED">Marco <span>OPRT_SET_MUTEX_ATTR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SET_MUTEX_ATTR_FAILED         (-102)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DESTROY_MUTEX_ATTR_FAILED">Marco <span>OPRT_DESTROY_MUTEX_ATTR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DESTROY_MUTEX_ATTR_FAILED     (-103)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INIT_MUTEX_FAILED">Marco <span>OPRT_INIT_MUTEX_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INIT_MUTEX_FAILED             (-104)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MUTEX_LOCK_FAILED">Marco <span>OPRT_MUTEX_LOCK_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MUTEX_LOCK_FAILED             (-105)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MUTEX_TRYLOCK_FAILED">Marco <span>OPRT_MUTEX_TRYLOCK_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MUTEX_TRYLOCK_FAILED          (-106)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MUTEX_LOCK_BUSY">Marco <span>OPRT_MUTEX_LOCK_BUSY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MUTEX_LOCK_BUSY               (-107)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MUTEX_UNLOCK_FAILED">Marco <span>OPRT_MUTEX_UNLOCK_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MUTEX_UNLOCK_FAILED           (-108)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MUTEX_RELEASE_FAILED">Marco <span>OPRT_MUTEX_RELEASE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MUTEX_RELEASE_FAILED          (-109)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MEM_PARTITION_EMPTY">Marco <span>OPRT_MEM_PARTITION_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MEM_PARTITION_EMPTY           (-111)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_CR_MUTEX_ERR                   (-110)</pre>
+
+      <h4 id="OPRT_MEM_PARTITION_FULL">Marco <span>OPRT_MEM_PARTITION_FULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MEM_PARTITION_FULL            (-112)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MEM_PARTITION_NOT_FOUND">Marco <span>OPRT_MEM_PARTITION_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MEM_PARTITION_NOT_FOUND       (-113)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DONOT_FOUND_MODULE">Marco <span>OPRT_DONOT_FOUND_MODULE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DONOT_FOUND_MODULE            (-114)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INIT_SEM_FAILED">Marco <span>OPRT_INIT_SEM_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INIT_SEM_FAILED               (-201)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WAIT_SEM_FAILED">Marco <span>OPRT_WAIT_SEM_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WAIT_SEM_FAILED               (-202)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_POST_SEM_FAILED">Marco <span>OPRT_POST_SEM_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_POST_SEM_FAILED               (-203)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_THRD_STA_UNVALID">Marco <span>OPRT_THRD_STA_UNVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_THRD_STA_UNVALID              (-301)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_THRD_CR_FAILED">Marco <span>OPRT_THRD_CR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_THRD_CR_FAILED                (-302)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_THRD_JOIN_FAILED">Marco <span>OPRT_THRD_JOIN_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_THRD_JOIN_FAILED              (-303)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_THRD_SELF_CAN_NOT_JOIN">Marco <span>OPRT_THRD_SELF_CAN_NOT_JOIN</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_THRD_SELF_CAN_NOT_JOIN        (-304)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_TIMERID_EXIST">Marco <span>OPRT_TIMERID_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_TIMERID_EXIST                 (-401)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_TIMERID_NOT_FOUND">Marco <span>OPRT_TIMERID_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_TIMERID_NOT_FOUND             (-402)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_TIMERID_UNVALID">Marco <span>OPRT_TIMERID_UNVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_TIMERID_UNVALID               (-403)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_GET_IDLE_TIMERID_ERROR">Marco <span>OPRT_GET_IDLE_TIMERID_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_GET_IDLE_TIMERID_ERROR        (-404)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MSG_NOT_FOUND">Marco <span>OPRT_MSG_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MSG_NOT_FOUND                 (-501)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MSG_LIST_EMPTY">Marco <span>OPRT_MSG_LIST_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MSG_LIST_EMPTY                (-502)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WIFI_SCAN_FAIL">Marco <span>OPRT_WIFI_SCAN_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WIFI_SCAN_FAIL                (-601)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_MAC_SET_FAIL">Marco <span>OPRT_WF_MAC_SET_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_MAC_SET_FAIL               (-602)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_CONN_FAIL">Marco <span>OPRT_WF_CONN_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_CONN_FAIL                  (-603)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_NW_CFG_FAIL">Marco <span>OPRT_WF_NW_CFG_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_NW_CFG_FAIL                (-604)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_AP_SACN_FAIL">Marco <span>OPRT_WF_AP_SACN_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_AP_SACN_FAIL               (-605)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_NOT_FIND_ASS_AP">Marco <span>OPRT_WF_NOT_FIND_ASS_AP</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_NOT_FIND_ASS_AP            (-606)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DISCONNECTED_WITH_ROUTER">Marco <span>OPRT_DISCONNECTED_WITH_ROUTER</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DISCONNECTED_WITH_ROUTER      (-607)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BUF_NOT_ENOUGH">Marco <span>OPRT_BUF_NOT_ENOUGH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BUF_NOT_ENOUGH                (-704)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_SOCK_CONN_ERR                  (-703)</pre>
+
+      <h4 id="OPRT_URL_PARAM_OUT_LIMIT">Marco <span>OPRT_URL_PARAM_OUT_LIMIT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_URL_PARAM_OUT_LIMIT           (-705)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_OS_ERROR">Marco <span>OPRT_HTTP_OS_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_OS_ERROR                 (-706)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_PR_REQ_ERROR">Marco <span>OPRT_HTTP_PR_REQ_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_PR_REQ_ERROR             (-707)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_SD_REQ_ERROR">Marco <span>OPRT_HTTP_SD_REQ_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_SD_REQ_ERROR             (-708)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_RD_ERROR">Marco <span>OPRT_HTTP_RD_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_RD_ERROR                 (-709)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_AD_HD_ERROR">Marco <span>OPRT_HTTP_AD_HD_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_AD_HD_ERROR              (-710)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_GET_RESP_ERROR">Marco <span>OPRT_HTTP_GET_RESP_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_GET_RESP_ERROR           (-711)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_AES_INIT_ERR">Marco <span>OPRT_HTTP_AES_INIT_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_AES_INIT_ERR             (-712)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_AES_OPEN_ERR">Marco <span>OPRT_HTTP_AES_OPEN_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_AES_OPEN_ERR             (-713)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_AES_SET_KEY_ERR">Marco <span>OPRT_HTTP_AES_SET_KEY_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_AES_SET_KEY_ERR          (-714)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_AES_ENCRYPT_ERR">Marco <span>OPRT_HTTP_AES_ENCRYPT_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_AES_ENCRYPT_ERR          (-715)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CR_HTTP_URL_H_ERR">Marco <span>OPRT_CR_HTTP_URL_H_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CR_HTTP_URL_H_ERR             (-716)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTPS_HANDLE_FAIL">Marco <span>OPRT_HTTPS_HANDLE_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTPS_HANDLE_FAIL             (-717)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTPS_RESP_UNVALID">Marco <span>OPRT_HTTPS_RESP_UNVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTPS_RESP_UNVALID            (-718)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTPS_NO_SUPPORT_RANGE">Marco <span>OPRT_HTTPS_NO_SUPPORT_RANGE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTPS_NO_SUPPORT_RANGE        (-719)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTPS_NOT_ENCRYPT_RET">Marco <span>OPRT_HTTPS_NOT_ENCRYPT_RET</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTPS_NOT_ENCRYPT_RET         (-720)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_FILL_URL_H_ERR">Marco <span>OPRT_HTTP_FILL_URL_H_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_FILL_URL_H_ERR           (-721)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_FILL_URL_FULL_ERR">Marco <span>OPRT_HTTP_FILL_URL_FULL_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_FILL_URL_FULL_ERR        (-722)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_FILL_DATA_ERR">Marco <span>OPRT_HTTP_FILL_DATA_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_FILL_DATA_ERR            (-723)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_URL_CFG_AI_SPEAKER_ERR">Marco <span>OPRT_HTTP_URL_CFG_AI_SPEAKER_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_URL_CFG_AI_SPEAKER_ERR   (-724)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_URL_CFG_URL_ERR">Marco <span>OPRT_HTTP_URL_CFG_URL_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_URL_CFG_URL_ERR          (-725)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_URL_CFG_URL2IP_ERR">Marco <span>OPRT_HTTP_URL_CFG_URL2IP_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_URL_CFG_URL2IP_ERR       (-726)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_URL_CFG_URL2IP_SELF_ERR">Marco <span>OPRT_HTTP_URL_CFG_URL2IP_SELF_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_URL_CFG_URL2IP_SELF_ERR  (-727)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_HTTP_URL_CFG_URL2IP_PSK_ERR">Marco <span>OPRT_HTTP_URL_CFG_URL2IP_PSK_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_HTTP_URL_CFG_URL2IP_PSK_ERR   (-728)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DP_ATTR_ILLEGAL">Marco <span>OPRT_DP_ATTR_ILLEGAL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DP_ATTR_ILLEGAL               (-902)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_NOT_FOUND                      (-901)</pre>
+
+      <h4 id="OPRT_DP_TYPE_PROP_ILLEGAL">Marco <span>OPRT_DP_TYPE_PROP_ILLEGAL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DP_TYPE_PROP_ILLEGAL          (-903)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DP_REPORT_CLOUD_ERR">Marco <span>OPRT_DP_REPORT_CLOUD_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DP_REPORT_CLOUD_ERR           (-904)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NO_NEED_SET_PRODINFO">Marco <span>OPRT_NO_NEED_SET_PRODINFO</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NO_NEED_SET_PRODINFO          (-905)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NW_INVALID">Marco <span>OPRT_NW_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NW_INVALID                    (-906)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SELECT_ERR">Marco <span>OPRT_SELECT_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SELECT_ERR                    (-907)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SELECT_TM">Marco <span>OPRT_SELECT_TM</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SELECT_TM                     (-908)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEV_NOT_BIND">Marco <span>OPRT_DEV_NOT_BIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEV_NOT_BIND                  (-910)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_SEND_ERR                       (-909)</pre>
+
+      <h4 id="OPRT_FW_UG_FAILED">Marco <span>OPRT_FW_UG_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_FW_UG_FAILED                  (-911)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_VER_FMT_ERR">Marco <span>OPRT_VER_FMT_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_VER_FMT_ERR                   (-912)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_FW_NOT_EXIST">Marco <span>OPRT_FW_NOT_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_FW_NOT_EXIST                  (-913)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SEM_CR_ERR">Marco <span>OPRT_SEM_CR_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SEM_CR_ERR                    (-914)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SELECT_TIMEOUT">Marco <span>OPRT_SELECT_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SELECT_TIMEOUT                (-915)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_GW_MQ_OFFLILNE">Marco <span>OPRT_GW_MQ_OFFLILNE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_GW_MQ_OFFLILNE                (-916)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NOT_SPT_CLX_DP">Marco <span>OPRT_NOT_SPT_CLX_DP</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NOT_SPT_CLX_DP                (-917)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_UG_PKG_NOT_ENOUGH">Marco <span>OPRT_UG_PKG_NOT_ENOUGH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_UG_PKG_NOT_ENOUGH             (-919)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_RECV_ERR                       (-918)</pre>
+
+      <h4 id="OPRT_SCMA_INVALID">Marco <span>OPRT_SCMA_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SCMA_INVALID                  (-920)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_PRODECT_KEY_NULL">Marco <span>OPRT_PRODECT_KEY_NULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_PRODECT_KEY_NULL              (-921)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEVICE_VER_NULL">Marco <span>OPRT_DEVICE_VER_NULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEVICE_VER_NULL               (-922)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MSG_OUT_OF_LMT">Marco <span>OPRT_MSG_OUT_OF_LMT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MSG_OUT_OF_LMT                (-923)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NOT_FOUND_AUTH_SSID">Marco <span>OPRT_NOT_FOUND_AUTH_SSID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NOT_FOUND_AUTH_SSID           (-924)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SOCKET_FAULT">Marco <span>OPRT_SOCKET_FAULT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SOCKET_FAULT                  (-925)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MQ_PUBLISH_TIMEOUT">Marco <span>OPRT_MQ_PUBLISH_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MQ_PUBLISH_TIMEOUT            (-926)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_GW_NOT_EXIST">Marco <span>OPRT_GW_NOT_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_GW_NOT_EXIST                  (-927)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_GW_SCHEMA_SIZE_LMT_OUT">Marco <span>OPRT_GW_SCHEMA_SIZE_LMT_OUT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_GW_SCHEMA_SIZE_LMT_OUT        (-928)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEV_DP_CNT_INVALID">Marco <span>OPRT_DEV_DP_CNT_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEV_DP_CNT_INVALID            (-929)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_TOKEN_OVERTIME">Marco <span>OPRT_TOKEN_OVERTIME</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_TOKEN_OVERTIME                (-930)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_NW_CFG_RECV_CONTINUE">Marco <span>OPRT_WF_NW_CFG_RECV_CONTINUE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_NW_CFG_RECV_CONTINUE       (-931)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SERV_VRFY_FAIL">Marco <span>OPRT_SERV_VRFY_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SERV_VRFY_FAIL                (-933)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_RECV_DA_NOT_ENOUGH             (-932)</pre>
+
+      <h4 id="OPRT_NO_AUTHENTICATION">Marco <span>OPRT_NO_AUTHENTICATION</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NO_AUTHENTICATION             (-936)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_KVS_RD_FAIL                    (-935)</pre>
+
+      <h4 id="OPRT_CMD_OUT_OF_TIME_NOT_EXEC">Marco <span>OPRT_CMD_OUT_OF_TIME_NOT_EXEC</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CMD_OUT_OF_TIME_NOT_EXEC      (-937)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CMD_NOT_EXEC">Marco <span>OPRT_CMD_NOT_EXEC</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CMD_NOT_EXEC                  (-938)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LAN_NO_CLIENT">Marco <span>OPRT_LAN_NO_CLIENT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LAN_NO_CLIENT                 (-940)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_CRC32_FAILED                   (-939)</pre>
+
+      <h4 id="OPRT_WF_INTF_LACK_REG_CB">Marco <span>OPRT_WF_INTF_LACK_REG_CB</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_INTF_LACK_REG_CB           (-941)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WF_INTF_NO_REG_CB">Marco <span>OPRT_WF_INTF_NO_REG_CB</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WF_INTF_NO_REG_CB             (-942)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_STORAGE_UPLOAD">Marco <span>OPRT_STORAGE_UPLOAD</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_STORAGE_UPLOAD                (-943)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DP_ID_NOT_FOUND">Marco <span>OPRT_DP_ID_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DP_ID_NOT_FOUND               (-944)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DP_TP_NOT_MATCH">Marco <span>OPRT_DP_TP_NOT_MATCH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DP_TP_NOT_MATCH               (-945)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEV_NEED_REGISTER">Marco <span>OPRT_DEV_NEED_REGISTER</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEV_NEED_REGISTER             (-946)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEV_RESET_FACTORY">Marco <span>OPRT_DEV_RESET_FACTORY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEV_RESET_FACTORY             (-947)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_API_VERSION_WRONG">Marco <span>OPRT_API_VERSION_WRONG</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_API_VERSION_WRONG             (-948)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEV_ALREADY_BIND">Marco <span>OPRT_DEV_ALREADY_BIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEV_ALREADY_BIND              (-949)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_API_DECODE_FAILED">Marco <span>OPRT_API_DECODE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_API_DECODE_FAILED             (-950)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_API_TOKEN_EXPIRE">Marco <span>OPRT_API_TOKEN_EXPIRE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_API_TOKEN_EXPIRE              (-951)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NOT_EXISTS">Marco <span>OPRT_NOT_EXISTS</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NOT_EXISTS                    (-952)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DP_ALREADY_PROCESS">Marco <span>OPRT_DP_ALREADY_PROCESS</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DP_ALREADY_PROCESS            (-953)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_API_VERIFY_FAILED">Marco <span>OPRT_API_VERIFY_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_API_VERIFY_FAILED             (-954)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_FILE_IS_FULL">Marco <span>OPRT_FILE_IS_FULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_FILE_IS_FULL                  (-999)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WRITE_FILE_FAILED">Marco <span>OPRT_WRITE_FILE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WRITE_FILE_FAILED             (-1000)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_OPEN_FILE_FAILED">Marco <span>OPRT_OPEN_FILE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_OPEN_FILE_FAILED              (-1001)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_PRINT_LOG_LEVEL_HIGHER">Marco <span>OPRT_PRINT_LOG_LEVEL_HIGHER</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_PRINT_LOG_LEVEL_HIGHER        (-1002)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_FORMAT_STRING_FAILED">Marco <span>OPRT_FORMAT_STRING_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_FORMAT_STRING_FAILED          (-1003)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_STRING_TOO_LONG">Marco <span>OPRT_STRING_TOO_LONG</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_STRING_TOO_LONG               (-1004)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WR_FLASH_ERROR">Marco <span>OPRT_WR_FLASH_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WR_FLASH_ERROR                (-1005)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_ROUTER_NOT_FIND">Marco <span>OPRT_ROUTER_NOT_FIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_ROUTER_NOT_FIND               (-1006)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SECURITY_VERIFY_NOT_OK">Marco <span>OPRT_SECURITY_VERIFY_NOT_OK</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SECURITY_VERIFY_NOT_OK        (-1008)
+</code></pre>
+      <pre class="doc-comment">//#define OPRT_EXCEED_UPPER_LIMIT             (-1007)</pre>
+
+      <h4 id="OPRT_FLASH_NOT_ENOUGH_PAGE">Marco <span>OPRT_FLASH_NOT_ENOUGH_PAGE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_FLASH_NOT_ENOUGH_PAGE         (-1009)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_ERASE_FLASH_ERROR">Marco <span>OPRT_ERASE_FLASH_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_ERASE_FLASH_ERROR             (-1088) // check the return value by custom
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_OSS_OPERATION_INIT_FAILED">Marco <span>OPRT_OSS_OPERATION_INIT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_OSS_OPERATION_INIT_FAILED     (-1100)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_OSS_OPERATION_UPDATE_FAILED">Marco <span>OPRT_OSS_OPERATION_UPDATE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_OSS_OPERATION_UPDATE_FAILED   (-1101)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_OSS_OPERATION_UPLOAD_FAILED">Marco <span>OPRT_OSS_OPERATION_UPLOAD_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_OSS_OPERATION_UPLOAD_FAILED   (-1102)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MOTION_DETECTION_ALARM_PACK_REPORT_FAILED">Marco <span>OPRT_MOTION_DETECTION_ALARM_PACK_REPORT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MOTION_DETECTION_ALARM_PACK_REPORT_FAILED     (-1103)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_TRANSFER_INIT_FAILED">Marco <span>OPRT_TRANSFER_INIT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_TRANSFER_INIT_FAILED          (-1104)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LOG_SEQ_LOCKED">Marco <span>OPRT_LOG_SEQ_LOCKED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LOG_SEQ_LOCKED                (-1200)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LOG_SEQ_DONT_LOCKED">Marco <span>OPRT_LOG_SEQ_DONT_LOCKED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LOG_SEQ_DONT_LOCKED           (-1201)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LOCAL_LINK_IGNORE">Marco <span>OPRT_LOCAL_LINK_IGNORE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LOCAL_LINK_IGNORE             (-1300)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LOCAL_LINK_CONTINUE">Marco <span>OPRT_LOCAL_LINK_CONTINUE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LOCAL_LINK_CONTINUE           (-1301)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_IMG_PROC_IMG_TYPE">Marco <span>OPRT_IMG_PROC_IMG_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_IMG_PROC_IMG_TYPE             (-1201)   
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_IMG_PROC_IMG_SIZE">Marco <span>OPRT_IMG_PROC_IMG_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_IMG_PROC_IMG_SIZE             (-1202) 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_IMG_PROC_PTR_NULL">Marco <span>OPRT_IMG_PROC_PTR_NULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_IMG_PROC_PTR_NULL             (-1203)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_IMG_PROC_ARRAY_SIZE">Marco <span>OPRT_IMG_PROC_ARRAY_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_IMG_PROC_ARRAY_SIZE           (-1204) 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_IMG_PROC_SCALE_SIZE">Marco <span>OPRT_IMG_PROC_SCALE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_IMG_PROC_SCALE_SIZE           (-1205) 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_IMG_PROC_PARA_ERROR">Marco <span>OPRT_IMG_PROC_PARA_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_IMG_PROC_PARA_ERROR           (-1206)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_EVENT_STATUS_INVALID">Marco <span>OPRT_EVENT_STATUS_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_EVENT_STATUS_INVALID          (-2000)
+</code></pre>
+      <pre class="doc-comment">/* ipc related */</pre>
+
+      <h4 id="OPRT_ENCRYPT_KEY_UPDATED">Marco <span>OPRT_ENCRYPT_KEY_UPDATED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_ENCRYPT_KEY_UPDATED           (-2001)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_ORDER_EXPIRE">Marco <span>OPRT_ORDER_EXPIRE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_ORDER_EXPIRE                  (-2002)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NO_MORE_DATA">Marco <span>OPRT_NO_MORE_DATA</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NO_MORE_DATA                  (-2003)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CLOUD_STORAGE_OFF">Marco <span>OPRT_CLOUD_STORAGE_OFF</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CLOUD_STORAGE_OFF			    (-2004)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CLOUD_STORAGE_STATUS_INVALID">Marco <span>OPRT_CLOUD_STORAGE_STATUS_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CLOUD_STORAGE_STATUS_INVALID  (-2005)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_REMOTE_API_RUN_UNKNOW_FAILED">Marco <span>OPRT_REMOTE_API_RUN_UNKNOW_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_REMOTE_API_RUN_UNKNOW_FAILED  (-2006)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEVICE_REMOVED">Marco <span>OPRT_DEVICE_REMOVED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEVICE_REMOVED                (-2007)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SIGNATURE_ERROR">Marco <span>OPRT_SIGNATURE_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SIGNATURE_ERROR               (-2008)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEVICE_NOT_WRONG">Marco <span>OPRT_DEVICE_NOT_WRONG</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEVICE_NOT_WRONG              (-2009)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WORK_NUM_EXIST">Marco <span>OPRT_WORK_NUM_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WORK_NUM_EXIST                (-2010)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SERVER_NOT_CONNECTED">Marco <span>OPRT_SERVER_NOT_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SERVER_NOT_CONNECTED          (-2011)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_AUTH_FAIL">Marco <span>OPRT_AUTH_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_AUTH_FAIL                     (-2012)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LOCAL_AI_FACE_NOT_INIT">Marco <span>OPRT_LOCAL_AI_FACE_NOT_INIT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LOCAL_AI_FACE_NOT_INIT        (-2013)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_LOCAL_AI_FACE_DB_ERROR">Marco <span>OPRT_LOCAL_AI_FACE_DB_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_LOCAL_AI_FACE_DB_ERROR        (-2014)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_UPLOAD_INTERRUPT_ERROR">Marco <span>OPRT_UPLOAD_INTERRUPT_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_UPLOAD_INTERRUPT_ERROR        (-2015)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_DEVICE_IS_SUB_NODE_OR_IN_ELECTION">Marco <span>OPRT_DEVICE_IS_SUB_NODE_OR_IN_ELECTION</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_DEVICE_IS_SUB_NODE_OR_IN_ELECTION        (-2016)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WARN_LIVING_CHROMECAST">Marco <span>OPRT_WARN_LIVING_CHROMECAST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WARN_LIVING_CHROMECAST        (148)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_WARN_LIVING_ECHOSHOW">Marco <span>OPRT_WARN_LIVING_ECHOSHOW</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_WARN_LIVING_ECHOSHOW          (149)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INFO_QUIT_CHROMECAST">Marco <span>OPRT_INFO_QUIT_CHROMECAST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INFO_QUIT_CHROMECAST          (150)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INFO_QUIT_ECHOSHOW">Marco <span>OPRT_INFO_QUIT_ECHOSHOW</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INFO_QUIT_ECHOSHOW            (151)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_DEF_ERR">Marco <span>MQTT_DEF_ERR</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_DEF_ERR                       (-3000)
+</code></pre>
+      <pre class="doc-comment">//mqtt</pre>
+
+      <h4 id="MQTT_INVALID_PARM">Marco <span>MQTT_INVALID_PARM</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_INVALID_PARM                  (-3001)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_MALLOC_FAILED">Marco <span>MQTT_MALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_MALLOC_FAILED                 (-3002)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_DNS_PARSED_FAILED">Marco <span>MQTT_DNS_PARSED_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_DNS_PARSED_FAILED             (-3010)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_SOCK_CREAT_FAILED">Marco <span>MQTT_SOCK_CREAT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_SOCK_CREAT_FAILED             (-3011)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_SOCK_CET_FAILED">Marco <span>MQTT_SOCK_CET_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_SOCK_CET_FAILED               (-3012)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_TCP_CONNECD_FAILED">Marco <span>MQTT_TCP_CONNECD_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_TCP_CONNECD_FAILED            (-3013)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_TCP_TLS_CONNECD_FAILED">Marco <span>MQTT_TCP_TLS_CONNECD_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_TCP_TLS_CONNECD_FAILED        (-3014)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_PACK_SEND_FAILED">Marco <span>MQTT_PACK_SEND_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_PACK_SEND_FAILED              (-3015)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_RECV_DATA_FORMAT_WRONG">Marco <span>MQTT_RECV_DATA_FORMAT_WRONG</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_RECV_DATA_FORMAT_WRONG        (-3016)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_RECV_DATA_MSGID_NOT_MATCH">Marco <span>MQTT_RECV_DATA_MSGID_NOT_MATCH</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_RECV_DATA_MSGID_NOT_MATCH     (-3017)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_START_TM_MSG_ERR">Marco <span>MQTT_START_TM_MSG_ERR</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_START_TM_MSG_ERR              (-3018)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_OVER_MAX_MESSAGE_LEN">Marco <span>MQTT_OVER_MAX_MESSAGE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_OVER_MAX_MESSAGE_LEN          (-3019)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQTT_PING_SEND_ERR">Marco <span>MQTT_PING_SEND_ERR</span></h4>
+      <pre class="doc-declare"><code>#define MQTT_PING_SEND_ERR                 (-3020)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

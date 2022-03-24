@@ -1,0 +1,661 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver.h" class="nav-sub-label">tuya_driver.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_legacy.h" class="nav-sub-label">tuya_uart_legacy.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_UART_H__" class="nav-sub-label">__TUYA_UART_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_UART_8N1_CFG(__UART, __BAUDRATE, __BUFSZ, __FLAG)" class="nav-sub-label">TUYA_UART_8N1_CFG(__UART, __BAUDRATE, __BUFSZ, __FLAG)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_UART_8N1_CFG_INIT(__CFG, __BAUDRATE, __BUFSZ, __FLAG)" class="nav-sub-label">TUYA_UART_8N1_CFG_INIT(__CFG, __BAUDRATE, __BUFSZ, __FLAG)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_uart_int_bufsize" class="nav-sub-label">tuya_uart_int_bufsize</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_read_timeout" class="nav-sub-label">tuya_uart_read_timeout</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_uart_init" class="nav-sub-label">tuya_uart_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_read" class="nav-sub-label">tuya_uart_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_write" class="nav-sub-label">tuya_uart_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_control" class="nav-sub-label">tuya_uart_control</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_deinit" class="nav-sub-label">tuya_uart_deinit</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_uart_port_t;
+" class="nav-sub-label">tuya_uart_port_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_baudrate_t;
+" class="nav-sub-label">tuya_uart_baudrate_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_databits_t;
+" class="nav-sub-label">tuya_uart_databits_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_stopbits_t;
+" class="nav-sub-label">tuya_uart_stopbits_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_parity_t;
+" class="nav-sub-label">tuya_uart_parity_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_event_t;
+" class="nav-sub-label">tuya_uart_event_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_flowctrl_t;
+" class="nav-sub-label">tuya_uart_flowctrl_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_cfg_t;
+" class="nav-sub-label">tuya_uart_cfg_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_cmd_t;
+" class="nav-sub-label">tuya_uart_cmd_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_t" class="nav-sub-label">tuya_uart_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_isr_cb" class="nav-sub-label">tuya_uart_isr_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_cb_t;
+" class="nav-sub-label">tuya_uart_cb_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_uart_ops_t;
+" class="nav-sub-label">tuya_uart_ops_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_driver.h"><span>tuya_driver.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_driver.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_driver.h"
+</pre>
+
+      <h4 id="tuya_uart_legacy.h"><span>tuya_uart_legacy.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_uart_legacy.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_uart_legacy.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_UART_H__">Marco <span>__TUYA_UART_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_UART_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_UART_8N1_CFG(__UART, __BAUDRATE, __BUFSZ, __FLAG)">Marco <span>TUYA_UART_8N1_CFG(__UART, __BAUDRATE, __BUFSZ, __FLAG)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_UART_8N1_CFG(__UART, __BAUDRATE, __BUFSZ, __FLAG)               \
+       (__UART)->cfg.baudrate = __BAUDRATE;                                \
+       (__UART)->cfg.flag     = TUYA_DRV_INT_RX_FLAG | __FLAG;             \
+       (__UART)->cfg.bufsz    = __BUFSZ;                                   \
+       (__UART)->cfg.databits = TUYA_UART_DATA_BIT8;                       \
+       (__UART)->cfg.stopbits = TUYA_UART_STOP_BIT1;                       \
+       (__UART)->cfg.parity   = TUYA_UART_PARITY_NONE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_UART_8N1_CFG_INIT(__CFG, __BAUDRATE, __BUFSZ, __FLAG)">Marco <span>TUYA_UART_8N1_CFG_INIT(__CFG, __BAUDRATE, __BUFSZ, __FLAG)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_UART_8N1_CFG_INIT(__CFG, __BAUDRATE, __BUFSZ, __FLAG)           \
+       (__CFG)->baudrate      = __BAUDRATE;                                \
+       (__CFG)->flag          = TUYA_DRV_INT_RX_FLAG | __FLAG;             \
+       (__CFG)->bufsz         = __BUFSZ;                                   \
+       (__CFG)->databits      = TUYA_UART_DATA_BIT8;                       \
+       (__CFG)->stopbits      = TUYA_UART_STOP_BIT1;                       \
+       (__CFG)->parity        = TUYA_UART_PARITY_NONE
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_uart_int_bufsize">Func <span>tuya_uart_int_bufsize</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_int_bufsize(tuya_uart_t *uart);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart data size
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_uart_read_timeout">Func <span>tuya_uart_read_timeout</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_read_timeout(tuya_uart_t *uart, void *data, uint16_t len, uint32_t timeout);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart read with timeout
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[out] data read buf
+ * @param[in] len read length
+ * @param[in] timeout read timeout
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_uart_init">Variable <span>tuya_uart_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_init    (tuya_uart_t *uart);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart init
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_uart_read">Variable <span>tuya_uart_read</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_read    (tuya_uart_t *uart, void *data, uint16_t len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart read
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[out] data read buf
+ * @param[in] len read length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_uart_write">Variable <span>tuya_uart_write</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_write    (tuya_uart_t *uart, void *data, uint16_t len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart write
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[in] data write buf
+ * @param[in] len write length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_uart_control">Variable <span>tuya_uart_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_control  (tuya_uart_t *uart, uint8_t cmd, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart control
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ * @param[in] cmd control command
+ * @param[in] arg command argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_uart_deinit">Variable <span>tuya_uart_deinit</span></h4>
+      <pre class="doc-declare"><code>int tuya_uart_deinit   (tuya_uart_t *uart);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief uart deinit
+ * 
+ * @param[in] uart refer to tuya_uart_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_uart_port_t;
+">Typedef <span>tuya_uart_port_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART0 = 0,
+   TUYA_UART1,
+   TUYA_UART2,
+   TUYA_UART3,
+} tuya_uart_port_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_baudrate_t;
+">Typedef <span>tuya_uart_baudrate_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_BAUDRATE_300       = 300,
+   TUYA_UART_BAUDRATE_600       = 600,
+   TUYA_UART_BAUDRATE_1200      = 1200,
+   TUYA_UART_BAUDRATE_2400      = 2400,
+   TUYA_UART_BAUDRATE_4800      = 4800,
+   TUYA_UART_BAUDRATE_9600      = 9600,
+   TUYA_UART_BAUDRATE_19200     = 19200,
+   TUYA_UART_BAUDRATE_38400     = 38400,
+   TUYA_UART_BAUDRATE_57600     = 57600,
+   TUYA_UART_BAUDRATE_74880     = 74880,
+   TUYA_UART_BAUDRATE_115200    = 115200,
+   TUYA_UART_BAUDRATE_230400    = 230400,
+   TUYA_UART_BAUDRATE_460800    = 460800,
+   TUYA_UART_BAUDRATE_921600    = 921600,
+   TUYA_UART_BAUDRATE_1500000   = 1500000,
+   TUYA_UART_BAUDRATE_1843200   = 1843200,
+   TUYA_UART_BAUDRATE_3686400   = 3686400,
+} tuya_uart_baudrate_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_databits_t;
+">Typedef <span>tuya_uart_databits_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_DATA_BIT5          = 5,
+   TUYA_UART_DATA_BIT6          = 6,
+   TUYA_UART_DATA_BIT7          = 7,
+   TUYA_UART_DATA_BIT8          = 8,
+} tuya_uart_databits_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_stopbits_t;
+">Typedef <span>tuya_uart_stopbits_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_STOP_BIT1          = 1,
+   TUYA_UART_STOP_BIT1_5        = 2,
+   TUYA_UART_STOP_BIT2          = 3,
+} tuya_uart_stopbits_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_parity_t;
+">Typedef <span>tuya_uart_parity_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_PARITY_NONE        = 0,  
+   TUYA_UART_PARITY_ODD         = 1, 
+   TUYA_UART_PARITY_EVEN        = 2,  
+} tuya_uart_parity_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_event_t;
+">Typedef <span>tuya_uart_event_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_INT_TX_EVENT       = 1,  
+   TUYA_UART_INT_RX_EVENT       = 2,  
+} tuya_uart_event_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_flowctrl_t;
+">Typedef <span>tuya_uart_flowctrl_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_FLOWCTRL_NONE      = 0,
+   TUYA_UART_FLOWCTRL_ENABLE    = 1,
+} tuya_uart_flowctrl_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_cfg_t;
+">Typedef <span>tuya_uart_cfg_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   uint16_t               flag;
+   uint16_t               bufsz;
+   tuya_uart_baudrate_t   baudrate;
+   tuya_uart_databits_t   databits;
+   tuya_uart_stopbits_t   stopbits;
+   tuya_uart_parity_t     parity;
+   tuya_uart_flowctrl_t   flowctrl;
+} tuya_uart_cfg_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_cmd_t;
+">Typedef <span>tuya_uart_cmd_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_UART_RXBUF_SIZE_CMD = TUYA_DRV_CUSTOM_CMD,
+   TUYA_UART_FLUSH_CMD,
+   TUYA_UART_RECONFIG_CMD,
+} tuya_uart_cmd_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_t">Typedef <span>tuya_uart_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct tuya_uart tuya_uart_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_isr_cb">Typedef <span>tuya_uart_isr_cb</span></h4>
+      <pre class="doc-declare"><code>typedef void (*tuya_uart_isr_cb)(tuya_uart_t *uart, uint32_t event);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_cb_t;
+">Typedef <span>tuya_uart_cb_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int  (*tx_finish) (tuya_uart_t *uart, void *buffer);
+   int  (*rx_notify) (tuya_uart_t *uart, uint16_t size);
+} tuya_uart_cb_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_uart_ops_t;
+">Typedef <span>tuya_uart_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int  (*init)      (tuya_uart_t *uart, tuya_uart_cfg_t *cfg);
+   int  (*read_byte) (tuya_uart_t *uart, uint8_t *byte);
+   int  (*write_byte) (tuya_uart_t *uart, uint8_t byte);
+   int  (*control)   (tuya_uart_t *uart, uint8_t cmd, void *arg);
+   int  (*deinit)    (tuya_uart_t *uart);
+} tuya_uart_ops_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

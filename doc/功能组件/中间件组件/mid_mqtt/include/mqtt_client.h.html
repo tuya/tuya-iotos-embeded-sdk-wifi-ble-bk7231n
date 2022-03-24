@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_MQTT_CLIENT_H" class="nav-sub-label">_MQTT_CLIENT_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#create_mqtt_hand" class="nav-sub-label">create_mqtt_hand</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_update_auth" class="nav-sub-label">mqtt_update_auth</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_register_cb" class="nav-sub-label">mqtt_register_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_client_start" class="nav-sub-label">mqtt_client_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_restart" class="nav-sub-label">mqtt_restart</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_client_quit" class="nav-sub-label">mqtt_client_quit</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_mqtt_conn_stat" class="nav-sub-label">get_mqtt_conn_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#mq_disconnect" class="nav-sub-label">mq_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#release_mqtt_hand" class="nav-sub-label">release_mqtt_hand</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_close" class="nav-sub-label">mqtt_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_publish_async" class="nav-sub-label">mqtt_publish_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_get_socket_fd" class="nav-sub-label">mqtt_get_socket_fd</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_get_alive_time_s" class="nav-sub-label">mqtt_get_alive_time_s</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_book_wakeup_topic" class="nav-sub-label">mqtt_book_wakeup_topic</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_book_additional_topic" class="nav-sub-label">mqtt_book_additional_topic</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_keep_alive" class="nav-sub-label">mqtt_keep_alive</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_subscribe_multi_topics" class="nav-sub-label">mqtt_subscribe_multi_topics</a>
+              </li>
+      
+
+              <li>
+                <a href="#mqtt_unsubscribe_multi_topics" class="nav-sub-label">mqtt_unsubscribe_multi_topics</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MQ_HANDLE" class="nav-sub-label">MQ_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_DATA_RECV_CB" class="nav-sub-label">MQ_DATA_RECV_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_CLIENT_IF_S;
+" class="nav-sub-label">MQ_CLIENT_IF_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_CONNED_CB" class="nav-sub-label">MQ_CONNED_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_DISCONN_CB" class="nav-sub-label">MQ_DISCONN_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_CONN_DENY_CB" class="nav-sub-label">MQ_CONN_DENY_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_UPDATE_AUTH_CB" class="nav-sub-label">MQ_UPDATE_AUTH_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_PERMIT_CONN_CB" class="nav-sub-label">MQ_PERMIT_CONN_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_PUB_ASYNC_IFM_CB" class="nav-sub-label">MQ_PUB_ASYNC_IFM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_MSG_RECV_CB" class="nav-sub-label">MQ_MSG_RECV_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_MQTT_CLIENT_H">Marco <span>_MQTT_CLIENT_H</span></h4>
+      <pre class="doc-declare"><code>#define _MQTT_CLIENT_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="create_mqtt_hand">Func <span>create_mqtt_hand</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET create_mqtt_hand(IN CONST CHAR_T **domain_tbl,
+                            IN CONST BYTE_T domain_num,
+                            IN CONST USHORT_T serv_port,
+                            IN CONST BOOL_T enable_tls,
+                            IN CONST MQ_CLIENT_IF_S *mqc_if,
+                            IN CONST USHORT_T s_alive,
+                            IN CONST MQ_DATA_RECV_CB recv_cb,
+                            IN CONST CHAR_T **wakeup_domain_tbl,
+                            IN CONST BYTE_T wakeup_domain_num,
+                            IN CONST USHORT_T wakeup_serv_port,
+                            OUT MQ_HANDLE *hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Create MQTT client instance
+ * 
+ * @param[in] domain_tbl Domains of MQTT broker
+ * @param[in] domain_num Count of domains
+ * @param[in] serv_port Port of MQTT broker
+ * @param[in] enable_tls TLS is enabled or not
+ * @param[in] mqc_if Credentials of MQTT client
+ * @param[in] s_alive MQTT hearbeat interval(unit sec), 0 will use the default timeout(60)
+ * @param[in] recv_cb Callback when msg recved from broker
+ * @param[in] wakeup_domain_tbl Domains of MQTT lowpower broker
+ * @param[in] wakeup_domain_num Count of lowpower domains
+ * @param[in] wakeup_serv_port Port of lowpower broker
+ * @param[out] hand Handler of MQTT client
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_update_auth">Func <span>mqtt_update_auth</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_update_auth(IN CONST MQ_HANDLE hand, IN CONST CHAR_T *p_username, IN CONST CHAR_T *p_passwd);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Update crenditials of MQTT client
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] p_username Username to connect to broker
+ * @param[in] p_passwd Password to connect to broker
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_register_cb">Func <span>mqtt_register_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_register_cb(IN CONST MQ_HANDLE hand,
+                            IN CONST MQ_CONNED_CB conn_cb,
+                            IN CONST MQ_DISCONN_CB dis_conn_cb,
+                            IN CONST MQ_CONN_DENY_CB conn_deny_cb,
+                            IN CONST MQ_PERMIT_CONN_CB permit_conn_cb,
+                            IN CONST MQ_UPDATE_AUTH_CB update_auth_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Register event handers of MQTT client
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] conn_cb Hander when MQTT client is connected to broker
+ * @param[in] dis_conn_cb Hander when MQTT client is disconnected to broker
+ * @param[in] conn_deny_cb Hander when MQTT client is not permited to connect to broker
+ * @param[in] permit_conn_cb Hander to check permission when connect to broker
+ * @param[in] update_auth_cb Hander to update authentication
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_client_start">Func <span>mqtt_client_start</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_client_start(IN CONST MQ_HANDLE hand,IN CONST CHAR_T *name);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Connect to broker, MQTT client thread is created
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] name Name of MQTT thread
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_restart">Func <span>mqtt_restart</span></h4>
+      <pre class="doc-declare"><code>VOID mqtt_restart(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Restart MQTT client
+ * 
+ * @param[in] hand Handler of MQTT client
+ */</pre>
+
+      <h4 id="mqtt_client_quit">Func <span>mqtt_client_quit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_client_quit(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Disconnect MQTT client from broker, delete MQTT client thread
+ * 
+ * @param[in] hand Handler of MQTT client
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="get_mqtt_conn_stat">Func <span>get_mqtt_conn_stat</span></h4>
+      <pre class="doc-declare"><code>BOOL_T get_mqtt_conn_stat(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Whether MQTT client is connected to broker or not
+ * 
+ * @param[in] hand Handler of MQTT client
+ * 
+ * @return TRUE indicates connected to MQTT broker,
+ * FALSE indicates disconnected to MQTT broker
+ */</pre>
+
+      <h4 id="mq_disconnect">Func <span>mq_disconnect</span></h4>
+      <pre class="doc-declare"><code>VOID mq_disconnect(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Disconnect MQTT client from broker, will re-connect later
+ * 
+ * @param[in] hand Handler of MQTT client
+ */</pre>
+
+      <h4 id="release_mqtt_hand">Func <span>release_mqtt_hand</span></h4>
+      <pre class="doc-declare"><code>VOID release_mqtt_hand(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Release MQTT client
+ * 
+ * @param[in] hand Handler of MQTT client
+ *
+ * @note MQTT client shall be closed before this API invoked
+ */</pre>
+
+      <h4 id="mqtt_close">Func <span>mqtt_close</span></h4>
+      <pre class="doc-declare"><code>VOID mqtt_close(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Close MQTT client socket fd, will re-connect later
+ * 
+ * @param[in] hand Handler of MQTT client
+ */</pre>
+
+      <h4 id="mqtt_publish_async">Func <span>mqtt_publish_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_publish_async(IN CONST MQ_HANDLE hand,IN CONST CHAR_T *topic,IN CONST BYTE_T qos,
+                              IN CONST BYTE_T *data,IN CONST INT_T len,IN CONST UINT_T to_lmt,
+                              IN CONST MQ_PUB_ASYNC_IFM_CB cb,IN VOID *prv_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Publish a msg to the specific MQTT topic with QOS level and timeout handler
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] topic Topic that the msg will be published
+ * @param[in] qos QOS level
+ * @param[in] data Buffer of msg content
+ * @param[in] len Length of msg content
+ * @param[in] to_lmt Timeout(unit sec) of QOS-1 ACK, 0 for the default value(3)
+ * @param[in] cb Callback when the msg is published and ACK is recved or timeout
+ * @param[in] prv_data Private data
+ * 
+ * @note if(0 == qos) then to_lmt cb prv_data useless,
+ * if(1 == qos) then need wait respond, other qos not support.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_get_socket_fd">Func <span>mqtt_get_socket_fd</span></h4>
+      <pre class="doc-declare"><code>INT_T mqtt_get_socket_fd(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Retrieve MQTT client socket fd
+ * 
+ * @param[in] hand Handler of MQTT client
+ *
+ * @return MQTT client socket fd on success, -1 on error.
+ */</pre>
+
+      <h4 id="mqtt_get_alive_time_s">Func <span>mqtt_get_alive_time_s</span></h4>
+      <pre class="doc-declare"><code>INT_T mqtt_get_alive_time_s(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Retrieve MQTT PING interval
+ * 
+ * @param[in] hand Handler of MQTT client
+ *
+ * @return MQTT PING interval(unit sec) on success, -1 on error.
+ */</pre>
+
+      <h4 id="mqtt_book_wakeup_topic">Func <span>mqtt_book_wakeup_topic</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_book_wakeup_topic(IN CONST MQ_HANDLE hand,IN CONST CHAR_T *wakeup_topic);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe a wakeup topic for lowpower device
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] wakeup_topic Topic to subscribe
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_book_additional_topic">Func <span>mqtt_book_additional_topic</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_book_additional_topic(IN CONST MQ_HANDLE hand, IN CONST CHAR_T *topic);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe an addition topic
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] topic Topic to subscribe
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_keep_alive">Func <span>mqtt_keep_alive</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_keep_alive(IN CONST MQ_HANDLE hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Send MQTT PING msg immediately
+ * 
+ * @param[in] hand Handler of MQTT client
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_subscribe_multi_topics">Func <span>mqtt_subscribe_multi_topics</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_subscribe_multi_topics(IN CONST MQ_HANDLE hand, IN CONST CHAR_T *topics[], 
+                                       IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe multiple topics within one MQTT request
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] topics Array of topics to subscribe
+ * @param[in] cnt Count of topics to subscribe
+ * @param[in] msg_cb Callback when MQTT msgs recv. If msg_cb is NULL, 
+ * msgs will transfer to default recv_cb of MQTT client
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="mqtt_unsubscribe_multi_topics">Func <span>mqtt_unsubscribe_multi_topics</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqtt_unsubscribe_multi_topics(IN CONST MQ_HANDLE hand, IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Unsubcribe multiple topics within one MQTT request
+ * 
+ * @param[in] hand Handler of MQTT client
+ * @param[in] topics Array of topics to unsubscribe
+ * @param[in] cnt Count of topics to unsubscribe
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="MQ_HANDLE">Typedef <span>MQ_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T MQ_HANDLE; //Definition of MQTT client handler
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQ_DATA_RECV_CB">Typedef <span>MQ_DATA_RECV_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_DATA_RECV_CB)(IN BYTE_T *data,IN UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  MQTT msg is recved from broker
+ * 
+ * @param[in] data Buffer of msg
+ * @param[in] len Length os msg
+ */</pre>
+
+      <h4 id="MQ_CLIENT_IF_S;
+">Typedef <span>MQ_CLIENT_IF_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** default topic subscribed from MQTT broker */
+   CHAR_T *subcribe_topic;
+   /** client id */
+   CHAR_T *client_id;
+   /** user name */
+   CHAR_T *user_name;
+   /** password */
+   CHAR_T *passwd;
+}MQ_CLIENT_IF_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of MQTT client's credentials
+ */</pre>
+
+      <h4 id="MQ_CONNED_CB">Typedef <span>MQ_CONNED_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_CONNED_CB)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief MQTT client is connected to broker
+ */</pre>
+
+      <h4 id="MQ_DISCONN_CB">Typedef <span>MQ_DISCONN_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_DISCONN_CB)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief MQTT client is disconnected to broker
+ */</pre>
+
+      <h4 id="MQ_CONN_DENY_CB">Typedef <span>MQ_CONN_DENY_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_CONN_DENY_CB)(IN BYTE_T deny_times);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief MQTT client is not permited to connect to broker
+ * 
+ * @param[in] deny_times How many times this MQTT client is denied by broker
+ */</pre>
+
+      <h4 id="MQ_UPDATE_AUTH_CB">Typedef <span>MQ_UPDATE_AUTH_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_UPDATE_AUTH_CB)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Update authentication of MQTT client
+ */</pre>
+
+      <h4 id="MQ_PERMIT_CONN_CB">Typedef <span>MQ_PERMIT_CONN_CB</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*MQ_PERMIT_CONN_CB)(VOID);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Check permission when connect to broker
+ * 
+ * @return 1: permit to connect mqtt
+ * 0: not permit to connect mqtt, and reconnect after a random delay
+ * -1: not permit to connect mqtt, and reconnect after a short delay
+ */</pre>
+
+      <h4 id="MQ_PUB_ASYNC_IFM_CB">Typedef <span>MQ_PUB_ASYNC_IFM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_PUB_ASYNC_IFM_CB)(IN CONST OPERATE_RET op_ret,IN CONST VOID *prv_data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Async callback that indicates mqtt_publish_async success or not.
+ * 
+ * @param[in] op_ret OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ * @param[in] prv_data Private data
+ */</pre>
+
+      <h4 id="MQ_MSG_RECV_CB">Typedef <span>MQ_MSG_RECV_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*MQ_MSG_RECV_CB)(IN CONST CHAR_T *topic, IN BYTE_T *data,IN UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Callback when specific MQTT msg recv
+ * 
+ * @param[in] topic Topic that msg is recved from
+ * @param[in] data Buffer of msg content
+ * @param[in] len Length of msg content
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+    </div>
+  </body>
+</html>
+            

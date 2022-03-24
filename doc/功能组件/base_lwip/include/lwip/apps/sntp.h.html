@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/apps/sntp_opts.h" class="nav-sub-label">lwip/apps/sntp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_SNTP_H" class="nav-sub-label">LWIP_HDR_APPS_SNTP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_OPMODE_POLL" class="nav-sub-label">SNTP_OPMODE_POLL</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNTP_OPMODE_LISTENONLY" class="nav-sub-label">SNTP_OPMODE_LISTENONLY</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_servermode_dhcp" class="nav-sub-label">sntp_servermode_dhcp</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#sntp_setoperatingmode" class="nav-sub-label">sntp_setoperatingmode</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_getoperatingmode" class="nav-sub-label">sntp_getoperatingmode</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_init" class="nav-sub-label">sntp_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_stop" class="nav-sub-label">sntp_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_enabled" class="nav-sub-label">sntp_enabled</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_setserver" class="nav-sub-label">sntp_setserver</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_getreachability" class="nav-sub-label">sntp_getreachability</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_setservername" class="nav-sub-label">sntp_setservername</a>
+              </li>
+      
+
+              <li>
+                <a href="#sntp_servermode_dhcp" class="nav-sub-label">sntp_servermode_dhcp</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/apps/sntp_opts.h"><span>lwip/apps/sntp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/apps/sntp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/apps/sntp_opts.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_SNTP_H">Marco <span>LWIP_HDR_APPS_SNTP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_SNTP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNTP_OPMODE_POLL">Marco <span>SNTP_OPMODE_POLL</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_OPMODE_POLL           0
+</code></pre>
+      <pre class="doc-comment">/* SNTP operating modes: default is to poll using unicast.
+   The mode has to be set before calling sntp_init(). */</pre>
+
+      <h4 id="SNTP_OPMODE_LISTENONLY">Marco <span>SNTP_OPMODE_LISTENONLY</span></h4>
+      <pre class="doc-declare"><code>#define SNTP_OPMODE_LISTENONLY     1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_servermode_dhcp">Marco <span>sntp_servermode_dhcp</span></h4>
+      <pre class="doc-declare"><code>#define sntp_servermode_dhcp(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="sntp_setoperatingmode">Func <span>sntp_setoperatingmode</span></h4>
+      <pre class="doc-declare"><code>void sntp_setoperatingmode(u8_t operating_mode);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_getoperatingmode">Func <span>sntp_getoperatingmode</span></h4>
+      <pre class="doc-declare"><code>u8_t sntp_getoperatingmode(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_init">Func <span>sntp_init</span></h4>
+      <pre class="doc-declare"><code>void sntp_init(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_stop">Func <span>sntp_stop</span></h4>
+      <pre class="doc-declare"><code>void sntp_stop(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_enabled">Func <span>sntp_enabled</span></h4>
+      <pre class="doc-declare"><code>u8_t sntp_enabled(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_setserver">Func <span>sntp_setserver</span></h4>
+      <pre class="doc-declare"><code>void sntp_setserver(u8_t idx, const ip_addr_t *addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_getreachability">Func <span>sntp_getreachability</span></h4>
+      <pre class="doc-declare"><code>u8_t sntp_getreachability(u8_t idx);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_setservername">Func <span>sntp_setservername</span></h4>
+      <pre class="doc-declare"><code>void sntp_setservername(u8_t idx, const char *server);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="sntp_servermode_dhcp">Func <span>sntp_servermode_dhcp</span></h4>
+      <pre class="doc-declare"><code>void sntp_servermode_dhcp(int set_servers_from_dhcp);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const ip_addr_t* sntp_getserver(u8_t idx);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char *sntp_getservername(u8_t idx);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

@@ -1,10 +1,12 @@
 /**
- * @file tuya_hal_ota.h
- * @brief ota底层操作接口
- * 
- * @copyright Copyright (c) {2018-2020} 涂鸦科技 www.tuya.com
- * 
- */
+* @file tuya_hal_ota.h
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef _TUYA_HAL_OTA_H_
 #define _TUYA_HAL_OTA_H_
 #include <stdint.h>
@@ -15,40 +17,55 @@ extern "C" {
 #endif
 
 /**
- * @brief 升级开始通知函数
- * 
- * @param file_size 升级固件大小
- * @param type 升级类型，串口升级还是OTA
- * 
- * @retval  =0      成功
- * @retval  <0      错误码
- */
+* @brief Start upgrade notification
+*
+* @param[in] file_size: file size
+* @param[in] type: ota type
+*
+* @note This API is used for starting upgrade notification
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/
 int tuya_hal_ota_start_inform(unsigned int file_size, OTA_TYPE type);
 
 /**
- * @brief ota数据包处理
- * 
- * @param total_len ota升级包总大小
- * @param offset 当前data在升级包中的偏移
- * @param data ota数据buffer指针
- * @param len ota数据buffer长度
- * @param remain_len [out] 内部已经下发但该函数还未处理的数据长度
- * @param pri_data 保留参数
- *
- * @retval  =0      成功
- * @retval  <0      错误码
- */
+* @brief Ota data packet processing
+*
+* @param[in] total_len: total lenth of upgrade package
+* @param[in] offset: offset of current data in upgrade package
+* @param[in] data: ota data
+* @param[in] len: ota data length
+* @param[out] remain_len: the length of data that has been distributed internally but not yet processed
+* @param[in] pri_data: reserved data
+*
+* @note This API is used for ota data packet processing
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/
 int tuya_hal_ota_data_process(const unsigned int total_len, const unsigned int offset,
                               const unsigned char* data, const unsigned int len, unsigned int* remain_len, void* pri_data);
 
 /**
- * @brief 固件ota数据传输完毕通知
- *        用户可以做固件校验以及设备重启
- * param[in]        reset       是否需要重启
- * @retval  =0      成功
- * @retval  <0      错误码
- */
+* @brief Ota data transfer completion notification
+*
+* @param[in] reset: if need reset or not
+*
+* @note This API is used for ota data transfer completion notification
+* users can do firmware verification and device restart
+*
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/
 int tuya_hal_ota_end_inform(bool reset);
+
+/**
+ * @brief Ota interface initialization
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialization of ota interface.
+ *
+ * @return VOID
+ */
 VOID_T tuya_os_ota_intf_init(VOID_T);
 
 #ifdef __cplusplus

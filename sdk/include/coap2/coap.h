@@ -35,6 +35,8 @@ extern "C" {
 #include <netinet/in.h>
 #endif
 
+#include <unistd.h>
+
 #include "libcoap.h"
 
 #include "address.h"

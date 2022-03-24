@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/tcpip.h" class="nav-sub-label">lwip/tcpip.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/sys.h" class="nav-sub-label">lwip/sys.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/timeouts.h" class="nav-sub-label">lwip/timeouts.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_TCPIP_PRIV_H" class="nav-sub-label">LWIP_HDR_TCPIP_PRIV_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_REF(name)" class="nav-sub-label">API_VAR_REF(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_DECLARE(type, name)" class="nav-sub-label">API_VAR_DECLARE(type, name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_ALLOC_EXT(type, pool, name, errorblock)" class="nav-sub-label">API_VAR_ALLOC_EXT(type, pool, name, errorblock)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_ALLOC(type, pool, name, errorval)" class="nav-sub-label">API_VAR_ALLOC(type, pool, name, errorval)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_ALLOC_POOL(type, pool, name, errorval)" class="nav-sub-label">API_VAR_ALLOC_POOL(type, pool, name, errorval)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_FREE(pool, name)" class="nav-sub-label">API_VAR_FREE(pool, name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_FREE_POOL(pool, name)" class="nav-sub-label">API_VAR_FREE_POOL(pool, name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_REF(expr)" class="nav-sub-label">API_EXPR_REF(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_REF_SEM(expr)" class="nav-sub-label">API_EXPR_REF_SEM(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_REF_SEM(expr)" class="nav-sub-label">API_EXPR_REF_SEM(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_DEREF(expr)" class="nav-sub-label">API_EXPR_DEREF(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_MSG_M_DEF(m)" class="nav-sub-label">API_MSG_M_DEF(m)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_MSG_M_DEF_C(t, m)" class="nav-sub-label">API_MSG_M_DEF_C(t, m)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_REF(name)" class="nav-sub-label">API_VAR_REF(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_DECLARE(type, name)" class="nav-sub-label">API_VAR_DECLARE(type, name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_ALLOC_EXT" class="nav-sub-label">API_VAR_ALLOC_EXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_ALLOC" class="nav-sub-label">API_VAR_ALLOC</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_ALLOC_POOL" class="nav-sub-label">API_VAR_ALLOC_POOL</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_FREE" class="nav-sub-label">API_VAR_FREE</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_VAR_FREE_POOL" class="nav-sub-label">API_VAR_FREE_POOL</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_REF(expr)" class="nav-sub-label">API_EXPR_REF(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_REF_SEM(expr)" class="nav-sub-label">API_EXPR_REF_SEM(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_EXPR_DEREF(expr)" class="nav-sub-label">API_EXPR_DEREF(expr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_MSG_M_DEF(m)" class="nav-sub-label">API_MSG_M_DEF(m)</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_MSG_M_DEF_C(t, m)" class="nav-sub-label">API_MSG_M_DEF_C(t, m)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tcpip_send_msg_wait_sem" class="nav-sub-label">tcpip_send_msg_wait_sem</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcpip_api_call" class="nav-sub-label">tcpip_api_call</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif" class="nav-sub-label">netif</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tcpip_api_call_fn" class="nav-sub-label">tcpip_api_call_fn</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/tcpip.h"><span>lwip/tcpip.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/tcpip.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/tcpip.h"
+</pre>
+
+      <h4 id="lwip/sys.h"><span>lwip/sys.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/sys.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/sys.h"
+</pre>
+
+      <h4 id="lwip/timeouts.h"><span>lwip/timeouts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/timeouts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/timeouts.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_TCPIP_PRIV_H">Marco <span>LWIP_HDR_TCPIP_PRIV_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_TCPIP_PRIV_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_REF(name)">Marco <span>API_VAR_REF(name)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_REF(name)              (*(name))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_DECLARE(type, name)">Marco <span>API_VAR_DECLARE(type, name)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_DECLARE(type, name)    type * name
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_ALLOC_EXT(type, pool, name, errorblock)">Marco <span>API_VAR_ALLOC_EXT(type, pool, name, errorblock)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_ALLOC_EXT(type, pool, name, errorblock) do { \
+                                         name = (type *)memp_malloc(pool); \
+                                         if (name == NULL) { \
+                                           errorblock; \
+                                         } \
+                                       } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_ALLOC(type, pool, name, errorval)">Marco <span>API_VAR_ALLOC(type, pool, name, errorval)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_ALLOC(type, pool, name, errorval) API_VAR_ALLOC_EXT(type, pool, name, return errorval)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_ALLOC_POOL(type, pool, name, errorval)">Marco <span>API_VAR_ALLOC_POOL(type, pool, name, errorval)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_ALLOC_POOL(type, pool, name, errorval) do { \
+                                         name = (type *)LWIP_MEMPOOL_ALLOC(pool); \
+                                         if (name == NULL) { \
+                                           return errorval; \
+                                         } \
+                                       } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_FREE(pool, name)">Marco <span>API_VAR_FREE(pool, name)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_FREE(pool, name)       memp_free(pool, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_FREE_POOL(pool, name)">Marco <span>API_VAR_FREE_POOL(pool, name)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_FREE_POOL(pool, name)  LWIP_MEMPOOL_FREE(pool, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_REF(expr)">Marco <span>API_EXPR_REF(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_REF(expr)             (&(expr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_REF_SEM(expr)">Marco <span>API_EXPR_REF_SEM(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_REF_SEM(expr)         (expr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_REF_SEM(expr)">Marco <span>API_EXPR_REF_SEM(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_REF_SEM(expr)         API_EXPR_REF(expr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_DEREF(expr)">Marco <span>API_EXPR_DEREF(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_DEREF(expr)           expr
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_MSG_M_DEF(m)">Marco <span>API_MSG_M_DEF(m)</span></h4>
+      <pre class="doc-declare"><code>#define API_MSG_M_DEF(m)               m
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_MSG_M_DEF_C(t, m)">Marco <span>API_MSG_M_DEF_C(t, m)</span></h4>
+      <pre class="doc-declare"><code>#define API_MSG_M_DEF_C(t, m)          t m
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_REF(name)">Marco <span>API_VAR_REF(name)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_REF(name)              name
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_DECLARE(type, name)">Marco <span>API_VAR_DECLARE(type, name)</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_DECLARE(type, name)    type name
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_ALLOC_EXT">Marco <span>API_VAR_ALLOC_EXT</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_ALLOC_EXT(type, pool, name, errorblock)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_ALLOC">Marco <span>API_VAR_ALLOC</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_ALLOC(type, pool, name, errorval)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_ALLOC_POOL">Marco <span>API_VAR_ALLOC_POOL</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_ALLOC_POOL(type, pool, name, errorval)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_FREE">Marco <span>API_VAR_FREE</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_FREE(pool, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_VAR_FREE_POOL">Marco <span>API_VAR_FREE_POOL</span></h4>
+      <pre class="doc-declare"><code>#define API_VAR_FREE_POOL(pool, name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_REF(expr)">Marco <span>API_EXPR_REF(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_REF(expr)             expr
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_REF_SEM(expr)">Marco <span>API_EXPR_REF_SEM(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_REF_SEM(expr)         API_EXPR_REF(expr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_EXPR_DEREF(expr)">Marco <span>API_EXPR_DEREF(expr)</span></h4>
+      <pre class="doc-declare"><code>#define API_EXPR_DEREF(expr)           (*(expr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_MSG_M_DEF(m)">Marco <span>API_MSG_M_DEF(m)</span></h4>
+      <pre class="doc-declare"><code>#define API_MSG_M_DEF(m)               *m
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_MSG_M_DEF_C(t, m)">Marco <span>API_MSG_M_DEF_C(t, m)</span></h4>
+      <pre class="doc-declare"><code>#define API_MSG_M_DEF_C(t, m)          const t * m
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tcpip_send_msg_wait_sem">Func <span>tcpip_send_msg_wait_sem</span></h4>
+      <pre class="doc-declare"><code>err_t tcpip_send_msg_wait_sem(tcpip_callback_fn fn, void *apimsg, sys_sem_t* sem);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcpip_api_call">Func <span>tcpip_api_call</span></h4>
+      <pre class="doc-declare"><code>err_t tcpip_api_call(tcpip_api_call_fn fn, struct tcpip_api_call_data *call);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netif">Variable <span>netif</span></h4>
+      <pre class="doc-declare"><code>struct netif;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tcpip_api_call_fn">Typedef <span>tcpip_api_call_fn</span></h4>
+      <pre class="doc-declare"><code>typedef err_t (*tcpip_api_call_fn)(struct tcpip_api_call_data* call);
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,8 +1,13 @@
-/***********************************************************
-*  File: sys_timer.h
-*  Author: nzy
-*  Date: 20150901
-***********************************************************/
+/**
+* @file sys_timer.h
+* @author nzy@tuya.com
+* @brief Common process - Initialization
+* @version 0.1
+* @date 2020-11-09
+*
+* @copyright Copyright 2020-2021 Tuya Inc. All Rights Reserved.
+*
+*/
 #ifndef _SYS_TIMER_H
 #define _SYS_TIMER_H
 
@@ -13,123 +18,138 @@
 extern "C" {
 #endif
 
-/***********************************************************
-*************************micro define***********************
-***********************************************************/
-
-/***********************************************************
-*************************variable define********************
-***********************************************************/
-
-/***********************************************************
-*************************function define********************
-***********************************************************/
-/***********************************************************
-*  Function: system_timer_init 系统定时器初始化
-*  Input: none
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Initializing the system timer
+ *
+ * @param VOID
+ *
+ * @note This API is used for initializing the system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET system_timer_init(void);
 
-/***********************************************************
-*  Function: sys_add_timer 添加一个系统定时器
-*  Input: timerID->定时器ID
-*         pTimerFunc->定时器处理函数
-*         pTimerArg->定时器函数处理参数
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Add a system timer
+ *
+ * @param[in] pTimerFunc: the processing function of the timer
+ * @param[in] pTimerArg: the parameater of the timer function
+ * @param[out] p_timerID: timer id
+ *
+ * @note This API is used for adding a system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET sys_add_timer(IN CONST P_TIMER_FUNC pTimerFunc,\
-                          IN CONST PVOID_T pTimerArg,\
-                          OUT TIMER_ID *p_timerID);
+                               IN CONST PVOID_T pTimerArg,\
+                               OUT TIMER_ID *p_timerID);
 
-/***********************************************************
-*  Function: sys_delete_timer 删除一个定时器
-*  Input: timerQueHandle->定时器队列管理结构句柄
-          timerID->定时器ID
-*  Output: none 
-*  Return: OPERATE_RET
-*  Date: 120427
-***********************************************************/
-extern \
+/**
+ * @brief Delete the system timer
+ *
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used for deleting the system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET sys_delete_timer(IN CONST TIMER_ID timerID);
 
-/***********************************************************
-*  Function: sys_stop_timer 停止一个定时器
-*  Input: timerID->定时器ID
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Stop the system timer
+ *
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used for stopping the system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET sys_stop_timer(IN CONST TIMER_ID timerID);
 
-/***********************************************************
-*  Function: 该系统定时器是否运行
-*  Input: timerID->定时器ID
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Identify the system timer is running
+ *
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used to identify wheather the system timer is running
+ *
+ * @return TRUE or FALSE
+ */
 BOOL_T IsThisSysTimerRun(IN CONST TIMER_ID timer_id);
 
-/***********************************************************
-*  Function: sys_start_timer 启动一个定时器
-*  Input: timerID->定时器ID
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Start the system timer
+ *
+ * @param[in] timerID: timer id
+ * @param[in] timeCycle: timer running cycle
+ * @param[in] timer_type: timer type
+ *
+ * @note This API is used for starting the system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET sys_start_timer(IN CONST TIMER_ID timerID,\
-                            IN CONST TIME_MS timeCycle,\
-                            IN CONST TIMER_TYPE timer_type);
+                                  IN CONST TIME_MS timeCycle,\
+                                  IN CONST TIMER_TYPE timer_type);
 
 
-/***********************************************************
-*  Function: sys_trigger_timer 立即触发一个定时器
-*  Input: timerID->定时器ID
-*  Output: none
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Trigger the system timer
+ *
+ * @param[in] timerID: timer id
+ *
+ * @note This API is used for triggering the system timer instantly.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET sys_trigger_timer(IN CONST TIMER_ID timerID);
 
 
-
-/***********************************************************
-*  Function: system_timer_release 系统定时器资源释放
-*  Input: none
-*  Output: none 
-*  Return: OPERATE_RET
-***********************************************************/
-extern \
+/**
+ * @brief Release all resource of the system timer
+ *
+ * @param VOID
+ *
+ * @note This API is used for releasing all resource of the system timer
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
 OPERATE_RET system_timer_release(void);
 
-/***********************************************************
-*  Function: system_timer_set_sleep_interval 
-*  Input: interval
-*  Output: none 
-*  Return: VOID
-***********************************************************/
-extern \
+/**
+ * @brief Set sleep interval of the system timer
+ *
+ * @param[in] interval: sleep interval(MS) of the system timer
+ *
+ * @note This API is used for setting the sleep interval(MS) of the system timer
+ *
+ * @return VOID
+ */
 VOID system_timer_set_sleep_interval(ULONG_T interval);
 
-extern \
+/**
+ * @brief Get sleep interval of the system timer
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting the sleep interval(MS) of the system timer
+ *
+ * @return the sleep interval of the system timer
+ */
 ULONG_T system_timer_get_sleep_interval(VOID);
 
-/***********************************************************
-*  Function: sys_get_timer_num 获取timer node数量
-*  Input: timerID->定时器ID
-*  Output: none
-*  Return: INT_T
-***********************************************************/
-extern \
-INT_T sys_get_timer_num(void);
+/**
+ * @brief Get timer node currently
+ *
+ * @param VOID
+ *
+ * @note This API is used for getting the timer node currently.
+ *
+ * @return the timer node count.
+ */
+INT_T sys_get_timer_num(VOID);
 
 
-OPERATE_RET system_timer_cfg_stack_size(UINT_T stack_size);
 
 #ifdef __cplusplus
 }

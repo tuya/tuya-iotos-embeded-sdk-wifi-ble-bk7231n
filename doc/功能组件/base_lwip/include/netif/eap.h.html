@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp.h" class="nav-sub-label">ppp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#PPP_EAP_H" class="nav-sub-label">PPP_EAP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_HEADERLEN" class="nav-sub-label">EAP_HEADERLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_REQUEST" class="nav-sub-label">EAP_REQUEST</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_RESPONSE" class="nav-sub-label">EAP_RESPONSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_SUCCESS" class="nav-sub-label">EAP_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_FAILURE" class="nav-sub-label">EAP_FAILURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_IDENTITY" class="nav-sub-label">EAPT_IDENTITY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_NOTIFICATION" class="nav-sub-label">EAPT_NOTIFICATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_NAK" class="nav-sub-label">EAPT_NAK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_MD5CHAP" class="nav-sub-label">EAPT_MD5CHAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_OTP" class="nav-sub-label">EAPT_OTP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_TOKEN" class="nav-sub-label">EAPT_TOKEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_RSA" class="nav-sub-label">EAPT_RSA</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_DSS" class="nav-sub-label">EAPT_DSS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_KEA" class="nav-sub-label">EAPT_KEA</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_KEA_VALIDATE" class="nav-sub-label">EAPT_KEA_VALIDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_TLS" class="nav-sub-label">EAPT_TLS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_DEFENDER" class="nav-sub-label">EAPT_DEFENDER</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_W2K" class="nav-sub-label">EAPT_W2K</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_ARCOT" class="nav-sub-label">EAPT_ARCOT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_CISCOWIRELESS" class="nav-sub-label">EAPT_CISCOWIRELESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_NOKIACARD" class="nav-sub-label">EAPT_NOKIACARD</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPT_SRP" class="nav-sub-label">EAPT_SRP</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_CHALLENGE" class="nav-sub-label">EAPSRP_CHALLENGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_CKEY" class="nav-sub-label">EAPSRP_CKEY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_SKEY" class="nav-sub-label">EAPSRP_SKEY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_CVALIDATOR" class="nav-sub-label">EAPSRP_CVALIDATOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_SVALIDATOR" class="nav-sub-label">EAPSRP_SVALIDATOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_ACK" class="nav-sub-label">EAPSRP_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAPSRP_LWRECHALLENGE" class="nav-sub-label">EAPSRP_LWRECHALLENGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SRPVAL_EBIT" class="nav-sub-label">SRPVAL_EBIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SRP_PSEUDO_ID" class="nav-sub-label">SRP_PSEUDO_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#SRP_PSEUDO_LEN" class="nav-sub-label">SRP_PSEUDO_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MD5_SIGNATURE_SIZE" class="nav-sub-label">MD5_SIGNATURE_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_MIN_CHALLENGE_LENGTH" class="nav-sub-label">EAP_MIN_CHALLENGE_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_MAX_CHALLENGE_LENGTH" class="nav-sub-label">EAP_MAX_CHALLENGE_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_MIN_MAX_POWER_OF_TWO_CHALLENGE_LENGTH" class="nav-sub-label">EAP_MIN_MAX_POWER_OF_TWO_CHALLENGE_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_STATES" class="nav-sub-label">EAP_STATES</a>
+              </li>
+      
+
+              <li>
+                <a href="#eap_client_active(pcb)" class="nav-sub-label">eap_client_active(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eap_server_active(pcb)" class="nav-sub-label">eap_server_active(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_MAX_CHALLENGE_LENGTH" class="nav-sub-label">EAP_MAX_CHALLENGE_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_DEFTIMEOUT" class="nav-sub-label">EAP_DEFTIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_DEFTRANSMITS" class="nav-sub-label">EAP_DEFTRANSMITS</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_DEFREQTIME" class="nav-sub-label">EAP_DEFREQTIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#EAP_DEFALLOWREQ" class="nav-sub-label">EAP_DEFALLOWREQ</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#eap_authwithpeer" class="nav-sub-label">eap_authwithpeer</a>
+              </li>
+      
+
+              <li>
+                <a href="#eap_authpeer" class="nav-sub-label">eap_authpeer</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#eap_state;
+" class="nav-sub-label">eap_state;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="ppp.h"><span>ppp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="PPP_EAP_H">Marco <span>PPP_EAP_H</span></h4>
+      <pre class="doc-declare"><code>#define PPP_EAP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_HEADERLEN">Marco <span>EAP_HEADERLEN</span></h4>
+      <pre class="doc-declare"><code>#define EAP_HEADERLEN 4
+</code></pre>
+      <pre class="doc-comment">/*
+ * Packet header = Code, id, length.
+ */</pre>
+
+      <h4 id="EAP_REQUEST">Marco <span>EAP_REQUEST</span></h4>
+      <pre class="doc-declare"><code>#define EAP_REQUEST 1
+</code></pre>
+      <pre class="doc-comment">/* EAP message codes. */</pre>
+
+      <h4 id="EAP_RESPONSE">Marco <span>EAP_RESPONSE</span></h4>
+      <pre class="doc-declare"><code>#define EAP_RESPONSE 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_SUCCESS">Marco <span>EAP_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define EAP_SUCCESS 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_FAILURE">Marco <span>EAP_FAILURE</span></h4>
+      <pre class="doc-declare"><code>#define EAP_FAILURE 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_IDENTITY">Marco <span>EAPT_IDENTITY</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_IDENTITY	1
+</code></pre>
+      <pre class="doc-comment">/* EAP types */</pre>
+
+      <h4 id="EAPT_NOTIFICATION">Marco <span>EAPT_NOTIFICATION</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_NOTIFICATION 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_NAK">Marco <span>EAPT_NAK</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_NAK	3 /* (response only) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_MD5CHAP">Marco <span>EAPT_MD5CHAP</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_MD5CHAP	4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_OTP">Marco <span>EAPT_OTP</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_OTP	5 /* One-Time Password; RFC 1938 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_TOKEN">Marco <span>EAPT_TOKEN</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_TOKEN	6 /* Generic Token Card */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_RSA">Marco <span>EAPT_RSA</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_RSA	9 /* RSA Public Key Authentication */
+</code></pre>
+      <pre class="doc-comment">/* 7 and 8 are unassigned. */</pre>
+
+      <h4 id="EAPT_DSS">Marco <span>EAPT_DSS</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_DSS	10 /* DSS Unilateral */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_KEA">Marco <span>EAPT_KEA</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_KEA	11 /* KEA */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_KEA_VALIDATE">Marco <span>EAPT_KEA_VALIDATE</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_KEA_VALIDATE 12 /* KEA-VALIDATE	*/
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_TLS">Marco <span>EAPT_TLS</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_TLS	13 /* EAP-TLS */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_DEFENDER">Marco <span>EAPT_DEFENDER</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_DEFENDER	14 /* Defender Token (AXENT) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_W2K">Marco <span>EAPT_W2K</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_W2K	15 /* Windows 2000 EAP */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_ARCOT">Marco <span>EAPT_ARCOT</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_ARCOT	16 /* Arcot Systems */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_CISCOWIRELESS">Marco <span>EAPT_CISCOWIRELESS</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_CISCOWIRELESS 17 /* Cisco Wireless */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_NOKIACARD">Marco <span>EAPT_NOKIACARD</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_NOKIACARD	18 /* Nokia IP smart card */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPT_SRP">Marco <span>EAPT_SRP</span></h4>
+      <pre class="doc-declare"><code>#define EAPT_SRP	19 /* Secure Remote Password */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPSRP_CHALLENGE">Marco <span>EAPSRP_CHALLENGE</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_CHALLENGE 1 /* Request 1 - Challenge */
+</code></pre>
+      <pre class="doc-comment">/* EAP SRP-SHA1 Subtypes */</pre>
+
+      <h4 id="EAPSRP_CKEY">Marco <span>EAPSRP_CKEY</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_CKEY	1 /* Response 1 - Client Key */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPSRP_SKEY">Marco <span>EAPSRP_SKEY</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_SKEY	2 /* Request 2 - Server Key */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPSRP_CVALIDATOR">Marco <span>EAPSRP_CVALIDATOR</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_CVALIDATOR 2 /* Response 2 - Client Validator */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPSRP_SVALIDATOR">Marco <span>EAPSRP_SVALIDATOR</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_SVALIDATOR 3 /* Request 3 - Server Validator */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPSRP_ACK">Marco <span>EAPSRP_ACK</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_ACK	3 /* Response 3 - final ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAPSRP_LWRECHALLENGE">Marco <span>EAPSRP_LWRECHALLENGE</span></h4>
+      <pre class="doc-declare"><code>#define EAPSRP_LWRECHALLENGE 4 /* Req/resp 4 - Lightweight rechal */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SRPVAL_EBIT">Marco <span>SRPVAL_EBIT</span></h4>
+      <pre class="doc-declare"><code>#define SRPVAL_EBIT 1 /* Use shared key for ECP */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SRP_PSEUDO_ID">Marco <span>SRP_PSEUDO_ID</span></h4>
+      <pre class="doc-declare"><code>#define SRP_PSEUDO_ID "pseudo_"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SRP_PSEUDO_LEN">Marco <span>SRP_PSEUDO_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SRP_PSEUDO_LEN 7
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MD5_SIGNATURE_SIZE">Marco <span>MD5_SIGNATURE_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MD5_SIGNATURE_SIZE 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_MIN_CHALLENGE_LENGTH">Marco <span>EAP_MIN_CHALLENGE_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define EAP_MIN_CHALLENGE_LENGTH 17
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_MAX_CHALLENGE_LENGTH">Marco <span>EAP_MAX_CHALLENGE_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define EAP_MAX_CHALLENGE_LENGTH 24
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_MIN_MAX_POWER_OF_TWO_CHALLENGE_LENGTH">Marco <span>EAP_MIN_MAX_POWER_OF_TWO_CHALLENGE_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define EAP_MIN_MAX_POWER_OF_TWO_CHALLENGE_LENGTH    3  /* 2^3-1 = 7, 17+7 = 24 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_STATES">Marco <span>EAP_STATES</span></h4>
+      <pre class="doc-declare"><code>#define EAP_STATES \
+ "Initial", "Pending", "Closed", "Listen", "Identify", \
+ "SRP1", "SRP2", "SRP3", "MD5Chall", "Open", "SRP4", "BadAuth"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eap_client_active(pcb)">Marco <span>eap_client_active(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define eap_client_active(pcb) ((pcb)->eap.es_client.ea_state == eapListen)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eap_server_active(pcb)">Marco <span>eap_server_active(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define eap_server_active(pcb) \
+ ((pcb)->eap.es_server.ea_state >= eapIdentify && \
+ (pcb)->eap.es_server.ea_state <= eapMD5Chall)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_MAX_CHALLENGE_LENGTH">Marco <span>EAP_MAX_CHALLENGE_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define EAP_MAX_CHALLENGE_LENGTH 24
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_DEFTIMEOUT">Marco <span>EAP_DEFTIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define EAP_DEFTIMEOUT	3 /* Timeout (seconds) for rexmit */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_DEFTRANSMITS">Marco <span>EAP_DEFTRANSMITS</span></h4>
+      <pre class="doc-declare"><code>#define EAP_DEFTRANSMITS 10 /* max # times to transmit */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_DEFREQTIME">Marco <span>EAP_DEFREQTIME</span></h4>
+      <pre class="doc-declare"><code>#define EAP_DEFREQTIME	20 /* Time to wait for peer request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EAP_DEFALLOWREQ">Marco <span>EAP_DEFALLOWREQ</span></h4>
+      <pre class="doc-declare"><code>#define EAP_DEFALLOWREQ	20 /* max # times to accept requests */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="eap_authwithpeer">Func <span>eap_authwithpeer</span></h4>
+      <pre class="doc-declare"><code>void eap_authwithpeer(ppp_pcb *pcb, const char *localname);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eap_authpeer">Func <span>eap_authpeer</span></h4>
+      <pre class="doc-declare"><code>void eap_authpeer(ppp_pcb *pcb, const char *localname);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="eap_state;
+">Typedef <span>eap_state;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct eap_state {
+ struct eap_auth es_client; /* Client (authenticatee) data */
+#if PPP_SERVER
+ struct eap_auth es_server; /* Server (authenticator) data */
+#endif /* PPP_SERVER */
+ int es_savedtime;	/* Saved timeout */
+ int es_rechallenge;	/* EAP rechallenge interval */
+ int es_lwrechallenge;	/* SRP lightweight rechallenge inter */
+ u8_t es_usepseudo;	/* Use SRP Pseudonym if offered one */
+ int es_usedpseudo;	/* Set if we already sent PN */
+ int es_challen;		/* Length of challenge string */
+ u_char es_challenge[EAP_MAX_CHALLENGE_LENGTH];
+} eap_state;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

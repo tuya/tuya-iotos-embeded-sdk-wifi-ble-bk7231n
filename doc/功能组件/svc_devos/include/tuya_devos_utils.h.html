@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_cJSON.h" class="nav-sub-label">ty_cJSON.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_intf.h" class="nav-sub-label">gw_intf.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_DEVOS_UTILS_H" class="nav-sub-label">TUYA_DEVOS_UTILS_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#gw_load_sum_time_zone_tbl" class="nav-sub-label">gw_load_sum_time_zone_tbl</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_dp_flow_ctrl_cfg_proc" class="nav-sub-label">gw_dp_flow_ctrl_cfg_proc</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_get_serialno" class="nav-sub-label">tuya_get_serialno</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cpu_set_lp_mode" class="nav-sub-label">tuya_cpu_set_lp_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cpu_get_lp_mode" class="nav-sub-label">tuya_cpu_get_lp_mode</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_init_rtc" class="nav-sub-label">ty_init_rtc</a>
+              </li>
+      
+
+              <li>
+                <a href="#set_gw_ext_stat" class="nav-sub-label">set_gw_ext_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#get_gw_ext_stat" class="nav-sub-label">get_gw_ext_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#gw_register_cbs" class="nav-sub-label">gw_register_cbs</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#DP_REPT_FLOW_CTRL_UNIT" class="nav-sub-label">DP_REPT_FLOW_CTRL_UNIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_COUNTRY_CODE_E" class="nav-sub-label">TUYA_COUNTRY_CODE_E</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="ty_cJSON.h"><span>ty_cJSON.h</span></h4>
+      <pre class="doc-declare"><code>#include "ty_cJSON.h"
+</code></pre>
+      <pre class="doc-comment">#include "ty_cJSON.h"
+</pre>
+
+      <h4 id="gw_intf.h"><span>gw_intf.h</span></h4>
+      <pre class="doc-declare"><code>#include "gw_intf.h"
+</code></pre>
+      <pre class="doc-comment">#include "gw_intf.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_DEVOS_UTILS_H">Marco <span>TUYA_DEVOS_UTILS_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_DEVOS_UTILS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="gw_load_sum_time_zone_tbl">Func <span>gw_load_sum_time_zone_tbl</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET gw_load_sum_time_zone_tbl(IN CONST CHAR_T *tm_zone);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Load summer timezone talbe
+ * 
+ * @param[in] tm_zone Summer timezone table
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="gw_dp_flow_ctrl_cfg_proc">Func <span>gw_dp_flow_ctrl_cfg_proc</span></h4>
+      <pre class="doc-declare"><code>CHAR_T* gw_dp_flow_ctrl_cfg_proc(ty_cJSON* result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Parse DP flow control rules
+ * 
+ * @param[in] result Json encoded flow control rules
+ * 
+ * @return Buffer of flow control rules, NULL on error
+ */</pre>
+
+      <h4 id="tuya_get_serialno">Func <span>tuya_get_serialno</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *tuya_get_serialno(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get serial number
+ * 
+ * @return Buffer of serial number, NULL on error
+ */</pre>
+
+      <h4 id="tuya_cpu_set_lp_mode">Func <span>tuya_cpu_set_lp_mode</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_cpu_set_lp_mode(BOOL_T lp_enable);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set CPU lowpower mode
+ * 
+ * @param[in] lp_enable CPU lowpower is enable or not
+ */</pre>
+
+      <h4 id="tuya_cpu_get_lp_mode">Func <span>tuya_cpu_get_lp_mode</span></h4>
+      <pre class="doc-declare"><code>BOOL_T tuya_cpu_get_lp_mode(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get CPU lowpower mode
+ * 
+ * @return TRUE on lowpower, FALSE on normal
+ */</pre>
+
+      <h4 id="ty_init_rtc">Func <span>ty_init_rtc</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ty_init_rtc(INT_T timeval);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Initialize rtc module
+ * 
+ * @param[in] timeval Time interval to update local time
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="set_gw_ext_stat">Func <span>set_gw_ext_stat</span></h4>
+      <pre class="doc-declare"><code>VOID set_gw_ext_stat(IN CONST GW_EXT_STAT_T ext_stat);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set DevOS extension state
+ * 
+ * @param[in] ext_stat Extension state, see GW_EXT_STAT_T
+ */</pre>
+
+      <h4 id="get_gw_ext_stat">Func <span>get_gw_ext_stat</span></h4>
+      <pre class="doc-declare"><code>GW_EXT_STAT_T get_gw_ext_stat(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get DevOS extension state
+ * 
+ * @return Extension state, see GW_EXT_STAT_T
+ */</pre>
+
+      <h4 id="gw_register_cbs">Func <span>gw_register_cbs</span></h4>
+      <pre class="doc-declare"><code>VOID gw_register_cbs(IN CONST TY_IOT_CBS_S *cbs);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set DevOS event handlers
+ * 
+ * @param[in] cbs Handler of event, see TY_IOT_CBS_S
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="DP_REPT_FLOW_CTRL_UNIT">Variable <span>DP_REPT_FLOW_CTRL_UNIT</span></h4>
+      <pre class="doc-declare"><code>DP_REPT_FLOW_CTRL_UNIT* get_all_dp_flow_ctrl_rule(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get DP flow control rules
+ * 
+ * @return See DP_REPT_FLOW_CTRL_UNIT, NULL on error
+ */</pre>
+
+      <h4 id="TUYA_COUNTRY_CODE_E">Variable <span>TUYA_COUNTRY_CODE_E</span></h4>
+      <pre class="doc-declare"><code>TUYA_COUNTRY_CODE_E tuya_wifi_get_country_code(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get Wi-Fi country code
+ * 
+ * @return Country code, see TUYA_COUNTRY_CODE_E
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_TUYA_WS_DB_H" class="nav-sub-label">_TUYA_WS_DB_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ws_db_init" class="nav-sub-label">ws_db_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#ws_db_init_mf" class="nav-sub-label">ws_db_init_mf</a>
+              </li>
+      
+
+              <li>
+                <a href="#ws_db_uninit" class="nav-sub-label">ws_db_uninit</a>
+              </li>
+      
+
+              <li>
+                <a href="#ws_db_format" class="nav-sub-label">ws_db_format</a>
+              </li>
+      
+
+              <li>
+                <a href="#ws_db_rebuild" class="nav-sub-label">ws_db_rebuild</a>
+              </li>
+      
+
+              <li>
+                <a href="#ws_db_get_storage_path" class="nav-sub-label">ws_db_get_storage_path</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_write" class="nav-sub-label">wd_common_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_read" class="nav-sub-label">wd_common_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_fuzzy_read" class="nav-sub-label">wd_common_fuzzy_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_free_data" class="nav-sub-label">wd_common_free_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_delete" class="nav-sub-label">wd_common_delete</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_fuzzy_delete" class="nav-sub-label">wd_common_fuzzy_delete</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_common_exist" class="nav-sub-label">wd_common_exist</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_protected_write" class="nav-sub-label">wd_protected_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_protected_read" class="nav-sub-label">wd_protected_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_protected_delete" class="nav-sub-label">wd_protected_delete</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_user_param_write" class="nav-sub-label">wd_user_param_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_user_param_read" class="nav-sub-label">wd_user_param_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_utils_serialize" class="nav-sub-label">wd_utils_serialize</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_utils_serialize_save" class="nav-sub-label">wd_utils_serialize_save</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_utils_serialize_restore" class="nav-sub-label">wd_utils_serialize_restore</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_utils_deserialize" class="nav-sub-label">wd_utils_deserialize</a>
+              </li>
+      
+
+              <li>
+                <a href="#wd_utils_free_outbuf" class="nav-sub-label">wd_utils_free_outbuf</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#VAR_TP_T" class="nav-sub-label">VAR_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DB_RW_S;
+" class="nav-sub-label">TY_DB_RW_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_TUYA_WS_DB_H">Marco <span>_TUYA_WS_DB_H</span></h4>
+      <pre class="doc-declare"><code>#define _TUYA_WS_DB_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ws_db_init">Func <span>ws_db_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ws_db_init(IN CONST CHAR_T *fs_storge_path, IN CONST BYTE_T *p_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database initialization
+ * 
+ * @param[in] fs_storge_path the storage path of the key-value database, only used in linux system
+ * @param[in] p_key the encypto key of the key-value database, if p_key==NULL, will generate a random one
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ * 
+ * @note user don't need to care about this function, it will be called when tuya IoTOS initialization.
+ * 
+ */</pre>
+
+      <h4 id="ws_db_init_mf">Func <span>ws_db_init_mf</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ws_db_init_mf(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database initialization in mf
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ * 
+ * @note user don't need to care about this function, it will be called when tuya IoTOS initialization.
+ * 
+ */</pre>
+
+      <h4 id="ws_db_uninit">Func <span>ws_db_uninit</span></h4>
+      <pre class="doc-declare"><code>VOID ws_db_uninit(VOID) ;</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database de-initialization
+ * 
+ * @return VOID 
+ */</pre>
+
+      <h4 id="ws_db_format">Func <span>ws_db_format</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ws_db_format(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database format
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */</pre>
+
+      <h4 id="ws_db_rebuild">Func <span>ws_db_rebuild</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET ws_db_rebuild(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database rebuild to recycle
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */</pre>
+
+      <h4 id="ws_db_get_storage_path">Func <span>ws_db_get_storage_path</span></h4>
+      <pre class="doc-declare"><code>CHAR_T* ws_db_get_storage_path(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database get storage path
+ *
+ * @note Caller shall free the buffer returned
+ *
+ * @return Buffer for storage path, NULL on error
+ */</pre>
+
+      <h4 id="wd_common_write">Func <span>wd_common_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_write(IN CONST CHAR_T *key, IN CONST BYTE_T *value, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database write entry
+ * 
+ * @param[in] key key of the entry you want to write
+ * @param[in] value value buffer you want to write 
+ * @param[in] len the numbers of byte you want to write
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */</pre>
+
+      <h4 id="wd_common_read">Func <span>wd_common_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_read(IN CONST CHAR_T *key, OUT BYTE_T **value, OUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database read entry
+ * 
+ * @param[in] key  key of the entry you want to read
+ * @param[out] value buffer of the value
+ * @param[out] p_len length of the buffer
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note must free the value buffer with wd_common_free_data when you nolonger need the buffer
+ */</pre>
+
+      <h4 id="wd_common_fuzzy_read">Func <span>wd_common_fuzzy_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_fuzzy_read(IN CONST CHAR_T *fuzzy_name, INOUT UINT_T *index, OUT BYTE_T **data, OUT UINT_T *len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database fuzzy read entry
+ * 
+ * @param[in] fuzzy_name  key of the entry you want to read
+ * @param[in] index index of the value sequnence
+ * @param[out] data buffer of the value
+ * @param[out] p_len length of the buffer
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note if we have three entry "x1","x2","x3" in database, and read use "x" as the key will got all these 3 entrys
+ * and will chose the return entry by index
+ * 
+ * @note must free the value buffer with wd_common_free_data when you nolonger need the buffer
+ */</pre>
+
+      <h4 id="wd_common_free_data">Func <span>wd_common_free_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_free_data(IN BYTE_T *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free the buffer which allocated by wd_common_read or wd_common_fuzzy_read 
+ * 
+ * @param[in] data the buffer got from wd_common_read or wd_common_fuzzy_read
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ */</pre>
+
+      <h4 id="wd_common_delete">Func <span>wd_common_delete</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_delete(IN CONST CHAR_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief delete the entry from key-value database
+ * 
+ * @param[in] key key of the entry you want to delete
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="wd_common_fuzzy_delete">Func <span>wd_common_fuzzy_delete</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_fuzzy_delete(IN CONST CHAR_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief fuzzy delete the entry from key-value database
+ * 
+ * @param[in] key key of the entry you want to delete
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note delete all entries if the key match the prefix of entry key
+ */</pre>
+
+      <h4 id="wd_common_exist">Func <span>wd_common_exist</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_common_exist(IN CONST CHAR_T *key, OUT BOOL_T *exist);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check the entry from key-value database
+ * 
+ * @param[in] key key of the entry you want to check
+ * @param[OUT] exist TRUE on exist
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="wd_protected_write">Func <span>wd_protected_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_protected_write(IN CONST CHAR_T *key, IN CONST BYTE_T *value, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya protected storage write entry
+ * 
+ * @param[in] key key of the entry you want to write
+ * @param[in] value value buffer you want to write 
+ * @param[in] len the numbers of byte you want to write
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h 
+ */</pre>
+
+      <h4 id="wd_protected_read">Func <span>wd_protected_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_protected_read(IN CONST CHAR_T *key, OUT BYTE_T **value, OUT UINT_T *p_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya protected storage read entry
+ * 
+ * @param[in] key  key of the entry you want to read
+ * @param[out] value buffer of the value
+ * @param[out] p_len length of the buffer
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h  
+ * 
+ * @note must free the value buffer with wd_common_free_data when you nolonger need the buffer
+ */</pre>
+
+      <h4 id="wd_protected_delete">Func <span>wd_protected_delete</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_protected_delete(IN CONST CHAR_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief delete the entry from protected storage
+ * 
+ * @param[in] key key of the entry you want to delete
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ */</pre>
+
+      <h4 id="wd_user_param_write">Func <span>wd_user_param_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_user_param_write(IN CONST BYTE_T *data, IN CONST UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief write the user parameter to tuya key-value database
+ * 
+ * @param[in] data buffer of the data
+ * @param[in] len length of the data
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ * 
+ * @note the key of user parameter entry is "user_param_key"
+ */</pre>
+
+      <h4 id="wd_user_param_read">Func <span>wd_user_param_read</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_user_param_read(OUT BYTE_T **buf, OUT UINT_T *len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read the user parameter from tuya key-value database
+ * 
+ * @param[out] buf buffer of the data
+ * @param[out] len length of the data
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ * 
+ * @note the key of user parameter entry is "user_param_key"，must free the value buffer with 
+ * wd_common_free_data when you nolonger need the buffer
+ */</pre>
+
+      <h4 id="wd_utils_serialize">Func <span>wd_utils_serialize</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_utils_serialize(IN CONST TY_DB_RW_S *rw, IN CONST UINT_T rw_cnt, OUT CHAR_T **out, OUT UINT_T *out_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value serialize, transfer the data from TY_DB_RW_S array to json format
+ * 
+ * @param[in] rw the database entry which contains a property array
+ * @param[in] rw_cnt the database entry property array count
+ * @param[out] out the serialized json format buffer
+ * @param[out] out_len the serialized json format length
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="wd_utils_serialize_save">Func <span>wd_utils_serialize_save</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_utils_serialize_save(IN CONST CHAR_T *key, IN CONST TY_DB_RW_S *rw, IN CONST UINT_T rw_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value serialize and save in tuya key-value database
+ * 
+ * @param[in] key key of the database entry
+ * @param[in] rw the database entry which contains a property array
+ * @param[in] rw_cnt the database entry property array count
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+
+      <h4 id="wd_utils_serialize_restore">Func <span>wd_utils_serialize_restore</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_utils_serialize_restore(IN CONST CHAR_T *key, INOUT TY_DB_RW_S *rw, IN CONST UINT_T rw_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value serialize restore, will read the data from tuya key-value database and restore to database property entry
+ * 
+ * @param[in] key key of the database entry
+ * @param[inout] rw the database entry which contains a property array
+ * @param[inout] rw_cnt the database entry property array count
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h    
+ * 
+ * @note tuya key-value database saved the json format data and this api will read and deserialize it to property entry according 
+ * the rw and rw_cnt, so must fill the rw and rw_cnt in right format.
+ */</pre>
+
+      <h4 id="wd_utils_deserialize">Func <span>wd_utils_deserialize</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_utils_deserialize(IN CONST CHAR_T *in, INOUT TY_DB_RW_S *rw,IN CONST UINT_T rw_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value deserialize, transfer the data from json format to property array 
+ * 
+ * @param[in] in the json format data
+ * @param[inout] rw the database entry which contains a property array
+ * @param[inout] rw_cnt the database entry property array count
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h   
+ * 
+ * @note deserialize the json format data to database property entry according the rw and rw_cnt, so must fill the rw and rw_cnt in right format.  
+ */</pre>
+
+      <h4 id="wd_utils_free_outbuf">Func <span>wd_utils_free_outbuf</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET wd_utils_free_outbuf(IN CHAR_T *out_buf);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free the buffer which allocated by wd_utils_serialize_restore
+ * 
+ * @param out_buf the buffer got from wd_utils_serialize_restore
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h     
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="VAR_TP_T">Typedef <span>VAR_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T VAR_TP_T;
+#define VT_CHAR 0      // char, same as int, need 11+6 byte
+#define VT_BYTE 1      // byte, same as int, need 11+6 byte
+#define VT_SHORT 2     // short, same as int, need 11+6 byte
+#define VT_USHORT 3    // unsigned short, same as int, need 11+6 byte
+#define VT_INT 4       // int, need 11+6 byte when serialize to json format
+#define VT_BOOL 5      // bool, need 6+6 byte when serialize to json format
+#define VT_STRING 6    // string, need len+6 byte when serialize to json format
+#define VT_RAW 7       // raw, need len/3*4+len%3?4:0+6 (base64 encode) when serialize to json format
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database property define, used for serialize/deserialize data to json format
+ * 
+ */</pre>
+
+      <h4 id="TY_DB_RW_S;
+">Typedef <span>TY_DB_RW_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *key;   // property name
+   VAR_TP_T vt;   // property type
+   VOID *val;     // property value
+   USHORT_T len;  // property length
+}TY_DB_RW_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya key-value database property, used for serialize/deserialize data to json format
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

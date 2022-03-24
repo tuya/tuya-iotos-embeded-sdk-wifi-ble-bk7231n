@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#crc32i.h" class="nav-sub-label">crc32i.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_log.h" class="nav-sub-label">uni_log.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#mem_pool.h" " class="nav-sub-label">mem_pool.h" </a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_inf.h" class="nav-sub-label">aes_inf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#mix_method.h" class="nav-sub-label">mix_method.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__LAN_PROTOCOL__" class="nav-sub-label">__LAN_PROTOCOL__</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_TP_CFG_WF" class="nav-sub-label">FRM_TP_CFG_WF</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_TP_CMD" class="nav-sub-label">FRM_TP_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_TP_STAT_REPORT" class="nav-sub-label">FRM_TP_STAT_REPORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_TP_HB" class="nav-sub-label">FRM_TP_HB</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_QUERY_STAT" class="nav-sub-label">FRM_QUERY_STAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_USER_BIND_REQ" class="nav-sub-label">FRM_USER_BIND_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_TP_NEW_CMD" class="nav-sub-label">FRM_TP_NEW_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_ADD_SUB_DEV_CMD" class="nav-sub-label">FRM_ADD_SUB_DEV_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_CFG_WIFI_INFO" class="nav-sub-label">FRM_CFG_WIFI_INFO</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_QUERY_STAT_NEW" class="nav-sub-label">FRM_QUERY_STAT_NEW</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_SCENE_EXEC" class="nav-sub-label">FRM_SCENE_EXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_LAN_QUERY_DP" class="nav-sub-label">FRM_LAN_QUERY_DP</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_SECURITY_TYPE3" class="nav-sub-label">FRM_SECURITY_TYPE3</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_SECURITY_TYPE4" class="nav-sub-label">FRM_SECURITY_TYPE4</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_SECURITY_TYPE5" class="nav-sub-label">FRM_SECURITY_TYPE5</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_LAN_EXT_STREAM" class="nav-sub-label">FRM_LAN_EXT_STREAM</a>
+              </li>
+      
+
+              <li>
+                <a href="#FR_TYPE_ENCRYPTION" class="nav-sub-label">FR_TYPE_ENCRYPTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#FRM_AP_CFG_WF_V40" class="nav-sub-label">FRM_AP_CFG_WF_V40</a>
+              </li>
+      
+
+              <li>
+                <a href="#FR_TYPE_BOARDCAST_LPV34" class="nav-sub-label">FR_TYPE_BOARDCAST_LPV34</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__lan_parse_data" class="nav-sub-label">__lan_parse_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#encrpt_lan_msg" class="nav-sub-label">encrpt_lan_msg</a>
+              </li>
+      
+
+              <li>
+                <a href="#__mlp_gw_send_da" class="nav-sub-label">__mlp_gw_send_da</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#AP_CFG_ERR_CODE" class="nav-sub-label">AP_CFG_ERR_CODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PRO_HEAD_APP_S;
+" class="nav-sub-label">LAN_PRO_HEAD_APP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PRO_TAIL_S;
+" class="nav-sub-label">LAN_PRO_TAIL_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PRO_TAIL_V34_S;
+" class="nav-sub-label">LAN_PRO_TAIL_V34_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_PRO_HEAD_GW_S;
+#pragma pack()
+
+" class="nav-sub-label">LAN_PRO_HEAD_GW_S;
+#pragma pack()
+
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="crc32i.h"><span>crc32i.h</span></h4>
+      <pre class="doc-declare"><code>#include "crc32i.h"
+</code></pre>
+      <pre class="doc-comment">#include "crc32i.h"
+</pre>
+
+      <h4 id="uni_log.h"><span>uni_log.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_log.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_log.h"
+</pre>
+
+      <h4 id="mem_pool.h" "><span>mem_pool.h" </span></h4>
+      <pre class="doc-declare"><code>#include "mem_pool.h" 
+</code></pre>
+      <pre class="doc-comment">#include "mem_pool.h" 
+</pre>
+
+      <h4 id="aes_inf.h"><span>aes_inf.h</span></h4>
+      <pre class="doc-declare"><code>#include "aes_inf.h"
+</code></pre>
+      <pre class="doc-comment">#include "aes_inf.h"
+</pre>
+
+      <h4 id="mix_method.h"><span>mix_method.h</span></h4>
+      <pre class="doc-declare"><code>#include "mix_method.h"
+</code></pre>
+      <pre class="doc-comment">#include "mix_method.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__LAN_PROTOCOL__">Marco <span>__LAN_PROTOCOL__</span></h4>
+      <pre class="doc-declare"><code>#define __LAN_PROTOCOL__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_TP_CFG_WF">Marco <span>FRM_TP_CFG_WF</span></h4>
+      <pre class="doc-declare"><code>#define FRM_TP_CFG_WF 1 // only used for ap 3.0 network config
+</code></pre>
+      <pre class="doc-comment">// lan protocol</pre>
+
+      <h4 id="FRM_TP_CMD">Marco <span>FRM_TP_CMD</span></h4>
+      <pre class="doc-declare"><code>#define FRM_TP_CMD 7
+</code></pre>
+      <pre class="doc-comment">// #define FRM_TP_UNBIND_DEV 6</pre>
+
+      <h4 id="FRM_TP_STAT_REPORT">Marco <span>FRM_TP_STAT_REPORT</span></h4>
+      <pre class="doc-declare"><code>#define FRM_TP_STAT_REPORT 8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_TP_HB">Marco <span>FRM_TP_HB</span></h4>
+      <pre class="doc-declare"><code>#define FRM_TP_HB 9
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_QUERY_STAT">Marco <span>FRM_QUERY_STAT</span></h4>
+      <pre class="doc-declare"><code>#define FRM_QUERY_STAT 0a
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_USER_BIND_REQ">Marco <span>FRM_USER_BIND_REQ</span></h4>
+      <pre class="doc-declare"><code>#define FRM_USER_BIND_REQ 0c
+</code></pre>
+      <pre class="doc-comment">// #define FRM_SSID_QUERY 0x0b // discard</pre>
+
+      <h4 id="FRM_TP_NEW_CMD">Marco <span>FRM_TP_NEW_CMD</span></h4>
+      <pre class="doc-declare"><code>#define FRM_TP_NEW_CMD 0d
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_ADD_SUB_DEV_CMD">Marco <span>FRM_ADD_SUB_DEV_CMD</span></h4>
+      <pre class="doc-declare"><code>#define FRM_ADD_SUB_DEV_CMD 0e
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_CFG_WIFI_INFO">Marco <span>FRM_CFG_WIFI_INFO</span></h4>
+      <pre class="doc-declare"><code>#define FRM_CFG_WIFI_INFO 15
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_QUERY_STAT_NEW">Marco <span>FRM_QUERY_STAT_NEW</span></h4>
+      <pre class="doc-declare"><code>#define FRM_QUERY_STAT_NEW 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_SCENE_EXEC">Marco <span>FRM_SCENE_EXEC</span></h4>
+      <pre class="doc-declare"><code>#define FRM_SCENE_EXEC 17
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_LAN_QUERY_DP">Marco <span>FRM_LAN_QUERY_DP</span></h4>
+      <pre class="doc-declare"><code>#define FRM_LAN_QUERY_DP 18
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_SECURITY_TYPE3">Marco <span>FRM_SECURITY_TYPE3</span></h4>
+      <pre class="doc-declare"><code>#define FRM_SECURITY_TYPE3 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_SECURITY_TYPE4">Marco <span>FRM_SECURITY_TYPE4</span></h4>
+      <pre class="doc-declare"><code>#define FRM_SECURITY_TYPE4 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_SECURITY_TYPE5">Marco <span>FRM_SECURITY_TYPE5</span></h4>
+      <pre class="doc-declare"><code>#define FRM_SECURITY_TYPE5 5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_LAN_EXT_STREAM">Marco <span>FRM_LAN_EXT_STREAM</span></h4>
+      <pre class="doc-declare"><code>#define FRM_LAN_EXT_STREAM 64
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FR_TYPE_ENCRYPTION">Marco <span>FR_TYPE_ENCRYPTION</span></h4>
+      <pre class="doc-declare"><code>#define FR_TYPE_ENCRYPTION 19
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FRM_AP_CFG_WF_V40">Marco <span>FRM_AP_CFG_WF_V40</span></h4>
+      <pre class="doc-declare"><code>#define FRM_AP_CFG_WF_V40 20
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FR_TYPE_BOARDCAST_LPV34">Marco <span>FR_TYPE_BOARDCAST_LPV34</span></h4>
+      <pre class="doc-declare"><code>#define FR_TYPE_BOARDCAST_LPV34 35
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="__lan_parse_data">Func <span>__lan_parse_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET __lan_parse_data(IN BYTE_T *data,IN CONST INT_T len,IN CONST BYTE_T *key,OUT CHAR_T **out_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief decrypt data
+ * 
+ * @param[in] data encry data
+ * @param[in] len encry data length
+ * @param[in] key decrypt key
+ * @param[out] out_data origin data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="encrpt_lan_msg">Func <span>encrpt_lan_msg</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET encrpt_lan_msg(IN CONST BYTE_T *data,IN CONST UINT_T len,OUT BYTE_T **ec_data,OUT UINT_T *ec_len,IN CONST BYTE_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief encry lan message
+ * 
+ * @param[in] data origin data
+ * @param[in] len origin data length
+ * @param[in] ec_data encode data
+ * @param[in] ec_len encode data length
+ * @param[in] key encry key
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__mlp_gw_send_da">Func <span>__mlp_gw_send_da</span></h4>
+      <pre class="doc-declare"><code>BYTE_T *__mlp_gw_send_da(IN CONST UINT_T fr_num,IN CONST UINT_T fr_type,\
+                             IN CONST UINT_T ret_code,IN CONST BYTE_T *data,\
+                             IN CONST UINT_T len,OUT UINT_T *s_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol send data, the date will package 0x55aa
+ * 
+ * @param[in] fr_num refer to LAN_PRO_HEAD_GW_S
+ * @param[in] fr_type refer to LAN_PRO_HEAD_GW_S
+ * @param[in] ret_code refer to LAN_PRO_HEAD_GW_S
+ * @param[in] data refer to LAN_PRO_HEAD_GW_S
+ * @param[in] len refer to LAN_PRO_HEAD_GW_S
+ * @param[in] s_len send data length
+ *
+ * @return send data buf point
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="AP_CFG_ERR_CODE">Typedef <span>AP_CFG_ERR_CODE</span></h4>
+      <pre class="doc-declare"><code>typedef int AP_CFG_ERR_CODE;
+#define AP_CFG_SUCC 0
+#define AP_CFG_ERR_PCK 1
+#define AP_CFG_AP_NOT_FOUND 2
+#define AP_CFG_ERR_PASSWD 3
+#define AP_CFG_CANT_CONN_AP 4
+#define AP_CFG_DHCP_FAILED 5
+#define AP_CFG_CONN_CLOUD_FAILED 6
+#define AP_CFG_GET_URL_FAILED 7
+#define AP_CFG_GW_ACTIVE_FAILED 8
+#define AP_CFG_GW_ACTIVE_SUCCESS 9
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_PRO_HEAD_APP_S;
+">Typedef <span>LAN_PRO_HEAD_APP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   UINT_T head; // 0x55aa
+   UINT_T fr_num;
+   UINT_T fr_type;
+   UINT_T len;
+   BYTE_T data[0];
+}LAN_PRO_HEAD_APP_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol app head
+ */</pre>
+
+      <h4 id="LAN_PRO_TAIL_S;
+">Typedef <span>LAN_PRO_TAIL_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T crc;
+   UINT_T tail; // 0xaa55
+}LAN_PRO_TAIL_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_PRO_TAIL_V34_S;
+">Typedef <span>LAN_PRO_TAIL_V34_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   BYTE_T hmac[32];
+   UINT_T tail; // 0xaa55
+}LAN_PRO_TAIL_V34_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LAN_PRO_HEAD_GW_S;
+#pragma pack()
+
+">Typedef <span>LAN_PRO_HEAD_GW_S;
+#pragma pack()
+
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   UINT_T head; // 0x55aa
+   UINT_T fr_num;
+   UINT_T fr_type;
+   UINT_T len;
+   UINT_T ret_code;
+   BYTE_T data[0];
+}LAN_PRO_HEAD_GW_S;
+#pragma pack()
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief lan protocol gateway head
+ */</pre>
+    </div>
+  </body>
+</html>
+            

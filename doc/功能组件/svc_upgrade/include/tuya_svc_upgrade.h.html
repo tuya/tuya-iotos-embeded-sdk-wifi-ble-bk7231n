@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_SVC_UPGRADE_H__" class="nav-sub-label">__TUYA_SVC_UPGRADE_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_START" class="nav-sub-label">TUS_DOWNLOAD_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_COMPLETE" class="nav-sub-label">TUS_DOWNLOAD_COMPLETE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_UPGRADE_START" class="nav-sub-label">TUS_UPGRADE_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_UPGRADE_SUCCESS" class="nav-sub-label">TUS_UPGRADE_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_ERROR_UNKONW" class="nav-sub-label">TUS_DOWNLOAD_ERROR_UNKONW</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_ERROR_LOW_BATTERY" class="nav-sub-label">TUS_DOWNLOAD_ERROR_LOW_BATTERY</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_ERROR_STORAGE_NOT_ENOUGH" class="nav-sub-label">TUS_DOWNLOAD_ERROR_STORAGE_NOT_ENOUGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_ERROR_MALLOC_FAIL" class="nav-sub-label">TUS_DOWNLOAD_ERROR_MALLOC_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_ERROR_TIMEOUT" class="nav-sub-label">TUS_DOWNLOAD_ERROR_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_DOWNLOAD_ERROR_HMAC" class="nav-sub-label">TUS_DOWNLOAD_ERROR_HMAC</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_UPGRADE_ERROR_LOW_BATTERY" class="nav-sub-label">TUS_UPGRADE_ERROR_LOW_BATTERY</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_UPGRADE_ERROR_MALLOC_FAIL" class="nav-sub-label">TUS_UPGRADE_ERROR_MALLOC_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_UPGRADE_ERROR_VERSION" class="nav-sub-label">TUS_UPGRADE_ERROR_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUS_UPGRADE_ERROR_HMAC" class="nav-sub-label">TUS_UPGRADE_ERROR_HMAC</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_svc_upgrade_init" class="nav-sub-label">tuya_svc_upgrade_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_active" class="nav-sub-label">tuya_svc_upgrade_active</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_detect_register" class="nav-sub-label">tuya_svc_upgrade_detect_register</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_register_pre_cb" class="nav-sub-label">tuya_svc_upgrade_register_pre_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_detect_reset" class="nav-sub-label">tuya_svc_upgrade_detect_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_refuse" class="nav-sub-label">tuya_svc_upgrade_refuse</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_result_report" class="nav-sub-label">tuya_svc_upgrade_result_report</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_start" class="nav-sub-label">tuya_svc_upgrade_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_mqtt_notify" class="nav-sub-label">tuya_svc_upgrade_mqtt_notify</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TI_UPGRD_STAT_S" class="nav-sub-label">TI_UPGRD_STAT_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_upgrade_detect_t;
+" class="nav-sub-label">tuya_upgrade_detect_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_upgrade_inform_cb" class="nav-sub-label">dev_upgrade_inform_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_upgrade_pre_inform_cb" class="nav-sub-label">dev_upgrade_pre_inform_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#subdev_upgrade_inform_cb" class="nav-sub-label">subdev_upgrade_inform_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#*tuya_upgrade_param_p;
+" class="nav-sub-label">*tuya_upgrade_param_p;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_SVC_UPGRADE_H__">Marco <span>__TUYA_SVC_UPGRADE_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_SVC_UPGRADE_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_START">Marco <span>TUS_DOWNLOAD_START</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_START 10 // download start
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_COMPLETE">Marco <span>TUS_DOWNLOAD_COMPLETE</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_COMPLETE 11 // download complete
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_UPGRADE_START">Marco <span>TUS_UPGRADE_START</span></h4>
+      <pre class="doc-declare"><code>#define TUS_UPGRADE_START 12 // upgrade start
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_UPGRADE_SUCCESS">Marco <span>TUS_UPGRADE_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define TUS_UPGRADE_SUCCESS 3 //upgrade success
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_ERROR_UNKONW">Marco <span>TUS_DOWNLOAD_ERROR_UNKONW</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_ERROR_UNKONW 40 // unknown error
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_ERROR_LOW_BATTERY">Marco <span>TUS_DOWNLOAD_ERROR_LOW_BATTERY</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_ERROR_LOW_BATTERY 41 // low battery
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_ERROR_STORAGE_NOT_ENOUGH">Marco <span>TUS_DOWNLOAD_ERROR_STORAGE_NOT_ENOUGH</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_ERROR_STORAGE_NOT_ENOUGH 42 // storage not enough
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_ERROR_MALLOC_FAIL">Marco <span>TUS_DOWNLOAD_ERROR_MALLOC_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_ERROR_MALLOC_FAIL 43 // malloc fail
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_ERROR_TIMEOUT">Marco <span>TUS_DOWNLOAD_ERROR_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_ERROR_TIMEOUT 44 // download timeout
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_DOWNLOAD_ERROR_HMAC">Marco <span>TUS_DOWNLOAD_ERROR_HMAC</span></h4>
+      <pre class="doc-declare"><code>#define TUS_DOWNLOAD_ERROR_HMAC 45 // hmac not match
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_UPGRADE_ERROR_LOW_BATTERY">Marco <span>TUS_UPGRADE_ERROR_LOW_BATTERY</span></h4>
+      <pre class="doc-declare"><code>#define TUS_UPGRADE_ERROR_LOW_BATTERY 46 // low battery
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_UPGRADE_ERROR_MALLOC_FAIL">Marco <span>TUS_UPGRADE_ERROR_MALLOC_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define TUS_UPGRADE_ERROR_MALLOC_FAIL 47 // malloc fail
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_UPGRADE_ERROR_VERSION">Marco <span>TUS_UPGRADE_ERROR_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define TUS_UPGRADE_ERROR_VERSION 48 // version invalid
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUS_UPGRADE_ERROR_HMAC">Marco <span>TUS_UPGRADE_ERROR_HMAC</span></h4>
+      <pre class="doc-declare"><code>#define TUS_UPGRADE_ERROR_HMAC 49 // hmac not match
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_svc_upgrade_init">Func <span>tuya_svc_upgrade_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_svc_upgrade_init(tuya_upgrade_param_t *ota_param);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Initilize firmware upgrade framework
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_active">Func <span>tuya_svc_upgrade_active</span></h4>
+      <pre class="doc-declare"><code>int tuya_svc_upgrade_active(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Run firmware upgrade framework, workloads registered will be executed
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_detect_register">Func <span>tuya_svc_upgrade_detect_register</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_upgrade_detect_register(tuya_upgrade_detect_t *detect);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register a new firmware upgrade workload
+ * 
+ * @param[in] detect The workload, see tuya_upgrade_detect_t
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_register_pre_cb">Func <span>tuya_svc_upgrade_register_pre_cb</span></h4>
+      <pre class="doc-declare"><code>void tuya_svc_upgrade_register_pre_cb(dev_upgrade_pre_inform_cb pre_ug_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register pre-precess handler to replace the default one
+ * 
+ * @param[in] pre_ug_cb The new handler
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_detect_reset">Func <span>tuya_svc_upgrade_detect_reset</span></h4>
+      <pre class="doc-declare"><code>int tuya_svc_upgrade_detect_reset(const int upgrade_interval);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Reset firmware upgrade check interval
+ * 
+ * @param[in] upgrade_interval Next interval to check(unit sec)
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_refuse">Func <span>tuya_svc_upgrade_refuse</span></h4>
+      <pre class="doc-declare"><code>int tuya_svc_upgrade_refuse(const FW_UG_S *fw, const char *dev_id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Refuse to download the specific firmware
+ * 
+ * @param[in] dev_id ID of sub-device, or NULL for GW
+ * @param[in] fw Firmware info to download
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_result_report">Func <span>tuya_svc_upgrade_result_report</span></h4>
+      <pre class="doc-declare"><code>int tuya_svc_upgrade_result_report(const char *dev_id, const DEV_TYPE_T type, const int result);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Sync dowload result to cloud
+ * 
+ * @param[in] dev_id ID of sub-device, or NULL for GW
+ * @param[in] tp OTA channel, see DEV_TYPE_T
+ * @param[in] result See TI_UPGRD_STAT_S
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_start">Func <span>tuya_svc_upgrade_start</span></h4>
+      <pre class="doc-declare"><code>int tuya_svc_upgrade_start(const CHAR_T *dev_id,
+					   const FW_UG_S *fw,
+					   const GET_FILE_DATA_CB get_file_cb,
+					   VOID *pri_data,
+					   const UPGRADE_NOTIFY_CB upgrd_nofity_cb, 
+					   const BOOL_T upload_upgrade_percent, 
+					   const UINT_T download_buf_size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start to download the specific firmware
+ * 
+ * @param[in] dev_id ID of sub-device, or NULL for GW
+ * @param[in] fw Firmware info to download
+ * @param[in] get_file_cb Callback to transfer data while downloading
+ * @param[in] pri_data Private data
+ * @param[in] upgrd_nofity_cb Callback when upgrade complete or error
+ * @param[in] upload_upgrade_percent Upload upgrade percent or not
+ * @param[in] download_buf_size Buffer size allocated for OTA
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_svc_upgrade_mqtt_notify">Func <span>tuya_svc_upgrade_mqtt_notify</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_upgrade_mqtt_notify(CHAR_T *dev_id, DEV_TYPE_T tp);</code></pre>
+      <pre class="doc-comment">/**
+* @brief Notify to upgrade immediately like mqtt15
+*
+* @param[in] dev_id ID of sub-device, or NULL for GW
+* @param[in] dev type to upgrade
+* @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+*/</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TI_UPGRD_STAT_S">Typedef <span>TI_UPGRD_STAT_S</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T TI_UPGRD_STAT_S;
+#define TUS_RD 1 // ready
+#define TUS_UPGRDING 2 // upgrading
+#define TUS_UPGRD_FINI 3 // finish
+#define TUS_UPGRD_EXEC 4 // error
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_upgrade_detect_t;
+">Typedef <span>tuya_upgrade_detect_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /*
+    * @param[out] dev_id device id for gw or nodeId for subdev
+    * @return OPERATE_RET OPRT_OK indicates a valid device need detect
+    */
+   OPERATE_RET (*upgrade_get_dev)(OUT CHAR_T dev_id[DEV_ID_LEN+1]);
+   /*
+    * @param[in] is_err TRUE indicates error happen, detect process is over
+    * @param[in] is_exe valid when !is_err
+                    TRUE indicates upgrade is got and notified
+                    FALSE indicates upgrade is got but execute time not arrival
+    * @param[in] detect_interval valid when !is_err && !is_exe
+                             upgrade should be detected again after detect_interval(s)
+    */
+   VOID (*upgrade_detect_result)(IN BOOL_T is_err, IN BOOL_T is_exe, IN UINT_T detect_interval);
+}tuya_upgrade_detect_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of firmware upgrade workload
+ */</pre>
+
+      <h4 id="dev_upgrade_inform_cb">Typedef <span>dev_upgrade_inform_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*dev_upgrade_inform_cb)(const FW_UG_S *fw);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler of GW upgrade inform
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="dev_upgrade_pre_inform_cb">Typedef <span>dev_upgrade_pre_inform_cb</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*dev_upgrade_pre_inform_cb)(BOOL_T *handled, const FW_UG_S *fw);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler of pre-process inform
+ */</pre>
+
+      <h4 id="subdev_upgrade_inform_cb">Typedef <span>subdev_upgrade_inform_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*subdev_upgrade_inform_cb)(const char *dev_id, const FW_UG_S *fw);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler of sub-device upgrade inform
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="*tuya_upgrade_param_p;
+">Typedef <span>*tuya_upgrade_param_p;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** Handler of gw upgrade inform */
+   dev_upgrade_inform_cb dev_upgrade_cb;
+   /** Handler of sub-device upgrade inform */
+   subdev_upgrade_inform_cb subdev_upgrade_cb;
+   /** Handler of gw upgrade pre-precess */
+   dev_upgrade_inform_cb pre_dev_upgrade_cb;
+   /** Handler of sub-device pre-precess */
+   subdev_upgrade_inform_cb pre_subdev_upgrade_cb;
+}tuya_upgrade_param_t, *tuya_upgrade_param_p;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of firmware upgrade handler
+ */</pre>
+    </div>
+  </body>
+</html>
+            

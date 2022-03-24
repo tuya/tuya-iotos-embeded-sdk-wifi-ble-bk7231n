@@ -1,0 +1,1448 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#asn1.h" class="nav-sub-label">asn1.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#pk.h" class="nav-sub-label">pk.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#rsa.h" class="nav-sub-label">rsa.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_X509_H" class="nav-sub-label">MBEDTLS_X509_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_MAX_INTERMEDIATE_CA" class="nav-sub-label">MBEDTLS_X509_MAX_INTERMEDIATE_CA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_FEATURE_UNAVAILABLE" class="nav-sub-label">MBEDTLS_ERR_X509_FEATURE_UNAVAILABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_UNKNOWN_OID" class="nav-sub-label">MBEDTLS_ERR_X509_UNKNOWN_OID</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_FORMAT" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_FORMAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_VERSION" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_SERIAL" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_SERIAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_ALG" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_ALG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_NAME" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_DATE" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_DATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_SIGNATURE" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_SIGNATURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_INVALID_EXTENSIONS" class="nav-sub-label">MBEDTLS_ERR_X509_INVALID_EXTENSIONS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_UNKNOWN_VERSION" class="nav-sub-label">MBEDTLS_ERR_X509_UNKNOWN_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_UNKNOWN_SIG_ALG" class="nav-sub-label">MBEDTLS_ERR_X509_UNKNOWN_SIG_ALG</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_SIG_MISMATCH" class="nav-sub-label">MBEDTLS_ERR_X509_SIG_MISMATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_CERT_VERIFY_FAILED" class="nav-sub-label">MBEDTLS_ERR_X509_CERT_VERIFY_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_CERT_UNKNOWN_FORMAT" class="nav-sub-label">MBEDTLS_ERR_X509_CERT_UNKNOWN_FORMAT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_BAD_INPUT_DATA" class="nav-sub-label">MBEDTLS_ERR_X509_BAD_INPUT_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_ALLOC_FAILED" class="nav-sub-label">MBEDTLS_ERR_X509_ALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_FILE_IO_ERROR" class="nav-sub-label">MBEDTLS_ERR_X509_FILE_IO_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_BUFFER_TOO_SMALL" class="nav-sub-label">MBEDTLS_ERR_X509_BUFFER_TOO_SMALL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_X509_FATAL_ERROR" class="nav-sub-label">MBEDTLS_ERR_X509_FATAL_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_EXPIRED" class="nav-sub-label">MBEDTLS_X509_BADCERT_EXPIRED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_REVOKED" class="nav-sub-label">MBEDTLS_X509_BADCERT_REVOKED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_CN_MISMATCH" class="nav-sub-label">MBEDTLS_X509_BADCERT_CN_MISMATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_NOT_TRUSTED" class="nav-sub-label">MBEDTLS_X509_BADCERT_NOT_TRUSTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCRL_NOT_TRUSTED" class="nav-sub-label">MBEDTLS_X509_BADCRL_NOT_TRUSTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCRL_EXPIRED" class="nav-sub-label">MBEDTLS_X509_BADCRL_EXPIRED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_MISSING" class="nav-sub-label">MBEDTLS_X509_BADCERT_MISSING</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_SKIP_VERIFY" class="nav-sub-label">MBEDTLS_X509_BADCERT_SKIP_VERIFY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_OTHER" class="nav-sub-label">MBEDTLS_X509_BADCERT_OTHER</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_FUTURE" class="nav-sub-label">MBEDTLS_X509_BADCERT_FUTURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCRL_FUTURE" class="nav-sub-label">MBEDTLS_X509_BADCRL_FUTURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_KEY_USAGE" class="nav-sub-label">MBEDTLS_X509_BADCERT_KEY_USAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_EXT_KEY_USAGE" class="nav-sub-label">MBEDTLS_X509_BADCERT_EXT_KEY_USAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_NS_CERT_TYPE" class="nav-sub-label">MBEDTLS_X509_BADCERT_NS_CERT_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_BAD_MD" class="nav-sub-label">MBEDTLS_X509_BADCERT_BAD_MD</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_BAD_PK" class="nav-sub-label">MBEDTLS_X509_BADCERT_BAD_PK</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCERT_BAD_KEY" class="nav-sub-label">MBEDTLS_X509_BADCERT_BAD_KEY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCRL_BAD_MD" class="nav-sub-label">MBEDTLS_X509_BADCRL_BAD_MD</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCRL_BAD_PK" class="nav-sub-label">MBEDTLS_X509_BADCRL_BAD_PK</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_BADCRL_BAD_KEY" class="nav-sub-label">MBEDTLS_X509_BADCRL_BAD_KEY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_DIGITAL_SIGNATURE" class="nav-sub-label">MBEDTLS_X509_KU_DIGITAL_SIGNATURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_NON_REPUDIATION" class="nav-sub-label">MBEDTLS_X509_KU_NON_REPUDIATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_KEY_ENCIPHERMENT" class="nav-sub-label">MBEDTLS_X509_KU_KEY_ENCIPHERMENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_DATA_ENCIPHERMENT" class="nav-sub-label">MBEDTLS_X509_KU_DATA_ENCIPHERMENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_KEY_AGREEMENT" class="nav-sub-label">MBEDTLS_X509_KU_KEY_AGREEMENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_KEY_CERT_SIGN" class="nav-sub-label">MBEDTLS_X509_KU_KEY_CERT_SIGN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_CRL_SIGN" class="nav-sub-label">MBEDTLS_X509_KU_CRL_SIGN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_ENCIPHER_ONLY" class="nav-sub-label">MBEDTLS_X509_KU_ENCIPHER_ONLY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_KU_DECIPHER_ONLY" class="nav-sub-label">MBEDTLS_X509_KU_DECIPHER_ONLY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_SSL_CLIENT" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_SSL_CLIENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_SSL_SERVER" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_SSL_SERVER</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_EMAIL" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_EMAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_RESERVED" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_RESERVED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_SSL_CA" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_SSL_CA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_EMAIL_CA" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_EMAIL_CA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING_CA" class="nav-sub-label">MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING_CA</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_AUTHORITY_KEY_IDENTIFIER" class="nav-sub-label">MBEDTLS_X509_EXT_AUTHORITY_KEY_IDENTIFIER</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_SUBJECT_KEY_IDENTIFIER" class="nav-sub-label">MBEDTLS_X509_EXT_SUBJECT_KEY_IDENTIFIER</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_KEY_USAGE" class="nav-sub-label">MBEDTLS_X509_EXT_KEY_USAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_CERTIFICATE_POLICIES" class="nav-sub-label">MBEDTLS_X509_EXT_CERTIFICATE_POLICIES</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_POLICY_MAPPINGS" class="nav-sub-label">MBEDTLS_X509_EXT_POLICY_MAPPINGS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_SUBJECT_ALT_NAME" class="nav-sub-label">MBEDTLS_X509_EXT_SUBJECT_ALT_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_ISSUER_ALT_NAME" class="nav-sub-label">MBEDTLS_X509_EXT_ISSUER_ALT_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_SUBJECT_DIRECTORY_ATTRS" class="nav-sub-label">MBEDTLS_X509_EXT_SUBJECT_DIRECTORY_ATTRS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_BASIC_CONSTRAINTS" class="nav-sub-label">MBEDTLS_X509_EXT_BASIC_CONSTRAINTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_NAME_CONSTRAINTS" class="nav-sub-label">MBEDTLS_X509_EXT_NAME_CONSTRAINTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_POLICY_CONSTRAINTS" class="nav-sub-label">MBEDTLS_X509_EXT_POLICY_CONSTRAINTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_EXTENDED_KEY_USAGE" class="nav-sub-label">MBEDTLS_X509_EXT_EXTENDED_KEY_USAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_CRL_DISTRIBUTION_POINTS" class="nav-sub-label">MBEDTLS_X509_EXT_CRL_DISTRIBUTION_POINTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_INIHIBIT_ANYPOLICY" class="nav-sub-label">MBEDTLS_X509_EXT_INIHIBIT_ANYPOLICY</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_FRESHEST_CRL" class="nav-sub-label">MBEDTLS_X509_EXT_FRESHEST_CRL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_EXT_NS_CERT_TYPE" class="nav-sub-label">MBEDTLS_X509_EXT_NS_CERT_TYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_FORMAT_DER" class="nav-sub-label">MBEDTLS_X509_FORMAT_DER</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_FORMAT_PEM" class="nav-sub-label">MBEDTLS_X509_FORMAT_PEM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_MAX_DN_NAME_SIZE" class="nav-sub-label">MBEDTLS_X509_MAX_DN_NAME_SIZE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_X509_SAFE_SNPRINTF" class="nav-sub-label">MBEDTLS_X509_SAFE_SNPRINTF</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_x509_dn_gets" class="nav-sub-label">mbedtls_x509_dn_gets</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_serial_gets" class="nav-sub-label">mbedtls_x509_serial_gets</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_time_is_past" class="nav-sub-label">mbedtls_x509_time_is_past</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_time_is_future" class="nav-sub-label">mbedtls_x509_time_is_future</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_self_test" class="nav-sub-label">mbedtls_x509_self_test</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_name" class="nav-sub-label">mbedtls_x509_get_name</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_alg_null" class="nav-sub-label">mbedtls_x509_get_alg_null</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_alg" class="nav-sub-label">mbedtls_x509_get_alg</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_rsassa_pss_params" class="nav-sub-label">mbedtls_x509_get_rsassa_pss_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_sig" class="nav-sub-label">mbedtls_x509_get_sig</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_sig_alg" class="nav-sub-label">mbedtls_x509_get_sig_alg</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_time" class="nav-sub-label">mbedtls_x509_get_time</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_serial" class="nav-sub-label">mbedtls_x509_get_serial</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_get_ext" class="nav-sub-label">mbedtls_x509_get_ext</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_sig_alg_gets" class="nav-sub-label">mbedtls_x509_sig_alg_gets</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_key_size_helper" class="nav-sub-label">mbedtls_x509_key_size_helper</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_string_to_names" class="nav-sub-label">mbedtls_x509_string_to_names</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_set_extension" class="nav-sub-label">mbedtls_x509_set_extension</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_write_extensions" class="nav-sub-label">mbedtls_x509_write_extensions</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_write_names" class="nav-sub-label">mbedtls_x509_write_names</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_write_sig" class="nav-sub-label">mbedtls_x509_write_sig</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_x509_buf" class="nav-sub-label">mbedtls_x509_buf</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_bitstring" class="nav-sub-label">mbedtls_x509_bitstring</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_name" class="nav-sub-label">mbedtls_x509_name</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_x509_sequence" class="nav-sub-label">mbedtls_x509_sequence</a>
+              </li>
+      
+
+              <li>
+                <a href="#
+mbedtls_x509_time;
+" class="nav-sub-label">
+mbedtls_x509_time;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="asn1.h"><span>asn1.h</span></h4>
+      <pre class="doc-declare"><code>#include "asn1.h"
+</code></pre>
+      <pre class="doc-comment">#include "asn1.h"
+</pre>
+
+      <h4 id="pk.h"><span>pk.h</span></h4>
+      <pre class="doc-declare"><code>#include "pk.h"
+</code></pre>
+      <pre class="doc-comment">#include "pk.h"
+</pre>
+
+      <h4 id="rsa.h"><span>rsa.h</span></h4>
+      <pre class="doc-declare"><code>#include "rsa.h"
+</code></pre>
+      <pre class="doc-comment">#include "rsa.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_X509_H">Marco <span>MBEDTLS_X509_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_MAX_INTERMEDIATE_CA">Marco <span>MBEDTLS_X509_MAX_INTERMEDIATE_CA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_MAX_INTERMEDIATE_CA  8
+</code></pre>
+      <pre class="doc-comment">/**
+ * Maximum number of intermediate CAs in a verification chain.
+ * That is, maximum length of the chain, excluding the end-entity certificate
+ * and the trusted root certificate.
+ *
+ * Set this to a low value to prevent an adversary from making you waste
+ * resources verifying an overlong certificate chain.
+ */</pre>
+
+      <h4 id="MBEDTLS_ERR_X509_FEATURE_UNAVAILABLE">Marco <span>MBEDTLS_ERR_X509_FEATURE_UNAVAILABLE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_FEATURE_UNAVAILABLE             -8320 /**< Unavailable feature, e.g. RSA hashing/encryption combination. */
+</code></pre>
+      <pre class="doc-comment">/**
+ * \name X509 Error codes
+ * \{
+ */</pre>
+
+      <h4 id="MBEDTLS_ERR_X509_UNKNOWN_OID">Marco <span>MBEDTLS_ERR_X509_UNKNOWN_OID</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_UNKNOWN_OID                     -8448 /**< Requested OID is unknown. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_FORMAT">Marco <span>MBEDTLS_ERR_X509_INVALID_FORMAT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_FORMAT                  -8576 /**< The CRT/CRL/CSR format is invalid, e.g. different type expected. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_VERSION">Marco <span>MBEDTLS_ERR_X509_INVALID_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_VERSION                 -8704 /**< The CRT/CRL/CSR version element is invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_SERIAL">Marco <span>MBEDTLS_ERR_X509_INVALID_SERIAL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_SERIAL                  -8832 /**< The serial tag or value is invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_ALG">Marco <span>MBEDTLS_ERR_X509_INVALID_ALG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_ALG                     -8960 /**< The algorithm tag or value is invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_NAME">Marco <span>MBEDTLS_ERR_X509_INVALID_NAME</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_NAME                    -9088 /**< The name tag or value is invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_DATE">Marco <span>MBEDTLS_ERR_X509_INVALID_DATE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_DATE                    -9216 /**< The date tag or value is invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_SIGNATURE">Marco <span>MBEDTLS_ERR_X509_INVALID_SIGNATURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_SIGNATURE               -9344 /**< The signature tag or value invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_INVALID_EXTENSIONS">Marco <span>MBEDTLS_ERR_X509_INVALID_EXTENSIONS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_INVALID_EXTENSIONS              -9472 /**< The extension tag or value is invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_UNKNOWN_VERSION">Marco <span>MBEDTLS_ERR_X509_UNKNOWN_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_UNKNOWN_VERSION                 -9600 /**< CRT/CRL/CSR has an unsupported version number. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_UNKNOWN_SIG_ALG">Marco <span>MBEDTLS_ERR_X509_UNKNOWN_SIG_ALG</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_UNKNOWN_SIG_ALG                 -9728 /**< Signature algorithm (oid) is unsupported. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_SIG_MISMATCH">Marco <span>MBEDTLS_ERR_X509_SIG_MISMATCH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_SIG_MISMATCH                    -9856 /**< Signature algorithms do not match. (see \c ::mbedtls_x509_crt sig_oid) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_CERT_VERIFY_FAILED">Marco <span>MBEDTLS_ERR_X509_CERT_VERIFY_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_CERT_VERIFY_FAILED              -9984 /**< Certificate verification failed, e.g. CRL, CA or signature check failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_CERT_UNKNOWN_FORMAT">Marco <span>MBEDTLS_ERR_X509_CERT_UNKNOWN_FORMAT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_CERT_UNKNOWN_FORMAT             -10112 /**< Format not recognized as DER or PEM. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_BAD_INPUT_DATA">Marco <span>MBEDTLS_ERR_X509_BAD_INPUT_DATA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_BAD_INPUT_DATA                  -10240 /**< Input invalid. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_ALLOC_FAILED">Marco <span>MBEDTLS_ERR_X509_ALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_ALLOC_FAILED                    -10368 /**< Allocation of memory failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_FILE_IO_ERROR">Marco <span>MBEDTLS_ERR_X509_FILE_IO_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_FILE_IO_ERROR                   -10496 /**< Read/write of file failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_BUFFER_TOO_SMALL">Marco <span>MBEDTLS_ERR_X509_BUFFER_TOO_SMALL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_BUFFER_TOO_SMALL                -10624 /**< Destination buffer is too small. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_X509_FATAL_ERROR">Marco <span>MBEDTLS_ERR_X509_FATAL_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_X509_FATAL_ERROR                     -12288 /**< A fatal error occured, eg the chain is too long or the vrfy callback failed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_EXPIRED">Marco <span>MBEDTLS_X509_BADCERT_EXPIRED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_EXPIRED            1 /**< The certificate validity has expired. */
+</code></pre>
+      <pre class="doc-comment">/* Reminder: update x509_crt_verify_strings[] in library/x509_crt.c */</pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_REVOKED">Marco <span>MBEDTLS_X509_BADCERT_REVOKED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_REVOKED            2 /**< The certificate has been revoked (is on a CRL). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_CN_MISMATCH">Marco <span>MBEDTLS_X509_BADCERT_CN_MISMATCH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_CN_MISMATCH        4 /**< The certificate Common Name (CN) does not match with the expected CN. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_NOT_TRUSTED">Marco <span>MBEDTLS_X509_BADCERT_NOT_TRUSTED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_NOT_TRUSTED        8 /**< The certificate is not correctly signed by the trusted CA. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCRL_NOT_TRUSTED">Marco <span>MBEDTLS_X509_BADCRL_NOT_TRUSTED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCRL_NOT_TRUSTED         16 /**< The CRL is not correctly signed by the trusted CA. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCRL_EXPIRED">Marco <span>MBEDTLS_X509_BADCRL_EXPIRED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCRL_EXPIRED             32 /**< The CRL is expired. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_MISSING">Marco <span>MBEDTLS_X509_BADCERT_MISSING</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_MISSING            64 /**< Certificate was missing. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_SKIP_VERIFY">Marco <span>MBEDTLS_X509_BADCERT_SKIP_VERIFY</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_SKIP_VERIFY        128 /**< Certificate verification was skipped. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_OTHER">Marco <span>MBEDTLS_X509_BADCERT_OTHER</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_OTHER            256 /**< Other reason (can be used by verify callback) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_FUTURE">Marco <span>MBEDTLS_X509_BADCERT_FUTURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_FUTURE           512 /**< The certificate validity starts in the future. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCRL_FUTURE">Marco <span>MBEDTLS_X509_BADCRL_FUTURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCRL_FUTURE            1024 /**< The CRL is from the future */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_KEY_USAGE">Marco <span>MBEDTLS_X509_BADCERT_KEY_USAGE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_KEY_USAGE        2048 /**< Usage does not match the keyUsage extension. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_EXT_KEY_USAGE">Marco <span>MBEDTLS_X509_BADCERT_EXT_KEY_USAGE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_EXT_KEY_USAGE    4096 /**< Usage does not match the extendedKeyUsage extension. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_NS_CERT_TYPE">Marco <span>MBEDTLS_X509_BADCERT_NS_CERT_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_NS_CERT_TYPE     8192 /**< Usage does not match the nsCertType extension. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_BAD_MD">Marco <span>MBEDTLS_X509_BADCERT_BAD_MD</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_BAD_MD           16384 /**< The certificate is signed with an unacceptable hash. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_BAD_PK">Marco <span>MBEDTLS_X509_BADCERT_BAD_PK</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_BAD_PK           32768 /**< The certificate is signed with an unacceptable PK alg (eg RSA vs ECDSA). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCERT_BAD_KEY">Marco <span>MBEDTLS_X509_BADCERT_BAD_KEY</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCERT_BAD_KEY        65536 /**< The certificate is signed with an unacceptable key (eg bad curve, RSA too short). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCRL_BAD_MD">Marco <span>MBEDTLS_X509_BADCRL_BAD_MD</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCRL_BAD_MD          131072 /**< The CRL is signed with an unacceptable hash. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCRL_BAD_PK">Marco <span>MBEDTLS_X509_BADCRL_BAD_PK</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCRL_BAD_PK          262144 /**< The CRL is signed with an unacceptable PK alg (eg RSA vs ECDSA). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_BADCRL_BAD_KEY">Marco <span>MBEDTLS_X509_BADCRL_BAD_KEY</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_BADCRL_BAD_KEY         524288 /**< The CRL is signed with an unacceptable key (eg bad curve, RSA too short). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_DIGITAL_SIGNATURE">Marco <span>MBEDTLS_X509_KU_DIGITAL_SIGNATURE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_DIGITAL_SIGNATURE           (128) /* bit 0 */
+</code></pre>
+      <pre class="doc-comment">/*
+ * X.509 v3 Key Usage Extension flags
+ * Reminder: update x509_info_key_usage() when adding new flags.
+ */</pre>
+
+      <h4 id="MBEDTLS_X509_KU_NON_REPUDIATION">Marco <span>MBEDTLS_X509_KU_NON_REPUDIATION</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_NON_REPUDIATION             (64) /* bit 1 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_KEY_ENCIPHERMENT">Marco <span>MBEDTLS_X509_KU_KEY_ENCIPHERMENT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_KEY_ENCIPHERMENT            (32) /* bit 2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_DATA_ENCIPHERMENT">Marco <span>MBEDTLS_X509_KU_DATA_ENCIPHERMENT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_DATA_ENCIPHERMENT           (16) /* bit 3 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_KEY_AGREEMENT">Marco <span>MBEDTLS_X509_KU_KEY_AGREEMENT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_KEY_AGREEMENT               (8) /* bit 4 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_KEY_CERT_SIGN">Marco <span>MBEDTLS_X509_KU_KEY_CERT_SIGN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_KEY_CERT_SIGN               (4) /* bit 5 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_CRL_SIGN">Marco <span>MBEDTLS_X509_KU_CRL_SIGN</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_CRL_SIGN                    (2) /* bit 6 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_ENCIPHER_ONLY">Marco <span>MBEDTLS_X509_KU_ENCIPHER_ONLY</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_ENCIPHER_ONLY               (1) /* bit 7 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_KU_DECIPHER_ONLY">Marco <span>MBEDTLS_X509_KU_DECIPHER_ONLY</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_KU_DECIPHER_ONLY             (32768) /* bit 8 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_SSL_CLIENT">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_SSL_CLIENT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_SSL_CLIENT        (128) /* bit 0 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_SSL_SERVER">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_SSL_SERVER</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_SSL_SERVER        (64) /* bit 1 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_EMAIL">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_EMAIL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_EMAIL             (32) /* bit 2 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING    (16) /* bit 3 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_RESERVED">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_RESERVED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_RESERVED          (8) /* bit 4 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_SSL_CA">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_SSL_CA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_SSL_CA            (4) /* bit 5 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_EMAIL_CA">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_EMAIL_CA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_EMAIL_CA          (2) /* bit 6 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING_CA">Marco <span>MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING_CA</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_NS_CERT_TYPE_OBJECT_SIGNING_CA (1) /* bit 7 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_AUTHORITY_KEY_IDENTIFIER">Marco <span>MBEDTLS_X509_EXT_AUTHORITY_KEY_IDENTIFIER</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_AUTHORITY_KEY_IDENTIFIER   (1 << 0)
+</code></pre>
+      <pre class="doc-comment">/*
+ * X.509 extension types
+ *
+ * Comments refer to the status for using certificates. Status can be
+ * different for writing certificates or reading CRLs or CSRs.
+ */</pre>
+
+      <h4 id="MBEDTLS_X509_EXT_SUBJECT_KEY_IDENTIFIER">Marco <span>MBEDTLS_X509_EXT_SUBJECT_KEY_IDENTIFIER</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_SUBJECT_KEY_IDENTIFIER     (1 << 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_KEY_USAGE">Marco <span>MBEDTLS_X509_EXT_KEY_USAGE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_KEY_USAGE                  (1 << 2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_CERTIFICATE_POLICIES">Marco <span>MBEDTLS_X509_EXT_CERTIFICATE_POLICIES</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_CERTIFICATE_POLICIES       (1 << 3)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_POLICY_MAPPINGS">Marco <span>MBEDTLS_X509_EXT_POLICY_MAPPINGS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_POLICY_MAPPINGS            (1 << 4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_SUBJECT_ALT_NAME">Marco <span>MBEDTLS_X509_EXT_SUBJECT_ALT_NAME</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_SUBJECT_ALT_NAME           (1 << 5)   /* Supported (DNS) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_ISSUER_ALT_NAME">Marco <span>MBEDTLS_X509_EXT_ISSUER_ALT_NAME</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_ISSUER_ALT_NAME            (1 << 6)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_SUBJECT_DIRECTORY_ATTRS">Marco <span>MBEDTLS_X509_EXT_SUBJECT_DIRECTORY_ATTRS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_SUBJECT_DIRECTORY_ATTRS    (1 << 7)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_BASIC_CONSTRAINTS">Marco <span>MBEDTLS_X509_EXT_BASIC_CONSTRAINTS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_BASIC_CONSTRAINTS          (1 << 8)   /* Supported */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_NAME_CONSTRAINTS">Marco <span>MBEDTLS_X509_EXT_NAME_CONSTRAINTS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_NAME_CONSTRAINTS           (1 << 9)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_POLICY_CONSTRAINTS">Marco <span>MBEDTLS_X509_EXT_POLICY_CONSTRAINTS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_POLICY_CONSTRAINTS         (1 << 10)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_EXTENDED_KEY_USAGE">Marco <span>MBEDTLS_X509_EXT_EXTENDED_KEY_USAGE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_EXTENDED_KEY_USAGE         (1 << 11)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_CRL_DISTRIBUTION_POINTS">Marco <span>MBEDTLS_X509_EXT_CRL_DISTRIBUTION_POINTS</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_CRL_DISTRIBUTION_POINTS    (1 << 12)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_INIHIBIT_ANYPOLICY">Marco <span>MBEDTLS_X509_EXT_INIHIBIT_ANYPOLICY</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_INIHIBIT_ANYPOLICY         (1 << 13)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_FRESHEST_CRL">Marco <span>MBEDTLS_X509_EXT_FRESHEST_CRL</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_FRESHEST_CRL               (1 << 14)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_EXT_NS_CERT_TYPE">Marco <span>MBEDTLS_X509_EXT_NS_CERT_TYPE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_EXT_NS_CERT_TYPE               (1 << 16)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_FORMAT_DER">Marco <span>MBEDTLS_X509_FORMAT_DER</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_FORMAT_DER                1
+</code></pre>
+      <pre class="doc-comment">/*
+ * Storage format identifiers
+ * Recognized formats: PEM and DER
+ */</pre>
+
+      <h4 id="MBEDTLS_X509_FORMAT_PEM">Marco <span>MBEDTLS_X509_FORMAT_PEM</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_FORMAT_PEM                2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_MAX_DN_NAME_SIZE">Marco <span>MBEDTLS_X509_MAX_DN_NAME_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_MAX_DN_NAME_SIZE        256 /**< Maximum value size of a DN entry */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_X509_SAFE_SNPRINTF">Marco <span>MBEDTLS_X509_SAFE_SNPRINTF</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_X509_SAFE_SNPRINTF                         \
+   do {                                                   \
+       if( ret < 0 || (size_t) ret >= n )                 \
+           return( MBEDTLS_ERR_X509_BUFFER_TOO_SMALL );   \
+                                                           \
+       n -= (size_t) ret;                                 \
+       p += (size_t) ret;                                 \
+   } while( 0 )
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_x509_dn_gets">Func <span>mbedtls_x509_dn_gets</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_dn_gets( char *buf, size_t size, const mbedtls_x509_name *dn );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Store the certificate DN in printable form into buf;
+ *                 no more than size characters will be written.
+ *
+ * \param buf      Buffer to write to
+ * \param size     Maximum size of buffer
+ * \param dn       The X509 name to represent
+ *
+ * \return         The length of the string written (not including the
+ *                 terminated nul byte), or a negative error code.
+ */</pre>
+
+      <h4 id="mbedtls_x509_serial_gets">Func <span>mbedtls_x509_serial_gets</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_serial_gets( char *buf, size_t size, const mbedtls_x509_buf *serial );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Store the certificate serial in printable form into buf;
+ *                 no more than size characters will be written.
+ *
+ * \param buf      Buffer to write to
+ * \param size     Maximum size of buffer
+ * \param serial   The X509 serial to represent
+ *
+ * \return         The length of the string written (not including the
+ *                 terminated nul byte), or a negative error code.
+ */</pre>
+
+      <h4 id="mbedtls_x509_time_is_past">Func <span>mbedtls_x509_time_is_past</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_time_is_past( const mbedtls_x509_time *to );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Check a given mbedtls_x509_time against the system time
+ *                 and tell if it's in the past.
+ *
+ * \note           Intended usage is "if( is_past( valid_to ) ) ERROR".
+ *                 Hence the return value of 1 if on internal errors.
+ *
+ * \param to       mbedtls_x509_time to check
+ *
+ * \return         1 if the given time is in the past or an error occured,
+ *                 0 otherwise.
+ */</pre>
+
+      <h4 id="mbedtls_x509_time_is_future">Func <span>mbedtls_x509_time_is_future</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_time_is_future( const mbedtls_x509_time *from );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Check a given mbedtls_x509_time against the system time
+ *                 and tell if it's in the future.
+ *
+ * \note           Intended usage is "if( is_future( valid_from ) ) ERROR".
+ *                 Hence the return value of 1 if on internal errors.
+ *
+ * \param from     mbedtls_x509_time to check
+ *
+ * \return         1 if the given time is in the future or an error occured,
+ *                 0 otherwise.
+ */</pre>
+
+      <h4 id="mbedtls_x509_self_test">Func <span>mbedtls_x509_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ * \return         0 if successful, or 1 if the test failed
+ */</pre>
+
+      <h4 id="mbedtls_x509_get_name">Func <span>mbedtls_x509_get_name</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_name( unsigned char **p, const unsigned char *end,
+                  mbedtls_x509_name *cur );</code></pre>
+      <pre class="doc-comment">/*
+ * Internal module functions. You probably do not want to use these unless you
+ * know you do.
+ */</pre>
+
+      <h4 id="mbedtls_x509_get_alg_null">Func <span>mbedtls_x509_get_alg_null</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_alg_null( unsigned char **p, const unsigned char *end,
+                      mbedtls_x509_buf *alg );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_alg">Func <span>mbedtls_x509_get_alg</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_alg( unsigned char **p, const unsigned char *end,
+                 mbedtls_x509_buf *alg, mbedtls_x509_buf *params );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_rsassa_pss_params">Func <span>mbedtls_x509_get_rsassa_pss_params</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_rsassa_pss_params( const mbedtls_x509_buf *params,
+                               mbedtls_md_type_t *md_alg, mbedtls_md_type_t *mgf_md,
+                               int *salt_len );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_sig">Func <span>mbedtls_x509_get_sig</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_sig( unsigned char **p, const unsigned char *end, mbedtls_x509_buf *sig );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_sig_alg">Func <span>mbedtls_x509_get_sig_alg</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_sig_alg( const mbedtls_x509_buf *sig_oid, const mbedtls_x509_buf *sig_params,
+                     mbedtls_md_type_t *md_alg, mbedtls_pk_type_t *pk_alg,
+                     void **sig_opts );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_time">Func <span>mbedtls_x509_get_time</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_time( unsigned char **p, const unsigned char *end,
+                  mbedtls_x509_time *t );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_serial">Func <span>mbedtls_x509_get_serial</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_serial( unsigned char **p, const unsigned char *end,
+                    mbedtls_x509_buf *serial );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_get_ext">Func <span>mbedtls_x509_get_ext</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_get_ext( unsigned char **p, const unsigned char *end,
+                 mbedtls_x509_buf *ext, int tag );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_sig_alg_gets">Func <span>mbedtls_x509_sig_alg_gets</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_sig_alg_gets( char *buf, size_t size, const mbedtls_x509_buf *sig_oid,
+                      mbedtls_pk_type_t pk_alg, mbedtls_md_type_t md_alg,
+                      const void *sig_opts );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_key_size_helper">Func <span>mbedtls_x509_key_size_helper</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_key_size_helper( char *buf, size_t buf_size, const char *name );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_string_to_names">Func <span>mbedtls_x509_string_to_names</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_string_to_names( mbedtls_asn1_named_data **head, const char *name );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_set_extension">Func <span>mbedtls_x509_set_extension</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_set_extension( mbedtls_asn1_named_data **head, const char *oid, size_t oid_len,
+                       int critical, const unsigned char *val,
+                       size_t val_len );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_write_extensions">Func <span>mbedtls_x509_write_extensions</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_write_extensions( unsigned char **p, unsigned char *start,
+                          mbedtls_asn1_named_data *first );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_write_names">Func <span>mbedtls_x509_write_names</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_write_names( unsigned char **p, unsigned char *start,
+                     mbedtls_asn1_named_data *first );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_x509_write_sig">Func <span>mbedtls_x509_write_sig</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_x509_write_sig( unsigned char **p, unsigned char *start,
+                   const char *oid, size_t oid_len,
+                   unsigned char *sig, size_t size );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="mbedtls_x509_buf">Typedef <span>mbedtls_x509_buf</span></h4>
+      <pre class="doc-declare"><code>typedef mbedtls_asn1_buf mbedtls_x509_buf;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Type-length-value structure that allows for ASN1 using DER.
+ */</pre>
+
+      <h4 id="mbedtls_x509_bitstring">Typedef <span>mbedtls_x509_bitstring</span></h4>
+      <pre class="doc-declare"><code>typedef mbedtls_asn1_bitstring mbedtls_x509_bitstring;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Container for ASN1 bit strings.
+ */</pre>
+
+      <h4 id="mbedtls_x509_name">Typedef <span>mbedtls_x509_name</span></h4>
+      <pre class="doc-declare"><code>typedef mbedtls_asn1_named_data mbedtls_x509_name;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Container for ASN1 named information objects.
+ * It allows for Relative Distinguished Names (e.g. cn=localhost,ou=code,etc.).
+ */</pre>
+
+      <h4 id="mbedtls_x509_sequence">Typedef <span>mbedtls_x509_sequence</span></h4>
+      <pre class="doc-declare"><code>typedef mbedtls_asn1_sequence mbedtls_x509_sequence;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Container for a sequence of ASN.1 items
+ */</pre>
+
+      <h4 id="
+mbedtls_x509_time;
+">Typedef <span>
+mbedtls_x509_time;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_x509_time
+{
+   int year, mon, day;        /**< Date. */
+   int hour, min, sec;        /**< Time. */
+}
+mbedtls_x509_time;
+</code></pre>
+      <pre class="doc-comment">/** Container for date and time (precision in seconds). */</pre>
+    </div>
+  </body>
+</html>
+            

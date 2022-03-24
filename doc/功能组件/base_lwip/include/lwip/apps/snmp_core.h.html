@@ -1,0 +1,1110 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/apps/snmp_opts.h" class="nav-sub-label">lwip/apps/snmp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_SNMP_CORE_H" class="nav-sub-label">LWIP_HDR_APPS_SNMP_CORE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CLASS_UNIVERSAL" class="nav-sub-label">SNMP_ASN1_CLASS_UNIVERSAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CLASS_APPLICATION" class="nav-sub-label">SNMP_ASN1_CLASS_APPLICATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CLASS_CONTEXT" class="nav-sub-label">SNMP_ASN1_CLASS_CONTEXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CLASS_PRIVATE" class="nav-sub-label">SNMP_ASN1_CLASS_PRIVATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CONTENTTYPE_PRIMITIVE" class="nav-sub-label">SNMP_ASN1_CONTENTTYPE_PRIMITIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CONTENTTYPE_CONSTRUCTED" class="nav-sub-label">SNMP_ASN1_CONTENTTYPE_CONSTRUCTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_UNIVERSAL_END_OF_CONTENT" class="nav-sub-label">SNMP_ASN1_UNIVERSAL_END_OF_CONTENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_UNIVERSAL_INTEGER" class="nav-sub-label">SNMP_ASN1_UNIVERSAL_INTEGER</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_UNIVERSAL_OCTET_STRING" class="nav-sub-label">SNMP_ASN1_UNIVERSAL_OCTET_STRING</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_UNIVERSAL_NULL" class="nav-sub-label">SNMP_ASN1_UNIVERSAL_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_UNIVERSAL_OBJECT_ID" class="nav-sub-label">SNMP_ASN1_UNIVERSAL_OBJECT_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_UNIVERSAL_SEQUENCE_OF" class="nav-sub-label">SNMP_ASN1_UNIVERSAL_SEQUENCE_OF</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_APPLICATION_IPADDR" class="nav-sub-label">SNMP_ASN1_APPLICATION_IPADDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_APPLICATION_COUNTER" class="nav-sub-label">SNMP_ASN1_APPLICATION_COUNTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_APPLICATION_GAUGE" class="nav-sub-label">SNMP_ASN1_APPLICATION_GAUGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_APPLICATION_TIMETICKS" class="nav-sub-label">SNMP_ASN1_APPLICATION_TIMETICKS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_APPLICATION_OPAQUE" class="nav-sub-label">SNMP_ASN1_APPLICATION_OPAQUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_APPLICATION_COUNTER64" class="nav-sub-label">SNMP_ASN1_APPLICATION_COUNTER64</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_CONTEXT_VARBIND_NO_SUCH_INSTANCE" class="nav-sub-label">SNMP_ASN1_CONTEXT_VARBIND_NO_SUCH_INSTANCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_END_OF_CONTENT" class="nav-sub-label">SNMP_ASN1_TYPE_END_OF_CONTENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_INTEGER" class="nav-sub-label">SNMP_ASN1_TYPE_INTEGER</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_OCTET_STRING" class="nav-sub-label">SNMP_ASN1_TYPE_OCTET_STRING</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_NULL" class="nav-sub-label">SNMP_ASN1_TYPE_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_OBJECT_ID" class="nav-sub-label">SNMP_ASN1_TYPE_OBJECT_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_SEQUENCE" class="nav-sub-label">SNMP_ASN1_TYPE_SEQUENCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_IPADDR" class="nav-sub-label">SNMP_ASN1_TYPE_IPADDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_IPADDRESS" class="nav-sub-label">SNMP_ASN1_TYPE_IPADDRESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_COUNTER" class="nav-sub-label">SNMP_ASN1_TYPE_COUNTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_COUNTER32" class="nav-sub-label">SNMP_ASN1_TYPE_COUNTER32</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_GAUGE" class="nav-sub-label">SNMP_ASN1_TYPE_GAUGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_GAUGE32" class="nav-sub-label">SNMP_ASN1_TYPE_GAUGE32</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_UNSIGNED32" class="nav-sub-label">SNMP_ASN1_TYPE_UNSIGNED32</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_TIMETICKS" class="nav-sub-label">SNMP_ASN1_TYPE_TIMETICKS</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_OPAQUE" class="nav-sub-label">SNMP_ASN1_TYPE_OPAQUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_ASN1_TYPE_COUNTER64" class="nav-sub-label">SNMP_ASN1_TYPE_COUNTER64</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_VARBIND_EXCEPTION_OFFSET" class="nav-sub-label">SNMP_VARBIND_EXCEPTION_OFFSET</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_VARBIND_EXCEPTION_MASK" class="nav-sub-label">SNMP_VARBIND_EXCEPTION_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_NODE_TREE" class="nav-sub-label">SNMP_NODE_TREE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_NODE_SCALAR" class="nav-sub-label">SNMP_NODE_SCALAR</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_NODE_SCALAR_ARRAY" class="nav-sub-label">SNMP_NODE_SCALAR_ARRAY</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_NODE_TABLE" class="nav-sub-label">SNMP_NODE_TABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_NODE_THREADSYNC" class="nav-sub-label">SNMP_NODE_THREADSYNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_GET_VALUE_RAW_DATA" class="nav-sub-label">SNMP_GET_VALUE_RAW_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_CREATE_TREE_NODE(oid, subnodes)" class="nav-sub-label">SNMP_CREATE_TREE_NODE(oid, subnodes)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_CREATE_EMPTY_TREE_NODE(oid)" class="nav-sub-label">SNMP_CREATE_EMPTY_TREE_NODE(oid)</a>
+              </li>
+      
+
+              <li>
+                <a href="#SNMP_MIB_CREATE(oid_list, root_node)" class="nav-sub-label">SNMP_MIB_CREATE(oid_list, root_node)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#snmp_oid_in_range" class="nav-sub-label">snmp_oid_in_range</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_next_oid_init" class="nav-sub-label">snmp_next_oid_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_next_oid_precheck" class="nav-sub-label">snmp_next_oid_precheck</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_next_oid_check" class="nav-sub-label">snmp_next_oid_check</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_assign" class="nav-sub-label">snmp_oid_assign</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_combine" class="nav-sub-label">snmp_oid_combine</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_prefix" class="nav-sub-label">snmp_oid_prefix</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_append" class="nav-sub-label">snmp_oid_append</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_equal" class="nav-sub-label">snmp_oid_equal</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_compare" class="nav-sub-label">snmp_oid_compare</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_to_ip4" class="nav-sub-label">snmp_oid_to_ip4</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_ip4_to_oid" class="nav-sub-label">snmp_ip4_to_oid</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_to_ip6" class="nav-sub-label">snmp_oid_to_ip6</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_ip6_to_oid" class="nav-sub-label">snmp_ip6_to_oid</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_ip_to_oid" class="nav-sub-label">snmp_ip_to_oid</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_ip_port_to_oid" class="nav-sub-label">snmp_ip_port_to_oid</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_to_ip" class="nav-sub-label">snmp_oid_to_ip</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_oid_to_ip_port" class="nav-sub-label">snmp_oid_to_ip_port</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif_to_num" class="nav-sub-label">netif_to_num</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_set_test_ok" class="nav-sub-label">snmp_set_test_ok</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_decode_bits" class="nav-sub-label">snmp_decode_bits</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_decode_truthvalue" class="nav-sub-label">snmp_decode_truthvalue</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_encode_bits" class="nav-sub-label">snmp_encode_bits</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_encode_truthvalue" class="nav-sub-label">snmp_encode_truthvalue</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#snmp_node_instance" class="nav-sub-label">snmp_node_instance</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif" class="nav-sub-label">netif</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#snmp_err_t;
+" class="nav-sub-label">snmp_err_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_access_t;
+" class="nav-sub-label">snmp_access_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#node_instance_get_value_method" class="nav-sub-label">node_instance_get_value_method</a>
+              </li>
+      
+
+              <li>
+                <a href="#node_instance_set_test_method" class="nav-sub-label">node_instance_set_test_method</a>
+              </li>
+      
+
+              <li>
+                <a href="#node_instance_set_value_method" class="nav-sub-label">node_instance_set_value_method</a>
+              </li>
+      
+
+              <li>
+                <a href="#node_instance_release_method" class="nav-sub-label">node_instance_release_method</a>
+              </li>
+      
+
+              <li>
+                <a href="#snmp_next_oid_status_t;
+" class="nav-sub-label">snmp_next_oid_status_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/apps/snmp_opts.h"><span>lwip/apps/snmp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/apps/snmp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/apps/snmp_opts.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_SNMP_CORE_H">Marco <span>LWIP_HDR_APPS_SNMP_CORE_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_SNMP_CORE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_CLASS_UNIVERSAL">Marco <span>SNMP_ASN1_CLASS_UNIVERSAL</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CLASS_UNIVERSAL  0
+</code></pre>
+      <pre class="doc-comment">/* basic ASN1 defines */</pre>
+
+      <h4 id="SNMP_ASN1_CLASS_APPLICATION">Marco <span>SNMP_ASN1_CLASS_APPLICATION</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CLASS_APPLICATION 64
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_CLASS_CONTEXT">Marco <span>SNMP_ASN1_CLASS_CONTEXT</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CLASS_CONTEXT    128
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_CLASS_PRIVATE">Marco <span>SNMP_ASN1_CLASS_PRIVATE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CLASS_PRIVATE    0xC0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_CONTENTTYPE_PRIMITIVE">Marco <span>SNMP_ASN1_CONTENTTYPE_PRIMITIVE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CONTENTTYPE_PRIMITIVE  0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_CONTENTTYPE_CONSTRUCTED">Marco <span>SNMP_ASN1_CONTENTTYPE_CONSTRUCTED</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CONTENTTYPE_CONSTRUCTED 32
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_UNIVERSAL_END_OF_CONTENT">Marco <span>SNMP_ASN1_UNIVERSAL_END_OF_CONTENT</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_UNIVERSAL_END_OF_CONTENT 0
+</code></pre>
+      <pre class="doc-comment">/* universal tags (from ASN.1 spec.) */</pre>
+
+      <h4 id="SNMP_ASN1_UNIVERSAL_INTEGER">Marco <span>SNMP_ASN1_UNIVERSAL_INTEGER</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_UNIVERSAL_INTEGER        2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_UNIVERSAL_OCTET_STRING">Marco <span>SNMP_ASN1_UNIVERSAL_OCTET_STRING</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_UNIVERSAL_OCTET_STRING   4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_UNIVERSAL_NULL">Marco <span>SNMP_ASN1_UNIVERSAL_NULL</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_UNIVERSAL_NULL           5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_UNIVERSAL_OBJECT_ID">Marco <span>SNMP_ASN1_UNIVERSAL_OBJECT_ID</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_UNIVERSAL_OBJECT_ID      6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_UNIVERSAL_SEQUENCE_OF">Marco <span>SNMP_ASN1_UNIVERSAL_SEQUENCE_OF</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_UNIVERSAL_SEQUENCE_OF   16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_APPLICATION_IPADDR">Marco <span>SNMP_ASN1_APPLICATION_IPADDR</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_APPLICATION_IPADDR   0 /* [APPLICATION 0] IMPLICIT OCTET STRING (SIZE (4)) */
+</code></pre>
+      <pre class="doc-comment">/* application specific (SNMP) tags (from SNMPv2-SMI) */</pre>
+
+      <h4 id="SNMP_ASN1_APPLICATION_COUNTER">Marco <span>SNMP_ASN1_APPLICATION_COUNTER</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_APPLICATION_COUNTER  1 /* [APPLICATION 1] IMPLICIT INTEGER (0..4294967295) => u32_t */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_APPLICATION_GAUGE">Marco <span>SNMP_ASN1_APPLICATION_GAUGE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_APPLICATION_GAUGE    2 /* [APPLICATION 2] IMPLICIT INTEGER (0..4294967295) => u32_t */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_APPLICATION_TIMETICKS">Marco <span>SNMP_ASN1_APPLICATION_TIMETICKS</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_APPLICATION_TIMETICKS 3 /* [APPLICATION 3] IMPLICIT INTEGER (0..4294967295) => u32_t */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_APPLICATION_OPAQUE">Marco <span>SNMP_ASN1_APPLICATION_OPAQUE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_APPLICATION_OPAQUE   4 /* [APPLICATION 4] IMPLICIT OCTET STRING */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_APPLICATION_COUNTER64">Marco <span>SNMP_ASN1_APPLICATION_COUNTER64</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_APPLICATION_COUNTER64 6 /* [APPLICATION 6] IMPLICIT INTEGER (0..18446744073709551615) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_CONTEXT_VARBIND_NO_SUCH_INSTANCE">Marco <span>SNMP_ASN1_CONTEXT_VARBIND_NO_SUCH_INSTANCE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_CONTEXT_VARBIND_NO_SUCH_INSTANCE 1
+</code></pre>
+      <pre class="doc-comment">/* context specific (SNMP) tags (from RFC 1905) */</pre>
+
+      <h4 id="SNMP_ASN1_TYPE_END_OF_CONTENT">Marco <span>SNMP_ASN1_TYPE_END_OF_CONTENT</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_END_OF_CONTENT (SNMP_ASN1_CLASS_UNIVERSAL | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_UNIVERSAL_END_OF_CONTENT)
+</code></pre>
+      <pre class="doc-comment">/* full ASN1 type defines */</pre>
+
+      <h4 id="SNMP_ASN1_TYPE_INTEGER">Marco <span>SNMP_ASN1_TYPE_INTEGER</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_INTEGER       (SNMP_ASN1_CLASS_UNIVERSAL | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_UNIVERSAL_INTEGER)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_OCTET_STRING">Marco <span>SNMP_ASN1_TYPE_OCTET_STRING</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_OCTET_STRING  (SNMP_ASN1_CLASS_UNIVERSAL | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_UNIVERSAL_OCTET_STRING)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_NULL">Marco <span>SNMP_ASN1_TYPE_NULL</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_NULL          (SNMP_ASN1_CLASS_UNIVERSAL | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_UNIVERSAL_NULL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_OBJECT_ID">Marco <span>SNMP_ASN1_TYPE_OBJECT_ID</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_OBJECT_ID     (SNMP_ASN1_CLASS_UNIVERSAL | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_UNIVERSAL_OBJECT_ID)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_SEQUENCE">Marco <span>SNMP_ASN1_TYPE_SEQUENCE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_SEQUENCE      (SNMP_ASN1_CLASS_UNIVERSAL | SNMP_ASN1_CONTENTTYPE_CONSTRUCTED | SNMP_ASN1_UNIVERSAL_SEQUENCE_OF)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_IPADDR">Marco <span>SNMP_ASN1_TYPE_IPADDR</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_IPADDR        (SNMP_ASN1_CLASS_APPLICATION | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_APPLICATION_IPADDR)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_IPADDRESS">Marco <span>SNMP_ASN1_TYPE_IPADDRESS</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_IPADDRESS     SNMP_ASN1_TYPE_IPADDR
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_COUNTER">Marco <span>SNMP_ASN1_TYPE_COUNTER</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_COUNTER       (SNMP_ASN1_CLASS_APPLICATION | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_APPLICATION_COUNTER)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_COUNTER32">Marco <span>SNMP_ASN1_TYPE_COUNTER32</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_COUNTER32     SNMP_ASN1_TYPE_COUNTER
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_GAUGE">Marco <span>SNMP_ASN1_TYPE_GAUGE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_GAUGE         (SNMP_ASN1_CLASS_APPLICATION | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_APPLICATION_GAUGE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_GAUGE32">Marco <span>SNMP_ASN1_TYPE_GAUGE32</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_GAUGE32       SNMP_ASN1_TYPE_GAUGE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_UNSIGNED32">Marco <span>SNMP_ASN1_TYPE_UNSIGNED32</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_UNSIGNED32    SNMP_ASN1_TYPE_GAUGE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_TIMETICKS">Marco <span>SNMP_ASN1_TYPE_TIMETICKS</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_TIMETICKS     (SNMP_ASN1_CLASS_APPLICATION | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_APPLICATION_TIMETICKS)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_OPAQUE">Marco <span>SNMP_ASN1_TYPE_OPAQUE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_OPAQUE        (SNMP_ASN1_CLASS_APPLICATION | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_APPLICATION_OPAQUE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_ASN1_TYPE_COUNTER64">Marco <span>SNMP_ASN1_TYPE_COUNTER64</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_ASN1_TYPE_COUNTER64     (SNMP_ASN1_CLASS_APPLICATION | SNMP_ASN1_CONTENTTYPE_PRIMITIVE | SNMP_ASN1_APPLICATION_COUNTER64)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_VARBIND_EXCEPTION_OFFSET">Marco <span>SNMP_VARBIND_EXCEPTION_OFFSET</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_VARBIND_EXCEPTION_OFFSET 240
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_VARBIND_EXCEPTION_MASK">Marco <span>SNMP_VARBIND_EXCEPTION_MASK</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_VARBIND_EXCEPTION_MASK  15
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_NODE_TREE">Marco <span>SNMP_NODE_TREE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_NODE_TREE        0
+</code></pre>
+      <pre class="doc-comment">/**
+SNMP MIB node types
+ tree node is the only node the stack can process in order to walk the tree,
+ all other nodes are assumed to be leaf nodes.
+ This cannot be an enum because users may want to define their own node types.
+*/</pre>
+
+      <h4 id="SNMP_NODE_SCALAR">Marco <span>SNMP_NODE_SCALAR</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_NODE_SCALAR      1
+</code></pre>
+      <pre class="doc-comment">/* predefined leaf node types */</pre>
+
+      <h4 id="SNMP_NODE_SCALAR_ARRAY">Marco <span>SNMP_NODE_SCALAR_ARRAY</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_NODE_SCALAR_ARRAY 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_NODE_TABLE">Marco <span>SNMP_NODE_TABLE</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_NODE_TABLE       3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_NODE_THREADSYNC">Marco <span>SNMP_NODE_THREADSYNC</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_NODE_THREADSYNC  4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_GET_VALUE_RAW_DATA">Marco <span>SNMP_GET_VALUE_RAW_DATA</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_GET_VALUE_RAW_DATA 16384 /* do not use 0x8000 because return value of node_instance_get_value_method is signed16 and 0x8000 would be the signed bit */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_CREATE_TREE_NODE(oid, subnodes)">Marco <span>SNMP_CREATE_TREE_NODE(oid, subnodes)</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_CREATE_TREE_NODE(oid, subnodes) \
+ {{ SNMP_NODE_TREE, (oid) }, \
+ (u16_t)LWIP_ARRAYSIZE(subnodes), (subnodes) }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_CREATE_EMPTY_TREE_NODE(oid)">Marco <span>SNMP_CREATE_EMPTY_TREE_NODE(oid)</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_CREATE_EMPTY_TREE_NODE(oid) \
+ {{ SNMP_NODE_TREE, (oid) }, \
+ 0, NULL }
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SNMP_MIB_CREATE(oid_list, root_node)">Marco <span>SNMP_MIB_CREATE(oid_list, root_node)</span></h4>
+      <pre class="doc-declare"><code>#define SNMP_MIB_CREATE(oid_list, root_node) { (oid_list), (u8_t)LWIP_ARRAYSIZE(oid_list), root_node }
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="snmp_oid_in_range">Func <span>snmp_oid_in_range</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_oid_in_range(const u32_t *oid_in, u8_t oid_len, const struct snmp_oid_range *oid_ranges, u8_t oid_ranges_len);</code></pre>
+      <pre class="doc-comment">/** checks if incoming OID length and values are in allowed ranges */</pre>
+
+      <h4 id="snmp_next_oid_init">Func <span>snmp_next_oid_init</span></h4>
+      <pre class="doc-declare"><code>void snmp_next_oid_init(struct snmp_next_oid_state *state,
+ const u32_t *start_oid, u8_t start_oid_len,
+ u32_t *next_oid_buf, u8_t next_oid_max_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_next_oid_precheck">Func <span>snmp_next_oid_precheck</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_next_oid_precheck(struct snmp_next_oid_state *state, const u32_t *oid, u8_t oid_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_next_oid_check">Func <span>snmp_next_oid_check</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_next_oid_check(struct snmp_next_oid_state *state, const u32_t *oid, u8_t oid_len, void* reference);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_assign">Func <span>snmp_oid_assign</span></h4>
+      <pre class="doc-declare"><code>void snmp_oid_assign(struct snmp_obj_id* target, const u32_t *oid, u8_t oid_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_combine">Func <span>snmp_oid_combine</span></h4>
+      <pre class="doc-declare"><code>void snmp_oid_combine(struct snmp_obj_id* target, const u32_t *oid1, u8_t oid1_len, const u32_t *oid2, u8_t oid2_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_prefix">Func <span>snmp_oid_prefix</span></h4>
+      <pre class="doc-declare"><code>void snmp_oid_prefix(struct snmp_obj_id* target, const u32_t *oid, u8_t oid_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_append">Func <span>snmp_oid_append</span></h4>
+      <pre class="doc-declare"><code>void snmp_oid_append(struct snmp_obj_id* target, const u32_t *oid, u8_t oid_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_equal">Func <span>snmp_oid_equal</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_oid_equal(const u32_t *oid1, u8_t oid1_len, const u32_t *oid2, u8_t oid2_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_compare">Func <span>snmp_oid_compare</span></h4>
+      <pre class="doc-declare"><code>s8_t snmp_oid_compare(const u32_t *oid1, u8_t oid1_len, const u32_t *oid2, u8_t oid2_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_to_ip4">Func <span>snmp_oid_to_ip4</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_oid_to_ip4(const u32_t *oid, ip4_addr_t *ip);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_ip4_to_oid">Func <span>snmp_ip4_to_oid</span></h4>
+      <pre class="doc-declare"><code>void snmp_ip4_to_oid(const ip4_addr_t *ip, u32_t *oid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_to_ip6">Func <span>snmp_oid_to_ip6</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_oid_to_ip6(const u32_t *oid, ip6_addr_t *ip);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_ip6_to_oid">Func <span>snmp_ip6_to_oid</span></h4>
+      <pre class="doc-declare"><code>void snmp_ip6_to_oid(const ip6_addr_t *ip, u32_t *oid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_ip_to_oid">Func <span>snmp_ip_to_oid</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_ip_to_oid(const ip_addr_t *ip, u32_t *oid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_ip_port_to_oid">Func <span>snmp_ip_port_to_oid</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_ip_port_to_oid(const ip_addr_t *ip, u16_t port, u32_t *oid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_to_ip">Func <span>snmp_oid_to_ip</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_oid_to_ip(const u32_t *oid, u8_t oid_len, ip_addr_t *ip);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_oid_to_ip_port">Func <span>snmp_oid_to_ip_port</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_oid_to_ip_port(const u32_t *oid, u8_t oid_len, ip_addr_t *ip, u16_t *port);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netif_to_num">Func <span>netif_to_num</span></h4>
+      <pre class="doc-declare"><code>u8_t netif_to_num(const struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_set_test_ok">Func <span>snmp_set_test_ok</span></h4>
+      <pre class="doc-declare"><code>snmp_err_t snmp_set_test_ok(struct snmp_node_instance* instance, u16_t value_len, void* value);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_decode_bits">Func <span>snmp_decode_bits</span></h4>
+      <pre class="doc-declare"><code>err_t snmp_decode_bits(const u8_t *buf, u32_t buf_len, u32_t *bit_value);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_decode_truthvalue">Func <span>snmp_decode_truthvalue</span></h4>
+      <pre class="doc-declare"><code>err_t snmp_decode_truthvalue(const s32_t *asn1_value, u8_t *bool_value);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_encode_bits">Func <span>snmp_encode_bits</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_encode_bits(u8_t *buf, u32_t buf_len, u32_t bit_value, u8_t bit_count);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_encode_truthvalue">Func <span>snmp_encode_truthvalue</span></h4>
+      <pre class="doc-declare"><code>u8_t snmp_encode_truthvalue(s32_t *asn1_value, u32_t bool_value);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="snmp_node_instance">Variable <span>snmp_node_instance</span></h4>
+      <pre class="doc-declare"><code>struct snmp_node_instance;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netif">Variable <span>netif</span></h4>
+      <pre class="doc-declare"><code>struct netif;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="snmp_err_t;
+">Typedef <span>snmp_err_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ SNMP_ERR_NOERROR            = 0,
+/* 
+outdated v1 error codes. do not use anmore!
+#define SNMP_ERR_NOSUCHNAME 2  use SNMP_ERR_NOSUCHINSTANCE instead
+#define SNMP_ERR_BADVALUE   3  use SNMP_ERR_WRONGTYPE,SNMP_ERR_WRONGLENGTH,SNMP_ERR_WRONGENCODING or SNMP_ERR_WRONGVALUE instead
+#define SNMP_ERR_READONLY   4  use SNMP_ERR_NOTWRITABLE instead
+*/
+ SNMP_ERR_GENERROR           = 5,
+ SNMP_ERR_NOACCESS           = 6,
+ SNMP_ERR_WRONGTYPE          = 7,
+ SNMP_ERR_WRONGLENGTH        = 8,
+ SNMP_ERR_WRONGENCODING      = 9,
+ SNMP_ERR_WRONGVALUE         = 10,
+ SNMP_ERR_NOCREATION         = 11,
+ SNMP_ERR_INCONSISTENTVALUE  = 12,
+ SNMP_ERR_RESOURCEUNAVAILABLE = 13,
+ SNMP_ERR_COMMITFAILED       = 14,
+ SNMP_ERR_UNDOFAILED         = 15,
+ SNMP_ERR_NOTWRITABLE        = 17,
+ SNMP_ERR_INCONSISTENTNAME   = 18,
+
+ SNMP_ERR_NOSUCHINSTANCE     = SNMP_VARBIND_EXCEPTION_OFFSET + SNMP_ASN1_CONTEXT_VARBIND_NO_SUCH_INSTANCE
+} snmp_err_t;
+</code></pre>
+      <pre class="doc-comment">/** error codes predefined by SNMP prot. */</pre>
+
+      <h4 id="snmp_access_t;
+">Typedef <span>snmp_access_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ SNMP_NODE_INSTANCE_ACCESS_READ   = 1,
+ SNMP_NODE_INSTANCE_ACCESS_WRITE  = 2,
+ SNMP_NODE_INSTANCE_READ_ONLY     = SNMP_NODE_INSTANCE_ACCESS_READ,
+ SNMP_NODE_INSTANCE_READ_WRITE    = (SNMP_NODE_INSTANCE_ACCESS_READ | SNMP_NODE_INSTANCE_ACCESS_WRITE),
+ SNMP_NODE_INSTANCE_WRITE_ONLY    = SNMP_NODE_INSTANCE_ACCESS_WRITE,
+ SNMP_NODE_INSTANCE_NOT_ACCESSIBLE = 0
+} snmp_access_t;
+</code></pre>
+      <pre class="doc-comment">/** SNMP node instance access types */</pre>
+
+      <h4 id="node_instance_get_value_method">Typedef <span>node_instance_get_value_method</span></h4>
+      <pre class="doc-declare"><code>typedef s16_t (*node_instance_get_value_method)(struct snmp_node_instance*, void*);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="node_instance_set_test_method">Typedef <span>node_instance_set_test_method</span></h4>
+      <pre class="doc-declare"><code>typedef snmp_err_t (*node_instance_set_test_method)(struct snmp_node_instance*, u16_t, void*);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="node_instance_set_value_method">Typedef <span>node_instance_set_value_method</span></h4>
+      <pre class="doc-declare"><code>typedef snmp_err_t (*node_instance_set_value_method)(struct snmp_node_instance*, u16_t, void*);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="node_instance_release_method">Typedef <span>node_instance_release_method</span></h4>
+      <pre class="doc-declare"><code>typedef void (*node_instance_release_method)(struct snmp_node_instance*);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="snmp_next_oid_status_t;
+">Typedef <span>snmp_next_oid_status_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ SNMP_NEXT_OID_STATUS_SUCCESS,
+ SNMP_NEXT_OID_STATUS_NO_MATCH,
+ SNMP_NEXT_OID_STATUS_BUF_TO_SMALL
+} snmp_next_oid_status_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

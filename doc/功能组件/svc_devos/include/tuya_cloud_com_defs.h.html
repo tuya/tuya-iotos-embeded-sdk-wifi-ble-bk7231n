@@ -1,0 +1,2196 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ty_cJSON.h" class="nav-sub-label">ty_cJSON.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_CLOUD_COM_DEFS_H" class="nav-sub-label">TUYA_CLOUD_COM_DEFS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#ENCRYPT_KEY_LEN" class="nav-sub-label">ENCRYPT_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_UUID_LEN" class="nav-sub-label">GW_UUID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#AUTH_KEY_LEN" class="nav-sub-label">AUTH_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PSK_KEY_LEN" class="nav-sub-label">PSK_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PRODUCT_KEY_LEN" class="nav-sub-label">PRODUCT_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SW_VER_LEN" class="nav-sub-label">SW_VER_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SW_MD5_LEN" class="nav-sub-label">SW_MD5_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_HID_LEN" class="nav-sub-label">BT_HID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#BT_MAC_LEN" class="nav-sub-label">BT_MAC_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PSK_LEN" class="nav-sub-label">TUYA_PSK_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PSK21_LEN" class="nav-sub-label">TUYA_PSK21_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_IMEI_LEN" class="nav-sub-label">TUYA_IMEI_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_SN_LEN" class="nav-sub-label">TUYA_SN_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SYS_ENV_LEN" class="nav-sub-label">SYS_ENV_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOG_SEQ_PATH_LEN" class="nav-sub-label">LOG_SEQ_PATH_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_ID_LEN" class="nav-sub-label">GW_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_UUID_LEN" class="nav-sub-label">DEV_UUID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_ID_LEN" class="nav-sub-label">DEV_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCHEMA_ID_LEN" class="nav-sub-label">SCHEMA_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCHEMA_VER_LEN" class="nav-sub-label">SCHEMA_VER_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#BIND_TOKEN_LEN" class="nav-sub-label">BIND_TOKEN_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TOKEN_LEN" class="nav-sub-label">TOKEN_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#REGION_LEN" class="nav-sub-label">REGION_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#REGIST_KEY_LEN" class="nav-sub-label">REGIST_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_URL_LMT" class="nav-sub-label">HTTP_URL_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MQ_URL_LMT" class="nav-sub-label">MQ_URL_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIME_ZONE_LEN" class="nav-sub-label">TIME_ZONE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SUMMER_TM_ZONE_LEN" class="nav-sub-label">SUMMER_TM_ZONE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#COUNTRY_CODE_LEN" class="nav-sub-label">COUNTRY_CODE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#COUNTRY_CODE_LEN" class="nav-sub-label">COUNTRY_CODE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPV4_LEN" class="nav-sub-label">IPV4_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SEC_KEY_LEN" class="nav-sub-label">SEC_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOCAL_KEY_LEN" class="nav-sub-label">LOCAL_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#WXAPPID_LEN" class="nav-sub-label">WXAPPID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#WXUUID_LEN" class="nav-sub-label">WXUUID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#GRP_ID_LEN" class="nav-sub-label">GRP_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCENE_ID_LEN" class="nav-sub-label">SCENE_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#NET_MODE_LEN" class="nav-sub-label">NET_MODE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LC_GW_SLEEP_HB_LMT_S" class="nav-sub-label">LC_GW_SLEEP_HB_LMT_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#M_SCE_SUCCESS" class="nav-sub-label">M_SCE_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#M_SCE_ERR_EXCEED" class="nav-sub-label">M_SCE_ERR_EXCEED</a>
+              </li>
+      
+
+              <li>
+                <a href="#M_SCE_ERR_TIMEOUT" class="nav-sub-label">M_SCE_ERR_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#M_SCE_ERR_PARAM" class="nav-sub-label">M_SCE_ERR_PARAM</a>
+              </li>
+      
+
+              <li>
+                <a href="#M_SCE_WRITE_FILE" class="nav-sub-label">M_SCE_WRITE_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#M_SCE_ERR_OTHER" class="nav-sub-label">M_SCE_ERR_OTHER</a>
+              </li>
+      
+
+              <li>
+                <a href="#GP_DEV_SUPPORT_MAX" class="nav-sub-label">GP_DEV_SUPPORT_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_NAME_LMT" class="nav-sub-label">CH_NAME_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_CODE_LMT" class="nav-sub-label">CH_CODE_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_SN_LMT" class="nav-sub-label">CH_SN_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_REPORT_CODE_LMT" class="nav-sub-label">CH_REPORT_CODE_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_MANU_ID_LMT" class="nav-sub-label">CH_MANU_ID_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_VERSION_LMT" class="nav-sub-label">CH_VERSION_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_ENCRYPT_KEY_LMT" class="nav-sub-label">CH_ENCRYPT_KEY_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_ATTACH_ATTR_LMT" class="nav-sub-label">GW_ATTACH_ATTR_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_USER_REG_MAX_NUM" class="nav-sub-label">DP_REPT_USER_REG_MAX_NUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#FW_URL_LEN" class="nav-sub-label">FW_URL_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#FW_MD5_LEN" class="nav-sub-label">FW_MD5_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#FW_HMAC_LEN" class="nav-sub-label">FW_HMAC_LEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#GW_ABI" class="nav-sub-label">GW_ABI</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_NW_STAT_T" class="nav-sub-label">GW_NW_STAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_EXT_STAT_T" class="nav-sub-label">GW_EXT_STAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_TYPE_T" class="nav-sub-label">DEV_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#IOT_GW_NET_TYPE_T" class="nav-sub-label">IOT_GW_NET_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#CUR_NET_STATUS_T" class="nav-sub-label">CUR_NET_STATUS_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#USER_DEV_DTL_DEF_T" class="nav-sub-label">USER_DEV_DTL_DEF_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_PERMIT_DEV_TP_T" class="nav-sub-label">GW_PERMIT_DEV_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DP_REPT_CHAN_TP_T" class="nav-sub-label">TY_DP_REPT_CHAN_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_INIT_PARAMS_S;
+" class="nav-sub-label">TY_INIT_PARAMS_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_ATTACH_ATTR_T;
+" class="nav-sub-label">GW_ATTACH_ATTR_T;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#CH_CODE_ST;
+" class="nav-sub-label">CH_CODE_ST;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_QOS_ST;
+" class="nav-sub-label">DEV_QOS_ST;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_TYPE_E" class="nav-sub-label">DP_REPT_TYPE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_TYPE_E" class="nav-sub-label">DP_TYPE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_MODE_E" class="nav-sub-label">DP_MODE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_TP_E" class="nav-sub-label">DP_PROP_TP_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#UP_MAP_TYPE_E" class="nav-sub-label">UP_MAP_TYPE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPGRADE_TYPE_T" class="nav-sub-label">UPGRADE_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_VAL_S;
+" class="nav-sub-label">DP_PROP_VAL_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_ENUM_S;
+" class="nav-sub-label">DP_PROP_ENUM_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_STR_S;
+" class="nav-sub-label">DP_PROP_STR_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_BOOL_S;
+" class="nav-sub-label">DP_BOOL_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_BITMAP;
+" class="nav-sub-label">DP_PROP_BITMAP;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PROP_VALUE_U;
+" class="nav-sub-label">DP_PROP_VALUE_U;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_TRIG_T_E" class="nav-sub-label">DP_TRIG_T_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_PSV_E" class="nav-sub-label">DP_PSV_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_STAT_TP_T" class="nav-sub-label">DP_STAT_TP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_DESC_IF_S;
+" class="nav-sub-label">DP_DESC_IF_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_CMD_TYPE_E" class="nav-sub-label">DP_CMD_TYPE_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_TRANS_TYPE_T" class="nav-sub-label">DP_TRANS_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_OBJ_DP_VALUE_U;
+" class="nav-sub-label">TY_OBJ_DP_VALUE_U;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_OBJ_DP_S;
+" class="nav-sub-label">TY_OBJ_DP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_RECV_OBJ_DP_S;
+" class="nav-sub-label">TY_RECV_OBJ_DP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_RECV_RAW_DP_S;
+" class="nav-sub-label">TY_RECV_RAW_DP_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_DP_QUERY_S;
+" class="nav-sub-label">TY_DP_QUERY_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_CB_DATA;
+" class="nav-sub-label">DP_REPT_CB_DATA;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_PRE_HANDLE" class="nav-sub-label">DP_REPT_PRE_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_POST_HANDLE" class="nav-sub-label">DP_REPT_POST_HANDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DP_REPT_HADLE_CB_S;
+" class="nav-sub-label">DP_REPT_HADLE_CB_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#FW_UG_S;
+" class="nav-sub-label">FW_UG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_STATUS_E" class="nav-sub-label">GW_STATUS_E</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_OBJ_DP_CMD_CB" class="nav-sub-label">DEV_OBJ_DP_CMD_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_RAW_DP_CMD_CB" class="nav-sub-label">DEV_RAW_DP_CMD_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_DP_QUERY_CB" class="nav-sub-label">DEV_DP_QUERY_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_UG_INFORM_CB" class="nav-sub-label">GW_UG_INFORM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RESET_TYPE_E;
+" class="nav-sub-label">GW_RESET_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_RESET_IFM_CB" class="nav-sub-label">GW_RESET_IFM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_UG_INFORM_CB" class="nav-sub-label">DEV_UG_INFORM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_RESET_TYPE_E;
+" class="nav-sub-label">DEV_RESET_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEV_RESET_IFM_CB" class="nav-sub-label">DEV_RESET_IFM_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPE_HTTPC_GET_CHCODE_CB" class="nav-sub-label">OPE_HTTPC_GET_CHCODE_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_FILE_DATA_CB" class="nav-sub-label">GET_FILE_DATA_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#ACTIVE_SHORTURL_CB" class="nav-sub-label">ACTIVE_SHORTURL_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPGRADE_NOTIFY_CB" class="nav-sub-label">UPGRADE_NOTIFY_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_IOT_CBS_S;
+" class="nav-sub-label">TY_IOT_CBS_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_CLOUD_STREAM_MQTT_CB" class="nav-sub-label">GW_CLOUD_STREAM_MQTT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TRAN_STEP_T" class="nav-sub-label">TRAN_STEP_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLEAR_TYPE_T" class="nav-sub-label">CLEAR_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#DATA_TYPE_T" class="nav-sub-label">DATA_TYPE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#FLOW_BODY_ST;
+" class="nav-sub-label">FLOW_BODY_ST;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#FLOW_BODY_V2_ST;
+" class="nav-sub-label">FLOW_BODY_V2_ST;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_IOT_REGION_INFO_S;
+" class="nav-sub-label">TY_IOT_REGION_INFO_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUSTOM_CFG_E;
+" class="nav-sub-label">TY_CUSTOM_CFG_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_LOCATION_INFO_S;
+" class="nav-sub-label">TY_LOCATION_INFO_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#GW_APP_LOG_PATH_CB" class="nav-sub-label">GW_APP_LOG_PATH_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_IOT_APP_CBS_S;
+" class="nav-sub-label">TY_IOT_APP_CBS_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="ty_cJSON.h"><span>ty_cJSON.h</span></h4>
+      <pre class="doc-declare"><code>#include "ty_cJSON.h"
+</code></pre>
+      <pre class="doc-comment">#include "ty_cJSON.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_CLOUD_COM_DEFS_H">Marco <span>TUYA_CLOUD_COM_DEFS_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CLOUD_COM_DEFS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ENCRYPT_KEY_LEN">Marco <span>ENCRYPT_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define ENCRYPT_KEY_LEN        16     // max string length of storage encrypt
+</code></pre>
+      <pre class="doc-comment">// tuya sdk constants definitions</pre>
+
+      <h4 id="GW_UUID_LEN">Marco <span>GW_UUID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define GW_UUID_LEN            25     // max string length of UUID
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AUTH_KEY_LEN">Marco <span>AUTH_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define AUTH_KEY_LEN           32     // max string length of AUTH_KEY
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PSK_KEY_LEN">Marco <span>PSK_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define PSK_KEY_LEN            64     // max string length of PSK_KEY
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PRODUCT_KEY_LEN">Marco <span>PRODUCT_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define PRODUCT_KEY_LEN        16     // max string length of PRODUCT_KEY
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SW_VER_LEN">Marco <span>SW_VER_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SW_VER_LEN             10     // max string length of VERSION
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SW_MD5_LEN">Marco <span>SW_MD5_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SW_MD5_LEN             32     // max string length of attatch MD5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_HID_LEN">Marco <span>BT_HID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define BT_HID_LEN             19     // max string length of HID
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BT_MAC_LEN">Marco <span>BT_MAC_LEN</span></h4>
+      <pre class="doc-declare"><code>#define BT_MAC_LEN             12     // max string length of MAC
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PSK_LEN">Marco <span>TUYA_PSK_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PSK_LEN           32     // max string length of PSK
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PSK21_LEN">Marco <span>TUYA_PSK21_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PSK21_LEN         44     // max string length of PSK21
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_IMEI_LEN">Marco <span>TUYA_IMEI_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_IMEI_LEN          18     // max string length of IMEI
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_SN_LEN">Marco <span>TUYA_SN_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_SN_LEN            20     // max string length of SN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SYS_ENV_LEN">Marco <span>SYS_ENV_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SYS_ENV_LEN            20     // max string length of ENV
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOG_SEQ_PATH_LEN">Marco <span>LOG_SEQ_PATH_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LOG_SEQ_PATH_LEN       128    // max string length of LOG SEQ PATH
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_ID_LEN">Marco <span>GW_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define GW_ID_LEN              25     // max string length of GW_ID
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_UUID_LEN">Marco <span>DEV_UUID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define DEV_UUID_LEN           25     // max string length of DEV UUID
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_ID_LEN">Marco <span>DEV_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define DEV_ID_LEN             25     // max string length of DEV_ID
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCHEMA_ID_LEN">Marco <span>SCHEMA_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SCHEMA_ID_LEN          16     // max string length of SCHEMA
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCHEMA_VER_LEN">Marco <span>SCHEMA_VER_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SCHEMA_VER_LEN         16     // max string length of SCHEMA VERSION
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BIND_TOKEN_LEN">Marco <span>BIND_TOKEN_LEN</span></h4>
+      <pre class="doc-declare"><code>#define BIND_TOKEN_LEN         16     // max string length of BIND_TOKEN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TOKEN_LEN">Marco <span>TOKEN_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TOKEN_LEN              8      // max string length of TOKEN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="REGION_LEN">Marco <span>REGION_LEN</span></h4>
+      <pre class="doc-declare"><code>#define REGION_LEN             2      // max string length of REGIN IN TOKEN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="REGIST_KEY_LEN">Marco <span>REGIST_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define REGIST_KEY_LEN         4      // max string length of REGIST_KEY IN TOKEN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_URL_LMT">Marco <span>HTTP_URL_LMT</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_URL_LMT           128    // max string length of URL
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MQ_URL_LMT">Marco <span>MQ_URL_LMT</span></h4>
+      <pre class="doc-declare"><code>#define MQ_URL_LMT             128    // max string length of MQTT_URL
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TIME_ZONE_LEN">Marco <span>TIME_ZONE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define TIME_ZONE_LEN          10     // max string length of TIME_ZONE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SUMMER_TM_ZONE_LEN">Marco <span>SUMMER_TM_ZONE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SUMMER_TM_ZONE_LEN     256    // max string length of SUMMER_TIME_ZONE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COUNTRY_CODE_LEN">Marco <span>COUNTRY_CODE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define COUNTRY_CODE_LEN       8      // max string length of COUNTRY_CODE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COUNTRY_CODE_LEN">Marco <span>COUNTRY_CODE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define COUNTRY_CODE_LEN       8      // max string length of COUNTRY_CODE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPV4_LEN">Marco <span>IPV4_LEN</span></h4>
+      <pre class="doc-declare"><code>#define IPV4_LEN               15     // max string length of IPV4_LEN 255.255.255.255
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SEC_KEY_LEN">Marco <span>SEC_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SEC_KEY_LEN            16     // max string length of SECURITY_KEY
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOCAL_KEY_LEN">Marco <span>LOCAL_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define LOCAL_KEY_LEN          16     // max string length of LOCAL_KEY
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WXAPPID_LEN">Marco <span>WXAPPID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define WXAPPID_LEN            32     // max string length of wechat_appid
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WXUUID_LEN">Marco <span>WXUUID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define WXUUID_LEN             32     // max string length of wechat_uuid
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GRP_ID_LEN">Marco <span>GRP_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define GRP_ID_LEN             5      // max string length of group id range:1-65535
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCENE_ID_LEN">Marco <span>SCENE_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define SCENE_ID_LEN           3      // max string length of scene id range:1-255
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NET_MODE_LEN">Marco <span>NET_MODE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define NET_MODE_LEN           32     // max string length of NET MODE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LC_GW_SLEEP_HB_LMT_S">Marco <span>LC_GW_SLEEP_HB_LMT_S</span></h4>
+      <pre class="doc-declare"><code>#define LC_GW_SLEEP_HB_LMT_S 12*3600 // 12h
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="M_SCE_SUCCESS">Marco <span>M_SCE_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define M_SCE_SUCCESS 0       // success
+</code></pre>
+      <pre class="doc-comment">//group and scene error code</pre>
+
+      <h4 id="M_SCE_ERR_EXCEED">Marco <span>M_SCE_ERR_EXCEED</span></h4>
+      <pre class="doc-declare"><code>#define M_SCE_ERR_EXCEED 1    // space not enough
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="M_SCE_ERR_TIMEOUT">Marco <span>M_SCE_ERR_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define M_SCE_ERR_TIMEOUT 2   // timeout
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="M_SCE_ERR_PARAM">Marco <span>M_SCE_ERR_PARAM</span></h4>
+      <pre class="doc-declare"><code>#define M_SCE_ERR_PARAM 3     // param not in range
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="M_SCE_WRITE_FILE">Marco <span>M_SCE_WRITE_FILE</span></h4>
+      <pre class="doc-declare"><code>#define M_SCE_WRITE_FILE 4    // failed to write db
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="M_SCE_ERR_OTHER">Marco <span>M_SCE_ERR_OTHER</span></h4>
+      <pre class="doc-declare"><code>#define M_SCE_ERR_OTHER 5     // other failure
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GP_DEV_SUPPORT_MAX">Marco <span>GP_DEV_SUPPORT_MAX</span></h4>
+      <pre class="doc-declare"><code>#define GP_DEV_SUPPORT_MAX GP_DEV_ATH_10 // max attach id
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_NAME_LMT">Marco <span>CH_NAME_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_NAME_LMT 15         // max string length of operator name
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_CODE_LMT">Marco <span>CH_CODE_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_CODE_LMT 20         // max string length of operator code
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_SN_LMT">Marco <span>CH_SN_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_SN_LMT 20           // max string length of device sn
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_REPORT_CODE_LMT">Marco <span>CH_REPORT_CODE_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_REPORT_CODE_LMT 20  // max string length of report code
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_MANU_ID_LMT">Marco <span>CH_MANU_ID_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_MANU_ID_LMT 10      // max string length of manufacture id
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_VERSION_LMT">Marco <span>CH_VERSION_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_VERSION_LMT 10      // max string length of sw version
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CH_ENCRYPT_KEY_LMT">Marco <span>CH_ENCRYPT_KEY_LMT</span></h4>
+      <pre class="doc-declare"><code>#define CH_ENCRYPT_KEY_LMT 20  // max string length of encrypt key
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GW_ATTACH_ATTR_LMT">Marco <span>GW_ATTACH_ATTR_LMT</span></h4>
+      <pre class="doc-declare"><code>#define GW_ATTACH_ATTR_LMT 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DP_REPT_USER_REG_MAX_NUM">Marco <span>DP_REPT_USER_REG_MAX_NUM</span></h4>
+      <pre class="doc-declare"><code>#define DP_REPT_USER_REG_MAX_NUM 5
+</code></pre>
+      <pre class="doc-comment">//add by sunkz</pre>
+
+      <h4 id="FW_URL_LEN">Marco <span>FW_URL_LEN</span></h4>
+      <pre class="doc-declare"><code>#define FW_URL_LEN     255      // max length of firmware download url
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FW_MD5_LEN">Marco <span>FW_MD5_LEN</span></h4>
+      <pre class="doc-declare"><code>#define FW_MD5_LEN     32       // max length of firmware md5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FW_HMAC_LEN">Marco <span>FW_HMAC_LEN</span></h4>
+      <pre class="doc-declare"><code>#define FW_HMAC_LEN    64       // max length of firmware hmac
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="GW_ABI">Typedef <span>GW_ABI</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_ABI;
+#define GW_VIRTUAL 0 // product doesn't have subdevices functions,it only has device function. For example: SOC or MCU
+#define GW_ENTITY_ATTH_DEV 1 // Product has subdevices functions and it also has device function.
+#define GW_ENTITY 2 // Product only has subdevices functions.
+
+</code></pre>
+      <pre class="doc-comment">// Product Function Specification</pre>
+
+      <h4 id="GW_NW_STAT_T">Typedef <span>GW_NW_STAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_NW_STAT_T;
+#define GNS_UNVALID 0   // product is offline in LAN and WAN
+#define GNS_LAN_VALID 1 // product is online in LAN but offline in WAN
+#define GNS_WAN_VALID 2 // product is online in LAN and WAN
+
+</code></pre>
+      <pre class="doc-comment">// Product Network Connection</pre>
+
+      <h4 id="GW_EXT_STAT_T">Typedef <span>GW_EXT_STAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_EXT_STAT_T;
+#define EXT_UNAUTH 0           // UNAUTH
+#define EXT_PROD_TEST 1        // PROD_TEST
+#define EXT_NORMAL_S 2         // NORMAL_S
+#define EXT_GW_UPGRD 3         // GW_UPGRD
+#define EXT_DEV_UPGRD 4        // DEV_UPGRD
+#define EXT_DEV_ADD 5          // DEV_ADD
+#define EXT_REG_FAIL 6         // REG_FAIL
+#define EXT_NET_FAIL 7         // NET_FAIL
+#define EXT_CONFIG_BACK_UP 8   // CONFIG_BACK_UP
+#define EXT_CONFIG_RESTORE 9   // CONFIG_RESTORE
+
+</code></pre>
+      <pre class="doc-comment">// Product Extend State</pre>
+
+      <h4 id="DEV_TYPE_T">Typedef <span>DEV_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DEV_TYPE_T;
+#define DEV_NM_ATH_SNGL    0  // main netlink module
+#define DEV_BLE_SNGL       1  // ble
+#define DEV_ZB_SNGL        3  // ZigBee
+#define DEV_NM_NOT_ATH_SNGL 9  // MCU
+#define DEV_ATTACH_MOD_1 10    // attach 1
+#define DEV_ATTACH_MOD_2 11    // attach 2
+#define DEV_ATTACH_MOD_3 12    // attach 3
+#define DEV_ATTACH_MOD_4 13    // attach 4
+#define DEV_ATTACH_MOD_5 14    // attach 5
+#define DEV_ATTACH_MOD_6 15    // attach 6
+#define DEV_ATTACH_MOD_7 16    // attach 7
+#define DEV_ATTACH_MOD_8 17    // attach 8
+#define DEV_ATTACH_MOD_9 18    // attach 9
+#define DEV_ATTACH_MOD_10 19   // attach 10
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of device ota channel
+ * 
+ * @note 0~9 are consistent among all TUYA devices
+ * 10~19 are customized by device itself
+ */</pre>
+
+      <h4 id="IOT_GW_NET_TYPE_T">Typedef <span>IOT_GW_NET_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T IOT_GW_NET_TYPE_T;
+#define IOT_GW_NET_WIRED      0  // only support wried
+#define IOT_GW_NET_WIFI       1  // only support wifi
+#define IOT_GW_NET_WIRED_WIFI 2  // support wired and wifi
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CUR_NET_STATUS_T">Typedef <span>CUR_NET_STATUS_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T CUR_NET_STATUS_T;
+#define NET_WIRED 0 // wired
+#define NET_WIFI 1 // wifi</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="USER_DEV_DTL_DEF_T">Typedef <span>USER_DEV_DTL_DEF_T</span></h4>
+      <pre class="doc-declare"><code>typedef UINT_T USER_DEV_DTL_DEF_T; // user detial type define
+</code></pre>
+      <pre class="doc-comment">// sub-device detail type</pre>
+
+      <h4 id="GW_PERMIT_DEV_TP_T">Typedef <span>GW_PERMIT_DEV_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_PERMIT_DEV_TP_T;
+#define GP_DEV_DEF 255                // default device type
+#define GP_DEV_ZB DEV_ZB_SNGL          // zigbee
+#define GP_DEV_BLE DEV_BLE_SNGL        // ble
+#define GP_DEV_MCU DEV_NM_NOT_ATH_SNGL // mcu
+#define GP_DEV_ATH_1 DEV_ATTACH_MOD_1  // attach 1
+#define GP_DEV_ATH_2 DEV_ATTACH_MOD_2  // attach 2
+#define GP_DEV_ATH_3 DEV_ATTACH_MOD_3  // attach 3
+#define GP_DEV_ATH_4 DEV_ATTACH_MOD_4  // attach 4
+#define GP_DEV_ATH_5 DEV_ATTACH_MOD_5  // attach 5
+#define GP_DEV_ATH_6 DEV_ATTACH_MOD_6  // attach 6
+#define GP_DEV_ATH_7 DEV_ATTACH_MOD_7  // attach 7
+#define GP_DEV_ATH_8 DEV_ATTACH_MOD_8  // attach 8
+#define GP_DEV_ATH_9 DEV_ATTACH_MOD_9  // attach 9
+#define GP_DEV_ATH_10 DEV_ATTACH_MOD_10 // attach 10
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of all attache types
+ */</pre>
+
+      <h4 id="TY_DP_REPT_CHAN_TP_T">Typedef <span>TY_DP_REPT_CHAN_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T TY_DP_REPT_CHAN_TP_T;
+#define TY_DP_REPT_CHAN_LAN      0
+#define TY_DP_REPT_CHAN_MQTT     1
+#define TY_DP_REPT_CHAN_HTTP     2
+#define TY_DP_REPT_CHAN_BLE      3
+#define TY_DP_REPT_CHAN_SIGMESH  4
+#define TY_DP_REPT_CHAN_TUYA_MESH 5
+#define TY_DP_REPT_CHAN_BEACON   6
+#define TY_DP_REPT_CHAN_MAX      7
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_INIT_PARAMS_S;
+">Typedef <span>TY_INIT_PARAMS_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** kv init or not */
+   BOOL_T init_db;
+   /** sys env settings */
+   CHAR_T sys_env[SYS_ENV_LEN];
+   /** log seq path */
+   CHAR_T log_seq_path[LOG_SEQ_PATH_LEN];
+}TY_INIT_PARAMS_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of TUYA DevOS init param
+ */</pre>
+
+      <h4 id="GW_ATTACH_ATTR_T;
+">Typedef <span>GW_ATTACH_ATTR_T;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** attach ota channel */
+   GW_PERMIT_DEV_TP_T tp;
+   /** attach version, format xx.xx.xx */
+   CHAR_T ver[SW_VER_LEN+1];
+   CHAR_T md5[SW_MD5_LEN+1];
+}GW_ATTACH_ATTR_T;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of attach moudule attribute
+ */</pre>
+
+      <h4 id="CH_CODE_ST;
+">Typedef <span>CH_CODE_ST;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** operator name */
+   CHAR_T ch_name[CH_NAME_LMT+1];
+   /** operator code */ 
+   CHAR_T ch_code[CH_CODE_LMT+1];
+   /** device sn */
+   CHAR_T ch_sn[CH_SN_LMT+1];
+   /** report code */
+   CHAR_T ch_report_code[CH_REPORT_CODE_LMT+1];
+   /** manufacture id */
+   CHAR_T ch_manu_id[CH_MANU_ID_LMT+1];
+   /** sw version */
+   CHAR_T ch_version[CH_VERSION_LMT+1];
+   /** encrypt key */
+   CHAR_T ch_encrype_key[CH_ENCRYPT_KEY_LMT+1];
+}CH_CODE_ST;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of operator code info
+ */</pre>
+
+      <h4 id="DEV_QOS_ST;
+">Typedef <span>DEV_QOS_ST;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** short nodeID */
+   USHORT_T sNodeID;
+   /** father short nodeID */
+   USHORT_T fNodeID;
+   /** RSSI */
+   CHAR_T  rssi;
+   /** lqi info */
+   UCHAR_T lqi;
+   /** father node ID str */
+   CHAR_T  fid[DEV_ID_LEN+1];
+}DEV_QOS_ST;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of device Quaility of Service
+ */</pre>
+
+      <h4 id="DP_REPT_TYPE_E">Typedef <span>DP_REPT_TYPE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_REPT_TYPE_E;
+#define T_OBJ_REPT     0          // dp is value,str,enum,bool,bitmap
+#define T_RAW_REPT     1          // raw type
+#define T_STAT_REPT    2          // stat type
+#define T_RE_TRANS_REPT 10         // repeat report
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp report type
+ */</pre>
+
+      <h4 id="DP_TYPE_E">Typedef <span>DP_TYPE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_TYPE_E;
+#define T_OBJ          0          // dp is value,str,enum,bool,bitmap
+#define T_RAW          1          // raw type
+#define T_FILE         2          // file type
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp type
+ */</pre>
+
+      <h4 id="DP_MODE_E">Typedef <span>DP_MODE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_MODE_E;
+#define M_RW           0         // cloud/app can read and write
+#define M_WR           1         // cloud/app can only write to device
+#define M_RO           2         // cloud/app can only read from device
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp mode
+ */</pre>
+
+      <h4 id="DP_PROP_TP_E">Typedef <span>DP_PROP_TP_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_PROP_TP_E;
+#define PROP_BOOL 0
+#define PROP_VALUE 1
+#define PROP_STR 2
+#define PROP_ENUM 3
+#define PROP_BITMAP 4
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp property type
+ */</pre>
+
+      <h4 id="UP_MAP_TYPE_E">Typedef <span>UP_MAP_TYPE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T UP_MAP_TYPE_E;
+#define UP_CLEANER_MAP  0
+#define UP_CLEANER_PATH 1
+#define UP_CLEANER_MAP_PATH 2
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of map type
+ */</pre>
+
+      <h4 id="UPGRADE_TYPE_T">Typedef <span>UPGRADE_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T UPGRADE_TYPE_T;
+#define UPGRADE_TYPE_NORMAL 0
+#define UPGRADE_TYPE_SILENT 1
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of upgrade type
+ */</pre>
+
+      <h4 id="DP_PROP_VAL_S;
+">Typedef <span>DP_PROP_VAL_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** min value */
+   INT_T min;
+   /** max value */
+   INT_T max;
+   /** step */
+   SHORT_T step;
+   /** scale */
+   USHORT_T scale;
+   /** dp value */
+   INT_T value;
+}DP_PROP_VAL_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp prop
+ */</pre>
+
+      <h4 id="DP_PROP_ENUM_S;
+">Typedef <span>DP_PROP_ENUM_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** enum count */
+   INT_T cnt;
+   /** enum value */
+   CHAR_T **pp_enum;
+   /** current value */
+   INT_T value;
+}DP_PROP_ENUM_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp prop
+ */</pre>
+
+      <h4 id="DP_PROP_STR_S;
+">Typedef <span>DP_PROP_STR_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** max len */
+   INT_T max_len;
+   /** cur len */
+   INT_T cur_len;
+   /** mutex */
+   void* dp_str_mutex;
+   /** dp value */
+   CHAR_T *value;
+}DP_PROP_STR_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp prop
+ */</pre>
+
+      <h4 id="DP_BOOL_S;
+">Typedef <span>DP_BOOL_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** bool value */
+   BOOL_T value;
+}DP_BOOL_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp prop
+ */</pre>
+
+      <h4 id="DP_PROP_BITMAP;
+">Typedef <span>DP_PROP_BITMAP;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** max len */
+   UINT_T max_len;
+   /** value */
+   UINT_T value;
+}DP_PROP_BITMAP;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp prop
+ */</pre>
+
+      <h4 id="DP_PROP_VALUE_U;
+">Typedef <span>DP_PROP_VALUE_U;
+</span></h4>
+      <pre class="doc-declare"><code>typedef union {
+   /** see DP_PROP_VAL_S */
+   DP_PROP_VAL_S prop_value;
+   /** see DP_PROP_ENUM_S */
+   DP_PROP_ENUM_S prop_enum;
+   /** see DP_PROP_STR_S */
+   DP_PROP_STR_S prop_str;
+   /** see DP_BOOL_S */
+   DP_BOOL_S prop_bool;
+   /** see DP_PROP_BITMAP */
+   DP_PROP_BITMAP prop_bitmap;
+}DP_PROP_VALUE_U;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp prop value
+ */</pre>
+
+      <h4 id="DP_TRIG_T_E">Typedef <span>DP_TRIG_T_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_TRIG_T_E;
+#define TRIG_PULSE     0  // upload when value changes
+#define TRIG_DIRECT    1  // upload without value change check
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp trigger type
+ */</pre>
+
+      <h4 id="DP_PSV_E">Typedef <span>DP_PSV_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_PSV_E;
+#define PSV_FALSE 0   /* disabled */
+#define PSV_TRUE 1    /* app hasn't query yet */
+#define PSV_F_ONCE 2  /* app has queryed, shoulb report */
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp positive upload policy
+ */</pre>
+
+      <h4 id="DP_STAT_TP_T">Typedef <span>DP_STAT_TP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_STAT_TP_T;
+#define DST_NONE 0 // no need statistics
+#define DST_INC 1 // dp statistics increase
+#define DST_TOTAL 2 // dp statistics total
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief  Definition of dp statistics type
+ */</pre>
+
+      <h4 id="DP_DESC_IF_S;
+">Typedef <span>DP_DESC_IF_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** dp id */
+   BYTE_T dp_id;
+   /** see DP_MODE_E */
+   DP_MODE_E mode;
+   /** see DP_PSV_E */
+   DP_PSV_E passive;
+   /** see DP_TYPE_E */
+   DP_TYPE_E type;
+   /** see DP_PROP_TP_E */
+   DP_PROP_TP_E prop_tp;
+   /** see DP_TRIG_T_E */
+   DP_TRIG_T_E trig_t;
+   /** see DP_STAT_TP_T */
+   DP_STAT_TP_T stat;
+}DP_DESC_IF_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of dp description
+ */</pre>
+
+      <h4 id="DP_CMD_TYPE_E">Typedef <span>DP_CMD_TYPE_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_CMD_TYPE_E;
+#define DP_CMD_LAN     0      // cmd from LAN
+#define DP_CMD_MQ      1      // cmd from MQTT
+#define DP_CMD_TIMER   2      // cmd from Local Timer
+#define DP_CMD_SCENE_LINKAGE 3 // cmd from scene linkage
+#define DP_CMD_RELIABLE_TRANSFER 4 // cmd from reliable transfer
+#define DP_CMD_BT      5     // cmd from bt
+#define DP_CMD_SCENE_LINKAGE_LAN 6 // cmd from lan scene linkage
+#define DP_CMD_FFC     7      // cmd from ffc
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya sdk dp cmd type
+ */</pre>
+
+      <h4 id="DP_TRANS_TYPE_T">Typedef <span>DP_TRANS_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DP_TRANS_TYPE_T;
+#define DTT_SCT_UNC    0      // unicast
+#define DTT_SCT_BNC    1      // boardcast
+#define DTT_SCT_MNC    2      // multicast
+#define DTT_SCT_SCENE  3      // scene
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya sdk dp trans type
+ */</pre>
+
+      <h4 id="TY_OBJ_DP_VALUE_U;
+">Typedef <span>TY_OBJ_DP_VALUE_U;
+</span></h4>
+      <pre class="doc-declare"><code>typedef union {
+   INT_T dp_value;            // valid when dp type is value
+   UINT_T dp_enum;            // valid when dp type is enum
+   CHAR_T *dp_str;            // valid when dp type is str
+   BOOL_T dp_bool;            // valid when dp type is bool
+   UINT_T dp_bitmap;          // valid when dp type is bitmap
+}TY_OBJ_DP_VALUE_U;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya sdk dp value union
+ */</pre>
+
+      <h4 id="TY_OBJ_DP_S;
+">Typedef <span>TY_OBJ_DP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** dp id */
+   BYTE_T dpid;
+   /** dp type, see DP_PROP_TP_E */
+   DP_PROP_TP_E type;
+   /** dp value, see TY_OBJ_DP_VALUE_U */
+   TY_OBJ_DP_VALUE_U value;
+   /** dp happen time. if 0, mean now */
+   UINT_T time_stamp;
+}TY_OBJ_DP_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of structured dp
+ */</pre>
+
+      <h4 id="TY_RECV_OBJ_DP_S;
+">Typedef <span>TY_RECV_OBJ_DP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** see DP_CMD_TYPE_E */
+   DP_CMD_TYPE_E cmd_tp;
+   /** see DP_TRANS_TYPE_T */
+   DP_TRANS_TYPE_T dtt_tp;
+   /** if(NULL == cid) then then the cid represents gwid */
+   CHAR_T *cid;
+   /** mb id */
+   CHAR_T *mb_id;
+   /** count of dp */
+   UINT_T dps_cnt;
+   /** the dp data */
+   TY_OBJ_DP_S dps[0];
+}TY_RECV_OBJ_DP_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of recved structured dp
+ */</pre>
+
+      <h4 id="TY_RECV_RAW_DP_S;
+">Typedef <span>TY_RECV_RAW_DP_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** see DP_CMD_TYPE_E */
+   DP_CMD_TYPE_E cmd_tp;
+   /** see DP_TRANS_TYPE_T */
+   DP_TRANS_TYPE_T dtt_tp;
+   /** if(NULL == cid) then then the cid represents gwid */
+   CHAR_T *cid;
+   /** dp id */
+   BYTE_T dpid;
+   /** mb id */
+   CHAR_T *mb_id;
+   /** data len */
+   UINT_T len;
+   /** the data */
+   BYTE_T data[0];
+}TY_RECV_RAW_DP_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of recved raw dp
+ */</pre>
+
+      <h4 id="TY_DP_QUERY_S;
+">Typedef <span>TY_DP_QUERY_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** if(NULL == cid) then then the cid represents gwid */
+   CHAR_T *cid;
+   /** dpid cnt if(0 == cnt) then query all object dp */
+   UINT_T cnt;
+   /** dpid */
+   BYTE_T dpid[0];
+}TY_DP_QUERY_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of DP query
+ */</pre>
+
+      <h4 id="DP_REPT_CB_DATA;
+">Typedef <span>DP_REPT_CB_DATA;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** report type, see DP_REPT_TYPE_E */
+   DP_REPT_TYPE_E dp_rept_type;
+   /** obj:为TY_OBJ_DP_REPT_S，stat:dp为TY_STAT_DP_REPT_S，RAW:TY_RAW_DP_REPT_S */
+   VOID_T*        dp_data;
+   /** Json decoded dp string */
+   CHAR_T*        dp_data_json;
+   /** is query or not */
+   BOOL_T         is_query;
+}DP_REPT_CB_DATA;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of DP report callbak
+ */</pre>
+
+      <h4 id="DP_REPT_PRE_HANDLE">Typedef <span>DP_REPT_PRE_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*DP_REPT_PRE_HANDLE)(IN CONST DP_REPT_CB_DATA* dp_data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler of dp report pre-process
+ * 
+ * @param[in] dp_rslt Default report result
+ * @param[in] dp_data DP data, see DP_REPT_CB_DATA
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="DP_REPT_POST_HANDLE">Typedef <span>DP_REPT_POST_HANDLE</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*DP_REPT_POST_HANDLE)(IN CONST OPERATE_RET dp_rslt, IN CONST DP_REPT_CB_DATA* dp_data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler of dp report post-process
+ * 
+ * @param[in] dp_rslt Default report result
+ * @param[in] dp_data DP data, see DP_REPT_CB_DATA
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="DP_REPT_HADLE_CB_S;
+">Typedef <span>DP_REPT_HADLE_CB_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** handler of pre-precess */
+   DP_REPT_PRE_HANDLE dp_rept_pre_cb;
+   /** handler of post-precess */
+   DP_REPT_POST_HANDLE dp_rept_post_cb;
+   /** send dp force or not */
+   BOOL_T need_dp_force;
+}DP_REPT_HADLE_CB_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of DP handlers
+*/</pre>
+
+      <h4 id="FW_UG_S;
+">Typedef <span>FW_UG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** firmware type */
+   DEV_TYPE_T tp;
+   /** upgrade type, see UPGRADE_TYPE_T */
+   UPGRADE_TYPE_T type;
+   /** firmware download url */
+   CHAR_T fw_url[FW_URL_LEN+1];
+   /** firmware version */
+   CHAR_T sw_ver[SW_VER_LEN+1];
+   /** firmware size in BYTE */
+   UINT_T file_size;
+   /** firmware hmac */
+   CHAR_T fw_hmac[FW_HMAC_LEN+1];
+   /** firmware md5 */
+   CHAR_T fw_md5[FW_MD5_LEN+1];
+   /** is difference ota or not */
+   BOOL_T diff_ota;
+}FW_UG_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya sdk ota firmware info 
+ */</pre>
+
+      <h4 id="GW_STATUS_E">Typedef <span>GW_STATUS_E</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T GW_STATUS_E;
+#define GW_RESET           0 // gw reset
+#define GW_ACTIVED         1 // gw actived
+#define GW_FIRST_START     2 // start tuya-sdk in the first time.
+#define GW_NORMAL          3 // tuya-sdk is actived and started
+#define GW_BLE_ACTIVED         4 // gw ble actived
+/**
+ * @brief Handler to process gateway state change
+ * 
+ * @param[in] status Gateway status, see GW_STATUS_E
+ */
+typedef VOID (*GW_STATUS_CHANGED_CB)(IN CONST GW_STATUS_E status);
+
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya sdk gateway status info
+ */</pre>
+
+      <h4 id="DEV_OBJ_DP_CMD_CB">Typedef <span>DEV_OBJ_DP_CMD_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*DEV_OBJ_DP_CMD_CB)(IN CONST TY_RECV_OBJ_DP_S *dp);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process structured DP info
+ * 
+ * @param[in] dp DP query info, see TY_RECV_OBJ_DP_S
+ */</pre>
+
+      <h4 id="DEV_RAW_DP_CMD_CB">Typedef <span>DEV_RAW_DP_CMD_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*DEV_RAW_DP_CMD_CB)(IN CONST TY_RECV_RAW_DP_S *dp);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process raw DP info
+ * 
+ * @param[in] dp DP query info, see TY_RECV_RAW_DP_S
+ */</pre>
+
+      <h4 id="DEV_DP_QUERY_CB">Typedef <span>DEV_DP_QUERY_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*DEV_DP_QUERY_CB)(IN CONST TY_DP_QUERY_S *dp_qry);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process structured DP query info
+ * 
+ * @param[in] dp_qry DP query info, see TY_DP_QUERY_S
+ */</pre>
+
+      <h4 id="GW_UG_INFORM_CB">Typedef <span>GW_UG_INFORM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (*GW_UG_INFORM_CB)(IN CONST FW_UG_S *fw);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process gateway upgrade inform
+ * 
+ * @param[in] fw Firmware info, see FW_UG_S
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GW_RESET_TYPE_E;
+">Typedef <span>GW_RESET_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   GW_LOCAL_RESET_FACTORY = 0,
+   GW_REMOTE_UNACTIVE,
+   GW_LOCAL_UNACTIVE,
+   GW_REMOTE_RESET_FACTORY,
+   GW_RESET_DATA_FACTORY, //need clear local data when active
+}GW_RESET_TYPE_E;
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk gateway reset type */</pre>
+
+      <h4 id="GW_RESET_IFM_CB">Typedef <span>GW_RESET_IFM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*GW_RESET_IFM_CB)(GW_RESET_TYPE_E type);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process gateway reset
+ * 
+ * @param[in] type Reset type, see DEV_RESET_TYPE_E
+ */</pre>
+
+      <h4 id="DEV_UG_INFORM_CB">Typedef <span>DEV_UG_INFORM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (*DEV_UG_INFORM_CB)(IN CONST CHAR_T *dev_id,IN CONST FW_UG_S *fw);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process sub-device upgrade inform
+ * 
+ * @param[in] dev_id Device ID, NULL indicates gateway
+ * @param[in] fw Firmware info, see FW_UG_S
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="DEV_RESET_TYPE_E;
+">Typedef <span>DEV_RESET_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   DEV_REMOTE_RESET_FACTORY,
+   DEV_RESET_DATA_FACTORY, //need clear local data when bind
+}DEV_RESET_TYPE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEV_RESET_IFM_CB">Typedef <span>DEV_RESET_IFM_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*DEV_RESET_IFM_CB)(IN CONST CHAR_T *dev_id,IN DEV_RESET_TYPE_E type);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process reset
+ * 
+ * @param[in] dev_id Device ID, NULL indicates gateway
+ * @param[in] type Reset type, see DEV_RESET_TYPE_E
+ */</pre>
+
+      <h4 id="OPE_HTTPC_GET_CHCODE_CB">Typedef <span>OPE_HTTPC_GET_CHCODE_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*OPE_HTTPC_GET_CHCODE_CB)(IN CONST BOOL_T is_gw, IN CONST CHAR_T *devid, INOUT CH_CODE_ST *ch_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to get operator code
+ * 
+ * @param[in] is_gw Whether gateway or not
+ * @param[in] devid Device ID, NULL indicates gateway
+ * @param[out] ch_code Operator code, see CH_CODE_ST
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="GET_FILE_DATA_CB">Typedef <span>GET_FILE_DATA_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*GET_FILE_DATA_CB)(IN CONST FW_UG_S *fw, IN CONST UINT_T total_len,IN CONST UINT_T offset,
+                                               IN CONST BYTE_T *data,IN CONST UINT_T len,OUT UINT_T *remain_len, IN PVOID_T pri_data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process firmware download content
+ * 
+ * @param[in] fw Firmware info, see FW_UG_S
+ * @param[in] total_len Total length of firmware
+ * @param[in] offset Current offset
+ * @param[in] data File data buffer
+ * @param[in] len Length of buffer
+ * @param[in] remain_len Length not handled
+ * @param[in] pri_data Private data
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="ACTIVE_SHORTURL_CB">Typedef <span>ACTIVE_SHORTURL_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*ACTIVE_SHORTURL_CB)(OUT CONST CHAR_T *shorturl);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process device active short url
+ * 
+ * @param[out] shorturl Short url to active
+ */</pre>
+
+      <h4 id="UPGRADE_NOTIFY_CB">Typedef <span>UPGRADE_NOTIFY_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*UPGRADE_NOTIFY_CB)(IN CONST FW_UG_S *fw, IN CONST INT_T download_result, IN PVOID_T pri_data);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler to process download result
+ * 
+ * @param[in] fw Firmware info, see FW_UG_S
+ * @param[in] download_result download result, 0 indicates success
+ * @param[in] pri_data Private data
+ */</pre>
+
+      <h4 id="TY_IOT_CBS_S;
+">Typedef <span>TY_IOT_CBS_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** status update */
+   GW_STATUS_CHANGED_CB gw_status_cb;
+   /** gateway upgrade */
+   GW_UG_INFORM_CB gw_ug_cb;
+   /** gateway reset */
+   GW_RESET_IFM_CB gw_reset_cb;
+   /** structured DP info */
+   DEV_OBJ_DP_CMD_CB dev_obj_dp_cb;
+   /** raw DP info */
+   DEV_RAW_DP_CMD_CB dev_raw_dp_cb;
+   /** DP query */
+   DEV_DP_QUERY_CB dev_dp_query_cb;
+   /** sub-device upgrade */
+   DEV_UG_INFORM_CB dev_ug_cb;
+   /** sub-device reset */
+   DEV_RESET_IFM_CB dev_reset_cb;
+#if defined(TUYA_GW_OPERATOR) && (TUYA_GW_OPERATOR==1)
+   /** opoerator code */
+   OPE_HTTPC_GET_CHCODE_CB ope_get_chcode_cb;
+#endif
+
+#if defined(QRCODE_ACTIVE_MODE) && (QRCODE_ACTIVE_MODE==1)
+   /** active short url */
+   ACTIVE_SHORTURL_CB active_shorturl;
+#endif
+   /** gateway upgrade pre-condition */
+   GW_UG_INFORM_CB pre_gw_ug_cb;
+   /** sub-device upgrade pre-condition */
+   DEV_UG_INFORM_CB pre_dev_ug_cb;
+}TY_IOT_CBS_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of gateway callback funtions
+ */</pre>
+
+      <h4 id="GW_CLOUD_STREAM_MQTT_CB">Typedef <span>GW_CLOUD_STREAM_MQTT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*GW_CLOUD_STREAM_MQTT_CB)(IN struct ty_cJSON *root_json);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TRAN_STEP_T">Typedef <span>TRAN_STEP_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T TRAN_STEP_T;
+#define TS_START 0
+#define TS_TRANSFER 1
+#define TS_END 2
+
+</code></pre>
+      <pre class="doc-comment">// mqtt media data interface</pre>
+
+      <h4 id="CLEAR_TYPE_T">Typedef <span>CLEAR_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T CLEAR_TYPE_T;
+#define CLEAR_CONTINUE_ADD 0
+#define CLEAR_REMOVE_MAP  1
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DATA_TYPE_T">Typedef <span>DATA_TYPE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T DATA_TYPE_T;
+#define DATA_INCREMENT_MAP 0
+#define DATA_COMPLETE_MAP 1 
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FLOW_BODY_ST;
+">Typedef <span>FLOW_BODY_ST;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   USHORT_T id;
+   UINT_T posix;
+   TRAN_STEP_T step;
+   UINT_T offset;
+   USHORT_T len;
+   BYTE_T data[0];
+}FLOW_BODY_ST;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FLOW_BODY_V2_ST;
+">Typedef <span>FLOW_BODY_V2_ST;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   USHORT_T id;
+ BYTE_T map_id;
+ BYTE_T clear_type;
+ BYTE_T data_type;	
+   UINT_T posix;
+   UINT_T offset;
+   USHORT_T len;
+   BYTE_T data[0];
+}FLOW_BODY_V2_ST;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_IOT_REGION_INFO_S;
+">Typedef <span>TY_IOT_REGION_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** region info */
+   CHAR_T region[REGION_LEN + 1];
+   /** timezone info */
+   CHAR_T time_zone[TIME_ZONE_LEN+1];
+}TY_IOT_REGION_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of region info
+ */</pre>
+
+      <h4 id="TY_CUSTOM_CFG_E;
+">Typedef <span>TY_CUSTOM_CFG_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   /** device cfg */
+   CFG_DEVICE = 1,
+   /** product cfg */
+   CFG_PRODUCT = 2,
+   CFG_INVALID,
+}TY_CUSTOM_CFG_E;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Definition of customer config type
+ */</pre>
+
+      <h4 id="TY_LOCATION_INFO_S;
+">Typedef <span>TY_LOCATION_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** country code */
+   CHAR_T country_code[COUNTRY_CODE_LEN + 1];
+   /** ip addr. */
+   CHAR_T ip[IPV4_LEN + 1];
+}TY_LOCATION_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of location info
+ */</pre>
+
+      <h4 id="GW_APP_LOG_PATH_CB">Typedef <span>GW_APP_LOG_PATH_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*GW_APP_LOG_PATH_CB)(OUT CHAR_T *path, IN CONST INT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler for log upload
+ * 
+ * @param path Log upload path
+ * @param len Length of path
+ */</pre>
+
+      <h4 id="TY_IOT_APP_CBS_S;
+">Typedef <span>TY_IOT_APP_CBS_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** path for log upload */
+   GW_APP_LOG_PATH_CB gw_app_log_path_cb;
+}TY_IOT_APP_CBS_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of IoT callbacks used by APP
+ */</pre>
+    </div>
+  </body>
+</html>
+            

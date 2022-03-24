@@ -1,0 +1,599 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_rpc.h" class="nav-sub-label">lan_rpc.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__LAN_CLUSTER_BASE_H" class="nav-sub-label">__LAN_CLUSTER_BASE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLS_CAP_MASTER_MIN" class="nav-sub-label">CLS_CAP_MASTER_MIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLS_CAP_NODE_MIN" class="nav-sub-label">CLS_CAP_NODE_MIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#MASTER_CONFIRM_MSG_TIME" class="nav-sub-label">MASTER_CONFIRM_MSG_TIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#MASTER_CONFIRM_MSG_WAIT_NUM" class="nav-sub-label">MASTER_CONFIRM_MSG_WAIT_NUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MASTER_KEEPALIVE_CHECK_NUM" class="nav-sub-label">MASTER_KEEPALIVE_CHECK_NUM</a>
+              </li>
+      
+
+              <li>
+                <a href="#MASTER_KEEPALIVE_CHECK_TIME" class="nav-sub-label">MASTER_KEEPALIVE_CHECK_TIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#MST_CFM_MSG_MAX_LEN" class="nav-sub-label">MST_CFM_MSG_MAX_LEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lan_cluster_init_node_master_status" class="nav-sub-label">lan_cluster_init_node_master_status</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_master_confirm_msg_st2json" class="nav-sub-label">lan_cluster_master_confirm_msg_st2json</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_master_confirm_msg_json2st" class="nav-sub-label">lan_cluster_master_confirm_msg_json2st</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_has_master_cap" class="nav-sub-label">lan_cluster_has_master_cap</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_has_node_cap" class="nav-sub-label">lan_cluster_has_node_cap</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_init_node_state" class="nav-sub-label">lan_cluster_init_node_state</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_lan_rpc_master_get_cb" class="nav-sub-label">lan_cluster_lan_rpc_master_get_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_cluster_status_change_inner2out" class="nav-sub-label">lan_cluster_status_change_inner2out</a>
+              </li>
+      
+
+              <li>
+                <a href="#lan_setup_udp_server_socket" class="nav-sub-label">lan_setup_udp_server_socket</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#NODE_CLS_ST_T" class="nav-sub-label">NODE_CLS_ST_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#NODE_ST_T" class="nav-sub-label">NODE_ST_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#NODE_CHANGE_ST_T" class="nav-sub-label">NODE_CHANGE_ST_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_NODE_S;
+" class="nav-sub-label">LAN_NODE_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_NODE_REPORT_S;
+" class="nav-sub-label">LAN_NODE_REPORT_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_NODE_ACK_S;
+" class="nav-sub-label">LAN_NODE_ACK_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATE_CHANGE_CALLBACK" class="nav-sub-label">STATE_CHANGE_CALLBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLS_NODE_CHANGE_CALLBACK" class="nav-sub-label">CLS_NODE_CHANGE_CALLBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#CLS_NODE_CHANGE_SINGLE_CALLBACK" class="nav-sub-label">CLS_NODE_CHANGE_SINGLE_CALLBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#LAN_CLUSTER_INIT" class="nav-sub-label">LAN_CLUSTER_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATE_CHANGE_CALLBACK_REG" class="nav-sub-label">STATE_CHANGE_CALLBACK_REG</a>
+              </li>
+      
+
+              <li>
+                <a href="#NODE_CHANGE_CALLBACK_REG" class="nav-sub-label">NODE_CHANGE_CALLBACK_REG</a>
+              </li>
+      
+
+              <li>
+                <a href="#NODE_ACK" class="nav-sub-label">NODE_ACK</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="lan_rpc.h"><span>lan_rpc.h</span></h4>
+      <pre class="doc-declare"><code>#include "lan_rpc.h"
+</code></pre>
+      <pre class="doc-comment">#include "lan_rpc.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__LAN_CLUSTER_BASE_H">Marco <span>__LAN_CLUSTER_BASE_H</span></h4>
+      <pre class="doc-declare"><code>#define __LAN_CLUSTER_BASE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CLS_CAP_MASTER_MIN">Marco <span>CLS_CAP_MASTER_MIN</span></h4>
+      <pre class="doc-declare"><code>#define CLS_CAP_MASTER_MIN  1000 //能变成master节点的最低能力值
+</code></pre>
+      <pre class="doc-comment">//对外的能力判断</pre>
+
+      <h4 id="CLS_CAP_NODE_MIN">Marco <span>CLS_CAP_NODE_MIN</span></h4>
+      <pre class="doc-declare"><code>#define CLS_CAP_NODE_MIN 	 100  //能变成普通节点的最低能力值
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MASTER_CONFIRM_MSG_TIME">Marco <span>MASTER_CONFIRM_MSG_TIME</span></h4>
+      <pre class="doc-declare"><code>#define MASTER_CONFIRM_MSG_TIME 		5 		//master广播周期，秒为单位
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MASTER_CONFIRM_MSG_WAIT_NUM">Marco <span>MASTER_CONFIRM_MSG_WAIT_NUM</span></h4>
+      <pre class="doc-declare"><code>#define MASTER_CONFIRM_MSG_WAIT_NUM	4	//master连续广播之后能成为master的广播次数
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MASTER_KEEPALIVE_CHECK_NUM">Marco <span>MASTER_KEEPALIVE_CHECK_NUM</span></h4>
+      <pre class="doc-declare"><code>#define MASTER_KEEPALIVE_CHECK_NUM  	3 		//普通节点判断master离线的 周期个数
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MASTER_KEEPALIVE_CHECK_TIME">Marco <span>MASTER_KEEPALIVE_CHECK_TIME</span></h4>
+      <pre class="doc-declare"><code>#define MASTER_KEEPALIVE_CHECK_TIME 	MASTER_CONFIRM_MSG_TIME 	//普通节点保活检测定时器周期
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MST_CFM_MSG_MAX_LEN">Marco <span>MST_CFM_MSG_MAX_LEN</span></h4>
+      <pre class="doc-declare"><code>#define MST_CFM_MSG_MAX_LEN 128
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="lan_cluster_init_node_master_status">Func <span>lan_cluster_init_node_master_status</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_cluster_init_node_master_status();</code></pre>
+      <pre class="doc-comment">//记录当前master状态的模块初始化</pre>
+
+      <h4 id="lan_cluster_master_confirm_msg_st2json">Func <span>lan_cluster_master_confirm_msg_st2json</span></h4>
+      <pre class="doc-declare"><code>VOID lan_cluster_master_confirm_msg_st2json(CONST LAN_NODE_S *msg_node, CHAR_T msg_json[MST_CFM_MSG_MAX_LEN]);</code></pre>
+      <pre class="doc-comment">//master广播消息结构体和json的互转</pre>
+
+      <h4 id="lan_cluster_master_confirm_msg_json2st">Func <span>lan_cluster_master_confirm_msg_json2st</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_cluster_master_confirm_msg_json2st(CONST CHAR_T *msg_json, LAN_NODE_S *msg_node);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_cluster_has_master_cap">Func <span>lan_cluster_has_master_cap</span></h4>
+      <pre class="doc-declare"><code>BOOL_T lan_cluster_has_master_cap(USHORT_T cap);</code></pre>
+      <pre class="doc-comment">//判断cap的值是否有master能力</pre>
+
+      <h4 id="lan_cluster_has_node_cap">Func <span>lan_cluster_has_node_cap</span></h4>
+      <pre class="doc-declare"><code>BOOL_T lan_cluster_has_node_cap(USHORT_T cap);</code></pre>
+      <pre class="doc-comment">//判断cap的值是否有集群节点能力</pre>
+
+      <h4 id="lan_cluster_init_node_state">Func <span>lan_cluster_init_node_state</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_cluster_init_node_state(IN STATE_CHANGE_CALLBACK_REG cb_reg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lan_cluster_lan_rpc_master_get_cb">Func <span>lan_cluster_lan_rpc_master_get_cb</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_cluster_lan_rpc_master_get_cb(LAN_RPC_MASTER_S *master);</code></pre>
+      <pre class="doc-comment">//实现查询当前master节点的回调，lanRPC中使用</pre>
+
+      <h4 id="lan_cluster_status_change_inner2out">Func <span>lan_cluster_status_change_inner2out</span></h4>
+      <pre class="doc-declare"><code>VOID lan_cluster_status_change_inner2out(NODE_ST_T new_status_in, const LAN_NODE_S *master_node_in, NODE_CLS_ST_T *new_status_out, LAN_NODE_S *master_node_out);</code></pre>
+      <pre class="doc-comment">//实现集群内部维护状态到外部使用者感知状态的转换</pre>
+
+      <h4 id="lan_setup_udp_server_socket">Func <span>lan_setup_udp_server_socket</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET lan_setup_udp_server_socket(IN INT_T port, OUT INT_T *fd_out);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="NODE_CLS_ST_T">Typedef <span>NODE_CLS_ST_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T NODE_CLS_ST_T;
+#define CLS_ST_INVALID     	0 // 没有加到集群
+#define CLS_ST_MASTER    		1 // 我是master
+#define CLS_ST_NORMAL_NODE   	2 // 我是普通节点
+
+</code></pre>
+      <pre class="doc-comment">//集群对外感知的状态</pre>
+
+      <h4 id="NODE_ST_T">Typedef <span>NODE_ST_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T NODE_ST_T;
+#define ST_MASTER_WAIT     0 // master等待状态
+#define ST_MASTER_OK    	1 // master
+#define ST_NORMAL_WAIT  	2 // 普通节点等待
+#define ST_NORMAL  		3 // 普通节点
+#define ST_MAX_NUM  		4 
+
+</code></pre>
+      <pre class="doc-comment">//集群内部处理感知的状态，每个节点自己感知到自己的状态</pre>
+
+      <h4 id="NODE_CHANGE_ST_T">Typedef <span>NODE_CHANGE_ST_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T NODE_CHANGE_ST_T;
+#define NODE_ST_JOINING	 	0 // 节点发现
+#define NODE_ST_JOINED    		1 // 节点加入集群
+#define NODE_ST_LEAVE  		2 // 节点离开
+#define NODE_ST_FAST_REJOIN  	3 // 离开后快速加入
+#define NODE_ST_FORBIDDEN  	4 // 发现非法节点
+
+</code></pre>
+      <pre class="doc-comment">//master感知到的单个节点的状态变化</pre>
+
+      <h4 id="LAN_NODE_S;
+">Typedef <span>LAN_NODE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T id[GW_ID_LEN+1]; // virtual id
+ UINT_T ip;
+ INT_T seqno;
+ USHORT_T cap; 
+}LAN_NODE_S;
+</code></pre>
+      <pre class="doc-comment">//节点基本信息</pre>
+
+      <h4 id="LAN_NODE_REPORT_S;
+">Typedef <span>LAN_NODE_REPORT_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T id[GW_ID_LEN+1]; // virtual id
+}LAN_NODE_REPORT_S;
+</code></pre>
+      <pre class="doc-comment">//用于节点上报的信息</pre>
+
+      <h4 id="LAN_NODE_ACK_S;
+">Typedef <span>LAN_NODE_ACK_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T id[GW_ID_LEN+1]; // virtual id    
+   CHAR_T local_key[LOCAL_KEY_LEN+1]; // local key
+ BOOL_T allow; 
+}LAN_NODE_ACK_S;
+</code></pre>
+      <pre class="doc-comment">//用于反馈节点上报结果的信息</pre>
+
+      <h4 id="STATE_CHANGE_CALLBACK">Typedef <span>STATE_CHANGE_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(*STATE_CHANGE_CALLBACK)(NODE_CLS_ST_T new_state, IN CONST LAN_NODE_S *master_node);
+</code></pre>
+      <pre class="doc-comment">//自己的集群状态切换回调</pre>
+
+      <h4 id="CLS_NODE_CHANGE_CALLBACK">Typedef <span>CLS_NODE_CHANGE_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(*CLS_NODE_CHANGE_CALLBACK)(IN CONST LAN_NODE_REPORT_S *node, UINT_T num);
+</code></pre>
+      <pre class="doc-comment">//集群中节点变化回调,全量上报</pre>
+
+      <h4 id="CLS_NODE_CHANGE_SINGLE_CALLBACK">Typedef <span>CLS_NODE_CHANGE_SINGLE_CALLBACK</span></h4>
+      <pre class="doc-declare"><code>typedef VOID(*CLS_NODE_CHANGE_SINGLE_CALLBACK)(IN CONST LAN_NODE_REPORT_S *node, NODE_CHANGE_ST_T st);
+</code></pre>
+      <pre class="doc-comment">//集群中节点变化回调,单个节点上报</pre>
+
+      <h4 id="LAN_CLUSTER_INIT">Typedef <span>LAN_CLUSTER_INIT</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*LAN_CLUSTER_INIT)(IN CONST   LAN_NODE_S* node);
+</code></pre>
+      <pre class="doc-comment">//不同集群角色，初始化函数类型</pre>
+
+      <h4 id="STATE_CHANGE_CALLBACK_REG">Typedef <span>STATE_CHANGE_CALLBACK_REG</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*STATE_CHANGE_CALLBACK_REG)(STATE_CHANGE_CALLBACK cb);
+</code></pre>
+      <pre class="doc-comment">//不同集群角色，注册自己集群状态切换回调的函数类型</pre>
+
+      <h4 id="NODE_CHANGE_CALLBACK_REG">Typedef <span>NODE_CHANGE_CALLBACK_REG</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*NODE_CHANGE_CALLBACK_REG)(CLS_NODE_CHANGE_CALLBACK cb);
+</code></pre>
+      <pre class="doc-comment">//不同集群角色，注册集群节点变化回调的函数类型</pre>
+
+      <h4 id="NODE_ACK">Typedef <span>NODE_ACK</span></h4>
+      <pre class="doc-declare"><code>typedef OPERATE_RET (*NODE_ACK)(IN CONST LAN_NODE_ACK_S *node_array, UINT_T node_num);
+</code></pre>
+      <pre class="doc-comment">//不同集群角色，注册反馈节点上报结果的函数类型</pre>
+    </div>
+  </body>
+</html>
+            

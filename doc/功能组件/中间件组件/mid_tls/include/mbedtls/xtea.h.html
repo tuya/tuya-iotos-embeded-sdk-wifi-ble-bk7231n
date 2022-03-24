@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#xtea_alt.h" class="nav-sub-label">xtea_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_XTEA_H" class="nav-sub-label">MBEDTLS_XTEA_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_XTEA_ENCRYPT" class="nav-sub-label">MBEDTLS_XTEA_ENCRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_XTEA_DECRYPT" class="nav-sub-label">MBEDTLS_XTEA_DECRYPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_XTEA_INVALID_INPUT_LENGTH" class="nav-sub-label">MBEDTLS_ERR_XTEA_INVALID_INPUT_LENGTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_XTEA_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_XTEA_HW_ACCEL_FAILED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_xtea_init" class="nav-sub-label">mbedtls_xtea_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_xtea_free" class="nav-sub-label">mbedtls_xtea_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_xtea_setup" class="nav-sub-label">mbedtls_xtea_setup</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_xtea_crypt_ecb" class="nav-sub-label">mbedtls_xtea_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_xtea_crypt_cbc" class="nav-sub-label">mbedtls_xtea_crypt_cbc</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_xtea_self_test" class="nav-sub-label">mbedtls_xtea_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_xtea_context;
+" class="nav-sub-label">
+mbedtls_xtea_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="xtea_alt.h"><span>xtea_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "xtea_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "xtea_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_XTEA_H">Marco <span>MBEDTLS_XTEA_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_XTEA_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_XTEA_ENCRYPT">Marco <span>MBEDTLS_XTEA_ENCRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_XTEA_ENCRYPT    1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_XTEA_DECRYPT">Marco <span>MBEDTLS_XTEA_DECRYPT</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_XTEA_DECRYPT    0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_XTEA_INVALID_INPUT_LENGTH">Marco <span>MBEDTLS_ERR_XTEA_INVALID_INPUT_LENGTH</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_XTEA_INVALID_INPUT_LENGTH            -40 /**< The data input has an invalid length. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_XTEA_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_XTEA_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_XTEA_HW_ACCEL_FAILED                 -41 /**< XTEA hardware accelerator failed. */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_XTEA_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_xtea_init">Func <span>mbedtls_xtea_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_xtea_init( mbedtls_xtea_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize XTEA context
+ *
+ * \param ctx      XTEA context to be initialized
+ */</pre>
+
+      <h4 id="mbedtls_xtea_free">Func <span>mbedtls_xtea_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_xtea_free( mbedtls_xtea_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Clear XTEA context
+ *
+ * \param ctx      XTEA context to be cleared
+ */</pre>
+
+      <h4 id="mbedtls_xtea_setup">Func <span>mbedtls_xtea_setup</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_xtea_setup( mbedtls_xtea_context *ctx, const unsigned char key[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          XTEA key schedule
+ *
+ * \param ctx      XTEA context to be initialized
+ * \param key      the secret key
+ */</pre>
+
+      <h4 id="mbedtls_xtea_crypt_ecb">Func <span>mbedtls_xtea_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_xtea_crypt_ecb( mbedtls_xtea_context *ctx,
+                   int mode,
+                   const unsigned char input[8],
+                   unsigned char output[8] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          XTEA cipher function
+ *
+ * \param ctx      XTEA context
+ * \param mode     MBEDTLS_XTEA_ENCRYPT or MBEDTLS_XTEA_DECRYPT
+ * \param input    8-byte input block
+ * \param output   8-byte output block
+ *
+ * \return         0 if successful
+ */</pre>
+
+      <h4 id="mbedtls_xtea_crypt_cbc">Func <span>mbedtls_xtea_crypt_cbc</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_xtea_crypt_cbc( mbedtls_xtea_context *ctx,
+                   int mode,
+                   size_t length,
+                   unsigned char iv[8],
+                   const unsigned char *input,
+                   unsigned char *output);</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          XTEA CBC cipher function
+ *
+ * \param ctx      XTEA context
+ * \param mode     MBEDTLS_XTEA_ENCRYPT or MBEDTLS_XTEA_DECRYPT
+ * \param length   the length of input, multiple of 8
+ * \param iv       initialization vector for CBC mode
+ * \param input    input block
+ * \param output   output block
+ *
+ * \return         0 if successful,
+ *                 MBEDTLS_ERR_XTEA_INVALID_INPUT_LENGTH if the length % 8 != 0
+ */</pre>
+
+      <h4 id="mbedtls_xtea_self_test">Func <span>mbedtls_xtea_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_xtea_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ * \return         0 if successful, or 1 if the test failed
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_xtea_context;
+">Typedef <span>
+mbedtls_xtea_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_xtea_context
+{
+   uint32_t k[4];      /*!< key */
+}
+mbedtls_xtea_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          XTEA context structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

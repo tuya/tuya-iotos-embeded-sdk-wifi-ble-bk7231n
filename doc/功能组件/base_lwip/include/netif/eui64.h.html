@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#EUI64_H" class="nav-sub-label">EUI64_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_iszero(e)" class="nav-sub-label">eui64_iszero(e)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_equals(e, o)" class="nav-sub-label">eui64_equals(e, o)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_zero(e)" class="nav-sub-label">eui64_zero(e)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_copy(s, d)" class="nav-sub-label">eui64_copy(s, d)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_magic(e)" class="nav-sub-label">eui64_magic(e)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_magic_nz(x)" class="nav-sub-label">eui64_magic_nz(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_magic_ne(x, y)" class="nav-sub-label">eui64_magic_ne(x, y)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_get(ll, cp)" class="nav-sub-label">eui64_get(ll, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_put(ll, cp)" class="nav-sub-label">eui64_put(ll, cp)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_set32(e, l)" class="nav-sub-label">eui64_set32(e, l)</a>
+              </li>
+      
+
+              <li>
+                <a href="#eui64_setlo32(e, l)" class="nav-sub-label">eui64_setlo32(e, l)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#eui64_t;
+" class="nav-sub-label">eui64_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="EUI64_H">Marco <span>EUI64_H</span></h4>
+      <pre class="doc-declare"><code>#define EUI64_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_iszero(e)">Marco <span>eui64_iszero(e)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_iszero(e)	(((e).e32[0] | (e).e32[1]) == 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_equals(e, o)">Marco <span>eui64_equals(e, o)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_equals(e, o) (((e).e32[0] == (o).e32[0]) && \
+			((e).e32[1] == (o).e32[1]))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_zero(e)">Marco <span>eui64_zero(e)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_zero(e)	(e).e32[0] = (e).e32[1] = 0;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_copy(s, d)">Marco <span>eui64_copy(s, d)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_copy(s, d) memcpy(&(d), &(s), sizeof(eui64_t))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_magic(e)">Marco <span>eui64_magic(e)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_magic(e)	do {		\
+			(e).e32[0] = magic(); \
+			(e).e32[1] = magic(); \
+			(e).e8[0] &= ~2; \
+			} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_magic_nz(x)">Marco <span>eui64_magic_nz(x)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_magic_nz(x) do {			\
+			eui64_magic(x);		\
+			} while (eui64_iszero(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_magic_ne(x, y)">Marco <span>eui64_magic_ne(x, y)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_magic_ne(x, y) do {			\
+			eui64_magic(x);		\
+			} while (eui64_equals(x, y))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_get(ll, cp)">Marco <span>eui64_get(ll, cp)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_get(ll, cp) do {			\
+			eui64_copy((*cp), (ll)); \
+			(cp) += sizeof(eui64_t); \
+			} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_put(ll, cp)">Marco <span>eui64_put(ll, cp)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_put(ll, cp) do {			\
+			eui64_copy((ll), (*cp)); \
+			(cp) += sizeof(eui64_t); \
+			} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_set32(e, l)">Marco <span>eui64_set32(e, l)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_set32(e, l) do {		\
+			(e).e32[0] = 0;	\
+			(e).e32[1] = lwip_htonl(l); \
+			} while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="eui64_setlo32(e, l)">Marco <span>eui64_setlo32(e, l)</span></h4>
+      <pre class="doc-declare"><code>#define eui64_setlo32(e, l) eui64_set32(e, l)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *eui64_ntoa(eui64_t);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="eui64_t;
+">Typedef <span>eui64_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef union
+{
+   u8_t e8[8];
+   u16_t e16[4];
+   u32_t e32[2];
+} eui64_t;
+</code></pre>
+      <pre class="doc-comment">/*
+ * @todo:
+ *
+ * Maybe this should be done by processing struct in6_addr directly...
+ */</pre>
+    </div>
+  </body>
+</html>
+            

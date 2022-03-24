@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver.h" class="nav-sub-label">tuya_driver.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_PIN_H__" class="nav-sub-label">__TUYA_PIN_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PINS_NAME(PORT)" class="nav-sub-label">TUYA_PINS_NAME(PORT)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_INIT_LOW" class="nav-sub-label">TUYA_PIN_INIT_LOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_INIT_HIGH" class="nav-sub-label">TUYA_PIN_INIT_HIGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_INIT_MASK" class="nav-sub-label">TUYA_PIN_INIT_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IN" class="nav-sub-label">TUYA_PIN_IN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IN_FL" class="nav-sub-label">TUYA_PIN_IN_FL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IN_IRQ" class="nav-sub-label">TUYA_PIN_IN_IRQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_OUT_PP" class="nav-sub-label">TUYA_PIN_OUT_PP</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_OUT_OD" class="nav-sub-label">TUYA_PIN_OUT_OD</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_INOUT_MASK" class="nav-sub-label">TUYA_PIN_INOUT_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IRQ_RISE" class="nav-sub-label">TUYA_PIN_IRQ_RISE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IRQ_FALL" class="nav-sub-label">TUYA_PIN_IRQ_FALL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IRQ_RISE_FALL" class="nav-sub-label">TUYA_PIN_IRQ_RISE_FALL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IRQ_LOW" class="nav-sub-label">TUYA_PIN_IRQ_LOW</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IRQ_HIGH" class="nav-sub-label">TUYA_PIN_IRQ_HIGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_IRQ_MASK" class="nav-sub-label">TUYA_PIN_IRQ_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_PULL_UP" class="nav-sub-label">TUYA_PIN_PULL_UP</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_PULL_DOWN" class="nav-sub-label">TUYA_PIN_PULL_DOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_PULL_NONE" class="nav-sub-label">TUYA_PIN_PULL_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_MODE_MASK" class="nav-sub-label">TUYA_PIN_MODE_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_NUM(__PINNAME)" class="nav-sub-label">TUYA_PIN_NUM(__PINNAME)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_PIN_PORT(__PINNAME)" class="nav-sub-label">TUYA_PIN_PORT(__PINNAME)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_pin_irq_disable" class="nav-sub-label">tuya_pin_irq_disable</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_pin_init" class="nav-sub-label">tuya_pin_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_write" class="nav-sub-label">tuya_pin_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_read" class="nav-sub-label">tuya_pin_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_control" class="nav-sub-label">tuya_pin_control</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_irq_init" class="nav-sub-label">tuya_pin_irq_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_irq_enable" class="nav-sub-label">tuya_pin_irq_enable</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_register" class="nav-sub-label">tuya_pin_register</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_pin_port_t;
+" class="nav-sub-label">tuya_pin_port_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_name_t;
+" class="nav-sub-label">tuya_pin_name_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_level_t;
+" class="nav-sub-label">tuya_pin_level_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_mode_t;
+" class="nav-sub-label">tuya_pin_mode_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_irq_cb" class="nav-sub-label">tuya_pin_irq_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_irq_t;
+" class="nav-sub-label">tuya_pin_irq_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_pin_ops_t;
+" class="nav-sub-label">tuya_pin_ops_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_driver.h"><span>tuya_driver.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_driver.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_driver.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_PIN_H__">Marco <span>__TUYA_PIN_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_PIN_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PINS_NAME(PORT)">Marco <span>TUYA_PINS_NAME(PORT)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PINS_NAME(PORT)                           \
+   PORT##0, PORT##1, PORT##2, PORT##3, PORT##4,   \
+   PORT##5, PORT##6, PORT##7, PORT##8, PORT##9,   \
+   PORT##10, PORT##11, PORT##12, PORT##13, PORT##14,  \
+   PORT##15, PORT##16, PORT##17, PORT##18, PORT##19,  \
+   PORT##20, PORT##21, PORT##22, PORT##23, PORT##24,  \
+   PORT##25, PORT##26, PORT##27, PORT##28, PORT##29,  \
+   PORT##30, PORT##31 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_INIT_LOW">Marco <span>TUYA_PIN_INIT_LOW</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_INIT_LOW              ((uint16_t)(1 << 0))
+</code></pre>
+      <pre class="doc-comment">// 2bit</pre>
+
+      <h4 id="TUYA_PIN_INIT_HIGH">Marco <span>TUYA_PIN_INIT_HIGH</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_INIT_HIGH             ((uint16_t)(2 << 0))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_INIT_MASK">Marco <span>TUYA_PIN_INIT_MASK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_INIT_MASK             ((uint16_t)(3 << 0))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IN">Marco <span>TUYA_PIN_IN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IN                    ((uint16_t)(1 << 2))
+</code></pre>
+      <pre class="doc-comment">// 3bit</pre>
+
+      <h4 id="TUYA_PIN_IN_FL">Marco <span>TUYA_PIN_IN_FL</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IN_FL                 ((uint16_t)(2 << 2))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IN_IRQ">Marco <span>TUYA_PIN_IN_IRQ</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IN_IRQ                ((uint16_t)(3 << 2))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_OUT_PP">Marco <span>TUYA_PIN_OUT_PP</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_OUT_PP                ((uint16_t)(4 << 2))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_OUT_OD">Marco <span>TUYA_PIN_OUT_OD</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_OUT_OD                ((uint16_t)(5 << 2))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_INOUT_MASK">Marco <span>TUYA_PIN_INOUT_MASK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_INOUT_MASK            ((uint16_t)(7 << 2))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IRQ_RISE">Marco <span>TUYA_PIN_IRQ_RISE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IRQ_RISE              ((uint16_t)(1 << 5))
+</code></pre>
+      <pre class="doc-comment">// 3bit</pre>
+
+      <h4 id="TUYA_PIN_IRQ_FALL">Marco <span>TUYA_PIN_IRQ_FALL</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IRQ_FALL              ((uint16_t)(2 << 5))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IRQ_RISE_FALL">Marco <span>TUYA_PIN_IRQ_RISE_FALL</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IRQ_RISE_FALL         ((uint16_t)(3 << 5))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IRQ_LOW">Marco <span>TUYA_PIN_IRQ_LOW</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IRQ_LOW               ((uint16_t)(4 << 5))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IRQ_HIGH">Marco <span>TUYA_PIN_IRQ_HIGH</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IRQ_HIGH              ((uint16_t)(5 << 5))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_IRQ_MASK">Marco <span>TUYA_PIN_IRQ_MASK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_IRQ_MASK              ((uint16_t)(7 << 5))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_PULL_UP">Marco <span>TUYA_PIN_PULL_UP</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_PULL_UP               ((uint16_t)(1 << 9))
+</code></pre>
+      <pre class="doc-comment">// 4bit </pre>
+
+      <h4 id="TUYA_PIN_PULL_DOWN">Marco <span>TUYA_PIN_PULL_DOWN</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_PULL_DOWN             ((uint16_t)(2 << 9))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_PULL_NONE">Marco <span>TUYA_PIN_PULL_NONE</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_PULL_NONE             ((uint16_t)(3 << 9))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_MODE_MASK">Marco <span>TUYA_PIN_MODE_MASK</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_MODE_MASK             ((uint16_t)(15 << 9))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_NUM(__PINNAME)">Marco <span>TUYA_PIN_NUM(__PINNAME)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_NUM(__PINNAME)        (__PINNAME & 31)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_PIN_PORT(__PINNAME)">Marco <span>TUYA_PIN_PORT(__PINNAME)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_PIN_PORT(__PINNAME)       (__PINNAME >> 5)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_pin_irq_disable">Func <span>tuya_pin_irq_disable</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_irq_disable (tuya_pin_name_t pin);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin irq disable
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_pin_init">Variable <span>tuya_pin_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_init    (tuya_pin_name_t pin, tuya_pin_mode_t mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin init
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ * @param[in] mode refer to tuya_pin_mode_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pin_write">Variable <span>tuya_pin_write</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_write    (tuya_pin_name_t pin, tuya_pin_level_t level);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin write
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ * @param[in] level refer to tuya_pin_level_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pin_read">Variable <span>tuya_pin_read</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_read    (tuya_pin_name_t pin);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin read
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pin_control">Variable <span>tuya_pin_control</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_control     (tuya_pin_name_t pin, uint8_t cmd, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin control
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ * @param[in] cmd control command
+ * @param[in] arg command argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pin_irq_init">Variable <span>tuya_pin_irq_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_irq_init    (tuya_pin_name_t pin, tuya_pin_mode_t irq_mode, tuya_pin_irq_cb cb, void *arg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin irq init
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ * @param[in] irq_mode refer to tuya_pin_mode_t
+ * @param[in] cb irq callback
+ * @param[in] arg callback argument
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pin_irq_enable">Variable <span>tuya_pin_irq_enable</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_irq_enable  (tuya_pin_name_t pin);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin irq enable
+ * 
+ * @param[in] pin refer to tuya_pin_name_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_pin_register">Variable <span>tuya_pin_register</span></h4>
+      <pre class="doc-declare"><code>int tuya_pin_register    (tuya_pin_ops_t *ops);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pin irq register
+ * 
+ * @param[in] ops refer to tuya_pin_ops_t
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_pin_port_t;
+">Typedef <span>tuya_pin_port_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PA = 0,
+   TUYA_PB = 1,
+   TUYA_PC = 2,
+   TUYA_PD = 3,
+   TUYA_PE = 4,
+} tuya_pin_port_t;
+</code></pre>
+      <pre class="doc-comment">// 3bit(bit7-bit5) port   5bit(bit4-bit0) pinmun</pre>
+
+      <h4 id="tuya_pin_name_t;
+">Typedef <span>tuya_pin_name_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PINS_NAME(TUYA_PA),
+   TUYA_PINS_NAME(TUYA_PB),
+   TUYA_PINS_NAME(TUYA_PC),
+   TUYA_PINS_NAME(TUYA_PD),
+   TUYA_PINS_NAME(TUYA_PE),
+} tuya_pin_name_t;
+</code></pre>
+      <pre class="doc-comment">// TUYA_PE ->  TUYA_PE0 - TUYA_PE31</pre>
+
+      <h4 id="tuya_pin_level_t;
+">Typedef <span>tuya_pin_level_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PIN_LOW = 0,
+   TUYA_PIN_HIGH
+} tuya_pin_level_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pin_mode_t;
+">Typedef <span>tuya_pin_mode_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_PIN_MODE_IN_PU              = TUYA_PIN_IN    | TUYA_PIN_PULL_UP,
+   TUYA_PIN_MODE_IN_PD              = TUYA_PIN_IN    | TUYA_PIN_PULL_DOWN,
+   TUYA_PIN_MODE_IN_FL              = TUYA_PIN_IN_FL,
+   TUYA_PIN_MODE_IN_IRQ_RISE        = TUYA_PIN_IN_IRQ | TUYA_PIN_IRQ_RISE | TUYA_PIN_PULL_UP, 
+   TUYA_PIN_MODE_IN_IRQ_FALL        = TUYA_PIN_IN_IRQ | TUYA_PIN_IRQ_FALL | TUYA_PIN_PULL_UP,
+   TUYA_PIN_MODE_IN_IRQ_RISE_FALL   = TUYA_PIN_IN_IRQ | TUYA_PIN_IRQ_RISE_FALL | TUYA_PIN_PULL_UP,
+   TUYA_PIN_MODE_IN_IRQ_LOW         = TUYA_PIN_IN_IRQ | TUYA_PIN_IRQ_LOW  | TUYA_PIN_PULL_UP,
+   TUYA_PIN_MODE_IN_IRQ_HIGH        = TUYA_PIN_IN_IRQ | TUYA_PIN_IRQ_HIGH | TUYA_PIN_PULL_UP,
+   TUYA_PIN_MODE_OUT_PP_LOW         = TUYA_PIN_OUT_PP | TUYA_PIN_INIT_LOW,
+   TUYA_PIN_MODE_OUT_PP_HIGH        = TUYA_PIN_OUT_PP | TUYA_PIN_INIT_HIGH,
+   TUYA_PIN_MODE_OUT_PP_PU_LOW      = TUYA_PIN_OUT_PP | TUYA_PIN_PULL_UP | TUYA_PIN_INIT_LOW,
+   TUYA_PIN_MODE_OUT_PP_PU_HIGH     = TUYA_PIN_OUT_PP | TUYA_PIN_PULL_UP | TUYA_PIN_INIT_HIGH,
+   TUYA_PIN_MODE_OUT_PP_PD_LOW      = TUYA_PIN_OUT_PP | TUYA_PIN_PULL_DOWN | TUYA_PIN_INIT_LOW,
+   TUYA_PIN_MODE_OUT_PP_PD_HIGH     = TUYA_PIN_OUT_PP | TUYA_PIN_PULL_DOWN | TUYA_PIN_INIT_HIGH,
+   TUYA_PIN_MODE_OUT_OD_LOW         = TUYA_PIN_OUT_OD | TUYA_PIN_INIT_LOW,
+   TUYA_PIN_MODE_OUT_OD_HIZ         = TUYA_PIN_OUT_OD | TUYA_PIN_INIT_HIGH,
+   TUYA_PIN_MODE_OUT_OD_PU_LOW      = TUYA_PIN_OUT_OD | TUYA_PIN_PULL_UP | TUYA_PIN_INIT_LOW,
+   TUYA_PIN_MODE_OUT_OD_PU_HIGH     = TUYA_PIN_OUT_OD | TUYA_PIN_PULL_UP | TUYA_PIN_INIT_HIGH,
+} tuya_pin_mode_t;
+</code></pre>
+      <pre class="doc-comment">// hiz ->  high-impedance level</pre>
+
+      <h4 id="tuya_pin_irq_cb">Typedef <span>tuya_pin_irq_cb</span></h4>
+      <pre class="doc-declare"><code>typedef void (*tuya_pin_irq_cb)(void *args);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pin_irq_t;
+">Typedef <span>tuya_pin_irq_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   tuya_pin_mode_t    mode;
+   tuya_pin_irq_cb    cb;
+   void               *arg;
+} tuya_pin_irq_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_pin_ops_t;
+">Typedef <span>tuya_pin_ops_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   int  (*init)      (tuya_pin_name_t pin, tuya_pin_mode_t mode);
+   int  (*write)     (tuya_pin_name_t pin, tuya_pin_level_t level);
+   int  (*read)      (tuya_pin_name_t pin);
+   int  (*toggle)    (tuya_pin_name_t pin);
+   int  (*control)   (tuya_pin_name_t pin, uint8_t cmd, void *arg);
+} tuya_pin_ops_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

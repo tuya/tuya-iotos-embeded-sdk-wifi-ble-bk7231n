@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#cJSON.h" class="nav-sub-label">cJSON.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__JSON_RPC_H__" class="nav-sub-label">__JSON_RPC_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#JRPC_PASER_ERROR" class="nav-sub-label">JRPC_PASER_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#JPRC_INVALID_REQUEST" class="nav-sub-label">JPRC_INVALID_REQUEST</a>
+              </li>
+      
+
+              <li>
+                <a href="#JPRC_METHOD_NOT_FOUND" class="nav-sub-label">JPRC_METHOD_NOT_FOUND</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#jrpc_create_request" class="nav-sub-label">jrpc_create_request</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_create_response" class="nav-sub-label">jrpc_create_response</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_create_error" class="nav-sub-label">jrpc_create_error</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_create_notification" class="nav-sub-label">jrpc_create_notification</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_write_int" class="nav-sub-label">jrpc_write_int</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_write_string" class="nav-sub-label">jrpc_write_string</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_read_int" class="nav-sub-label">jrpc_read_int</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_read_string" class="nav-sub-label">jrpc_read_string</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_read_method" class="nav-sub-label">jrpc_read_method</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_read_error" class="nav-sub-label">jrpc_read_error</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_write_binary" class="nav-sub-label">jrpc_write_binary</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_read_binary" class="nav-sub-label">jrpc_read_binary</a>
+              </li>
+      
+
+              <li>
+                <a href="#jrpc_delete" class="nav-sub-label">jrpc_delete</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#JRPC_TYPE_E;
+" class="nav-sub-label">JRPC_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#JRPC_NODE_TYPE_E;
+" class="nav-sub-label">JRPC_NODE_TYPE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#JRPC_MSG_S;
+" class="nav-sub-label">JRPC_MSG_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="cJSON.h"><span>cJSON.h</span></h4>
+      <pre class="doc-declare"><code>#include "cJSON.h"
+</code></pre>
+      <pre class="doc-comment">#include "cJSON.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__JSON_RPC_H__">Marco <span>__JSON_RPC_H__</span></h4>
+      <pre class="doc-declare"><code>#define __JSON_RPC_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="JRPC_PASER_ERROR">Marco <span>JRPC_PASER_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define JRPC_PASER_ERROR           -32700
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="JPRC_INVALID_REQUEST">Marco <span>JPRC_INVALID_REQUEST</span></h4>
+      <pre class="doc-declare"><code>#define JPRC_INVALID_REQUEST       -32600 
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="JPRC_METHOD_NOT_FOUND">Marco <span>JPRC_METHOD_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define JPRC_METHOD_NOT_FOUND      -32601
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="jrpc_create_request">Func <span>jrpc_create_request</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_create_request(JRPC_MSG_S *msg, UINT8_T *method, INT_T id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create request
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] method method
+ * @param[in] id node id
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_create_response">Func <span>jrpc_create_response</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_create_response(JRPC_MSG_S *msg, INT_T id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create response
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] id node id
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_create_error">Func <span>jrpc_create_error</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_create_error(JRPC_MSG_S *msg, INT_T id, INT_T code, INT8_T *message);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create error
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] id node id
+ * @param[in] code json int
+ * @param[in] message json message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_create_notification">Func <span>jrpc_create_notification</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_create_notification(JRPC_MSG_S *msg, UINT8_T *method);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create notification
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] method refer to JRPC_NODE_TYPE_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_write_int">Func <span>jrpc_write_int</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_write_int(JRPC_MSG_S *msg, UINT8_T type, UINT8_T *key, INT_T value);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief write int
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] type refer to JRPC_NODE_TYPE_E
+ * @param[in] key json key
+ * @param[in] value json value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_write_string">Func <span>jrpc_write_string</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_write_string(JRPC_MSG_S *msg, UINT8_T type, UINT8_T *key, UINT8_T *value);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief write string
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] type refer to JRPC_NODE_TYPE_E
+ * @param[in] key json key
+ * @param[in] value json value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_read_int">Func <span>jrpc_read_int</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_read_int(JRPC_MSG_S *msg, UINT8_T type, UINT8_T *key, INT_T *value);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read int
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] type refer to JRPC_NODE_TYPE_E
+ * @param[in] key json key
+ * @param[out] value json value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_read_string">Func <span>jrpc_read_string</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_read_string(JRPC_MSG_S *msg, UINT8_T type, UINT8_T *key, UINT8_T **value);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read string
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[in] type refer to JRPC_NODE_TYPE_E
+ * @param[in] key json key
+ * @param[out] value json value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_read_method">Func <span>jrpc_read_method</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_read_method(JRPC_MSG_S *msg, UINT8_T **method);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read method
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[out] method value
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_read_error">Func <span>jrpc_read_error</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_read_error(JRPC_MSG_S *msg, INT_T *code, UINT8_T **message);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief read error
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ * @param[out] code error code
+ * @param[out] message error message
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_write_binary">Func <span>jrpc_write_binary</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_write_binary(JRPC_MSG_S *msg, UINT8_T type, INT8_T *key, UINT8_T *binary, UINT16_T size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief binary write
+ * 
+ * @param[in] msg refer to LAN_RPC_NODE_OUTPUT_CB
+ * @param[in] type refer to JRPC_NODE_TYPE_E
+ * @param[in] key json key
+ * @param[in] binary write value
+ * @param[in] size write size
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_read_binary">Func <span>jrpc_read_binary</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET jrpc_read_binary(JRPC_MSG_S *msg, UINT8_T type, INT8_T *key, UINT8_T **binary, UINT16_T *size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief binary read
+ * 
+ * @param[in] msg refer to LAN_RPC_NODE_OUTPUT_CB
+ * @param[in] type refer to JRPC_NODE_TYPE_E
+ * @param[in] key json key
+ * @param[out] binary read value
+ * @param[out] size read size
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="jrpc_delete">Func <span>jrpc_delete</span></h4>
+      <pre class="doc-declare"><code>VOID jrpc_delete(JRPC_MSG_S *msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief json rpc delete
+ * 
+ * @param[in] msg refer to JRPC_MSG_S
+ *
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="JRPC_TYPE_E;
+">Typedef <span>JRPC_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   JRPC_REQUEST       = 0,
+   JRPC_RESPONSE,
+   JRPC_NOTIFICATION,
+   JRPC_ERROR,
+   JRPC_WRONG_OBJECT
+} JRPC_TYPE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="JRPC_NODE_TYPE_E;
+">Typedef <span>JRPC_NODE_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   JRPC_PARAMS        = 0,
+   JRPC_RESULT
+} JRPC_NODE_TYPE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="JRPC_MSG_S;
+">Typedef <span>JRPC_MSG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   cJSON          *json;
+   UINT8_T        *binary;
+   JRPC_TYPE_E    type;
+} JRPC_MSG_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

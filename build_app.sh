@@ -30,15 +30,14 @@ fi
 cd `dirname $0`
 
 TARGET_PLATFORM=bk7231n
-TARGET_PLATFORM_REPO=https://airtake-public-data-1254153901.cos.ap-shanghai.myqcloud.com/smart/embed/pruduct/bk7231n_0.0.10.zip
-TARGET_PLATFORM_VERSION=0.0.10
+TARGET_PLATFORM_REPO=https://airtake-public-data-1254153901.cos.ap-shanghai.myqcloud.com/smart/embed/pruduct/bk7231n_0.0.21.zip
+TARGET_PLATFORM_VERSION=0.0.21
 ROOT_DIR=$(pwd)
 
 # 下载编译环境
 if [ ! -d platforms/$TARGET_PLATFORM ]; then
     if [ -n "$TARGET_PLATFORM_REPO" ]; then
         # download toolchain
-        mkdir -p platforms
         cd platforms
         wget $TARGET_PLATFORM_REPO 
         unzip -o ${TARGET_PLATFORM}_${TARGET_PLATFORM_VERSION}.zip
@@ -70,6 +69,7 @@ else
 fi
 
 cd $APP_PATH
+export APP_PROJ_PATH=$APP_PATH
 if [ -f build.sh ]; then
     sh ./build.sh $APP_NAME $APP_VERSION $TARGET_PLATFORM $USER_CMD
 elif [ -f Makefile -o -f makefile ]; then

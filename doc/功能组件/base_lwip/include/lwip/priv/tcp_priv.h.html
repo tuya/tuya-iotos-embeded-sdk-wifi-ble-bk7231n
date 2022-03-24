@@ -1,0 +1,1693 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/tcp.h" class="nav-sub-label">lwip/tcp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/mem.h" class="nav-sub-label">lwip/mem.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip.h" class="nav-sub-label">lwip/ip.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/icmp.h" class="nav-sub-label">lwip/icmp.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6.h" class="nav-sub-label">lwip/ip6.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6_addr.h" class="nav-sub-label">lwip/ip6_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/tcp.h" class="nav-sub-label">lwip/prot/tcp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_TCP_PRIV_H" class="nav-sub-label">LWIP_HDR_TCP_PRIV_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_do_output_nagle(tpcb)" class="nav-sub-label">tcp_do_output_nagle(tpcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_output_nagle(tpcb)" class="nav-sub-label">tcp_output_nagle(tpcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SEQ_LT(a,b)" class="nav-sub-label">TCP_SEQ_LT(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SEQ_LEQ(a,b)" class="nav-sub-label">TCP_SEQ_LEQ(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SEQ_GT(a,b)" class="nav-sub-label">TCP_SEQ_GT(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SEQ_GEQ(a,b)" class="nav-sub-label">TCP_SEQ_GEQ(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SEQ_BETWEEN(a,b,c)" class="nav-sub-label">TCP_SEQ_BETWEEN(a,b,c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SEQ_BETWEEN(a,b,c)" class="nav-sub-label">TCP_SEQ_BETWEEN(a,b,c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_TMR_INTERVAL" class="nav-sub-label">TCP_TMR_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_FAST_INTERVAL" class="nav-sub-label">TCP_FAST_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SLOW_INTERVAL" class="nav-sub-label">TCP_SLOW_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_FIN_WAIT_TIMEOUT" class="nav-sub-label">TCP_FIN_WAIT_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_SYN_RCVD_TIMEOUT" class="nav-sub-label">TCP_SYN_RCVD_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_OOSEQ_TIMEOUT" class="nav-sub-label">TCP_OOSEQ_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_MSL" class="nav-sub-label">TCP_MSL</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_KEEPIDLE_DEFAULT" class="nav-sub-label">TCP_KEEPIDLE_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_KEEPINTVL_DEFAULT" class="nav-sub-label">TCP_KEEPINTVL_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_KEEPCNT_DEFAULT" class="nav-sub-label">TCP_KEEPCNT_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_MAXIDLE" class="nav-sub-label">TCP_MAXIDLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_TCPLEN(seg)" class="nav-sub-label">TCP_TCPLEN(seg)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TF_RESET" class="nav-sub-label">TF_RESET</a>
+              </li>
+      
+
+              <li>
+                <a href="#TF_CLOSED" class="nav-sub-label">TF_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#TF_GOT_FIN" class="nav-sub-label">TF_GOT_FIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)" class="nav-sub-label">TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_SENT(pcb,space,ret)" class="nav-sub-label">TCP_EVENT_SENT(pcb,space,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_RECV(pcb,p,err,ret)" class="nav-sub-label">TCP_EVENT_RECV(pcb,p,err,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_CLOSED(pcb,ret)" class="nav-sub-label">TCP_EVENT_CLOSED(pcb,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_CONNECTED(pcb,err,ret)" class="nav-sub-label">TCP_EVENT_CONNECTED(pcb,err,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_POLL(pcb,ret)" class="nav-sub-label">TCP_EVENT_POLL(pcb,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_ERR(last_state,errf,arg,err)" class="nav-sub-label">TCP_EVENT_ERR(last_state,errf,arg,err)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)" class="nav-sub-label">TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_SENT(pcb,space,ret)" class="nav-sub-label">TCP_EVENT_SENT(pcb,space,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_RECV(pcb,p,err,ret)" class="nav-sub-label">TCP_EVENT_RECV(pcb,p,err,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_CLOSED(pcb,ret)" class="nav-sub-label">TCP_EVENT_CLOSED(pcb,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_CONNECTED(pcb,err,ret)" class="nav-sub-label">TCP_EVENT_CONNECTED(pcb,err,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_POLL(pcb,ret)" class="nav-sub-label">TCP_EVENT_POLL(pcb,ret)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_EVENT_ERR(last_state,errf,arg,err)" class="nav-sub-label">TCP_EVENT_ERR(last_state,errf,arg,err)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_OVERSIZE_DBGCHECK" class="nav-sub-label">TCP_OVERSIZE_DBGCHECK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_OVERSIZE_DBGCHECK" class="nav-sub-label">TCP_OVERSIZE_DBGCHECK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_CHECKSUM_ON_COPY" class="nav-sub-label">TCP_CHECKSUM_ON_COPY</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_EOL" class="nav-sub-label">LWIP_TCP_OPT_EOL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_NOP" class="nav-sub-label">LWIP_TCP_OPT_NOP</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_MSS" class="nav-sub-label">LWIP_TCP_OPT_MSS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_WS" class="nav-sub-label">LWIP_TCP_OPT_WS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_SACK_PERM" class="nav-sub-label">LWIP_TCP_OPT_SACK_PERM</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_TS" class="nav-sub-label">LWIP_TCP_OPT_TS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_MSS" class="nav-sub-label">LWIP_TCP_OPT_LEN_MSS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_TS" class="nav-sub-label">LWIP_TCP_OPT_LEN_TS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_TS_OUT" class="nav-sub-label">LWIP_TCP_OPT_LEN_TS_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_TS_OUT" class="nav-sub-label">LWIP_TCP_OPT_LEN_TS_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_WS" class="nav-sub-label">LWIP_TCP_OPT_LEN_WS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_WS_OUT" class="nav-sub-label">LWIP_TCP_OPT_LEN_WS_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_WS_OUT" class="nav-sub-label">LWIP_TCP_OPT_LEN_WS_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_SACK_PERM" class="nav-sub-label">LWIP_TCP_OPT_LEN_SACK_PERM</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_SACK_PERM_OUT" class="nav-sub-label">LWIP_TCP_OPT_LEN_SACK_PERM_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LEN_SACK_PERM_OUT" class="nav-sub-label">LWIP_TCP_OPT_LEN_SACK_PERM_OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_TCP_OPT_LENGTH(flags)" class="nav-sub-label">LWIP_TCP_OPT_LENGTH(flags)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_BUILD_MSS_OPTION(mss)" class="nav-sub-label">TCP_BUILD_MSS_OPTION(mss)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWNDSIZE_F" class="nav-sub-label">TCPWNDSIZE_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWND_MAX" class="nav-sub-label">TCPWND_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWND_CHECK16(x)" class="nav-sub-label">TCPWND_CHECK16(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWND_MIN16(x)" class="nav-sub-label">TCPWND_MIN16(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWNDSIZE_F" class="nav-sub-label">TCPWNDSIZE_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWND_MAX" class="nav-sub-label">TCPWND_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWND_CHECK16" class="nav-sub-label">TCPWND_CHECK16</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCPWND_MIN16(x)" class="nav-sub-label">TCPWND_MIN16(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#NUM_TCP_PCB_LISTS_NO_TIME_WAIT" class="nav-sub-label">NUM_TCP_PCB_LISTS_NO_TIME_WAIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#NUM_TCP_PCB_LISTS" class="nav-sub-label">NUM_TCP_PCB_LISTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_DEBUG_PCB_LISTS" class="nav-sub-label">TCP_DEBUG_PCB_LISTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_REG(pcbs, npcb)" class="nav-sub-label">TCP_REG(pcbs, npcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_RMV(pcbs, npcb)" class="nav-sub-label">TCP_RMV(pcbs, npcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_REG(pcbs, npcb)" class="nav-sub-label">TCP_REG(pcbs, npcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_RMV(pcbs, npcb)" class="nav-sub-label">TCP_RMV(pcbs, npcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_REG_ACTIVE(npcb)" class="nav-sub-label">TCP_REG_ACTIVE(npcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_RMV_ACTIVE(npcb)" class="nav-sub-label">TCP_RMV_ACTIVE(npcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#TCP_PCB_REMOVE_ACTIVE(pcb)" class="nav-sub-label">TCP_PCB_REMOVE_ACTIVE(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_ack(pcb)" class="nav-sub-label">tcp_ack(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_ack_now(pcb)" class="nav-sub-label">tcp_ack_now(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_eff_send_mss(sendmss, src, dest)" class="nav-sub-label">tcp_eff_send_mss(sendmss, src, dest)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tcp_slowtmr" class="nav-sub-label">tcp_slowtmr</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_fasttmr" class="nav-sub-label">tcp_fasttmr</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_abandon" class="nav-sub-label">tcp_abandon</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_send_empty_ack" class="nav-sub-label">tcp_send_empty_ack</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rexmit" class="nav-sub-label">tcp_rexmit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rexmit_rto_prepare" class="nav-sub-label">tcp_rexmit_rto_prepare</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rexmit_rto_commit" class="nav-sub-label">tcp_rexmit_rto_commit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rexmit_rto" class="nav-sub-label">tcp_rexmit_rto</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rexmit_fast" class="nav-sub-label">tcp_rexmit_fast</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_update_rcv_ann_wnd" class="nav-sub-label">tcp_update_rcv_ann_wnd</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_process_refused_data" class="nav-sub-label">tcp_process_refused_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_pcb_purge" class="nav-sub-label">tcp_pcb_purge</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_pcb_remove" class="nav-sub-label">tcp_pcb_remove</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_segs_free" class="nav-sub-label">tcp_segs_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_seg_free" class="nav-sub-label">tcp_seg_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_send_fin" class="nav-sub-label">tcp_send_fin</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_enqueue_flags" class="nav-sub-label">tcp_enqueue_flags</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rexmit_seg" class="nav-sub-label">tcp_rexmit_seg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_rst" class="nav-sub-label">tcp_rst</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_next_iss" class="nav-sub-label">tcp_next_iss</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_keepalive" class="nav-sub-label">tcp_keepalive</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_split_unsent_seg" class="nav-sub-label">tcp_split_unsent_seg</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_zero_window_probe" class="nav-sub-label">tcp_zero_window_probe</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_trigger_input_pcb_close" class="nav-sub-label">tcp_trigger_input_pcb_close</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_eff_send_mss_netif" class="nav-sub-label">tcp_eff_send_mss_netif</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_recv_null" class="nav-sub-label">tcp_recv_null</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_debug_print" class="nav-sub-label">tcp_debug_print</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_debug_print_flags" class="nav-sub-label">tcp_debug_print_flags</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_debug_print_state" class="nav-sub-label">tcp_debug_print_state</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_debug_print_pcbs" class="nav-sub-label">tcp_debug_print_pcbs</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_pcbs_sane" class="nav-sub-label">tcp_pcbs_sane</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_timer_needed" class="nav-sub-label">tcp_timer_needed</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_netif_ip_addr_changed" class="nav-sub-label">tcp_netif_ip_addr_changed</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_free_ooseq" class="nav-sub-label">tcp_free_ooseq</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_ext_arg_invoke_callbacks_passive_open" class="nav-sub-label">tcp_ext_arg_invoke_callbacks_passive_open</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tcp_init" class="nav-sub-label">tcp_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_tmr" class="nav-sub-label">tcp_tmr</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_txnow" class="nav-sub-label">tcp_txnow</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_input" class="nav-sub-label">tcp_input</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_pcb" class="nav-sub-label">tcp_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_free" class="nav-sub-label">tcp_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_pcb" class="nav-sub-label">tcp_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tcp_seg" class="nav-sub-label">tcp_seg</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/tcp.h"><span>lwip/tcp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/tcp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/tcp.h"
+</pre>
+
+      <h4 id="lwip/mem.h"><span>lwip/mem.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/mem.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/mem.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+
+      <h4 id="lwip/ip.h"><span>lwip/ip.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip.h"
+</pre>
+
+      <h4 id="lwip/icmp.h"><span>lwip/icmp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/icmp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/icmp.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/ip6.h"><span>lwip/ip6.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6.h"
+</pre>
+
+      <h4 id="lwip/ip6_addr.h"><span>lwip/ip6_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6_addr.h"
+</pre>
+
+      <h4 id="lwip/prot/tcp.h"><span>lwip/prot/tcp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/tcp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/tcp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_TCP_PRIV_H">Marco <span>LWIP_HDR_TCP_PRIV_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_TCP_PRIV_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_do_output_nagle(tpcb)">Marco <span>tcp_do_output_nagle(tpcb)</span></h4>
+      <pre class="doc-declare"><code>#define tcp_do_output_nagle(tpcb) ((((tpcb)->unacked == NULL) || \
+                           ((tpcb)->flags & (TF_NODELAY | TF_INFR)) || \
+                           (((tpcb)->unsent != NULL) && (((tpcb)->unsent->next != NULL) || \
+                             ((tpcb)->unsent->len >= (tpcb)->mss))) || \
+                           ((tcp_sndbuf(tpcb) == 0) || (tcp_sndqueuelen(tpcb) >= TCP_SND_QUEUELEN)) \
+                           ) ? 1 : 0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * This is the Nagle algorithm: try to combine user data to send as few TCP
+ * segments as possible. Only send if
+ * - no previously transmitted data on the connection remains unacknowledged or
+ * - the TF_NODELAY flag is set (nagle algorithm turned off for this pcb) or
+ * - the only unsent segment is at least pcb->mss bytes long (or there is more
+ *   than one unsent segment - with lwIP, this can happen although unsent->len < mss)
+ * - or if we are in fast-retransmit (TF_INFR)
+ */</pre>
+
+      <h4 id="tcp_output_nagle(tpcb)">Marco <span>tcp_output_nagle(tpcb)</span></h4>
+      <pre class="doc-declare"><code>#define tcp_output_nagle(tpcb) (tcp_do_output_nagle(tpcb) ? tcp_output(tpcb) : ERR_OK)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SEQ_LT(a,b)">Marco <span>TCP_SEQ_LT(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SEQ_LT(a,b)    ((s32_t)((u32_t)(a) - (u32_t)(b)) < 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SEQ_LEQ(a,b)">Marco <span>TCP_SEQ_LEQ(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SEQ_LEQ(a,b)   ((s32_t)((u32_t)(a) - (u32_t)(b)) <= 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SEQ_GT(a,b)">Marco <span>TCP_SEQ_GT(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SEQ_GT(a,b)    ((s32_t)((u32_t)(a) - (u32_t)(b)) > 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SEQ_GEQ(a,b)">Marco <span>TCP_SEQ_GEQ(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SEQ_GEQ(a,b)   ((s32_t)((u32_t)(a) - (u32_t)(b)) >= 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SEQ_BETWEEN(a,b,c)">Marco <span>TCP_SEQ_BETWEEN(a,b,c)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SEQ_BETWEEN(a,b,c) ((c)-(b) >= (a)-(b))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SEQ_BETWEEN(a,b,c)">Marco <span>TCP_SEQ_BETWEEN(a,b,c)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SEQ_BETWEEN(a,b,c) (TCP_SEQ_GEQ(a,b) && TCP_SEQ_LEQ(a,c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_TMR_INTERVAL">Marco <span>TCP_TMR_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define TCP_TMR_INTERVAL      250 /* The TCP timer interval in milliseconds. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_FAST_INTERVAL">Marco <span>TCP_FAST_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define TCP_FAST_INTERVAL     TCP_TMR_INTERVAL /* the fine grained timeout in milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SLOW_INTERVAL">Marco <span>TCP_SLOW_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SLOW_INTERVAL     (2*TCP_TMR_INTERVAL) /* the coarse grained timeout in milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_FIN_WAIT_TIMEOUT">Marco <span>TCP_FIN_WAIT_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define TCP_FIN_WAIT_TIMEOUT 20000 /* milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_SYN_RCVD_TIMEOUT">Marco <span>TCP_SYN_RCVD_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define TCP_SYN_RCVD_TIMEOUT 20000 /* milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_OOSEQ_TIMEOUT">Marco <span>TCP_OOSEQ_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define TCP_OOSEQ_TIMEOUT       6U /* x RTO */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_MSL">Marco <span>TCP_MSL</span></h4>
+      <pre class="doc-declare"><code>#define TCP_MSL 60000UL /* The maximum segment lifetime in milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_KEEPIDLE_DEFAULT">Marco <span>TCP_KEEPIDLE_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define TCP_KEEPIDLE_DEFAULT    7200000UL /* Default KEEPALIVE timer in milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_KEEPINTVL_DEFAULT">Marco <span>TCP_KEEPINTVL_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define TCP_KEEPINTVL_DEFAULT   75000UL  /* Default Time between KEEPALIVE probes in milliseconds */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_KEEPCNT_DEFAULT">Marco <span>TCP_KEEPCNT_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define TCP_KEEPCNT_DEFAULT     9U       /* Default Counter for KEEPALIVE probes */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_MAXIDLE">Marco <span>TCP_MAXIDLE</span></h4>
+      <pre class="doc-declare"><code>#define TCP_MAXIDLE             TCP_KEEPCNT_DEFAULT * TCP_KEEPINTVL_DEFAULT /* Maximum KEEPALIVE probe time */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_TCPLEN(seg)">Marco <span>TCP_TCPLEN(seg)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_TCPLEN(seg) ((seg)->len + (((TCPH_FLAGS((seg)->tcphdr) & (TCP_FIN | TCP_SYN)) != 0) ? 1U : 0U))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TF_RESET">Marco <span>TF_RESET</span></h4>
+      <pre class="doc-declare"><code>#define TF_RESET    (u8_t)0x08U  /* Connection was reset. */
+</code></pre>
+      <pre class="doc-comment">/** Flags used on input processing, not on pcb->flags
+*/</pre>
+
+      <h4 id="TF_CLOSED">Marco <span>TF_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define TF_CLOSED   (u8_t)0x10U  /* Connection was successfully closed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TF_GOT_FIN">Marco <span>TF_GOT_FIN</span></h4>
+      <pre class="doc-declare"><code>#define TF_GOT_FIN  (u8_t)0x20U  /* Connection was closed by the remote end. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)">Marco <span>TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret) ret = lwip_tcp_event(arg, (pcb),\
+               LWIP_EVENT_ACCEPT, NULL, 0, err)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_SENT(pcb,space,ret)">Marco <span>TCP_EVENT_SENT(pcb,space,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_SENT(pcb,space,ret) ret = lwip_tcp_event((pcb)->callback_arg, (pcb),\
+                  LWIP_EVENT_SENT, NULL, space, ERR_OK)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_RECV(pcb,p,err,ret)">Marco <span>TCP_EVENT_RECV(pcb,p,err,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_RECV(pcb,p,err,ret) ret = lwip_tcp_event((pcb)->callback_arg, (pcb),\
+               LWIP_EVENT_RECV, (p), 0, (err))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_CLOSED(pcb,ret)">Marco <span>TCP_EVENT_CLOSED(pcb,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_CLOSED(pcb,ret) ret = lwip_tcp_event((pcb)->callback_arg, (pcb),\
+               LWIP_EVENT_RECV, NULL, 0, ERR_OK)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_CONNECTED(pcb,err,ret)">Marco <span>TCP_EVENT_CONNECTED(pcb,err,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_CONNECTED(pcb,err,ret) ret = lwip_tcp_event((pcb)->callback_arg, (pcb),\
+               LWIP_EVENT_CONNECTED, NULL, 0, (err))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_POLL(pcb,ret)">Marco <span>TCP_EVENT_POLL(pcb,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_POLL(pcb,ret)      do { if ((pcb)->state != SYN_RCVD) {                         \
+               ret = lwip_tcp_event((pcb)->callback_arg, (pcb), LWIP_EVENT_POLL, NULL, 0, ERR_OK); \
+               } else {                                                                           \
+               ret = ERR_ARG; } } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_ERR(last_state,errf,arg,err)">Marco <span>TCP_EVENT_ERR(last_state,errf,arg,err)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_ERR(last_state,errf,arg,err) do { if (last_state != SYN_RCVD) {               \
+               lwip_tcp_event((arg), NULL, LWIP_EVENT_ERR, NULL, 0, (err)); } } while(0)
+</code></pre>
+      <pre class="doc-comment">/* For event API, last state SYN_RCVD must be excluded here: the application
+   has not seen this pcb, yet! */</pre>
+
+      <h4 id="TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)">Marco <span>TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_ACCEPT(lpcb,pcb,arg,err,ret)                \
+ do {                                                        \
+   if((lpcb)->accept != NULL)                                \
+     (ret) = (lpcb)->accept((arg),(pcb),(err));              \
+   else (ret) = ERR_ARG;                                     \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_SENT(pcb,space,ret)">Marco <span>TCP_EVENT_SENT(pcb,space,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_SENT(pcb,space,ret)                         \
+ do {                                                        \
+   if((pcb)->sent != NULL)                                   \
+     (ret) = (pcb)->sent((pcb)->callback_arg,(pcb),(space)); \
+   else (ret) = ERR_OK;                                      \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_RECV(pcb,p,err,ret)">Marco <span>TCP_EVENT_RECV(pcb,p,err,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_RECV(pcb,p,err,ret)                         \
+ do {                                                        \
+   if((pcb)->recv != NULL) {                                 \
+     (ret) = (pcb)->recv((pcb)->callback_arg,(pcb),(p),(err));\
+   } else {                                                  \
+     (ret) = tcp_recv_null(NULL, (pcb), (p), (err));         \
+   }                                                         \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_CLOSED(pcb,ret)">Marco <span>TCP_EVENT_CLOSED(pcb,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_CLOSED(pcb,ret)                               \
+ do {                                                          \
+   if(((pcb)->recv != NULL)) {                                 \
+     (ret) = (pcb)->recv((pcb)->callback_arg,(pcb),NULL,ERR_OK);\
+   } else {                                                    \
+     (ret) = ERR_OK;                                           \
+   }                                                           \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_CONNECTED(pcb,err,ret)">Marco <span>TCP_EVENT_CONNECTED(pcb,err,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_CONNECTED(pcb,err,ret)                        \
+ do {                                                          \
+   if((pcb)->connected != NULL)                                \
+     (ret) = (pcb)->connected((pcb)->callback_arg,(pcb),(err)); \
+   else (ret) = ERR_OK;                                        \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_POLL(pcb,ret)">Marco <span>TCP_EVENT_POLL(pcb,ret)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_POLL(pcb,ret)                               \
+ do {                                                        \
+   if((pcb)->poll != NULL)                                   \
+     (ret) = (pcb)->poll((pcb)->callback_arg,(pcb));         \
+   else (ret) = ERR_OK;                                      \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_EVENT_ERR(last_state,errf,arg,err)">Marco <span>TCP_EVENT_ERR(last_state,errf,arg,err)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_EVENT_ERR(last_state,errf,arg,err)                \
+ do {                                                        \
+   LWIP_UNUSED_ARG(last_state);                              \
+   if((errf) != NULL)                                        \
+     (errf)((arg),(err));                                    \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_OVERSIZE_DBGCHECK">Marco <span>TCP_OVERSIZE_DBGCHECK</span></h4>
+      <pre class="doc-declare"><code>#define TCP_OVERSIZE_DBGCHECK 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_OVERSIZE_DBGCHECK">Marco <span>TCP_OVERSIZE_DBGCHECK</span></h4>
+      <pre class="doc-declare"><code>#define TCP_OVERSIZE_DBGCHECK 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_CHECKSUM_ON_COPY">Marco <span>TCP_CHECKSUM_ON_COPY</span></h4>
+      <pre class="doc-declare"><code>#define TCP_CHECKSUM_ON_COPY (LWIP_CHECKSUM_ON_COPY && CHECKSUM_GEN_TCP)
+</code></pre>
+      <pre class="doc-comment">/** Don't generate checksum on copy if CHECKSUM_GEN_TCP is disabled */</pre>
+
+      <h4 id="LWIP_TCP_OPT_EOL">Marco <span>LWIP_TCP_OPT_EOL</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_EOL       0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_NOP">Marco <span>LWIP_TCP_OPT_NOP</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_NOP       1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_MSS">Marco <span>LWIP_TCP_OPT_MSS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_MSS       2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_WS">Marco <span>LWIP_TCP_OPT_WS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_WS        3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_SACK_PERM">Marco <span>LWIP_TCP_OPT_SACK_PERM</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_SACK_PERM 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_TS">Marco <span>LWIP_TCP_OPT_TS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_TS        8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_MSS">Marco <span>LWIP_TCP_OPT_LEN_MSS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_MSS   4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_TS">Marco <span>LWIP_TCP_OPT_LEN_TS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_TS    10
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_TS_OUT">Marco <span>LWIP_TCP_OPT_LEN_TS_OUT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_TS_OUT 12 /* aligned for output (includes NOP padding) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_TS_OUT">Marco <span>LWIP_TCP_OPT_LEN_TS_OUT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_TS_OUT 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_WS">Marco <span>LWIP_TCP_OPT_LEN_WS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_WS    3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_WS_OUT">Marco <span>LWIP_TCP_OPT_LEN_WS_OUT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_WS_OUT 4 /* aligned for output (includes NOP padding) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_WS_OUT">Marco <span>LWIP_TCP_OPT_LEN_WS_OUT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_WS_OUT 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_SACK_PERM">Marco <span>LWIP_TCP_OPT_LEN_SACK_PERM</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_SACK_PERM    2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_SACK_PERM_OUT">Marco <span>LWIP_TCP_OPT_LEN_SACK_PERM_OUT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_SACK_PERM_OUT 4 /* aligned for output (includes NOP padding) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LEN_SACK_PERM_OUT">Marco <span>LWIP_TCP_OPT_LEN_SACK_PERM_OUT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LEN_SACK_PERM_OUT 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_TCP_OPT_LENGTH(flags)">Marco <span>LWIP_TCP_OPT_LENGTH(flags)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_TCP_OPT_LENGTH(flags) \
+ ((flags) & TF_SEG_OPTS_MSS      ? LWIP_TCP_OPT_LEN_MSS          : 0) + \
+ ((flags) & TF_SEG_OPTS_TS       ? LWIP_TCP_OPT_LEN_TS_OUT       : 0) + \
+ ((flags) & TF_SEG_OPTS_WND_SCALE ? LWIP_TCP_OPT_LEN_WS_OUT       : 0) + \
+ ((flags) & TF_SEG_OPTS_SACK_PERM ? LWIP_TCP_OPT_LEN_SACK_PERM_OUT : 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_BUILD_MSS_OPTION(mss)">Marco <span>TCP_BUILD_MSS_OPTION(mss)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_BUILD_MSS_OPTION(mss) lwip_htonl(33816576 | ((mss) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** This returns a TCP header option for MSS in an u32_t */</pre>
+
+      <h4 id="TCPWNDSIZE_F">Marco <span>TCPWNDSIZE_F</span></h4>
+      <pre class="doc-declare"><code>#define TCPWNDSIZE_F      U32_F
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWND_MAX">Marco <span>TCPWND_MAX</span></h4>
+      <pre class="doc-declare"><code>#define TCPWND_MAX        0xFFFFFFFFU
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWND_CHECK16(x)">Marco <span>TCPWND_CHECK16(x)</span></h4>
+      <pre class="doc-declare"><code>#define TCPWND_CHECK16(x) LWIP_ASSERT("window size > 0xFFFF", (x) <= 65535)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWND_MIN16(x)">Marco <span>TCPWND_MIN16(x)</span></h4>
+      <pre class="doc-declare"><code>#define TCPWND_MIN16(x)   ((u16_t)LWIP_MIN((x), 65535))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWNDSIZE_F">Marco <span>TCPWNDSIZE_F</span></h4>
+      <pre class="doc-declare"><code>#define TCPWNDSIZE_F      U16_F
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWND_MAX">Marco <span>TCPWND_MAX</span></h4>
+      <pre class="doc-declare"><code>#define TCPWND_MAX        0xFFFFU
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWND_CHECK16">Marco <span>TCPWND_CHECK16</span></h4>
+      <pre class="doc-declare"><code>#define TCPWND_CHECK16(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCPWND_MIN16(x)">Marco <span>TCPWND_MIN16(x)</span></h4>
+      <pre class="doc-declare"><code>#define TCPWND_MIN16(x)   x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NUM_TCP_PCB_LISTS_NO_TIME_WAIT">Marco <span>NUM_TCP_PCB_LISTS_NO_TIME_WAIT</span></h4>
+      <pre class="doc-declare"><code>#define NUM_TCP_PCB_LISTS_NO_TIME_WAIT 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NUM_TCP_PCB_LISTS">Marco <span>NUM_TCP_PCB_LISTS</span></h4>
+      <pre class="doc-declare"><code>#define NUM_TCP_PCB_LISTS              4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_DEBUG_PCB_LISTS">Marco <span>TCP_DEBUG_PCB_LISTS</span></h4>
+      <pre class="doc-declare"><code>#define TCP_DEBUG_PCB_LISTS 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_REG(pcbs, npcb)">Marco <span>TCP_REG(pcbs, npcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_REG(pcbs, npcb) do {\
+                           struct tcp_pcb *tcp_tmp_pcb; \
+                           LWIP_DEBUGF(TCP_DEBUG, ("TCP_REG %p local port %"U16_F"\n", (void *)(npcb), (npcb)->local_port)); \
+                           for (tcp_tmp_pcb = *(pcbs); \
+         tcp_tmp_pcb != NULL; \
+       tcp_tmp_pcb = tcp_tmp_pcb->next) { \
+                               LWIP_ASSERT("TCP_REG: already registered\n", tcp_tmp_pcb != (npcb)); \
+                           } \
+                           LWIP_ASSERT("TCP_REG: pcb->state != CLOSED", ((pcbs) == &tcp_bound_pcbs) || ((npcb)->state != CLOSED)); \
+                           (npcb)->next = *(pcbs); \
+                           LWIP_ASSERT("TCP_REG: npcb->next != npcb", (npcb)->next != (npcb)); \
+                           *(pcbs) = (npcb); \
+                           LWIP_ASSERT("TCP_REG: tcp_pcbs sane", tcp_pcbs_sane()); \
+             tcp_timer_needed(); \
+                           } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_RMV(pcbs, npcb)">Marco <span>TCP_RMV(pcbs, npcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_RMV(pcbs, npcb) do { \
+                           struct tcp_pcb *tcp_tmp_pcb; \
+                           LWIP_ASSERT("TCP_RMV: pcbs != NULL", *(pcbs) != NULL); \
+                           LWIP_DEBUGF(TCP_DEBUG, ("TCP_RMV: removing %p from %p\n", (void *)(npcb), (void *)(*(pcbs)))); \
+                           if(*(pcbs) == (npcb)) { \
+                              *(pcbs) = (*pcbs)->next; \
+                           } else for (tcp_tmp_pcb = *(pcbs); tcp_tmp_pcb != NULL; tcp_tmp_pcb = tcp_tmp_pcb->next) { \
+                              if(tcp_tmp_pcb->next == (npcb)) { \
+                                 tcp_tmp_pcb->next = (npcb)->next; \
+                                 break; \
+                              } \
+                           } \
+                           (npcb)->next = NULL; \
+                           LWIP_ASSERT("TCP_RMV: tcp_pcbs sane", tcp_pcbs_sane()); \
+                           LWIP_DEBUGF(TCP_DEBUG, ("TCP_RMV: removed %p from %p\n", (void *)(npcb), (void *)(*(pcbs)))); \
+                           } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_REG(pcbs, npcb)">Marco <span>TCP_REG(pcbs, npcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_REG(pcbs, npcb)                       \
+ do {                                            \
+   (npcb)->next = *pcbs;                         \
+   *(pcbs) = (npcb);                             \
+   tcp_timer_needed();                           \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_RMV(pcbs, npcb)">Marco <span>TCP_RMV(pcbs, npcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_RMV(pcbs, npcb)                       \
+ do {                                            \
+   if(*(pcbs) == (npcb)) {                       \
+     (*(pcbs)) = (*pcbs)->next;                  \
+   }                                             \
+   else {                                        \
+     struct tcp_pcb *tcp_tmp_pcb;                \
+     for (tcp_tmp_pcb = *pcbs;                   \
+         tcp_tmp_pcb != NULL;                    \
+         tcp_tmp_pcb = tcp_tmp_pcb->next) {      \
+       if(tcp_tmp_pcb->next == (npcb)) {         \
+         tcp_tmp_pcb->next = (npcb)->next;       \
+         break;                                  \
+       }                                         \
+     }                                           \
+   }                                             \
+   (npcb)->next = NULL;                          \
+ } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_REG_ACTIVE(npcb)">Marco <span>TCP_REG_ACTIVE(npcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_REG_ACTIVE(npcb)                      \
+ do {                                            \
+   TCP_REG(&tcp_active_pcbs, npcb);              \
+   tcp_active_pcbs_changed = 1;                  \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_RMV_ACTIVE(npcb)">Marco <span>TCP_RMV_ACTIVE(npcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_RMV_ACTIVE(npcb)                      \
+ do {                                            \
+   TCP_RMV(&tcp_active_pcbs, npcb);              \
+   tcp_active_pcbs_changed = 1;                  \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TCP_PCB_REMOVE_ACTIVE(pcb)">Marco <span>TCP_PCB_REMOVE_ACTIVE(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define TCP_PCB_REMOVE_ACTIVE(pcb)                \
+ do {                                            \
+   tcp_pcb_remove(&tcp_active_pcbs, pcb);        \
+   tcp_active_pcbs_changed = 1;                  \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_ack(pcb)">Marco <span>tcp_ack(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define tcp_ack(pcb)                              \
+ do {                                            \
+   if((pcb)->flags & TF_ACK_DELAY) {             \
+     tcp_clear_flags(pcb, TF_ACK_DELAY);         \
+     tcp_ack_now(pcb);                           \
+   }                                             \
+   else {                                        \
+     tcp_set_flags(pcb, TF_ACK_DELAY);           \
+   }                                             \
+ } while (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_ack_now(pcb)">Marco <span>tcp_ack_now(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define tcp_ack_now(pcb)                          \
+ tcp_set_flags(pcb, TF_ACK_NOW)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_eff_send_mss(sendmss, src, dest)">Marco <span>tcp_eff_send_mss(sendmss, src, dest)</span></h4>
+      <pre class="doc-declare"><code>#define tcp_eff_send_mss(sendmss, src, dest) \
+   tcp_eff_send_mss_netif(sendmss, ip_route(src, dest), dest)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tcp_slowtmr">Func <span>tcp_slowtmr</span></h4>
+      <pre class="doc-declare"><code>void            tcp_slowtmr (void);</code></pre>
+      <pre class="doc-comment">/* It is also possible to call these two functions at the right
+   intervals (instead of calling tcp_tmr()). */</pre>
+
+      <h4 id="tcp_fasttmr">Func <span>tcp_fasttmr</span></h4>
+      <pre class="doc-declare"><code>void            tcp_fasttmr (void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_abandon">Func <span>tcp_abandon</span></h4>
+      <pre class="doc-declare"><code>void            tcp_abandon (struct tcp_pcb *pcb, int reset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_send_empty_ack">Func <span>tcp_send_empty_ack</span></h4>
+      <pre class="doc-declare"><code>err_t           tcp_send_empty_ack(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rexmit">Func <span>tcp_rexmit</span></h4>
+      <pre class="doc-declare"><code>err_t           tcp_rexmit (struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rexmit_rto_prepare">Func <span>tcp_rexmit_rto_prepare</span></h4>
+      <pre class="doc-declare"><code>err_t           tcp_rexmit_rto_prepare(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rexmit_rto_commit">Func <span>tcp_rexmit_rto_commit</span></h4>
+      <pre class="doc-declare"><code>void            tcp_rexmit_rto_commit(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rexmit_rto">Func <span>tcp_rexmit_rto</span></h4>
+      <pre class="doc-declare"><code>void            tcp_rexmit_rto (struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rexmit_fast">Func <span>tcp_rexmit_fast</span></h4>
+      <pre class="doc-declare"><code>void            tcp_rexmit_fast (struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_update_rcv_ann_wnd">Func <span>tcp_update_rcv_ann_wnd</span></h4>
+      <pre class="doc-declare"><code>u32_t           tcp_update_rcv_ann_wnd(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_process_refused_data">Func <span>tcp_process_refused_data</span></h4>
+      <pre class="doc-declare"><code>err_t           tcp_process_refused_data(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_pcb_purge">Func <span>tcp_pcb_purge</span></h4>
+      <pre class="doc-declare"><code>void tcp_pcb_purge(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_pcb_remove">Func <span>tcp_pcb_remove</span></h4>
+      <pre class="doc-declare"><code>void tcp_pcb_remove(struct tcp_pcb **pcblist, struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_segs_free">Func <span>tcp_segs_free</span></h4>
+      <pre class="doc-declare"><code>void tcp_segs_free(struct tcp_seg *seg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_seg_free">Func <span>tcp_seg_free</span></h4>
+      <pre class="doc-declare"><code>void tcp_seg_free(struct tcp_seg *seg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_send_fin">Func <span>tcp_send_fin</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_send_fin(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_enqueue_flags">Func <span>tcp_enqueue_flags</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_enqueue_flags(struct tcp_pcb *pcb, u8_t flags);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rexmit_seg">Func <span>tcp_rexmit_seg</span></h4>
+      <pre class="doc-declare"><code>void tcp_rexmit_seg(struct tcp_pcb *pcb, struct tcp_seg *seg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_rst">Func <span>tcp_rst</span></h4>
+      <pre class="doc-declare"><code>void tcp_rst(const struct tcp_pcb* pcb, u32_t seqno, u32_t ackno,
+      const ip_addr_t *local_ip, const ip_addr_t *remote_ip,
+      u16_t local_port, u16_t remote_port);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_next_iss">Func <span>tcp_next_iss</span></h4>
+      <pre class="doc-declare"><code>u32_t tcp_next_iss(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_keepalive">Func <span>tcp_keepalive</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_keepalive(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_split_unsent_seg">Func <span>tcp_split_unsent_seg</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_split_unsent_seg(struct tcp_pcb *pcb, u16_t split);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_zero_window_probe">Func <span>tcp_zero_window_probe</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_zero_window_probe(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_trigger_input_pcb_close">Func <span>tcp_trigger_input_pcb_close</span></h4>
+      <pre class="doc-declare"><code>void tcp_trigger_input_pcb_close(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_eff_send_mss_netif">Func <span>tcp_eff_send_mss_netif</span></h4>
+      <pre class="doc-declare"><code>u16_t tcp_eff_send_mss_netif(u16_t sendmss, struct netif *outif,
+                            const ip_addr_t *dest);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_recv_null">Func <span>tcp_recv_null</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_recv_null(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_debug_print">Func <span>tcp_debug_print</span></h4>
+      <pre class="doc-declare"><code>void tcp_debug_print(struct tcp_hdr *tcphdr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_debug_print_flags">Func <span>tcp_debug_print_flags</span></h4>
+      <pre class="doc-declare"><code>void tcp_debug_print_flags(u8_t flags);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_debug_print_state">Func <span>tcp_debug_print_state</span></h4>
+      <pre class="doc-declare"><code>void tcp_debug_print_state(enum tcp_state s);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_debug_print_pcbs">Func <span>tcp_debug_print_pcbs</span></h4>
+      <pre class="doc-declare"><code>void tcp_debug_print_pcbs(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_pcbs_sane">Func <span>tcp_pcbs_sane</span></h4>
+      <pre class="doc-declare"><code>s16_t tcp_pcbs_sane(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_timer_needed">Func <span>tcp_timer_needed</span></h4>
+      <pre class="doc-declare"><code>void tcp_timer_needed(void);</code></pre>
+      <pre class="doc-comment">/** External function (implemented in timers.c), called when TCP detects
+ * that a timer is needed (i.e. active- or time-wait-pcb found). */</pre>
+
+      <h4 id="tcp_netif_ip_addr_changed">Func <span>tcp_netif_ip_addr_changed</span></h4>
+      <pre class="doc-declare"><code>void tcp_netif_ip_addr_changed(const ip_addr_t* old_addr, const ip_addr_t* new_addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_free_ooseq">Func <span>tcp_free_ooseq</span></h4>
+      <pre class="doc-declare"><code>void tcp_free_ooseq(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_ext_arg_invoke_callbacks_passive_open">Func <span>tcp_ext_arg_invoke_callbacks_passive_open</span></h4>
+      <pre class="doc-declare"><code>err_t tcp_ext_arg_invoke_callbacks_passive_open(struct tcp_pcb_listen *lpcb, struct tcp_pcb *cpcb);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tcp_init">Variable <span>tcp_init</span></h4>
+      <pre class="doc-declare"><code>void            tcp_init   (void);</code></pre>
+      <pre class="doc-comment">/* Lower layer interface to TCP: */</pre>
+
+      <h4 id="tcp_tmr">Variable <span>tcp_tmr</span></h4>
+      <pre class="doc-declare"><code>void            tcp_tmr    (void);</code></pre>
+      <pre class="doc-comment">/* Initialize this module. */</pre>
+
+      <h4 id="tcp_txnow">Variable <span>tcp_txnow</span></h4>
+      <pre class="doc-declare"><code>void            tcp_txnow  (void);</code></pre>
+      <pre class="doc-comment">/* Call this from a netif driver (watch out for threading issues!) that has
+   returned a memory error on transmit and now has free buffers to send more.
+   This iterates all active pcbs that had an error and tries to call
+   tcp_output, so use this with care as it might slow down the system. */</pre>
+
+      <h4 id="tcp_input">Variable <span>tcp_input</span></h4>
+      <pre class="doc-declare"><code>void            tcp_input  (struct pbuf *p, struct netif *inp);</code></pre>
+      <pre class="doc-comment">/* Only used by IP to pass a TCP segment to TCP: */</pre>
+
+      <h4 id="tcp_pcb">Variable <span>tcp_pcb</span></h4>
+      <pre class="doc-declare"><code>struct tcp_pcb * tcp_alloc  (u8_t prio);</code></pre>
+      <pre class="doc-comment">/* Used within the TCP code only: */</pre>
+
+      <h4 id="tcp_free">Variable <span>tcp_free</span></h4>
+      <pre class="doc-declare"><code>void            tcp_free   (struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tcp_pcb">Variable <span>tcp_pcb</span></h4>
+      <pre class="doc-declare"><code>struct tcp_pcb *tcp_pcb_copy(struct tcp_pcb *pcb);</code></pre>
+      <pre class="doc-comment">/* Internal functions: */</pre>
+
+      <h4 id="tcp_seg">Variable <span>tcp_seg</span></h4>
+      <pre class="doc-declare"><code>struct tcp_seg *tcp_seg_copy(struct tcp_seg *seg);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

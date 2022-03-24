@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_network.h" class="nav-sub-label">uni_network.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#mem_pool.h" class="nav-sub-label">mem_pool.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_config.h" class="nav-sub-label">coap_config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#unistd.h" class="nav-sub-label">unistd.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ws2tcpip.h" class="nav-sub-label">ws2tcpip.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sys/socket.h" class="nav-sub-label">sys/socket.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_LIBCOAP_H_" class="nav-sub-label">COAP_LIBCOAP_H_</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_startup" class="nav-sub-label">coap_startup</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_cleanup" class="nav-sub-label">coap_cleanup</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ssize_t" class="nav-sub-label">ssize_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#USHORT" class="nav-sub-label">USHORT</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="uni_network.h"><span>uni_network.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_network.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_network.h"
+</pre>
+
+      <h4 id="mem_pool.h"><span>mem_pool.h</span></h4>
+      <pre class="doc-declare"><code>#include "mem_pool.h"
+</code></pre>
+      <pre class="doc-comment">#include "mem_pool.h"
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="coap_config.h"><span>coap_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_config.h"
+</pre>
+
+      <h4 id="unistd.h"><span>unistd.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;unistd.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <unistd.h>
+</pre>
+
+      <h4 id="ws2tcpip.h"><span>ws2tcpip.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;ws2tcpip.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <ws2tcpip.h>
+</pre>
+
+      <h4 id="sys/socket.h"><span>sys/socket.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;sys/socket.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <sys/socket.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_LIBCOAP_H_">Marco <span>COAP_LIBCOAP_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_LIBCOAP_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_startup">Func <span>coap_startup</span></h4>
+      <pre class="doc-declare"><code>void coap_startup(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_cleanup">Func <span>coap_cleanup</span></h4>
+      <pre class="doc-declare"><code>void coap_cleanup(void);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="ssize_t">Typedef <span>ssize_t</span></h4>
+      <pre class="doc-declare"><code>typedef SSIZE_T ssize_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="USHORT">Typedef <span>USHORT</span></h4>
+      <pre class="doc-declare"><code>typedef USHORT in_port_t;
+#elif !defined (CONTIKI)
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

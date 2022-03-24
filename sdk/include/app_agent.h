@@ -1,107 +1,242 @@
-/***********************************************************
-*  File: app_agent.h
-*  Author: nzy
-*  Date: 20150618
-***********************************************************/
+/**
+* @file app_agent.h
+* @brief Common process - app agent
+* @version 0.1
+* @date 2015-06-18
+*
+* @copyright Copyright 2015-2021 Tuya Inc. All Rights Reserved.
+*
+*/
+
 #ifndef _APP_AGENT_H
 #define _APP_AGENT_H
 
 #include "tuya_cloud_types.h"
 #include "uni_network.h"
+#include "ty_cJSON.h"
 
 #ifdef __cplusplus
-    extern "C" {
+extern "C" {
 #endif
-
-#ifdef  __APP_AGENT_GLOBALS
-    #define __APP_AGENT_EXT
-#else
-    #define __APP_AGENT_EXT extern
-#endif
-
-
 
 //group test
 #define FRM_GRP_OPER_ENGR 0xd0
 #define FRM_GRP_CMD 0xd1
 
-#if defined(ENABLE_IPC) && (ENABLE_IPC == 1)
-/* 局域网P2P信令通道，由P2P模块注册回调, 非线程安全 */
-typedef INT_T (*LAN_IPC_FRM_RECV_CB)(IN CONST INT_T socket,IN CONST CHAR_T *dev_id, IN CONST CHAR_T * buffer, IN CONST INT_T len);
+typedef enum {
+    CFG_UDP_DISCOVERY_FORCE,    // send upd discovery even if clients exceed(BOOL_T)
+    CFG_UDP_EXT_CONTENT,        // deprecated(reserved for gw/ipc)
+    CFG_UDP_EXT_UPDATE,         // add/update new key/value(ty_cJSON)
+    CFG_UDP_EXT_DELETE,         // delete key/value(ty_cJSON)
+    CFG_SET_CLT_NUM,            // set clinet number(UINT_T)
+    CFG_UDP_DISCOVERY_INTERVAL, // set udp discovery interval(UINT_T, unit:s, default:5)
+    CFG_REV_BUF_SIZE,           // receive buffer size(UINT, default:512)
+    CFG_DEFAULT_LINKAGE,        // default lan linkage (netmgr_linkage_t)
+    CFG_MAX
+} Lan_Cfg_e;
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_ipc_frm_register_cb(IN CONST LAN_IPC_FRM_RECV_CB recv_cb);
+/**
+ * @brief lan protocol init
+ *
+ * @param[in] wechat true/false
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_init();
+#define lan_pro_cntl_init(wechat) tuya_svc_lan_init()
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_ipc_frm_unregister_cb();
+/**
+ * @brief lan protocol exit
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_exit(VOID);
+#define lan_pro_cntl_exit() tuya_svc_lan_exit()
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_ipc_tcp_send(IN BYTE_T *data, IN UINT_T len);
-#endif
+/**
+ * @brief lan protocol diable
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_disable(VOID);
+#define lan_pro_cntl_disable() tuya_svc_lan_disable()
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_pro_cntl_init(BOOL_T wechat);
+/**
+ * @brief lan protocol enable
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_enable(VOID);
+#define lan_pro_cntl_enable() tuya_svc_lan_enable()
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_pro_cntl_exit(VOID);
+/**
+ * @brief lan dp report
+ *
+ * @param[in] data data buf
+ * @param[in] len buf length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_dp_report(IN CONST VOID *data, IN CONST UINT_T len);
+#define lan_dp_sata_report(data,len) tuya_svc_lan_dp_report(data,len)
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_pro_cntl_disable(VOID);
+/**
+ * @brief lan dp report callback
+ *
+ * @param[in] fr_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] ret_code refer to LAN_PRO_HEAD_APP_S
+ * @param[in] data refer to LAN_PRO_HEAD_APP_S
+ * @param[in] len refer to LAN_PRO_HEAD_APP_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_data_report(IN CONST UINT_T fr_type, IN CONST UINT_T ret_code,IN CONST BYTE_T *data, IN CONST UINT_T len);
+#define lan_data_report_cb(fr_type,ret_code,data,len) tuya_svc_lan_data_report(fr_type,ret_code,data,len)
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_pro_cntl_enable(VOID);
+/**
+ * @brief disconnect all sockets
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_disconnect_all(VOID);
+#define lan_disconnect_all_sockets() tuya_svc_lan_disconnect_all()
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_dp_sata_report(IN CONST VOID *data,IN CONST UINT_T len);
+/**
+ * @brief get vaild connect count
+ *
+ * @return vaild count
+ */
+INT_T tuya_svc_lan_get_valid_connections(VOID);
+#define lan_pro_cntl_get_valid_connect_cnt() tuya_svc_lan_get_valid_connections()
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_data_report_cb(IN CONST UINT_T fr_type,IN CONST UINT_T ret_code, \
-                                     IN CONST BYTE_T *data,IN CONST UINT_T len);
+/**
+ * @brief lan configure
+ *
+ * @param[in] cfg refer to Lan_Cfg_e
+ * @param[in] data buf
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_cfg(IN CONST Lan_Cfg_e cfg, IN CONST VOID * data);
+#define lan_pro_cntl_cfg(cfg,data) tuya_svc_lan_cfg(cfg,data)
 
-__APP_AGENT_EXT \
-INT_T lan_pro_cntl_get_valid_connect_cnt(VOID);
+/**
+ * @brief unregister callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_unregister_cb(IN UINT_T frame_type);
+#define lan_pro_cntl_unregister_cb(frame_type) tuya_svc_lan_unregister_cb(frame_type)
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_disconnect_all_sockets(VOID_T);
+/**
+ * @brief judge if lan connect
+ *
+ * @return TRUE/FALSE
+ */
+INT_T tuya_svc_lan_get_valid_connections(VOID);
+#define is_lan_connected() (tuya_svc_lan_get_valid_connections() != 0)
 
+/**
+ * @brief lan cmd extersion, caller will free out
+ *
+ * @param[in] data data
+ * @param[out] out buf
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+typedef OPERATE_RET(*lan_cmd_handler_cb)(IN CONST BYTE_T *data, OUT BYTE_T **out);
 
-#define LSTN_SVR_MAX_FD_NUM 2
-typedef OPERATE_RET (*LSTN_SVR_GET_FDS_CB)(OUT INT_T *fds, IN OUT INT_T *fd_num);
-typedef OPERATE_RET (*LSTN_SVR_ON_READ_CB)(IN CONST UNW_FD_SET_T *readfds, OUT INT_T *hdl_num);
-typedef OPERATE_RET (*LSTN_SVR_ON_ERR_CB)(IN CONST UNW_FD_SET_T *errfds,  OUT INT_T *hdl_num);
+/**
+ * @brief register callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] frame_type refer to lan_cmd_handler_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_register_cb(IN UINT_T frame_type, IN lan_cmd_handler_cb handler);
 
-typedef struct
-{
-	LSTN_SVR_GET_FDS_CB cb_get_fd;
-	LSTN_SVR_ON_READ_CB cb_read;
-	LSTN_SVR_ON_ERR_CB cb_err;
-} LAN_LSTN_SVR_CB_S;
+/**
+ * @brief register callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] frame_type refer to lan_cmd_handler_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET lan_pro_cntl_register_cb(UINT_T frame_type, lan_cmd_handler_cb handler);
 
-#if defined(ENABLE_LAN_LINKAGE) && (ENABLE_LAN_LINKAGE==1)
+/**
+ * @brief unregister callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET lan_pro_cntl_unregister_cb(UINT_T frame_type);
 
-__APP_AGENT_EXT \
-VOID lan_linkage_set_cap(IN USHORT_T cap);
+/**
+ * @brief get lan client number
+ *
+ * @return client number
+ */
+UINT_T tuya_svc_lan_get_client_num(VOID);
 
-//set seq for every time join the lan cluster
-__APP_AGENT_EXT \
-VOID lan_linkage_set_seqno(IN INT_T seqno);
+/**
+ * @brief Callback to handle lan protocol data
+ *
+ * @param[in] root_json Json encoded protocol data
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+typedef OPERATE_RET(*lan_ext_protocol_handler_cb)(IN ty_cJSON *root_json);
 
-__APP_AGENT_EXT \
-OPERATE_RET lan_listen_server_rsg(IN CONST LAN_LSTN_SVR_CB_S *svr_cb);
+/**
+ * @brief Register extend lan protocol
+ *
+ * @param[in] ext_lan_pro Protocol string
+ * @param[in] handler Protocol handler
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_ext_proto_reg(CONST CHAR_T *ext_lan_pro, lan_ext_protocol_handler_cb handler);
 
+/**
+ * @brief Unregister extend lan protocol
+ *
+ * @param[in] ext_lan_pro Protocol string
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_ext_proto_unreg(CONST CHAR_T *ext_lan_pro);
 
-//encrprt data to a frame use key2
-//must Free ec_data
-__APP_AGENT_EXT \
-OPERATE_RET lan_encrpt_frame_key2(IN CONST BYTE_T *data,IN UINT_T in_len,  OUT BYTE_T **ec_data,OUT UINT_T *ec_len);
+/**
+ * @brief uninit extend lan protocol
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_ext_proto_uninit(VOID);
 
+/**
+ * @brief extend lan protocol data report
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_ext_proto_data_report(IN CONST VOID *data, IN CONST UINT_T len);
 
-//decrprt data from a frame use key2
-//must Free ec_data
-__APP_AGENT_EXT \
-OPERATE_RET lan_decrpt_frame_key2(IN CONST BYTE_T *data,IN UINT_T in_len,  OUT BYTE_T **ret_dec_data,OUT UINT_T *ret_dec_len);
+/**
+ * @brief register callback
+ *
+ * @param[in] frame_type refer to LAN_PRO_HEAD_APP_S
+ * @param[in] frame_type refer to lan_cmd_handler_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */
+OPERATE_RET tuya_svc_lan_register_cb(IN UINT_T frame_type, IN lan_cmd_handler_cb handler);
+#define lan_pro_cntl_register_cb(frame_type,handler) tuya_svc_lan_register_cb(frame_type,handler)
 
-#endif
 #ifdef __cplusplus
 }
 #endif

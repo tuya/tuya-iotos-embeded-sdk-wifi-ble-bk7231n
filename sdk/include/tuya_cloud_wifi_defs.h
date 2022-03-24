@@ -1,8 +1,11 @@
-/*
-tuya_cloud_wifi_defs.h
-Copyright(C),2018-2020, 涂鸦科技 www.tuya.comm
+/**
+* @file tuya_cloud_wifi_defs.h
+* @brief Definitions of Wi-Fi utils
+* @version 0.1
+* @date 2018-04-25
+*
+* @copyright Copyright 2018-2021 Tuya Inc. All Rights Reserved.
 */
-
 #ifndef TUYA_CLOUD_WIFI_DEFS_H
 #define TUYA_CLOUD_WIFI_DEFS_H
 
@@ -44,6 +47,8 @@ typedef BYTE_T GW_WF_NWC_STAT_T;
 #define GWNS_NO_NEED_CFG        7   // no need config wifi
 #define GWNS_TY_SMART_AP_CFG	9	//already get ssid && passwd from smart-cfg and ap-cfg concurrent mode
 #define GWNS_UNCFG_SMC_AP		10 	//current in smart-cfg and ap-cfg concurrent mode
+#define GWNS_BT_ACTIVED  		11 	// bt actived
+#define GWNS_BT_CONFIG_WF		12 	//in bt actived,has configed wifi
 
 /* tuya sdk definition of wifi-config fast status */
 typedef BYTE_T GW_WF_NWC_FAST_STAT_T;
@@ -69,22 +74,17 @@ typedef BYTE_T GW_WIFI_NW_STAT_E;
 #define STAT_MQTT_ONLINE        11
 #define STAT_MQTT_OFFLINE       12
 #define STAT_UNPROVISION_AP_STA_UNCFG		13 //smart-cfg and ap-cfg concurrent config status
+#define STAT_BT_ACTIVED         14
+
 
 typedef BYTE_T NW_CFG_ERR_CODE_E;
-/*初始状态*/
-#define NW_CFG_INIT  				0
-/*激活失败*/
-#define NW_CFG_ACTIVE_FAILED 		1
-/*ap找不到*/
-#define NW_CFG_AP_NOT_FOUND 		2
-/*密码错误*/
-#define NW_CFG_ERR_PASSWD 			3
-/*ap连接不上*/
-#define NW_CFG_CANT_CONN_AP 		4
-/*dhcp错误*/
-#define NW_CFG_DHCP_FAILED 			5
-/*路由器连接成功*/
-#define NW_CFG_SUCC  				100
+#define NW_CFG_INIT  				0   // initial state
+#define NW_CFG_ACTIVE_FAILED 		1   // active failed
+#define NW_CFG_AP_NOT_FOUND 		2   // ap not found
+#define NW_CFG_ERR_PASSWD 			3   // password error
+#define NW_CFG_CANT_CONN_AP 		4   // can not connect to ap
+#define NW_CFG_DHCP_FAILED 			5   // dhcp failed
+#define NW_CFG_SUCC  				100 // succeed
 
 /* tuya sdk definition of wifi-reset type */
 typedef BYTE_T WF_RESET_TP_T;
@@ -93,7 +93,9 @@ typedef BYTE_T WF_RESET_TP_T;
 #define WRT_AUTO                2
 #define WRT_SMT_AP_CFG			3
 
-/* tuya-sdk product info (wifi version) */
+/**
+ * Definition of Wi-Fi product info
+ */
 typedef struct {
     CHAR_T *uuid;       // strlen(uuid) <= 16,must not be null
     CHAR_T *auth_key;   // strlen(auth_key) <= 32,must not be null
@@ -101,24 +103,27 @@ typedef struct {
     CHAR_T *ap_passwd;  // strlen(ap_passwd) <= 16,default null
 }WF_GW_PROD_INFO_S;
 
+/**
+ * @brief Definition of product info (for debug)
+ */
 typedef struct {
     BOOL_T has_auth; 	// authFlag
     CHAR_T *ap_ssid; 	// strlen(ap_ssid) <= 16,if ap_ssid is null ,then the default ssid is Smartlife_xxxx
     CHAR_T *ap_passwd; 	// strlen(ap_passwd) <= 16,default null
 }DEBUG_GW_PROD_INFO_S;
 
-/***********************************************************
-*  callback function: GET_WF_NW_STAT_CB
-*  Desc:    tuya-sdk network check callback (wifi version)
-*  Input:   stat: curr network status
-***********************************************************/
+/**
+ * @brief Handler when network connection error happens
+ *
+ * @param[in] stat State code, see GW_WIFI_NW_STAT_E
+ */
 typedef VOID (*GET_WF_NW_STAT_CB)(IN CONST GW_WIFI_NW_STAT_E stat);
 
-/***********************************************************
-*  callback function: WF_NW_CFG_ERR_CODE_CB
-*  Desc:	tuya-sdk network config error code callback (wifi version)
-*  Input:	stat: curr network error code
-***********************************************************/
+/**
+ * @brief Handler when network configuration error happens
+ *
+ * @param[in] err_code Error code, see NW_CFG_ERR_CODE_E
+ */
 typedef VOID (*WF_NW_CFG_ERR_CODE_CB)(IN CONST NW_CFG_ERR_CODE_E err_code);
 
 #ifdef __cplusplus

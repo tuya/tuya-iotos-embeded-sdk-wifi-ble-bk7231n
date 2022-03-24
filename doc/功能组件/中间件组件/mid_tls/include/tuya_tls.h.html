@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ssl.h" class="nav-sub-label">ssl.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_TLS_H" class="nav-sub-label">TUYA_TLS_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_tls_load_der_info" class="nav-sub-label">tuya_tls_load_der_info</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_register_constant" class="nav-sub-label">tuya_tls_register_constant</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_set_ssl_verify" class="nav-sub-label">tuya_tls_set_ssl_verify</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_register_x509_crt_der" class="nav-sub-label">tuya_tls_register_x509_crt_der</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_set_load_cert" class="nav-sub-label">tuya_tls_set_load_cert</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_set_coustom_cert" class="nav-sub-label">tuya_tls_set_coustom_cert</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_set_client_cert_pkey" class="nav-sub-label">tuya_tls_set_client_cert_pkey</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_init" class="nav-sub-label">tuya_tls_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_connect" class="nav-sub-label">tuya_tls_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_write" class="nav-sub-label">tuya_tls_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_read" class="nav-sub-label">tuya_tls_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_disconnect" class="nav-sub-label">tuya_tls_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#__tuya_tls_random" class="nav-sub-label">__tuya_tls_random</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_set_calloc_and_free" class="nav-sub-label">tuya_tls_set_calloc_and_free</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_tls_cert_perm_t;
+" class="nav-sub-label">tuya_tls_cert_perm_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_hander" class="nav-sub-label">tuya_tls_hander</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_send_cb" class="nav-sub-label">tuya_tls_send_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_recv_cb" class="nav-sub-label">tuya_tls_recv_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_TLS_EVENT_E;
+" class="nav-sub-label">TY_TLS_EVENT_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_tls_event_cb" class="nav-sub-label">tuya_tls_event_cb</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="ssl.h"><span>ssl.h</span></h4>
+      <pre class="doc-declare"><code>#include "ssl.h"
+</code></pre>
+      <pre class="doc-comment">#include "ssl.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_TLS_H">Marco <span>TUYA_TLS_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_TLS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_tls_load_der_info">Func <span>tuya_tls_load_der_info</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_tls_load_der_info(VOID);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_tls_register_constant">Func <span>tuya_tls_register_constant</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_tls_register_constant(IN CHAR_T *p_uuid, IN CHAR_T *p_authkey, IN CHAR_T *p_psk_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tls register
+ * 
+ * @param[in] p_uuid uudi
+ * @param[in] p_authkey auth key
+ * @param[in] p_psk_key psk key
+ *
+ */</pre>
+
+      <h4 id="tuya_tls_set_ssl_verify">Func <span>tuya_tls_set_ssl_verify</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_tls_set_ssl_verify(IN CONST INT_T verify_mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set tls verity
+ * 
+ * @param[in] verify_mode VERIFY_NONE:0,VERIFY_OPTIONAL:1,VERIFY_REQUIRED:2
+ */</pre>
+
+      <h4 id="tuya_tls_register_x509_crt_der">Func <span>tuya_tls_register_x509_crt_der</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_tls_register_x509_crt_der(VOID *p_ctx, UCHAR_T *p_der, UINT_T der_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tls register x509 ca
+ * 
+ * @param[in] p_ctx ca content
+ * @param[in] p_der ca
+ * @param[in] der_len ca len
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_tls_set_load_cert">Func <span>tuya_tls_set_load_cert</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_tls_set_load_cert(BOOL_T load);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief load ca flag
+ * 
+ * @param[in] load flag
+ *
+ */</pre>
+
+      <h4 id="tuya_tls_set_coustom_cert">Func <span>tuya_tls_set_coustom_cert</span></h4>
+      <pre class="doc-declare"><code>void tuya_tls_set_coustom_cert(CHAR_T *cert, INT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set ca
+ * 
+ * @param[in] cert ca
+ * @param[in] len ca length
+ *
+ */</pre>
+
+      <h4 id="tuya_tls_set_client_cert_pkey">Func <span>tuya_tls_set_client_cert_pkey</span></h4>
+      <pre class="doc-declare"><code>void tuya_tls_set_client_cert_pkey(CHAR_T *cert, INT_T len, CHAR_T *client_pkey, INT_T pkey_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set pkey
+ * 
+ * @param[in] cert ca
+ * @param[in] len ca length
+ * @param[in] client_pkey key
+ * @param[in] pkey_len key length
+ *
+ */</pre>
+
+      <h4 id="tuya_tls_init">Func <span>tuya_tls_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_tls_init(IN tuya_tls_event_cb event_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tls init
+ * 
+ * @param[in] event_cb refer to tuya_tls_event_cb
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_tls_connect">Func <span>tuya_tls_connect</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_tls_connect(OUT tuya_tls_hander *p_tls_handler, IN CHAR_T *hostname,IN INT_T port_num, IN INT_T sethostname,
+                            IN VOID *p_custom_net_ctx, IN tuya_tls_send_cb send_cb, IN tuya_tls_recv_cb recv_cb,
+                            IN INT_T socket_fd, IN INT_T overtime_s);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tls connect
+ * 
+ * @param[in] p_tls_handler refer to tuya_tls_hander
+ * @param[in] hostname url
+ * @param[in] port_num port
+ * @param[in] sethostname need set hostname or not
+ * @param[in] p_custom_net_ctx net content 
+ * @param[in] send_cb callback of send
+ * @param[in] recv_cb callback of received
+ * @param[in] socket_fd fd
+ * @param[in] overtime_s connect timeout
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_tls_write">Func <span>tuya_tls_write</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_tls_write(IN tuya_tls_hander tls_handler, BYTE_T *buf, UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tls write
+ * 
+ * @param[in] tls_handler refer to tuya_tls_hander
+ * @param[in] buf write data
+ * @param[in] len write length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_tls_read">Func <span>tuya_tls_read</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_tls_read(IN tuya_tls_hander tls_handler, BYTE_T *buf, UINT_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tls read
+ * 
+ * @param[in] tls_handler refer to tuya_tls_hander
+ * @param[out] buf read data
+ * @param[in] len read length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_tls_disconnect">Func <span>tuya_tls_disconnect</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_tls_disconnect(IN tuya_tls_hander tls_handler);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief generated random
+ * 
+ * @param[in] tls_handler refer to tuya_tls_hander
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="__tuya_tls_random">Func <span>__tuya_tls_random</span></h4>
+      <pre class="doc-declare"><code>int __tuya_tls_random(void *p_rng, unsigned char *output, size_t output_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief generated random
+ * 
+ * @param[in] p_rng no use
+ * @param[out] output random data
+ * @param[in] output_len length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_tls_set_calloc_and_free">Func <span>tuya_tls_set_calloc_and_free</span></h4>
+      <pre class="doc-declare"><code>void tuya_tls_set_calloc_and_free(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief set tls calloc and free function
+ * 
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_tls_cert_perm_t;
+">Typedef <span>tuya_tls_cert_perm_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CONST UINT8_T *pub_perm;
+   CONST UINT8_T *pri_perm;
+   UINT16_T pub_perm_len;
+   UINT16_T pri_perm_len;
+}tuya_tls_cert_perm_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_tls_hander">Typedef <span>tuya_tls_hander</span></h4>
+      <pre class="doc-declare"><code>typedef PVOID_T tuya_tls_hander;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_tls_send_cb">Typedef <span>tuya_tls_send_cb</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*tuya_tls_send_cb)( VOID *p_custom_net_ctx, CONST BYTE_T *buf, SIZE_T len);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_tls_recv_cb">Typedef <span>tuya_tls_recv_cb</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*tuya_tls_recv_cb)( VOID *p_custom_net_ctx, BYTE_T *buf, SIZE_T len);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_TLS_EVENT_E;
+">Typedef <span>TY_TLS_EVENT_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum
+{
+   TY_TLS_CERT_EXPIRED,
+}TY_TLS_EVENT_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_tls_event_cb">Typedef <span>tuya_tls_event_cb</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*tuya_tls_event_cb)(TY_TLS_EVENT_E event, VOID *p_args);
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

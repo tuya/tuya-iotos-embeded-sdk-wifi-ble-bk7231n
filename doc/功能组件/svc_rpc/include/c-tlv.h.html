@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__C_TLV_H__" class="nav-sub-label">__C_TLV_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT8(ptr)" class="nav-sub-label">UINT8(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT8(ptr)" class="nav-sub-label">INT8(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT16(ptr)" class="nav-sub-label">UINT16(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT16(ptr)" class="nav-sub-label">INT16(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT32(ptr)" class="nav-sub-label">UINT32(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT32(ptr)" class="nav-sub-label">INT32(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACKED" class="nav-sub-label">PACKED</a>
+              </li>
+      
+
+              <li>
+                <a href="#PUT8(ptr, c)" class="nav-sub-label">PUT8(ptr, c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PUT16(ptr, s)" class="nav-sub-label">PUT16(ptr, s)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PUT32(ptr, l)" class="nav-sub-label">PUT32(ptr, l)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_UINT8(ptr)" class="nav-sub-label">GET_UINT8(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_INT8(ptr)" class="nav-sub-label">GET_INT8(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_UINT16(ptr)" class="nav-sub-label">GET_UINT16(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_INT16(ptr)" class="nav-sub-label">GET_INT16(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_UINT32(ptr)" class="nav-sub-label">GET_UINT32(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#GET_INT32(ptr)" class="nav-sub-label">GET_INT32(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ADVANCE8(ptr)" class="nav-sub-label">ADVANCE8(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ADVANCE16(ptr)" class="nav-sub-label">ADVANCE16(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ADVANCE32(ptr)" class="nav-sub-label">ADVANCE32(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_MAGIC" class="nav-sub-label">MSG_MAGIC</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_AVAILABLE_TLVS(msg)" class="nav-sub-label">MSG_AVAILABLE_TLVS(msg)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_TLV(msg, index)" class="nav-sub-label">MSG_TLV(msg, index)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_LAST_TLV(msg)" class="nav-sub-label">MSG_LAST_TLV(msg)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MSG_SIZE(msg)" class="nav-sub-label">MSG_SIZE(msg)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#msg_free" class="nav-sub-label">msg_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#msg_get_packed_size" class="nav-sub-label">msg_get_packed_size</a>
+              </li>
+      
+
+              <li>
+                <a href="#msg_print" class="nav-sub-label">msg_print</a>
+              </li>
+      
+
+              <li>
+                <a href="#msg_pack" class="nav-sub-label">msg_pack</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#message_t" class="nav-sub-label">message_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#tlv_t" class="nav-sub-label">tlv_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#message_t" class="nav-sub-label">message_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tlv_type_t;
+" class="nav-sub-label">tlv_type_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tlv_t;
+" class="nav-sub-label">tlv_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#message_t;
+" class="nav-sub-label">message_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__C_TLV_H__">Marco <span>__C_TLV_H__</span></h4>
+      <pre class="doc-declare"><code>#define __C_TLV_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT8(ptr)">Marco <span>UINT8(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define UINT8(ptr)                  ((UINT8_T *)(ptr))
+</code></pre>
+      <pre class="doc-comment">/* 强转成某一类型的指针 */</pre>
+
+      <h4 id="INT8(ptr)">Marco <span>INT8(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define INT8(ptr)                   ((INT8_T *)(ptr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT16(ptr)">Marco <span>UINT16(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define UINT16(ptr)                 ((UINT16_T *)(ptr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INT16(ptr)">Marco <span>INT16(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define INT16(ptr)                  ((INT16_T *)(ptr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT32(ptr)">Marco <span>UINT32(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define UINT32(ptr)                 ((UINT_T *)(ptr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INT32(ptr)">Marco <span>INT32(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define INT32(ptr)                  ((INT_T *)(ptr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACKED">Marco <span>PACKED</span></h4>
+      <pre class="doc-declare"><code>#define PACKED                  __attribute__((packed))
+</code></pre>
+      <pre class="doc-comment">/* 向指针赋值 */</pre>
+
+      <h4 id="PUT8(ptr, c)">Marco <span>PUT8(ptr, c)</span></h4>
+      <pre class="doc-declare"><code>#define PUT8(ptr, c)            (*UINT8((ptr)) = (UINT8_T)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PUT16(ptr, s)">Marco <span>PUT16(ptr, s)</span></h4>
+      <pre class="doc-declare"><code>#define PUT16(ptr, s)           (*UINT16((ptr)) = (UINT16_T)(s))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PUT32(ptr, l)">Marco <span>PUT32(ptr, l)</span></h4>
+      <pre class="doc-declare"><code>#define PUT32(ptr, l)           (*UINT32((ptr)) = (UINT_T)(l))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_UINT8(ptr)">Marco <span>GET_UINT8(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define GET_UINT8(ptr)             (*UINT8((ptr)))
+</code></pre>
+      <pre class="doc-comment">/* 从指针取值 */</pre>
+
+      <h4 id="GET_INT8(ptr)">Marco <span>GET_INT8(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define GET_INT8(ptr)              (*INT8((ptr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_UINT16(ptr)">Marco <span>GET_UINT16(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define GET_UINT16(ptr)            (*UINT16((ptr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_INT16(ptr)">Marco <span>GET_INT16(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define GET_INT16(ptr)             (*INT16((ptr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_UINT32(ptr)">Marco <span>GET_UINT32(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define GET_UINT32(ptr)            (*UINT32((ptr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="GET_INT32(ptr)">Marco <span>GET_INT32(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define GET_INT32(ptr)             (*INT32((ptr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ADVANCE8(ptr)">Marco <span>ADVANCE8(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define ADVANCE8(ptr)               ptr = (UINT8(UINT8((ptr)) + 1))
+</code></pre>
+      <pre class="doc-comment">/* 指针向下移位 */</pre>
+
+      <h4 id="ADVANCE16(ptr)">Marco <span>ADVANCE16(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define ADVANCE16(ptr)              ptr = (UINT8(UINT16((ptr)) + 1))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ADVANCE32(ptr)">Marco <span>ADVANCE32(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define ADVANCE32(ptr)              ptr = (UINT8(UINT32((ptr)) + 1))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_MAGIC">Marco <span>MSG_MAGIC</span></h4>
+      <pre class="doc-declare"><code>#define MSG_MAGIC                (305419896)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_AVAILABLE_TLVS(msg)">Marco <span>MSG_AVAILABLE_TLVS(msg)</span></h4>
+      <pre class="doc-declare"><code>#define MSG_AVAILABLE_TLVS(msg)  (((msg)->capacity) - ((msg)->nitems))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_TLV(msg, index)">Marco <span>MSG_TLV(msg, index)</span></h4>
+      <pre class="doc-declare"><code>#define MSG_TLV(msg, index)      (&((msg)->tlvs[(index)]))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_LAST_TLV(msg)">Marco <span>MSG_LAST_TLV(msg)</span></h4>
+      <pre class="doc-declare"><code>#define MSG_LAST_TLV(msg)     (MSG_TLV((msg), (msg)->nitems)) //last unvalid tlv element
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MSG_SIZE(msg)">Marco <span>MSG_SIZE(msg)</span></h4>
+      <pre class="doc-declare"><code>#define MSG_SIZE(msg)         ((UINT16_T)(SIZEOF(message_t) + SIZEOF(tlv_t) * (msg)->capacity))
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="msg_free">Func <span>msg_free</span></h4>
+      <pre class="doc-declare"><code>VOID msg_free(message_t *msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free msg
+ * 
+ * @param[in] msg refer to message_t
+ *
+ */</pre>
+
+      <h4 id="msg_get_packed_size">Func <span>msg_get_packed_size</span></h4>
+      <pre class="doc-declare"><code>UINT_T msg_get_packed_size(message_t * msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get a packed message length
+ * 
+ * @param[in] msg refer to message_t
+ *
+ * @return packed length
+ */</pre>
+
+      <h4 id="msg_print">Func <span>msg_print</span></h4>
+      <pre class="doc-declare"><code>VOID msg_print(message_t * msg);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief dump a message data
+ * 
+ * @param[in] msg refer to message_t
+ *
+ */</pre>
+
+      <h4 id="msg_pack">Func <span>msg_pack</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET msg_pack(message_t *msg, UINT8_T *out, UINT_T *out_size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief pack message to stream
+ * 
+ * @param[in] msg refer to message_t
+ * @param[out] out need malloc first by user
+ * @param[in] out_size buffer size
+ * @param[out] out_size packed size
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="message_t">Variable <span>message_t</span></h4>
+      <pre class="doc-declare"><code>message_t * msg_init(UINT_T max_items);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create a new msg
+ * 
+ * @param[in] max_items item
+ *
+ * @return refer to message_t
+ */</pre>
+
+      <h4 id="tlv_t">Variable <span>tlv_t</span></h4>
+      <pre class="doc-declare"><code>tlv_t * msg_append(message_t *msg, tlv_type_t type, UINT16_T id, VOID *value, UINT16_T length);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief add itme to msg
+ * 
+ * @param[in] msg refer to message_t
+ * @param[in] type refer to tlv_type_t
+ * @param[in] id id
+ * @param[in] value value
+ * @param[in] length length
+ *
+ * @return refer to tlv_t
+ */</pre>
+
+      <h4 id="message_t">Variable <span>message_t</span></h4>
+      <pre class="doc-declare"><code>message_t * msg_unpack(UINT8_T *packed, UINT_T size);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief unpack stream to message
+ * 
+ * @param[in] packed stream
+ * @param[in] size stream size
+ *
+ * @return refer to message_t
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tlv_type_t;
+">Typedef <span>tlv_type_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ TLV_TYPE_INT8  = 7,
+ TLV_TYPE_UINT8 = 8,
+ TLV_TYPE_INT16 = 9,
+ TLV_TYPE_UINT16 = 10,
+ TLV_TYPE_INT32 = 11,
+ TLV_TYPE_UINT32 = 12,
+ TLV_TYPE_BYTES = 13,
+   TLV_TYPE_MSG   = 14, //Compound nested structure
+} tlv_type_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tlv_t;
+">Typedef <span>tlv_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT16_T id;
+   UINT16_T type;
+   UINT16_T length;
+   UINT8_T * value;
+} PACKED tlv_t;
+</code></pre>
+      <pre class="doc-comment">/* tlv/msg structures */</pre>
+
+      <h4 id="message_t;
+">Typedef <span>message_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   UINT_T magic;
+   UINT_T nitems;
+   UINT_T capacity;
+   tlv_t tlvs[0];
+} PACKED message_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

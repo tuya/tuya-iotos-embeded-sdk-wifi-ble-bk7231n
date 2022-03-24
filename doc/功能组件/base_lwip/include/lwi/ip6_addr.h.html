@@ -1,0 +1,1337 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#def.h" class="nav-sub-label">def.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6_zone.h" class="nav-sub-label">lwip/ip6_zone.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_IP6_ADDR_H" class="nav-sub-label">LWIP_HDR_IP6_ADDR_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_PART(ip6addr, index, a,b,c,d)" class="nav-sub-label">IP6_ADDR_PART(ip6addr, index, a,b,c,d)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR(ip6addr, idx0, idx1, idx2, idx3)" class="nav-sub-label">IP6_ADDR(ip6addr, idx0, idx1, idx2, idx3)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK1(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK1(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK2(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK2(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK3(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK3(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK4(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK4(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK5(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK5(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK6(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK6(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK7(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK7(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_BLOCK8(ip6addr)" class="nav-sub-label">IP6_ADDR_BLOCK8(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_copy(dest, src)" class="nav-sub-label">ip6_addr_copy(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set(dest, src)" class="nav-sub-label">ip6_addr_set(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_copy_from_packed(dest, src)" class="nav-sub-label">ip6_addr_copy_from_packed(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_copy_to_packed(dest, src)" class="nav-sub-label">ip6_addr_copy_to_packed(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_zero(ip6addr)" class="nav-sub-label">ip6_addr_set_zero(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_any(ip6addr)" class="nav-sub-label">ip6_addr_set_any(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_loopback(ip6addr)" class="nav-sub-label">ip6_addr_set_loopback(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_hton(dest, src)" class="nav-sub-label">ip6_addr_set_hton(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_netcmp_zoneless(addr1, addr2)" class="nav-sub-label">ip6_addr_netcmp_zoneless(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_netcmp(addr1, addr2)" class="nav-sub-label">ip6_addr_netcmp(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_nethostcmp(addr1, addr2)" class="nav-sub-label">ip6_addr_nethostcmp(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_cmp_zoneless(addr1, addr2)" class="nav-sub-label">ip6_addr_cmp_zoneless(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_cmp(addr1, addr2)" class="nav-sub-label">ip6_addr_cmp(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_cmp_packed(ip6addr, paddr, zone_idx)" class="nav-sub-label">ip6_addr_cmp_packed(ip6addr, paddr, zone_idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_get_subnet_id(ip6addr)" class="nav-sub-label">ip6_get_subnet_id(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isany_val(ip6addr)" class="nav-sub-label">ip6_addr_isany_val(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isany(ip6addr)" class="nav-sub-label">ip6_addr_isany(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isloopback(ip6addr)" class="nav-sub-label">ip6_addr_isloopback(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isglobal(ip6addr)" class="nav-sub-label">ip6_addr_isglobal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_islinklocal(ip6addr)" class="nav-sub-label">ip6_addr_islinklocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_issitelocal(ip6addr)" class="nav-sub-label">ip6_addr_issitelocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isuniquelocal(ip6addr)" class="nav-sub-label">ip6_addr_isuniquelocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isipv4mappedipv6(ip6addr)" class="nav-sub-label">ip6_addr_isipv4mappedipv6(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_multicast_transient_flag(ip6addr)" class="nav-sub-label">ip6_addr_multicast_transient_flag(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_multicast_prefix_flag(ip6addr)" class="nav-sub-label">ip6_addr_multicast_prefix_flag(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_multicast_rendezvous_flag(ip6addr)" class="nav-sub-label">ip6_addr_multicast_rendezvous_flag(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_multicast_scope(ip6addr)" class="nav-sub-label">ip6_addr_multicast_scope(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_RESERVED" class="nav-sub-label">IP6_MULTICAST_SCOPE_RESERVED</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_RESERVED0" class="nav-sub-label">IP6_MULTICAST_SCOPE_RESERVED0</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_INTERFACE_LOCAL" class="nav-sub-label">IP6_MULTICAST_SCOPE_INTERFACE_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_LINK_LOCAL" class="nav-sub-label">IP6_MULTICAST_SCOPE_LINK_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_RESERVED3" class="nav-sub-label">IP6_MULTICAST_SCOPE_RESERVED3</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_ADMIN_LOCAL" class="nav-sub-label">IP6_MULTICAST_SCOPE_ADMIN_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_SITE_LOCAL" class="nav-sub-label">IP6_MULTICAST_SCOPE_SITE_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_ORGANIZATION_LOCAL" class="nav-sub-label">IP6_MULTICAST_SCOPE_ORGANIZATION_LOCAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_GLOBAL" class="nav-sub-label">IP6_MULTICAST_SCOPE_GLOBAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_MULTICAST_SCOPE_RESERVEDF" class="nav-sub-label">IP6_MULTICAST_SCOPE_RESERVEDF</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast_iflocal(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast_iflocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast_linklocal(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast_linklocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast_adminlocal(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast_adminlocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast_sitelocal(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast_sitelocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast_orglocal(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast_orglocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ismulticast_global(ip6addr)" class="nav-sub-label">ip6_addr_ismulticast_global(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isallnodes_iflocal(ip6addr)" class="nav-sub-label">ip6_addr_isallnodes_iflocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isallnodes_linklocal(ip6addr)" class="nav-sub-label">ip6_addr_isallnodes_linklocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_allnodes_linklocal(ip6addr)" class="nav-sub-label">ip6_addr_set_allnodes_linklocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isallrouters_linklocal(ip6addr)" class="nav-sub-label">ip6_addr_isallrouters_linklocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_allrouters_linklocal(ip6addr)" class="nav-sub-label">ip6_addr_set_allrouters_linklocal(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_issolicitednode(ip6addr)" class="nav-sub-label">ip6_addr_issolicitednode(ip6addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_set_solicitednode(ip6addr, if_id)" class="nav-sub-label">ip6_addr_set_solicitednode(ip6addr, if_id)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_cmp_solicitednode(ip6addr, sn_addr)" class="nav-sub-label">ip6_addr_cmp_solicitednode(ip6addr, sn_addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_INVALID" class="nav-sub-label">IP6_ADDR_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE" class="nav-sub-label">IP6_ADDR_TENTATIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_1" class="nav-sub-label">IP6_ADDR_TENTATIVE_1</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_2" class="nav-sub-label">IP6_ADDR_TENTATIVE_2</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_3" class="nav-sub-label">IP6_ADDR_TENTATIVE_3</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_4" class="nav-sub-label">IP6_ADDR_TENTATIVE_4</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_5" class="nav-sub-label">IP6_ADDR_TENTATIVE_5</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_6" class="nav-sub-label">IP6_ADDR_TENTATIVE_6</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_7" class="nav-sub-label">IP6_ADDR_TENTATIVE_7</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_VALID" class="nav-sub-label">IP6_ADDR_VALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_PREFERRED" class="nav-sub-label">IP6_ADDR_PREFERRED</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_DEPRECATED" class="nav-sub-label">IP6_ADDR_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_DUPLICATED" class="nav-sub-label">IP6_ADDR_DUPLICATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_TENTATIVE_COUNT_MASK" class="nav-sub-label">IP6_ADDR_TENTATIVE_COUNT_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isinvalid(addr_state)" class="nav-sub-label">ip6_addr_isinvalid(addr_state)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_istentative(addr_state)" class="nav-sub-label">ip6_addr_istentative(addr_state)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isvalid(addr_state)" class="nav-sub-label">ip6_addr_isvalid(addr_state)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_ispreferred(addr_state)" class="nav-sub-label">ip6_addr_ispreferred(addr_state)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isdeprecated(addr_state)" class="nav-sub-label">ip6_addr_isdeprecated(addr_state)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_isduplicated(addr_state)" class="nav-sub-label">ip6_addr_isduplicated(addr_state)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_LIFE_STATIC" class="nav-sub-label">IP6_ADDR_LIFE_STATIC</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6_ADDR_LIFE_INFINITE" class="nav-sub-label">IP6_ADDR_LIFE_INFINITE</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_life_isstatic(addr_life)" class="nav-sub-label">ip6_addr_life_isstatic(addr_life)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_life_isinfinite(addr_life)" class="nav-sub-label">ip6_addr_life_isinfinite(addr_life)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_debug_print_parts(debug, a, b, c, d, e, f, g, h)" class="nav-sub-label">ip6_addr_debug_print_parts(debug, a, b, c, d, e, f, g, h)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_debug_print(debug, ipaddr)" class="nav-sub-label">ip6_addr_debug_print(debug, ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip6_addr_debug_print_val(debug, ipaddr)" class="nav-sub-label">ip6_addr_debug_print_val(debug, ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP6ADDR_STRLEN_MAX" class="nav-sub-label">IP6ADDR_STRLEN_MAX</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ip6addr_aton" class="nav-sub-label">ip6addr_aton</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ip6_addr_t" class="nav-sub-label">ip6_addr_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="def.h"><span>def.h</span></h4>
+      <pre class="doc-declare"><code>#include "def.h"
+</code></pre>
+      <pre class="doc-comment">#include "def.h"
+</pre>
+
+      <h4 id="lwip/ip6_zone.h"><span>lwip/ip6_zone.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6_zone.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6_zone.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_IP6_ADDR_H">Marco <span>LWIP_HDR_IP6_ADDR_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_IP6_ADDR_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_PART(ip6addr, index, a,b,c,d)">Marco <span>IP6_ADDR_PART(ip6addr, index, a,b,c,d)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_PART(ip6addr, index, a,b,c,d) \
+ (ip6addr)->addr[index] = PP_HTONL(LWIP_MAKEU32(a,b,c,d))
+</code></pre>
+      <pre class="doc-comment">/** Set an IPv6 partial address given by byte-parts */</pre>
+
+      <h4 id="IP6_ADDR(ip6addr, idx0, idx1, idx2, idx3)">Marco <span>IP6_ADDR(ip6addr, idx0, idx1, idx2, idx3)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR(ip6addr, idx0, idx1, idx2, idx3) do { \
+ (ip6addr)->addr[0] = idx0; \
+ (ip6addr)->addr[1] = idx1; \
+ (ip6addr)->addr[2] = idx2; \
+ (ip6addr)->addr[3] = idx3; \
+ ip6_addr_clear_zone(ip6addr); } while(0)
+</code></pre>
+      <pre class="doc-comment">/** Set a full IPv6 address by passing the 4 u32_t indices in network byte order
+    (use PP_HTONL() for constants) */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK1(ip6addr)">Marco <span>IP6_ADDR_BLOCK1(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK1(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[0]) >> 16) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK2(ip6addr)">Marco <span>IP6_ADDR_BLOCK2(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK2(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[0])) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK3(ip6addr)">Marco <span>IP6_ADDR_BLOCK3(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK3(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[1]) >> 16) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK4(ip6addr)">Marco <span>IP6_ADDR_BLOCK4(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK4(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[1])) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK5(ip6addr)">Marco <span>IP6_ADDR_BLOCK5(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK5(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[2]) >> 16) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK6(ip6addr)">Marco <span>IP6_ADDR_BLOCK6(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK6(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[2])) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK7(ip6addr)">Marco <span>IP6_ADDR_BLOCK7(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK7(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[3]) >> 16) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="IP6_ADDR_BLOCK8(ip6addr)">Marco <span>IP6_ADDR_BLOCK8(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_BLOCK8(ip6addr) ((u16_t)((lwip_htonl((ip6addr)->addr[3])) & 65535))
+</code></pre>
+      <pre class="doc-comment">/** Access address in 16-bit block */</pre>
+
+      <h4 id="ip6_addr_copy(dest, src)">Marco <span>ip6_addr_copy(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_copy(dest, src) do{(dest).addr[0] = (src).addr[0]; \
+                                   (dest).addr[1] = (src).addr[1]; \
+                                   (dest).addr[2] = (src).addr[2]; \
+                                   (dest).addr[3] = (src).addr[3]; \
+                                   ip6_addr_copy_zone((dest), (src)); }while(0)
+</code></pre>
+      <pre class="doc-comment">/** Copy IPv6 address - faster than ip6_addr_set: no NULL check */</pre>
+
+      <h4 id="ip6_addr_set(dest, src)">Marco <span>ip6_addr_set(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set(dest, src) do{(dest)->addr[0] = (src) == NULL ? 0 : (src)->addr[0]; \
+                                  (dest)->addr[1] = (src) == NULL ? 0 : (src)->addr[1]; \
+                                  (dest)->addr[2] = (src) == NULL ? 0 : (src)->addr[2]; \
+                                  (dest)->addr[3] = (src) == NULL ? 0 : (src)->addr[3]; \
+                                  ip6_addr_set_zone((dest), (src) == NULL ? IP6_NO_ZONE : ip6_addr_zone(src)); }while(0)
+</code></pre>
+      <pre class="doc-comment">/** Safely copy one IPv6 address to another (src may be NULL) */</pre>
+
+      <h4 id="ip6_addr_copy_from_packed(dest, src)">Marco <span>ip6_addr_copy_from_packed(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_copy_from_packed(dest, src) do{(dest).addr[0] = (src).addr[0]; \
+                                   (dest).addr[1] = (src).addr[1]; \
+                                   (dest).addr[2] = (src).addr[2]; \
+                                   (dest).addr[3] = (src).addr[3]; \
+                                   ip6_addr_clear_zone(&dest); }while(0)
+</code></pre>
+      <pre class="doc-comment">/** Copy packed IPv6 address to unpacked IPv6 address; zone is not set */</pre>
+
+      <h4 id="ip6_addr_copy_to_packed(dest, src)">Marco <span>ip6_addr_copy_to_packed(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_copy_to_packed(dest, src) do{(dest).addr[0] = (src).addr[0]; \
+                                   (dest).addr[1] = (src).addr[1]; \
+                                   (dest).addr[2] = (src).addr[2]; \
+                                   (dest).addr[3] = (src).addr[3]; }while(0)
+</code></pre>
+      <pre class="doc-comment">/** Copy unpacked IPv6 address to packed IPv6 address; zone is lost */</pre>
+
+      <h4 id="ip6_addr_set_zero(ip6addr)">Marco <span>ip6_addr_set_zero(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_zero(ip6addr)   do{(ip6addr)->addr[0] = 0; \
+                                        (ip6addr)->addr[1] = 0; \
+                                        (ip6addr)->addr[2] = 0; \
+                                        (ip6addr)->addr[3] = 0; \
+                                        ip6_addr_clear_zone(ip6addr);}while(0)
+</code></pre>
+      <pre class="doc-comment">/** Set complete address to zero */</pre>
+
+      <h4 id="ip6_addr_set_any(ip6addr)">Marco <span>ip6_addr_set_any(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_any(ip6addr)      ip6_addr_set_zero(ip6addr)
+</code></pre>
+      <pre class="doc-comment">/** Set address to ipv6 'any' (no need for lwip_htonl()) */</pre>
+
+      <h4 id="ip6_addr_set_loopback(ip6addr)">Marco <span>ip6_addr_set_loopback(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_loopback(ip6addr) do{(ip6addr)->addr[0] = 0; \
+                                         (ip6addr)->addr[1] = 0; \
+                                         (ip6addr)->addr[2] = 0; \
+                                         (ip6addr)->addr[3] = PP_HTONL(0x00000001UL); \
+                                         ip6_addr_clear_zone(ip6addr);}while(0)
+</code></pre>
+      <pre class="doc-comment">/** Set address to ipv6 loopback address */</pre>
+
+      <h4 id="ip6_addr_set_hton(dest, src)">Marco <span>ip6_addr_set_hton(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_hton(dest, src) do{(dest)->addr[0] = (src) == NULL ? 0 : lwip_htonl((src)->addr[0]); \
+                                       (dest)->addr[1] = (src) == NULL ? 0 : lwip_htonl((src)->addr[1]); \
+                                       (dest)->addr[2] = (src) == NULL ? 0 : lwip_htonl((src)->addr[2]); \
+                                       (dest)->addr[3] = (src) == NULL ? 0 : lwip_htonl((src)->addr[3]); \
+                                       ip6_addr_set_zone((dest), (src) == NULL ? IP6_NO_ZONE : ip6_addr_zone(src));}while(0)
+</code></pre>
+      <pre class="doc-comment">/** Safely copy one IPv6 address to another and change byte order
+ * from host- to network-order. */</pre>
+
+      <h4 id="ip6_addr_netcmp_zoneless(addr1, addr2)">Marco <span>ip6_addr_netcmp_zoneless(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_netcmp_zoneless(addr1, addr2) (((addr1)->addr[0] == (addr2)->addr[0]) && \
+                                              ((addr1)->addr[1] == (addr2)->addr[1]))
+</code></pre>
+      <pre class="doc-comment">/** Compare IPv6 networks, ignoring zone information. To be used sparingly! */</pre>
+
+      <h4 id="ip6_addr_netcmp(addr1, addr2)">Marco <span>ip6_addr_netcmp(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_netcmp(addr1, addr2) (ip6_addr_netcmp_zoneless((addr1), (addr2)) && \
+                                      ip6_addr_cmp_zone((addr1), (addr2)))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Determine if two IPv6 address are on the same network.
+ *
+ * @param addr1 IPv6 address 1
+ * @param addr2 IPv6 address 2
+ * @return 1 if the network identifiers of both address match, 0 if not
+ */</pre>
+
+      <h4 id="ip6_addr_nethostcmp(addr1, addr2)">Marco <span>ip6_addr_nethostcmp(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_nethostcmp(addr1, addr2) (((addr1)->addr[2] == (addr2)->addr[2]) && \
+                                          ((addr1)->addr[3] == (addr2)->addr[3]))
+</code></pre>
+      <pre class="doc-comment">/* Exact-host comparison *after* ip6_addr_netcmp() succeeded, for efficiency. */</pre>
+
+      <h4 id="ip6_addr_cmp_zoneless(addr1, addr2)">Marco <span>ip6_addr_cmp_zoneless(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_cmp_zoneless(addr1, addr2) (((addr1)->addr[0] == (addr2)->addr[0]) && \
+                                   ((addr1)->addr[1] == (addr2)->addr[1]) && \
+                                   ((addr1)->addr[2] == (addr2)->addr[2]) && \
+                                   ((addr1)->addr[3] == (addr2)->addr[3]))
+</code></pre>
+      <pre class="doc-comment">/** Compare IPv6 addresses, ignoring zone information. To be used sparingly! */</pre>
+
+      <h4 id="ip6_addr_cmp(addr1, addr2)">Marco <span>ip6_addr_cmp(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_cmp(addr1, addr2) (ip6_addr_cmp_zoneless((addr1), (addr2)) && \
+                                   ip6_addr_cmp_zone((addr1), (addr2)))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Determine if two IPv6 addresses are the same. In particular, the address
+ * part of both must be the same, and the zone must be compatible.
+ *
+ * @param addr1 IPv6 address 1
+ * @param addr2 IPv6 address 2
+ * @return 1 if the addresses are considered equal, 0 if not
+ */</pre>
+
+      <h4 id="ip6_addr_cmp_packed(ip6addr, paddr, zone_idx)">Marco <span>ip6_addr_cmp_packed(ip6addr, paddr, zone_idx)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_cmp_packed(ip6addr, paddr, zone_idx) (((ip6addr)->addr[0] == (paddr)->addr[0]) && \
+                                   ((ip6addr)->addr[1] == (paddr)->addr[1]) && \
+                                   ((ip6addr)->addr[2] == (paddr)->addr[2]) && \
+                                   ((ip6addr)->addr[3] == (paddr)->addr[3]) && \
+                                   ip6_addr_equals_zone((ip6addr), (zone_idx)))
+</code></pre>
+      <pre class="doc-comment">/** Compare IPv6 address to packed address and zone */</pre>
+
+      <h4 id="ip6_get_subnet_id(ip6addr)">Marco <span>ip6_get_subnet_id(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_get_subnet_id(ip6addr)  (lwip_htonl((ip6addr)->addr[2]) & 0x0000ffffUL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isany_val(ip6addr)">Marco <span>ip6_addr_isany_val(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isany_val(ip6addr) (((ip6addr).addr[0] == 0) && \
+                                    ((ip6addr).addr[1] == 0) && \
+                                    ((ip6addr).addr[2] == 0) && \
+                                    ((ip6addr).addr[3] == 0))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isany(ip6addr)">Marco <span>ip6_addr_isany(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isany(ip6addr) (((ip6addr) == NULL) || ip6_addr_isany_val(*(ip6addr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isloopback(ip6addr)">Marco <span>ip6_addr_isloopback(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isloopback(ip6addr) (((ip6addr)->addr[0] == 0UL) && \
+                                     ((ip6addr)->addr[1] == 0UL) && \
+                                     ((ip6addr)->addr[2] == 0UL) && \
+                                     ((ip6addr)->addr[3] == PP_HTONL(0x00000001UL)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isglobal(ip6addr)">Marco <span>ip6_addr_isglobal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isglobal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xe0000000UL)) == PP_HTONL(0x20000000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_islinklocal(ip6addr)">Marco <span>ip6_addr_islinklocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_islinklocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(255c00000UL)) == PP_HTONL(15e800000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_issitelocal(ip6addr)">Marco <span>ip6_addr_issitelocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_issitelocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(255c00000UL)) == PP_HTONL(15ec00000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isuniquelocal(ip6addr)">Marco <span>ip6_addr_isuniquelocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isuniquelocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(15e000000UL)) == PP_HTONL(15c000000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isipv4mappedipv6(ip6addr)">Marco <span>ip6_addr_isipv4mappedipv6(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isipv4mappedipv6(ip6addr) (((ip6addr)->addr[0] == 0) && ((ip6addr)->addr[1] == 0) && (((ip6addr)->addr[2]) == PP_HTONL(0x0000FFFFUL)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast(ip6addr)">Marco <span>ip6_addr_ismulticast(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff000000UL)) == PP_HTONL(0xff000000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_multicast_transient_flag(ip6addr)">Marco <span>ip6_addr_multicast_transient_flag(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_multicast_transient_flag(ip6addr) ((ip6addr)->addr[0] & PP_HTONL(0x00100000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_multicast_prefix_flag(ip6addr)">Marco <span>ip6_addr_multicast_prefix_flag(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_multicast_prefix_flag(ip6addr)    ((ip6addr)->addr[0] & PP_HTONL(0x00200000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_multicast_rendezvous_flag(ip6addr)">Marco <span>ip6_addr_multicast_rendezvous_flag(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_multicast_rendezvous_flag(ip6addr) ((ip6addr)->addr[0] & PP_HTONL(0x00400000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_multicast_scope(ip6addr)">Marco <span>ip6_addr_multicast_scope(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_multicast_scope(ip6addr) ((lwip_htonl((ip6addr)->addr[0]) >> 16) & 15)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_RESERVED">Marco <span>IP6_MULTICAST_SCOPE_RESERVED</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_RESERVED           0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_RESERVED0">Marco <span>IP6_MULTICAST_SCOPE_RESERVED0</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_RESERVED0          0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_INTERFACE_LOCAL">Marco <span>IP6_MULTICAST_SCOPE_INTERFACE_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_INTERFACE_LOCAL    1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_LINK_LOCAL">Marco <span>IP6_MULTICAST_SCOPE_LINK_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_LINK_LOCAL         2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_RESERVED3">Marco <span>IP6_MULTICAST_SCOPE_RESERVED3</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_RESERVED3          3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_ADMIN_LOCAL">Marco <span>IP6_MULTICAST_SCOPE_ADMIN_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_ADMIN_LOCAL        4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_SITE_LOCAL">Marco <span>IP6_MULTICAST_SCOPE_SITE_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_SITE_LOCAL         5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_ORGANIZATION_LOCAL">Marco <span>IP6_MULTICAST_SCOPE_ORGANIZATION_LOCAL</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_ORGANIZATION_LOCAL 8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_GLOBAL">Marco <span>IP6_MULTICAST_SCOPE_GLOBAL</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_GLOBAL             0xe
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_MULTICAST_SCOPE_RESERVEDF">Marco <span>IP6_MULTICAST_SCOPE_RESERVEDF</span></h4>
+      <pre class="doc-declare"><code>#define IP6_MULTICAST_SCOPE_RESERVEDF          15
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast_iflocal(ip6addr)">Marco <span>ip6_addr_ismulticast_iflocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast_iflocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff8f0000UL)) == PP_HTONL(0xff010000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast_linklocal(ip6addr)">Marco <span>ip6_addr_ismulticast_linklocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast_linklocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff8f0000UL)) == PP_HTONL(0xff020000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast_adminlocal(ip6addr)">Marco <span>ip6_addr_ismulticast_adminlocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast_adminlocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff8f0000UL)) == PP_HTONL(0xff040000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast_sitelocal(ip6addr)">Marco <span>ip6_addr_ismulticast_sitelocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast_sitelocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff8f0000UL)) == PP_HTONL(0xff050000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast_orglocal(ip6addr)">Marco <span>ip6_addr_ismulticast_orglocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast_orglocal(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff8f0000UL)) == PP_HTONL(0xff080000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ismulticast_global(ip6addr)">Marco <span>ip6_addr_ismulticast_global(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ismulticast_global(ip6addr) (((ip6addr)->addr[0] & PP_HTONL(0xff8f0000UL)) == PP_HTONL(4080e0000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isallnodes_iflocal(ip6addr)">Marco <span>ip6_addr_isallnodes_iflocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isallnodes_iflocal(ip6addr) (((ip6addr)->addr[0] == PP_HTONL(0xff010000UL)) && \
+   ((ip6addr)->addr[1] == 0UL) && \
+   ((ip6addr)->addr[2] == 0UL) && \
+   ((ip6addr)->addr[3] == PP_HTONL(0x00000001UL)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isallnodes_linklocal(ip6addr)">Marco <span>ip6_addr_isallnodes_linklocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isallnodes_linklocal(ip6addr) (((ip6addr)->addr[0] == PP_HTONL(0xff020000UL)) && \
+   ((ip6addr)->addr[1] == 0UL) && \
+   ((ip6addr)->addr[2] == 0UL) && \
+   ((ip6addr)->addr[3] == PP_HTONL(0x00000001UL)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_set_allnodes_linklocal(ip6addr)">Marco <span>ip6_addr_set_allnodes_linklocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_allnodes_linklocal(ip6addr) do{(ip6addr)->addr[0] = PP_HTONL(0xff020000UL); \
+               (ip6addr)->addr[1] = 0; \
+               (ip6addr)->addr[2] = 0; \
+               (ip6addr)->addr[3] = PP_HTONL(0x00000001UL); \
+               ip6_addr_clear_zone(ip6addr); }while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isallrouters_linklocal(ip6addr)">Marco <span>ip6_addr_isallrouters_linklocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isallrouters_linklocal(ip6addr) (((ip6addr)->addr[0] == PP_HTONL(0xff020000UL)) && \
+   ((ip6addr)->addr[1] == 0UL) && \
+   ((ip6addr)->addr[2] == 0UL) && \
+   ((ip6addr)->addr[3] == PP_HTONL(0x00000002UL)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_set_allrouters_linklocal(ip6addr)">Marco <span>ip6_addr_set_allrouters_linklocal(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_allrouters_linklocal(ip6addr) do{(ip6addr)->addr[0] = PP_HTONL(0xff020000UL); \
+               (ip6addr)->addr[1] = 0; \
+               (ip6addr)->addr[2] = 0; \
+               (ip6addr)->addr[3] = PP_HTONL(0x00000002UL); \
+               ip6_addr_clear_zone(ip6addr); }while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_issolicitednode(ip6addr)">Marco <span>ip6_addr_issolicitednode(ip6addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_issolicitednode(ip6addr) ( ((ip6addr)->addr[0] == PP_HTONL(0xff020000UL)) && \
+       ((ip6addr)->addr[2] == PP_HTONL(0x00000001UL)) && \
+       (((ip6addr)->addr[3] & PP_HTONL(0xff000000UL)) == PP_HTONL(0xff000000UL)) )
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_set_solicitednode(ip6addr, if_id)">Marco <span>ip6_addr_set_solicitednode(ip6addr, if_id)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_set_solicitednode(ip6addr, if_id) do{(ip6addr)->addr[0] = PP_HTONL(0xff020000UL); \
+               (ip6addr)->addr[1] = 0; \
+               (ip6addr)->addr[2] = PP_HTONL(0x00000001UL); \
+               (ip6addr)->addr[3] = (PP_HTONL(0xff000000UL) | (if_id)); \
+               ip6_addr_clear_zone(ip6addr); }while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_cmp_solicitednode(ip6addr, sn_addr)">Marco <span>ip6_addr_cmp_solicitednode(ip6addr, sn_addr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_cmp_solicitednode(ip6addr, sn_addr) (((ip6addr)->addr[0] == PP_HTONL(0xff020000UL)) && \
+                                   ((ip6addr)->addr[1] == 0) && \
+                                   ((ip6addr)->addr[2] == PP_HTONL(0x00000001UL)) && \
+                                   ((ip6addr)->addr[3] == (PP_HTONL(0xff000000UL) | (sn_addr)->addr[3])))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_INVALID">Marco <span>IP6_ADDR_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_INVALID     0
+</code></pre>
+      <pre class="doc-comment">/* IPv6 address states. */</pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE">Marco <span>IP6_ADDR_TENTATIVE</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE   8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_1">Marco <span>IP6_ADDR_TENTATIVE_1</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_1 9 /* 1 probe sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_2">Marco <span>IP6_ADDR_TENTATIVE_2</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_2 0a /* 2 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_3">Marco <span>IP6_ADDR_TENTATIVE_3</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_3 0b /* 3 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_4">Marco <span>IP6_ADDR_TENTATIVE_4</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_4 0c /* 4 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_5">Marco <span>IP6_ADDR_TENTATIVE_5</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_5 0d /* 5 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_6">Marco <span>IP6_ADDR_TENTATIVE_6</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_6 0e /* 6 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_7">Marco <span>IP6_ADDR_TENTATIVE_7</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_7 15 /* 7 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_VALID">Marco <span>IP6_ADDR_VALID</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_VALID       16 /* This bit marks an address as valid (preferred or deprecated) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_PREFERRED">Marco <span>IP6_ADDR_PREFERRED</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_PREFERRED   48
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_DEPRECATED">Marco <span>IP6_ADDR_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_DEPRECATED  16 /* Same as VALID (valid but not preferred) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_DUPLICATED">Marco <span>IP6_ADDR_DUPLICATED</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_DUPLICATED  64 /* Failed DAD test, not valid */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_TENTATIVE_COUNT_MASK">Marco <span>IP6_ADDR_TENTATIVE_COUNT_MASK</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_TENTATIVE_COUNT_MASK 7 /* 1-7 probes sent */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isinvalid(addr_state)">Marco <span>ip6_addr_isinvalid(addr_state)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isinvalid(addr_state) (addr_state == IP6_ADDR_INVALID)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_istentative(addr_state)">Marco <span>ip6_addr_istentative(addr_state)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_istentative(addr_state) (addr_state & IP6_ADDR_TENTATIVE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isvalid(addr_state)">Marco <span>ip6_addr_isvalid(addr_state)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isvalid(addr_state) (addr_state & IP6_ADDR_VALID) /* Include valid, preferred, and deprecated. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_ispreferred(addr_state)">Marco <span>ip6_addr_ispreferred(addr_state)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_ispreferred(addr_state) (addr_state == IP6_ADDR_PREFERRED)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isdeprecated(addr_state)">Marco <span>ip6_addr_isdeprecated(addr_state)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isdeprecated(addr_state) (addr_state == IP6_ADDR_DEPRECATED)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_isduplicated(addr_state)">Marco <span>ip6_addr_isduplicated(addr_state)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_isduplicated(addr_state) (addr_state == IP6_ADDR_DUPLICATED)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_LIFE_STATIC">Marco <span>IP6_ADDR_LIFE_STATIC</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_LIFE_STATIC  (0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6_ADDR_LIFE_INFINITE">Marco <span>IP6_ADDR_LIFE_INFINITE</span></h4>
+      <pre class="doc-declare"><code>#define IP6_ADDR_LIFE_INFINITE (0xffffffffUL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_life_isstatic(addr_life)">Marco <span>ip6_addr_life_isstatic(addr_life)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_life_isstatic(addr_life) ((addr_life) == IP6_ADDR_LIFE_STATIC)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_life_isinfinite(addr_life)">Marco <span>ip6_addr_life_isinfinite(addr_life)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_life_isinfinite(addr_life) ((addr_life) == IP6_ADDR_LIFE_INFINITE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_debug_print_parts(debug, a, b, c, d, e, f, g, h)">Marco <span>ip6_addr_debug_print_parts(debug, a, b, c, d, e, f, g, h)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_debug_print_parts(debug, a, b, c, d, e, f, g, h) \
+ LWIP_DEBUGF(debug, ("%" X16_F ":%" X16_F ":%" X16_F ":%" X16_F ":%" X16_F ":%" X16_F ":%" X16_F ":%" X16_F, \
+                     a, b, c, d, e, f, g, h))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_debug_print(debug, ipaddr)">Marco <span>ip6_addr_debug_print(debug, ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_debug_print(debug, ipaddr) \
+ ip6_addr_debug_print_parts(debug, \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK1(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK2(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK3(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK4(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK5(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK6(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK7(ipaddr) : 0),   \
+                     (u16_t)((ipaddr) != NULL ? IP6_ADDR_BLOCK8(ipaddr) : 0))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip6_addr_debug_print_val(debug, ipaddr)">Marco <span>ip6_addr_debug_print_val(debug, ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip6_addr_debug_print_val(debug, ipaddr) \
+ ip6_addr_debug_print_parts(debug, \
+                     IP6_ADDR_BLOCK1(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK2(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK3(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK4(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK5(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK6(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK7(&(ipaddr)),   \
+                     IP6_ADDR_BLOCK8(&(ipaddr)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP6ADDR_STRLEN_MAX">Marco <span>IP6ADDR_STRLEN_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IP6ADDR_STRLEN_MAX   46
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ip6addr_aton">Func <span>ip6addr_aton</span></h4>
+      <pre class="doc-declare"><code>int ip6addr_aton(const char *cp, ip6_addr_t *addr);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *ip6addr_ntoa(const ip6_addr_t *addr);</code></pre>
+      <pre class="doc-comment">/** returns ptr to static buffer; not reentrant! */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *ip6addr_ntoa_r(const ip6_addr_t *addr, char *buf, int buflen);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="ip6_addr_t">Typedef <span>ip6_addr_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct ip6_addr ip6_addr_t;
+</code></pre>
+      <pre class="doc-comment">/** IPv6 address */</pre>
+    </div>
+  </body>
+</html>
+            

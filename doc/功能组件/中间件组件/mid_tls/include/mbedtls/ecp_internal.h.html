@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_ECP_INTERNAL_H" class="nav-sub-label">MBEDTLS_ECP_INTERNAL_H</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_internal_ecp_init" class="nav-sub-label">mbedtls_internal_ecp_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_free" class="nav-sub-label">mbedtls_internal_ecp_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_randomize_jac" class="nav-sub-label">mbedtls_internal_ecp_randomize_jac</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_add_mixed" class="nav-sub-label">mbedtls_internal_ecp_add_mixed</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_double_jac" class="nav-sub-label">mbedtls_internal_ecp_double_jac</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_normalize_jac_many" class="nav-sub-label">mbedtls_internal_ecp_normalize_jac_many</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_normalize_jac" class="nav-sub-label">mbedtls_internal_ecp_normalize_jac</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_double_add_mxz" class="nav-sub-label">mbedtls_internal_ecp_double_add_mxz</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_randomize_mxz" class="nav-sub-label">mbedtls_internal_ecp_randomize_mxz</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_ecp_normalize_mxz" class="nav-sub-label">mbedtls_internal_ecp_normalize_mxz</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_ECP_INTERNAL_H">Marco <span>MBEDTLS_ECP_INTERNAL_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ECP_INTERNAL_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_internal_ecp_init">Func <span>mbedtls_internal_ecp_init</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_init( const mbedtls_ecp_group *grp );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Initialise the Elliptic Curve Point module extension.
+ *
+ *                  If mbedtls_internal_ecp_grp_capable returns true for a
+ *                  group, this function has to be able to initialise the
+ *                  module for it.
+ *
+ *                  This module can be a driver to a crypto hardware
+ *                  accelerator, for which this could be an initialise function.
+ *
+ * \param grp       The pointer to the group the module needs to be
+ *                  initialised for.
+ *
+ * \return          0 if successful.
+ */</pre>
+
+      <h4 id="mbedtls_internal_ecp_free">Func <span>mbedtls_internal_ecp_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_internal_ecp_free( const mbedtls_ecp_group *grp );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Frees and deallocates the Elliptic Curve Point module
+ *                  extension.
+ *
+ * \param grp       The pointer to the group the module was initialised for.
+ */</pre>
+
+      <h4 id="mbedtls_internal_ecp_randomize_jac">Func <span>mbedtls_internal_ecp_randomize_jac</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_randomize_jac( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *pt, int (*f_rng)(void *, unsigned char *, size_t),
+       void *p_rng );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Randomize jacobian coordinates:
+ *                  (X, Y, Z) -> (l^2 X, l^3 Y, l Z) for random l.
+ *
+ * \param grp       Pointer to the group representing the curve.
+ *
+ * \param pt        The point on the curve to be randomised, given with Jacobian
+ *                  coordinates.
+ *
+ * \param f_rng     A function pointer to the random number generator.
+ *
+ * \param p_rng     A pointer to the random number generator state.
+ *
+ * \return          0 if successful.
+ */</pre>
+
+      <h4 id="mbedtls_internal_ecp_add_mixed">Func <span>mbedtls_internal_ecp_add_mixed</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_add_mixed( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *R, const mbedtls_ecp_point *P,
+       const mbedtls_ecp_point *Q );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Addition: R = P + Q, mixed affine-Jacobian coordinates.
+ *
+ *                  The coordinates of Q must be normalized (= affine),
+ *                  but those of P don't need to. R is not normalized.
+ *
+ *                  This function is used only as a subrutine of
+ *                  ecp_mul_comb().
+ *
+ *                  Special cases: (1) P or Q is zero, (2) R is zero,
+ *                      (3) P == Q.
+ *                  None of these cases can happen as intermediate step in
+ *                  ecp_mul_comb():
+ *                      - at each step, P, Q and R are multiples of the base
+ *                      point, the factor being less than its order, so none of
+ *                      them is zero;
+ *                      - Q is an odd multiple of the base point, P an even
+ *                      multiple, due to the choice of precomputed points in the
+ *                      modified comb method.
+ *                  So branches for these cases do not leak secret information.
+ *
+ *                  We accept Q->Z being unset (saving memory in tables) as
+ *                  meaning 1.
+ *
+ *                  Cost in field operations if done by [5] 3.22:
+ *                      1A := 8M + 3S
+ *
+ * \param grp       Pointer to the group representing the curve.
+ *
+ * \param R         Pointer to a point structure to hold the result.
+ *
+ * \param P         Pointer to the first summand, given with Jacobian
+ *                  coordinates
+ *
+ * \param Q         Pointer to the second summand, given with affine
+ *                  coordinates.
+ *
+ * \return          0 if successful.
+ */</pre>
+
+      <h4 id="mbedtls_internal_ecp_double_jac">Func <span>mbedtls_internal_ecp_double_jac</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_double_jac( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *R, const mbedtls_ecp_point *P );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_internal_ecp_normalize_jac_many">Func <span>mbedtls_internal_ecp_normalize_jac_many</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_normalize_jac_many( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *T[], size_t t_len );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_internal_ecp_normalize_jac">Func <span>mbedtls_internal_ecp_normalize_jac</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_normalize_jac( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *pt );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_internal_ecp_double_add_mxz">Func <span>mbedtls_internal_ecp_double_add_mxz</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_double_add_mxz( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *R, mbedtls_ecp_point *S, const mbedtls_ecp_point *P,
+       const mbedtls_ecp_point *Q, const mbedtls_mpi *d );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_internal_ecp_randomize_mxz">Func <span>mbedtls_internal_ecp_randomize_mxz</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_randomize_mxz( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *P, int (*f_rng)(void *, unsigned char *, size_t),
+       void *p_rng );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mbedtls_internal_ecp_normalize_mxz">Func <span>mbedtls_internal_ecp_normalize_mxz</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_ecp_normalize_mxz( const mbedtls_ecp_group *grp,
+       mbedtls_ecp_point *P );</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>unsigned char mbedtls_internal_ecp_grp_capable( const mbedtls_ecp_group *grp );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief           Indicate if the Elliptic Curve Point module extension can
+ *                  handle the group.
+ *
+ * \param grp       The pointer to the elliptic curve group that will be the
+ *                  basis of the cryptographic computations.
+ *
+ * \return          Non-zero if successful.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_config.h" class="nav-sub-label">coap_config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#net.h" class="nav-sub-label">net.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#resource.h" class="nav-sub-label">resource.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#subscribe.h" class="nav-sub-label">subscribe.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MEMP_NUM_COAPCONTEXT" class="nav-sub-label">MEMP_NUM_COAPCONTEXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPENDPOINT" class="nav-sub-label">MEMP_NUM_COAPENDPOINT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPPACKET" class="nav-sub-label">MEMP_NUM_COAPPACKET</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPNODE" class="nav-sub-label">MEMP_NUM_COAPNODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPPDU" class="nav-sub-label">MEMP_NUM_COAPPDU</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPSESSION" class="nav-sub-label">MEMP_NUM_COAPSESSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAP_SUBSCRIPTION" class="nav-sub-label">MEMP_NUM_COAP_SUBSCRIPTION</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPRESOURCE" class="nav-sub-label">MEMP_NUM_COAPRESOURCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPRESOURCEATTR" class="nav-sub-label">MEMP_NUM_COAPRESOURCEATTR</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPOPTLIST" class="nav-sub-label">MEMP_NUM_COAPOPTLIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_LEN_COAPOPTLIST" class="nav-sub-label">MEMP_LEN_COAPOPTLIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_NUM_COAPSTRING" class="nav-sub-label">MEMP_NUM_COAPSTRING</a>
+              </li>
+      
+
+              <li>
+                <a href="#MEMP_LEN_COAPSTRING" class="nav-sub-label">MEMP_LEN_COAPSTRING</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_MEMPOOL" class="nav-sub-label">LWIP_MEMPOOL</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="coap_config.h"><span>coap_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_config.h"
+</pre>
+
+      <h4 id="net.h"><span>net.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;net.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <net.h>
+</pre>
+
+      <h4 id="resource.h"><span>resource.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;resource.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <resource.h>
+</pre>
+
+      <h4 id="subscribe.h"><span>subscribe.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;subscribe.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <subscribe.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MEMP_NUM_COAPCONTEXT">Marco <span>MEMP_NUM_COAPCONTEXT</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPCONTEXT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPENDPOINT">Marco <span>MEMP_NUM_COAPENDPOINT</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPENDPOINT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPPACKET">Marco <span>MEMP_NUM_COAPPACKET</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPPACKET 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPNODE">Marco <span>MEMP_NUM_COAPNODE</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPNODE 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPPDU">Marco <span>MEMP_NUM_COAPPDU</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPPDU MEMP_NUM_COAPNODE
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPSESSION">Marco <span>MEMP_NUM_COAPSESSION</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPSESSION 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAP_SUBSCRIPTION">Marco <span>MEMP_NUM_COAP_SUBSCRIPTION</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAP_SUBSCRIPTION 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPRESOURCE">Marco <span>MEMP_NUM_COAPRESOURCE</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPRESOURCE 10
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPRESOURCEATTR">Marco <span>MEMP_NUM_COAPRESOURCEATTR</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPRESOURCEATTR 20
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPOPTLIST">Marco <span>MEMP_NUM_COAPOPTLIST</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPOPTLIST 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_LEN_COAPOPTLIST">Marco <span>MEMP_LEN_COAPOPTLIST</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_LEN_COAPOPTLIST 12
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_NUM_COAPSTRING">Marco <span>MEMP_NUM_COAPSTRING</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_NUM_COAPSTRING 10
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MEMP_LEN_COAPSTRING">Marco <span>MEMP_LEN_COAPSTRING</span></h4>
+      <pre class="doc-declare"><code>#define MEMP_LEN_COAPSTRING 32
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="LWIP_MEMPOOL">Func <span>LWIP_MEMPOOL</span></h4>
+      <pre class="doc-declare"><code>LWIP_MEMPOOL(COAP_CONTEXT, MEMP_NUM_COAPCONTEXT, sizeof(coap_context_t), "COAP_CONTEXT")
+LWIP_MEMPOOL(COAP_ENDPOINT, MEMP_NUM_COAPENDPOINT, sizeof(coap_endpoint_t), "COAP_ENDPOINT")
+LWIP_MEMPOOL(COAP_PACKET, MEMP_NUM_COAPPACKET, sizeof(coap_packet_t), "COAP_PACKET")
+LWIP_MEMPOOL(COAP_NODE, MEMP_NUM_COAPNODE, sizeof(coap_queue_t), "COAP_NODE")
+LWIP_MEMPOOL(COAP_PDU, MEMP_NUM_COAPPDU, sizeof(coap_pdu_t), "COAP_PDU")
+LWIP_MEMPOOL(COAP_SESSION, MEMP_NUM_COAPSESSION, sizeof(coap_session_t), "COAP_SESSION")
+LWIP_MEMPOOL(COAP_subscription, MEMP_NUM_COAP_SUBSCRIPTION, sizeof(coap_subscription_t), "COAP_subscription")
+LWIP_MEMPOOL(COAP_RESOURCE, MEMP_NUM_COAPRESOURCE, sizeof(coap_resource_t), "COAP_RESOURCE")
+LWIP_MEMPOOL(COAP_RESOURCEATTR, MEMP_NUM_COAPRESOURCEATTR, sizeof(coap_attr_t), "COAP_RESOURCEATTR")
+LWIP_MEMPOOL(COAP_OPTLIST, MEMP_NUM_COAPOPTLIST, sizeof(coap_optlist_t)+MEMP_LEN_COAPOPTLIST, "COAP_OPTLIST")
+LWIP_MEMPOOL(COAP_STRING, MEMP_NUM_COAPSTRING, sizeof(coap_string_t)+MEMP_LEN_COAPSTRING, "COAP_STRING")
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

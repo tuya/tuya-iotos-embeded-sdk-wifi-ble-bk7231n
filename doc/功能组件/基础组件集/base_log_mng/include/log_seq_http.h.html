@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#log_seq.h" class="nav-sub-label">log_seq.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__LOG_SEQ_HTTP_H" class="nav-sub-label">__LOG_SEQ_HTTP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOGSEQ_OBJ" class="nav-sub-label">LOGSEQ_OBJ</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#HTTP_LOG_SEQ_E;
+" class="nav-sub-label">HTTP_LOG_SEQ_E;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="log_seq.h"><span>log_seq.h</span></h4>
+      <pre class="doc-declare"><code>#include "log_seq.h"
+</code></pre>
+      <pre class="doc-comment">#include "log_seq.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__LOG_SEQ_HTTP_H">Marco <span>__LOG_SEQ_HTTP_H</span></h4>
+      <pre class="doc-declare"><code>#define __LOG_SEQ_HTTP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOGSEQ_OBJ">Marco <span>LOGSEQ_OBJ</span></h4>
+      <pre class="doc-declare"><code>#define LOGSEQ_OBJ "http"
+</code></pre>
+      <pre class="doc-comment">// define log sequence object is "http", include this head file can recorde log sequence to "http" module</pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="HTTP_LOG_SEQ_E;
+">Typedef <span>HTTP_LOG_SEQ_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   // generic
+   LOGSEQ_HTTP_TIME               = 0,   // type:string, value:system time, location:NULL
+   LOGSEQ_HTTP_TOKEN              = 1,   // typeLstring, value:device Token, location:NULL
+
+   // URL config
+   LOGSEQ_HTTP_URL_CFG            = 11,  // type: error code, value: URL from URL config api, location:http_iot_dns_get_cloud_url
+
+   // request
+   LOGSEQ_HTTP_API                = 20,  // type:string, value:API name, location:__iot_common_post
+   LOGSEQ_HTTP_URL                = 21,  // type:string, value:API name, location:__iot_common_post
+   LOGSEQ_HTTP_DATA               = 22,  // type:string, value:API name, location:__iot_common_post
+   LOGSEQ_HTTP_OPEN_SESSION       = 23,  // type:error code, value:fail on connect http session, locaiton：__http_inf_com_hanle->http_open_session
+   LOGSEQ_HTTP_PREPARE_REQ        = 24,  // type:error code, value:fail on prepare http request data, location:__http_inf_com_hanle->http_prepare_req
+   LOGSEQ_HTTP_SEND_REQUEST       = 25,  // type:error code, value:fail on http send request, location:__http_inf_com_hanle->http_send_request
+
+   // response
+   LOGSEQ_HTTP_GET_RESP_HEAD      = 30,  // type:error code, value:get head of http responsed data fail, location:http_get_response_hdr
+   LOGSEQ_HTTP_CHK_RESP_RET       = 31,  // type:error code, value:return value of http response error, location:NULL
+   LOGSEQ_HTTP_RECV_RESP          = 32,  // type:error code, value:http failed to accept response data, location:__httpc_return_json_cb和__httpc_gw_common_cb
+   LOGSEQ_HTTP_RECV_BODY_CJSON    = 33,  // type:error code, value:http received response data decode failed,location:__httpc_return_json_cb和__httpc_gw_common_cb
+   LOGSEQ_HTTP_RECV_DECODE        = 34,  // type:error code, value:http decryption failed, location:__httpc_gw_common_cb
+   LOGSEQ_HTTP_RECV_CONTENT       = 35,  // type:error code, value:http content error, location:NULL
+   LOGSEQ_HTTP_RECV_DATA          = 36,  // type:error code, value:http data error, location:NULL
+
+   LOGSEQ_HTTP_DB_RECOVERY        = 100, // 类型：错误码，值：KV被破坏并恢复，位置：NULL
+}HTTP_LOG_SEQ_E;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief define http detail log sequence information 
+ *        user can easy know bug location from this sequence, which include type, value, location
+ */</pre>
+    </div>
+  </body>
+</html>
+            

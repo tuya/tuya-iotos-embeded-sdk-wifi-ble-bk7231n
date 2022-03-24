@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_AES_INF_H" class="nav-sub-label">_AES_INF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#AES128_ENCRYPT_KEY_LEN" class="nav-sub-label">AES128_ENCRYPT_KEY_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_free_data" class="nav-sub-label">aes128_free_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_get_data_actual_length" class="nav-sub-label">aes128_get_data_actual_length</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#aes_pkcs7padding_buffer" class="nav-sub-label">aes_pkcs7padding_buffer</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_method_register" class="nav-sub-label">aes_method_register</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_method_unregister" class="nav-sub-label">aes_method_unregister</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes192_cbc_encode" class="nav-sub-label">aes192_cbc_encode</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes192_cbc_decode" class="nav-sub-label">aes192_cbc_decode</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_ecb_encode" class="nav-sub-label">aes128_ecb_encode</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_ecb_decode" class="nav-sub-label">aes128_ecb_decode</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_cbc_encode" class="nav-sub-label">aes128_cbc_encode</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_cbc_decode" class="nav-sub-label">aes128_cbc_decode</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_free_data" class="nav-sub-label">aes_free_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_get_actual_length" class="nav-sub-label">aes_get_actual_length</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes192_cbc_encode_raw" class="nav-sub-label">aes192_cbc_encode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes192_cbc_decode_raw" class="nav-sub-label">aes192_cbc_decode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes256_cbc_encode_raw" class="nav-sub-label">aes256_cbc_encode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_ecb_encode_raw" class="nav-sub-label">aes128_ecb_encode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_ecb_decode_raw" class="nav-sub-label">aes128_ecb_decode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_cbc_encode_raw" class="nav-sub-label">aes128_cbc_encode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes128_cbc_decode_raw" class="nav-sub-label">aes128_cbc_decode_raw</a>
+              </li>
+      
+
+              <li>
+                <a href="#aes_method_get_callback_func" class="nav-sub-label">aes_method_get_callback_func</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hw_aes_crypt_init" class="nav-sub-label">tuya_hw_aes_crypt_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hw_aes_crypt_uninit" class="nav-sub-label">tuya_hw_aes_crypt_uninit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hw_aes_update_key" class="nav-sub-label">tuya_hw_aes_update_key</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hw_aes_encrypt_cbc" class="nav-sub-label">tuya_hw_aes_encrypt_cbc</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#AES128_ECB_ENC_BUF" class="nav-sub-label">AES128_ECB_ENC_BUF</a>
+              </li>
+      
+
+              <li>
+                <a href="#AES128_ECB_DEC_BUF" class="nav-sub-label">AES128_ECB_DEC_BUF</a>
+              </li>
+      
+
+              <li>
+                <a href="#AES128_CBC_ENC_BUF" class="nav-sub-label">AES128_CBC_ENC_BUF</a>
+              </li>
+      
+
+              <li>
+                <a href="#AES128_CBC_DEC_BUF" class="nav-sub-label">AES128_CBC_DEC_BUF</a>
+              </li>
+      
+
+              <li>
+                <a href="#AES_METHOD_REG_S;
+" class="nav-sub-label">AES_METHOD_REG_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_HW_AES_MODE_E;
+" class="nav-sub-label">TUYA_HW_AES_MODE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_HW_AES_CRYPT_MODE_E;
+" class="nav-sub-label">TUYA_HW_AES_CRYPT_MODE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_HW_AES_PARAM_S;
+" class="nav-sub-label">TUYA_HW_AES_PARAM_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_HW_AES_S;
+" class="nav-sub-label">TUYA_HW_AES_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#Tuya_CBC_AES128_Init" class="nav-sub-label">Tuya_CBC_AES128_Init</a>
+              </li>
+      
+
+              <li>
+                <a href="#Tuya_CBC_AES128_Encrypt" class="nav-sub-label">Tuya_CBC_AES128_Encrypt</a>
+              </li>
+      
+
+              <li>
+                <a href="#Tuya_CBC_AES128_Decrypt" class="nav-sub-label">Tuya_CBC_AES128_Decrypt</a>
+              </li>
+      
+
+              <li>
+                <a href="#Tuya_CBC_AES128_Destroy" class="nav-sub-label">Tuya_CBC_AES128_Destroy</a>
+              </li>
+      
+
+              <li>
+                <a href="#AES_HW_CBC_FUNC;
+" class="nav-sub-label">AES_HW_CBC_FUNC;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_HW_AES_HANDLE_S;
+" class="nav-sub-label">TUYA_HW_AES_HANDLE_S;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_AES_INF_H">Marco <span>_AES_INF_H</span></h4>
+      <pre class="doc-declare"><code>#define _AES_INF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AES128_ENCRYPT_KEY_LEN">Marco <span>AES128_ENCRYPT_KEY_LEN</span></h4>
+      <pre class="doc-declare"><code>#define AES128_ENCRYPT_KEY_LEN 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="aes128_free_data">Marco <span>aes128_free_data</span></h4>
+      <pre class="doc-declare"><code>#define aes128_free_data                   aes_free_data
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="aes128_get_data_actual_length">Marco <span>aes128_get_data_actual_length</span></h4>
+      <pre class="doc-declare"><code>#define aes128_get_data_actual_length      aes_get_actual_length
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="aes_pkcs7padding_buffer">Func <span>aes_pkcs7padding_buffer</span></h4>
+      <pre class="doc-declare"><code>UINT_T aes_pkcs7padding_buffer(BYTE_T *p_buffer, UINT_T length);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes_pkcs7padding_buffer 
+ *
+ * @param[in] p_buffer
+ * @param[in] length
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="aes_method_register">Func <span>aes_method_register</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes_method_register(IN CONST AES_METHOD_REG_S *aes, IN CONST TUYA_HW_AES_S* pafunc);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes_method_register 
+ *
+ * @param[in] aes
+ * @param[in] pafunc
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes_method_unregister">Func <span>aes_method_unregister</span></h4>
+      <pre class="doc-declare"><code>VOID aes_method_unregister(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes_method_unregister 
+ *
+ * @param VOID
+ *
+ * @return 
+ */</pre>
+
+      <h4 id="aes192_cbc_encode">Func <span>aes192_cbc_encode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes192_cbc_encode(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                           IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                           OUT BYTE_T **ec_data,OUT UINT_T *ec_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes192_cbc_encode 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] ec_data
+ * @param[out] ec_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes192_cbc_decode">Func <span>aes192_cbc_decode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes192_cbc_decode(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                           IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                           OUT BYTE_T **dec_data,OUT UINT_T *dec_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes192_cbc_decode 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] dec_data
+ * @param[out] dec_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_ecb_encode">Func <span>aes128_ecb_encode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_ecb_encode(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                             OUT BYTE_T **ec_data,OUT UINT_T *ec_len,\
+                             IN CONST BYTE_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_ecb_encode 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[out] ec_data
+ * @param[out] ec_len
+ * @param[in] key
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_ecb_decode">Func <span>aes128_ecb_decode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_ecb_decode(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                             OUT BYTE_T **dec_data,OUT UINT_T *dec_len,\
+                             IN CONST BYTE_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_ecb_decode 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[out] dec_data
+ * @param[out] dec_len
+ * @param[in] key
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_cbc_encode">Func <span>aes128_cbc_encode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_cbc_encode(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                             IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                             OUT BYTE_T **ec_data,OUT UINT_T *ec_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_cbc_encode 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] ec_data
+ * @param[out] ec_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_cbc_decode">Func <span>aes128_cbc_decode</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_cbc_decode(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                             IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                             OUT BYTE_T **dec_data,OUT UINT_T *dec_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_cbc_decode 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] dec_data
+ * @param[out] dec_len
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes_free_data">Func <span>aes_free_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes_free_data(IN BYTE_T *data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes_free_data 
+ *
+ * @param[in] data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes_get_actual_length">Func <span>aes_get_actual_length</span></h4>
+      <pre class="doc-declare"><code>INT_T aes_get_actual_length(IN CONST BYTE_T *dec_data,IN CONST UINT_T dec_data_len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes_get_actual_length 
+ *
+ * @param[in] dec_data
+ * @param[in] dec_data_len
+ *
+ * @return actural length of dec_data, negative on error
+ */</pre>
+
+      <h4 id="aes192_cbc_encode_raw">Func <span>aes192_cbc_encode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes192_cbc_encode_raw(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                 IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                                 OUT BYTE_T *ec_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes192_cbc_encode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] ec_data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes192_cbc_decode_raw">Func <span>aes192_cbc_decode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes192_cbc_decode_raw(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                 IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                                 OUT BYTE_T *dec_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes192_cbc_decode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] dec_data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes256_cbc_encode_raw">Func <span>aes256_cbc_encode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes256_cbc_encode_raw(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                 IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                                 OUT BYTE_T *ec_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes256_cbc_encode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] ec_data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_ecb_encode_raw">Func <span>aes128_ecb_encode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_ecb_encode_raw(IN CONST BYTE_T *data, IN CONST UINT_T len,\
+                                 OUT BYTE_T *ec_data,IN CONST BYTE_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_ecb_encode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[out] ec_data
+ * @param[in] key
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_ecb_decode_raw">Func <span>aes128_ecb_decode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_ecb_decode_raw(IN CONST BYTE_T *data, IN CONST UINT_T len,\
+                                 OUT BYTE_T *dec_data,IN CONST BYTE_T *key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_ecb_decode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[out] dec_data
+ * @param[in] key
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_cbc_encode_raw">Func <span>aes128_cbc_encode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_cbc_encode_raw(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                 IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                                 OUT BYTE_T *ec_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_cbc_encode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] ec_data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes128_cbc_decode_raw">Func <span>aes128_cbc_decode_raw</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET aes128_cbc_decode_raw(IN CONST BYTE_T *data,IN CONST UINT_T len,\
+                                 IN CONST BYTE_T *key,IN BYTE_T *iv,\
+                                 OUT BYTE_T *dec_data);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes128_cbc_decode_raw 
+ *
+ * @param[in] data
+ * @param[in] len
+ * @param[in] key
+ * @param[in] iv
+ * @param[out] dec_data
+ *
+ * @return OPERATE_RET
+ */</pre>
+
+      <h4 id="aes_method_get_callback_func">Func <span>aes_method_get_callback_func</span></h4>
+      <pre class="doc-declare"><code>void aes_method_get_callback_func(TUYA_HW_AES_S* paes);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief aes_method_get_callback_func 
+ *
+ * @param paes
+ */</pre>
+
+      <h4 id="tuya_hw_aes_crypt_init">Func <span>tuya_hw_aes_crypt_init</span></h4>
+      <pre class="doc-declare"><code>int tuya_hw_aes_crypt_init(TUYA_HW_AES_HANDLE_S* paesHdl, char* pkey);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_hw_aes_crypt_init 
+ *
+ * @param paesHdl
+ * @param pkey
+ *
+ * @return int
+ */</pre>
+
+      <h4 id="tuya_hw_aes_crypt_uninit">Func <span>tuya_hw_aes_crypt_uninit</span></h4>
+      <pre class="doc-declare"><code>int tuya_hw_aes_crypt_uninit(TUYA_HW_AES_HANDLE_S* paesHdl);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_hw_aes_crypt_uninit 
+ *
+ * @param paesHdl
+ *
+ * @return int
+ */</pre>
+
+      <h4 id="tuya_hw_aes_update_key">Func <span>tuya_hw_aes_update_key</span></h4>
+      <pre class="doc-declare"><code>int tuya_hw_aes_update_key(TUYA_HW_AES_HANDLE_S* paesHdl, char* pkey);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_hw_aes_update_key 
+ *
+ * @param paesHdl
+ * @param pkey
+ *
+ * @return int
+ */</pre>
+
+      <h4 id="tuya_hw_aes_encrypt_cbc">Func <span>tuya_hw_aes_encrypt_cbc</span></h4>
+      <pre class="doc-declare"><code>int tuya_hw_aes_encrypt_cbc(TUYA_HW_AES_HANDLE_S* paesHdl, const unsigned char* iv, unsigned int ivbits,
+                           const unsigned char *input, size_t length, unsigned char *output, size_t* poutlen);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief tuya_hw_aes_encrypt_cbc 
+ *
+ * @param[in] paesHdl
+ * @param[in] iv
+ * @param[in] ivbits
+ * @param[in] input
+ * @param[in] length
+ * @param[out] output
+ * @param[out] poutlen
+ *
+ * @return int
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="AES128_ECB_ENC_BUF">Typedef <span>AES128_ECB_ENC_BUF</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*AES128_ECB_ENC_BUF)(IN CONST BYTE_T *input, IN CONST UINT_T length, IN CONST BYTE_T *key,OUT BYTE_T *output);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AES128_ECB_DEC_BUF">Typedef <span>AES128_ECB_DEC_BUF</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*AES128_ECB_DEC_BUF)(IN CONST BYTE_T *input, IN CONST UINT_T length, IN CONST BYTE_T *key,OUT BYTE_T *output);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AES128_CBC_ENC_BUF">Typedef <span>AES128_CBC_ENC_BUF</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*AES128_CBC_ENC_BUF)(IN CONST BYTE_T *input, IN CONST UINT_T length, IN CONST BYTE_T *key, IN BYTE_T *iv, OUT BYTE_T *output);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AES128_CBC_DEC_BUF">Typedef <span>AES128_CBC_DEC_BUF</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*AES128_CBC_DEC_BUF)(IN CONST BYTE_T *input, IN CONST UINT_T length, IN CONST BYTE_T *key, IN BYTE_T *iv, OUT BYTE_T *output);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AES_METHOD_REG_S;
+">Typedef <span>AES_METHOD_REG_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   AES128_ECB_ENC_BUF ecb_enc_128;
+   AES128_ECB_DEC_BUF ecb_dec_128;
+   AES128_CBC_ENC_BUF cbc_enc_128;
+   AES128_CBC_DEC_BUF cbc_dec_128;
+}AES_METHOD_REG_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_HW_AES_MODE_E;
+">Typedef <span>TUYA_HW_AES_MODE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum TUYA_HW_AES_MODE_ {
+   TUYA_HW_AES_MODE_ENCRYPT,
+   TUYA_HW_AES_MODE_DECRYPT,
+} TUYA_HW_AES_MODE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_HW_AES_CRYPT_MODE_E;
+">Typedef <span>TUYA_HW_AES_CRYPT_MODE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum TUYA_HW_AES_CRYPT_MODE_ {
+   TUYA_HW_AES_CRYPT_MODE_ECB,
+   TUYA_HW_AES_CRYPT_MODE_CBC,
+   TUYA_HW_AES_CRYPT_MODE_CFB,
+   TUYA_HW_AES_CRYPT_MODE_OFB,
+} TUYA_HW_AES_CRYPT_MODE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_HW_AES_PARAM_S;
+">Typedef <span>TUYA_HW_AES_PARAM_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct TUYA_HW_AES_PARAM_ {
+   TUYA_HW_AES_MODE_E       method;
+   TUYA_HW_AES_CRYPT_MODE_E encryptMode;
+} TUYA_HW_AES_PARAM_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_HW_AES_S;
+">Typedef <span>TUYA_HW_AES_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct TUYA_HW_AES_ {
+   int (*aes_create)(void** pphdl, TUYA_HW_AES_PARAM_S* pparam);
+   int (*aes_destroy)(void* phdl);
+   int (*aes_setkey_enc)(void* phdl, const unsigned char *key, unsigned int keybits);
+   int (*aes_setkey_dec)(void* phdl, const unsigned char *key, unsigned int keybits);
+   int (*aes_crypt_ecb)(void* phdl, const unsigned char* input, size_t length, unsigned char* output);
+   int (*aes_crypt_cbc)(void* phdl, const unsigned char* iv, unsigned int ivbits, const unsigned char *input, size_t length, unsigned char *output);
+} TUYA_HW_AES_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="Tuya_CBC_AES128_Init">Typedef <span>Tuya_CBC_AES128_Init</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*Tuya_CBC_AES128_Init)(VOID);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="Tuya_CBC_AES128_Encrypt">Typedef <span>Tuya_CBC_AES128_Encrypt</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*Tuya_CBC_AES128_Encrypt)(IN BYTE_T *pdata_in,  //data to be encrypted, should NOT be changed
+                                            IN UINT_T data_len,    //date length to be encrypted
+                                            IN BYTE_T *pdata_out,  //data after encrytion, memory is MALLOC inside tuya SDK already
+                                            OUT UINT_T *pdata_out_len,  //data length after encrytion
+                                            IN BYTE_T *pkey,    //aes key 
+                                            IN BYTE_T *piv);    //aes iv for cbc mode
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="Tuya_CBC_AES128_Decrypt">Typedef <span>Tuya_CBC_AES128_Decrypt</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*Tuya_CBC_AES128_Decrypt)(IN BYTE_T *pdata_in,  //date to be decryted, should NOT be changed
+                                            IN UINT_T data_len,    //data length after decryption
+                                            IN BYTE_T *pdata_out,  //data after decryption, memory is MALLOC inside tuya SDK already
+                                            OUT UINT_T *pdata_out_len,  //data length after decrytion
+                                            IN BYTE_T *pkey,    //aes key
+                                            IN BYTE_T *piv);    //aes iv for cbc mode
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="Tuya_CBC_AES128_Destroy">Typedef <span>Tuya_CBC_AES128_Destroy</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*Tuya_CBC_AES128_Destroy)(VOID);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AES_HW_CBC_FUNC;
+">Typedef <span>AES_HW_CBC_FUNC;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct
+{
+   Tuya_CBC_AES128_Init init;
+   Tuya_CBC_AES128_Encrypt encrypt;
+   Tuya_CBC_AES128_Decrypt decrypt;
+   Tuya_CBC_AES128_Destroy destory;
+}AES_HW_CBC_FUNC;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_HW_AES_HANDLE_S;
+">Typedef <span>TUYA_HW_AES_HANDLE_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct TUYA_HW_AES_HANDLE_ {
+   int            init;
+   TUYA_HW_AES_S  aesFunc;
+   void*          phwHdl;
+} TUYA_HW_AES_HANDLE_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,1170 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#time.h" class="nav-sub-label">time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_time.h" class="nav-sub-label">uni_time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_network.h" class="nav-sub-label">tuya_hal_network.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_HTTPC_H_" class="nav-sub-label">_HTTPC_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#STANDARD_HDR_FLAGS" class="nav-sub-label">STANDARD_HDR_FLAGS</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_RESP_INFORMATIONAL(x)" class="nav-sub-label">HTTP_RESP_INFORMATIONAL(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_RESP_SUCCESS(x)" class="nav-sub-label">HTTP_RESP_SUCCESS(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_RESP_REDIR(x)" class="nav-sub-label">HTTP_RESP_REDIR(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_RESP_CLIENT_ERR(x)" class="nav-sub-label">HTTP_RESP_CLIENT_ERR(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_RESP_SERVER_ERR(x)" class="nav-sub-label">HTTP_RESP_SERVER_ERR(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_OK" class="nav-sub-label">HTTP_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_CREATED" class="nav-sub-label">HTTP_CREATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_ACCEPTED" class="nav-sub-label">HTTP_ACCEPTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_FOUND" class="nav-sub-label">HTTP_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_NOT_MODIFIED" class="nav-sub-label">HTTP_NOT_MODIFIED</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_BAD_REQUEST" class="nav-sub-label">HTTP_BAD_REQUEST</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_NOT_AUTH" class="nav-sub-label">HTTP_NOT_AUTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_FORBIDDEN" class="nav-sub-label">HTTP_FORBIDDEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_NOT_FOUND" class="nav-sub-label">HTTP_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#REDIRECT_CNT_MAX" class="nav-sub-label">REDIRECT_CNT_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#REDIRECT_CNT_DEFAULT" class="nav-sub-label">REDIRECT_CNT_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#REDIRECT_CNT_DISABLED" class="nav-sub-label">REDIRECT_CNT_DISABLED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#http_reset_session_state" class="nav-sub-label">http_reset_session_state</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_open_session" class="nav-sub-label">http_open_session</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_prepare_req" class="nav-sub-label">http_prepare_req</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_add_header" class="nav-sub-label">http_add_header</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_send_request" class="nav-sub-label">http_send_request</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_get_response_hdr" class="nav-sub-label">http_get_response_hdr</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_get_response_hdr_value" class="nav-sub-label">http_get_response_hdr_value</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_get_response_hdr_all" class="nav-sub-label">http_get_response_hdr_all</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_read_content" class="nav-sub-label">http_read_content</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_parse_URL" class="nav-sub-label">http_parse_URL</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_lowlevel_read" class="nav-sub-label">http_lowlevel_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_lowlevel_write" class="nav-sub-label">http_lowlevel_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_write_standard" class="nav-sub-label">http_write_standard</a>
+              </li>
+      
+
+              <li>
+                <a href="#httpc_write_chunked" class="nav-sub-label">httpc_write_chunked</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_close_session" class="nav-sub-label">http_close_session</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_redirect_limit_set" class="nav-sub-label">http_redirect_limit_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_redirect_limit_get" class="nav-sub-label">http_redirect_limit_get</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#http_session_t" class="nav-sub-label">http_session_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_method_t;
+" class="nav-sub-label">http_method_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_ver_t;
+" class="nav-sub-label">http_ver_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_hdr_field_sel_t;
+" class="nav-sub-label">http_hdr_field_sel_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_HEAD_ADD_CB" class="nav-sub-label">HTTP_HEAD_ADD_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_CUSTOM_GET_CONTENT_LEN_CB" class="nav-sub-label">HTTP_CUSTOM_GET_CONTENT_LEN_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_CUSTOM_BEFORE_READ_CONTENT_CB" class="nav-sub-label">HTTP_CUSTOM_BEFORE_READ_CONTENT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_CUSTOM_READ_CONTENT_CB" class="nav-sub-label">HTTP_CUSTOM_READ_CONTENT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#HTTP_CUSTOM_AFTER_READ_CONTENT_CB" class="nav-sub-label">HTTP_CUSTOM_AFTER_READ_CONTENT_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_custom_content_ctx_s;
+" class="nav-sub-label">http_custom_content_ctx_s;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_req_t;
+" class="nav-sub-label">http_req_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_resp_t;
+" class="nav-sub-label">http_resp_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_header_pair_t;
+" class="nav-sub-label">http_header_pair_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#parsed_url_t;
+" class="nav-sub-label">parsed_url_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#http_open_flags_t;
+" class="nav-sub-label">http_open_flags_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="time.h"><span>time.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;time.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <time.h>
+</pre>
+
+      <h4 id="uni_time.h"><span>uni_time.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_time.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_time.h"
+</pre>
+
+      <h4 id="tuya_hal_network.h"><span>tuya_hal_network.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_network.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_network.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_HTTPC_H_">Marco <span>_HTTPC_H_</span></h4>
+      <pre class="doc-declare"><code>#define _HTTPC_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STANDARD_HDR_FLAGS">Marco <span>STANDARD_HDR_FLAGS</span></h4>
+      <pre class="doc-declare"><code>#define STANDARD_HDR_FLAGS		\
+    (HDR_ADD_DEFAULT_USER_AGENT)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_RESP_INFORMATIONAL(x)">Marco <span>HTTP_RESP_INFORMATIONAL(x)</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_RESP_INFORMATIONAL(x) (x >=100 && < 200)
+</code></pre>
+      <pre class="doc-comment">/* Status codes */</pre>
+
+      <h4 id="HTTP_RESP_SUCCESS(x)">Marco <span>HTTP_RESP_SUCCESS(x)</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_RESP_SUCCESS(x) (x >= 200 && x < 300)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_RESP_REDIR(x)">Marco <span>HTTP_RESP_REDIR(x)</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_RESP_REDIR(x) (x >= 300 && x < 400)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_RESP_CLIENT_ERR(x)">Marco <span>HTTP_RESP_CLIENT_ERR(x)</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_RESP_CLIENT_ERR(x) (x >= 400 && x < 500)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_RESP_SERVER_ERR(x)">Marco <span>HTTP_RESP_SERVER_ERR(x)</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_RESP_SERVER_ERR(x) (x >= 500 && x < 600)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_OK">Marco <span>HTTP_OK</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_OK 200
+</code></pre>
+      <pre class="doc-comment">/*
+ * These macros are not of any use to the HTTP client itself. They are used
+ * by the users of the HTTP client. This list may be extended if required
+ */</pre>
+
+      <h4 id="HTTP_CREATED">Marco <span>HTTP_CREATED</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_CREATED 201
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_ACCEPTED">Marco <span>HTTP_ACCEPTED</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_ACCEPTED 202
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_FOUND">Marco <span>HTTP_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_FOUND 302
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_NOT_MODIFIED">Marco <span>HTTP_NOT_MODIFIED</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_NOT_MODIFIED 304
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_BAD_REQUEST">Marco <span>HTTP_BAD_REQUEST</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_BAD_REQUEST 400
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_NOT_AUTH">Marco <span>HTTP_NOT_AUTH</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_NOT_AUTH 401
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_FORBIDDEN">Marco <span>HTTP_FORBIDDEN</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_FORBIDDEN 403
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_NOT_FOUND">Marco <span>HTTP_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define HTTP_NOT_FOUND 404
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="REDIRECT_CNT_MAX">Marco <span>REDIRECT_CNT_MAX</span></h4>
+      <pre class="doc-declare"><code>#define REDIRECT_CNT_MAX     5
+</code></pre>
+      <pre class="doc-comment">/* max redirect count */</pre>
+
+      <h4 id="REDIRECT_CNT_DEFAULT">Marco <span>REDIRECT_CNT_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define REDIRECT_CNT_DEFAULT 3
+</code></pre>
+      <pre class="doc-comment">/* default redirect count */</pre>
+
+      <h4 id="REDIRECT_CNT_DISABLED">Marco <span>REDIRECT_CNT_DISABLED</span></h4>
+      <pre class="doc-declare"><code>#define REDIRECT_CNT_DISABLED 0
+</code></pre>
+      <pre class="doc-comment">/* zero means disable http redirect */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="http_reset_session_state">Func <span>http_reset_session_state</span></h4>
+      <pre class="doc-declare"><code>void http_reset_session_state(http_session_t handle);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_open_session">Func <span>http_open_session</span></h4>
+      <pre class="doc-declare"><code>int http_open_session(http_session_t *handle,const char *hostname, \
+                     int flags,int retry_cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * Start an HTTP session.
+ *
+ * @par
+ * This API starts a new HTTP session. It will create a socket and
+ * then connect to the server given as a parameter.
+ *
+ * @param[in,out] handle Pointer to a handle for the session. Will be
+ * assigned by the callee.
+ * @param[in] hostname Host name or IP address.  The hostname should be in
+ * the format [http://]hostname[:portno][/path/to/resource]. The fields
+ * between the square brackets above are optional. The part specifying
+ * the path to resource will be ignored as it is of no use during session
+ * setup.
+ * @param[in] flags Pass OR of the flags mentioned in enum
+ * \ref http_open_flags_t.
+ * @param[in] cfg This is a pointer of the type \a
+ * tls_init_config_t. Please refer to file wm-tls.h for the structure
+ * internals. This pointer will be passed verbatim to the tls API
+ * tls_session_init(). \b If TLS (secure connection) is not needed please
+ * pass NULL value.
+ * @param[in] retry_cnt There are limited sockets available due to memory
+ * constraints. A socket creation can fail if all sockets are currently
+ * used up. If the socket creation fails, http_open_session() will wait
+ * for some time and try to create the socket again for retry_cnt number
+ * of times. 0 is default value which lets the SDK decide the count.
+ *
+ * @return WM_SUCCESS on success
+ * @return -WM_E_INVAL if any of the arguments were invalid
+ * @return -WM_FAIL if the API was unable to initiate an HTTP session with
+ * the server.
+ */</pre>
+
+      <h4 id="http_prepare_req">Func <span>http_prepare_req</span></h4>
+      <pre class="doc-declare"><code>int http_prepare_req(http_session_t handle, const http_req_t *req,
+                    http_hdr_field_sel_t field_flags);</code></pre>
+      <pre class="doc-comment">/**
+ * Prepare the HTTP header for sending to the server.
+ *
+ * This API will prepare an HTTP request for sending it out through
+ * http_send_request(). Calling this API is mandatory before calling
+ * http_send_request().
+ *
+ * @pre http_open_session()
+ *
+ * @param[in] handle Handle returned from the call to http_open_session()
+ * @param[in] req Allocated and initialized \ref http_req_t structure.
+ * @param[in] field_flags Bitwise OR of flags of enum \ref
+ * http_hdr_field_sel_t as required by the caller.
+ *
+ * @note The request structure \ref http_req_t needs to be filled before
+ * invoking this API.
+ * @note The field_flags parameter is a way to request the http client to
+ * use default field values for standard fields. If the corresponding bits
+ * are not set then the respective fields are not added. The user can add
+ * any custom fields including the standard ones using the API
+ * http_add_header()
+ *
+ * @return Standard wmsdk return codes.
+ */</pre>
+
+      <h4 id="http_add_header">Func <span>http_add_header</span></h4>
+      <pre class="doc-declare"><code>int http_add_header(http_session_t handle, const http_req_t *req,
+                   const char *name, const char *value);</code></pre>
+      <pre class="doc-comment">/**
+ * Add custom http headers to the partially generated header.
+ *
+ * This API allows the caller to add custom headers to the partial
+ * http header generated by earlier call to http_prepare_req()
+ *
+ * @note Calling this API is optional and needs to be called only if custom
+ * headers (or standard headers with non-default values) are to be added.
+ *
+ * @pre http_prepare_req()
+ *
+ * @param[in] handle Handle returned from the call to http_open_session()
+ * @param[in] req Structure of the type \ref http_req_t passed earlier to
+ * http_prepare_req()
+ * @param[in] name The name of the field. e.g User-Agent or
+ * If-Modified-Since
+ * @param[in] value Value associated with the name given above.
+ *
+ * @return Standard wmsdk value.
+ */</pre>
+
+      <h4 id="http_send_request">Func <span>http_send_request</span></h4>
+      <pre class="doc-declare"><code>int http_send_request(http_session_t handle, const http_req_t * req, int send_content);</code></pre>
+      <pre class="doc-comment">/**
+ * Perform an HTTP request.
+ *
+ * This API sends the prepared request header and content if
+ * applicable.
+ *
+ * @note If this API fails and the caller decides to abandon this
+ * session altogether it needs to call the API  http_close_session()
+ * explicitly. Failure to do this will cause undefined behaviour.
+ *
+ * @pre http_prepare_req() is mandatory. http_add_header() is optional.
+ *
+ * @param[in] handle Handle returned from the call to http_open_session()
+ * @param[in] req The \ref http_req_t structure filled up with appropriate
+ * parameters.
+ *
+ * @return WM_SUCCESS on success
+ * @return -WM_E_IO if failed to send data to network
+ * @return -WM_E_INVAL for an invalid arguments.
+ */</pre>
+
+      <h4 id="http_get_response_hdr">Func <span>http_get_response_hdr</span></h4>
+      <pre class="doc-declare"><code>int http_get_response_hdr(http_session_t handle, http_resp_t ** resp);</code></pre>
+      <pre class="doc-comment">/**
+ * Get the HTTP response header
+ *
+ * This API received the response header from the server and parses
+ * it. It then populates the \ref http_resp_t structure and returns the
+ * pointer to this structure. The structure \ref http_resp_t is allocated by
+ * the callee.
+ *
+ * @par
+ * The caller is expected to analyse this information to find out the
+ * result of the earlier request sent through API http_send_request(). If
+ * the earlier request was HTTP_GET then the caller will need to call the
+ * API http_read_content() to read the data sent by the server.
+ *
+ * @note Calling this API is \a optional. If the caller does not want
+ * to read/analyse the header and knows beforehand what to expect, it can
+ * directly call http_read_content(). The API http_read_content()
+ * will internally read the HTTP response header. However, the API
+ * http_read_content() will return an error if the HTTP status code
+ * returned is not 200.  If you need to read content in cases where the
+ * return status code is other than 200 you need to call
+ * http_get_response_hdr() first.
+ *
+ * @note After invoking this API, it is mandatory to read the entire
+ * content using the http_read_content() API, especially in the case
+ * of repeat http transaction on the same session handle (interleaved mode).
+ * @note If this API fails and the caller decides to abandon this
+ * session altogether it needs to call http_close_session()
+ * explicitly. Failure to do this will cause undefined behaviour.
+ *
+ * @pre http_send_request() is called before.
+ *
+ * @param[in] handle Handle returned from the call to http_new_session()
+ * @param[in,out] resp Pointer to a pointer of type \ref http_resp_t .The
+ * structure will be allocated by the callee. Note that the caller does
+ * \b not need to free the structure allocated and returned from this
+ * API. The allocation and free is done by the callee automatically.
+ *
+ * @return WM_SUCCESS on success
+ * @return -WM_FAIL on error
+ */</pre>
+
+      <h4 id="http_get_response_hdr_value">Func <span>http_get_response_hdr_value</span></h4>
+      <pre class="doc-declare"><code>int http_get_response_hdr_value(http_session_t handle,
+               const char *header_name, char **value);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_get_response_hdr_all">Func <span>http_get_response_hdr_all</span></h4>
+      <pre class="doc-declare"><code>int http_get_response_hdr_all(http_session_t handle, http_header_pair_t *arr,
+                 int *count);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_read_content">Func <span>http_read_content</span></h4>
+      <pre class="doc-declare"><code>int http_read_content(http_session_t handle, void *buf, unsigned int max_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_parse_URL">Func <span>http_parse_URL</span></h4>
+      <pre class="doc-declare"><code>int http_parse_URL(const char *URL, char *tmp_buf, int tmp_buf_len,
+          parsed_url_t *parsed_url);</code></pre>
+      <pre class="doc-comment">/**
+ * Parse the given string into URL subcomponents.
+ *
+ * The hostname string syntax is:
+ * [scheme://]hostname[:port][/path_to_resource?query_string#fragment_id]
+ * The fields between the square brackets above are optional.
+ *
+ * @note <b>Buffer management</b>: To free the caller of the task of
+ * allocating multiple buffers of arbitrary size to store each of the
+ * subcomponents we use the following strategy. This API takes a temporary
+ * buffer, allocated (static or dynamic) by the caller to store the
+ * subcomponents. The caller needs to allocate this buffer with size equal
+ * to (strlen(URL) + 10). When this API returns, the pointers in the
+ * parsed_url structure will point to appropriate address in this
+ * buffer. The caller may free this buffer after usage of the
+ * sub-components is complete. Freeing before that will cause undefined
+ * behavior.
+ *
+ * @param[in] URL Pointer to the string containing the URL. This API
+ * will not modify this argument.
+ * @param[in] tmp_buf A buffer where the strings will be stored after
+ * parsing. Needs to be allocated by the caller and should be of size
+ * atleast 10 greater than size of the URL string passed as first
+ * argument.
+ * @param[in] tmp_buf_len Size of the caller allocated, temporary buffer
+ * sent as second argument.
+ * @param[in, out] parsed_url Pointer to an allocated structure. The member
+ * pointers will point to the appropriate address in the temporary buffer
+ * holding the NULL terminated string corresponding to the subcomponent.
+ *
+ * @return Standard WMSDK return codes.
+ */</pre>
+
+      <h4 id="http_lowlevel_read">Func <span>http_lowlevel_read</span></h4>
+      <pre class="doc-declare"><code>int http_lowlevel_read(http_session_t handle, void *buf, unsigned maxlen);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_lowlevel_write">Func <span>http_lowlevel_write</span></h4>
+      <pre class="doc-declare"><code>int http_lowlevel_write(http_session_t handle, const void *buf, unsigned len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_write_standard">Func <span>http_write_standard</span></h4>
+      <pre class="doc-declare"><code>int http_write_standard(http_session_t handle, const void *buf, unsigned len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="httpc_write_chunked">Func <span>httpc_write_chunked</span></h4>
+      <pre class="doc-declare"><code>int httpc_write_chunked(http_session_t handle, const char *data, int len);</code></pre>
+      <pre class="doc-comment">/**
+ * HTTP write chunked
+ *
+ * This API is used for chunked transfer encoding
+ *
+ * @note To end the chunked data transfer, this API should be called with
+ * len=0, buf may be NULL
+ *
+ * @param[in] handle Handle retrieved from the call to http_open_session()
+ * @param[in] data Pointer to the buffer to be written.
+ * @param[in] len The number of bytes to be written.
+ *
+ * @return WM_SUCCESS is returned on success.
+ * @return -WM_E_INVAL is returned in case of invalid parameters.
+ * @return -WM_FAIL is returned if session is invalid.
+ * @return Standard libc error codes are returned when there are other
+ * problems.
+ */</pre>
+
+      <h4 id="http_close_session">Func <span>http_close_session</span></h4>
+      <pre class="doc-declare"><code>void http_close_session(http_session_t *handle);</code></pre>
+      <pre class="doc-comment">/**
+ * Close the session.
+ *
+ * This API will close the session represented by the given
+ * handle. The socket associated with this session will be closed and thus
+ * the TCP connection with the server will be terminated. No requests on
+ * this same session will succeed after this API is called.
+ *
+ * @note <b>The response structure \ref http_resp_t returned earlier from
+ *  http_get_response_hdr() will be invalid after this call.</b>
+ *
+ * @param[in] handle Handle returned from the previous call to
+ * http_new_session(). The handle will be set to NULL by the callee thus
+ * effectively blocking futher requests on the same session handle.
+ *
+ */</pre>
+
+      <h4 id="http_redirect_limit_set">Func <span>http_redirect_limit_set</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET http_redirect_limit_set(IN UINT8_T cnt);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to SET HTTP Redirect Limit Count
+ *
+ * @param[in] cnt The count of redirect, the max value should <= REDIRECT_CNT_MAX
+ *                  Set as zero, means disable http redirect function.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="http_redirect_limit_get">Func <span>http_redirect_limit_get</span></h4>
+      <pre class="doc-declare"><code>UINT8_T http_redirect_limit_get(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief This API is used to GET HTTP Redirect Limit Count
+ *
+ * @param[in]
+ *
+ * @return count of http redirect
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="http_session_t">Typedef <span>http_session_t</span></h4>
+      <pre class="doc-declare"><code>typedef void * http_session_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_method_t;
+">Typedef <span>http_method_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   HTTP_OPTIONS,	/* request to server for communication  options */
+   HTTP_GET,	/* retrieve information */
+   HTTP_HEAD,	/* get meta-info */
+   HTTP_POST,	/* request to accept new sub-ordinate of resource */
+   HTTP_PUT,	/* modify or create new resource referred to by URI */
+   HTTP_DELETE,	/* delete the resource */
+   HTTP_TRACE,	/* echo */
+   HTTP_CONNECT,	/* do we need this  ? */
+} http_method_t;
+</code></pre>
+      <pre class="doc-comment">/* Request methods */</pre>
+
+      <h4 id="http_ver_t;
+">Typedef <span>http_ver_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   HTTP_VER_1_0,
+   HTTP_VER_1_1,
+} http_ver_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_hdr_field_sel_t;
+">Typedef <span>http_hdr_field_sel_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   HDR_ADD_DEFAULT_USER_AGENT = 1,
+   /* Note: This flag is not necessary to set up persistent
+     * connections in HTTP 1.1. However, if you want the server to
+     * respond with persistent connection timeout values you may need
+     * to add this flag. These timeout values are used to find out how
+     * long a persistent connection will be kept alive by the
+     * server. */
+   HDR_ADD_CONN_KEEP_ALIVE	= 2,
+   HDR_ADD_CONN_CLOSE	= 4,
+   HDR_ADD_TYPE_CHUNKED           = 8,
+
+   // add content type
+   HDR_ADD_CONTENT_TYPE_JSON      = 16,
+   HDR_ADD_CONTENT_TYPE_FORM_URLENCODE = 32, // add by nzy 20150608
+   HRD_ADD_DOWNLOAD_RANGE = 64, /* add downlaod offset */
+   HRD_ADD_HTTP_RAW = 128, /* add downlaod offset */
+
+} http_hdr_field_sel_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * The OR of zero or more flags below is passed to the API
+ * http_prepare_req(). If the a flag is passed the corresponding HTTP
+ * header field is added to the HTTP header. The values added will be
+ * default ones.
+ */</pre>
+
+      <h4 id="HTTP_HEAD_ADD_CB">Typedef <span>HTTP_HEAD_ADD_CB</span></h4>
+      <pre class="doc-declare"><code>typedef void (*HTTP_HEAD_ADD_CB)(http_session_t session, VOID* data);
+</code></pre>
+      <pre class="doc-comment">// user http head add callback</pre>
+
+      <h4 id="HTTP_CUSTOM_GET_CONTENT_LEN_CB">Typedef <span>HTTP_CUSTOM_GET_CONTENT_LEN_CB</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int (*HTTP_CUSTOM_GET_CONTENT_LEN_CB)(VOID *pri_data);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_CUSTOM_BEFORE_READ_CONTENT_CB">Typedef <span>HTTP_CUSTOM_BEFORE_READ_CONTENT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (*HTTP_CUSTOM_BEFORE_READ_CONTENT_CB)(VOID *pri_data, unsigned int *p_malloc_buffer_size);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_CUSTOM_READ_CONTENT_CB">Typedef <span>HTTP_CUSTOM_READ_CONTENT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (*HTTP_CUSTOM_READ_CONTENT_CB)(unsigned char *p_buffer, int buf_size, VOID *pri_data);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HTTP_CUSTOM_AFTER_READ_CONTENT_CB">Typedef <span>HTTP_CUSTOM_AFTER_READ_CONTENT_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (*HTTP_CUSTOM_AFTER_READ_CONTENT_CB)(VOID *pri_data);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_custom_content_ctx_s;
+">Typedef <span>http_custom_content_ctx_s;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   HTTP_CUSTOM_GET_CONTENT_LEN_CB get_content_len_cb;
+   HTTP_CUSTOM_BEFORE_READ_CONTENT_CB before_read_cb;
+   HTTP_CUSTOM_READ_CONTENT_CB read_content_cb;
+   HTTP_CUSTOM_AFTER_READ_CONTENT_CB after_read_cb;
+   VOID *pri_data;
+}http_custom_content_ctx_s;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_req_t;
+">Typedef <span>http_req_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** The Type of HTTP Request */
+   http_method_t type;
+   /** The target resource for the HTTP Request. A complete URL is also
+     * accepted.
+     */
+   const char *resource;
+   /** initialzied redirect count, default is zero */
+   unsigned char redirect_cnt;
+   /** The HTTP Protocol Version */
+   http_ver_t version;
+   /** Pointer to data buffer. NULL if GET request */
+   const char *content;
+   /** The length of the data pointed to by \a content above. This is
+     * don't-care if the content is set to NULL
+     */
+   int content_len;
+   HTTP_HEAD_ADD_CB add_head_cb;
+   VOID *add_head_data;
+   unsigned int download_offset;
+   unsigned int download_size;
+
+   http_custom_content_ctx_s *p_custom_content_ctx;
+} http_req_t;
+</code></pre>
+      <pre class="doc-comment">/** The HTTP Client's Request structure
+ *
+ * \par
+ * The application should fill up this structure and pass it to the
+ * http_prepare_req() API while making an HTTP request.
+ * For HTTP POST, the fields content and content_len of this structure
+ * have to be set as well.
+ * More name-value fields can be added to HTTP header using http_add_header().
+ */</pre>
+
+      <h4 id="http_resp_t;
+">Typedef <span>http_resp_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** The value of the protocol field in the first line of the HTTP
+        header response. e.g. "HTTP". */
+   const char *protocol;
+   /** HTTP version */
+   http_ver_t version;
+   /** The status code returned as a part of the first line of the
+        HTTP response e.g. 200 if success
+    */
+   int status_code;
+   /** The ASCII string present in the first line of HTTP response. It
+        is the verbose representation of status code. e.g. "OK" if
+        status_code is 200
+    */
+   const char *reason_phrase;
+   /** HTTP "Location" header field value */
+   const char *location;
+   /** HTTP "Server" header field value */
+   const char *server;
+   /** Accept-Ranges */
+   const char *p_accept_ranges;
+   /** Last-Modified header field value in POSIX time format */
+   time_t modify_time;
+   /** The value of "Content-Type" header field. e.g. "text/html" */
+   const char *content_type;
+   /** The value of "Content-Encoding" header field e.g. "gzip" */
+   const char *content_encoding;
+   /** If "Keep-Alive" field is present or if the value of
+        "Connection" field is "Keep-Alive" then this member is set to
+        'true'. It is set to 'false' in other cases
+    */
+   bool_t keep_alive_ack;
+   /** If "Keep-Alive" field is present in the response, this member
+        contains the value of the "timeout" sub-field of this
+        field. This is the time the server will allow an idle
+        connection to remain open before it is closed.
+    */
+   int keep_alive_timeout;
+   /** If "Keep-Alive" field is present in the response, this member
+        contains the value of the "max" sub-field of this field. The
+        max parameter indicates the maximum number of requests that a
+        client will make, or that a server will allow to be made on the
+        persistent connection.
+    */
+   int keep_alive_max;
+   /** This will be 'true' if "Transfer-Encoding" field is set to
+        "chunked". Note that this is only for information and the API
+        http_read_content() transparently handles chunked reads.
+    */
+   bool_t chunked;
+   /** Value of the "Content-Length" field. If "Transfer-Encoding" is
+        set to chunked then this value will be zero.
+    */
+   unsigned int content_length;
+} http_resp_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Structure used to give back http header response fields to the caller.
+ */</pre>
+
+      <h4 id="http_header_pair_t;
+">Typedef <span>http_header_pair_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   char *name;
+   char *value;
+} http_header_pair_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="parsed_url_t;
+">Typedef <span>parsed_url_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   const char *scheme;
+   const char *hostname;
+   unsigned portno;
+   const char *resource;
+} parsed_url_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="http_open_flags_t;
+">Typedef <span>http_open_flags_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   /** Pass this flag when you want the connection to be SSL based */
+   TLS_ENABLE = 1,
+} http_open_flags_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * If the given URL has a scheme field, and it is https then the http
+ * client will auto-switch to SSL mode, irrespective of the TLS_ENABLE
+ * flag below.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

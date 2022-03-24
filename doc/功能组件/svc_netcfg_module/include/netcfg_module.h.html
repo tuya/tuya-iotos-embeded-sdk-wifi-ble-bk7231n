@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_wifi.h" class="nav-sub-label">tuya_hal_wifi.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_pointer.h" class="nav-sub-label">uni_pointer.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__NETCFG_MODULE__" class="nav-sub-label">__NETCFG_MODULE__</a>
+              </li>
+      
+
+              <li>
+                <a href="#VENDOR_TUYA" class="nav-sub-label">VENDOR_TUYA</a>
+              </li>
+      
+
+              <li>
+                <a href="#VENDOR_JD" class="nav-sub-label">VENDOR_JD</a>
+              </li>
+      
+
+              <li>
+                <a href="#VENDOR_WEIXIN" class="nav-sub-label">VENDOR_WEIXIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#VENDOR_AMAZON" class="nav-sub-label">VENDOR_AMAZON</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_SMARTCFG" class="nav-sub-label">WIFI_SMARTCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_AP" class="nav-sub-label">WIFI_AP</a>
+              </li>
+      
+
+              <li>
+                <a href="#BLE" class="nav-sub-label">BLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CAMERA_QR" class="nav-sub-label">CAMERA_QR</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_SMARTCFG_COEXIST" class="nav-sub-label">WIFI_SMARTCFG_COEXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_AP_COEXIST" class="nav-sub-label">WIFI_AP_COEXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_FFS" class="nav-sub-label">WIFI_FFS</a>
+              </li>
+      
+
+              <li>
+                <a href="#WIFI_PEGASUS" class="nav-sub-label">WIFI_PEGASUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#API_USER" class="nav-sub-label">API_USER</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_WIFI_SMARTCFG" class="nav-sub-label">NETCFG_TY_WIFI_SMARTCFG</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_WIFI_SMARTCFG_COEXIST" class="nav-sub-label">NETCFG_TY_WIFI_SMARTCFG_COEXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_WIFI_AP" class="nav-sub-label">NETCFG_TY_WIFI_AP</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_WIFI_AP_COEXIST" class="nav-sub-label">NETCFG_TY_WIFI_AP_COEXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_BLE" class="nav-sub-label">NETCFG_TY_BLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_CAMERA_QR" class="nav-sub-label">NETCFG_TY_CAMERA_QR</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_API_USER" class="nav-sub-label">NETCFG_TY_API_USER</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_JD_WIFI_SMART" class="nav-sub-label">NETCFG_JD_WIFI_SMART</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_WX_WIFI_AIRKISS" class="nav-sub-label">NETCFG_WX_WIFI_AIRKISS</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_AMAZON_WIFI_FFS" class="nav-sub-label">NETCFG_AMAZON_WIFI_FFS</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_TY_WIFI_PEGASUS" class="nav-sub-label">NETCFG_TY_WIFI_PEGASUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#NETCFG_STOP_ALL_CFG_MODULE" class="nav-sub-label">NETCFG_STOP_ALL_CFG_MODULE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DEF_AP_SSID_PF" class="nav-sub-label">DEF_AP_SSID_PF</a>
+              </li>
+      
+
+              <li>
+                <a href="#WL_TOKEN_LEN" class="nav-sub-label">WL_TOKEN_LEN</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netcfg_module_init" class="nav-sub-label">netcfg_module_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_module_uninit" class="nav-sub-label">netcfg_module_uninit</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_module_register" class="nav-sub-label">netcfg_module_register</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_module_unregister" class="nav-sub-label">netcfg_module_unregister</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_start" class="nav-sub-label">netcfg_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_stop" class="nav-sub-label">netcfg_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_stop_other_all" class="nav-sub-label">netcfg_stop_other_all</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_start_other_all" class="nav-sub-label">netcfg_start_other_all</a>
+              </li>
+      
+
+              <li>
+                <a href="#netcfg_set_transporter_switch_interval" class="nav-sub-label">netcfg_set_transporter_switch_interval</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#*P_AP_NETCFG_ARGS;
+" class="nav-sub-label">*P_AP_NETCFG_ARGS;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PTR_SSID_PASSWORD_TOKEN;
+" class="nav-sub-label">*PTR_SSID_PASSWORD_TOKEN;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#*ptrApSsidPasswd;
+" class="nav-sub-label">*ptrApSsidPasswd;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#FN_NETCFG_CB" class="nav-sub-label">FN_NETCFG_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#FN_NETCFG_START" class="nav-sub-label">FN_NETCFG_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#FN_NETCFG_STOP" class="nav-sub-label">FN_NETCFG_STOP</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PTR_NETCFG_HANDLER;
+" class="nav-sub-label">*PTR_NETCFG_HANDLER;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_hal_wifi.h"><span>tuya_hal_wifi.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_wifi.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_wifi.h"
+</pre>
+
+      <h4 id="uni_pointer.h"><span>uni_pointer.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_pointer.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_pointer.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__NETCFG_MODULE__">Marco <span>__NETCFG_MODULE__</span></h4>
+      <pre class="doc-declare"><code>#define __NETCFG_MODULE__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="VENDOR_TUYA">Marco <span>VENDOR_TUYA</span></h4>
+      <pre class="doc-declare"><code>#define VENDOR_TUYA		(1 << 0)
+</code></pre>
+      <pre class="doc-comment">/*
+	配网提供方：
+	tuya, jd, weixin
+
+*/</pre>
+
+      <h4 id="VENDOR_JD">Marco <span>VENDOR_JD</span></h4>
+      <pre class="doc-declare"><code>#define VENDOR_JD		(1 << 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="VENDOR_WEIXIN">Marco <span>VENDOR_WEIXIN</span></h4>
+      <pre class="doc-declare"><code>#define VENDOR_WEIXIN	(1 << 2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="VENDOR_AMAZON">Marco <span>VENDOR_AMAZON</span></h4>
+      <pre class="doc-declare"><code>#define VENDOR_AMAZON	(1 << 3)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_SMARTCFG">Marco <span>WIFI_SMARTCFG</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_SMARTCFG				(1 << 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_AP">Marco <span>WIFI_AP</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_AP					(1 << 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BLE">Marco <span>BLE</span></h4>
+      <pre class="doc-declare"><code>#define BLE						(1 << 2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CAMERA_QR">Marco <span>CAMERA_QR</span></h4>
+      <pre class="doc-declare"><code>#define CAMERA_QR				(1 << 3)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_SMARTCFG_COEXIST">Marco <span>WIFI_SMARTCFG_COEXIST</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_SMARTCFG_COEXIST		(1 << 4)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_AP_COEXIST">Marco <span>WIFI_AP_COEXIST</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_AP_COEXIST			(1 << 5)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_FFS">Marco <span>WIFI_FFS</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_FFS				(1 << 6)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WIFI_PEGASUS">Marco <span>WIFI_PEGASUS</span></h4>
+      <pre class="doc-declare"><code>#define WIFI_PEGASUS			(1 << 7)//无感配网
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="API_USER">Marco <span>API_USER</span></h4>
+      <pre class="doc-declare"><code>#define API_USER   				(1 << 8)//用户通过api配网
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NETCFG_TY_WIFI_SMARTCFG">Marco <span>NETCFG_TY_WIFI_SMARTCFG</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_WIFI_SMARTCFG				((VENDOR_TUYA << 16) | WIFI_SMARTCFG)
+</code></pre>
+      <pre class="doc-comment">// ez</pre>
+
+      <h4 id="NETCFG_TY_WIFI_SMARTCFG_COEXIST">Marco <span>NETCFG_TY_WIFI_SMARTCFG_COEXIST</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_WIFI_SMARTCFG_COEXIST		((VENDOR_TUYA << 16) | WIFI_SMARTCFG_COEXIST)
+</code></pre>
+      <pre class="doc-comment">// ez in WF_START_SMART_AP_CONCURRENT</pre>
+
+      <h4 id="NETCFG_TY_WIFI_AP">Marco <span>NETCFG_TY_WIFI_AP</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_WIFI_AP			((VENDOR_TUYA << 16) | WIFI_AP)
+</code></pre>
+      <pre class="doc-comment">//ap </pre>
+
+      <h4 id="NETCFG_TY_WIFI_AP_COEXIST">Marco <span>NETCFG_TY_WIFI_AP_COEXIST</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_WIFI_AP_COEXIST	((VENDOR_TUYA << 16) | WIFI_AP_COEXIST)
+</code></pre>
+      <pre class="doc-comment">//ap in WF_START_SMART_AP_CONCURRENT</pre>
+
+      <h4 id="NETCFG_TY_BLE">Marco <span>NETCFG_TY_BLE</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_BLE				((VENDOR_TUYA << 16) | BLE)
+</code></pre>
+      <pre class="doc-comment">//ble </pre>
+
+      <h4 id="NETCFG_TY_CAMERA_QR">Marco <span>NETCFG_TY_CAMERA_QR</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_CAMERA_QR			((VENDOR_TUYA << 16) | CAMERA_QR)
+</code></pre>
+      <pre class="doc-comment">//qr</pre>
+
+      <h4 id="NETCFG_TY_API_USER">Marco <span>NETCFG_TY_API_USER</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_API_USER 			((VENDOR_TUYA << 16) | API_USER)
+</code></pre>
+      <pre class="doc-comment">//user or uart</pre>
+
+      <h4 id="NETCFG_JD_WIFI_SMART">Marco <span>NETCFG_JD_WIFI_SMART</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_JD_WIFI_SMART		((VENDOR_JD << 16) | WIFI_SMARTCFG)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NETCFG_WX_WIFI_AIRKISS">Marco <span>NETCFG_WX_WIFI_AIRKISS</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_WX_WIFI_AIRKISS		((VENDOR_WEIXIN << 16) | WIFI_SMARTCFG)
+</code></pre>
+      <pre class="doc-comment">//wechat airkiss</pre>
+
+      <h4 id="NETCFG_AMAZON_WIFI_FFS">Marco <span>NETCFG_AMAZON_WIFI_FFS</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_AMAZON_WIFI_FFS		((VENDOR_AMAZON << 16) | (WIFI_FFS))
+</code></pre>
+      <pre class="doc-comment">//amazon ffs netcfg</pre>
+
+      <h4 id="NETCFG_TY_WIFI_PEGASUS">Marco <span>NETCFG_TY_WIFI_PEGASUS</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_TY_WIFI_PEGASUS		((VENDOR_TUYA << 16) | WIFI_PEGASUS)
+</code></pre>
+      <pre class="doc-comment">//tuya pegasus netcfg</pre>
+
+      <h4 id="NETCFG_STOP_ALL_CFG_MODULE">Marco <span>NETCFG_STOP_ALL_CFG_MODULE</span></h4>
+      <pre class="doc-declare"><code>#define NETCFG_STOP_ALL_CFG_MODULE	(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DEF_AP_SSID_PF">Marco <span>DEF_AP_SSID_PF</span></h4>
+      <pre class="doc-declare"><code>#define DEF_AP_SSID_PF "SmartLife"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WL_TOKEN_LEN">Marco <span>WL_TOKEN_LEN</span></h4>
+      <pre class="doc-declare"><code>#define WL_TOKEN_LEN (16)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="netcfg_module_init">Func <span>netcfg_module_init</span></h4>
+      <pre class="doc-declare"><code>int netcfg_module_init(int netcfg_policy, ApSsidPasswd_t pApInfo, bool isApCfg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_module_uninit">Func <span>netcfg_module_uninit</span></h4>
+      <pre class="doc-declare"><code>int netcfg_module_uninit();</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_module_register">Func <span>netcfg_module_register</span></h4>
+      <pre class="doc-declare"><code>int netcfg_module_register(int	type, FN_NETCFG_START	start, FN_NETCFG_STOP stop);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_module_unregister">Func <span>netcfg_module_unregister</span></h4>
+      <pre class="doc-declare"><code>int netcfg_module_unregister(int	type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_start">Func <span>netcfg_start</span></h4>
+      <pre class="doc-declare"><code>int netcfg_start(int type, FN_NETCFG_CB netcfg_finish_cb, void *args);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief start netcfg type
+ * 
+ * @param[in] type netcfg type,refer to netcfg type definitions 
+ * @param[in] netcfg_finish_cb callback function when netcfg finished 
+ * @param[in] args private data for netcfg_finish_cb
+ *
+ * @note start netcfg type.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="netcfg_stop">Func <span>netcfg_stop</span></h4>
+      <pre class="doc-declare"><code>int netcfg_stop(int type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_stop_other_all">Func <span>netcfg_stop_other_all</span></h4>
+      <pre class="doc-declare"><code>int netcfg_stop_other_all(int type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_start_other_all">Func <span>netcfg_start_other_all</span></h4>
+      <pre class="doc-declare"><code>int netcfg_start_other_all(int type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="netcfg_set_transporter_switch_interval">Func <span>netcfg_set_transporter_switch_interval</span></h4>
+      <pre class="doc-declare"><code>int netcfg_set_transporter_switch_interval(int ms_interval);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="*P_AP_NETCFG_ARGS;
+">Typedef <span>*P_AP_NETCFG_ARGS;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+ int enable_station_ap;
+ WF_AP_CFG_IF_S *pDevApCfg;
+}AP_NETCFG_ARGS, *P_AP_NETCFG_ARGS;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PTR_SSID_PASSWORD_TOKEN;
+">Typedef <span>*PTR_SSID_PASSWORD_TOKEN;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** ssid array */
+   uint8_t ssid[WIFI_SSID_LEN+1];   
+   /** length of ssid array */
+   uint8_t s_len;   
+   /** password array */
+   uint8_t passwd[WIFI_PASSWD_LEN+1];      
+   /** length of password array */
+   uint8_t p_len; 
+   /** token array */
+   uint8_t token[WL_TOKEN_LEN+1]; 
+   /** length of token array */
+   uint8_t t_len;
+}SSID_PASSWORD_TOKEN, *PTR_SSID_PASSWORD_TOKEN;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*ptrApSsidPasswd;
+">Typedef <span>*ptrApSsidPasswd;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct apSsidPasswd_s{
+   /** ssid */
+ uint8_t* pSsid;   
+   /** password */
+ uint8_t* pPasswd;
+}ApSsidPasswd_t, *ptrApSsidPasswd;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief ssid and password info
+ */</pre>
+
+      <h4 id="FN_NETCFG_CB">Typedef <span>FN_NETCFG_CB</span></h4>
+      <pre class="doc-declare"><code>typedef int (* FN_NETCFG_CB)( PTR_SSID_PASSWORD_TOKEN info, int type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FN_NETCFG_START">Typedef <span>FN_NETCFG_START</span></h4>
+      <pre class="doc-declare"><code>typedef int (* FN_NETCFG_START)(FN_NETCFG_CB cb, void * args, int type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FN_NETCFG_STOP">Typedef <span>FN_NETCFG_STOP</span></h4>
+      <pre class="doc-declare"><code>typedef int (* FN_NETCFG_STOP)(int type);
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PTR_NETCFG_HANDLER;
+">Typedef <span>*PTR_NETCFG_HANDLER;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct{
+   /** node for list */
+ LIST_HEAD			node;   
+   /** netcfg type */
+   int			 	type;   
+   /** netcfg start function */
+   FN_NETCFG_START	start;   
+   /** netcfg stop function */
+   FN_NETCFG_STOP		stop;   
+   /** netcfg finished function */
+   FN_NETCFG_CB       netcfg_finish_cb;     
+   /** args for netcfg_finish_cb */
+   void *				args;   
+   /** netcfg is started or not */
+ bool				isStarted; 
+}NETCFG_HANDLER, *PTR_NETCFG_HANDLER;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

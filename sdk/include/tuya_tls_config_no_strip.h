@@ -2056,7 +2056,7 @@
  * This module enables the AES-CCM ciphersuites, if other requisites are
  * enabled as well.
  */
-//#define MBEDTLS_CCM_C
+#define MBEDTLS_CCM_C
 
 /**
  * \def MBEDTLS_CERTS_C
@@ -2702,7 +2702,7 @@
  *            on it, and considering stronger message digests instead.
  *
  */
-#if ((ENABLE_ECHO_SHOW ==1) || (ENABLE_CHROMECAST==1) || (TUYA_OPERATOR_TYPE == TUYA_OPERATOR_CMCC_ANDLINK) )
+#if ((ENABLE_ECHO_SHOW ==1) || (ENABLE_CHROMECAST==1))
 #define MBEDTLS_SHA1_C
 #endif
 
@@ -2737,7 +2737,7 @@
  *
  * This module adds support for SHA-384 and SHA-512.
  */
-//#define MBEDTLS_SHA512_C
+#define MBEDTLS_SHA512_C
 
 /**
  * \def MBEDTLS_SSL_CACHE_C
@@ -3002,7 +3002,7 @@
 
 /* MPI / BIGNUM options */
 #define MBEDTLS_MPI_WINDOW_SIZE           1 /**< Maximum windows size used. */
-#define MBEDTLS_MPI_MAX_SIZE            256 /**< Maximum number of bytes for usable MPIs. */
+#define MBEDTLS_MPI_MAX_SIZE            1024 /**< Maximum number of bytes for usable MPIs. */
 
 /* CTR_DRBG options */
 //#define MBEDTLS_CTR_DRBG_ENTROPY_LEN               48 /**< Amount of entropy used per seed by default (48 with SHA-512, 32 with SHA-256) */

@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/apps/smtp_opts.h" class="nav-sub-label">lwip/apps/smtp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/prot/iana.h" class="nav-sub-label">lwip/prot/iana.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_SMTP_H" class="nav-sub-label">LWIP_HDR_APPS_SMTP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_DEFAULT_PORT" class="nav-sub-label">SMTP_DEFAULT_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTPS_DEFAULT_PORT" class="nav-sub-label">SMTPS_DEFAULT_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_OK" class="nav-sub-label">SMTP_RESULT_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_UNKNOWN" class="nav-sub-label">SMTP_RESULT_ERR_UNKNOWN</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_CONNECT" class="nav-sub-label">SMTP_RESULT_ERR_CONNECT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_HOSTNAME" class="nav-sub-label">SMTP_RESULT_ERR_HOSTNAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_CLOSED" class="nav-sub-label">SMTP_RESULT_ERR_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_TIMEOUT" class="nav-sub-label">SMTP_RESULT_ERR_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_SVR_RESP" class="nav-sub-label">SMTP_RESULT_ERR_SVR_RESP</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_RESULT_ERR_MEM" class="nav-sub-label">SMTP_RESULT_ERR_MEM</a>
+              </li>
+      
+
+              <li>
+                <a href="#SMTP_BODYDH_BUFFER_SIZE" class="nav-sub-label">SMTP_BODYDH_BUFFER_SIZE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#smtp_send_mail_bodycback" class="nav-sub-label">smtp_send_mail_bodycback</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_set_server_addr" class="nav-sub-label">smtp_set_server_addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_set_server_port" class="nav-sub-label">smtp_set_server_port</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_set_tls_config" class="nav-sub-label">smtp_set_tls_config</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_set_auth" class="nav-sub-label">smtp_set_auth</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_send_mail" class="nav-sub-label">smtp_send_mail</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_send_mail_static" class="nav-sub-label">smtp_send_mail_static</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_send_mail_int" class="nav-sub-label">smtp_send_mail_int</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#altcp_tls_config" class="nav-sub-label">altcp_tls_config</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#smtp_result_fn" class="nav-sub-label">smtp_result_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#smtp_bodycback_fn" class="nav-sub-label">smtp_bodycback_fn</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/apps/smtp_opts.h"><span>lwip/apps/smtp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/apps/smtp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/apps/smtp_opts.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+
+      <h4 id="lwip/prot/iana.h"><span>lwip/prot/iana.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/prot/iana.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/prot/iana.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_SMTP_H">Marco <span>LWIP_HDR_APPS_SMTP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_SMTP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SMTP_DEFAULT_PORT">Marco <span>SMTP_DEFAULT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_DEFAULT_PORT        LWIP_IANA_PORT_SMTP
+</code></pre>
+      <pre class="doc-comment">/** The default TCP port used for SMTP */</pre>
+
+      <h4 id="SMTPS_DEFAULT_PORT">Marco <span>SMTPS_DEFAULT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define SMTPS_DEFAULT_PORT       LWIP_IANA_PORT_SMTPS
+</code></pre>
+      <pre class="doc-comment">/** The default TCP port used for SMTPS */</pre>
+
+      <h4 id="SMTP_RESULT_OK">Marco <span>SMTP_RESULT_OK</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_OK           0
+</code></pre>
+      <pre class="doc-comment">/** Email successfully sent */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_UNKNOWN">Marco <span>SMTP_RESULT_ERR_UNKNOWN</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_UNKNOWN  1
+</code></pre>
+      <pre class="doc-comment">/** Unknown error */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_CONNECT">Marco <span>SMTP_RESULT_ERR_CONNECT</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_CONNECT  2
+</code></pre>
+      <pre class="doc-comment">/** Connection to server failed */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_HOSTNAME">Marco <span>SMTP_RESULT_ERR_HOSTNAME</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_HOSTNAME 3
+</code></pre>
+      <pre class="doc-comment">/** Failed to resolve server hostname */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_CLOSED">Marco <span>SMTP_RESULT_ERR_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_CLOSED   4
+</code></pre>
+      <pre class="doc-comment">/** Connection unexpectedly closed by remote server */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_TIMEOUT">Marco <span>SMTP_RESULT_ERR_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_TIMEOUT  5
+</code></pre>
+      <pre class="doc-comment">/** Connection timed out (server didn't respond in time) */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_SVR_RESP">Marco <span>SMTP_RESULT_ERR_SVR_RESP</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_SVR_RESP 6
+</code></pre>
+      <pre class="doc-comment">/** Server responded with an unknown response code */</pre>
+
+      <h4 id="SMTP_RESULT_ERR_MEM">Marco <span>SMTP_RESULT_ERR_MEM</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_RESULT_ERR_MEM      7
+</code></pre>
+      <pre class="doc-comment">/** Out of resources locally */</pre>
+
+      <h4 id="SMTP_BODYDH_BUFFER_SIZE">Marco <span>SMTP_BODYDH_BUFFER_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define SMTP_BODYDH_BUFFER_SIZE 256
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="smtp_send_mail_bodycback">Func <span>smtp_send_mail_bodycback</span></h4>
+      <pre class="doc-declare"><code>err_t smtp_send_mail_bodycback(const char *from, const char* to, const char* subject,
+                    smtp_bodycback_fn bodycback_fn, smtp_result_fn callback_fn, void* callback_arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_set_server_addr">Func <span>smtp_set_server_addr</span></h4>
+      <pre class="doc-declare"><code>err_t smtp_set_server_addr(const char* server);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_set_server_port">Func <span>smtp_set_server_port</span></h4>
+      <pre class="doc-declare"><code>void smtp_set_server_port(u16_t port);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_set_tls_config">Func <span>smtp_set_tls_config</span></h4>
+      <pre class="doc-declare"><code>void smtp_set_tls_config(struct altcp_tls_config *tls_config);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_set_auth">Func <span>smtp_set_auth</span></h4>
+      <pre class="doc-declare"><code>err_t smtp_set_auth(const char* username, const char* pass);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_send_mail">Func <span>smtp_send_mail</span></h4>
+      <pre class="doc-declare"><code>err_t smtp_send_mail(const char *from, const char* to, const char* subject, const char* body,
+                    smtp_result_fn callback_fn, void* callback_arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_send_mail_static">Func <span>smtp_send_mail_static</span></h4>
+      <pre class="doc-declare"><code>err_t smtp_send_mail_static(const char *from, const char* to, const char* subject, const char* body,
+                    smtp_result_fn callback_fn, void* callback_arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="smtp_send_mail_int">Func <span>smtp_send_mail_int</span></h4>
+      <pre class="doc-declare"><code>void smtp_send_mail_int(void *arg);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="altcp_tls_config">Variable <span>altcp_tls_config</span></h4>
+      <pre class="doc-declare"><code>struct altcp_tls_config;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const char* smtp_result_str(u8_t smtp_result);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="smtp_result_fn">Typedef <span>smtp_result_fn</span></h4>
+      <pre class="doc-declare"><code>typedef void (*smtp_result_fn)(void *arg, u8_t smtp_result, u16_t srv_err, err_t err);
+</code></pre>
+      <pre class="doc-comment">/** Prototype of an smtp callback function
+ *
+ * @param arg argument specified when initiating the email
+ * @param smtp_result result of the mail transfer (see defines SMTP_RESULT_*)
+ * @param srv_err if aborted by the server, this contains the error code received
+ * @param err an error returned by internal lwip functions, can help to specify
+ *            the source of the error but must not necessarily be != ERR_OK
+ */</pre>
+
+      <h4 id="smtp_bodycback_fn">Typedef <span>smtp_bodycback_fn</span></h4>
+      <pre class="doc-declare"><code>typedef int (*smtp_bodycback_fn)(void *arg, struct smtp_bodydh *bodydh);
+</code></pre>
+      <pre class="doc-comment">/** Prototype of an smtp body callback function
+ * It receives a struct smtp_bodydh, and a buffer to write data,
+ * must return BDH_WORKING to be called again and BDH_DONE when
+ * it has finished processing. This one tries to fill one TCP buffer with
+ * data, your function will be repeatedly called until that happens; so if you
+ * know you'll be taking too long to serve your request, pause once in a while
+ * by writing length=0 to avoid hogging system resources
+ *
+ * @param arg argument specified when initiating the email
+ * @param smtp_bodydh state handling + buffer structure
+ */</pre>
+    </div>
+  </body>
+</html>
+            

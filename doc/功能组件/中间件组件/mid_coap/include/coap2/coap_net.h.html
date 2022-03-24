@@ -1,0 +1,1298 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#assert.h" class="nav-sub-label">assert.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#string.h" class="nav-sub-label">string.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#sys/time.h" class="nav-sub-label">sys/time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#time.h" class="nav-sub-label">time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_io.h" class="nav-sub-label">coap_io.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_dtls.h" class="nav-sub-label">coap_dtls.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_event.h" class="nav-sub-label">coap_event.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_time.h" class="nav-sub-label">coap_time.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#option.h" class="nav-sub-label">option.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#pdu.h" class="nav-sub-label">pdu.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#prng.h" class="nav-sub-label">prng.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_session.h" class="nav-sub-label">coap_session.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#COAP_NET_H_" class="nav-sub-label">COAP_NET_H_</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_insert_node" class="nav-sub-label">coap_insert_node</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_delete_node" class="nav-sub-label">coap_delete_node</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_delete_all" class="nav-sub-label">coap_delete_all</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_adjust_basetime" class="nav-sub-label">coap_adjust_basetime</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_set_psk" class="nav-sub-label">coap_context_set_psk</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_set_pki" class="nav-sub-label">coap_context_set_pki</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_set_pki_root_cas" class="nav-sub-label">coap_context_set_pki_root_cas</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_set_keepalive" class="nav-sub-label">coap_context_set_keepalive</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_free_context" class="nav-sub-label">coap_free_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_set_app_data" class="nav-sub-label">coap_set_app_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_get_app_data" class="nav-sub-label">coap_get_app_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_send_error" class="nav-sub-label">coap_send_error</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_send_message_type" class="nav-sub-label">coap_send_message_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_send_ack" class="nav-sub-label">coap_send_ack</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_send" class="nav-sub-label">coap_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_retransmit" class="nav-sub-label">coap_retransmit</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_write" class="nav-sub-label">coap_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_read" class="nav-sub-label">coap_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_run_once" class="nav-sub-label">coap_run_once</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_handle_dgram" class="nav-sub-label">coap_handle_dgram</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_handle_event" class="nav-sub-label">coap_handle_event</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_remove_from_queue" class="nav-sub-label">coap_remove_from_queue</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_wait_ack" class="nav-sub-label">coap_wait_ack</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_cancel_all_messages" class="nav-sub-label">coap_cancel_all_messages</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_cancel_session_messages" class="nav-sub-label">coap_cancel_session_messages</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_dispatch" class="nav-sub-label">coap_dispatch</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_can_exit" class="nav-sub-label">coap_can_exit</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_ticks" class="nav-sub-label">coap_ticks</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_option_check_critical" class="nav-sub-label">coap_option_check_critical</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_calc_timeout" class="nav-sub-label">coap_calc_timeout</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_queue_t" class="nav-sub-label">coap_queue_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_queue_t" class="nav-sub-label">coap_queue_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_resource_t" class="nav-sub-label">coap_resource_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_t" class="nav-sub-label">coap_context_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_async_state_t" class="nav-sub-label">coap_async_state_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_queue_t" class="nav-sub-label">coap_queue_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_queue_t" class="nav-sub-label">coap_queue_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_t" class="nav-sub-label">coap_context_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_queue_t" class="nav-sub-label">coap_queue_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pdu_t" class="nav-sub-label">coap_pdu_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#coap_queue_t;
+" class="nav-sub-label">coap_queue_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_response_handler_t" class="nav-sub-label">coap_response_handler_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_nack_handler_t" class="nav-sub-label">coap_nack_handler_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_ping_handler_t" class="nav-sub-label">coap_ping_handler_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_pong_handler_t" class="nav-sub-label">coap_pong_handler_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#coap_context_t;
+" class="nav-sub-label">coap_context_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="assert.h"><span>assert.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;assert.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <assert.h>
+</pre>
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h>
+</pre>
+
+      <h4 id="string.h"><span>string.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;string.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <string.h>
+</pre>
+
+      <h4 id="sys/time.h"><span>sys/time.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;sys/time.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <sys/time.h>
+</pre>
+
+      <h4 id="time.h"><span>time.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;time.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <time.h>
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;lwip/ip_addr.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <lwip/ip_addr.h>
+</pre>
+
+      <h4 id="coap_io.h"><span>coap_io.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_io.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_io.h"
+</pre>
+
+      <h4 id="coap_dtls.h"><span>coap_dtls.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_dtls.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_dtls.h"
+</pre>
+
+      <h4 id="coap_event.h"><span>coap_event.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_event.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_event.h"
+</pre>
+
+      <h4 id="coap_time.h"><span>coap_time.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_time.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_time.h"
+</pre>
+
+      <h4 id="option.h"><span>option.h</span></h4>
+      <pre class="doc-declare"><code>#include "option.h"
+</code></pre>
+      <pre class="doc-comment">#include "option.h"
+</pre>
+
+      <h4 id="pdu.h"><span>pdu.h</span></h4>
+      <pre class="doc-declare"><code>#include "pdu.h"
+</code></pre>
+      <pre class="doc-comment">#include "pdu.h"
+</pre>
+
+      <h4 id="prng.h"><span>prng.h</span></h4>
+      <pre class="doc-declare"><code>#include "prng.h"
+</code></pre>
+      <pre class="doc-comment">#include "prng.h"
+</pre>
+
+      <h4 id="coap_session.h"><span>coap_session.h</span></h4>
+      <pre class="doc-declare"><code>#include "coap_session.h"
+</code></pre>
+      <pre class="doc-comment">#include "coap_session.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="COAP_NET_H_">Marco <span>COAP_NET_H_</span></h4>
+      <pre class="doc-declare"><code>#define COAP_NET_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="coap_insert_node">Func <span>coap_insert_node</span></h4>
+      <pre class="doc-declare"><code>int coap_insert_node(coap_queue_t **queue, coap_queue_t *node);</code></pre>
+      <pre class="doc-comment">/**
+ * Adds @p node to given @p queue, ordered by variable t in @p node.
+ *
+ * @param queue Queue to add to.
+ * @param node Node entry to add to Queue.
+ *
+ * @return @c 1 added to queue, @c 0 failure.
+ */</pre>
+
+      <h4 id="coap_delete_node">Func <span>coap_delete_node</span></h4>
+      <pre class="doc-declare"><code>int coap_delete_node(coap_queue_t *node);</code></pre>
+      <pre class="doc-comment">/**
+ * Destroys specified @p node.
+ *
+ * @param node Node entry to remove.
+ *
+ * @return @c 1 node deleted from queue, @c 0 failure.
+ */</pre>
+
+      <h4 id="coap_delete_all">Func <span>coap_delete_all</span></h4>
+      <pre class="doc-declare"><code>void coap_delete_all(coap_queue_t *queue);</code></pre>
+      <pre class="doc-comment">/**
+ * Removes all items from given @p queue and frees the allocated storage.
+ *
+ * @param queue The queue to delete.
+ */</pre>
+
+      <h4 id="coap_adjust_basetime">Func <span>coap_adjust_basetime</span></h4>
+      <pre class="doc-declare"><code>unsigned int coap_adjust_basetime(coap_context_t *ctx, coap_tick_t now);</code></pre>
+      <pre class="doc-comment">/**
+ * Set sendqueue_basetime in the given context object @p ctx to @p now. This
+ * function returns the number of elements in the queue head that have timed
+ * out.
+ */</pre>
+
+      <h4 id="coap_context_set_psk">Func <span>coap_context_set_psk</span></h4>
+      <pre class="doc-declare"><code>int coap_context_set_psk( coap_context_t *context, const char *hint,
+                          const uint8_t *key, size_t key_len );</code></pre>
+      <pre class="doc-comment">/**
+ * Set the context's default PSK hint and/or key for a server.
+ *
+ * @param context The current coap_context_t object.
+ * @param hint    The default PSK server hint sent to a client. If @p NULL, PSK
+ *                authentication is disabled. Empty string is a valid hint.
+ * @param key     The default PSK key. If @p NULL, PSK authentication will fail.
+ * @param key_len The default PSK key's length. If @p 0, PSK authentication will
+ *                fail.
+ *
+ * @return @c 1 if successful, else @c 0.
+ */</pre>
+
+      <h4 id="coap_context_set_pki">Func <span>coap_context_set_pki</span></h4>
+      <pre class="doc-declare"><code>int
+coap_context_set_pki(coap_context_t *context,
+                    coap_dtls_pki_t *setup_data);</code></pre>
+      <pre class="doc-comment">/**
+ * Set the context's default PKI information for a server.
+ *
+ * @param context        The current coap_context_t object.
+ * @param setup_data     If @p NULL, PKI authentication will fail. Certificate
+ *                       information required.
+ *
+ * @return @c 1 if successful, else @c 0.
+ */</pre>
+
+      <h4 id="coap_context_set_pki_root_cas">Func <span>coap_context_set_pki_root_cas</span></h4>
+      <pre class="doc-declare"><code>int
+coap_context_set_pki_root_cas(coap_context_t *context,
+                             const char *ca_file,
+                             const char *ca_dir);</code></pre>
+      <pre class="doc-comment">/**
+ * Set the context's default Root CA information for a client or server.
+ *
+ * @param context        The current coap_context_t object.
+ * @param ca_file        If not @p NULL, is the full path name of a PEM encoded
+ *                       file containing all the Root CAs to be used.
+ * @param ca_dir         If not @p NULL, points to a directory containing PEM
+ *                       encoded files containing all the Root CAs to be used.
+ *
+ * @return @c 1 if successful, else @c 0.
+ */</pre>
+
+      <h4 id="coap_context_set_keepalive">Func <span>coap_context_set_keepalive</span></h4>
+      <pre class="doc-declare"><code>void coap_context_set_keepalive(coap_context_t *context, unsigned int seconds);</code></pre>
+      <pre class="doc-comment">/**
+ * Set the context keepalive timer for sessions.
+ * A keepalive message will be sent after if a session has been inactive,
+ * i.e. no packet sent or received, for the given number of seconds.
+ * For reliable protocols, a PING message will be sent. If a PONG has not
+ * been received before the next PING is due to be sent, the session will
+ * considered as disconnected.
+ *
+ * @param context        The coap_context_t object.
+ * @param seconds                 Number of seconds for the inactivity timer, or zero
+ *                       to disable CoAP-level keepalive messages.
+ *
+ * @return 1 if successful, else 0
+ */</pre>
+
+      <h4 id="coap_free_context">Func <span>coap_free_context</span></h4>
+      <pre class="doc-declare"><code>void coap_free_context(coap_context_t *context);</code></pre>
+      <pre class="doc-comment">/**
+ * CoAP stack context must be released with coap_free_context(). This function
+ * clears all entries from the receive queue and send queue and deletes the
+ * resources that have been registered with @p context, and frees the attached
+ * endpoints.
+ *
+ * @param context The current coap_context_t object to free off.
+ */</pre>
+
+      <h4 id="coap_set_app_data">Func <span>coap_set_app_data</span></h4>
+      <pre class="doc-declare"><code>void coap_set_app_data(coap_context_t *context, void *data);</code></pre>
+      <pre class="doc-comment">/**
+ * Stores @p data with the given CoAP context. This function
+ * overwrites any value that has previously been stored with @p
+ * context.
+ *
+ * @param context The CoAP context.
+ * @param data The data to store with wih the context. Note that this data
+ *             must be valid during the lifetime of @p context.
+ */</pre>
+
+      <h4 id="coap_get_app_data">Func <span>coap_get_app_data</span></h4>
+      <pre class="doc-declare"><code>void *coap_get_app_data(const coap_context_t *context);</code></pre>
+      <pre class="doc-comment">/**
+ * Returns any application-specific data that has been stored with @p
+ * context using the function coap_set_app_data(). This function will
+ * return @c NULL if no data has been stored.
+ *
+ * @param context The CoAP context.
+ *
+ * @return The data previously stored or @c NULL if not data stored.
+ */</pre>
+
+      <h4 id="coap_send_error">Func <span>coap_send_error</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t coap_send_error(coap_session_t *session,
+                          coap_pdu_t *request,
+                          unsigned char code,
+                          coap_opt_filter_t opts);</code></pre>
+      <pre class="doc-comment">/**
+ * Sends an error response with code @p code for request @p request to @p dst.
+ * @p opts will be passed to coap_new_error_response() to copy marked options
+ * from the request. This function returns the transaction id if the message was
+ * sent, or @c COAP_INVALID_TID otherwise.
+ *
+ * @param session         The CoAP session.
+ * @param request         The original request to respond to.
+ * @param code            The response code.
+ * @param opts            A filter that specifies the options to copy from the
+ *                        @p request.
+ *
+ * @return                The transaction id if the message was sent, or @c
+ *                        COAP_INVALID_TID otherwise.
+ */</pre>
+
+      <h4 id="coap_send_message_type">Func <span>coap_send_message_type</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t
+coap_send_message_type(coap_session_t *session, coap_pdu_t *request, unsigned char type);</code></pre>
+      <pre class="doc-comment">/**
+ * Helper funktion to create and send a message with @p type (usually ACK or
+ * RST). This function returns @c COAP_INVALID_TID when the message was not
+ * sent, a valid transaction id otherwise.
+ *
+ * @param session         The CoAP session.
+ * @param request         The request that should be responded to.
+ * @param type            Which type to set.
+ * @return                transaction id on success or @c COAP_INVALID_TID
+ *                        otherwise.
+ */</pre>
+
+      <h4 id="coap_send_ack">Func <span>coap_send_ack</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t coap_send_ack(coap_session_t *session, coap_pdu_t *request);</code></pre>
+      <pre class="doc-comment">/**
+ * Sends an ACK message with code @c 0 for the specified @p request to @p dst.
+ * This function returns the corresponding transaction id if the message was
+ * sent or @c COAP_INVALID_TID on error.
+ *
+ * @param session         The CoAP session.
+ * @param request         The request to be acknowledged.
+ *
+ * @return                The transaction id if ACK was sent or @c
+ *                        COAP_INVALID_TID on error.
+ */</pre>
+
+      <h4 id="coap_send">Func <span>coap_send</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t coap_send( coap_session_t *session, coap_pdu_t *pdu );</code></pre>
+      <pre class="doc-comment">/**
+* Sends a CoAP message to given peer. The memory that is
+* allocated by pdu will be released by coap_send().
+* The caller must not use the pdu after calling coap_send().
+*
+* @param session         The CoAP session.
+* @param pdu             The CoAP PDU to send.
+*
+* @return                The message id of the sent message or @c
+*                        COAP_INVALID_TID on error.
+*/</pre>
+
+      <h4 id="coap_retransmit">Func <span>coap_retransmit</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t coap_retransmit(coap_context_t *context, coap_queue_t *node);</code></pre>
+      <pre class="doc-comment">/**
+ * Handles retransmissions of confirmable messages
+ *
+ * @param context      The CoAP context.
+ * @param node         The node to retransmit.
+ *
+ * @return             The message id of the sent message or @c
+ *                     COAP_INVALID_TID on error.
+ */</pre>
+
+      <h4 id="coap_write">Func <span>coap_write</span></h4>
+      <pre class="doc-declare"><code>unsigned int
+coap_write(coap_context_t *ctx,
+ coap_socket_t *sockets[],
+ unsigned int max_sockets,
+ unsigned int *num_sockets,
+ coap_tick_t now
+);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_read">Func <span>coap_read</span></h4>
+      <pre class="doc-declare"><code>void coap_read(coap_context_t *ctx, coap_tick_t now);</code></pre>
+      <pre class="doc-comment">/**
+ * For applications with their own message loop, reads all data from the network.
+ *
+ * @param ctx The CoAP context
+ * @param now Current time
+ */</pre>
+
+      <h4 id="coap_run_once">Func <span>coap_run_once</span></h4>
+      <pre class="doc-declare"><code>int coap_run_once( coap_context_t *ctx, unsigned int timeout_ms );</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_handle_dgram">Func <span>coap_handle_dgram</span></h4>
+      <pre class="doc-declare"><code>int coap_handle_dgram(coap_context_t *ctx, coap_session_t *session, uint8_t *data, size_t data_len);</code></pre>
+      <pre class="doc-comment">/**
+ * Parses and interprets a CoAP datagram with context @p ctx. This function
+ * returns @c 0 if the datagram was handled, or a value less than zero on
+ * error.
+ *
+ * @param ctx    The current CoAP context.
+ * @param session The current CoAP session.
+ * @param data The received packet'd data.
+ * @param data_len The received packet'd data length.
+ *
+ * @return       @c 0 if message was handled successfully, or less than zero on
+ *               error.
+ */</pre>
+
+      <h4 id="coap_handle_event">Func <span>coap_handle_event</span></h4>
+      <pre class="doc-declare"><code>int coap_handle_event(coap_context_t *context,
+                     coap_event_t event,
+                     coap_session_t *session);</code></pre>
+      <pre class="doc-comment">/**
+ * Invokes the event handler of @p context for the given @p event and
+ * @p data.
+ *
+ * @param context The CoAP context whose event handler is to be called.
+ * @param event   The event to deliver.
+ * @param session The session related to @p event.
+ * @return The result from the associated event handler or 0 if none was
+ * registered.
+ */</pre>
+
+      <h4 id="coap_remove_from_queue">Func <span>coap_remove_from_queue</span></h4>
+      <pre class="doc-declare"><code>int coap_remove_from_queue(coap_queue_t **queue,
+                          coap_session_t *session,
+                          coap_tid_t id,
+                          coap_queue_t **node);</code></pre>
+      <pre class="doc-comment">/**
+ * This function removes the element with given @p id from the list given list.
+ * If @p id was found, @p node is updated to point to the removed element. Note
+ * that the storage allocated by @p node is @b not released. The caller must do
+ * this manually using coap_delete_node(). This function returns @c 1 if the
+ * element with id @p id was found, @c 0 otherwise. For a return value of @c 0,
+ * the contents of @p node is undefined.
+ *
+ * @param queue The queue to search for @p id.
+ * @param session The session to look for.
+ * @param id    The transaction id to look for.
+ * @param node  If found, @p node is updated to point to the removed node. You
+ *              must release the storage pointed to by @p node manually.
+ *
+ * @return      @c 1 if @p id was found, @c 0 otherwise.
+ */</pre>
+
+      <h4 id="coap_wait_ack">Func <span>coap_wait_ack</span></h4>
+      <pre class="doc-declare"><code>coap_tid_t
+coap_wait_ack( coap_context_t *context, coap_session_t *session,
+              coap_queue_t *node);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_cancel_all_messages">Func <span>coap_cancel_all_messages</span></h4>
+      <pre class="doc-declare"><code>void coap_cancel_all_messages(coap_context_t *context,
+                             coap_session_t *session,
+                             const uint8_t *token,
+                             size_t token_length);</code></pre>
+      <pre class="doc-comment">/**
+ * Cancels all outstanding messages for session @p session that have the specified
+ * token.
+ *
+ * @param context      The context in use.
+ * @param session      Session of the messages to remove.
+ * @param token        Message token.
+ * @param token_length Actual length of @p token.
+ */</pre>
+
+      <h4 id="coap_cancel_session_messages">Func <span>coap_cancel_session_messages</span></h4>
+      <pre class="doc-declare"><code>void
+coap_cancel_session_messages(coap_context_t *context,
+                            coap_session_t *session,
+                            coap_nack_reason_t reason);</code></pre>
+      <pre class="doc-comment">/**
+* Cancels all outstanding messages for session @p session.
+*
+* @param context      The context in use.
+* @param session      Session of the messages to remove.
+* @param reason       The reasion for the session cancellation
+*/</pre>
+
+      <h4 id="coap_dispatch">Func <span>coap_dispatch</span></h4>
+      <pre class="doc-declare"><code>void coap_dispatch(coap_context_t *context, coap_session_t *session,
+                  coap_pdu_t *pdu);</code></pre>
+      <pre class="doc-comment">/**
+ * Dispatches the PDUs from the receive queue in given context.
+ */</pre>
+
+      <h4 id="coap_can_exit">Func <span>coap_can_exit</span></h4>
+      <pre class="doc-declare"><code>int coap_can_exit(coap_context_t *context);</code></pre>
+      <pre class="doc-comment">/**
+ * Returns 1 if there are no messages to send or to dispatch in the context's
+ * queues. */</pre>
+
+      <h4 id="coap_ticks">Func <span>coap_ticks</span></h4>
+      <pre class="doc-declare"><code>void coap_ticks(coap_tick_t *);</code></pre>
+      <pre class="doc-comment">/**
+ * Returns the current value of an internal tick counter. The counter counts \c
+ * COAP_TICKS_PER_SECOND ticks every second.
+ */</pre>
+
+      <h4 id="coap_option_check_critical">Func <span>coap_option_check_critical</span></h4>
+      <pre class="doc-declare"><code>int coap_option_check_critical(coap_context_t *ctx,
+                              coap_pdu_t *pdu,
+                              coap_opt_filter_t unknown);</code></pre>
+      <pre class="doc-comment">/**
+ * Verifies that @p pdu contains no unknown critical options. Options must be
+ * registered at @p ctx, using the function coap_register_option(). A basic set
+ * of options is registered automatically by coap_new_context(). This function
+ * returns @c 1 if @p pdu is ok, @c 0 otherwise. The given filter object @p
+ * unknown will be updated with the unknown options. As only @c COAP_MAX_OPT
+ * options can be signalled this way, remaining options must be examined
+ * manually.
+ *
+ * @code
+  coap_opt_filter_t f = COAP_OPT_NONE;
+  coap_opt_iterator_t opt_iter;
+
+  if (coap_option_check_critical(ctx, pdu, f) == 0) {
+    coap_option_iterator_init(pdu, &opt_iter, f);
+
+    while (coap_option_next(&opt_iter)) {
+      if (opt_iter.type & 0x01) {
+        ... handle unknown critical option in opt_iter ...
+      }
+    }
+  }
+   @endcode
+ *
+ * @param ctx      The context where all known options are registered.
+ * @param pdu      The PDU to check.
+ * @param unknown  The output filter that will be updated to indicate the
+ *                 unknown critical options found in @p pdu.
+ *
+ * @return         @c 1 if everything was ok, @c 0 otherwise.
+ */</pre>
+
+      <h4 id="coap_calc_timeout">Func <span>coap_calc_timeout</span></h4>
+      <pre class="doc-declare"><code>unsigned int coap_calc_timeout(coap_session_t *session, unsigned char r);</code></pre>
+      <pre class="doc-comment">/**
+ * Calculates the initial timeout based on the session CoAP transmission
+ * parameters 'ack_timeout', 'ack_random_factor', and COAP_TICKS_PER_SECOND.
+ * The calculation requires 'ack_timeout' and 'ack_random_factor' to be in
+ * Qx.FRAC_BITS fixed point notation, whereas the passed parameter @p r
+ * is interpreted as the fractional part of a Q0.MAX_BITS random value.
+ *
+ * @param session session timeout is associated with
+ * @param r  random value as fractional part of a Q0.MAX_BITS fixed point
+ *           value
+ * @return   COAP_TICKS_PER_SECOND * 'ack_timeout' *
+ *           (1 + ('ack_random_factor' - 1) * r)
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="coap_queue_t">Variable <span>coap_queue_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_queue_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_queue_t">Variable <span>coap_queue_t</span></h4>
+      <pre class="doc-declare"><code>coap_queue_t *coap_new_node(void);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new node suitable for adding to the CoAP sendqueue.
+ *
+ * @return New node entry, or @c NULL if failure.
+ */</pre>
+
+      <h4 id="coap_resource_t">Variable <span>coap_resource_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_resource_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_context_t">Variable <span>coap_context_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_context_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_async_state_t">Variable <span>coap_async_state_t</span></h4>
+      <pre class="doc-declare"><code>struct coap_async_state_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="coap_queue_t">Variable <span>coap_queue_t</span></h4>
+      <pre class="doc-declare"><code>coap_queue_t *coap_peek_next( coap_context_t *context );</code></pre>
+      <pre class="doc-comment">/**
+ * Returns the next pdu to send without removing from sendqeue.
+ */</pre>
+
+      <h4 id="coap_queue_t">Variable <span>coap_queue_t</span></h4>
+      <pre class="doc-declare"><code>coap_queue_t *coap_pop_next( coap_context_t *context );</code></pre>
+      <pre class="doc-comment">/**
+ * Returns the next pdu to send and removes it from the sendqeue.
+ */</pre>
+
+      <h4 id="coap_context_t">Variable <span>coap_context_t</span></h4>
+      <pre class="doc-declare"><code>coap_context_t *coap_new_context(const coap_address_t *listen_addr);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new coap_context_t object that will hold the CoAP stack status.
+ */</pre>
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>coap_pdu_t *coap_new_error_response(coap_pdu_t *request,
+                                   unsigned char code,
+                                   coap_opt_filter_t opts);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new ACK PDU with specified error @p code. The options specified by
+ * the filter expression @p opts will be copied from the original request
+ * contained in @p request. Unless @c SHORT_ERROR_RESPONSE was defined at build
+ * time, the textual reason phrase for @p code will be added as payload, with
+ * Content-Type @c 0.
+ * This function returns a pointer to the new response message, or @c NULL on
+ * error. The storage allocated for the new message must be relased with
+ * coap_free().
+ *
+ * @param request Specification of the received (confirmable) request.
+ * @param code    The error code to set.
+ * @param opts    An option filter that specifies which options to copy from
+ *                the original request in @p node.
+ *
+ * @return        A pointer to the new message or @c NULL on error.
+ */</pre>
+
+      <h4 id="coap_queue_t">Variable <span>coap_queue_t</span></h4>
+      <pre class="doc-declare"><code>coap_queue_t *coap_find_transaction(coap_queue_t *queue, coap_session_t *session, coap_tid_t id);</code></pre>
+      <pre class="doc-comment">/**
+ * Retrieves transaction from the queue.
+ *
+ * @param queue The transaction queue to be searched.
+ * @param session The session to find.
+ * @param id    The transaction id to find.
+ *
+ * @return      A pointer to the transaction object or @c NULL if not found.
+ */</pre>
+
+      <h4 id="coap_pdu_t">Variable <span>coap_pdu_t</span></h4>
+      <pre class="doc-declare"><code>coap_pdu_t *coap_wellknown_response(coap_context_t *context,
+                                   coap_session_t *session,
+                                   coap_pdu_t *request);</code></pre>
+      <pre class="doc-comment">/**
+ * Creates a new response for given @p request with the contents of @c
+ * .well-known/core. The result is NULL on error or a newly allocated PDU that
+ * must be either sent with coap_sent() or released by coap_delete_pdu().
+ *
+ * @param context The current coap context to use.
+ * @param session The CoAP session.
+ * @param request The request for @c .well-known/core .
+ *
+ * @return        A new 2.05 response for @c .well-known/core or NULL on error.
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="coap_queue_t;
+">Typedef <span>coap_queue_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_queue_t {
+ struct coap_queue_t *next;
+ coap_tick_t t;               /**< when to send PDU for the next time */
+ unsigned char retransmit_cnt; /**< retransmission counter, will be removed
+                                 *    when zero */
+ unsigned int timeout;        /**< the randomized timeout value */
+ coap_session_t *session;     /**< the CoAP session */
+ coap_tid_t id;               /**< CoAP transaction id */
+ coap_pdu_t *pdu;             /**< the CoAP PDU to send */
+} coap_queue_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * Queue entry
+ */</pre>
+
+      <h4 id="coap_response_handler_t">Typedef <span>coap_response_handler_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*coap_response_handler_t)(struct coap_context_t *context,
+                                       coap_session_t *session,
+                                       coap_pdu_t *sent,
+                                       coap_pdu_t *received,
+                                       const coap_tid_t id);
+</code></pre>
+      <pre class="doc-comment">/**
+ * Response handler that is used as call-back in coap_context_t.
+ *
+ * @param context CoAP session.
+ * @param session CoAP session.
+ * @param sent The PDU that was transmitted.
+ * @param received The PDU that was received.
+ * @param id CoAP transaction ID.
+ */</pre>
+
+      <h4 id="coap_nack_handler_t">Typedef <span>coap_nack_handler_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*coap_nack_handler_t)(struct coap_context_t *context,
+                                   coap_session_t *session,
+                                   coap_pdu_t *sent,
+                                   coap_nack_reason_t reason,
+                                   const coap_tid_t id);
+</code></pre>
+      <pre class="doc-comment">/**
+ * Negative Acknowedge handler that is used as call-back in coap_context_t.
+ *
+ * @param context CoAP session.
+ * @param session CoAP session.
+ * @param sent The PDU that was transmitted.
+ * @param reason The reason for the NACK.
+ * @param id CoAP transaction ID.
+ */</pre>
+
+      <h4 id="coap_ping_handler_t">Typedef <span>coap_ping_handler_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*coap_ping_handler_t)(struct coap_context_t *context,
+                                   coap_session_t *session,
+                                   coap_pdu_t *received,
+                                   const coap_tid_t id);
+</code></pre>
+      <pre class="doc-comment">/**
+ * Recieved Ping handler that is used as call-back in coap_context_t.
+ *
+ * @param context CoAP session.
+ * @param session CoAP session.
+ * @param received The PDU that was received.
+ * @param id CoAP transaction ID.
+ */</pre>
+
+      <h4 id="coap_pong_handler_t">Typedef <span>coap_pong_handler_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*coap_pong_handler_t)(struct coap_context_t *context,
+                                   coap_session_t *session,
+                                   coap_pdu_t *received,
+                                   const coap_tid_t id);
+</code></pre>
+      <pre class="doc-comment">/**
+ * Recieved Pong handler that is used as call-back in coap_context_t.
+ *
+ * @param context CoAP session.
+ * @param session CoAP session.
+ * @param received The PDU that was received.
+ * @param id CoAP transaction ID.
+ */</pre>
+
+      <h4 id="coap_context_t;
+">Typedef <span>coap_context_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct coap_context_t {
+ coap_opt_filter_t known_options;
+ struct coap_resource_t *resources; /**< hash table or list of known
+                                          resources */
+ struct coap_resource_t *unknown_resource; /**< can be used for handling
+                                                 unknown resources */
+
+#ifndef WITHOUT_ASYNC
+ /**
+   * list of asynchronous transactions */
+ struct coap_async_state_t *async_state;
+#endif /* WITHOUT_ASYNC */
+
+ /**
+   * The time stamp in the first element of the sendqeue is relative
+   * to sendqueue_basetime. */
+ coap_tick_t sendqueue_basetime;
+ coap_queue_t *sendqueue;
+ coap_endpoint_t *endpoint;     /**< the endpoints used for listening  */
+ coap_session_t *sessions;      /**< client sessions */
+
+#ifdef WITH_CONTIKI
+ struct uip_udp_conn *conn;     /**< uIP connection object */
+ struct etimer retransmit_timer; /**< fires when the next packet must be sent */
+ struct etimer notify_timer;    /**< used to check resources periodically */
+#endif /* WITH_CONTIKI */
+
+#ifdef WITH_LWIP
+ uint8_t timer_configured;      /**< Set to 1 when a retransmission is
+                                   *   scheduled using lwIP timers for this
+                                   *   context, otherwise 0. */
+#endif /* WITH_LWIP */
+
+ /**
+   * The last message id that was used is stored in this field. The initial
+   * value is set by coap_new_context() and is usually a random value. A new
+   * message id can be created with coap_new_message_id().
+   */
+ uint16_t message_id;
+
+ coap_response_handler_t response_handler;
+ coap_nack_handler_t nack_handler;
+ coap_ping_handler_t ping_handler;
+ coap_pong_handler_t pong_handler;
+
+ /**
+   * Callback function that is used to signal events to the
+   * application.  This field is set by coap_set_event_handler().
+   */
+ coap_event_handler_t handle_event;
+
+ ssize_t (*network_send)(coap_socket_t *sock, const coap_session_t *session, const uint8_t *data, size_t datalen);
+
+ ssize_t (*network_read)(coap_socket_t *sock, struct coap_packet_t *packet);
+
+ size_t(*get_client_psk)(const coap_session_t *session, const uint8_t *hint, size_t hint_len, uint8_t *identity, size_t *identity_len, size_t max_identity_len, uint8_t *psk, size_t max_psk_len);
+ size_t(*get_server_psk)(const coap_session_t *session, const uint8_t *identity, size_t identity_len, uint8_t *psk, size_t max_psk_len);
+ size_t(*get_server_hint)(const coap_session_t *session, uint8_t *hint, size_t max_hint_len);
+
+ void *dtls_context;
+ uint8_t *psk_hint;
+ size_t psk_hint_len;
+ uint8_t *psk_key;
+ size_t psk_key_len;
+
+ unsigned int session_timeout;   /**< Number of seconds of inactivity after which an unused session will be closed. 0 means use default. */
+ unsigned int max_idle_sessions; /**< Maximum number of simultaneous unused sessions per endpoint. 0 means no maximum. */
+ unsigned int max_handshake_sessions; /**< Maximum number of simultaneous negotating sessions per endpoint. 0 means use default. */
+ unsigned int ping_timeout;          /**< Minimum inactivity time before sending a ping message. 0 means disabled. */
+ unsigned int csm_timeout;          /**< Timeout for waiting for a CSM from the remote side. 0 means disabled. */
+
+ void *app;                      /**< application-specific data */
+} coap_context_t;
+</code></pre>
+      <pre class="doc-comment">/**
+ * The CoAP stack's global state is stored in a coap_context_t object.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

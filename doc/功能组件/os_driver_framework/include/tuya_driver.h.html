@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdbool.h" class="nav-sub-label">stdbool.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_mutex.h" class="nav-sub-label">tuya_hal_mutex.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_semaphore.h" class="nav-sub-label">tuya_hal_semaphore.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#uni_log.h" class="nav-sub-label">uni_log.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_DRV_H__" class="nav-sub-label">__TUYA_DRV_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_DRV_ASSRET(__EXPRESS)" class="nav-sub-label">TUYA_DRV_ASSRET(__EXPRESS)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_driver_find" class="nav-sub-label">tuya_driver_find</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_driver_register" class="nav-sub-label">tuya_driver_register</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_drv_flag_t;
+" class="nav-sub-label">tuya_drv_flag_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_drv_cmd_t;
+" class="nav-sub-label">tuya_drv_cmd_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_drv_type_t;
+" class="nav-sub-label">tuya_drv_type_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_drv_event_t;
+" class="nav-sub-label">tuya_drv_event_t;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#SLIST_HEAD_DRIVER;
+" class="nav-sub-label">SLIST_HEAD_DRIVER;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_drv_node_t;
+" class="nav-sub-label">tuya_drv_node_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include "stdint.h"
+</code></pre>
+      <pre class="doc-comment">#include "stdint.h"
+</pre>
+
+      <h4 id="stdbool.h"><span>stdbool.h</span></h4>
+      <pre class="doc-declare"><code>#include "stdbool.h"
+</code></pre>
+      <pre class="doc-comment">#include "stdbool.h"
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_hal_mutex.h"><span>tuya_hal_mutex.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_mutex.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_mutex.h"
+</pre>
+
+      <h4 id="tuya_hal_semaphore.h"><span>tuya_hal_semaphore.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_hal_semaphore.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_hal_semaphore.h"
+</pre>
+
+      <h4 id="uni_log.h"><span>uni_log.h</span></h4>
+      <pre class="doc-declare"><code>#include "uni_log.h"
+</code></pre>
+      <pre class="doc-comment">#include "uni_log.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_DRV_H__">Marco <span>__TUYA_DRV_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_DRV_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_DRV_ASSRET(__EXPRESS)">Marco <span>TUYA_DRV_ASSRET(__EXPRESS)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_DRV_ASSRET(__EXPRESS)                     \
+   if (!(__EXPRESS)) {                               \
+       PR_ERR("TUYA DRV ASSERT "#__EXPRESS"");        \
+       return OPRT_INVALID_PARM;                         \
+   }
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_driver_find">Func <span>tuya_driver_find</span></h4>
+      <pre class="doc-declare"><code>void *tuya_driver_find(uint8_t type, uint8_t port);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief driver find
+ * 
+ * @param[in] type node type
+ * @param[in] port node port
+ *
+ */</pre>
+
+      <h4 id="tuya_driver_register">Func <span>tuya_driver_register</span></h4>
+      <pre class="doc-declare"><code>int tuya_driver_register(tuya_drv_node_t *node, uint8_t type, uint8_t port);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief driver register
+ * 
+ * @param[in] node refer to tuya_drv_node_t
+ * @param[in] type node type
+ * @param[in] port node port
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_drv_flag_t;
+">Typedef <span>tuya_drv_flag_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_DRV_INT_RX_FLAG    = 1,
+   TUYA_DRV_INT_TX_FLAG    = 2,
+   TUYA_DRV_DMA_RX_FLAG    = 4,         
+   TUYA_DRV_DMA_TX_FLAG    = 8,
+   TUYA_DRV_NONBLOCK_FLAG  = 16,
+} tuya_drv_flag_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_drv_cmd_t;
+">Typedef <span>tuya_drv_cmd_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_DRV_RESUME_CMD     = 1,
+   TUYA_DRV_SUSPEND_CMD,
+   TUYA_DRV_SET_INT_CMD,         
+   TUYA_DRV_CLR_INT_CMD,
+   TUYA_DRV_SET_ISR_CMD,
+   TUYA_DRV_CONFIG_CMD,
+   TUYA_DRV_ISR_MODE_CMD,
+   TUYA_DRV_CUSTOM_CMD,
+} tuya_drv_cmd_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_drv_type_t;
+">Typedef <span>tuya_drv_type_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_DRV_PIN            = 1,
+   TUYA_DRV_UART,
+   TUYA_DRV_PWM,
+   TUYA_DRV_TIMER,
+   TUYA_DRV_ADC,         
+   TUYA_DRV_I2C,
+   TUYA_DRV_RTC,
+   TUYA_DRV_CUSTOM,
+} tuya_drv_type_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_drv_event_t;
+">Typedef <span>tuya_drv_event_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TUYA_DRV_TX_EVENT       = 1,
+   TUYA_DRV_RX_EVENT,
+   TUYA_DRV_DMARX_EVENT,
+   TUYA_DRV_DMATX_EVENT
+} tuya_drv_event_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SLIST_HEAD_DRIVER;
+">Typedef <span>SLIST_HEAD_DRIVER;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct slist_head_driver {
+   struct slist_head *next;
+}SLIST_HEAD_DRIVER;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_drv_node_t;
+">Typedef <span>tuya_drv_node_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   SLIST_HEAD_DRIVER   list;
+   uint8_t             port;
+   uint8_t             type;
+} tuya_drv_node_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

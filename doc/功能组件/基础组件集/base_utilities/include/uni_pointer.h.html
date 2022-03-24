@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_UNI_POINTER_H" class="nav-sub-label">_UNI_POINTER_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIST_HEAD_INIT(name)" class="nav-sub-label">LIST_HEAD_INIT(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LIST_HEAD(name)" class="nav-sub-label">LIST_HEAD(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#INIT_LIST_HEAD(ptr)" class="nav-sub-label">INIT_LIST_HEAD(ptr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#NEW_LIST_NODE(type, node)" class="nav-sub-label">NEW_LIST_NODE(type, node)</a>
+              </li>
+      
+
+              <li>
+                <a href="#FREE_LIST(type, p, list_name)\
+{\" class="nav-sub-label">FREE_LIST(type, p, list_name)\
+{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#GetFirstNode(type,p,list_name,pGetNode)\
+{\" class="nav-sub-label">GetFirstNode(type,p,list_name,pGetNode)\
+{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#DeleteNodeAndFree(pDelNode,list_name)\
+{\" class="nav-sub-label">DeleteNodeAndFree(pDelNode,list_name)\
+{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#DeleteNode(pDelNode,list_name)\
+{\" class="nav-sub-label">DeleteNode(pDelNode,list_name)\
+{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#FreeNode(pDelNode)\
+{\" class="nav-sub-label">FreeNode(pDelNode)\
+{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_entry(ptr, type, member)" class="nav-sub-label">tuya_list_entry(ptr, type, member)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_for_each(pos, head)" class="nav-sub-label">tuya_list_for_each(pos, head)</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_for_each_safe(p, n, head)" class="nav-sub-label">tuya_list_for_each_safe(p, n, head)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_list_empty" class="nav-sub-label">tuya_list_empty</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_add" class="nav-sub-label">tuya_list_add</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_add_tail" class="nav-sub-label">tuya_list_add_tail</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_splice" class="nav-sub-label">tuya_list_splice</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_del" class="nav-sub-label">tuya_list_del</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_list_del_init" class="nav-sub-label">tuya_list_del_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LIST_HEAD,*P_LIST_HEAD;
+" class="nav-sub-label">LIST_HEAD,*P_LIST_HEAD;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_UNI_POINTER_H">Marco <span>_UNI_POINTER_H</span></h4>
+      <pre class="doc-declare"><code>#define _UNI_POINTER_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LIST_HEAD_INIT(name)">Marco <span>LIST_HEAD_INIT(name)</span></h4>
+      <pre class="doc-declare"><code>#define LIST_HEAD_INIT(name) { &(name), &(name) }
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief define and initialize bidirection list head
+ * 
+ */</pre>
+
+      <h4 id="LIST_HEAD(name)">Marco <span>LIST_HEAD(name)</span></h4>
+      <pre class="doc-declare"><code>#define LIST_HEAD(name) \
+LIST_HEAD name = LIST_HEAD_INIT(name)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INIT_LIST_HEAD(ptr)">Marco <span>INIT_LIST_HEAD(ptr)</span></h4>
+      <pre class="doc-declare"><code>#define INIT_LIST_HEAD(ptr) do { \
+(ptr)->next = (ptr); (ptr)->prev = (ptr); \
+} while (0)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief bidirection list initialization
+ * 
+ */</pre>
+
+      <h4 id="NEW_LIST_NODE(type, node)">Marco <span>NEW_LIST_NODE(type, node)</span></h4>
+      <pre class="doc-declare"><code>#define NEW_LIST_NODE(type, node) \
+{\
+   node = (type *)Malloc(sizeof(type));\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief create a new bidirection list, will call malloc
+ * 
+ */</pre>
+
+      <h4 id="FREE_LIST(type, p, list_name)\
+{\">Marco <span>FREE_LIST(type, p, list_name)\
+{\</span></h4>
+      <pre class="doc-declare"><code>#define FREE_LIST(type, p, list_name)\
+{\
+   type *posnode;\
+   while(!tuya_list_empty(&(p)->list_name)) {\
+   posnode = tuya_list_entry((&(p)->list_name)->next, type, list_name);\
+   tuya_list_del((&(p)->list_name)->next);\
+   Free(posnode);\
+   }\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free all objects in the bidirection list
+ * 
+ */</pre>
+
+      <h4 id="GetFirstNode(type,p,list_name,pGetNode)\
+{\">Marco <span>GetFirstNode(type,p,list_name,pGetNode)\
+{\</span></h4>
+      <pre class="doc-declare"><code>#define GetFirstNode(type,p,list_name,pGetNode)\
+{\
+   pGetNode = NULL;\
+   while(!tuya_list_empty(&(p)->list_name)){\
+   pGetNode = tuya_list_entry((&(p)->list_name)->next, type, list_name);\
+   break;\
+   }\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief get the first object of the bidirection list
+ * 
+ */</pre>
+
+      <h4 id="DeleteNodeAndFree(pDelNode,list_name)\
+{\">Marco <span>DeleteNodeAndFree(pDelNode,list_name)\
+{\</span></h4>
+      <pre class="doc-declare"><code>#define DeleteNodeAndFree(pDelNode,list_name)\
+{\
+   tuya_list_del(&(pDelNode->list_name));\
+   Free(pDelNode);\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief remove the object from bidirection list and free the memory
+ * 
+ * @note the pDelNode must be the object pointer
+ */</pre>
+
+      <h4 id="DeleteNode(pDelNode,list_name)\
+{\">Marco <span>DeleteNode(pDelNode,list_name)\
+{\</span></h4>
+      <pre class="doc-declare"><code>#define DeleteNode(pDelNode,list_name)\
+{\
+   tuya_list_del(&(pDelNode->list_name));\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief remove the object from the bidirection list
+ * 
+ */</pre>
+
+      <h4 id="FreeNode(pDelNode)\
+{\">Marco <span>FreeNode(pDelNode)\
+{\</span></h4>
+      <pre class="doc-declare"><code>#define FreeNode(pDelNode)\
+{\
+   Free(pDelNode);\
+}
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief free the object in bidirection list
+ * 
+ */</pre>
+
+      <h4 id="tuya_list_entry(ptr, type, member)">Marco <span>tuya_list_entry(ptr, type, member)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_list_entry(ptr, type, member) \
+((type *)((char *)(ptr)-(size_t)(&((type *)0)->member)))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief cast the bidirection list node to object
+ * 
+ */</pre>
+
+      <h4 id="tuya_list_for_each(pos, head)">Marco <span>tuya_list_for_each(pos, head)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_list_for_each(pos, head) \
+for (pos = (head)->next; (pos != NULL) && (pos != (head)); pos = pos->next)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse the bidirection list, cannot change the bidiretion list during traverse
+ * 
+ */</pre>
+
+      <h4 id="tuya_list_for_each_safe(p, n, head)">Marco <span>tuya_list_for_each_safe(p, n, head)</span></h4>
+      <pre class="doc-declare"><code>#define tuya_list_for_each_safe(p, n, head) \
+for (p = (head)->next; n = p->next, p != (head); p = n)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief traverse the bidirection list, can change the bidiretion list during traverse
+ * 
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_list_empty">Func <span>tuya_list_empty</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_list_empty(IN CONST P_LIST_HEAD pHead);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief check if the bidirection list is empty
+ * 
+ * @param[in] pHead the bidirection list
+ * @return 0 means empty, others means empty
+ */</pre>
+
+      <h4 id="tuya_list_add">Func <span>tuya_list_add</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_list_add(IN CONST P_LIST_HEAD pNew, IN CONST P_LIST_HEAD pHead);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief add new list node into bidirection list
+ * 
+ * @param[in] pNew the new list node
+ * @param[in] pHead the bidirection list
+ * @return VOID 
+ */</pre>
+
+      <h4 id="tuya_list_add_tail">Func <span>tuya_list_add_tail</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_list_add_tail(IN CONST P_LIST_HEAD pNew, IN CONST P_LIST_HEAD pHead);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief add new list node to the tail of the bidirection list
+ * 
+ * @param[in] pNew the new list node
+ * @param[in] pHead the bidirection list
+ * @return VOID 
+ */</pre>
+
+      <h4 id="tuya_list_splice">Func <span>tuya_list_splice</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_list_splice(IN CONST P_LIST_HEAD pList, IN CONST P_LIST_HEAD pHead);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief splice two dibrection list
+ * 
+ * @param[in] pList the bidirection list need to splice
+ * @param[in] pHead the bidirection list
+ * @return VOID 
+ */</pre>
+
+      <h4 id="tuya_list_del">Func <span>tuya_list_del</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_list_del(IN CONST P_LIST_HEAD pEntry);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief remove a list node from bidirection list
+ * 
+ * @param[in] pEntry the list node need to remove
+ * @return VOID 
+ */</pre>
+
+      <h4 id="tuya_list_del_init">Func <span>tuya_list_del_init</span></h4>
+      <pre class="doc-declare"><code>VOID tuya_list_del_init(IN CONST P_LIST_HEAD pEntry);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief remove a list node from bidirection list and initialize it
+ * 
+ * @param[in] pEntry the list node need to remove and initialize
+ * @return VOID 
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="LIST_HEAD,*P_LIST_HEAD;
+">Typedef <span>LIST_HEAD,*P_LIST_HEAD;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct tuya_list_head 
+{
+   struct tuya_list_head *next, *prev;
+}LIST_HEAD,*P_LIST_HEAD;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief bidirection list head
+ * 
+ */</pre>
+    </div>
+  </body>
+</html>
+            

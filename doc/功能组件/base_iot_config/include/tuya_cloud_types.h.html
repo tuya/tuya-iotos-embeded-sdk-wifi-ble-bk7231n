@@ -1,0 +1,1215 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_iot_config.h" class="nav-sub-label">tuya_iot_config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdarg.h" class="nav-sub-label">stdarg.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ctype.h" class="nav-sub-label">ctype.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_error_code.h" class="nav-sub-label">tuya_cloud_error_code.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_error_code.h" class="nav-sub-label">tuya_error_code.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_CLOUD_TYPES_H" class="nav-sub-label">TUYA_CLOUD_TYPES_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#FALSE" class="nav-sub-label">FALSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#TRUE" class="nav-sub-label">TRUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#IN" class="nav-sub-label">IN</a>
+              </li>
+      
+
+              <li>
+                <a href="#OUT" class="nav-sub-label">OUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#INOUT" class="nav-sub-label">INOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#VOID" class="nav-sub-label">VOID</a>
+              </li>
+      
+
+              <li>
+                <a href="#VOID_T" class="nav-sub-label">VOID_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#CONST" class="nav-sub-label">CONST</a>
+              </li>
+      
+
+              <li>
+                <a href="#STATIC" class="nav-sub-label">STATIC</a>
+              </li>
+      
+
+              <li>
+                <a href="#SIZEOF" class="nav-sub-label">SIZEOF</a>
+              </li>
+      
+
+              <li>
+                <a href="#INLINE" class="nav-sub-label">INLINE</a>
+              </li>
+      
+
+              <li>
+                <a href="#NULL" class="nav-sub-label">NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#NULL" class="nav-sub-label">NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#true" class="nav-sub-label">true</a>
+              </li>
+      
+
+              <li>
+                <a href="#false" class="nav-sub-label">false</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX(a,b)" class="nav-sub-label">MAX(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MIN(a,b)" class="nav-sub-label">MIN(a,b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#BIT(nr)" class="nav-sub-label">BIT(nr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAKEWORD(a, b)" class="nav-sub-label">MAKEWORD(a, b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAKELONG(a, b)" class="nav-sub-label">MAKELONG(a, b)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOWORD(l)" class="nav-sub-label">LOWORD(l)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HIWORD(l)" class="nav-sub-label">HIWORD(l)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOBYTE(w)" class="nav-sub-label">LOBYTE(w)</a>
+              </li>
+      
+
+              <li>
+                <a href="#HIBYTE(w)" class="nav-sub-label">HIBYTE(w)</a>
+              </li>
+      
+
+              <li>
+                <a href="#WORD_SWAP(X)" class="nav-sub-label">WORD_SWAP(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DWORD_SWAP(X)" class="nav-sub-label">DWORD_SWAP(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DDWORD_SWAP(X)" class="nav-sub-label">DDWORD_SWAP(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_NTOHS(X)" class="nav-sub-label">UNI_NTOHS(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_HTONS(X)" class="nav-sub-label">UNI_HTONS(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_NTOHL(X)" class="nav-sub-label">UNI_NTOHL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_HTONL(X)" class="nav-sub-label">UNI_HTONL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_NTOHLL(X)" class="nav-sub-label">UNI_NTOHLL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_HTONLL(X)" class="nav-sub-label">UNI_HTONLL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_NTOHS(X)" class="nav-sub-label">UNI_NTOHS(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_HTONS(X)" class="nav-sub-label">UNI_HTONS(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_NTOHL(X)" class="nav-sub-label">UNI_NTOHL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_HTONL(X)" class="nav-sub-label">UNI_HTONL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_NTOHLL(X)" class="nav-sub-label">UNI_NTOHLL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#UNI_HTONLL(X)" class="nav-sub-label">UNI_HTONLL(X)</a>
+              </li>
+      
+
+              <li>
+                <a href="#OFFSOF(s,m)" class="nav-sub-label">OFFSOF(s,m)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CNTSOF(a)" class="nav-sub-label">CNTSOF(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#CNTR_OF(ptr, type, member)" class="nav-sub-label">CNTR_OF(ptr, type, member)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#DLONG_T" class="nav-sub-label">DLONG_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PDLONG_T" class="nav-sub-label">*PDLONG_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#DDWORD_T" class="nav-sub-label">DDWORD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PDDWORD_T" class="nav-sub-label">*PDDWORD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#FLOAT_T" class="nav-sub-label">FLOAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PFLOAT_T" class="nav-sub-label">*PFLOAT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT_T" class="nav-sub-label">INT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PINT_T" class="nav-sub-label">*PINT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PVOID_T" class="nav-sub-label">*PVOID_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#CHAR_T" class="nav-sub-label">CHAR_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PCHAR_T" class="nav-sub-label">*PCHAR_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#SCHAR_T" class="nav-sub-label">SCHAR_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#UCHAR_T" class="nav-sub-label">UCHAR_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#SHORT_T" class="nav-sub-label">SHORT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#USHORT_T" class="nav-sub-label">USHORT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PSHORT_T" class="nav-sub-label">*PSHORT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#LONG_T" class="nav-sub-label">LONG_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#ULONG_T" class="nav-sub-label">ULONG_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PLONG_T" class="nav-sub-label">*PLONG_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#BYTE_T" class="nav-sub-label">BYTE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PBYTE_T" class="nav-sub-label">*PBYTE_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#WORD_T" class="nav-sub-label">WORD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PWORD_T" class="nav-sub-label">*PWORD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#DWORD_T" class="nav-sub-label">DWORD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PDWORD_T" class="nav-sub-label">*PDWORD_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT_T" class="nav-sub-label">UINT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PUINT_T" class="nav-sub-label">*PUINT_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#BOOL_T" class="nav-sub-label">BOOL_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PBOOL_T" class="nav-sub-label">*PBOOL_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT64_T" class="nav-sub-label">INT64_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PINT64_T" class="nav-sub-label">*PINT64_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT64_T" class="nav-sub-label">UINT64_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PUINT64_T" class="nav-sub-label">*PUINT64_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT16_T" class="nav-sub-label">INT16_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PINT16_T" class="nav-sub-label">*PINT16_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT16_T" class="nav-sub-label">UINT16_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PUINT16_T" class="nav-sub-label">*PUINT16_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#INT8_T" class="nav-sub-label">INT8_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PINT8_T" class="nav-sub-label">*PINT8_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#UINT8_T" class="nav-sub-label">UINT8_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#*PUINT8_T" class="nav-sub-label">*PUINT8_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIME_MS" class="nav-sub-label">TIME_MS</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIME_S" class="nav-sub-label">TIME_S</a>
+              </li>
+      
+
+              <li>
+                <a href="#TIME_T" class="nav-sub-label">TIME_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#bool_t" class="nav-sub-label">bool_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#SIZE_T" class="nav-sub-label">SIZE_T</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_iot_config.h"><span>tuya_iot_config.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_iot_config.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_iot_config.h"
+</pre>
+
+      <h4 id="stdarg.h"><span>stdarg.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdarg.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdarg.h>
+</pre>
+
+      <h4 id="ctype.h"><span>ctype.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;ctype.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <ctype.h>
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="tuya_cloud_error_code.h"><span>tuya_cloud_error_code.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_error_code.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_error_code.h"
+</pre>
+
+      <h4 id="tuya_error_code.h"><span>tuya_error_code.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_error_code.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_error_code.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_CLOUD_TYPES_H">Marco <span>TUYA_CLOUD_TYPES_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CLOUD_TYPES_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FALSE">Marco <span>FALSE</span></h4>
+      <pre class="doc-declare"><code>#define FALSE 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TRUE">Marco <span>TRUE</span></h4>
+      <pre class="doc-declare"><code>#define TRUE 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IN">Marco <span>IN</span></h4>
+      <pre class="doc-declare"><code>#define IN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OUT">Marco <span>OUT</span></h4>
+      <pre class="doc-declare"><code>#define OUT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INOUT">Marco <span>INOUT</span></h4>
+      <pre class="doc-declare"><code>#define INOUT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="VOID">Marco <span>VOID</span></h4>
+      <pre class="doc-declare"><code>#define VOID void
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="VOID_T">Marco <span>VOID_T</span></h4>
+      <pre class="doc-declare"><code>#define VOID_T void
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CONST">Marco <span>CONST</span></h4>
+      <pre class="doc-declare"><code>#define CONST const
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="STATIC">Marco <span>STATIC</span></h4>
+      <pre class="doc-declare"><code>#define STATIC static
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SIZEOF">Marco <span>SIZEOF</span></h4>
+      <pre class="doc-declare"><code>#define SIZEOF sizeof
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INLINE">Marco <span>INLINE</span></h4>
+      <pre class="doc-declare"><code>#define INLINE inline
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NULL">Marco <span>NULL</span></h4>
+      <pre class="doc-declare"><code>#define NULL 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NULL">Marco <span>NULL</span></h4>
+      <pre class="doc-declare"><code>#define NULL ((void *)0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="true">Marco <span>true</span></h4>
+      <pre class="doc-declare"><code>#define true 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="false">Marco <span>false</span></h4>
+      <pre class="doc-declare"><code>#define false 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX(a,b)">Marco <span>MAX(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define MAX(a,b) (((a) > (b)) ? (a) : (b))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MIN(a,b)">Marco <span>MIN(a,b)</span></h4>
+      <pre class="doc-declare"><code>#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BIT(nr)">Marco <span>BIT(nr)</span></h4>
+      <pre class="doc-declare"><code>#define BIT(nr)    (1UL << (nr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAKEWORD(a, b)">Marco <span>MAKEWORD(a, b)</span></h4>
+      <pre class="doc-declare"><code>#define MAKEWORD(a, b) ((WORD_T)(((BYTE_T)(a)) | ((WORD_T)((BYTE_T)(b))) << 8))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAKELONG(a, b)">Marco <span>MAKELONG(a, b)</span></h4>
+      <pre class="doc-declare"><code>#define MAKELONG(a, b) ((LONG_T)(((WORD_T)(a)) | ((DWORD_T)((WORD_T)(b))) << 16))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOWORD(l)">Marco <span>LOWORD(l)</span></h4>
+      <pre class="doc-declare"><code>#define LOWORD(l) ((WORD_T)(l))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HIWORD(l)">Marco <span>HIWORD(l)</span></h4>
+      <pre class="doc-declare"><code>#define HIWORD(l) ((WORD_T)(((DWORD_T)(l) >> 16) & 65535))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOBYTE(w)">Marco <span>LOBYTE(w)</span></h4>
+      <pre class="doc-declare"><code>#define LOBYTE(w) ((BYTE_T)(w))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="HIBYTE(w)">Marco <span>HIBYTE(w)</span></h4>
+      <pre class="doc-declare"><code>#define HIBYTE(w) ((BYTE_T)(((WORD_T)(w) >> 8) & 255))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WORD_SWAP(X)">Marco <span>WORD_SWAP(X)</span></h4>
+      <pre class="doc-declare"><code>#define WORD_SWAP(X)   (((X << 8) | (X >> 8))&65535)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DWORD_SWAP(X)">Marco <span>DWORD_SWAP(X)</span></h4>
+      <pre class="doc-declare"><code>#define DWORD_SWAP(X)  ( (((X)&255)<<24) + \
+                         (((X)&65280)<<8) + \
+                         (((X)&16711680)>>8) + \
+                         (((X)&4278190080)>>24) )
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DDWORD_SWAP(X)">Marco <span>DDWORD_SWAP(X)</span></h4>
+      <pre class="doc-declare"><code>#define DDWORD_SWAP(X) { \
+   unsigned long temp_low, temp_high; \
+   temp_low = DWORD_SWAP((unsigned long)((X) & 4294967295)); \
+   temp_high = DWORD_SWAP((unsigned long)((X) >> 32)); \
+   X = 0; \
+   X |= temp_low; \
+   X <<= 32; \
+   X |= temp_high;\
+}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_NTOHS(X)">Marco <span>UNI_NTOHS(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_NTOHS(X) WORD_SWAP(X)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_HTONS(X)">Marco <span>UNI_HTONS(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_HTONS(X) WORD_SWAP(X)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_NTOHL(X)">Marco <span>UNI_NTOHL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_NTOHL(X) DWORD_SWAP(X)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_HTONL(X)">Marco <span>UNI_HTONL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_HTONL(X) DWORD_SWAP(X)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_NTOHLL(X)">Marco <span>UNI_NTOHLL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_NTOHLL(X) DDWORD_SWAP(X)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_HTONLL(X)">Marco <span>UNI_HTONLL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_HTONLL(X) DDWORD_SWAP(X)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_NTOHS(X)">Marco <span>UNI_NTOHS(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_NTOHS(X) X
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_HTONS(X)">Marco <span>UNI_HTONS(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_HTONS(X) X
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_NTOHL(X)">Marco <span>UNI_NTOHL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_NTOHL(X) X
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_HTONL(X)">Marco <span>UNI_HTONL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_HTONL(X) X
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_NTOHLL(X)">Marco <span>UNI_NTOHLL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_NTOHLL(X) X
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UNI_HTONLL(X)">Marco <span>UNI_HTONLL(X)</span></h4>
+      <pre class="doc-declare"><code>#define UNI_HTONLL(X) X
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OFFSOF(s,m)">Marco <span>OFFSOF(s,m)</span></h4>
+      <pre class="doc-declare"><code>#define OFFSOF(s,m) ((SIZE_T)(&(((s*)0)->m)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CNTSOF(a)">Marco <span>CNTSOF(a)</span></h4>
+      <pre class="doc-declare"><code>#define CNTSOF(a)  (sizeof(a)/sizeof(a[0]))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CNTR_OF(ptr, type, member)">Marco <span>CNTR_OF(ptr, type, member)</span></h4>
+      <pre class="doc-declare"><code>#define CNTR_OF(ptr, type, member) \
+       ({(type *)( (char *)ptr - OFFSOF(type,member) );}) // continer of
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="DLONG_T">Typedef <span>DLONG_T</span></h4>
+      <pre class="doc-declare"><code>typedef long long DLONG_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PDLONG_T">Typedef <span>*PDLONG_T</span></h4>
+      <pre class="doc-declare"><code>typedef DLONG_T *PDLONG_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DDWORD_T">Typedef <span>DDWORD_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned long long DDWORD_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PDDWORD_T">Typedef <span>*PDDWORD_T</span></h4>
+      <pre class="doc-declare"><code>typedef DDWORD_T *PDDWORD_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="FLOAT_T">Typedef <span>FLOAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef float FLOAT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PFLOAT_T">Typedef <span>*PFLOAT_T</span></h4>
+      <pre class="doc-declare"><code>typedef FLOAT_T *PFLOAT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INT_T">Typedef <span>INT_T</span></h4>
+      <pre class="doc-declare"><code>typedef signed int INT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PINT_T">Typedef <span>*PINT_T</span></h4>
+      <pre class="doc-declare"><code>typedef int *PINT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PVOID_T">Typedef <span>*PVOID_T</span></h4>
+      <pre class="doc-declare"><code>typedef void *PVOID_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CHAR_T">Typedef <span>CHAR_T</span></h4>
+      <pre class="doc-declare"><code>typedef char CHAR_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PCHAR_T">Typedef <span>*PCHAR_T</span></h4>
+      <pre class="doc-declare"><code>typedef char *PCHAR_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SCHAR_T">Typedef <span>SCHAR_T</span></h4>
+      <pre class="doc-declare"><code>typedef signed char SCHAR_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UCHAR_T">Typedef <span>UCHAR_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned char UCHAR_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SHORT_T">Typedef <span>SHORT_T</span></h4>
+      <pre class="doc-declare"><code>typedef short SHORT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="USHORT_T">Typedef <span>USHORT_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned short USHORT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PSHORT_T">Typedef <span>*PSHORT_T</span></h4>
+      <pre class="doc-declare"><code>typedef short *PSHORT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LONG_T">Typedef <span>LONG_T</span></h4>
+      <pre class="doc-declare"><code>typedef long LONG_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ULONG_T">Typedef <span>ULONG_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned long ULONG_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PLONG_T">Typedef <span>*PLONG_T</span></h4>
+      <pre class="doc-declare"><code>typedef long *PLONG_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BYTE_T">Typedef <span>BYTE_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned char BYTE_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PBYTE_T">Typedef <span>*PBYTE_T</span></h4>
+      <pre class="doc-declare"><code>typedef BYTE_T *PBYTE_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="WORD_T">Typedef <span>WORD_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned short WORD_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PWORD_T">Typedef <span>*PWORD_T</span></h4>
+      <pre class="doc-declare"><code>typedef WORD_T *PWORD_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DWORD_T">Typedef <span>DWORD_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int DWORD_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PDWORD_T">Typedef <span>*PDWORD_T</span></h4>
+      <pre class="doc-declare"><code>typedef DWORD_T *PDWORD_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT_T">Typedef <span>UINT_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int UINT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PUINT_T">Typedef <span>*PUINT_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int *PUINT_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BOOL_T">Typedef <span>BOOL_T</span></h4>
+      <pre class="doc-declare"><code>typedef int BOOL_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PBOOL_T">Typedef <span>*PBOOL_T</span></h4>
+      <pre class="doc-declare"><code>typedef BOOL_T *PBOOL_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INT64_T">Typedef <span>INT64_T</span></h4>
+      <pre class="doc-declare"><code>typedef long long int INT64_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PINT64_T">Typedef <span>*PINT64_T</span></h4>
+      <pre class="doc-declare"><code>typedef INT64_T *PINT64_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT64_T">Typedef <span>UINT64_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned long long int UINT64_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PUINT64_T">Typedef <span>*PUINT64_T</span></h4>
+      <pre class="doc-declare"><code>typedef UINT64_T *PUINT64_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INT16_T">Typedef <span>INT16_T</span></h4>
+      <pre class="doc-declare"><code>typedef short INT16_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PINT16_T">Typedef <span>*PINT16_T</span></h4>
+      <pre class="doc-declare"><code>typedef INT16_T *PINT16_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT16_T">Typedef <span>UINT16_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned short UINT16_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PUINT16_T">Typedef <span>*PUINT16_T</span></h4>
+      <pre class="doc-declare"><code>typedef UINT16_T *PUINT16_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="INT8_T">Typedef <span>INT8_T</span></h4>
+      <pre class="doc-declare"><code>typedef char INT8_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PINT8_T">Typedef <span>*PINT8_T</span></h4>
+      <pre class="doc-declare"><code>typedef INT8_T *PINT8_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UINT8_T">Typedef <span>UINT8_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned char UINT8_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="*PUINT8_T">Typedef <span>*PUINT8_T</span></h4>
+      <pre class="doc-declare"><code>typedef UINT8_T *PUINT8_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TIME_MS">Typedef <span>TIME_MS</span></h4>
+      <pre class="doc-declare"><code>typedef ULONG_T TIME_MS;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TIME_S">Typedef <span>TIME_S</span></h4>
+      <pre class="doc-declare"><code>typedef ULONG_T TIME_S;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TIME_T">Typedef <span>TIME_T</span></h4>
+      <pre class="doc-declare"><code>typedef unsigned int TIME_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="bool_t">Typedef <span>bool_t</span></h4>
+      <pre class="doc-declare"><code>typedef int bool_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SIZE_T">Typedef <span>SIZE_T</span></h4>
+      <pre class="doc-declare"><code>typedef size_t SIZE_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_PROT_DHCP6_H" class="nav-sub-label">LWIP_HDR_PROT_DHCP6_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_CLIENT_PORT" class="nav-sub-label">DHCP6_CLIENT_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_SERVER_PORT" class="nav-sub-label">DHCP6_SERVER_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_TRANSACTION_ID_LEN" class="nav-sub-label">DHCP6_TRANSACTION_ID_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_SOLICIT" class="nav-sub-label">DHCP6_SOLICIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_ADVERTISE" class="nav-sub-label">DHCP6_ADVERTISE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_REQUEST" class="nav-sub-label">DHCP6_REQUEST</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_CONFIRM" class="nav-sub-label">DHCP6_CONFIRM</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_RENEW" class="nav-sub-label">DHCP6_RENEW</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_REBIND" class="nav-sub-label">DHCP6_REBIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_REPLY" class="nav-sub-label">DHCP6_REPLY</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_RELEASE" class="nav-sub-label">DHCP6_RELEASE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_DECLINE" class="nav-sub-label">DHCP6_DECLINE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_RECONFIGURE" class="nav-sub-label">DHCP6_RECONFIGURE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_INFOREQUEST" class="nav-sub-label">DHCP6_INFOREQUEST</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_RELAYFORW" class="nav-sub-label">DHCP6_RELAYFORW</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_RELAYREPL" class="nav-sub-label">DHCP6_RELAYREPL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_STATUS_SUCCESS" class="nav-sub-label">DHCP6_STATUS_SUCCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_STATUS_UNSPECFAIL" class="nav-sub-label">DHCP6_STATUS_UNSPECFAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_STATUS_NOADDRSAVAIL" class="nav-sub-label">DHCP6_STATUS_NOADDRSAVAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_STATUS_NOBINDING" class="nav-sub-label">DHCP6_STATUS_NOBINDING</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_STATUS_NOTONLINK" class="nav-sub-label">DHCP6_STATUS_NOTONLINK</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_STATUS_USEMULTICAST" class="nav-sub-label">DHCP6_STATUS_USEMULTICAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_DUID_LLT" class="nav-sub-label">DHCP6_DUID_LLT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_DUID_EN" class="nav-sub-label">DHCP6_DUID_EN</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_DUID_LL" class="nav-sub-label">DHCP6_DUID_LL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_DUID_UUID" class="nav-sub-label">DHCP6_DUID_UUID</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_CLIENTID" class="nav-sub-label">DHCP6_OPTION_CLIENTID</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_SERVERID" class="nav-sub-label">DHCP6_OPTION_SERVERID</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_IA_NA" class="nav-sub-label">DHCP6_OPTION_IA_NA</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_IA_TA" class="nav-sub-label">DHCP6_OPTION_IA_TA</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_IAADDR" class="nav-sub-label">DHCP6_OPTION_IAADDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_ORO" class="nav-sub-label">DHCP6_OPTION_ORO</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_PREFERENCE" class="nav-sub-label">DHCP6_OPTION_PREFERENCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_ELAPSED_TIME" class="nav-sub-label">DHCP6_OPTION_ELAPSED_TIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_RELAY_MSG" class="nav-sub-label">DHCP6_OPTION_RELAY_MSG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_AUTH" class="nav-sub-label">DHCP6_OPTION_AUTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_UNICAST" class="nav-sub-label">DHCP6_OPTION_UNICAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_STATUS_CODE" class="nav-sub-label">DHCP6_OPTION_STATUS_CODE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_RAPID_COMMIT" class="nav-sub-label">DHCP6_OPTION_RAPID_COMMIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_USER_CLASS" class="nav-sub-label">DHCP6_OPTION_USER_CLASS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_VENDOR_CLASS" class="nav-sub-label">DHCP6_OPTION_VENDOR_CLASS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_VENDOR_OPTS" class="nav-sub-label">DHCP6_OPTION_VENDOR_OPTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_INTERFACE_ID" class="nav-sub-label">DHCP6_OPTION_INTERFACE_ID</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_RECONF_MSG" class="nav-sub-label">DHCP6_OPTION_RECONF_MSG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_RECONF_ACCEPT" class="nav-sub-label">DHCP6_OPTION_RECONF_ACCEPT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_DNS_SERVERS" class="nav-sub-label">DHCP6_OPTION_DNS_SERVERS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_DOMAIN_LIST" class="nav-sub-label">DHCP6_OPTION_DOMAIN_LIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#DHCP6_OPTION_SNTP_SERVERS" class="nav-sub-label">DHCP6_OPTION_SNTP_SERVERS</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#PACK_STRUCT_END" class="nav-sub-label">PACK_STRUCT_END</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_PROT_DHCP6_H">Marco <span>LWIP_HDR_PROT_DHCP6_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_PROT_DHCP6_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_CLIENT_PORT">Marco <span>DHCP6_CLIENT_PORT</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_CLIENT_PORT 546
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_SERVER_PORT">Marco <span>DHCP6_SERVER_PORT</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_SERVER_PORT 547
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_TRANSACTION_ID_LEN">Marco <span>DHCP6_TRANSACTION_ID_LEN</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_TRANSACTION_ID_LEN  3
+</code></pre>
+      <pre class="doc-comment">/* DHCPv6 message item offsets and length */</pre>
+
+      <h4 id="DHCP6_SOLICIT">Marco <span>DHCP6_SOLICIT</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_SOLICIT              1
+</code></pre>
+      <pre class="doc-comment">/* DHCPv6 message types */</pre>
+
+      <h4 id="DHCP6_ADVERTISE">Marco <span>DHCP6_ADVERTISE</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_ADVERTISE            2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_REQUEST">Marco <span>DHCP6_REQUEST</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_REQUEST              3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_CONFIRM">Marco <span>DHCP6_CONFIRM</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_CONFIRM              4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_RENEW">Marco <span>DHCP6_RENEW</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_RENEW                5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_REBIND">Marco <span>DHCP6_REBIND</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_REBIND               6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_REPLY">Marco <span>DHCP6_REPLY</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_REPLY                7
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_RELEASE">Marco <span>DHCP6_RELEASE</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_RELEASE              8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_DECLINE">Marco <span>DHCP6_DECLINE</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_DECLINE              9
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_RECONFIGURE">Marco <span>DHCP6_RECONFIGURE</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_RECONFIGURE          10
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_INFOREQUEST">Marco <span>DHCP6_INFOREQUEST</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_INFOREQUEST          11
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_RELAYFORW">Marco <span>DHCP6_RELAYFORW</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_RELAYFORW            12
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_RELAYREPL">Marco <span>DHCP6_RELAYREPL</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_RELAYREPL            13
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_STATUS_SUCCESS">Marco <span>DHCP6_STATUS_SUCCESS</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_STATUS_SUCCESS       0 /* Success. */
+</code></pre>
+      <pre class="doc-comment">/** DHCPv6 status codes */</pre>
+
+      <h4 id="DHCP6_STATUS_UNSPECFAIL">Marco <span>DHCP6_STATUS_UNSPECFAIL</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_STATUS_UNSPECFAIL    1 /* Failure, reason unspecified; this status code is sent by either a client or a server to indicate a failure not explicitly specified in this document. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_STATUS_NOADDRSAVAIL">Marco <span>DHCP6_STATUS_NOADDRSAVAIL</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_STATUS_NOADDRSAVAIL  2 /* Server has no addresses available to assign to the IA(s). */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_STATUS_NOBINDING">Marco <span>DHCP6_STATUS_NOBINDING</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_STATUS_NOBINDING     3 /* Client record (binding) unavailable. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_STATUS_NOTONLINK">Marco <span>DHCP6_STATUS_NOTONLINK</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_STATUS_NOTONLINK     4 /* The prefix for the address is not appropriate for the link to which the client is attached. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_STATUS_USEMULTICAST">Marco <span>DHCP6_STATUS_USEMULTICAST</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_STATUS_USEMULTICAST  5 /* Sent by a server to a client to force the client to send messages to the server using the All_DHCP_Relay_Agents_and_Servers address. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_DUID_LLT">Marco <span>DHCP6_DUID_LLT</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_DUID_LLT             1 /* LLT: Link-layer Address Plus Time */
+</code></pre>
+      <pre class="doc-comment">/** DHCPv6 DUID types */</pre>
+
+      <h4 id="DHCP6_DUID_EN">Marco <span>DHCP6_DUID_EN</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_DUID_EN              2 /* EN: Enterprise number */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_DUID_LL">Marco <span>DHCP6_DUID_LL</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_DUID_LL              3 /* LL: Link-layer Address */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_DUID_UUID">Marco <span>DHCP6_DUID_UUID</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_DUID_UUID            4 /* UUID (RFC 6355) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_CLIENTID">Marco <span>DHCP6_OPTION_CLIENTID</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_CLIENTID      1
+</code></pre>
+      <pre class="doc-comment">/* DHCPv6 options */</pre>
+
+      <h4 id="DHCP6_OPTION_SERVERID">Marco <span>DHCP6_OPTION_SERVERID</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_SERVERID      2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_IA_NA">Marco <span>DHCP6_OPTION_IA_NA</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_IA_NA         3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_IA_TA">Marco <span>DHCP6_OPTION_IA_TA</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_IA_TA         4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_IAADDR">Marco <span>DHCP6_OPTION_IAADDR</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_IAADDR        5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_ORO">Marco <span>DHCP6_OPTION_ORO</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_ORO           6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_PREFERENCE">Marco <span>DHCP6_OPTION_PREFERENCE</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_PREFERENCE    7
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_ELAPSED_TIME">Marco <span>DHCP6_OPTION_ELAPSED_TIME</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_ELAPSED_TIME  8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_RELAY_MSG">Marco <span>DHCP6_OPTION_RELAY_MSG</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_RELAY_MSG     9
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_AUTH">Marco <span>DHCP6_OPTION_AUTH</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_AUTH          11
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_UNICAST">Marco <span>DHCP6_OPTION_UNICAST</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_UNICAST       12
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_STATUS_CODE">Marco <span>DHCP6_OPTION_STATUS_CODE</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_STATUS_CODE   13
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_RAPID_COMMIT">Marco <span>DHCP6_OPTION_RAPID_COMMIT</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_RAPID_COMMIT  14
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_USER_CLASS">Marco <span>DHCP6_OPTION_USER_CLASS</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_USER_CLASS    15
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_VENDOR_CLASS">Marco <span>DHCP6_OPTION_VENDOR_CLASS</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_VENDOR_CLASS  16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_VENDOR_OPTS">Marco <span>DHCP6_OPTION_VENDOR_OPTS</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_VENDOR_OPTS   17
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_INTERFACE_ID">Marco <span>DHCP6_OPTION_INTERFACE_ID</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_INTERFACE_ID  18
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_RECONF_MSG">Marco <span>DHCP6_OPTION_RECONF_MSG</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_RECONF_MSG    19
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_RECONF_ACCEPT">Marco <span>DHCP6_OPTION_RECONF_ACCEPT</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_RECONF_ACCEPT 20
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_DNS_SERVERS">Marco <span>DHCP6_OPTION_DNS_SERVERS</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_DNS_SERVERS   23 /* RFC 3646 */
+</code></pre>
+      <pre class="doc-comment">/* More options see https://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xhtml */</pre>
+
+      <h4 id="DHCP6_OPTION_DOMAIN_LIST">Marco <span>DHCP6_OPTION_DOMAIN_LIST</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_DOMAIN_LIST   24 /* RFC 3646 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DHCP6_OPTION_SNTP_SERVERS">Marco <span>DHCP6_OPTION_SNTP_SERVERS</span></h4>
+      <pre class="doc-declare"><code>#define DHCP6_OPTION_SNTP_SERVERS  31 /* RFC 4075 */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="PACK_STRUCT_END">Variable <span>PACK_STRUCT_END</span></h4>
+      <pre class="doc-declare"><code>PACK_STRUCT_END
+#ifdef PACK_STRUCT_USE_INCLUDES
+# include "arch/epstruct.h"
+#endif
+
+
+/* DHCP6 client states */
+typedef enum {
+ DHCP6_STATE_OFF              = 0,
+ DHCP6_STATE_STATELESS_IDLE   = 1,
+ DHCP6_STATE_REQUESTING_CONFIG = 2
+} dhcp6_state_enum_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

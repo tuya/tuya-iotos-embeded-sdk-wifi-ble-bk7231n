@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_GPIO_H__" class="nav-sub-label">__TUYA_GPIO_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_gpio_inout_set" class="nav-sub-label">tuya_gpio_inout_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_gpio_inout_set_select" class="nav-sub-label">tuya_gpio_inout_set_select</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_gpio_mode_set" class="nav-sub-label">tuya_gpio_mode_set</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_gpio_read" class="nav-sub-label">tuya_gpio_read</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_gpio_write" class="nav-sub-label">tuya_gpio_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_gpio_irq_init" class="nav-sub-label">tuya_gpio_irq_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TY_GPIO_PORT_E;
+" class="nav-sub-label">TY_GPIO_PORT_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_GPIO_MODE_E;
+" class="nav-sub-label">TY_GPIO_MODE_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_GPIO_IRQ_TRIG_E;
+" class="nav-sub-label">TY_GPIO_IRQ_TRIG_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_GPIO_IRQ_CB" class="nav-sub-label">TY_GPIO_IRQ_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_GPIO_H__">Marco <span>__TUYA_GPIO_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_GPIO_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_gpio_inout_set">Func <span>tuya_gpio_inout_set</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_gpio_inout_set(IN CONST TY_GPIO_PORT_E port, IN CONST BOOL_T in);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio inout set
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] in TRUE:in,FALSE:out
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_gpio_inout_set_select">Func <span>tuya_gpio_inout_set_select</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_gpio_inout_set_select(IN CONST TY_GPIO_PORT_E port,IN CONST BOOL_T in,IN CONST BOOL_T high);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio inout select
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] in TRUE:in,FALSE:out
+ * @param[in] high TRUE/FALSE
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_gpio_mode_set">Func <span>tuya_gpio_mode_set</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_gpio_mode_set(IN CONST TY_GPIO_PORT_E port, IN CONST TY_GPIO_MODE_E mode);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio mode set
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] mode refer to TY_GPIO_MODE_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_gpio_read">Func <span>tuya_gpio_read</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_gpio_read(IN CONST TY_GPIO_PORT_E port);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio read
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_gpio_write">Func <span>tuya_gpio_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_gpio_write(IN CONST TY_GPIO_PORT_E port, IN CONST BOOL_T high);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio wriet
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] high TRUE:high,FALSE:low
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_gpio_irq_init">Func <span>tuya_gpio_irq_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_gpio_irq_init(IN CONST TY_GPIO_PORT_E port,IN CONST TY_GPIO_IRQ_CB gpio_irq_cb, IN CONST TY_GPIO_IRQ_TRIG_E trig_type, UINT_T id);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio irq init
+ * 
+ * @param[in] port refer to TY_GPIO_PORT_E
+ * @param[in] gpio_irq_cb callback
+ * @param[in] trig_type refer to TY_GPIO_IRQ_TRIG_E
+ * @param[in] id irq number
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TY_GPIO_PORT_E;
+">Typedef <span>TY_GPIO_PORT_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TY_GPIOA_0 = 0,
+   TY_GPIOA_1,
+   TY_GPIOA_2,
+   TY_GPIOA_3,
+   TY_GPIOA_4,
+   TY_GPIOA_5,
+   TY_GPIOA_6,
+   TY_GPIOA_7,
+   TY_GPIOA_8,
+   TY_GPIOA_9,
+   TY_GPIOA_10,
+   TY_GPIOA_11,
+   TY_GPIOA_12,
+   TY_GPIOA_13,
+   TY_GPIOA_14,
+   TY_GPIOA_15,
+   TY_GPIOA_16,
+   TY_GPIOA_17,
+   TY_GPIOA_18,
+   TY_GPIOA_19,
+   TY_GPIOA_20,
+   TY_GPIOA_21,
+   TY_GPIOA_22,
+   TY_GPIOA_23,
+   TY_GPIOA_24,
+   TY_GPIOA_25,
+   TY_GPIOA_26,
+   TY_GPIOA_27,
+   TY_GPIOA_28,
+   TY_GPIOA_29,
+   TY_GPIOA_30,
+   TY_GPIOA_31,
+   TY_GPIOB_0 = 32,
+   TY_GPIOB_1,
+   TY_GPIOB_2,
+   TY_GPIOB_3,
+   TY_GPIOB_4,
+   TY_GPIOB_5,
+   TY_GPIOB_6,
+   TY_GPIOB_7,
+   TY_GPIOB_8,
+   TY_GPIOB_9,
+   TY_GPIOB_10,
+   TY_GPIOB_11,
+   TY_GPIOB_12,
+   TY_GPIOB_13,
+   TY_GPIOB_14,
+   TY_GPIOB_15,
+   TY_GPIOB_16,
+   TY_GPIOB_17,
+   TY_GPIOB_18,
+   TY_GPIOB_19,
+   TY_GPIOB_20,
+   TY_GPIOB_21,
+   TY_GPIOB_22,
+   TY_GPIOB_23,
+   TY_GPIOB_24,
+   TY_GPIOB_25,
+   TY_GPIOB_26,
+   TY_GPIOB_27,
+   TY_GPIOB_28,
+   TY_GPIOB_29,
+   TY_GPIOB_30,
+   TY_GPIOB_31
+}TY_GPIO_PORT_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_GPIO_MODE_E;
+">Typedef <span>TY_GPIO_MODE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TY_GPIO_PULLUP,                   // Pad pull up 
+   TY_GPIO_PULLDOWN,                 // Pad pull down
+   TY_GPIO_PULLUP_PULLDOWN,          // Pad pull up + pull down
+   TY_GPIO_OPENDRAIN,                // Pad open drain
+   TY_GPIO_FLOATING,                 // Pad floating
+} TY_GPIO_MODE_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_GPIO_IRQ_TRIG_E;
+">Typedef <span>TY_GPIO_IRQ_TRIG_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   TY_IRQ_NONE,
+   /** IRQ occurs on rising edge */
+   TY_IRQ_RISE,
+   /** IRQ occurs on falling edge */
+   TY_IRQ_FALL,
+   /** IRQ occurs on either edge */
+   TY_IRQ_BOTH,
+   /** IRQ occurs when line is low */
+   TY_IRQ_HIGH,
+   /** IRQ occurs when line is high */
+   TY_IRQ_LOW
+} TY_GPIO_IRQ_TRIG_E;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_GPIO_IRQ_CB">Typedef <span>TY_GPIO_IRQ_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*TY_GPIO_IRQ_CB)(VOID *args);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief gpio irq callback
+ * 
+ * @param[in] args argument
+ *
+ */</pre>
+    </div>
+  </body>
+</html>
+            

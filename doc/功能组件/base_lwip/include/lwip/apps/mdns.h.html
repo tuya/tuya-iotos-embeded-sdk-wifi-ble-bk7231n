@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/apps/mdns_opts.h" class="nav-sub-label">lwip/apps/mdns_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/netif.h" class="nav-sub-label">lwip/netif.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_APPS_MDNS_H" class="nav-sub-label">LWIP_HDR_APPS_MDNS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDNS_PROBING_CONFLICT" class="nav-sub-label">MDNS_PROBING_CONFLICT</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDNS_PROBING_SUCCESSFUL" class="nav-sub-label">MDNS_PROBING_SUCCESSFUL</a>
+              </li>
+      
+
+              <li>
+                <a href="#MDNS_LABEL_MAXLEN" class="nav-sub-label">MDNS_LABEL_MAXLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_netif_settings_changed(netif)" class="nav-sub-label">mdns_resp_netif_settings_changed(netif)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mdns_resp_init" class="nav-sub-label">mdns_resp_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_register_name_result_cb" class="nav-sub-label">mdns_resp_register_name_result_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_add_netif" class="nav-sub-label">mdns_resp_add_netif</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_remove_netif" class="nav-sub-label">mdns_resp_remove_netif</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_rename_netif" class="nav-sub-label">mdns_resp_rename_netif</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_add_service" class="nav-sub-label">mdns_resp_add_service</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_del_service" class="nav-sub-label">mdns_resp_del_service</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_rename_service" class="nav-sub-label">mdns_resp_rename_service</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_add_service_txtitem" class="nav-sub-label">mdns_resp_add_service_txtitem</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_restart" class="nav-sub-label">mdns_resp_restart</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_resp_announce" class="nav-sub-label">mdns_resp_announce</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mdns_host" class="nav-sub-label">mdns_host</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_service" class="nav-sub-label">mdns_service</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#service_get_txt_fn_t" class="nav-sub-label">service_get_txt_fn_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mdns_name_result_cb_t" class="nav-sub-label">mdns_name_result_cb_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/apps/mdns_opts.h"><span>lwip/apps/mdns_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/apps/mdns_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/apps/mdns_opts.h"
+</pre>
+
+      <h4 id="lwip/netif.h"><span>lwip/netif.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/netif.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/netif.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_APPS_MDNS_H">Marco <span>LWIP_HDR_APPS_MDNS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_APPS_MDNS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDNS_PROBING_CONFLICT">Marco <span>MDNS_PROBING_CONFLICT</span></h4>
+      <pre class="doc-declare"><code>#define MDNS_PROBING_CONFLICT  0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDNS_PROBING_SUCCESSFUL">Marco <span>MDNS_PROBING_SUCCESSFUL</span></h4>
+      <pre class="doc-declare"><code>#define MDNS_PROBING_SUCCESSFUL 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MDNS_LABEL_MAXLEN">Marco <span>MDNS_LABEL_MAXLEN</span></h4>
+      <pre class="doc-declare"><code>#define MDNS_LABEL_MAXLEN 63
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_netif_settings_changed(netif)">Marco <span>mdns_resp_netif_settings_changed(netif)</span></h4>
+      <pre class="doc-declare"><code>#define mdns_resp_netif_settings_changed(netif) mdns_resp_announce(netif)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mdns
+ * Announce IP settings have changed on netif.
+ * Call this in your callback registered by netif_set_status_callback().
+ * No need to call this function when LWIP_NETIF_EXT_STATUS_CALLBACK==1,
+ * this handled automatically for you.
+ * @param netif The network interface where settings have changed.
+ */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mdns_resp_init">Func <span>mdns_resp_init</span></h4>
+      <pre class="doc-declare"><code>void mdns_resp_init(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_register_name_result_cb">Func <span>mdns_resp_register_name_result_cb</span></h4>
+      <pre class="doc-declare"><code>void mdns_resp_register_name_result_cb(mdns_name_result_cb_t cb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_add_netif">Func <span>mdns_resp_add_netif</span></h4>
+      <pre class="doc-declare"><code>err_t mdns_resp_add_netif(struct netif *netif, const char *hostname, u32_t dns_ttl);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_remove_netif">Func <span>mdns_resp_remove_netif</span></h4>
+      <pre class="doc-declare"><code>err_t mdns_resp_remove_netif(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_rename_netif">Func <span>mdns_resp_rename_netif</span></h4>
+      <pre class="doc-declare"><code>err_t mdns_resp_rename_netif(struct netif *netif, const char *hostname);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_add_service">Func <span>mdns_resp_add_service</span></h4>
+      <pre class="doc-declare"><code>s8_t mdns_resp_add_service(struct netif *netif, const char *name, const char *service, enum mdns_sd_proto proto, u16_t port, u32_t dns_ttl, service_get_txt_fn_t txt_fn, void *txt_userdata);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_del_service">Func <span>mdns_resp_del_service</span></h4>
+      <pre class="doc-declare"><code>err_t mdns_resp_del_service(struct netif *netif, s8_t slot);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_rename_service">Func <span>mdns_resp_rename_service</span></h4>
+      <pre class="doc-declare"><code>err_t mdns_resp_rename_service(struct netif *netif, s8_t slot, const char *name);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_add_service_txtitem">Func <span>mdns_resp_add_service_txtitem</span></h4>
+      <pre class="doc-declare"><code>err_t mdns_resp_add_service_txtitem(struct mdns_service *service, const char *txt, u8_t txt_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_restart">Func <span>mdns_resp_restart</span></h4>
+      <pre class="doc-declare"><code>void mdns_resp_restart(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_resp_announce">Func <span>mdns_resp_announce</span></h4>
+      <pre class="doc-declare"><code>void mdns_resp_announce(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="mdns_host">Variable <span>mdns_host</span></h4>
+      <pre class="doc-declare"><code>struct mdns_host;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mdns_service">Variable <span>mdns_service</span></h4>
+      <pre class="doc-declare"><code>struct mdns_service;</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="service_get_txt_fn_t">Typedef <span>service_get_txt_fn_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*service_get_txt_fn_t)(struct mdns_service *service, void *txt_userdata);
+</code></pre>
+      <pre class="doc-comment">/** Callback function to add text to a reply, called when generating the reply */</pre>
+
+      <h4 id="mdns_name_result_cb_t">Typedef <span>mdns_name_result_cb_t</span></h4>
+      <pre class="doc-declare"><code>typedef void (*mdns_name_result_cb_t)(struct netif* netif, u8_t result);
+</code></pre>
+      <pre class="doc-comment">/** Callback function to let application know the result of probing network for name
+ * uniqueness, called with result MDNS_PROBING_SUCCESSFUL if no other node claimed
+ * use for the name for the netif or a service and is safe to use, or MDNS_PROBING_CONFLICT
+ * if another node is already using it and mdns is disabled on this interface */</pre>
+    </div>
+  </body>
+</html>
+            

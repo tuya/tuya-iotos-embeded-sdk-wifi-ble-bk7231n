@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__BASE_EVENT_INFO_H__" class="nav-sub-label">__BASE_EVENT_INFO_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_RESET" class="nav-sub-label">EVENT_RESET</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_INIT" class="nav-sub-label">EVENT_INIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_RUN" class="nav-sub-label">EVENT_RUN</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_REBOOT_REQ" class="nav-sub-label">EVENT_REBOOT_REQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_REBOOT_ACK" class="nav-sub-label">EVENT_REBOOT_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_CAD_VER_UPDATE" class="nav-sub-label">EVENT_CAD_VER_UPDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_FW_VER_UPDATE" class="nav-sub-label">EVENT_FW_VER_UPDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_POST_ACTIVATE" class="nav-sub-label">EVENT_POST_ACTIVATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_PROD_INFO_CHANGED" class="nav-sub-label">EVENT_PROD_INFO_CHANGED</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_HTTP_FAILED" class="nav-sub-label">EVENT_HTTP_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_SDK_EARLY_INIT_OK" class="nav-sub-label">EVENT_SDK_EARLY_INIT_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_SDK_DB_INIT_OK" class="nav-sub-label">EVENT_SDK_DB_INIT_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_SCHEMA_UPDATE" class="nav-sub-label">EVENT_SCHEMA_UPDATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_OTA_START_NOTIFY" class="nav-sub-label">EVENT_OTA_START_NOTIFY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_NETCFG_ERROR" class="nav-sub-label">EVENT_NETCFG_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_BLE_ACTIVE_START" class="nav-sub-label">EVENT_BLE_ACTIVE_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_MQTT_CONNECTED" class="nav-sub-label">EVENT_MQTT_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_MQTT_DISCONNECTED" class="nav-sub-label">EVENT_MQTT_DISCONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_LAN_DISABLE" class="nav-sub-label">EVENT_LAN_DISABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_LAN_ENABLE" class="nav-sub-label">EVENT_LAN_ENABLE</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_RECOVER_DB" class="nav-sub-label">EVENT_RECOVER_DB</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_SUMMER_TZ" class="nav-sub-label">EVENT_SUMMER_TZ</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_OTA_START_NOTIFY" class="nav-sub-label">EVENT_OTA_START_NOTIFY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_OTA_PROCESS_NOTIFY" class="nav-sub-label">EVENT_OTA_PROCESS_NOTIFY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_OTA_FAILED_NOTIFY" class="nav-sub-label">EVENT_OTA_FAILED_NOTIFY</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_OTA_FINISHED_NOTIFY" class="nav-sub-label">EVENT_OTA_FINISHED_NOTIFY</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__BASE_EVENT_INFO_H__">Marco <span>__BASE_EVENT_INFO_H__</span></h4>
+      <pre class="doc-declare"><code>#define __BASE_EVENT_INFO_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_RESET">Marco <span>EVENT_RESET</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_RESET            "dev.reset"        // device reset
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief the event define
+ * 
+ */</pre>
+
+      <h4 id="EVENT_INIT">Marco <span>EVENT_INIT</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_INIT             "dev.init"         // sdk init finished, device init start
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_RUN">Marco <span>EVENT_RUN</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_RUN              "dev.run"          // sdk active finished, device run start
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_REBOOT_REQ">Marco <span>EVENT_REBOOT_REQ</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_REBOOT_REQ       "dev.reboot.req"   // device health check reboot request, application should subscribe it if needed
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_REBOOT_ACK">Marco <span>EVENT_REBOOT_ACK</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_REBOOT_ACK       "dev.reboot.ack"   // device health check reboot ack, application should publish when it ready
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_CAD_VER_UPDATE">Marco <span>EVENT_CAD_VER_UPDATE</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_CAD_VER_UPDATE   "cad.update"       // cad protocol update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_FW_VER_UPDATE">Marco <span>EVENT_FW_VER_UPDATE</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_FW_VER_UPDATE    "fw.update"        // firmware version update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_POST_ACTIVATE">Marco <span>EVENT_POST_ACTIVATE</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_POST_ACTIVATE    "activate.post"    // active
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_PROD_INFO_CHANGED">Marco <span>EVENT_PROD_INFO_CHANGED</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_PROD_INFO_CHANGED "prod.chg"         //
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_HTTP_FAILED">Marco <span>EVENT_HTTP_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_HTTP_FAILED      "http.failed"      // http request failed
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_SDK_EARLY_INIT_OK">Marco <span>EVENT_SDK_EARLY_INIT_OK</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_SDK_EARLY_INIT_OK "early.init"       // before kv flash init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_SDK_DB_INIT_OK">Marco <span>EVENT_SDK_DB_INIT_OK</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_SDK_DB_INIT_OK   "db.init"          // before db init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_SCHEMA_UPDATE">Marco <span>EVENT_SCHEMA_UPDATE</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_SCHEMA_UPDATE    "schema.update"    // schema update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_OTA_START_NOTIFY">Marco <span>EVENT_OTA_START_NOTIFY</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_OTA_START_NOTIFY "ota.start"        // ota start
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_NETCFG_ERROR">Marco <span>EVENT_NETCFG_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_NETCFG_ERROR     "netcfg.error"     // error happened when netcfg
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_BLE_ACTIVE_START">Marco <span>EVENT_BLE_ACTIVE_START</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_BLE_ACTIVE_START "ble.active.start" // ble active start
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_MQTT_CONNECTED">Marco <span>EVENT_MQTT_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_MQTT_CONNECTED   "mqtt.con"         // mqtt connect
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_MQTT_DISCONNECTED">Marco <span>EVENT_MQTT_DISCONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_MQTT_DISCONNECTED "mqtt.disc"        // mqtt disconnect
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_LAN_DISABLE">Marco <span>EVENT_LAN_DISABLE</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_LAN_DISABLE      "lan.disable"      // lan disable
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_LAN_ENABLE">Marco <span>EVENT_LAN_ENABLE</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_LAN_ENABLE       "lan.enable"       // lan enable
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_RECOVER_DB">Marco <span>EVENT_RECOVER_DB</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_RECOVER_DB       "dev.recover.db"   // db is lost, device need recover from cloud
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_SUMMER_TZ">Marco <span>EVENT_SUMMER_TZ</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_SUMMER_TZ        "summer.tz"        // summer time zone update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_OTA_START_NOTIFY">Marco <span>EVENT_OTA_START_NOTIFY</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_OTA_START_NOTIFY     "ota.start"
+</code></pre>
+      <pre class="doc-comment">// ota</pre>
+
+      <h4 id="EVENT_OTA_PROCESS_NOTIFY">Marco <span>EVENT_OTA_PROCESS_NOTIFY</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_OTA_PROCESS_NOTIFY   "ota.process"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_OTA_FAILED_NOTIFY">Marco <span>EVENT_OTA_FAILED_NOTIFY</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_OTA_FAILED_NOTIFY    "ota.failed"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_OTA_FINISHED_NOTIFY">Marco <span>EVENT_OTA_FINISHED_NOTIFY</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_OTA_FINISHED_NOTIFY  "ota.finished"
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

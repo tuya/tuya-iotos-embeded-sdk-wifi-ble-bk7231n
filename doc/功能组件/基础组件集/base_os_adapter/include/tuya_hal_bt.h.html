@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_os_adapter.h" class="nav-sub-label">tuya_os_adapter.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdbool.h" class="nav-sub-label">stdbool.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_HAL_BT_H__" class="nav-sub-label">TUYA_HAL_BT_H__</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_hal_bt_port_init" class="nav-sub-label">tuya_hal_bt_port_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_port_deinit" class="nav-sub-label">tuya_hal_bt_port_deinit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_gap_disconnect" class="nav-sub-label">tuya_hal_bt_gap_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_send" class="nav-sub-label">tuya_hal_bt_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_reset_adv" class="nav-sub-label">tuya_hal_bt_reset_adv</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_get_rssi" class="nav-sub-label">tuya_hal_bt_get_rssi</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_start_adv" class="nav-sub-label">tuya_hal_bt_start_adv</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_stop_adv" class="nav-sub-label">tuya_hal_bt_stop_adv</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_assign_scan" class="nav-sub-label">tuya_hal_bt_assign_scan</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_get_ability" class="nav-sub-label">tuya_hal_bt_get_ability</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_scan_init" class="nav-sub-label">tuya_hal_bt_scan_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_start_scan" class="nav-sub-label">tuya_hal_bt_start_scan</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_stop_scan" class="nav-sub-label">tuya_hal_bt_stop_scan</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_central_init" class="nav-sub-label">tuya_hal_bt_central_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_central_deinit" class="nav-sub-label">tuya_hal_bt_central_deinit</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_master_connect" class="nav-sub-label">tuya_hal_bt_master_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_master_disconnect" class="nav-sub-label">tuya_hal_bt_master_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_master_scan" class="nav-sub-label">tuya_hal_bt_master_scan</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_master_get_max_slave_num" class="nav-sub-label">tuya_hal_bt_master_get_max_slave_num</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_gattc_send_data" class="nav-sub-label">tuya_hal_bt_gattc_send_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_gattc_start_discovery" class="nav-sub-label">tuya_hal_bt_gattc_start_discovery</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_os_bt_intf_init" class="nav-sub-label">tuya_os_bt_intf_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_get_mac" class="nav-sub-label">tuya_hal_bt_get_mac</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_set_mac" class="nav-sub-label">tuya_hal_bt_set_mac</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_os_adapter.h"><span>tuya_os_adapter.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_os_adapter.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_os_adapter.h"
+</pre>
+
+      <h4 id="stdbool.h"><span>stdbool.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdbool.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdbool.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_HAL_BT_H__">Marco <span>TUYA_HAL_BT_H__</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_HAL_BT_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_hal_bt_port_init">Func <span>tuya_hal_bt_port_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_port_init(ty_bt_param_t *p);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init bluetooth.
+ *
+ * @param[in] p: parameters of bluetooth
+ *
+ * @note This API is used for initialization of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_port_deinit">Func <span>tuya_hal_bt_port_deinit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_port_deinit(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief De-init bluetooth.
+ *
+ * @param void
+ *
+ * @note This API is used for de-initialization of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_gap_disconnect">Func <span>tuya_hal_bt_gap_disconnect</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_gap_disconnect(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Disconnect bluetooth.
+ *
+ * @param void
+ *
+ * @note This API is used for disconnecting bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_send">Func <span>tuya_hal_bt_send</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_send(BYTE_T *data, UINT8_T len);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Send data by bluetooth.
+ *
+ * @param[in] data: send data
+ * @param[in] len: data lenth
+ *
+ * @note This API is used for sending data by bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_reset_adv">Func <span>tuya_hal_bt_reset_adv</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_reset_adv(tuya_ble_data_buf_t *adv, tuya_ble_data_buf_t *scan_resp);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Reset advertisement data of bluetooth.
+ *
+ * @param[in] adv: advertisement data
+ * @param[in] scan_resp: advertisement scan data
+ *
+ * @note This API is used for reseting advertisement data of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_get_rssi">Func <span>tuya_hal_bt_get_rssi</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_get_rssi(SCHAR_T *rssi);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get rssi info.
+ *
+ * @param[out] rssi: rssi info
+ * 
+ * @note This API is used for getting rssi info.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_start_adv">Func <span>tuya_hal_bt_start_adv</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_start_adv(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start advertising of bluetooth.
+ *
+ * @param void
+ *
+ * @note This API is used to start advertising of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_stop_adv">Func <span>tuya_hal_bt_stop_adv</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_stop_adv(void);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Stop advertising of bluetooth.
+ *
+ * @param void
+ *
+ * @note This API is used to stopping advertising of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_assign_scan">Func <span>tuya_hal_bt_assign_scan</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_assign_scan(INOUT ty_bt_scan_info_t *info);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get scan info of bluetooth.
+ *
+ * @param[out] info: scan info of bluetooth.
+ * 
+ * @note This API is used for getting scan info of bluetooth for mf test
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_get_ability">Func <span>tuya_hal_bt_get_ability</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_get_ability(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get ability of bluetooth.
+ *
+ * @param VOID
+ *
+ * @note This API is used to getting ability of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_scan_init">Func <span>tuya_hal_bt_scan_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_scan_init(IN TY_BT_SCAN_ADV_CB scan_adv_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Init advertisement scanning of bluetooth.
+ *
+ * @param[in] scan_adv_cb: callback function of advertisement scanning
+ * @param[in] scan_resp: advertisement scan data
+ *
+ * @note This API is used for Initializion for advertisement scanning of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_start_scan">Func <span>tuya_hal_bt_start_scan</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_start_scan(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start advertising scanning of bluetooth.
+ *
+ * @param VOID
+ *
+ * @note This API is used to start advertising scanning of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_stop_scan">Func <span>tuya_hal_bt_stop_scan</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_stop_scan(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Stop advertising scanning of bluetooth.
+ *
+ * @param VOID
+ *
+ * @note This API is used to stop advertising scanning of bluetooth.
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_central_init">Func <span>tuya_hal_bt_central_init</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_central_init(ty_ble_central_param_t *p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_central_deinit">Func <span>tuya_hal_bt_central_deinit</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_central_deinit(VOID_T);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_master_connect">Func <span>tuya_hal_bt_master_connect</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_master_connect(UINT8_T mac[6], ty_ble_addr_type_t type, UINT_T timeout_ms, ty_ble_gap_conn_params_t *params);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_master_disconnect">Func <span>tuya_hal_bt_master_disconnect</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_master_disconnect(UINT8_T mac[6], ty_ble_addr_type_t type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_master_scan">Func <span>tuya_hal_bt_master_scan</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_master_scan(BOOL_T enable);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_master_get_max_slave_num">Func <span>tuya_hal_bt_master_get_max_slave_num</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_master_get_max_slave_num(UINT16_T *num);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_gattc_send_data">Func <span>tuya_hal_bt_gattc_send_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_gattc_send_data(UINT8_T mac[6], UINT8_T *data, UINT_T length);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_gattc_start_discovery">Func <span>tuya_hal_bt_gattc_start_discovery</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_gattc_start_discovery(UINT8_T mac[6], ty_bt_uuid_t *uuid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_os_bt_intf_init">Func <span>tuya_os_bt_intf_init</span></h4>
+      <pre class="doc-declare"><code>VOID_T tuya_os_bt_intf_init(VOID_T);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Bluetooth interface initialization
+ *
+ * @param VOID
+ *
+ * @note This API is used for initialization of bluetooth interface.
+ *
+ * @return VOID
+ */</pre>
+
+      <h4 id="tuya_hal_bt_get_mac">Func <span>tuya_hal_bt_get_mac</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_get_mac(NW_MAC_S *mac);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get mac
+ *
+ * @param[out] mac: refer NW_MAC_S struct
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_hal_bt_set_mac">Func <span>tuya_hal_bt_set_mac</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_set_mac(CONST NW_MAC_S *mac);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set mac
+ *
+ * @param[in] mac: refer NW_MAC_S struct
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

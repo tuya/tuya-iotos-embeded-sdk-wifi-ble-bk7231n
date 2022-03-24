@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_BASE_RPC_COM_H" class="nav-sub-label">_BASE_RPC_COM_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#COM_KEY_LEN_LMT" class="nav-sub-label">COM_KEY_LEN_LMT</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRC_SET_PRIV_DATA_CMD" class="nav-sub-label">BRC_SET_PRIV_DATA_CMD</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRC_GET_PRIV_DATA_CMD" class="nav-sub-label">BRC_GET_PRIV_DATA_CMD</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#cr_and_init_brc_hand" class="nav-sub-label">cr_and_init_brc_hand</a>
+              </li>
+      
+
+              <li>
+                <a href="#brc_data_recv_process" class="nav-sub-label">brc_data_recv_process</a>
+              </li>
+      
+
+              <li>
+                <a href="#rpc_client_call_async" class="nav-sub-label">rpc_client_call_async</a>
+              </li>
+      
+
+              <li>
+                <a href="#rpc_serv_respsond_call" class="nav-sub-label">rpc_serv_respsond_call</a>
+              </li>
+      
+
+              <li>
+                <a href="#brc_control" class="nav-sub-label">brc_control</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#BRC_HAND_T" class="nav-sub-label">BRC_HAND_T</a>
+              </li>
+      
+
+              <li>
+                <a href="#BRC_SEND_FUNC" class="nav-sub-label">BRC_SEND_FUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#RPC_RECV_CB" class="nav-sub-label">RPC_RECV_CB</a>
+              </li>
+      
+
+              <li>
+                <a href="#RPC_TRANSFER_CB" class="nav-sub-label">RPC_TRANSFER_CB</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_BASE_RPC_COM_H">Marco <span>_BASE_RPC_COM_H</span></h4>
+      <pre class="doc-declare"><code>#define _BASE_RPC_COM_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="COM_KEY_LEN_LMT">Marco <span>COM_KEY_LEN_LMT</span></h4>
+      <pre class="doc-declare"><code>#define COM_KEY_LEN_LMT            16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRC_SET_PRIV_DATA_CMD">Marco <span>BRC_SET_PRIV_DATA_CMD</span></h4>
+      <pre class="doc-declare"><code>#define BRC_SET_PRIV_DATA_CMD      0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRC_GET_PRIV_DATA_CMD">Marco <span>BRC_GET_PRIV_DATA_CMD</span></h4>
+      <pre class="doc-declare"><code>#define BRC_GET_PRIV_DATA_CMD      1
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="cr_and_init_brc_hand">Func <span>cr_and_init_brc_hand</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET cr_and_init_brc_hand(IN BRC_SEND_FUNC send, IN RPC_RECV_CB recv, OUT BRC_HAND_T *hand);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief init function
+ * 
+ * @param[in] send refer to BRC_SEND_FUNC
+ * @param[in] recv receive callback
+ * @param[out] hand refer to BRC_HAND_T
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="brc_data_recv_process">Func <span>brc_data_recv_process</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET brc_data_recv_process(IN BRC_HAND_T        hand,IN CHAR_T *com_key,IN BYTE_T *data,IN UINT_T len,IN UINT8_T* enc_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief data handle
+ * 
+ * @param[in] hand refer to BRC_HAND_T
+ * @param[in] com_key key
+ * @param[in] data handle data
+ * @param[in] len data length
+ * @param[in] enc_key key
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="rpc_client_call_async">Func <span>rpc_client_call_async</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET rpc_client_call_async(IN BRC_HAND_T        hand,
+                                 IN CHAR_T            *com_key, 
+                                 IN VOID              *input,
+                                 IN UINT_T            in_len,
+                                 IN UINT_T            timeout,
+                                 IN RPC_TRANSFER_CB   cb,
+                                 IN VOID              *pri_data,
+                                 IN UINT8_T*          enc_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief call async
+ * 
+ * @param[in] hand refer to BRC_HAND_T
+ * @param[in] com_key key
+ * @param[in] input input
+ * @param[in] in_len input length
+ * @param[in] timeout timeout
+ * @param[in] cb refer to RPC_TRANSFER_CB
+ * @param[in] pri_data callback argument
+ * @param[in] enc_key key
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="rpc_serv_respsond_call">Func <span>rpc_serv_respsond_call</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET rpc_serv_respsond_call(IN BRC_HAND_T        hand, 
+                                  IN CHAR_T           *com_key,
+                                  IN VOID             *input,
+                                  IN UINT_T           in_len,
+                                  IN USHORT_T         snd_seqno,
+                                  IN UINT8_T*         enc_key);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief respsond call
+ * 
+ * @param[in] hand refer to BRC_HAND_T
+ * @param[in] com_key key
+ * @param[in] input input
+ * @param[in] in_len input length
+ * @param[in] snd_seqno sequence
+ * @param[in] enc_key key
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="brc_control">Func <span>brc_control</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET brc_control(IN BRC_HAND_T hand, IN UCHAR_T cmd, INOUT VOID *args);</code></pre>
+      <pre class="doc-comment">/**
+  * @brief base rpc control
+  * 
+  * @param[in] hand refer to BRC_HAND_T
+  * @param[in] cmd control command
+  * @param[in] args control argument
+  * @param[out] args control argument
+  *
+  * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+  */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="BRC_HAND_T">Typedef <span>BRC_HAND_T</span></h4>
+      <pre class="doc-declare"><code>typedef VOID * BRC_HAND_T;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BRC_SEND_FUNC">Typedef <span>BRC_SEND_FUNC</span></h4>
+      <pre class="doc-declare"><code>typedef INT_T (*BRC_SEND_FUNC)(IN CONST BRC_HAND_T hand,IN CONST CHAR_T *com_key,IN BYTE_T *data,IN CONST UINT_T len);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief server send callback
+ * 
+ * @param[in] hand refer to BRC_HAND_T
+ * @param[in] com_key key
+ * @param[in] data send data
+ * @param[in] len send length
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="RPC_RECV_CB">Typedef <span>RPC_RECV_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*RPC_RECV_CB)(IN BRC_HAND_T hand, IN CONST CHAR_T *com_key, IN CONST VOID *input, IN CONST UINT_T len, IN CONST USHORT_T snd_seqno, IN BYTE_T *enc_key, IN CONST BOOL_T rsp);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief server received callback
+ * 
+ * @param[in] hand refer to BRC_HAND_T
+ * @param[in] com_key key
+ * @param[in] input input data
+ * @param[in] len data length
+ * @param[in] snd_seqno sequence
+ * @param[in] enc_key key
+ * @param[in] rsp resonsible
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="RPC_TRANSFER_CB">Typedef <span>RPC_TRANSFER_CB</span></h4>
+      <pre class="doc-declare"><code>typedef VOID (*RPC_TRANSFER_CB)(IN OPERATE_RET op_ret,OUT VOID *output,OUT UINT_T out_len,IN VOID *prv_data, IN BYTE_T *enc_key);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief clinet result callback
+ * 
+ * @param[in] op_ret refer to OPERATE_RET
+ * @param[out] output result
+ * @param[out] out_len length
+ * @param[in] prv_data data
+ * @param[in] enc_key key
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+    </div>
+  </body>
+</html>
+            

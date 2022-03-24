@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#__TUYA_FFS_STREAM_H__" class="nav-sub-label">__TUYA_FFS_STREAM_H__</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_FFS_TEMPORARY_STREAM(name, size)" class="nav-sub-label">TUYA_FFS_TEMPORARY_STREAM(name, size)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_ffs_stream_free" class="nav-sub-label">tuya_ffs_stream_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stream_write" class="nav-sub-label">tuya_ffs_stream_write</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stream_bind_data" class="nav-sub-label">tuya_ffs_stream_bind_data</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stream_flush" class="nav-sub-label">tuya_ffs_stream_flush</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stream_get_space_size" class="nav-sub-label">tuya_ffs_stream_get_space_size</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_ffs_stream_get_write_pointer" class="nav-sub-label">tuya_ffs_stream_get_write_pointer</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_ffs_stream_t" class="nav-sub-label">tuya_ffs_stream_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_ffs_stream_t;
+" class="nav-sub-label">tuya_ffs_stream_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="__TUYA_FFS_STREAM_H__">Marco <span>__TUYA_FFS_STREAM_H__</span></h4>
+      <pre class="doc-declare"><code>#define __TUYA_FFS_STREAM_H__
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_FFS_TEMPORARY_STREAM(name, size)">Marco <span>TUYA_FFS_TEMPORARY_STREAM(name, size)</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_FFS_TEMPORARY_STREAM(name, size) \
+   CHAR_T name ## data[size] = {0}; \
+   tuya_ffs_stream_t name ; \
+   memset(&name, 0, sizeof(name)); \
+   name.data = name ## data; \
+   name.max_size = size; \
+
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_ffs_stream_free">Func <span>tuya_ffs_stream_free</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_stream_free(tuya_ffs_stream_t *stream);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_stream_write">Func <span>tuya_ffs_stream_write</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_stream_write(tuya_ffs_stream_t *stream, UINT8_T *data, UINT_T len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_stream_bind_data">Func <span>tuya_ffs_stream_bind_data</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_stream_bind_data(tuya_ffs_stream_t *stream, UINT8_T *data, UINT_T len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_stream_flush">Func <span>tuya_ffs_stream_flush</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_ffs_stream_flush(tuya_ffs_stream_t *stream);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_stream_get_space_size">Func <span>tuya_ffs_stream_get_space_size</span></h4>
+      <pre class="doc-declare"><code>INT_T tuya_ffs_stream_get_space_size(const tuya_ffs_stream_t *stream);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_ffs_stream_get_write_pointer">Func <span>tuya_ffs_stream_get_write_pointer</span></h4>
+      <pre class="doc-declare"><code>CHAR_T *tuya_ffs_stream_get_write_pointer(tuya_ffs_stream_t *stream);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="tuya_ffs_stream_t">Variable <span>tuya_ffs_stream_t</span></h4>
+      <pre class="doc-declare"><code>tuya_ffs_stream_t *tuya_ffs_stream_new(INT_T buf_len);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="tuya_ffs_stream_t;
+">Typedef <span>tuya_ffs_stream_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   CHAR_T *data;
+   INT_T  data_size; /* number of byte writen */
+   INT_T  max_size;  /* maximnm data size.*/
+}tuya_ffs_stream_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

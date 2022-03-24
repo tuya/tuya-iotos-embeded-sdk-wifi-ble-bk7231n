@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#config.h" class="nav-sub-label">config.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_CONFIG_FILE" class="nav-sub-label">MBEDTLS_CONFIG_FILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#md5_alt.h" class="nav-sub-label">md5_alt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_MD5_H" class="nav-sub-label">MBEDTLS_MD5_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_ERR_MD5_HW_ACCEL_FAILED" class="nav-sub-label">MBEDTLS_ERR_MD5_HW_ACCEL_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#mbedtls_md5_init" class="nav-sub-label">mbedtls_md5_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_free" class="nav-sub-label">mbedtls_md5_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_clone" class="nav-sub-label">mbedtls_md5_clone</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_starts_ret" class="nav-sub-label">mbedtls_md5_starts_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_update_ret" class="nav-sub-label">mbedtls_md5_update_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_finish_ret" class="nav-sub-label">mbedtls_md5_finish_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_internal_md5_process" class="nav-sub-label">mbedtls_internal_md5_process</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_ret" class="nav-sub-label">mbedtls_md5_ret</a>
+              </li>
+      
+
+              <li>
+                <a href="#mbedtls_md5_self_test" class="nav-sub-label">mbedtls_md5_self_test</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+
+              <li>
+                <a href="#MBEDTLS_DEPRECATED" class="nav-sub-label">MBEDTLS_DEPRECATED</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#
+mbedtls_md5_context;
+" class="nav-sub-label">
+mbedtls_md5_context;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="config.h"><span>config.h</span></h4>
+      <pre class="doc-declare"><code>#include "config.h"
+</code></pre>
+      <pre class="doc-comment">#include "config.h"
+</pre>
+
+      <h4 id="MBEDTLS_CONFIG_FILE"><span>MBEDTLS_CONFIG_FILE</span></h4>
+      <pre class="doc-declare"><code>#include MBEDTLS_CONFIG_FILE
+</code></pre>
+      <pre class="doc-comment">#include MBEDTLS_CONFIG_FILE
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h>
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="md5_alt.h"><span>md5_alt.h</span></h4>
+      <pre class="doc-declare"><code>#include "md5_alt.h"
+</code></pre>
+      <pre class="doc-comment">#include "md5_alt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="MBEDTLS_MD5_H">Marco <span>MBEDTLS_MD5_H</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_MD5_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_ERR_MD5_HW_ACCEL_FAILED">Marco <span>MBEDTLS_ERR_MD5_HW_ACCEL_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_ERR_MD5_HW_ACCEL_FAILED                  -47 /**< MD5 hardware accelerator failed */
+</code></pre>
+      <pre class="doc-comment">/* MBEDTLS_ERR_MD5_HW_ACCEL_FAILED is deprecated and should not be used. */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED     __attribute__((deprecated))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Marco <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>#define MBEDTLS_DEPRECATED
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="mbedtls_md5_init">Func <span>mbedtls_md5_init</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_md5_init( mbedtls_md5_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Initialize MD5 context
+ *
+ * \param ctx      MD5 context to be initialized
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_free">Func <span>mbedtls_md5_free</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_md5_free( mbedtls_md5_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Clear MD5 context
+ *
+ * \param ctx      MD5 context to be cleared
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_clone">Func <span>mbedtls_md5_clone</span></h4>
+      <pre class="doc-declare"><code>void mbedtls_md5_clone( mbedtls_md5_context *dst,
+                       const mbedtls_md5_context *src );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Clone (the state of) an MD5 context
+ *
+ * \param dst      The destination context
+ * \param src      The context to be cloned
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_starts_ret">Func <span>mbedtls_md5_starts_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md5_starts_ret( mbedtls_md5_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 context setup
+ *
+ * \param ctx      context to be initialized
+ *
+ * \return         0 if successful
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_update_ret">Func <span>mbedtls_md5_update_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md5_update_ret( mbedtls_md5_context *ctx,
+                           const unsigned char *input,
+                           size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 process buffer
+ *
+ * \param ctx      MD5 context
+ * \param input    buffer holding the data
+ * \param ilen     length of the input data
+ *
+ * \return         0 if successful
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_finish_ret">Func <span>mbedtls_md5_finish_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md5_finish_ret( mbedtls_md5_context *ctx,
+                           unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 final digest
+ *
+ * \param ctx      MD5 context
+ * \param output   MD5 checksum result
+ *
+ * \return         0 if successful
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_internal_md5_process">Func <span>mbedtls_internal_md5_process</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_internal_md5_process( mbedtls_md5_context *ctx,
+                                 const unsigned char data[64] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 process data block (internal use only)
+ *
+ * \param ctx      MD5 context
+ * \param data     buffer holding one block of data
+ *
+ * \return         0 if successful
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_ret">Func <span>mbedtls_md5_ret</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md5_ret( const unsigned char *input,
+                    size_t ilen,
+                    unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Output = MD5( input buffer )
+ *
+ * \param input    buffer holding the data
+ * \param ilen     length of the input data
+ * \param output   MD5 checksum result
+ *
+ * \return         0 if successful
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="mbedtls_md5_self_test">Func <span>mbedtls_md5_self_test</span></h4>
+      <pre class="doc-declare"><code>int mbedtls_md5_self_test( int verbose );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Checkup routine
+ *
+ * \return         0 if successful, or 1 if the test failed
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_md5_starts( mbedtls_md5_context *ctx );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 context setup
+ *
+ * \deprecated     Superseded by mbedtls_md5_starts_ret() in 2.7.0
+ *
+ * \param ctx      context to be initialized
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_md5_update( mbedtls_md5_context *ctx,
+                                           const unsigned char *input,
+                                           size_t ilen );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 process buffer
+ *
+ * \deprecated     Superseded by mbedtls_md5_update_ret() in 2.7.0
+ *
+ * \param ctx      MD5 context
+ * \param input    buffer holding the data
+ * \param ilen     length of the input data
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_md5_finish( mbedtls_md5_context *ctx,
+                                           unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 final digest
+ *
+ * \deprecated     Superseded by mbedtls_md5_finish_ret() in 2.7.0
+ *
+ * \param ctx      MD5 context
+ * \param output   MD5 checksum result
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_md5_process( mbedtls_md5_context *ctx,
+                                            const unsigned char data[64] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 process data block (internal use only)
+ *
+ * \deprecated     Superseded by mbedtls_internal_md5_process() in 2.7.0
+ *
+ * \param ctx      MD5 context
+ * \param data     buffer holding one block of data
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+
+      <h4 id="MBEDTLS_DEPRECATED">Variable <span>MBEDTLS_DEPRECATED</span></h4>
+      <pre class="doc-declare"><code>MBEDTLS_DEPRECATED void mbedtls_md5( const unsigned char *input,
+                                    size_t ilen,
+                                    unsigned char output[16] );</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          Output = MD5( input buffer )
+ *
+ * \deprecated     Superseded by mbedtls_md5_ret() in 2.7.0
+ *
+ * \param input    buffer holding the data
+ * \param ilen     length of the input data
+ * \param output   MD5 checksum result
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="
+mbedtls_md5_context;
+">Typedef <span>
+mbedtls_md5_context;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct mbedtls_md5_context
+{
+   uint32_t total[2];         /*!< number of bytes processed  */
+   uint32_t state[4];         /*!< intermediate digest state  */
+   unsigned char buffer[64];  /*!< data block being processed */
+}
+mbedtls_md5_context;
+</code></pre>
+      <pre class="doc-comment">/**
+ * \brief          MD5 context structure
+ *
+ * \warning        MD5 is considered a weak message digest and its use
+ *                 constitutes a security risk. We recommend considering
+ *                 stronger message digests instead.
+ *
+ */</pre>
+    </div>
+  </body>
+</html>
+            

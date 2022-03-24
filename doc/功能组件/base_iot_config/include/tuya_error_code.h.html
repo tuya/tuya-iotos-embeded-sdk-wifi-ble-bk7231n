@@ -1,0 +1,2528 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TUYA_ERROR_CODE_H" class="nav-sub-label">TUYA_ERROR_CODE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_OK" class="nav-sub-label">OPRT_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_COM_ERROR" class="nav-sub-label">OPRT_COM_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INVALID_PARM" class="nav-sub-label">OPRT_INVALID_PARM</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MALLOC_FAILED" class="nav-sub-label">OPRT_MALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NOT_SUPPORTED" class="nav-sub-label">OPRT_NOT_SUPPORTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NETWORK_ERROR" class="nav-sub-label">OPRT_NETWORK_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_NOT_FOUND" class="nav-sub-label">OPRT_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CR_CJSON_ERR" class="nav-sub-label">OPRT_CR_CJSON_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CJSON_PARSE_ERR" class="nav-sub-label">OPRT_CJSON_PARSE_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CJSON_GET_ERR" class="nav-sub-label">OPRT_CJSON_GET_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CR_MUTEX_ERR" class="nav-sub-label">OPRT_CR_MUTEX_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SOCK_ERR" class="nav-sub-label">OPRT_SOCK_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SET_SOCK_ERR" class="nav-sub-label">OPRT_SET_SOCK_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SOCK_CONN_ERR" class="nav-sub-label">OPRT_SOCK_CONN_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SEND_ERR" class="nav-sub-label">OPRT_SEND_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_RECV_ERR" class="nav-sub-label">OPRT_RECV_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_RECV_DA_NOT_ENOUGH" class="nav-sub-label">OPRT_RECV_DA_NOT_ENOUGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_KVS_WR_FAIL" class="nav-sub-label">OPRT_KVS_WR_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_KVS_RD_FAIL" class="nav-sub-label">OPRT_KVS_RD_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_CRC32_FAILED" class="nav-sub-label">OPRT_CRC32_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_TIMEOUT" class="nav-sub-label">OPRT_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INIT_MORE_THAN_ONCE" class="nav-sub-label">OPRT_INIT_MORE_THAN_ONCE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_INDEX_OUT_OF_BOUND" class="nav-sub-label">OPRT_INDEX_OUT_OF_BOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_RESOURCE_NOT_READY" class="nav-sub-label">OPRT_RESOURCE_NOT_READY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_EXCEED_UPPER_LIMIT" class="nav-sub-label">OPRT_EXCEED_UPPER_LIMIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_FILE_NOT_FIND" class="nav-sub-label">OPRT_FILE_NOT_FIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_GLOBAL_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_GLOBAL_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_REG_NULL_ERROR" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_REG_NULL_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_INIT_MUTEX_ATTR_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_INIT_MUTEX_ATTR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_SET_MUTEX_ATTR_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_SET_MUTEX_ATTR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_DESTROY_MUTEX_ATTR_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_DESTROY_MUTEX_ATTR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_INIT_MUTEX_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_INIT_MUTEX_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MUTEX_TRYLOCK_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MUTEX_TRYLOCK_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_BUSY" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_BUSY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MUTEX_UNLOCK_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MUTEX_UNLOCK_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MUTEX_RELEASE_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MUTEX_RELEASE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_CR_MUTEX_ERR" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_CR_MUTEX_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MEM_PARTITION_EMPTY" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MEM_PARTITION_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MEM_PARTITION_FULL" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MEM_PARTITION_FULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_MEM_PARTITION_NOT_FOUND" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_MEM_PARTITION_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_INIT_SEM_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_INIT_SEM_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_WAIT_SEM_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_WAIT_SEM_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_POST_SEM_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_POST_SEM_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_THRD_STA_UNVALID" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_THRD_STA_UNVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_THRD_CR_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_THRD_CR_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_THRD_JOIN_FAILED" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_THRD_JOIN_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_THRD_SELF_CAN_NOT_JOIN" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_THRD_SELF_CAN_NOT_JOIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_OS_ADAPTER_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_OS_ADAPTER_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_UTILITIES_PARTITION_EMPTY" class="nav-sub-label">OPRT_BASE_UTILITIES_PARTITION_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_UTILITIES_PARTITION_FULL" class="nav-sub-label">OPRT_BASE_UTILITIES_PARTITION_FULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_UTILITIES_PARTITION_NOT_FOUND" class="nav-sub-label">OPRT_BASE_UTILITIES_PARTITION_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_UTILITIES_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_UTILITIES_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_SECURITY_CRC32_FAILED" class="nav-sub-label">OPRT_BASE_SECURITY_CRC32_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_SECURITY_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_SECURITY_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_DONOT_FOUND_MODULE" class="nav-sub-label">OPRT_BASE_LOG_MNG_DONOT_FOUND_MODULE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_PRINT_LOG_LEVEL_HIGHER" class="nav-sub-label">OPRT_BASE_LOG_MNG_PRINT_LOG_LEVEL_HIGHER</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_FORMAT_STRING_FAILED" class="nav-sub-label">OPRT_BASE_LOG_MNG_FORMAT_STRING_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_LOG_SEQ_OPEN_FILE_FAIL" class="nav-sub-label">OPRT_BASE_LOG_MNG_LOG_SEQ_OPEN_FILE_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_LOG_SEQ_WRITE_FILE_FAIL" class="nav-sub-label">OPRT_BASE_LOG_MNG_LOG_SEQ_WRITE_FILE_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_FULL" class="nav-sub-label">OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_FULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_NOT_EXIST" class="nav-sub-label">OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_NOT_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_LOG_SEQ_NAME_INVALIDE" class="nav-sub-label">OPRT_BASE_LOG_MNG_LOG_SEQ_NAME_INVALIDE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_LOG_SEQ_CREATE_FAIL" class="nav-sub-label">OPRT_BASE_LOG_MNG_LOG_SEQ_CREATE_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_LOG_MNG_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_LOG_MNG_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_TIMEQ_TIMERID_EXIST" class="nav-sub-label">OPRT_BASE_TIMEQ_TIMERID_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_TIMEQ_TIMERID_NOT_FOUND" class="nav-sub-label">OPRT_BASE_TIMEQ_TIMERID_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_TIMEQ_TIMERID_UNVALID" class="nav-sub-label">OPRT_BASE_TIMEQ_TIMERID_UNVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_TIMEQ_GET_IDLE_TIMERID_ERROR" class="nav-sub-label">OPRT_BASE_TIMEQ_GET_IDLE_TIMERID_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_TIMEQ_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_TIMEQ_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_MSGQ_NOT_FOUND" class="nav-sub-label">OPRT_BASE_MSGQ_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_MSGQ_LIST_EMPTY" class="nav-sub-label">OPRT_BASE_MSGQ_LIST_EMPTY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_MSGQ_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_MSGQ_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_BUF_NOT_ENOUGH" class="nav-sub-label">OPRT_MID_HTTP_BUF_NOT_ENOUGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_URL_PARAM_OUT_LIMIT" class="nav-sub-label">OPRT_MID_HTTP_URL_PARAM_OUT_LIMIT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_OS_ERROR" class="nav-sub-label">OPRT_MID_HTTP_OS_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_PR_REQ_ERROR" class="nav-sub-label">OPRT_MID_HTTP_PR_REQ_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_SD_REQ_ERROR" class="nav-sub-label">OPRT_MID_HTTP_SD_REQ_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_RD_ERROR" class="nav-sub-label">OPRT_MID_HTTP_RD_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_AD_HD_ERROR" class="nav-sub-label">OPRT_MID_HTTP_AD_HD_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_GET_RESP_ERROR" class="nav-sub-label">OPRT_MID_HTTP_GET_RESP_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_AES_INIT_ERR" class="nav-sub-label">OPRT_MID_HTTP_AES_INIT_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_AES_OPEN_ERR" class="nav-sub-label">OPRT_MID_HTTP_AES_OPEN_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_AES_SET_KEY_ERR" class="nav-sub-label">OPRT_MID_HTTP_AES_SET_KEY_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_AES_ENCRYPT_ERR" class="nav-sub-label">OPRT_MID_HTTP_AES_ENCRYPT_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_CR_HTTP_URL_H_ERR" class="nav-sub-label">OPRT_MID_HTTP_CR_HTTP_URL_H_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_HTTPS_HANDLE_FAIL" class="nav-sub-label">OPRT_MID_HTTP_HTTPS_HANDLE_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_HTTPS_RESP_UNVALID" class="nav-sub-label">OPRT_MID_HTTP_HTTPS_RESP_UNVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_NO_SUPPORT_RANGE" class="nav-sub-label">OPRT_MID_HTTP_NO_SUPPORT_RANGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_HTTP_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_MID_HTTP_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_DEF_ERR" class="nav-sub-label">OPRT_MID_MQTT_DEF_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_INVALID_PARM" class="nav-sub-label">OPRT_MID_MQTT_INVALID_PARM</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_MALLOC_FAILED" class="nav-sub-label">OPRT_MID_MQTT_MALLOC_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_DNS_PARSED_FAILED" class="nav-sub-label">OPRT_MID_MQTT_DNS_PARSED_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_SOCK_CREAT_FAILED" class="nav-sub-label">OPRT_MID_MQTT_SOCK_CREAT_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_SOCK_SET_FAILED" class="nav-sub-label">OPRT_MID_MQTT_SOCK_SET_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_TCP_CONNECD_FAILED" class="nav-sub-label">OPRT_MID_MQTT_TCP_CONNECD_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_TCP_TLS_CONNECD_FAILED" class="nav-sub-label">OPRT_MID_MQTT_TCP_TLS_CONNECD_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_PACK_SEND_FAILED" class="nav-sub-label">OPRT_MID_MQTT_PACK_SEND_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_RECV_DATA_FORMAT_WRONG" class="nav-sub-label">OPRT_MID_MQTT_RECV_DATA_FORMAT_WRONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_MSGID_NOT_MATCH" class="nav-sub-label">OPRT_MID_MQTT_MSGID_NOT_MATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_START_TM_MSG_ERR" class="nav-sub-label">OPRT_MID_MQTT_START_TM_MSG_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_OVER_MAX_MESSAGE_LEN" class="nav-sub-label">OPRT_MID_MQTT_OVER_MAX_MESSAGE_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_PING_SEND_ERR" class="nav-sub-label">OPRT_MID_MQTT_PING_SEND_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_PUBLISH_TIMEOUT" class="nav-sub-label">OPRT_MID_MQTT_PUBLISH_TIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_MQTT_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_MID_MQTT_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_NET_SOCKET_ERROR" class="nav-sub-label">OPRT_MID_TLS_NET_SOCKET_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_NET_CONNECT_ERROR" class="nav-sub-label">OPRT_MID_TLS_NET_CONNECT_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_UNKNOWN_HOST_ERROR" class="nav-sub-label">OPRT_MID_TLS_UNKNOWN_HOST_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_CONNECTION_ERROR" class="nav-sub-label">OPRT_MID_TLS_CONNECTION_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_DRBG_ENTROPY_ERROR" class="nav-sub-label">OPRT_MID_TLS_DRBG_ENTROPY_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_X509_ROOT_CRT_PARSE_ERROR" class="nav-sub-label">OPRT_MID_TLS_X509_ROOT_CRT_PARSE_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_X509_DEVICE_CRT_PARSE_ERROR" class="nav-sub-label">OPRT_MID_TLS_X509_DEVICE_CRT_PARSE_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_CTR_DRBG_ENTROPY_SOURCE_ERROR" class="nav-sub-label">OPRT_MID_TLS_CTR_DRBG_ENTROPY_SOURCE_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_PK_PRIVATE_KEY_PARSE_ERROR" class="nav-sub-label">OPRT_MID_TLS_PK_PRIVATE_KEY_PARSE_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_MID_TLS_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_MID_TLS_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_WIFI_NETCFG_RECV_CONTINUE" class="nav-sub-label">OPRT_SVC_WIFI_NETCFG_RECV_CONTINUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_WIFI_NETCFG_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_WIFI_NETCFG_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MF_TEST_UPDATE_DATA_LEN_EXECED" class="nav-sub-label">OPRT_SVC_MF_TEST_UPDATE_DATA_LEN_EXECED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MF_TEST_UPDATE_CRC_ERROR" class="nav-sub-label">OPRT_SVC_MF_TEST_UPDATE_CRC_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MF_TEST_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_MF_TEST_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_ALREADY_PROCESS" class="nav-sub-label">OPRT_SVC_DP_ALREADY_PROCESS</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_ID_NOT_FOUND" class="nav-sub-label">OPRT_SVC_DP_ID_NOT_FOUND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_TP_NOT_MATCH" class="nav-sub-label">OPRT_SVC_DP_TP_NOT_MATCH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_DEVICE_NOT_BINDED" class="nav-sub-label">OPRT_SVC_DP_DEVICE_NOT_BINDED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_TYPE_PROP_ILLEGAL" class="nav-sub-label">OPRT_SVC_DP_TYPE_PROP_ILLEGAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_NW_INVALID" class="nav-sub-label">OPRT_SVC_DP_NW_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_SECURITY_VERIFY_ERR" class="nav-sub-label">OPRT_SVC_DP_SECURITY_VERIFY_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_REPORT_FINISH" class="nav-sub-label">OPRT_SVC_DP_REPORT_FINISH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DP_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_DP_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_EVENT_INVALID_EVENT_NAME" class="nav-sub-label">OPRT_BASE_EVENT_INVALID_EVENT_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_EVENT_INVALID_EVENT_DESC" class="nav-sub-label">OPRT_BASE_EVENT_INVALID_EVENT_DESC</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_EVENT_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_EVENT_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_TIMER_TASK_LOAD_INVALID_CJSON" class="nav-sub-label">OPRT_SVC_TIMER_TASK_LOAD_INVALID_CJSON</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_TIMER_TASK_LOAD_INVALID_DATA" class="nav-sub-label">OPRT_SVC_TIMER_TASK_LOAD_INVALID_DATA</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_TIMER_TASK_UPDATE_LAST_FETCH_INVALID" class="nav-sub-label">OPRT_SVC_TIMER_TASK_UPDATE_LAST_FETCH_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_INVALID" class="nav-sub-label">OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_EXCEED" class="nav-sub-label">OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_EXCEED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_TIMER_TASK_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_TIMER_TASK_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_NOT_ENCRYPT_RET" class="nav-sub-label">OPRT_SVC_HTTP_NOT_ENCRYPT_RET</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_FILL_URL_H_ERR" class="nav-sub-label">OPRT_SVC_HTTP_FILL_URL_H_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_FILL_URL_FULL_ERR" class="nav-sub-label">OPRT_SVC_HTTP_FILL_URL_FULL_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_FILL_DATA_ERR" class="nav-sub-label">OPRT_SVC_HTTP_FILL_DATA_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_URL_CFG_AI_SPEAKER_ERR" class="nav-sub-label">OPRT_SVC_HTTP_URL_CFG_AI_SPEAKER_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_URL_CFG_URL_ERR" class="nav-sub-label">OPRT_SVC_HTTP_URL_CFG_URL_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_URL_CFG_URL2IP_ERR" class="nav-sub-label">OPRT_SVC_HTTP_URL_CFG_URL2IP_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_URL_CFG_URL2IP_SELF_ERR" class="nav-sub-label">OPRT_SVC_HTTP_URL_CFG_URL2IP_SELF_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_URL_CFG_URL2IP_VERIFY_ERR" class="nav-sub-label">OPRT_SVC_HTTP_URL_CFG_URL2IP_VERIFY_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_URL_CFG_URL2IP_PSK_ERR" class="nav-sub-label">OPRT_SVC_HTTP_URL_CFG_URL2IP_PSK_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_RECV_ERR" class="nav-sub-label">OPRT_SVC_HTTP_RECV_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_RECV_DA_NOT_ENOUGH" class="nav-sub-label">OPRT_SVC_HTTP_RECV_DA_NOT_ENOUGH</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_API_VERIFY_FAILED" class="nav-sub-label">OPRT_SVC_HTTP_API_VERIFY_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_GW_NOT_EXIST" class="nav-sub-label">OPRT_SVC_HTTP_GW_NOT_EXIST</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_API_TOKEN_EXPIRE" class="nav-sub-label">OPRT_SVC_HTTP_API_TOKEN_EXPIRE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_DEV_RESET_FACTORY" class="nav-sub-label">OPRT_SVC_HTTP_DEV_RESET_FACTORY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_DEV_NEED_REGISTER" class="nav-sub-label">OPRT_SVC_HTTP_DEV_NEED_REGISTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_ORDER_EXPIRE" class="nav-sub-label">OPRT_SVC_HTTP_ORDER_EXPIRE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_NOT_EXISTS" class="nav-sub-label">OPRT_SVC_HTTP_NOT_EXISTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_SIGNATURE_ERROR" class="nav-sub-label">OPRT_SVC_HTTP_SIGNATURE_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_API_VERSION_WRONG" class="nav-sub-label">OPRT_SVC_HTTP_API_VERSION_WRONG</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_DEVICE_REMOVED" class="nav-sub-label">OPRT_SVC_HTTP_DEVICE_REMOVED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_DEV_ALREADY_BIND" class="nav-sub-label">OPRT_SVC_HTTP_DEV_ALREADY_BIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_REMOTE_API_RUN_UNKNOW_FAILED" class="nav-sub-label">OPRT_SVC_HTTP_REMOTE_API_RUN_UNKNOW_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_FORMAT_STRING_FAILED" class="nav-sub-label">OPRT_SVC_HTTP_FORMAT_STRING_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_API_DECODE_FAILED" class="nav-sub-label">OPRT_SVC_HTTP_API_DECODE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_SERV_VRFY_FAIL" class="nav-sub-label">OPRT_SVC_HTTP_SERV_VRFY_FAIL</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_HTTP_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_HTTP_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_LAN_SOCKET_FAULT" class="nav-sub-label">OPRT_SVC_LAN_SOCKET_FAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_LAN_SEND_ERR" class="nav-sub-label">OPRT_SVC_LAN_SEND_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_LAN_NO_CLIENT_CONNECTED" class="nav-sub-label">OPRT_SVC_LAN_NO_CLIENT_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_LAN_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_LAN_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MQTT_CMD_NOT_EXEC" class="nav-sub-label">OPRT_SVC_MQTT_CMD_NOT_EXEC</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MQTT_CMD_OUT_OF_TIME" class="nav-sub-label">OPRT_SVC_MQTT_CMD_OUT_OF_TIME</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MQTT_GW_MQ_OFFLILNE" class="nav-sub-label">OPRT_SVC_MQTT_GW_MQ_OFFLILNE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_MQTT_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_MQTT_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_PEGASUS_DECODE_FAILED" class="nav-sub-label">OPRT_SVC_PEGASUS_DECODE_FAILED</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_PEGASUS_DONOT_FOUND_MODULE" class="nav-sub-label">OPRT_SVC_PEGASUS_DONOT_FOUND_MODULE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_PEGASUS_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_PEGASUS_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_UPGRADE_APP_NOT_READY" class="nav-sub-label">OPRT_SVC_UPGRADE_APP_NOT_READY</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_UPGRADE_NO_VALID_FIRMWARE" class="nav-sub-label">OPRT_SVC_UPGRADE_NO_VALID_FIRMWARE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_UPGRADE_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_UPGRADE_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_API_IOT_DISCONNECTED_WITH_ROUTER" class="nav-sub-label">OPRT_SVC_API_IOT_DISCONNECTED_WITH_ROUTER</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_API_IOT_DEV_NOT_BIND" class="nav-sub-label">OPRT_SVC_API_IOT_DEV_NOT_BIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_API_IOT_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_API_IOT_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DEVOS_NOT_EXISTS" class="nav-sub-label">OPRT_SVC_DEVOS_NOT_EXISTS</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DEVOS_SCMA_INVALID" class="nav-sub-label">OPRT_SVC_DEVOS_SCMA_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DEVOS_DEV_DP_CNT_INVALID" class="nav-sub-label">OPRT_SVC_DEVOS_DEV_DP_CNT_INVALID</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DEVOS_NO_AUTHENTICATION" class="nav-sub-label">OPRT_SVC_DEVOS_NO_AUTHENTICATION</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DEVOS_ROUTER_NOT_FIND" class="nav-sub-label">OPRT_SVC_DEVOS_ROUTER_NOT_FIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_DEVOS_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_DEVOS_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_DB_FLASH_NOT_ENOUGH_PAGE" class="nav-sub-label">OPRT_BASE_DB_FLASH_NOT_ENOUGH_PAGE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_BASE_DB_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_BASE_DB_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_BT_API_TRSMITR_CONTINUE" class="nav-sub-label">OPRT_SVC_BT_API_TRSMITR_CONTINUE</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_BT_API_TRSMITR_ERROR" class="nav-sub-label">OPRT_SVC_BT_API_TRSMITR_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_BT_NETCFG_ERROR_ACK" class="nav-sub-label">OPRT_SVC_BT_NETCFG_ERROR_ACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#OPRT_SVC_BT_ERRCODE_MAX_CNT" class="nav-sub-label">OPRT_SVC_BT_ERRCODE_MAX_CNT</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CHECK_NULL_RETURN(x, y)\
+do{\" class="nav-sub-label">TUYA_CHECK_NULL_RETURN(x, y)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CHECK_NULL_GOTO(x, label)\
+do{\" class="nav-sub-label">TUYA_CHECK_NULL_GOTO(x, label)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_LOG(func)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_LOG(func)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_GOTO(func, label)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_GOTO(func, label)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_RETURN(func)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_RETURN(func)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_RETURN_VAL(func, y)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_RETURN_VAL(func, y)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_LOG_SEQ_RETURN_VAL(func, y, point)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_LOG_SEQ_RETURN_VAL(func, y, point)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_LOG_SEQ_RETURN(func, point)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_LOG_SEQ_RETURN(func, point)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_LOG_SEQ_GOTO(func, label)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_LOG_SEQ_GOTO(func, label)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CALL_ERR_LOG_SEQ(func)\
+do{\" class="nav-sub-label">TUYA_CALL_ERR_LOG_SEQ(func)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CHECK_NULL_LOG_SEQ_RETURN(x, y, point)\
+do{\" class="nav-sub-label">TUYA_CHECK_NULL_LOG_SEQ_RETURN(x, y, point)\
+do{\</a>
+              </li>
+      
+
+              <li>
+                <a href="#TUYA_CHECK_NULL_LOG_SEQ_GOTO(x, point, label)\
+do{\" class="nav-sub-label">TUYA_CHECK_NULL_LOG_SEQ_GOTO(x, point, label)\
+do{\</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#OPERATE_RET" class="nav-sub-label">OPERATE_RET</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="TUYA_ERROR_CODE_H">Marco <span>TUYA_ERROR_CODE_H</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_ERROR_CODE_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_OK">Marco <span>OPRT_OK</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_OK                                           (0) //0, 执行成功
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module GLOBAL 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_COM_ERROR">Marco <span>OPRT_COM_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_COM_ERROR                                    (-1) //-1, 通用错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INVALID_PARM">Marco <span>OPRT_INVALID_PARM</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INVALID_PARM                                 (-2) //-2, 无效的入参
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MALLOC_FAILED">Marco <span>OPRT_MALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MALLOC_FAILED                                (-3) //-3, 内存分配失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NOT_SUPPORTED">Marco <span>OPRT_NOT_SUPPORTED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NOT_SUPPORTED                                (-4) //-4, 不支持
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NETWORK_ERROR">Marco <span>OPRT_NETWORK_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NETWORK_ERROR                                (-5) //-5, 网络错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_NOT_FOUND">Marco <span>OPRT_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_NOT_FOUND                                    (-6) //-6, 没有找到对象
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CR_CJSON_ERR">Marco <span>OPRT_CR_CJSON_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CR_CJSON_ERR                                 (-7) //-7, 创建json对象失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CJSON_PARSE_ERR">Marco <span>OPRT_CJSON_PARSE_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CJSON_PARSE_ERR                              (-8) //-8, json解析失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CJSON_GET_ERR">Marco <span>OPRT_CJSON_GET_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CJSON_GET_ERR                                (-9) //-9, 获取json对象失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CR_MUTEX_ERR">Marco <span>OPRT_CR_MUTEX_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CR_MUTEX_ERR                                 (0a) //-10, 创建信号量失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SOCK_ERR">Marco <span>OPRT_SOCK_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SOCK_ERR                                     (0b) //-11, 创建socket失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SET_SOCK_ERR">Marco <span>OPRT_SET_SOCK_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SET_SOCK_ERR                                 (0c) //-12, socket设置失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SOCK_CONN_ERR">Marco <span>OPRT_SOCK_CONN_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SOCK_CONN_ERR                                (0d) //-13, socket连接失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SEND_ERR">Marco <span>OPRT_SEND_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SEND_ERR                                     (0e) //-14, 发送失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_RECV_ERR">Marco <span>OPRT_RECV_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_RECV_ERR                                     (-15) //-15, 接收失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_RECV_DA_NOT_ENOUGH">Marco <span>OPRT_RECV_DA_NOT_ENOUGH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_RECV_DA_NOT_ENOUGH                           (-16) //-16, 接收数据不完整
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_KVS_WR_FAIL">Marco <span>OPRT_KVS_WR_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_KVS_WR_FAIL                                  (-17) //-17, KV写失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_KVS_RD_FAIL">Marco <span>OPRT_KVS_RD_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_KVS_RD_FAIL                                  (-18) //-18, KV读失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_CRC32_FAILED">Marco <span>OPRT_CRC32_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_CRC32_FAILED                                 (-19) //-19, CRC校验失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_TIMEOUT">Marco <span>OPRT_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_TIMEOUT                                      (-20) //-20, 超时
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INIT_MORE_THAN_ONCE">Marco <span>OPRT_INIT_MORE_THAN_ONCE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INIT_MORE_THAN_ONCE                          (-21) //-21, 初始化超过一次
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_INDEX_OUT_OF_BOUND">Marco <span>OPRT_INDEX_OUT_OF_BOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_INDEX_OUT_OF_BOUND                           (-22) //-22, 索引越界
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_RESOURCE_NOT_READY">Marco <span>OPRT_RESOURCE_NOT_READY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_RESOURCE_NOT_READY                           (-23) //-23, 资源未完善
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_EXCEED_UPPER_LIMIT">Marco <span>OPRT_EXCEED_UPPER_LIMIT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_EXCEED_UPPER_LIMIT                           (-24) //-24, 超过上限
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_FILE_NOT_FIND">Marco <span>OPRT_FILE_NOT_FIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_FILE_NOT_FIND                                (-25) //-25, 文件未找到
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_GLOBAL_ERRCODE_MAX_CNT">Marco <span>OPRT_GLOBAL_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_GLOBAL_ERRCODE_MAX_CNT 26
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_REG_NULL_ERROR">Marco <span>OPRT_BASE_OS_ADAPTER_REG_NULL_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_REG_NULL_ERROR               (-256) //-256, 系统适配注册失败
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_OS_ADAPTER 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_INIT_MUTEX_ATTR_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_INIT_MUTEX_ATTR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_INIT_MUTEX_ATTR_FAILED       (-257) //-257, 初始化同步属性失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_SET_MUTEX_ATTR_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_SET_MUTEX_ATTR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_SET_MUTEX_ATTR_FAILED        (-258) //-258, 设置同步属性失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_DESTROY_MUTEX_ATTR_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_DESTROY_MUTEX_ATTR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_DESTROY_MUTEX_ATTR_FAILED    (-259) //-259, 销毁同步属性失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_INIT_MUTEX_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_INIT_MUTEX_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_INIT_MUTEX_FAILED            (-260) //-260, 初始化互斥量失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_FAILED            (-261) //-261, 互斥量加锁失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MUTEX_TRYLOCK_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_MUTEX_TRYLOCK_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MUTEX_TRYLOCK_FAILED         (-262) //-262, 互斥量尝试加锁失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_BUSY">Marco <span>OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_BUSY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MUTEX_LOCK_BUSY              (-263) //-263, 互斥量忙
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MUTEX_UNLOCK_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_MUTEX_UNLOCK_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MUTEX_UNLOCK_FAILED          (-264) //-264, 互斥量解锁失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MUTEX_RELEASE_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_MUTEX_RELEASE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MUTEX_RELEASE_FAILED         (-265) //-265, 互斥量释放失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_CR_MUTEX_ERR">Marco <span>OPRT_BASE_OS_ADAPTER_CR_MUTEX_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_CR_MUTEX_ERR                 (-16a) //-266, 互斥量创建失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MEM_PARTITION_EMPTY">Marco <span>OPRT_BASE_OS_ADAPTER_MEM_PARTITION_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MEM_PARTITION_EMPTY          (-16b) //-267, 内存分区空
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MEM_PARTITION_FULL">Marco <span>OPRT_BASE_OS_ADAPTER_MEM_PARTITION_FULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MEM_PARTITION_FULL           (-16c) //-268, 内存分区满
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_MEM_PARTITION_NOT_FOUND">Marco <span>OPRT_BASE_OS_ADAPTER_MEM_PARTITION_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_MEM_PARTITION_NOT_FOUND      (-16d) //-269, 内存分区不存在
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_INIT_SEM_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_INIT_SEM_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_INIT_SEM_FAILED              (-16e) //-270, 初始化信号量失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_WAIT_SEM_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_WAIT_SEM_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_WAIT_SEM_FAILED              (-271) //-271, 等待信号量失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_POST_SEM_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_POST_SEM_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_POST_SEM_FAILED              (-272) //-272, 释放信号量失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_THRD_STA_UNVALID">Marco <span>OPRT_BASE_OS_ADAPTER_THRD_STA_UNVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_THRD_STA_UNVALID             (-273) //-273, 线程状态非法
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_THRD_CR_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_THRD_CR_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_THRD_CR_FAILED               (-274) //-274, 线程创建失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_THRD_JOIN_FAILED">Marco <span>OPRT_BASE_OS_ADAPTER_THRD_JOIN_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_THRD_JOIN_FAILED             (-275) //-275, 线程JOIN函数调用失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_THRD_SELF_CAN_NOT_JOIN">Marco <span>OPRT_BASE_OS_ADAPTER_THRD_SELF_CAN_NOT_JOIN</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_THRD_SELF_CAN_NOT_JOIN       (-276) //-276, 自身线程不能调用JOIN函数
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_OS_ADAPTER_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_OS_ADAPTER_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_OS_ADAPTER_ERRCODE_MAX_CNT 21
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_UTILITIES_PARTITION_EMPTY">Marco <span>OPRT_BASE_UTILITIES_PARTITION_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_UTILITIES_PARTITION_EMPTY               (-512) //-512, 无空闲链表
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_UTILITIES 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_UTILITIES_PARTITION_FULL">Marco <span>OPRT_BASE_UTILITIES_PARTITION_FULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_UTILITIES_PARTITION_FULL                (-513) //-513, 链表已满
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_UTILITIES_PARTITION_NOT_FOUND">Marco <span>OPRT_BASE_UTILITIES_PARTITION_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_UTILITIES_PARTITION_NOT_FOUND           (-514) //-514, 链表未遍历到
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_UTILITIES_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_UTILITIES_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_UTILITIES_ERRCODE_MAX_CNT 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_SECURITY_CRC32_FAILED">Marco <span>OPRT_BASE_SECURITY_CRC32_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_SECURITY_CRC32_FAILED                   (-768) //-768, CRC32错误
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_SECURITY 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_SECURITY_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_SECURITY_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_SECURITY_ERRCODE_MAX_CNT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_DONOT_FOUND_MODULE">Marco <span>OPRT_BASE_LOG_MNG_DONOT_FOUND_MODULE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_DONOT_FOUND_MODULE              (-1024) //-1024, 未发现log模块
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_LOG_MNG 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_PRINT_LOG_LEVEL_HIGHER">Marco <span>OPRT_BASE_LOG_MNG_PRINT_LOG_LEVEL_HIGHER</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_PRINT_LOG_LEVEL_HIGHER          (-1025) //-1025, log级别低
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_FORMAT_STRING_FAILED">Marco <span>OPRT_BASE_LOG_MNG_FORMAT_STRING_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_FORMAT_STRING_FAILED            (-1026) //-1026, log字符串格式化失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_LOG_SEQ_OPEN_FILE_FAIL">Marco <span>OPRT_BASE_LOG_MNG_LOG_SEQ_OPEN_FILE_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_LOG_SEQ_OPEN_FILE_FAIL          (-1027) //-1027, 打开日志序文件失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_LOG_SEQ_WRITE_FILE_FAIL">Marco <span>OPRT_BASE_LOG_MNG_LOG_SEQ_WRITE_FILE_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_LOG_SEQ_WRITE_FILE_FAIL         (-1028) //-1028, 写日志序文件失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_FULL">Marco <span>OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_FULL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_FULL               (-1029) //-1029, 日志序文件满
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_NOT_EXIST">Marco <span>OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_NOT_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_LOG_SEQ_FILE_NOT_EXIST          (-1030) //-1030, 日志序文件不存在
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_LOG_SEQ_NAME_INVALIDE">Marco <span>OPRT_BASE_LOG_MNG_LOG_SEQ_NAME_INVALIDE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_LOG_SEQ_NAME_INVALIDE           (-1031) //-1031, 日志序名称无效
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_LOG_SEQ_CREATE_FAIL">Marco <span>OPRT_BASE_LOG_MNG_LOG_SEQ_CREATE_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_LOG_SEQ_CREATE_FAIL             (-1032) //-1032, 日志序创建失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_LOG_MNG_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_LOG_MNG_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_LOG_MNG_ERRCODE_MAX_CNT 9
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_TIMEQ_TIMERID_EXIST">Marco <span>OPRT_BASE_TIMEQ_TIMERID_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_TIMEQ_TIMERID_EXIST                     (-1536) //-1536, 定时器ID已存在
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_TIMEQ 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_TIMEQ_TIMERID_NOT_FOUND">Marco <span>OPRT_BASE_TIMEQ_TIMERID_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_TIMEQ_TIMERID_NOT_FOUND                 (-1537) //-1537, 未找到指定定时器ID
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_TIMEQ_TIMERID_UNVALID">Marco <span>OPRT_BASE_TIMEQ_TIMERID_UNVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_TIMEQ_TIMERID_UNVALID                   (-1538) //-1538, 定时器ID非法
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_TIMEQ_GET_IDLE_TIMERID_ERROR">Marco <span>OPRT_BASE_TIMEQ_GET_IDLE_TIMERID_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_TIMEQ_GET_IDLE_TIMERID_ERROR            (-1539) //-1539, 获取空闲定时器ID错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_TIMEQ_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_TIMEQ_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_TIMEQ_ERRCODE_MAX_CNT 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_MSGQ_NOT_FOUND">Marco <span>OPRT_BASE_MSGQ_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_MSGQ_NOT_FOUND                          (-1792) //-1792, 消息未找到
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_MSGQ 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_MSGQ_LIST_EMPTY">Marco <span>OPRT_BASE_MSGQ_LIST_EMPTY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_MSGQ_LIST_EMPTY                         (-1793) //-1793, 列表为空
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_MSGQ_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_MSGQ_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_MSGQ_ERRCODE_MAX_CNT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_BUF_NOT_ENOUGH">Marco <span>OPRT_MID_HTTP_BUF_NOT_ENOUGH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_BUF_NOT_ENOUGH                      (-2048) //-2048, 缓冲区长度不足
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module MID_HTTP 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_MID_HTTP_URL_PARAM_OUT_LIMIT">Marco <span>OPRT_MID_HTTP_URL_PARAM_OUT_LIMIT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_URL_PARAM_OUT_LIMIT                 (-2049) //-2049, URL长度超出限制
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_OS_ERROR">Marco <span>OPRT_MID_HTTP_OS_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_OS_ERROR                            (-2050) //-2050, 系统错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_PR_REQ_ERROR">Marco <span>OPRT_MID_HTTP_PR_REQ_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_PR_REQ_ERROR                        (-2051) //-2051, 准备请求错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_SD_REQ_ERROR">Marco <span>OPRT_MID_HTTP_SD_REQ_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_SD_REQ_ERROR                        (-2052) //-2052, 发送请求错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_RD_ERROR">Marco <span>OPRT_MID_HTTP_RD_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_RD_ERROR                            (-2053) //-2053, 读取错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_AD_HD_ERROR">Marco <span>OPRT_MID_HTTP_AD_HD_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_AD_HD_ERROR                         (-2054) //-2054, 添加头错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_GET_RESP_ERROR">Marco <span>OPRT_MID_HTTP_GET_RESP_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_GET_RESP_ERROR                      (-2055) //-2055, 获取应答错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_AES_INIT_ERR">Marco <span>OPRT_MID_HTTP_AES_INIT_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_AES_INIT_ERR                        (-2056) //-2056, AES初始化错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_AES_OPEN_ERR">Marco <span>OPRT_MID_HTTP_AES_OPEN_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_AES_OPEN_ERR                        (-2057) //-2057, AES打开错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_AES_SET_KEY_ERR">Marco <span>OPRT_MID_HTTP_AES_SET_KEY_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_AES_SET_KEY_ERR                     (-128a) //-2058, AES设置KEY错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_AES_ENCRYPT_ERR">Marco <span>OPRT_MID_HTTP_AES_ENCRYPT_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_AES_ENCRYPT_ERR                     (-128b) //-2059, AES加密错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_CR_HTTP_URL_H_ERR">Marco <span>OPRT_MID_HTTP_CR_HTTP_URL_H_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_CR_HTTP_URL_H_ERR                   (-128c) //-2060, 创建HTTP URL头错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_HTTPS_HANDLE_FAIL">Marco <span>OPRT_MID_HTTP_HTTPS_HANDLE_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_HTTPS_HANDLE_FAIL                   (-128d) //-2061, HTTPS句柄错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_HTTPS_RESP_UNVALID">Marco <span>OPRT_MID_HTTP_HTTPS_RESP_UNVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_HTTPS_RESP_UNVALID                  (-128e) //-2062, HTTPS无效应答
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_NO_SUPPORT_RANGE">Marco <span>OPRT_MID_HTTP_NO_SUPPORT_RANGE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_NO_SUPPORT_RANGE                    (-2063) //-2063, 不支持断点续传
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_HTTP_ERRCODE_MAX_CNT">Marco <span>OPRT_MID_HTTP_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_HTTP_ERRCODE_MAX_CNT 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_DEF_ERR">Marco <span>OPRT_MID_MQTT_DEF_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_DEF_ERR                             (-2304) //-2304, 定义失败
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module MID_MQTT 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_MID_MQTT_INVALID_PARM">Marco <span>OPRT_MID_MQTT_INVALID_PARM</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_INVALID_PARM                        (-2305) //-2305, 参数无效
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_MALLOC_FAILED">Marco <span>OPRT_MID_MQTT_MALLOC_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_MALLOC_FAILED                       (-2306) //-2306, 内存申请失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_DNS_PARSED_FAILED">Marco <span>OPRT_MID_MQTT_DNS_PARSED_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_DNS_PARSED_FAILED                   (-2307) //-2307, DNS解析失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_SOCK_CREAT_FAILED">Marco <span>OPRT_MID_MQTT_SOCK_CREAT_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_SOCK_CREAT_FAILED                   (-2308) //-2308, socket创建失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_SOCK_SET_FAILED">Marco <span>OPRT_MID_MQTT_SOCK_SET_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_SOCK_SET_FAILED                     (-2309) //-2309, socket set失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_TCP_CONNECD_FAILED">Marco <span>OPRT_MID_MQTT_TCP_CONNECD_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_TCP_CONNECD_FAILED                  (-2310) //-2310, tcp连接失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_TCP_TLS_CONNECD_FAILED">Marco <span>OPRT_MID_MQTT_TCP_TLS_CONNECD_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_TCP_TLS_CONNECD_FAILED              (-2311) //-2311, tcp tls连接失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_PACK_SEND_FAILED">Marco <span>OPRT_MID_MQTT_PACK_SEND_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_PACK_SEND_FAILED                    (-2312) //-2312, 包发送失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_RECV_DATA_FORMAT_WRONG">Marco <span>OPRT_MID_MQTT_RECV_DATA_FORMAT_WRONG</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_RECV_DATA_FORMAT_WRONG              (-2313) //-2313, 接收数据格式错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_MSGID_NOT_MATCH">Marco <span>OPRT_MID_MQTT_MSGID_NOT_MATCH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_MSGID_NOT_MATCH                     (-144a) //-2314, 接收数据msgid未找到
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_START_TM_MSG_ERR">Marco <span>OPRT_MID_MQTT_START_TM_MSG_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_START_TM_MSG_ERR                    (-144b) //-2315, 开始事件msg错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_OVER_MAX_MESSAGE_LEN">Marco <span>OPRT_MID_MQTT_OVER_MAX_MESSAGE_LEN</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_OVER_MAX_MESSAGE_LEN                (-144c) //-2316, 超过消息最大长度
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_PING_SEND_ERR">Marco <span>OPRT_MID_MQTT_PING_SEND_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_PING_SEND_ERR                       (-144d) //-2317, ping发送失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_PUBLISH_TIMEOUT">Marco <span>OPRT_MID_MQTT_PUBLISH_TIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_PUBLISH_TIMEOUT                     (-144e) //-2318, 发布超时
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_MQTT_ERRCODE_MAX_CNT">Marco <span>OPRT_MID_MQTT_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_MQTT_ERRCODE_MAX_CNT 15
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_NET_SOCKET_ERROR">Marco <span>OPRT_MID_TLS_NET_SOCKET_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_NET_SOCKET_ERROR                     (0a00) //-2560, Failed to open a socket
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module MID_TLS 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_MID_TLS_NET_CONNECT_ERROR">Marco <span>OPRT_MID_TLS_NET_CONNECT_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_NET_CONNECT_ERROR                    (0a01) //-2561, The connection to the given server / port failed.
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_UNKNOWN_HOST_ERROR">Marco <span>OPRT_MID_TLS_UNKNOWN_HOST_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_UNKNOWN_HOST_ERROR                   (0a02) //-2562, Failed to get an IP address for the given hostname.
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_CONNECTION_ERROR">Marco <span>OPRT_MID_TLS_CONNECTION_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_CONNECTION_ERROR                     (0a03) //-2563, TLS连接失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_DRBG_ENTROPY_ERROR">Marco <span>OPRT_MID_TLS_DRBG_ENTROPY_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_DRBG_ENTROPY_ERROR                   (0a04) //-2564, mbedtls随机种子生成失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_X509_ROOT_CRT_PARSE_ERROR">Marco <span>OPRT_MID_TLS_X509_ROOT_CRT_PARSE_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_X509_ROOT_CRT_PARSE_ERROR            (0a05) //-2565, X509根证书解析失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_X509_DEVICE_CRT_PARSE_ERROR">Marco <span>OPRT_MID_TLS_X509_DEVICE_CRT_PARSE_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_X509_DEVICE_CRT_PARSE_ERROR          (0a06) //-2566, X509设备证书解析失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_CTR_DRBG_ENTROPY_SOURCE_ERROR">Marco <span>OPRT_MID_TLS_CTR_DRBG_ENTROPY_SOURCE_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_CTR_DRBG_ENTROPY_SOURCE_ERROR        (0a07) //-2567, The entropy source failed
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_PK_PRIVATE_KEY_PARSE_ERROR">Marco <span>OPRT_MID_TLS_PK_PRIVATE_KEY_PARSE_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_PK_PRIVATE_KEY_PARSE_ERROR           (0a08) //-2568, 秘钥解析失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_MID_TLS_ERRCODE_MAX_CNT">Marco <span>OPRT_MID_TLS_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_MID_TLS_ERRCODE_MAX_CNT 9
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_WIFI_NETCFG_RECV_CONTINUE">Marco <span>OPRT_SVC_WIFI_NETCFG_RECV_CONTINUE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_WIFI_NETCFG_RECV_CONTINUE                (0b00) //-2816, 继续接收配网包
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_WIFI_NETCFG 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_WIFI_NETCFG_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_WIFI_NETCFG_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_WIFI_NETCFG_ERRCODE_MAX_CNT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_MF_TEST_UPDATE_DATA_LEN_EXECED">Marco <span>OPRT_SVC_MF_TEST_UPDATE_DATA_LEN_EXECED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MF_TEST_UPDATE_DATA_LEN_EXECED           (0d00) //-3328, 升级数据长度超过处理上限
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_MF_TEST 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_MF_TEST_UPDATE_CRC_ERROR">Marco <span>OPRT_SVC_MF_TEST_UPDATE_CRC_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MF_TEST_UPDATE_CRC_ERROR                 (0d01) //-3329, 升级crc校验失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_MF_TEST_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_MF_TEST_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MF_TEST_ERRCODE_MAX_CNT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_ALREADY_PROCESS">Marco <span>OPRT_SVC_DP_ALREADY_PROCESS</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_ALREADY_PROCESS                       (0e00) //-3584, DP已经处理
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_DP 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_DP_ID_NOT_FOUND">Marco <span>OPRT_SVC_DP_ID_NOT_FOUND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_ID_NOT_FOUND                          (0e01) //-3585, DP ID没有发现
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_TP_NOT_MATCH">Marco <span>OPRT_SVC_DP_TP_NOT_MATCH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_TP_NOT_MATCH                          (0e02) //-3586, DP 类型未匹配
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_DEVICE_NOT_BINDED">Marco <span>OPRT_SVC_DP_DEVICE_NOT_BINDED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_DEVICE_NOT_BINDED                     (0e03) //-3587, 设备未绑定
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_TYPE_PROP_ILLEGAL">Marco <span>OPRT_SVC_DP_TYPE_PROP_ILLEGAL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_TYPE_PROP_ILLEGAL                     (0e04) //-3588, 类型属性不合法
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_NW_INVALID">Marco <span>OPRT_SVC_DP_NW_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_NW_INVALID                            (0e05) //-3589, 网络无效
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_SECURITY_VERIFY_ERR">Marco <span>OPRT_SVC_DP_SECURITY_VERIFY_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_SECURITY_VERIFY_ERR                   (0e06) //-3590, 安全校验失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_REPORT_FINISH">Marco <span>OPRT_SVC_DP_REPORT_FINISH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_REPORT_FINISH                         (0e07) //-3591, DP上报已结束
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DP_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_DP_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DP_ERRCODE_MAX_CNT 8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_EVENT_INVALID_EVENT_NAME">Marco <span>OPRT_BASE_EVENT_INVALID_EVENT_NAME</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_EVENT_INVALID_EVENT_NAME                (-3840) //-3840, 无效的事件名
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_EVENT 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_EVENT_INVALID_EVENT_DESC">Marco <span>OPRT_BASE_EVENT_INVALID_EVENT_DESC</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_EVENT_INVALID_EVENT_DESC                (-3841) //-3841, 无效的事件描述
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_EVENT_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_EVENT_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_EVENT_ERRCODE_MAX_CNT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_TIMER_TASK_LOAD_INVALID_CJSON">Marco <span>OPRT_SVC_TIMER_TASK_LOAD_INVALID_CJSON</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_TIMER_TASK_LOAD_INVALID_CJSON            (-4096) //-4096, K/V中保存的数据JSON格式错误
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_TIMER_TASK 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_TIMER_TASK_LOAD_INVALID_DATA">Marco <span>OPRT_SVC_TIMER_TASK_LOAD_INVALID_DATA</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_TIMER_TASK_LOAD_INVALID_DATA             (-4097) //-4097, K/V中保存的数据缺少cnt字段
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_TIMER_TASK_UPDATE_LAST_FETCH_INVALID">Marco <span>OPRT_SVC_TIMER_TASK_UPDATE_LAST_FETCH_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_TIMER_TASK_UPDATE_LAST_FETCH_INVALID     (-4098) //-4098, 云端返回的数据缺少lastFetchTime字段
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_INVALID">Marco <span>OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_INVALID      (-4099) //-4099, 云端返回的数据缺少count字段
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_EXCEED">Marco <span>OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_EXCEED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_TIMER_TASK_UPDATE_TIMER_CNT_EXCEED       (-4100) //-4100, 云端返回的定时任务数量超过30个
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_TIMER_TASK_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_TIMER_TASK_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_TIMER_TASK_ERRCODE_MAX_CNT 5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_NOT_ENCRYPT_RET">Marco <span>OPRT_SVC_HTTP_NOT_ENCRYPT_RET</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_NOT_ENCRYPT_RET                     (-4352) //-4352, 结果未加密
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_HTTP 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_HTTP_FILL_URL_H_ERR">Marco <span>OPRT_SVC_HTTP_FILL_URL_H_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_FILL_URL_H_ERR                      (-4353) //-4353, 构造header错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_FILL_URL_FULL_ERR">Marco <span>OPRT_SVC_HTTP_FILL_URL_FULL_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_FILL_URL_FULL_ERR                   (-4354) //-4354, 构造整个URL错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_FILL_DATA_ERR">Marco <span>OPRT_SVC_HTTP_FILL_DATA_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_FILL_DATA_ERR                       (-4355) //-4355, 构造data错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_URL_CFG_AI_SPEAKER_ERR">Marco <span>OPRT_SVC_HTTP_URL_CFG_AI_SPEAKER_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_URL_CFG_AI_SPEAKER_ERR              (-4356) //-4356, 音响配置失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_URL_CFG_URL_ERR">Marco <span>OPRT_SVC_HTTP_URL_CFG_URL_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_URL_CFG_URL_ERR                     (-4357) //-4357, httpUrl/mqttUrl字段缺失
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_URL_CFG_URL2IP_ERR">Marco <span>OPRT_SVC_HTTP_URL_CFG_URL2IP_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_URL_CFG_URL2IP_ERR                  (-4358) //-4358, httpUrl/mqttUrl解析错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_URL_CFG_URL2IP_SELF_ERR">Marco <span>OPRT_SVC_HTTP_URL_CFG_URL2IP_SELF_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_URL_CFG_URL2IP_SELF_ERR             (-4359) //-4359, httpsSelfUrl/mqttsSelfUrl解析错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_URL_CFG_URL2IP_VERIFY_ERR">Marco <span>OPRT_SVC_HTTP_URL_CFG_URL2IP_VERIFY_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_URL_CFG_URL2IP_VERIFY_ERR           (-4360) //-4360, httpsVerifyUrl/mqttsVerifyUrl解析错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_URL_CFG_URL2IP_PSK_ERR">Marco <span>OPRT_SVC_HTTP_URL_CFG_URL2IP_PSK_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_URL_CFG_URL2IP_PSK_ERR              (-4361) //-4361, httpsPSKUrl/mqttsPSKUrl解析错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_RECV_ERR">Marco <span>OPRT_SVC_HTTP_RECV_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_RECV_ERR                            (-272a) //-4362, 接收数据错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_RECV_DA_NOT_ENOUGH">Marco <span>OPRT_SVC_HTTP_RECV_DA_NOT_ENOUGH</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_RECV_DA_NOT_ENOUGH                  (-272b) //-4363, 接收数据不足
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_API_VERIFY_FAILED">Marco <span>OPRT_SVC_HTTP_API_VERIFY_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_API_VERIFY_FAILED                   (-272c) //-4364, 数据校验错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_GW_NOT_EXIST">Marco <span>OPRT_SVC_HTTP_GW_NOT_EXIST</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_GW_NOT_EXIST                        (-272d) //-4365, 网关信息不存在
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_API_TOKEN_EXPIRE">Marco <span>OPRT_SVC_HTTP_API_TOKEN_EXPIRE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_API_TOKEN_EXPIRE                    (-272e) //-4366, TOKEN过期
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_DEV_RESET_FACTORY">Marco <span>OPRT_SVC_HTTP_DEV_RESET_FACTORY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_DEV_RESET_FACTORY                   (-4367) //-4367, 设备需要恢复出厂
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_DEV_NEED_REGISTER">Marco <span>OPRT_SVC_HTTP_DEV_NEED_REGISTER</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_DEV_NEED_REGISTER                   (-4368) //-4368, 设备未注册
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_ORDER_EXPIRE">Marco <span>OPRT_SVC_HTTP_ORDER_EXPIRE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_ORDER_EXPIRE                        (-4369) //-4369, 订单已过期
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_NOT_EXISTS">Marco <span>OPRT_SVC_HTTP_NOT_EXISTS</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_NOT_EXISTS                          (-4370) //-4370, 不存在
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_SIGNATURE_ERROR">Marco <span>OPRT_SVC_HTTP_SIGNATURE_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_SIGNATURE_ERROR                     (-4371) //-4371, 签名错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_API_VERSION_WRONG">Marco <span>OPRT_SVC_HTTP_API_VERSION_WRONG</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_API_VERSION_WRONG                   (-4372) //-4372, API版本错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_DEVICE_REMOVED">Marco <span>OPRT_SVC_HTTP_DEVICE_REMOVED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_DEVICE_REMOVED                      (-4373) //-4373, 设备已移除
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_DEV_ALREADY_BIND">Marco <span>OPRT_SVC_HTTP_DEV_ALREADY_BIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_DEV_ALREADY_BIND                    (-4374) //-4374, 设备已经绑定
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_REMOTE_API_RUN_UNKNOW_FAILED">Marco <span>OPRT_SVC_HTTP_REMOTE_API_RUN_UNKNOW_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_REMOTE_API_RUN_UNKNOW_FAILED        (-4375) //-4375, 无法识别API
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_FORMAT_STRING_FAILED">Marco <span>OPRT_SVC_HTTP_FORMAT_STRING_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_FORMAT_STRING_FAILED                (-4376) //-4376, 字符串格式化错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_API_DECODE_FAILED">Marco <span>OPRT_SVC_HTTP_API_DECODE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_API_DECODE_FAILED                   (-4377) //-4377, 数据解密失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_SERV_VRFY_FAIL">Marco <span>OPRT_SVC_HTTP_SERV_VRFY_FAIL</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_SERV_VRFY_FAIL                      (-273a) //-4378, 服务端校验失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_HTTP_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_HTTP_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_HTTP_ERRCODE_MAX_CNT 27
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_LAN_SOCKET_FAULT">Marco <span>OPRT_SVC_LAN_SOCKET_FAULT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_LAN_SOCKET_FAULT                         (-5376) //-5376, socket错误
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_LAN 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_LAN_SEND_ERR">Marco <span>OPRT_SVC_LAN_SEND_ERR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_LAN_SEND_ERR                             (-5377) //-5377, socket发送错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_LAN_NO_CLIENT_CONNECTED">Marco <span>OPRT_SVC_LAN_NO_CLIENT_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_LAN_NO_CLIENT_CONNECTED                  (-5378) //-5378, 没有可以上报的局域网设备连接
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_LAN_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_LAN_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_LAN_ERRCODE_MAX_CNT 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_MQTT_CMD_NOT_EXEC">Marco <span>OPRT_SVC_MQTT_CMD_NOT_EXEC</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MQTT_CMD_NOT_EXEC                        (-5888) //-5888, 命令未执行
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_MQTT 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_MQTT_CMD_OUT_OF_TIME">Marco <span>OPRT_SVC_MQTT_CMD_OUT_OF_TIME</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MQTT_CMD_OUT_OF_TIME                     (-5889) //-5889, 命令未在规定时间内执行
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_MQTT_GW_MQ_OFFLILNE">Marco <span>OPRT_SVC_MQTT_GW_MQ_OFFLILNE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MQTT_GW_MQ_OFFLILNE                      (-5890) //-5890, MQTT离线
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_MQTT_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_MQTT_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_MQTT_ERRCODE_MAX_CNT 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_PEGASUS_DECODE_FAILED">Marco <span>OPRT_SVC_PEGASUS_DECODE_FAILED</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_PEGASUS_DECODE_FAILED                    (-6144) //-6144, 解码失败
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_PEGASUS 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_PEGASUS_DONOT_FOUND_MODULE">Marco <span>OPRT_SVC_PEGASUS_DONOT_FOUND_MODULE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_PEGASUS_DONOT_FOUND_MODULE               (-6145) //-6145, 模块未找到
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_PEGASUS_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_PEGASUS_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_PEGASUS_ERRCODE_MAX_CNT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_UPGRADE_APP_NOT_READY">Marco <span>OPRT_SVC_UPGRADE_APP_NOT_READY</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_UPGRADE_APP_NOT_READY                    (-6400) //-6400, 应用尚未就绪
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_UPGRADE 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_UPGRADE_NO_VALID_FIRMWARE">Marco <span>OPRT_SVC_UPGRADE_NO_VALID_FIRMWARE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_UPGRADE_NO_VALID_FIRMWARE                (-6401) //-6401, 升级信息字段校验失败
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_UPGRADE_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_UPGRADE_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_UPGRADE_ERRCODE_MAX_CNT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_API_IOT_DISCONNECTED_WITH_ROUTER">Marco <span>OPRT_SVC_API_IOT_DISCONNECTED_WITH_ROUTER</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_API_IOT_DISCONNECTED_WITH_ROUTER         (-1a00) //-6656, 路由器断开
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_API_IOT 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_API_IOT_DEV_NOT_BIND">Marco <span>OPRT_SVC_API_IOT_DEV_NOT_BIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_API_IOT_DEV_NOT_BIND                     (-1a01) //-6657, 设备未绑定
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_API_IOT_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_API_IOT_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_API_IOT_ERRCODE_MAX_CNT 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DEVOS_NOT_EXISTS">Marco <span>OPRT_SVC_DEVOS_NOT_EXISTS</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DEVOS_NOT_EXISTS                         (-1c00) //-7168, 不存在
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_DEVOS 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_DEVOS_SCMA_INVALID">Marco <span>OPRT_SVC_DEVOS_SCMA_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DEVOS_SCMA_INVALID                       (-1c01) //-7169, SCMA无效
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DEVOS_DEV_DP_CNT_INVALID">Marco <span>OPRT_SVC_DEVOS_DEV_DP_CNT_INVALID</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DEVOS_DEV_DP_CNT_INVALID                 (-1c02) //-7170, 设备DP数量无效
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DEVOS_NO_AUTHENTICATION">Marco <span>OPRT_SVC_DEVOS_NO_AUTHENTICATION</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DEVOS_NO_AUTHENTICATION                  (-1c03) //-7171, 无授权
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DEVOS_ROUTER_NOT_FIND">Marco <span>OPRT_SVC_DEVOS_ROUTER_NOT_FIND</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DEVOS_ROUTER_NOT_FIND                    (-1c04) //-7172, 路由器未找到
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_DEVOS_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_DEVOS_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_DEVOS_ERRCODE_MAX_CNT 5
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_BASE_DB_FLASH_NOT_ENOUGH_PAGE">Marco <span>OPRT_BASE_DB_FLASH_NOT_ENOUGH_PAGE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_DB_FLASH_NOT_ENOUGH_PAGE                (-1d00) //-7424, flash页不够
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module BASE_DB 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_BASE_DB_ERRCODE_MAX_CNT">Marco <span>OPRT_BASE_DB_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_BASE_DB_ERRCODE_MAX_CNT 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_BT_API_TRSMITR_CONTINUE">Marco <span>OPRT_SVC_BT_API_TRSMITR_CONTINUE</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_BT_API_TRSMITR_CONTINUE                  (-7936) //-7936, 传输未结束
+</code></pre>
+      <pre class="doc-comment">/****************************************************************************
+            the error code marco define for module SVC_BT 
+****************************************************************************/</pre>
+
+      <h4 id="OPRT_SVC_BT_API_TRSMITR_ERROR">Marco <span>OPRT_SVC_BT_API_TRSMITR_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_BT_API_TRSMITR_ERROR                     (-7937) //-7937, 传输错误
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_BT_NETCFG_ERROR_ACK">Marco <span>OPRT_SVC_BT_NETCFG_ERROR_ACK</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_BT_NETCFG_ERROR_ACK                      (-7938) //-7938, bt命令出错，给app发送ack
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="OPRT_SVC_BT_ERRCODE_MAX_CNT">Marco <span>OPRT_SVC_BT_ERRCODE_MAX_CNT</span></h4>
+      <pre class="doc-declare"><code>#define OPRT_SVC_BT_ERRCODE_MAX_CNT 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CHECK_NULL_RETURN(x, y)\
+do{\">Marco <span>TUYA_CHECK_NULL_RETURN(x, y)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CHECK_NULL_RETURN(x, y)\
+do{\
+   if (NULL == (x)){\
+       PR_ERR("%s null", #x);\
+       return (y);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CHECK_NULL_GOTO(x, label)\
+do{\">Marco <span>TUYA_CHECK_NULL_GOTO(x, label)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CHECK_NULL_GOTO(x, label)\
+do{\
+   if (NULL == (x)){\
+       PR_ERR("%s null", #x);\
+       goto label;\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_LOG(func)\
+do{\">Marco <span>TUYA_CALL_ERR_LOG(func)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_LOG(func)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt))\
+       PR_ERR("ret:%d", rt);\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_GOTO(func, label)\
+do{\">Marco <span>TUYA_CALL_ERR_GOTO(func, label)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_GOTO(func, label)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)){\
+       PR_ERR("ret:%d", rt);\
+       goto label;\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_RETURN(func)\
+do{\">Marco <span>TUYA_CALL_ERR_RETURN(func)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_RETURN(func)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)){\
+      PR_ERR("ret:%d", rt);\
+      return (rt);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_RETURN_VAL(func, y)\
+do{\">Marco <span>TUYA_CALL_ERR_RETURN_VAL(func, y)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_RETURN_VAL(func, y)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)){\
+       PR_ERR("ret:%d", rt);\
+       return (y);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_LOG_SEQ_RETURN_VAL(func, y, point)\
+do{\">Marco <span>TUYA_CALL_ERR_LOG_SEQ_RETURN_VAL(func, y, point)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_LOG_SEQ_RETURN_VAL(func, y, point)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)){\
+       PR_ERR("ret:%d", rt);\
+       INSERT_ERROR_LOG_SEQ_DEC((point), rt);\
+       return (y);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_LOG_SEQ_RETURN(func, point)\
+do{\">Marco <span>TUYA_CALL_ERR_LOG_SEQ_RETURN(func, point)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_LOG_SEQ_RETURN(func, point)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)){\
+       PR_ERR("ret:%d", rt);\
+       INSERT_ERROR_LOG_SEQ_DEC((point), rt);\
+       return (rt);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_LOG_SEQ_GOTO(func, label)\
+do{\">Marco <span>TUYA_CALL_ERR_LOG_SEQ_GOTO(func, label)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_LOG_SEQ_GOTO(func, label)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)){\
+       PR_ERR("ret:%d", rt);\
+       INSERT_ERROR_LOG_SEQ_DEC((point), rt);\
+       goto label;\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CALL_ERR_LOG_SEQ(func)\
+do{\">Marco <span>TUYA_CALL_ERR_LOG_SEQ(func)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CALL_ERR_LOG_SEQ(func)\
+do{\
+   rt = (func);\
+   if (OPRT_OK != (rt)) {\
+       PR_ERR("ret:%d", rt);\
+       INSERT_ERROR_LOG_SEQ_DEC((point), rt);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CHECK_NULL_LOG_SEQ_RETURN(x, y, point)\
+do{\">Marco <span>TUYA_CHECK_NULL_LOG_SEQ_RETURN(x, y, point)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CHECK_NULL_LOG_SEQ_RETURN(x, y, point)\
+do{\
+   if (NULL == (x)){\
+       PR_ERR("%s null", #x);\
+       INSERT_ERROR_LOG_SEQ_DEC((point), y);\
+       return (y);\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TUYA_CHECK_NULL_LOG_SEQ_GOTO(x, point, label)\
+do{\">Marco <span>TUYA_CHECK_NULL_LOG_SEQ_GOTO(x, point, label)\
+do{\</span></h4>
+      <pre class="doc-declare"><code>#define TUYA_CHECK_NULL_LOG_SEQ_GOTO(x, point, label)\
+do{\
+   if (NULL == (x)){\
+       PR_ERR("%s null", #x);\
+       INSERT_ERROR_LOG_SEQ_NULL((point));\
+       goto label;\
+   }\
+}while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="OPERATE_RET">Typedef <span>OPERATE_RET</span></h4>
+      <pre class="doc-declare"><code>typedef int OPERATE_RET;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

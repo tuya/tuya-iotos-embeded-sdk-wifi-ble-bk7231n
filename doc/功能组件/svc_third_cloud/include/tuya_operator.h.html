@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 280px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#stdio.h" class="nav-sub-label">stdio.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_types.h" class="nav-sub-label">tuya_cloud_types.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_cloud_com_defs.h" class="nav-sub-label">tuya_cloud_com_defs.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#_TUYA_OPERATOR_H_" class="nav-sub-label">_TUYA_OPERATOR_H_</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_UPLOAD_RESULT_OK" class="nav-sub-label">TY_CUCC_UPLOAD_RESULT_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_UPLOAD_ERR" class="nav-sub-label">TY_CUCC_UPLOAD_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_IS_UNICOM_NETWORK" class="nav-sub-label">TY_CUCC_IS_UNICOM_NETWORK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_NOT_UNICOM_NETWORK" class="nav-sub-label">TY_CUCC_NOT_UNICOM_NETWORK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_NUMBER_ATTR_OK" class="nav-sub-label">TY_CUCC_NUMBER_ATTR_OK</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_NUMBER_NOT_BIND" class="nav-sub-label">TY_CUCC_NUMBER_NOT_BIND</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_LOCATION_ERR" class="nav-sub-label">TY_CUCC_LOCATION_ERR</a>
+              </li>
+      
+
+              <li>
+                <a href="#EVENT_OPERATOR_INFO_UPLOAD" class="nav-sub-label">EVENT_OPERATOR_INFO_UPLOAD</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#tuya_operator_get_cucc_stat" class="nav-sub-label">tuya_operator_get_cucc_stat</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_cmcc_reg_params" class="nav-sub-label">tuya_operator_cmcc_reg_params</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_upload_manual" class="nav-sub-label">tuya_operator_upload_manual</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_upload" class="nav-sub-label">tuya_operator_upload</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_get_type" class="nav-sub-label">tuya_operator_get_type</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_reset" class="nav-sub-label">tuya_operator_reset</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_code_get" class="nav-sub-label">tuya_operator_code_get</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_operator_inf_upload" class="nav-sub-label">tuya_operator_inf_upload</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#TY_CUCC_STAT_E;
+" class="nav-sub-label">TY_CUCC_STAT_E;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_CUCC_STAT_INFO_S;
+" class="nav-sub-label">TY_CUCC_STAT_INFO_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_OPERATOR_INFO_S;
+" class="nav-sub-label">TY_OPERATOR_INFO_S;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_OPERATOR_TYPE_E;
+" class="nav-sub-label">TY_OPERATOR_TYPE_E;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="stdio.h"><span>stdio.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdio.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdio.h>
+</pre>
+
+      <h4 id="tuya_cloud_types.h"><span>tuya_cloud_types.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_types.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_types.h"
+</pre>
+
+      <h4 id="tuya_cloud_com_defs.h"><span>tuya_cloud_com_defs.h</span></h4>
+      <pre class="doc-declare"><code>#include "tuya_cloud_com_defs.h"
+</code></pre>
+      <pre class="doc-comment">#include "tuya_cloud_com_defs.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="_TUYA_OPERATOR_H_">Marco <span>_TUYA_OPERATOR_H_</span></h4>
+      <pre class="doc-declare"><code>#define _TUYA_OPERATOR_H_
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_UPLOAD_RESULT_OK">Marco <span>TY_CUCC_UPLOAD_RESULT_OK</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_UPLOAD_RESULT_OK           0 // upload ok
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_UPLOAD_ERR">Marco <span>TY_CUCC_UPLOAD_ERR</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_UPLOAD_ERR                 1 // upload error
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_IS_UNICOM_NETWORK">Marco <span>TY_CUCC_IS_UNICOM_NETWORK</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_IS_UNICOM_NETWORK          0 // is unicom network
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_NOT_UNICOM_NETWORK">Marco <span>TY_CUCC_NOT_UNICOM_NETWORK</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_NOT_UNICOM_NETWORK         1 // not unicom network
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_NUMBER_ATTR_OK">Marco <span>TY_CUCC_NUMBER_ATTR_OK</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_NUMBER_ATTR_OK             0 // number attr ok
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_NUMBER_NOT_BIND">Marco <span>TY_CUCC_NUMBER_NOT_BIND</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_NUMBER_NOT_BIND            1 // number not bind
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_CUCC_LOCATION_ERR">Marco <span>TY_CUCC_LOCATION_ERR</span></h4>
+      <pre class="doc-declare"><code>#define TY_CUCC_LOCATION_ERR               2 // location error
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="EVENT_OPERATOR_INFO_UPLOAD">Marco <span>EVENT_OPERATOR_INFO_UPLOAD</span></h4>
+      <pre class="doc-declare"><code>#define EVENT_OPERATOR_INFO_UPLOAD "EVT_OPR_UPLOAD" // event definition
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="tuya_operator_get_cucc_stat">Func <span>tuya_operator_get_cucc_stat</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_get_cucc_stat(TY_CUCC_STAT_INFO_S *p_stat);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get operator(CUCC) state info
+ * 
+ * @param[in] p_stat State info, see TY_CUCC_STAT_INFO_S
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_cmcc_reg_params">Func <span>tuya_operator_cmcc_reg_params</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_cmcc_reg_params(IN CONST CHAR_T *p_appkey, IN CONST CHAR_T *p_aeskey,
+                                         IN CHAR_T *p_deviceType,IN CHAR_T *p_productToken, UINT_T localport, IN CHAR_T *p_appBinName);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Set operator initial params
+ * 
+ * @param[in] p_appkey Key of application
+ * @param[in] p_aeskey AES key
+ * @param[in] p_deviceType Device type
+ * @param[in] p_productToken Product token
+ * @param[in] localport Local port
+ * @param[in] p_appBinName Applicaiton bin name
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_upload_manual">Func <span>tuya_operator_upload_manual</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_upload_manual(IN CONST TY_OPERATOR_INFO_S *p_info, IN CONST BOOL_T async);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Upload operator info manually(once a time)
+ * 
+ * @param[in] p_info Operator info, see TY_OPERATOR_INFO_S
+ * @param[in] async Sync or not to upload operator info
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_upload">Func <span>tuya_operator_upload</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_upload(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Start to upload operator info
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_get_type">Func <span>tuya_operator_get_type</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_get_type(OUT TY_OPERATOR_TYPE_E *p_type);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Get current operator type
+ * 
+ * @param[in] p_type Operator type, see TY_OPERATOR_TYPE_E
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_reset">Func <span>tuya_operator_reset</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_reset(VOID);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Reset saved operator info
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_code_get">Func <span>tuya_operator_code_get</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_code_get(IN CONST CHAR_T *devid, OUT CH_CODE_ST *ch_code);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Retrieve operator info
+ * 
+ * @param[in] dev_id ID of sub-device, or NULL for GW
+ * @param[in] ch_code Operator info, see CH_CODE_ST
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="tuya_operator_inf_upload">Func <span>tuya_operator_inf_upload</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_operator_inf_upload(IN CONST CHAR_T *devid, IN CONST CH_CODE_ST *ch_code, IN BOOL_T initial);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Upload operator info
+ * 
+ * @param[in] dev_id ID of sub-device, or NULL for GW
+ * @param[in] ch_code Operator info, see CH_CODE_ST
+ * @param[in] initial Whether the first time to upload
+ * 
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="TY_CUCC_STAT_E;
+">Typedef <span>TY_CUCC_STAT_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+   /** INIT */
+   TY_CUCC_STAT_INIT = 0,
+   /** HTTP error */  
+   TY_CUCC_STAT_HTTP_ERR = 1,
+   /** HTTP ok */
+   TY_CUCC_STAT_HTTP_OK = 2
+} TY_CUCC_STAT_E;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of CUCC state
+ */</pre>
+
+      <h4 id="TY_CUCC_STAT_INFO_S;
+">Typedef <span>TY_CUCC_STAT_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {
+   /** see TY_CUCC_STAT_E */
+   TY_CUCC_STAT_E stat;
+   /** serial code */
+   CHAR_T         cuei[20];
+   /** report result */
+   UINT_T         report_result;
+   /** is unicom network */
+   UINT_T         is_unicom_network;
+   /** is home location */
+   UINT_T         is_telephone_home_location;
+}TY_CUCC_STAT_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of CUCC state info
+ */</pre>
+
+      <h4 id="TY_OPERATOR_INFO_S;
+">Typedef <span>TY_OPERATOR_INFO_S;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct {             /*   CTCC     CMCC    CUCC  */
+   CHAR_T *fwver;           /*    Y                Y    */ //
+   CHAR_T *device_info;     /*             Y            */ //备用(不上报)
+   CHAR_T *app_info;        /*             Y            */ //应用信息(App集合，每条日志用\r\n分隔，每条日志包含 App名称、包名、App使用时长(毫秒)、App打开次数 并由’|’分隔 )
+   CHAR_T *rom;             /*             Y            */ //rom信息
+   CHAR_T *ram;             /*             Y            */ //ram信息
+   CHAR_T *cpu;             /*             Y            */ //cpu信息
+   CHAR_T *sys_ver;         /*             Y            */ //操作系统版本号
+   CHAR_T *soft_ver;        /*             Y            */ //固件版本号
+   CHAR_T *soft_name;       /*             Y            */ //固件名称
+   CHAR_T *volte;           /*             Y            */ //volte开关状态
+   CHAR_T *nettype;         /*             Y            */ //当前网络类型
+   CHAR_T *account;         /*             Y            */ //宽带账号
+   CHAR_T *p_num;           /*             Y            */ //本机号码
+   CHAR_T *location;        /*             Y            */ //位置信息(包含经度，维度，定位模式，以逗号‘,’分隔)
+   BYTE_T mac[6];           /*    Y                Y    */ //设备mac地址
+   BOOL_T initial;           /*   Y                     */ //是否开机后首次上报，子设备使用
+   CHAR_T *devid;           /*    Y                     */ //子设备ID/MAC
+}TY_OPERATOR_INFO_S;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of operator info
+ */</pre>
+
+      <h4 id="TY_OPERATOR_TYPE_E;
+">Typedef <span>TY_OPERATOR_TYPE_E;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum operat_ctei_type {
+   /** TUYA */
+   OPERATOR_TUYA = 1,
+   /** China Telecom */
+   OPERATOR_CTCC,
+   /** China Mobile */
+   OPERATOR_CMCC,
+   /** China Unicom */
+   OPERATOR_CUCC,
+} TY_OPERATOR_TYPE_E;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Definition of operator type
+ */</pre>
+    </div>
+  </body>
+</html>
+            
