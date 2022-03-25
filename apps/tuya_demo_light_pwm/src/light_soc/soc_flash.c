@@ -11,7 +11,7 @@
  */
 
 #include "soc_flash.h"
-#include "uf_file.h"
+#include "tuya_uf_db.h"
 #include "light_types.h"
 #include "light_printf.h"
 #include "light_tools.h"
@@ -170,7 +170,7 @@ OPERATE_LIGHT tuya_soc_cfg_write(IN USHORT_T len, IN UCHAR_T *data)
     OPERATE_LIGHT ret = -1;
     uFILE * fp = NULL;
     UINT_T write_cnt = 0;
-   
+
     fp = ufopen("oem_cfg", "w+");
     if (NULL == fp) {
         PR_ERR("oem cfg uf file can't open and write data!");
@@ -249,7 +249,8 @@ OPERATE_LIGHT tuya_soc_flash_earse_special(IN SOC_FLASH_SAVE_TYPE_E data_type, I
     }
 
     return OPRT_OK;
-}
+
+}
 
 /**
  * @brief: 擦除所有flash文件适配
@@ -283,6 +284,7 @@ OPERATE_LIGHT tuya_soc_flash_earse(VOID)
     
     return OPRT_OK;
     
-}
+
+}
 
 

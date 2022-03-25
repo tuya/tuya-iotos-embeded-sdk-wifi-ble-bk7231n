@@ -34,7 +34,7 @@ extern "C" {
 
 //#define _IS_OEM
 
-#define DEFAULT_CONFIG "{Jsonver:1.1.0,module:CBU,cmod:rgbcw,dmod:0,cwtype:0,onoffmode:0,pmemory:1,title20:0,defcolor:c,defbright:100,deftemp:100,cwmaxp:100,brightmin:10,brightmax:100,colormin:10,colormax:100,wfcfg:spcl,rstmode:0,rstnum:3,rstcor:c,rstbr:50,rsttemp:100,pwmhz:1000,r_pin:26,r_lv:1,g_pin:24,g_lv:1,b_pin:6,b_lv:1,c_pin:8,c_lv:1,w_pin:7,w_lv:1,}"
+#define DEFAULT_CONFIG "{Jsonver:1.1.0,module:CBU,cmod:rgbcw,dmod:0,cwtype:0,onoffmode:0,pmemory:1,title20:0,defcolor:c,defbright:100,deftemp:100,cwmaxp:100,brightmin:10,brightmax:100,colormin:10,colormax:100,wfcfg:spcl,rstmode:0,rstnum:3,rstcor:c,rstbr:50,rsttemp:100,pwmhz:1000,r_pin:8,r_lv:1,g_pin:6,g_lv:1,b_pin:24,b_lv:1,c_pin:26,c_lv:1,w_pin:7,w_lv:1,}"
 
 /**
  * @brief: 灯软件系统初始化

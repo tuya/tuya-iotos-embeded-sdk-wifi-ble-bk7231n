@@ -17,25 +17,17 @@
 #include "light_control.h"
 #include "light_prod.h"
 #include "user_flash.h"
-#include "gpio_test.h"
-#include "smart_frame.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
-#include "timers.h"
 #include "tuya_iot_wifi_api.h"
-#include "cJSON.h"
 #include "gw_intf.h"
 #include "tuya_ws_db.h"
-#include "bt_dp.h"
 #include "user_timer.h"
 #include "light_tools.h"
-#include "tuya_iot_config.h"
-#include "tuya_bt_sdk.h"
 #include "uni_log.h"
 #include "base_event_info.h"
 #include "base_event.h"
-#include "wf_basic_intf.h"
 #include "tuya_hal_semaphore.h"
 
 
@@ -280,9 +272,12 @@ STATIC VOID _wifi_status_display_callback(IN CONST GW_WIFI_NW_STAT_E stat)
 /**
  * @brief: 颜色格式转换color --> RGB
  * @param: IN CHAR_T *date -> 颜色数据
- * @param: OUT USHORT_T *red -> 保存R格式数据
- * @param: OUT USHORT_T *green -> 保存G格式数据
- * @param: OUT USHORT_T *blue -> 保存B格式数据
+ * @param: OUT USHORT_T *red -> 保存R格式
+数据
+ * @param: OUT USHORT_T *green -> 保存G格式
+数据
+ * @param: OUT USHORT_T *blue -> 保存B格式
+数据
  * @retval: none
 */
 STATIC VOID _light_sys_color_to_rgb(IN CHAR_T *date, OUT USHORT_T *red, OUT USHORT_T *green, OUT USHORT_T *blue)
@@ -319,58 +314,32 @@ STATIC VOID _light_sys_color_to_rgb(IN CHAR_T *date, OUT USHORT_T *red, OUT USHO
  */
 VOID tuya_light_ctrl_data_switch_respone(OUT BOOL_T on_off)
 {
+    OPERATE_RET op_ret = OPRT_OK;
 
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    CHAR_T tmp[4] = {0};
-    
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
-    
-    p_node = make_klv_list(p_node, DPID_SWITCH, DT_BOOL, &on_off, DT_BOOL_LEN);
-    p_node = make_klv_list(p_node, DPID_COUNTDOWN, DT_VALUE, &sg_countdown_value, DT_VALUE_LEN);
+    INT_T dp_cnt = 1; /* update DP number */
 
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-
-
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    tuya_num_to_str(0, DPID_SWITCH, 4, tmp);
-    cJSON_AddBoolToObject(root, tmp, on_off);
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    tuya_num_to_str(0, DPID_COUNTDOWN, 4, tmp);
-    cJSON_AddNumberToObject(root, tmp, sg_countdown_value);
-    
-    
+    dp_arr[0].dpid = DPID_SWITCH; /* DP ID */
+    dp_arr[0].type = PROP_BOOL; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_bool = on_off; /* DP data */
 
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
 
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
-
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
     return;
@@ -383,65 +352,32 @@ VOID tuya_light_ctrl_data_switch_respone(OUT BOOL_T on_off)
  */
 VOID tuya_light_ctrl_data_mode_response(OUT LIGHT_MODE_E Mode)
 {
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    DP_CNTL_S *dp_cntl =  NULL;
-    CHAR_T tmp[4] = {0};
+    OPERATE_RET op_ret = OPRT_OK;
 
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
-    UINT_T temp_mode =0;
-    
-    temp_mode = Mode;
-    p_node = make_klv_list(p_node, DPID_MODE, DT_ENUM, &temp_mode, DT_ENUM_LEN);
-  
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
+    INT_T dp_cnt = 1; /* update DP number */
 
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-
-
-    DEV_CNTL_N_S *dev_cntl = get_gw_cntl()->dev;
-
-    if (dev_cntl == NULL) {
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    dp_cntl = &dev_cntl->dp[1];
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
-        return;
-    }
+    dp_arr[0].dpid = DPID_MODE; /* DP ID */
+    dp_arr[0].type = PROP_ENUM; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_enum = Mode; /* DP data */
 
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
 
-    tuya_num_to_str(0, DPID_MODE, 4, tmp);
-    cJSON_AddStringToObject(root, tmp, _light_get_dp_name(dp_cntl, (UCHAR_T)Mode));
-     
-
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
-
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
-
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
     return;
@@ -456,67 +392,36 @@ VOID tuya_light_ctrl_data_mode_response(OUT LIGHT_MODE_E Mode)
  */
 VOID tuya_light_ctrl_data_bright_response(OUT LIGHT_MODE_E mode, OUT USHORT_T bright)
 {
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;    
-    DP_CNTL_S *dp_cntl =  NULL;
-    CHAR_T tmp[4] = {0};
+    OPERATE_RET op_ret = OPRT_OK;
 
-    
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
-    UINT_T temp_mode = 0;
-    UINT_T temp_bright = 0;
-    temp_mode = mode;
-    temp_bright = bright;
-    p_node = make_klv_list(p_node, DPID_MODE, DT_ENUM, &temp_mode, DT_ENUM_LEN);
-    p_node = make_klv_list(p_node, DPID_BRIGHT, DT_VALUE, &temp_bright, DT_VALUE_LEN);
-    
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
+    INT_T dp_cnt = 2; /* update DP number */
 
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-    
-
-    DEV_CNTL_N_S *dev_cntl = get_gw_cntl()->dev;
-    
-    if (dev_cntl == NULL) {
-        return;
-    }
-    dp_cntl = &dev_cntl->dp[1];    
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    tuya_num_to_str(0, DPID_MODE, 4, tmp);
-    cJSON_AddStringToObject(root, tmp, _light_get_dp_name(dp_cntl,(UCHAR_T)mode));
-    
-    tuya_num_to_str(0, DPID_BRIGHT, 4, tmp);
-    cJSON_AddNumberToObject(root, tmp, bright);
-    
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
+    dp_arr[0].dpid = DPID_MODE; /* DP ID */
+    dp_arr[0].type = PROP_ENUM; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_enum = mode; /* DP data */
+    dp_arr[1].dpid = DPID_BRIGHT; /* DP ID */
+    dp_arr[1].type = PROP_VALUE; /* DP type */
+    dp_arr[1].time_stamp = 0;
+    dp_arr[1].value.dp_value = bright; /* DP data */
 
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
+
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
     return;
@@ -531,68 +436,36 @@ VOID tuya_light_ctrl_data_bright_response(OUT LIGHT_MODE_E mode, OUT USHORT_T br
  */
 VOID tuya_light_ctrl_data_temperature_response(OUT LIGHT_MODE_E mode, OUT USHORT_T temperature)
 {
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    DP_CNTL_S *dp_cntl =  NULL;
-    CHAR_T tmp[4] = {0};
+    OPERATE_RET op_ret = OPRT_OK;
 
+    INT_T dp_cnt = 2; /* update DP number */
 
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
-    UINT_T temp_mode = 0;
-    UINT_T temp_temperature = 0;
-    temp_mode = mode;
-    temp_temperature = temperature;
-    p_node = make_klv_list(p_node, DPID_MODE, DT_ENUM, &temp_mode, DT_ENUM_LEN);
-    p_node = make_klv_list(p_node, DPID_TEMPR, DT_VALUE, &temp_temperature, DT_VALUE_LEN);
-    
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
-
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-
-    DEV_CNTL_N_S *dev_cntl = get_gw_cntl()->dev;
-    
-    if (dev_cntl == NULL) {
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    dp_cntl = &dev_cntl->dp[1];
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
-        return;
-    }
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    tuya_num_to_str(0, DPID_MODE, 4, tmp);
-    cJSON_AddStringToObject(root, tmp, _light_get_dp_name(dp_cntl,(UCHAR_T)mode));
-    
-    tuya_num_to_str(0, DPID_TEMPR, 4, tmp);
-    cJSON_AddNumberToObject(root, tmp, temperature);
+    dp_arr[0].dpid = DPID_MODE; /* DP ID */
+    dp_arr[0].type = PROP_ENUM; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_enum = mode; /* DP data */
+    dp_arr[1].dpid = DPID_TEMPR; /* DP ID */
+    dp_arr[1].type = PROP_VALUE; /* DP type */
+    dp_arr[1].time_stamp = 0;
+    dp_arr[1].value.dp_value = temperature; /* DP data */
 
-    
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
 
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
-
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
     return;
@@ -605,53 +478,32 @@ VOID tuya_light_ctrl_data_temperature_response(OUT LIGHT_MODE_E mode, OUT USHORT
  */
 VOID tuya_light_ctrl_data_rgb_response(OUT color_origin_t *color_origin)
 {
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    CHAR_T tmp[4] = {0};
+    OPERATE_RET op_ret = OPRT_OK;
 
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
+    INT_T dp_cnt = 1; /* update DP number */
 
-    p_node = make_klv_list(p_node, DPID_COLOR, DT_STRING, color_origin->color_str, strlen(color_origin->color_str));
-    
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
-
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-
-
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    tuya_num_to_str(0, DPID_COLOR, 4, tmp);
-    cJSON_AddStringToObject(root, tmp, color_origin->color_str);
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
+    dp_arr[0].dpid = DPID_COLOR; /* DP ID */
+    dp_arr[0].type = PROP_STR; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_str = color_origin->color_str; /* DP data */
 
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
 
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
     return;
@@ -665,55 +517,32 @@ VOID tuya_light_ctrl_data_rgb_response(OUT color_origin_t *color_origin)
  */
 VOID tuya_light_ctrl_data_scene_response(OUT CHAR_T *scene_data)
 {
+    OPERATE_RET op_ret = OPRT_OK;
 
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    CHAR_T tmp[4] = {0};
+    INT_T dp_cnt = 1; /* update DP number */
 
-
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
-
-    p_node = make_klv_list(p_node, DPID_SCENE, DT_STRING, scene_data, strlen(scene_data));
-    
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
-
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-
-
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    tuya_num_to_str(0, DPID_SCENE, 4, tmp);
-    cJSON_AddStringToObject(root, tmp, scene_data);
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
+    dp_arr[0].dpid = DPID_SCENE; /* DP ID */
+    dp_arr[0].type = PROP_STR; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_str = scene_data; /* DP data */
 
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
 
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
     return;
@@ -726,77 +555,35 @@ VOID tuya_light_ctrl_data_scene_response(OUT CHAR_T *scene_data)
  */
 VOID tuya_light_ctrl_data_countdown_response(OUT UINT_T remain_time)
 {
+    OPERATE_RET op_ret = OPRT_OK;
 
-    OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    CHAR_T tmp[4] = {0};
-    BOOL_T switch_status = 0xFF;
-    STATIC BOOL_T last_switch = 0xFF;
-    
-    PR_DEBUG("count down %d...", remain_time);
-    sg_countdown_value = remain_time ;
+    INT_T dp_cnt = 1; /* update DP number */
 
-    ret = tuya_light_ctrl_data_switch_get(&switch_status);
-    if (ret != LIGHT_OK) {
-        switch_status = last_switch;   /* get err, to make sure don't upload! */
-    }
-
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    klv_node_s *p_node = NULL;
-
-    if (last_switch != switch_status) {
-        p_node = make_klv_list(p_node, DPID_SWITCH, DT_BOOL, &switch_status, DT_BOOL_LEN);
-    }
-    p_node = make_klv_list(p_node, DPID_COUNTDOWN, DT_VALUE, &sg_countdown_value, DT_VALUE_LEN);
-  
-    PR_DEBUG("*******************ty_bt_klv_report****************");
-    ty_bt_klv_report(p_node);
-    free_klv_list(p_node);
-
-
-    GW_WIFI_NW_STAT_E current_stat;
-    get_wf_gw_nw_status(&current_stat);
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        last_switch = switch_status;
-        return;
-    }
-#endif
-
-
-    root = cJSON_CreateObject();
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc failed");
         return;
     }
 
-    if (last_switch != switch_status) {        
-        tuya_num_to_str(0, DPID_SWITCH, 4, tmp);
-        cJSON_AddBoolToObject(root, tmp, switch_status);
-    }    
-    tuya_num_to_str(0, DPID_COUNTDOWN, 4, tmp);
-    cJSON_AddNumberToObject(root, tmp, sg_countdown_value);
-    
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
 
-    out = cJSON_PrintUnformatted(root);
-    cJSON_Delete(root);
+    dp_arr[0].dpid = DPID_COUNTDOWN; /* DP ID */
+    dp_arr[0].type = PROP_VALUE; /* DP type */
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_value = remain_time; /* DP data */
 
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-    PR_DEBUG("upload: %s", out);
+    /* report DP */
+    op_ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
 
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+    if(OPRT_OK != op_ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num",op_ret);
     }
 
-    last_switch = switch_status;
-
-    return ;
+    return;
 }
 
 /**
@@ -1046,26 +833,8 @@ STATIC UCHAR_T *_light_get_dp_name(IN DP_CNTL_S *dp_cntl, IN UCHAR_T enum_id)
 STATIC VOID _light_all_dp_upload(VOID)
 {
     OPERATE_LIGHT ret = -1;
-    cJSON *root = NULL;
-    CHAR_T *out = NULL;
-    DP_CNTL_S *dp_cntl =  NULL;
-    CHAR_T tmp[4] = {0};
+    INT_T dp_cnt = 6; /* update DP number */
     light_ctrl_data_t* update = NULL;
-    
-#if defined(TY_BT_MOD) && TY_BT_MOD == 1
-    GW_WIFI_NW_STAT_E current_stat;    //保存当前wifi的连接状态
-
-    //获取当前wifi的连接状态
-    get_wf_gw_nw_status(&current_stat);    
-    if ((current_stat < STAT_STA_CONN) && (current_stat != STAT_AP_STA_CONN)) { 
-        return;
-    }
-#endif
-
-    DEV_CNTL_N_S *dev_cntl = get_gw_cntl()->dev;    //?
-    if (dev_cntl == NULL) {
-        return;
-    }
 
     update = (light_ctrl_data_t*)Malloc(SIZEOF(light_ctrl_data_t));
     if (NULL == update) {
@@ -1073,82 +842,103 @@ STATIC VOID _light_all_dp_upload(VOID)
         return;
     }
 
-    dp_cntl = &dev_cntl->dp[1];
-
-    //创建ty_cJSON项
-    root = cJSON_CreateObject();    
-    if (NULL == root) {
-        PR_ERR("cJSON_CreateObject error...");
+    /* switch status */
+    ret = tuya_light_ctrl_data_switch_get(&update->switch_status);
+    if (ret != LIGHT_OK) {
+        PR_ERR("get switch status error, %d", ret);
         Free(update);
         return;
     }
 
-    //获取灯的开关数据
-    ret = tuya_light_ctrl_data_switch_get(&update->switch_status);
-    if (ret == LIGHT_OK) {
-        tuya_num_to_str(0, DPID_SWITCH, 4, tmp);    //整型转字符型  
-        cJSON_AddBoolToObject(root, tmp, update->switch_status);    //
-    }
-
-    //获取灯的模式数据
+    /* mode */
     ret = tuya_light_ctrl_data_mode_get(&update->mode);
-    if (ret == LIGHT_OK) {
-        tuya_num_to_str(0, DPID_MODE, 4, tmp);
-        cJSON_AddStringToObject(root, tmp, _light_get_dp_name(dp_cntl,(UCHAR_T)update->mode));    //
+    if (ret != LIGHT_OK) {
+        PR_ERR("get mode error, %d", ret);
+        Free(update);
+        return;
     }
 
-    //获取灯的明度
+    /* bright */
     ret = tuya_light_ctrl_data_bright_get(&update->bright);
-    if (ret == LIGHT_OK) {
-        tuya_num_to_str(0, DPID_BRIGHT, 4, tmp);    //整型转字符型 
-        cJSON_AddNumberToObject(root, tmp, update->bright);    //
+    if (ret != LIGHT_OK) {
+        PR_ERR("get bright error, %d", ret);
+        Free(update);
+        return;
     }
 
-    //获取灯的色温
+    /* temperature */
     ret = tuya_light_ctrl_data_temperature_get(&update->temper);
-    if (ret == LIGHT_OK) {
-        tuya_num_to_str(0, DPID_TEMPR, 4, tmp);    //整型转字符型 
-        cJSON_AddNumberToObject(root, tmp, update->temper);    //
+    if (ret != LIGHT_OK) {
+        PR_ERR("get temperature error, %d", ret);
+        Free(update);
+        return;
     }
 
-    //获取灯的原始颜色数据
+    /* color */
     ret = tuya_light_ctrl_data_origin_get(&update->color_origin);
-    if (ret == LIGHT_OK) {
-        tuya_num_to_str(0, DPID_COLOR, 4, tmp);    //整型转字符型 
-        cJSON_AddStringToObject(root, tmp, update->color_origin.color_str);    //
+    if (ret != LIGHT_OK) {
+        PR_ERR("get color error, %d", ret);
+        Free(update);
+        return;
     }
 
-    //获取灯的场景数据
+    /* scene */
     ret = tuya_light_ctrl_data_scene_get(update->scene);
-    if (ret == LIGHT_OK) {
-        tuya_num_to_str(0, DPID_SCENE, 4, tmp);    //整型转字符型 
-        cJSON_AddStringToObject(root, tmp, update->scene);    //
+    if (ret != LIGHT_OK) {
+        PR_ERR("get scene error, %d", ret);
+        Free(update);
+        return;
     }
+
+    TY_OBJ_DP_S *dp_arr = (TY_OBJ_DP_S *)Malloc(dp_cnt*SIZEOF(TY_OBJ_DP_S));
+    if(NULL == dp_arr) {
+        PR_ERR("malloc dp array failed");
+        return;
+    }
+    /* initialize requested memory space */
+    memset(dp_arr, 0, dp_cnt*SIZEOF(TY_OBJ_DP_S));
+
+    dp_arr[0].dpid = DPID_SWITCH; 
+    dp_arr[0].type = PROP_BOOL; 
+    dp_arr[0].time_stamp = 0;
+    dp_arr[0].value.dp_bool = update->switch_status; 
+
+    dp_arr[1].dpid = DPID_MODE; 
+    dp_arr[1].type = PROP_ENUM;
+    dp_arr[1].time_stamp = 0;
+    dp_arr[1].value.dp_enum = update->mode;
+
+    dp_arr[2].dpid = DPID_BRIGHT; 
+    dp_arr[2].type = PROP_VALUE;
+    dp_arr[2].time_stamp = 0;
+    dp_arr[2].value.dp_value = update->bright;
+
+    dp_arr[3].dpid = DPID_TEMPR; 
+    dp_arr[3].type = PROP_VALUE;
+    dp_arr[3].time_stamp = 0;
+    dp_arr[3].value.dp_value = update->temper;
+
+    dp_arr[4].dpid = DPID_COLOR; 
+    dp_arr[4].type = PROP_STR;
+    dp_arr[4].time_stamp = 0;
+    dp_arr[4].value.dp_str = update->color_origin.color_str;
+
+    dp_arr[5].dpid = DPID_SCENE; 
+    dp_arr[5].type = PROP_STR;
+    dp_arr[5].time_stamp = 0;
+    dp_arr[5].value.dp_str = update->scene;
+
+    /* report DP */
+    ret = dev_report_dp_json_async(NULL ,dp_arr, dp_cnt);
+    if(OPRT_OK != ret) {
+        PR_ERR("dev_report_dp_json_async relay_config data error,err_num", ret);
+    }
+
+    /* free requested memory space */
+    Free(dp_arr);
+    dp_arr = NULL;
+
     Free(update);
-    update = NULL;
-
-    tuya_num_to_str(0, DPID_COUNTDOWN, 4, tmp);    //整型转字符型 
-    cJSON_AddNumberToObject(root, tmp, sg_countdown_value);    //
-
-    out = cJSON_PrintUnformatted(root);    //
-    cJSON_Delete(root);    //
-
-    if (NULL == out) {
-        PR_ERR("cJSON_PrintUnformatted err...");
-        return;
-    }
-
-    PR_DEBUG("upload: %s", out);
-
-    //
-    ret = sf_obj_dp_report_async(get_gw_cntl()->gw_if.id, out, FALSE);
-    Free(out);
-    out = NULL;
-    if (LIGHT_OK != ret) {
-        PR_ERR("sf_obj_dp_report err:%d",ret);
-        return;
-    }
-
     return;
 }
 
@@ -1326,7 +1116,7 @@ VOID tuya_light_fast_boot(VOID)
 {
     OPERATE_LIGHT ret = -1;
     
-    SetLogManageAttr(TY_LOG_LEVEL_NOTICE);
+    SetLogManageAttr(TY_LOG_LEVEL_DEBUG);
     PR_NOTICE("go to pre device!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     //灯初始化
