@@ -3,6 +3,7 @@
  * @author: wuls@tuya.com
  * @brief: 设备初始化流程处理模块
  * @history: 
+ *          2022-03-25 update reporte interface
  *          2020-12-07 style modify
  *          2019-05-22 create  
  * @Copyright (c) tuya.inc 2020
