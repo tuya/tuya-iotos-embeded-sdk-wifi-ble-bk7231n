@@ -1,14 +1,13 @@
-/*
- * @Author: wuls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: light_init.c
- * @Description: 灯的初始化程序
- * @Copyright: 杭州涂鸦信息技术有限公司
- * @Company: http://www.tuya.com
- * @Date: 2019-04-28 14:35:54
- * @LastEditTime: 2020-03-06 12:01:27
- */
+/**
+* @file light_init.c
+* @author www.tuya.com
+* @brief light initialization program
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "light_printf.h"
 #include "light_types.h"

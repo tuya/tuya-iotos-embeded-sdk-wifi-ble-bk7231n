@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @Date: 2019-05-22 10:17:39
- * @LastEditors: wls
- * @LastEditTime: 2020-03-06 12:34:08
- * @file name: light_system.c
- * @Description: system adapter process
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- */
+/**
+* @file light_system.c
+* @author www.tuya.com
+* @brief system adapter process
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "light_system.h"
 #include "device_config_load.h"

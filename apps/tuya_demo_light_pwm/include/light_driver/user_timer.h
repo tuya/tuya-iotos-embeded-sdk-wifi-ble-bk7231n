@@ -1,12 +1,13 @@
 /**
- * @file: user_timer.h
- * @author: wuls@tuya.com
- * @brief: 软件硬件定时器include文件
- * @history: 
- *          2020-12-07: style modify
- *          2019-05-22: create
- * @Copyright (c) tuya.inc 2020
- */
+* @file user_timer.h
+* @author www.tuya.com
+* @brief Software and hardware timing modules
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __USER_TIMER_H__
 #define __USER_TIMER_H__

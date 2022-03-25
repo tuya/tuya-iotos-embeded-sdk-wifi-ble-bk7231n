@@ -1,13 +1,13 @@
 /**
- * @file: user_flash.h
- * @author: wuls@tuya.com
- * @brief: 用户存储include文件
- * @history: 
- *          2020-12-07: style modify
- *          2019-05-22: create
- * @Copyright (c) tuya.inc 2020
- */
-
+* @file user_flash.h
+* @author www.tuya.com
+* @brief flash driver program
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __USER_FLASH_H__
 #define __USER_FLASH_H__

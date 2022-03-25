@@ -1,15 +1,14 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: soc_pwm.c
- * @Description: soc PWM proc
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-24 20:42:29
- * @LastEditTime: 2019-08-28 21:50:15
- */
- 
+/**
+* @file soc_pwm.c
+* @author www.tuya.com
+* @brief soc PWM proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
+
 #include "soc_pwm.h"
 #include "tuya_gpio.h"
 #include "light_printf.h"

@@ -1,15 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: user_pwm.h
- * @Description: pwm send out include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-22 20:01:00
- * @LastEditTime: 2019-08-13 11:23:10
- */
-
+/**
+* @file user_pwm.h
+* @author www.tuya.com
+* @brief PWM driver program
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __USER_PWM_H__
 #define __USER_PWM_H__

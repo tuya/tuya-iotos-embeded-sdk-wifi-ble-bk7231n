@@ -1,13 +1,16 @@
 /**
- * @file: tuya_device.c
- * @author: wuls@tuya.com
- * @brief: 设备初始化流程处理模块
- * @history: 
- *          2022-03-25 update reporte interface
- *          2020-12-07 style modify
- *          2019-05-22 create  
- * @Copyright (c) tuya.inc 2020
- */
+* @file tuya_device.c
+* @author www.tuya.com
+* @brief Device initialization process processing module
+* @version 0.2
+* @date 2022-03-25
+* @history: 
+*          2022-03-25 update reporte interface
+*          2020-12-07 style modify
+*          2019-05-22 create  
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #define _TUYA_DEVICE_GLOBAL
  

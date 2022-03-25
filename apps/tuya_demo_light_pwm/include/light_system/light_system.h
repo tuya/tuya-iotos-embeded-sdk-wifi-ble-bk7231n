@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: light_control.h
- * @Description: light system include file
- * @Copyright: 杭州涂鸦信息技术有限公司
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2019-05-21 10:13:39
- */
+/**
+* @file light_system.h
+* @author www.tuya.com
+* @brief system adapter process
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __LIHGT_SYSTEM_H__
 #define __LIHGT_SYSTEM_H__

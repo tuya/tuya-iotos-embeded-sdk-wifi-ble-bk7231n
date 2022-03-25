@@ -1,9 +1,14 @@
 /**
- * @Author: jinlu
- * @file name: device_config_load.h
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- */
+* @file device_config_load.h
+* @author www.tuya.com
+* @brief Light device configuration item processing module
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
+
 #ifndef __DEVICE_CONFIG_LOAD__
 #define __DEVICE_CONFIG_LOAD__
 

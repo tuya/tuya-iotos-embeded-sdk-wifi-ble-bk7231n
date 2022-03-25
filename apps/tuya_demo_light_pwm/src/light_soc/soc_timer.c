@@ -1,14 +1,14 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: soc_timer.c
- * @Description: soc timer proc
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-05-06 10:00:26
- * @LastEditTime: 2019-10-18 09:51:33
- */
+/**
+* @file soc_timer.c
+* @author www.tuya.com
+* @brief soc timer proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
+
 #include "uni_time_queue.h"
 #include "light_types.h"
 #include "light_printf.h"

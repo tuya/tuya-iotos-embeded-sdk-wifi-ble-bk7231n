@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: light_set_color.h
- * @Description: light set color(choose drive mode)include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2020-03-06 11:36:54
- */
+/**
+* @file light_driver_adapter.h
+* @author www.tuya.com
+* @brief light driver adapter proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __LIHGT_SET_COLOR_H__
 #define __LIHGT_SET_COLOR_H__

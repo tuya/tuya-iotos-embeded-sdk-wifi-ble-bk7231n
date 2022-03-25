@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: soc_pwm.h
- * @Description: soc PWM头文件
- * @Copyright: 杭州涂鸦信息科技有限公司
- * @Company: http://www.tuya.com
- * @Date: 2019-04-24 20:42:29
- * @LastEditTime: 2019-08-28 21:50:23
- */
+/**
+* @file soc_pwm.h
+* @author www.tuya.com
+* @brief soc PWM proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __SOC_PWM_H__
 #define __SOC_PWM_H__

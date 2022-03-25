@@ -1,14 +1,14 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: light_control.h
- * @Description: light control include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2020-03-06 12:35:19
- */
+/**
+* @file light_control.h
+* @author www.tuya.com
+* @brief light control process
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
+
 
 #ifndef __LIHGT_CONTROL_H__
 #define __LIHGT_CONTROL_H__

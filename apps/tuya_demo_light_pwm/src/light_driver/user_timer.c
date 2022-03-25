@@ -1,13 +1,13 @@
 /**
- * @file: user_timer.h
- * @author: wuls@tuya.com
- * @brief: 软硬件定时实现模块
- * @history: 
- *          2020-12-07: style modify
- *          2019-05-22: create
- * @Copyright (c) tuya.inc 2020
- */
-
+* @file user_timer.c
+* @author www.tuya.com
+* @brief Software and hardware timing modules
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "user_timer.h"
 #include "light_types.h"

@@ -1,14 +1,14 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name:  soc_gpio.h
- * @Description: soc gpio include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-16 16:46:43
- * @LastEditTime: 2019-10-21 14:27:20
- */
+/**
+* @file soc_gpio.h
+* @author www.tuya.com
+* @brief soc gpio proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
+
 #ifndef __SOC_GPIO_H__
 #define __SOC_GPIO_H__
 
