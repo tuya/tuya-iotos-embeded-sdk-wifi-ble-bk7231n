@@ -574,6 +574,20 @@ alloc_socket(struct netconn *newconn, int accepted)
   return -1;
 }
 
+int LWIP_GetMaxSockets() {
+	return NUM_SOCKETS;
+}
+int LWIP_GetActiveSockets() {
+	int i;
+	int r=0;
+	for (i = 0; i < NUM_SOCKETS; ++i) {
+		if (sockets[i].conn) {
+			r++;
+		}
+	}
+	return r;
+}
+
 /** Free a socket. The socket's netconn must have been
  * delete before!
  *
