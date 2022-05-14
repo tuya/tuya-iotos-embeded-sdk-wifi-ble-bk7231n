@@ -163,7 +163,8 @@ static void low_level_init(struct netif *netif)
     netif->mtu = 1500;
     /* device capabilities */
     /* don't set NETIF_FLAG_ETHARP if this device is not an ethernet one */
-    netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
+	// 2022 - added  | NETIF_FLAG_IGMP; for multicast
+    netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP | NETIF_FLAG_IGMP;
     ETH_INTF_PRT("leave low level!\r\n");
 }
 
