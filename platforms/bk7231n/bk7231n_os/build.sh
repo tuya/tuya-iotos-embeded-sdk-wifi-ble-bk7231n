@@ -39,15 +39,15 @@ do
     rm -rf $i/*.o
 done
 
-for i in `find ../tuya_common -type d`
-do
-    rm -rf $i/*.o
-done
+# for i in `find ../tuya_common -type d`
+# do
+#     rm -rf $i/*.o
+# done
 
-for i in `find ../../../components -type d`
-do
-    rm -rf $i/*.o
-done
+# for i in `find ../../../components -type d`
+# do
+#     rm -rf $i/*.o
+# done
 
 if [ -z $CI_PACKAGE_PATH ]; then
     echo "not is ci build"

@@ -1001,7 +1001,7 @@ endif # APP_MK_NAME
 # -------------------------------------------------------------------
 TY_OUTPUT = $(TOP_DIR)/apps/$(APP_BIN_NAME)/output/$(APP_VERSION)
 
-TY_SRC_DIRS += $(shell find ../tuya_common -type d)
+# TY_SRC_DIRS += $(shell find ../tuya_common -type d)
 TY_SRC_DIRS += $(shell find $(TOP_DIR)/apps/$(APP_BIN_NAME)/src -type d)
 TY_SRC_DIRS += $(shell find ../tuya_os_adapter/src -type d)
 
