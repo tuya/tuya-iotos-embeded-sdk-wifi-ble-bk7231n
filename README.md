@@ -1,3 +1,10 @@
+
+## OpenBK7231N SDK needed to compile OpenBK7231T_App for BK7231N
+
+See: https://github.com/openshwprojects/OpenBK7231T_App
+
+## Original Tuya readme below
+
 Tuya IoTOS Embedded Wi-Fi and BLE SDK for bk7231n
 
 [中文版](README_zh.md) | [English](README.md)
