@@ -1062,10 +1062,23 @@ mqtt_publish(mqtt_client_t *client, const char *topic, const void *payload, u16_
 
   r = mqtt_create_request(client->req_list, pkt_id, cb, arg);
   if (r == NULL) {
+	MQTT_OBK_Printf("mqtt_create_request ERR_MEM");
     return ERR_MEM;
   }
 
+  if(1) {
+	  char tmp[64];
+	  int has;
+
+	  has = mqtt_ringbuf_free(&client->output);
+	  sprintf(tmp,"mqtt_publish requies %i, has %i",remaining_length,has);
+	MQTT_OBK_Printf(tmp);
+  }
+
   if (mqtt_output_check_space(&client->output, remaining_length) == 0) {
+	  char tmp[64];
+	  sprintf(tmp,"mqtt_output_check_space ERR_MEM while needed %i",remaining_length);
+	MQTT_OBK_Printf(tmp);
     mqtt_delete_request(r);
     return ERR_MEM;
   }
