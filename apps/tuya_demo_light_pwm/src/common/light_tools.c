@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name: light_toolkit.c
- * @Description: light common toolkit
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-05-06 10:57:08
- * @LastEditTime: 2019-06-21 11:18:08
- */
+/**
+* @file light_toolkit.c
+* @author www.tuya.com
+* @brief light common toolkit
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "light_types.h"
 #include "light_tools.h"
@@ -565,7 +564,8 @@ STATIC OPERATE_LIGHT _decompress_scene_data_one_uint(CONST IN UCHAR_T *input_buf
 OPERATE_LIGHT tuya_scene_data_decompress(CONST IN UCHAR_T* input_buf, CONST IN UINT_T input_buf_len, OUT CHAR_T* output_str)
 {
     OPERATE_LIGHT ret = -1;
-    INT_T i = 0;
+    
+INT_T i = 0;
     CHAR_T output_str_tmp[27] = {0}; 
     UCHAR_T light_mode_tmp = 0;
     

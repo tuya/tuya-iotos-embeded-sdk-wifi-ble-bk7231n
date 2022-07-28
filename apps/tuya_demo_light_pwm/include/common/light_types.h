@@ -1,15 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name: light_types.h
- * @Description: all typedef 
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-22 20:01:00
- * @LastEditTime: 2019-05-30 20:45:55
- */
-
+/**
+* @file light_types.h
+* @author www.tuya.com
+* @brief 
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __LIHGT_TYPES_H__
 #define __LIHGT_TYPES_H__

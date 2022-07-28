@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name:  soc_gpio.c
- * @Description: BK7231通用GPIO口设置程序
- * @Copyright: 杭州涂鸦信息技术有限公司
- * @Company: http://www.tuya.com
- * @Date: 2019-04-16 16:46:43
- * @LastEditTime: 2019-04-25 17:21:28
- */
+/**
+* @file soc_gpio.c
+* @author www.tuya.com
+* @brief soc gpio proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "soc_gpio.h"
 #include "tuya_gpio.h"

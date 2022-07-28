@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name: soc_flash.h
- * @Description: soc flash include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-05-06 10:00:26
- * @LastEditTime: 2019-10-18 10:55:03
- */
+/**
+* @file soc_flash.h
+* @author www.tuya.com
+* @brief soc flash proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __SOC_FLASH_H__
 #define __SOC_FLASH_H__

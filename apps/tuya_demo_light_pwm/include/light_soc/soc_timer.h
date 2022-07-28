@@ -1,14 +1,13 @@
-/*
- * @Author: wuls
- * @email: wulsu@tuya.com
- * @LastEditors:
- * @file name: soc_timer.h
- * @Description: soc timer proc include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-05-06 10:00:26
- * @LastEditTime: 2019-08-28 16:15:05
- */
+/**
+* @file soc_timer.h
+* @author www.tuya.com
+* @brief soc timer proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __SOC_TIMER_H__
 #define __SOC_TIMER_H__

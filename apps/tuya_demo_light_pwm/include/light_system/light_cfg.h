@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: light_cfg.h
- * @Description: 控制灯的依赖函数头文件
- * @Copyright: 杭州涂鸦信息技术有限公司
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2020-03-06 12:11:35
- */
+/**
+* @file light_cfg.h
+* @author www.tuya.com
+* @brief 
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __LIHGT_CFG_H__
 #define __LIHGT_CFG_H__

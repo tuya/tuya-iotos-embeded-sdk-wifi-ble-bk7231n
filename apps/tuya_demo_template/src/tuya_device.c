@@ -2,10 +2,10 @@
 * @file tuya_device.c
 * @author www.tuya.com
 * @brief template demo for SDK WiFi & BLE for BK7231N, hardware: BK7231N NANO SoC board
-* @version 0.1
-* @date 2021-08-12
+* @version 0.2
+* @date 2022-03-14
 *
-* @copyright Copyright (c) tuya.inc 2021
+* @copyright Copyright (c) tuya.inc 2022
 *
 */
 #define _TUYA_DEVICE_GLOBAL
@@ -26,10 +26,6 @@
 *************************micro define***********************
 ***********************************************************/
 #define APP_RAW_PRINT_DEBUG 1
-
-/* wifi config */
-#define WIFI_WORK_MODE_SEL          GWCM_OLD_PROD   /* select Wi-Fi work mode */
-#define WIFI_CONNECT_OVERTIME_S     180             /* connect network timeout time, uint: s */
 
 /* reset key config */
 #define WIFI_KEY_PIN                TY_GPIOA_9  /* reset button pin */
@@ -138,7 +134,7 @@ STATIC VOID wifi_config_init(VOID)
     /* LED initiation */ 
     op_ret = tuya_create_led_handle(WIFI_LED_PIN, TRUE, &wifi_led_handle);
     if (OPRT_OK != op_ret) {
-        PR_ERR("key_init err:%d", op_ret);
+        PR_ERR("led init err:%d", op_ret);
         return;
     }
     tuya_set_led_light_type(wifi_led_handle, OL_LOW, 0, 0); //turn off
@@ -148,7 +144,7 @@ STATIC VOID wifi_config_init(VOID)
 
     op_ret = key_init(NULL, 0, WIFI_KEY_TIMER_MS);
     if (OPRT_OK != op_ret) {
-        PR_ERR("key_init err:%d", op_ret);
+        PR_ERR("key init err:%d", op_ret);
         return;
     }
 
@@ -164,7 +160,7 @@ STATIC VOID wifi_config_init(VOID)
     /* register key */
     op_ret = reg_proc_key(&key_def);
     if (OPRT_OK != op_ret) {
-        PR_ERR("reg_proc_key err:%d", op_ret);
+        PR_ERR("register WiFi key err:%d", op_ret);
     }
 
     return;
@@ -470,7 +466,7 @@ OPERATE_RET device_init(VOID)
     };
 
     /* tuya IoT framework initialization */
-    op_ret = tuya_iot_wf_soc_dev_init_param(WIFI_WORK_MODE_SEL, WF_START_SMART_FIRST, &wf_cbs, NULL, PRODECT_ID, DEV_SW_VERSION);
+    op_ret = tuya_iot_wf_soc_dev_init_param(GWCM_OLD_PROD, WF_START_SMART_FIRST, &wf_cbs, NULL, PRODUCT_ID, DEV_SW_VERSION);
     if(OPRT_OK != op_ret) {
         PR_ERR("tuya_iot_wf_soc_dev_init_param error,err_num:%d", op_ret);
         return op_ret;
@@ -485,3 +481,4 @@ OPERATE_RET device_init(VOID)
 
     return op_ret;
 }
+

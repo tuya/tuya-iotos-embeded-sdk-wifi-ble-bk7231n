@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: user_pwm.c
- * @Description: PWM driver program
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-16 11:44:21
- * @LastEditTime: 2019-08-13 11:23:01
- */
+/**
+* @file user_pwm.c
+* @author www.tuya.com
+* @brief PWM driver program
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "user_pwm.h"
 #include "light_printf.h"

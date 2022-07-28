@@ -1,17 +1,16 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name: soc_flash.c
- * @Description: soc flash proc
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-05-06 10:00:26
- * @LastEditTime: 2019-10-21 14:15:59
- */
+/**
+* @file soc_flash.c
+* @author www.tuya.com
+* @brief soc flash proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "soc_flash.h"
-#include "uf_file.h"
+#include "tuya_uf_db.h"
 #include "light_types.h"
 #include "light_printf.h"
 #include "light_tools.h"
@@ -170,7 +169,7 @@ OPERATE_LIGHT tuya_soc_cfg_write(IN USHORT_T len, IN UCHAR_T *data)
     OPERATE_LIGHT ret = -1;
     uFILE * fp = NULL;
     UINT_T write_cnt = 0;
-   
+
     fp = ufopen("oem_cfg", "w+");
     if (NULL == fp) {
         PR_ERR("oem cfg uf file can't open and write data!");
@@ -249,7 +248,8 @@ OPERATE_LIGHT tuya_soc_flash_earse_special(IN SOC_FLASH_SAVE_TYPE_E data_type, I
     }
 
     return OPRT_OK;
-}
+
+}
 
 /**
  * @brief: 擦除所有flash文件适配
@@ -283,6 +283,7 @@ OPERATE_LIGHT tuya_soc_flash_earse(VOID)
     
     return OPRT_OK;
     
-}
+
+}
 
 

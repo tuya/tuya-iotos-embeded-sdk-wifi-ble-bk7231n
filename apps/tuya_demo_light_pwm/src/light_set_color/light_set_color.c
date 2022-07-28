@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name: light_driver_adapter.c
- * @Description: light driver adapter proc
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2019-10-18 15:30:15
- */
+/**
+* @file light_driver_adapter.c
+* @author www.tuya.com
+* @brief light driver adapter proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "light_set_color.h"
 #include "light_printf.h"

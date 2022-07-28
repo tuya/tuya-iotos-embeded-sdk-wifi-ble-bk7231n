@@ -1,12 +1,15 @@
 /**
- * @file: tuya_device.h
- * @author: wuls@tuya.com
- * @brief: 应用设备管理模块，用于填写固件key、产品key等
- * @history: 
- *          2020-12-07: style modify
- *          2019-05-22: create
- * @Copyright (c) tuya.inc 2020
- */
+* @file tuya_device.h
+* @author www.tuya.com
+* @brief Device initialization process processing module
+* @version 0.2
+* @date 2022-03-25
+* @history: 
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
+
 #ifndef _TUYA_DEVICE_H
 #define _TUYA_DEVICE_H
 

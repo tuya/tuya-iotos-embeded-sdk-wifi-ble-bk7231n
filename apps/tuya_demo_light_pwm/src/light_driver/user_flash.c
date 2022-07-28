@@ -1,13 +1,13 @@
 /**
- * @file: user_flash.c
- * @author: wuls@tuya.com
- * @brief: 设备数据存储、读取和删除处理
- * @history:  
- *          2020-12-07: style modify
- *          2019-05-22: create
- * @Copyright (c) tuya.inc 2020
- */
-
+* @file user_flash.c
+* @author www.tuya.com
+* @brief flash driver program
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #include "soc_flash.h"
 #include "user_flash.h"

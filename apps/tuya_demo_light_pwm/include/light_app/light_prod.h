@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors: wls
- * @file name: light_prod.h
- * @Description: light production test include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2019-05-08 16:17:44
- */
+/**
+* @file light_prod.h
+* @author www.tuya.com
+* @brief light production test proc
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __LIHGT_PROD_H__
 #define __LIHGT_PROD_H__

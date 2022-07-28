@@ -1,14 +1,13 @@
-/*
- * @Author: wls
- * @email: wuls@tuya.com
- * @LastEditors:   
- * @file name: light_toolkit.h
- * @Description: light common tool include file
- * @Copyright: HANGZHOU TUYA INFORMATION TECHNOLOGY CO.,LTD
- * @Company: http://www.tuya.com
- * @Date: 2019-04-26 13:55:40
- * @LastEditTime: 2019-05-28 15:24:01
- */
+/**
+* @file light_toolkit.c
+* @author www.tuya.com
+* @brief light common toolkit
+* @version 0.2
+* @date 2022-03-25
+*
+* @copyright Copyright (c) tuya.inc 2022
+*
+*/
 
 #ifndef __LIHGT_TOOLS_H__
 #define __LIHGT_TOOLS_H__
