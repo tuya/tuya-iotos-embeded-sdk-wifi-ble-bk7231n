@@ -38,14 +38,6 @@
 #include "lwip/stats.h"
 #include "sys_rtos.h"
 #include "lwip/timeouts.h"
-#include "rtos_pub.h"
-#include "portmacro.h"
-
-#define CFG_ENABLE_LWIP_MUTEX      1
-
-#if CFG_ENABLE_LWIP_MUTEX
-static sys_mutex_t sys_arch_mutex;
-#endif
 
 /*-----------------------------------------------------------------------------------*/
 err_t sys_mbox_new(sys_mbox_t *mbox, int size)
@@ -266,7 +258,7 @@ err_t sys_sem_new(sys_sem_t *sem, u8_t count)
 */
 u32_t sys_arch_sem_wait(sys_sem_t *sem, u32_t timeout)
 {
-	portTickType StartTime, EndTime, Elapsed;
+portTickType StartTime, EndTime, Elapsed;
 
 	StartTime = xTaskGetTickCount();
 
@@ -286,15 +278,12 @@ u32_t sys_arch_sem_wait(sys_sem_t *sem, u32_t timeout)
 	}
 	else // must block without a timeout
 	{
-		while( xSemaphoreTake( *sem, portMAX_DELAY) != pdTRUE)
-		{
-			;
-		}
-		
+		while( xSemaphoreTake(*sem, portMAX_DELAY) != pdTRUE){}
 		EndTime = xTaskGetTickCount();
 		Elapsed = (EndTime - StartTime) * portTICK_RATE_MS;
 
 		return ( Elapsed ); // return time blocked	
+		
 	}
 }
 
@@ -330,32 +319,28 @@ void sys_sem_set_invalid(sys_sem_t *sem)
   *sem = SYS_SEM_NULL;                                                          
 } 
 
-/*-----------------------------------------------------------------------------------*/        
 err_t sys_mutex_trylock(sys_mutex_t *pxMutex)
 {
-	if (xSemaphoreTake(*pxMutex, 0) == pdPASS) 
-		return 0;
-	else 
-		return -1;
+	if (xSemaphoreTake(*pxMutex, 0) == pdPASS) return 0;
+	else return -1;
 }
-
 /*-----------------------------------------------------------------------------------*/
 // Initialize sys arch
 void sys_init(void)
 {
-#if CFG_ENABLE_LWIP_MUTEX
-	sys_mutex_new(&sys_arch_mutex);
-#endif
+
 }
 
 /*-----------------------------------------------------------------------------------*/
                                       /* Mutexes*/
 /*-----------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------*/
+#if LWIP_COMPAT_MUTEX == 0
 /* Create a new mutex*/
 err_t sys_mutex_new(sys_mutex_t *mutex) {
-	*mutex = xSemaphoreCreateMutex();
-	if(*mutex == NULL)
+
+  *mutex = xSemaphoreCreateMutex();
+		if(*mutex == NULL)
 	{
 #if SYS_STATS
       ++lwip_stats.sys.mutex.err;
@@ -369,7 +354,6 @@ err_t sys_mutex_new(sys_mutex_t *mutex) {
 		lwip_stats.sys.mutex.max = lwip_stats.sys.mutex.used;
 	}
 #endif /* SYS_STATS */
-
         return ERR_OK;
 }
 /*-----------------------------------------------------------------------------------*/
@@ -386,7 +370,7 @@ void sys_mutex_free(sys_mutex_t *mutex)
 /* Lock a mutex*/
 void sys_mutex_lock(sys_mutex_t *mutex)
 {
-	sys_arch_sem_wait(mutex, BEKEN_WAIT_FOREVER);
+	sys_arch_sem_wait(*mutex, 0);
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -395,6 +379,8 @@ void sys_mutex_unlock(sys_mutex_t *mutex)
 {
 	xSemaphoreGive(*mutex);
 }
+#endif /*LWIP_COMPAT_MUTEX*/
+
 
 /*-----------------------------------------------------------------------------------*/
 // TODO
@@ -407,23 +393,32 @@ void sys_mutex_unlock(sys_mutex_t *mutex)
 */
 sys_thread_t sys_thread_new(const char *name, lwip_thread_fn thread , void *arg, int stacksize, int prio)
 {
-	xTaskHandle CreatedTask;
-	int result;
+xTaskHandle CreatedTask;
+int result;
+
    
-	result = xTaskCreate( thread, ( portCHAR * ) name, stacksize, arg, prio, &CreatedTask );
-	if(result == pdPASS)
-	{
-	   return CreatedTask;
-	}
-	else
-	{
-	   return NULL;
-	}
+	   vPortEnterCritical();
+       result = xTaskCreate( thread, ( signed portCHAR * ) name, stacksize, arg, prio, &CreatedTask );
+
+       vPortExitCritical();
+	   
+	   if(result == pdPASS)
+	   {
+		   return CreatedTask;
+	   }
+	   else
+	   {
+		   return NULL;
+	   }
+
 }
 
 int sys_thread_delete(xTaskHandle pid)
 {
-	return pdPASS;
+
+		return pdPASS;
+
+
 }
 
 /*
@@ -440,14 +435,9 @@ int sys_thread_delete(xTaskHandle pid)
   system.
 */
 sys_prot_t sys_arch_protect(void)
-{	
-#if CFG_ENABLE_LWIP_MUTEX
-	sys_mutex_lock(&sys_arch_mutex);
-
-	return 0;
-#else
-	return port_disable_interrupts_flag();
-#endif	
+{
+	vPortEnterCritical();
+	return 1;
 }
 
 /*
@@ -458,12 +448,8 @@ sys_prot_t sys_arch_protect(void)
 */
 void sys_arch_unprotect(sys_prot_t pval)
 {
-#if CFG_ENABLE_LWIP_MUTEX
-	(void)pval;
-	sys_mutex_unlock(&sys_arch_mutex);
-#else
-	port_enable_interrupts_flag(pval);
-#endif
+	(void) pval;
+	vPortExitCritical();
 }
 
 /*
@@ -472,12 +458,11 @@ void sys_arch_unprotect(sys_prot_t pval)
 void sys_assert( const char *msg )
 {	
 	(void) msg;
-	
-	/*FSL:only needed for debugging*/
-	os_printf(msg);
-	os_printf("\n\r");		
-    vPortEnterCritical();
-	
+	/*FSL:only needed for debugging
+	printf(msg);
+	printf("\n\r");
+	*/
+    vPortEnterCritical(  );
     for(;;)
     ;
 }
@@ -492,9 +477,9 @@ u32_t sys_jiffies(void)
 	return xTaskGetTickCount() * portTICK_RATE_MS;
 }
 
-void sys_arch_msleep(int ms)
+void
+sys_arch_msleep(int ms)
 {
 	vTaskDelay(ms / portTICK_RATE_MS);
 }
-// eof
 

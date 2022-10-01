@@ -87,7 +87,7 @@
 #define SNMP_MSG_DEBUG                  LWIP_DBG_OFF
 #define SNMP_MIB_DEBUG                  LWIP_DBG_OFF
 #define DNS_DEBUG                       LWIP_DBG_OFF
-
+#define LWIP_COMPAT_MUTEX      		1
 /**
  * SYS_LIGHTWEIGHT_PROT==1: if you want inter-task protection for certain
  * critical regions during buffer allocation, deallocation and memory
@@ -398,7 +398,9 @@ The STM32F107 allows computing and verifying the IP, UDP, TCP and ICMP checksums
 
 //#ifdef CONFIG_ENABLE_MXCHIP
 /* save memory */
-///#define PBUF_POOL_SIZE          (3)
+#ifndef PBUF_POOL_SIZE
+#define PBUF_POOL_SIZE          (3)
+#endif
 #define TCP_MSS                 (1500 - 40)
 /* TCP receive window. */
 #define TCP_WND                 (3 * TCP_MSS)
