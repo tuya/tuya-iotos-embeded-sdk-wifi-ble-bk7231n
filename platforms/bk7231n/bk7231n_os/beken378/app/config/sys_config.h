@@ -153,7 +153,7 @@
 #define CFG_SYS_REDUCE_NORMAL_POWER                0
 
 /*section 24 ----- less memery in rwnx*/
-#define CFG_LESS_MEMERY_IN_RWNX                    1
+#define CFG_LESS_MEMERY_IN_RWNX                    0
 
 /*section 25 ----- use audio*/
 #define CFG_USE_AUDIO                              0
