@@ -33,19 +33,56 @@
  *
  * Author: Adam Dunkels <adam@sics.se>
  */
+
 #ifndef LWIP_HDR_SYS_H
 #define LWIP_HDR_SYS_H
 
 #include "lwip/opt.h"
-#include "rtos_pub.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #if NO_SYS
-#error "warning!!!"
+
+/* For a totally minimal and standalone system, we provide null
+   definitions of the sys_ functions. */
+typedef u8_t sys_sem_t;
+typedef u8_t sys_mutex_t;
+typedef u8_t sys_mbox_t;
+
+#define sys_sem_new(s, c) ERR_OK
+#define sys_sem_signal(s)
+#define sys_sem_wait(s)
+#define sys_arch_sem_wait(s,t)
+#define sys_sem_free(s)
+#define sys_sem_valid(s) 0
+#define sys_sem_valid_val(s) 0
+#define sys_sem_set_invalid(s)
+#define sys_sem_set_invalid_val(s)
+#define sys_mutex_new(mu) ERR_OK
+#define sys_mutex_lock(mu)
+#define sys_mutex_unlock(mu)
+#define sys_mutex_free(mu)
+#define sys_mutex_valid(mu) 0
+#define sys_mutex_set_invalid(mu)
+#define sys_mbox_new(m, s) ERR_OK
+#define sys_mbox_fetch(m,d)
+#define sys_mbox_tryfetch(m,d)
+#define sys_mbox_post(m,d)
+#define sys_mbox_trypost(m,d)
+#define sys_mbox_free(m)
+#define sys_mbox_valid(m)
+#define sys_mbox_valid_val(m)
+#define sys_mbox_set_invalid(m)
+#define sys_mbox_set_invalid_val(m)
+
+#define sys_thread_new(n,t,a,s,p)
+
+#define sys_msleep(t)
+
 #else /* NO_SYS */
+
 /** Return code for timeouts from sys_arch_mbox_fetch and sys_arch_sem_wait */
 #define SYS_ARCH_TIMEOUT 0xffffffffUL
 
@@ -82,8 +119,6 @@ typedef void (*lwip_thread_fn)(void *arg);
 #define sys_mutex_set_invalid(mutex)  sys_sem_set_invalid(mutex)
 
 #else /* LWIP_COMPAT_MUTEX */
-
-typedef beken_mutex_t sys_mutex_t;
 
 /**
  * @ingroup sys_mutex

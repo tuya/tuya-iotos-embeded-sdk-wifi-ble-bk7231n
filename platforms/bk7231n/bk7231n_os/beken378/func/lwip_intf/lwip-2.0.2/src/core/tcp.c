@@ -971,8 +971,6 @@ tcp_connect(struct tcp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port,
   return ret;
 }
 
-extern err_t tcp_rexmit_rto_prepare(struct tcp_pcb *pcb);
-extern void tcp_rexmit_rto_commit(struct tcp_pcb *pcb);
 /**
  * Called every 500 ms and implements the retransmission timer and the timer that
  * removes PCBs that have been in TIME-WAIT for enough time. It also increments

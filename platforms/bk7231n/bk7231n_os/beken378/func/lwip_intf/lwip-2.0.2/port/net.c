@@ -24,7 +24,6 @@
 #if CFG_ROLE_LAUNCH
 #include "role_launch.h"
 #endif
-#include "net.h"
 
 struct ipv4_config sta_ip_settings;
 struct ipv4_config uap_ip_settings; 
@@ -227,8 +226,8 @@ static void wm_netif_status_static_callback(struct netif *n)
     	// static IP fail;
     }
 }
+	
 
-extern int auto_check_dtim_rf_ps_mode(void );
 static void wm_netif_status_callback(struct netif *n)
 {
 	uint32_t val;
@@ -247,7 +246,7 @@ static void wm_netif_status_callback(struct netif *n)
 #if CFG_ROLE_LAUNCH
                 rl_pre_sta_set_status(RL_STATUS_STA_LAUNCHED);
 #endif
-				fn = (FUNC_1PARAM_PTR)bk_wlan_get_status_cb();
+				fn = bk_wlan_get_status_cb();
 				if(fn)
 				{
 					val = RW_EVT_STA_GOT_IP;
@@ -261,9 +260,7 @@ static void wm_netif_status_callback(struct netif *n)
 				if(sta_connected_func != NULL)
 					(*sta_connected_func)();
 
-#if CFG_USE_STA_PS
                 auto_check_dtim_rf_ps_mode();
-#endif
 			} 
 			else 
 			{
@@ -386,10 +383,8 @@ void sta_ip_down(void)
 
 void sta_ip_start(void)
 {
-    struct wlan_ip_config address;
+    struct wlan_ip_config address = {0};
 
-	memset(&address,0,sizeof(address));
-	
     if(!sta_ip_start_flag)
     {
         os_printf("sta_ip_start\r\n");
@@ -775,7 +770,7 @@ void net_wlan_add_netif(void *mac)
         return ;
     }
 
-	if (netif_is_added((struct netif *)wlan_if)) {
+	if (netif_is_added(wlan_if)) {
     	os_printf("net_wlan_add_netif already added done!, vif_idx:%d\r\n", vif_idx);
 		return;
 	}
