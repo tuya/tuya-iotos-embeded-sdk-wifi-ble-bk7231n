@@ -448,6 +448,10 @@ u32_t sys_jiffies(void);
  */
 u32_t sys_now(void);
 
+void sys_arch_check_core_locked(void);
+
+void sys_arch_mark_core(void);
+
 /* Critical Region Protection */
 /* These functions must be implemented in the sys_arch.c file.
    In some implementations they can provide a more light-weight protection

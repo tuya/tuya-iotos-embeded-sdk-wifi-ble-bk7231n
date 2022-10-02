@@ -69,6 +69,7 @@
 #define MQTT_DEBUG                  LWIP_DBG_OFF
 #endif
 
+#define MQTT_DEBUG_CUSTOM       (LWIP_DBG_ON  | LWIP_DBG_TRACE)
 #define MQTT_DEBUG_TRACE        (LWIP_DBG_OFF | LWIP_DBG_TRACE)
 #define MQTT_DEBUG_STATE        (LWIP_DBG_OFF | LWIP_DBG_STATE)
 #define MQTT_DEBUG_WARN         (LWIP_DBG_ON  | LWIP_DBG_LEVEL_WARNING)
@@ -303,9 +304,9 @@ mqtt_output_send(struct mqtt_ringbuf_t *rb, struct altcp_pcb *tpcb)
 
     {
       char tmp[128];
-      sprintf(tmp,"mqtt_output_send: tcp_sndbuf: %d bytes, ringbuf_linear_available: %d, get %d, put %d len %d\n",
+      sprintf(tmp,"mqtt_output_send: tcp_sndbuf: %d bytes, ringbuf_linear_available: %d, get %d, put %d len %d\n\r",
               send_len, ringbuf_lin_len, ((rb)->get), ((rb)->put), ringbuf_len);
-      MQTT_OBK_Printf(tmp);
+      LWIP_DEBUGF(MQTT_DEBUG_CUSTOM, (tmp) );
     } 
 
     if (send_len > ringbuf_lin_len) 
@@ -343,8 +344,8 @@ mqtt_output_send(struct mqtt_ringbuf_t *rb, struct altcp_pcb *tpcb)
       LWIP_DEBUGF(MQTT_DEBUG_WARN, ("mqtt_output_send: Send failed with err %d (\"%s\")\n", err, lwip_strerr(err)));
       {
         char tmp[128];
-        sprintf(tmp,"mqtt_output_send: Send failed with err %d (\"%s\")\n", err, lwip_strerr(err));
-        MQTT_OBK_Printf(tmp);
+        sprintf(tmp,"mqtt_output_send: Send failed with err %d (\"%s\")\n\r", err, lwip_strerr(err));
+        LWIP_DEBUGF(MQTT_DEBUG_CUSTOM, (tmp) );
       }
     }
     xSemaphoreGive(rb->g_mutex); 
@@ -737,8 +738,8 @@ pub_ack_rec_rel_response(mqtt_client_t *client, u8_t msg, u16_t pkt_id, u8_t qos
   {
     {
       char tmp[128];
-      sprintf(tmp,"mqtt_pub_ack_rel_response: msg: %d pkt_id: %d qos: %d\n", msg, pkt_id, qos);
-      MQTT_OBK_Printf(tmp);
+      sprintf(tmp,"mqtt_pub_ack_rel_response: msg: %d pkt_id: %d qos: %d\n\r", msg, pkt_id, qos);
+      LWIP_DEBUGF(MQTT_DEBUG_CUSTOM, (tmp) );
     }
     if (xSemaphoreTake(client->output.g_mutex, portMAX_DELAY) == pdTRUE)
     { 

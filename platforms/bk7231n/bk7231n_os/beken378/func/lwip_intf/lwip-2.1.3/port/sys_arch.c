@@ -46,6 +46,8 @@
 #if CFG_ENABLE_LWIP_MUTEX
 static sys_mutex_t sys_arch_mutex;
 #endif
+static TaskHandle_t lwip_marked_core_thread = NULL;
+static TaskHandle_t lwip_core_lock_holder_thread = NULL;
 
 /*-----------------------------------------------------------------------------------*/
 err_t sys_mbox_new(sys_mbox_t *mbox, int size)
@@ -440,10 +442,9 @@ int sys_thread_delete(xTaskHandle pid)
   system.
 */
 sys_prot_t sys_arch_protect(void)
-{	
+{
 #if CFG_ENABLE_LWIP_MUTEX
 	sys_mutex_lock(&sys_arch_mutex);
-
 	return 0;
 #else
 	return port_disable_interrupts_flag();
@@ -496,5 +497,43 @@ void sys_arch_msleep(int ms)
 {
 	vTaskDelay(ms / portTICK_RATE_MS);
 }
+
+void sys_arch_check_core_locked(void)
+{
+    extern sys_mutex_t lock_tcpip_core;
+    TaskHandle_t current_thread =  xTaskGetCurrentTaskHandle();
+   
+#if LWIP_TCPIP_CORE_LOCKING    
+    if (lwip_core_lock_holder_thread != NULL)
+    {
+        //LWIP_ASSERT("Function called without core lock", 
+        if (current_thread != lwip_core_lock_holder_thread)
+        {
+        }
+    }
+#else /* LWIP_TCPIP_CORE_LOCKING */    
+    if (lwip_marked_core_thread != NULL)
+    {
+        //LWIP_ASSERT("Function called from wrong thread", 
+        if (current_thread != lwip_marked_core_thread)
+        {
+        }
+    }
+#endif /* LWIP_TCPIP_CORE_LOCKING */
+    /* If the mutex hasn't been initialized yet, then give it a pass. */
+    if (NULL == lock_tcpip_core)
+        return;
+    /* Check that the mutex is currently taken (locked). */
+    if (uxSemaphoreGetCount(lock_tcpip_core) != 0)
+    {
+        os_printf("WARN: TCPIP mutex is locked\n\r");
+    }
+}
+
+void sys_arch_mark_core(void)
+{
+    lwip_marked_core_thread = xTaskGetCurrentTaskHandle();
+}
+
 // eof
 

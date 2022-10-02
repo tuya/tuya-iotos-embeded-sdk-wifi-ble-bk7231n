@@ -50,6 +50,7 @@
  */
 #include "lwipopts.h"
 #include "lwip/debug.h"
+#include "arch/sys_arch.h"
 
 /**
  * @defgroup lwip_opts Options (lwipopts.h)
@@ -224,7 +225,7 @@
  * @see @ref multithreading
  */
 #if !defined LWIP_ASSERT_CORE_LOCKED || defined __DOXYGEN__
-#define LWIP_ASSERT_CORE_LOCKED()
+#define LWIP_ASSERT_CORE_LOCKED()  sys_arch_check_core_locked()
 #endif
 
 /**
@@ -233,7 +234,7 @@
  * @see @ref multithreading
  */
 #if !defined LWIP_MARK_TCPIP_THREAD || defined __DOXYGEN__
-#define LWIP_MARK_TCPIP_THREAD()
+#define LWIP_MARK_TCPIP_THREAD()   sys_arch_mark_core()
 #endif
 /**
  * @}
