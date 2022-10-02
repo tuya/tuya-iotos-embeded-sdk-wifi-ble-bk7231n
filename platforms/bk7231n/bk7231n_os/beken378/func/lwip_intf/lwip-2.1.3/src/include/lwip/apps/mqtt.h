@@ -180,6 +180,8 @@ void mqtt_disconnect(mqtt_client_t *client);
 
 mqtt_client_t *mqtt_client_new(void);
 void mqtt_client_free(mqtt_client_t* client);
+#define MQTT_CLIENT_CLEANUP
+void mqtt_client_cleanup(mqtt_client_t* client);
 
 u8_t mqtt_client_is_connected(mqtt_client_t *client);
 
