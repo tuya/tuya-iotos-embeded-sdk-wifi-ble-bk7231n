@@ -1414,13 +1414,16 @@ void mqtt_client_cleanup(mqtt_client_t *client)
  */
 void
 mqtt_client_free(mqtt_client_t *client)
-{
-  if (client->output.g_mutex != NULL)
+{ 
+  if (client != NULL)
   {
-    vSemaphoreDelete(client->output.g_mutex);
-    client->output.g_mutex = NULL;
+    if (client->output.g_mutex != NULL)
+    {
+      vSemaphoreDelete(client->output.g_mutex);
+      client->output.g_mutex = NULL;
+    }
+    mem_free(client);
   }
-  mem_free(client);
 }
 
 /**
