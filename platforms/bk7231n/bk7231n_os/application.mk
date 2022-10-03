@@ -16,8 +16,16 @@ CFG_BLE_5X_RW ?= 1
 CFG_BLE_5X_USE_RWIP_LIB ?= 1
 CFG_GIT_VERSION ?= ""
 CFG_WRAP_LIBC  ?= 1
+CFG_LWIP_2_0_2 ?= 0
+CFG_LWIP_2_1_3 ?= 1
 
+
+ifeq ($(CFG_LWIP_2_0_2),1)
 ota_idx = 1
+endif
+ifeq ($(CFG_LWIP_2_1_3),1)
+ota_idx = 1
+endif
 
 # Compilation tools
 AR = $(CROSS_COMPILE)ar
@@ -176,12 +184,22 @@ INCLUDES += -I./beken378/func/hostapd-2.5/src/ap
 INCLUDES += -I./beken378/func/hostapd-2.5/src/common
 INCLUDES += -I./beken378/func/hostapd-2.5/src/drivers
 INCLUDES += -I./beken378/func/hostapd-2.5/src
+ifeq ($(CFG_LWIP_2_0_2),1)
 INCLUDES += -I./beken378/func/lwip_intf/lwip-2.0.2
 INCLUDES += -I./beken378/func/lwip_intf/lwip-2.0.2/src
 INCLUDES += -I./beken378/func/lwip_intf/lwip-2.0.2/port
 INCLUDES += -I./beken378/func/lwip_intf/lwip-2.0.2/src/include
 INCLUDES += -I./beken378/func/lwip_intf/lwip-2.0.2/src/include/netif
 INCLUDES += -I./beken378/func/lwip_intf/lwip-2.0.2/src/include/lwip
+endif
+ifeq ($(CFG_LWIP_2_1_3),1)
+INCLUDES += -I./beken378/func/lwip_intf/lwip-2.1.3
+INCLUDES += -I./beken378/func/lwip_intf/lwip-2.1.3/src
+INCLUDES += -I./beken378/func/lwip_intf/lwip-2.1.3/port
+INCLUDES += -I./beken378/func/lwip_intf/lwip-2.1.3/src/include
+INCLUDES += -I./beken378/func/lwip_intf/lwip-2.1.3/src/include/netif
+INCLUDES += -I./beken378/func/lwip_intf/lwip-2.1.3/src/include/lwip
+endif
 INCLUDES += -I./beken378/func/temp_detect
 INCLUDES += -I./beken378/func/spidma_intf
 INCLUDES += -I./beken378/func/rwnx_intf
@@ -640,6 +658,7 @@ SRC_C += ./beken378/func/libc/stdlib/lib_strtod.c
 SRC_C += ./beken378/func/libc/stdlib/lib_qsort.c
 endif
 
+ifeq ($(CFG_LWIP_2_0_2),1)
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/port/ethernetif.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/port/net.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/port/sys_arch.c
@@ -689,6 +708,64 @@ SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/netif/ethernet.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/apps/httpd/httpd.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/apps/httpd/fs.c
 SRC_C += ./beken378/func/lwip_intf/lwip-2.0.2/src/apps/mqtt/mqtt.c
+endif
+
+ifeq ($(CFG_LWIP_2_1_3),1)
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/port/ethernetif.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/port/net.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/port/sys_arch.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/api_lib.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/api_msg.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/err.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/netbuf.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/netdb.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/netifapi.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/sockets.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/api/tcpip.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/altcp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/altcp_alloc.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/altcp_tcp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/def.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/dns.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/inet_chksum.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/init.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ip.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ip_a.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/autoip.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/dhcp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/etharp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/icmp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/igmp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/ip4_addr.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/ip4.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv4/ip4_frag.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/dhcp6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/ethip6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/icmp6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/inet6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/ip6_addr.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/ip6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/ip6_frag.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/mld6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/ipv6/nd6.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/mem.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/memp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/netif.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/pbuf.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/raw.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/stats.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/sys.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/tcp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/tcp_in.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/tcp_out.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/timeouts.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/core/udp.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/netif/ethernet.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/apps/http/httpd.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/apps/http/fs.c
+SRC_C += ./beken378/func/lwip_intf/lwip-2.1.3/src/apps/mqtt/mqtt.c
+endif
+
 SRC_C += ./beken378/func/lwip_intf/dhcpd/dhcp-server.c
 SRC_C += ./beken378/func/lwip_intf/dhcpd/dhcp-server-main.c
 SRC_C += ./beken378/func/misc/fake_clock.c
@@ -1042,6 +1119,7 @@ application: test_target
 ifeq ("${ota_idx}", "1")
 	$(LD) $(LFLAGS) -o $(TY_OUTPUT)/$(APP_BIN_NAME)_$(APP_VERSION).axf  $(OBJ_LIST) $(OBJ_S_LIST) $(OBJ_OS_LIST) $(LIBFLAGS) -T./beken378/build/bk7231n_ota.ld
 else ifeq ("${ota_idx}", "2")
+	$(LD) $(LFLAGS) -o $(TY_OUTPUT)/$(APP_BIN_NAME)_$(APP_VERSION).axf  $(OBJ_LIST) $(OBJ_S_LIST) $(OBJ_OS_LIST) $(LIBFLAGS) -T./beken378/build/bk7231n_ota2.ld
 else
 	@echo ===========================================================
 	@echo ota_idx must be "1" or "2"

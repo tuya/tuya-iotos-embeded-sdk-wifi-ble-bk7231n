@@ -53,7 +53,7 @@ extern "C" {
  * Output ring-buffer size, must be able to fit largest outgoing publish message topic+payloads
  */
 #ifndef MQTT_OUTPUT_RINGBUF_SIZE
-#define MQTT_OUTPUT_RINGBUF_SIZE 256
+#define MQTT_OUTPUT_RINGBUF_SIZE 2048
 #endif
 
 /**
@@ -61,14 +61,14 @@ extern "C" {
  * If one wants to avoid fragmented incoming publish, set length to max incoming topic length + max payload length + 8
  */
 #ifndef MQTT_VAR_HEADER_BUFFER_LEN
-#define MQTT_VAR_HEADER_BUFFER_LEN 128
+#define MQTT_VAR_HEADER_BUFFER_LEN 2048
 #endif
 
 /**
  * Maximum number of pending subscribe, unsubscribe and publish requests to server .
  */
 #ifndef MQTT_REQ_MAX_IN_FLIGHT
-#define MQTT_REQ_MAX_IN_FLIGHT 4
+#define MQTT_REQ_MAX_IN_FLIGHT 8
 #endif
 
 /**

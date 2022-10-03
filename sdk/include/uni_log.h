@@ -181,6 +181,7 @@ do \
 #define PR_TRACE_ENTER() 
 #define PR_TRACE_LEAVE()
 #define MPR_TRACE(module,fmt, ...) 
+#undef PR_DEBUG
 #define PR_DEBUG(fmt, ...) 
 #define MPR_DEBUG(module,fmt, ...) 
 
@@ -190,13 +191,14 @@ do \
 #define PR_TRACE_LEAVE()     PR_TRACE("leave [%s]", (const char*)__func__)
 // 基于模块级别的日志输出宏
 #define MPR_TRACE(module,fmt, ...) SAK_PRINT_LOG(module,TY_LOG_LEVEL_TRACE, fmt, ##__VA_ARGS__)
+#undef PR_DEBUG
 #define PR_DEBUG(fmt, ...)         SAK_PRINT_DEBUG_LOG(fmt, ##__VA_ARGS__)
 #define MPR_DEBUG(module,fmt, ...) SAK_PRINT_LOG(module,TY_LOG_LEVEL_DEBUG, fmt, ##__VA_ARGS__)
 
 #endif
 
 
-
+#undef PR_ERR
 #define PR_ERR(fmt, ...) SAK_PRINT_ERR_LOG(fmt, ##__VA_ARGS__)
 #define PR_WARN(fmt, ...) SAK_PRINT_WARN_LOG(fmt, ##__VA_ARGS__)
 #define PR_NOTICE(fmt, ...) SAK_PRINT_NOTICE_LOG(fmt, ##__VA_ARGS__)
@@ -212,10 +214,12 @@ do \
 #define MPR_INFO(module,fmt, ...) SAK_PRINT_LOG(module,TY_LOG_LEVEL_INFO, fmt, ##__VA_ARGS__)
 
 #if defined(TUYA_REDUCE_BIN) && (TUYA_REDUCE_BIN >= TUYA_REDUCE_BIN_LEVEL3)
+#undef PR_DEBUG
 #define PR_DEBUG_RAW(fmt, ...)
 #else
 // 直接输出
 #if defined(TUYA_IOT_DEBUG) && (TUYA_IOT_DEBUG==1)
+#undef PR_DEBUG
 #define PR_DEBUG_RAW(fmt, ...) PrintLogRaw(fmt, ##__VA_ARGS__)
 #else
 #define PR_DEBUG_RAW(fmt, ...)
