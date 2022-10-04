@@ -23,9 +23,9 @@
  * Rather than doubling the size of the _ctype lookup table to hold a 'blank'
  * flag, just check for space or tab.
  */
-#ifndef isblank
-#define isblank(ch)	(((ch) == ' ') || ((ch) == '\t'))
-#endif
+//#ifndef isblank
+//#define isblank(ch)	(((ch) == ' ') || ((ch) == '\t'))
+//#endif
 #ifndef isascii
 #define isascii(ch) (((unsigned char)(ch))<=0x7f)
 #endif
