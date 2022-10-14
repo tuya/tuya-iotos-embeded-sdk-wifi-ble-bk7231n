@@ -14,6 +14,8 @@ platforms/bk7231n/bk7231n_os/tools/generate/*.rbl
 !platforms/bk7231n/bk7231n_os/tools/generate/bk7231n_bootloader.bin
 !platforms/bk7231n/bk7231n_os/tools/generate/bk7231n_bootloader_enc.bin
 !platforms/bk7231n/bk7231n_os/tools/generate/package.bin
+!platforms/bk7231n/toolchain/**/*.o
+
 
 apps/*
 !apps/obk*
