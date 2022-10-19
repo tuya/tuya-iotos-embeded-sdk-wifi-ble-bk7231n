@@ -122,13 +122,15 @@ SECTIONS
 		*(.rodata.*)
 		*(.gnu.linkonce.r*)
 	} > flash
-	
+
+    __exidx_start = .;	
 	.ARM.exidx :
 	{
 	    *(.ARM.exidx*)
 	    *(.gnu.linkonce.armexidx.*)
 	} > flash
-	
+	__exidx_end = .;
+
     . = ORIGIN(tcm);
     .tcm ALIGN(8) :
     {    
