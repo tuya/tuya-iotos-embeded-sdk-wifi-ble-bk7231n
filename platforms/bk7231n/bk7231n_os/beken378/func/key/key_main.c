@@ -8,7 +8,6 @@
 
 beken_timer_t g_key_timer;
 
-
 #if 1
 BUTTON_S button_test;
 
@@ -72,6 +71,7 @@ uint8_t key_get_gpio_value(void)
 uint8_t key_gpio_init(void)
 {
 	bk_gpio_config_input_pup(GPIO_TEST_ID);
+    return 0;
 }
 
 void key_item_configure(void)

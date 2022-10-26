@@ -25,6 +25,9 @@
  *  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************
  */
+
+#include <string.h>
+
 #include "include.h"
 #include "rtos_pub.h"
 #include "BkDriverPwm.h"

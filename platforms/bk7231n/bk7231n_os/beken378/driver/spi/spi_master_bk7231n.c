@@ -159,7 +159,7 @@ static void bk_spi_tx_finish_callback(int port, void *param)
 static void bk_spi_configure(UINT32 rate, UINT32 mode)
 {
 	UINT32 param;
-	struct spi_callback_des spi_dev_cb;
+	//struct spi_callback_des spi_dev_cb;
 
     
 	param = 0;
@@ -723,7 +723,7 @@ int bk_spi_master_dma_send(struct spi_message *spi_msg)
     {
         GDMA_CFG_ST en_cfg;
     	en_cfg.channel = SPI_TX_DMA_CHANNEL;
-	    en_cfg.param   = spi_msg->send_buf;		// dma dst addr
+	    en_cfg.param   = (UINT32)spi_msg->send_buf;		// dma dst addr
         gdma_ctrl(CMD_GDMA_SET_SRC_START_ADDR, (void *)&en_cfg); 
         spi_dev->tx_ptr = spi_msg->send_buf;
         
@@ -784,7 +784,7 @@ int bk_spi_master_dma_recv(struct spi_message *spi_msg)
     {
         GDMA_CFG_ST en_cfg;
     	en_cfg.channel = SPI_RX_DMA_CHANNEL;
-	    en_cfg.param   = spi_msg->recv_buf;		// dma dst addr
+	    en_cfg.param   = (UINT32)spi_msg->recv_buf;		// dma dst addr
         gdma_ctrl( CMD_GDMA_SET_DST_START_ADDR, (void *)&en_cfg); 
         spi_dev->rx_ptr = spi_msg->recv_buf;
         
@@ -837,7 +837,7 @@ void bk_master_dma_rx_finshed_callback(void (*func)(void))
 
 void bk_master_dma_tx_disable(void)
 {
-	GDMA_CFG_ST en_cfg;
+	//GDMA_CFG_ST en_cfg;
 
 	spi_dma_tx_enable(0);
     spi_dev->flag &= (~TX_FINISH_FLAG);
@@ -847,7 +847,7 @@ void bk_master_dma_tx_disable(void)
 
 void bk_master_dma_rx_disable(void)
 {
-	GDMA_CFG_ST en_cfg;
+	//GDMA_CFG_ST en_cfg;
 	spi_dma_rx_enable(0);
 	spi_dev->flag &= (~RX_FINISH_FLAG);
 

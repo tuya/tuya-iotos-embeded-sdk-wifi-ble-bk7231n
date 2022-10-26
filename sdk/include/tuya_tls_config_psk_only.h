@@ -31,6 +31,7 @@
 
 
 #define TUYA_TLS_DYNAMIC_MEMORY_ALLOCATION 	1	//开启TLS动态内存
+#undef  TLS_SESSION
 #define TLS_SESSION 				1			//开启TLS_SESSION
 #define TLS_MEM_DEBUG 				0			//开启TLS内存调试
 #define TUYA_TLS_DEBUG_THRDSHOLD    5			//TLS 调试等级

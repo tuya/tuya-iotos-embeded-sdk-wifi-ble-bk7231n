@@ -817,6 +817,7 @@ UINT8 pwm_update_param(pwm_param_t *pwm_param)
 		value = (UINT32) pwm_param->end_value;
 		REG_WRITE(REG_GROUP_PWM1_T4_ADDR(current_group), value);
 	}
+    return 0;
 }
 
 UINT8 pwm_single_update_param(pwm_param_t *pwm_param)
@@ -935,6 +936,7 @@ UINT8 pwm_group_update_param_enable(UINT8 channel1,UINT8 channel2,pwm_param_t *p
     }
 	
 	REG_WRITE(REG_PWM_GROUP_CTRL_ADDR(current_group), value);
+    return 0;
 }
 
 UINT8 pwm_nogroup_update_param_enable(UINT8 channel1,UINT8 channel2,pwm_param_t *pwm_param)
@@ -961,6 +963,7 @@ UINT8 pwm_nogroup_update_param_enable(UINT8 channel1,UINT8 channel2,pwm_param_t 
 	
 	REG_WRITE(REG_PWM_GROUP_CTRL_ADDR(group1), value1);
 	REG_WRITE(REG_PWM_GROUP_CTRL_ADDR(group2), value2);
+    return 0;
 }
 
 UINT8 pwm_param_clear(UINT8 ucChannel)
@@ -996,7 +999,7 @@ UINT8 pwm_param_clear(UINT8 ucChannel)
 		REG_WRITE(REG_GROUP_PWM1_T3_ADDR(current_group), 0);
 		REG_WRITE(REG_GROUP_PWM1_T4_ADDR(current_group), 0);
 	}
-	
+    return 0;	
 }
 
 
