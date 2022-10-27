@@ -158,6 +158,11 @@ typedef struct
 extern void pwm_init(void);
 extern void pwm_exit(void);
 extern void pwm_isr(void);
+extern UINT8 pwm_single_update_param_enable(UINT8 ucChannel,UINT32 level);
+extern UINT32 pwm_check_group(UINT8 channel1,UINT8 channel2);
+extern void pwm_group_mode_disable(UINT8 ucChannel);
+extern void pwm_unit_disable(UINT8 ucChannel);
+extern UINT8 pwm_init_levl_get(UINT8 ucChannel);
 
 #endif //_PWM_PUB_H_
 // eof
