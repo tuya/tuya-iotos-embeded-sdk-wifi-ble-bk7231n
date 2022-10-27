@@ -654,6 +654,9 @@ mqtt_close(mqtt_client_t *client, mqtt_connection_status_t reason)
       client->connect_cb(client, client->connect_arg, reason);
     }
   }
+  if (client->output.g_mutex != NULL)
+    vSemaphoreDelete(client->output.g_mutex);
+  client->output.g_mutex = NULL;
 }
 
 
@@ -1401,7 +1404,6 @@ void mqtt_client_cleanup(mqtt_client_t *client)
     if (client->output.g_mutex != NULL)
     {
       vSemaphoreDelete(client->output.g_mutex);
-      client->output.g_mutex = NULL;
     }
     memset(client, 0, sizeof(mqtt_client_t));
   }
@@ -1420,7 +1422,6 @@ mqtt_client_free(mqtt_client_t *client)
     if (client->output.g_mutex != NULL)
     {
       vSemaphoreDelete(client->output.g_mutex);
-      client->output.g_mutex = NULL;
     }
     mem_free(client);
   }
@@ -1518,6 +1519,9 @@ mqtt_client_connect(mqtt_client_t *client, const ip_addr_t *ip_addr, u16_t port,
   remaining_length = (u16_t)len;
 
   if (mqtt_output_check_space(&client->output, remaining_length) == 0) {
+    if (client->output.g_mutex != NULL)
+      vSemaphoreDelete(client->output.g_mutex);
+    client->output.g_mutex = NULL;
     return ERR_MEM;
   }
 
@@ -1530,6 +1534,9 @@ mqtt_client_connect(mqtt_client_t *client, const ip_addr_t *ip_addr, u16_t port,
     client->conn = altcp_tcp_new_ip_type(IP_GET_TYPE(ip_addr));
   }
   if (client->conn == NULL) {
+    if (client->output.g_mutex != NULL)
+      vSemaphoreDelete(client->output.g_mutex);
+    client->output.g_mutex = NULL;
     return ERR_MEM;
   }
 
@@ -1585,6 +1592,9 @@ mqtt_client_connect(mqtt_client_t *client, const ip_addr_t *ip_addr, u16_t port,
   return ERR_OK;
 
 tcp_fail:
+  if (client->output.g_mutex != NULL)
+    vSemaphoreDelete(client->output.g_mutex);
+  client->output.g_mutex = NULL;
   altcp_abort(client->conn);
   client->conn = NULL;
   return err;
