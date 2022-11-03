@@ -297,7 +297,7 @@ SRC_C += ./beken378/driver/spidma/spidma.c
 SRC_C += ./beken378/driver/sys_ctrl/sys_ctrl.c
 SRC_C += ./beken378/driver/uart/Retarget.c
 SRC_C += ./beken378/driver/uart/uart_bk.c
-SRC_C += ./beken378/driver/uart/printf.c
+#SRC_C += ./beken378/driver/uart/printf.c
 SRC_C += ./beken378/driver/wdt/wdt.c
 #SRC_C += ./beken378/driver/ble/ble.c
 #SRC_C += ./beken378/driver/ble/ble_pub/ip/ble/hl/src/prf/prf.c
@@ -1009,7 +1009,14 @@ LFLAGS += -g -Wl,--gc-sections -marm -mcpu=arm968e-s -mthumb-interwork
 # LFLAGS += -nostdlib
 LFLAGS += -Xlinker -Map=tuya.map
 LFLAGS += -Wl,-wrap,malloc -Wl,-wrap,_malloc_r -Wl,-wrap,free -Wl,-wrap,_free_r -Wl,-wrap,zalloc -Wl,-wrap,calloc -Wl,-wrap,realloc  -Wl,-wrap,_realloc_r
-LFLAGS += -Wl,-wrap,printf -Wl,-wrap,vsnprintf -Wl,-wrap,snprintf -Wl,-wrap,sprintf -Wl,-wrap,puts
+#LFLAGS += -Wl,-wrap,printf -Wl,-wrap,vsnprintf -Wl,-wrap,snprintf -Wl,-wrap,sprintf -Wl,-wrap,puts
+
+CFLAGS += -DWRAP_PRINTF=1
+LFLAGS += -Wl,-wrap,vsnprintf
+LFLAGS += -Wl,-wrap,snprintf
+LFLAGS += -Wl,-wrap,sprintf
+LFLAGS += -Wl,-wrap,vsprintf
+
 
 # stdlib wrapper
 ifeq ($(CFG_WRAP_LIBC),1)
