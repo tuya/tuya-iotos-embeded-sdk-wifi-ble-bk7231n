@@ -526,7 +526,7 @@ void sys_arch_check_core_locked(void)
     /* Check that the mutex is currently taken (locked). */
     if (uxSemaphoreGetCount(lock_tcpip_core) != 0)
     {
-        os_printf("WARN: TCPIP mutex is locked\n\r");
+        //os_printf("WARN: TCPIP mutex is locked\n\r");
     }
 }
 
