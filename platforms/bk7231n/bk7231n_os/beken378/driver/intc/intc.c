@@ -39,15 +39,90 @@ ISR_T _isrs[INTC_MAX_COUNT] = {{{0, 0}},};
 static UINT32 isrs_mask = 0;
 static ISR_LIST_T isr_hdr = {{&isr_hdr.isr, &isr_hdr.isr},};
 IRDA_CHECK_FUNC func_irda_check = NULL;
+volatile UINT32 irq_ticks = 0;
+volatile UINT32 fiq_ticks = 0;
+
+UINT32 intc_get_irq_tick_count()
+{
+    return irq_ticks;
+}
+
+UINT32 intc_get_fiq_tick_count()
+{
+    return fiq_ticks;
+}
+
+int intc_get_handler_count()
+{
+    int cnt = 0;
+    LIST_HEADER_T *pos, *n;
+    if (list_empty(&isr_hdr.isr))
+    {
+        return 0;
+    }
+
+    list_for_each_safe(pos, n, &isr_hdr.isr)
+    {
+        cnt++;
+    }
+    return cnt;
+}
+
+UINT32 intc_get_isr_call_count(int isr_index)
+{
+    UINT32 isr_cnt = 0;
+    int cnt = 0;
+    LIST_HEADER_T *pos, *n;
+    ISR_T *f;
+
+    if (list_empty(&isr_hdr.isr))
+    {
+        return 0;
+    }
+
+    list_for_each_safe(pos, n, &isr_hdr.isr)
+    {
+        if (cnt == isr_index)
+        {
+            f = list_entry(pos, ISR_T, list);
+            isr_cnt = f->isr_cnt;
+        }
+        cnt++;
+    }
+    return isr_cnt;
+}
+
+int intc_get_isr_num(int isr_index)
+{
+    int cnt = 0;
+    LIST_HEADER_T *pos, *n;
+    ISR_T *f;
+
+    if (list_empty(&isr_hdr.isr))
+    {
+        return -1;
+    }
+
+    list_for_each_safe(pos, n, &isr_hdr.isr)
+    {
+        if (cnt == isr_index)
+        {
+            f = list_entry(pos, ISR_T, list);
+            return f->int_num;
+        }
+        cnt++;
+    }
+    return -1;
+}
 
 void intc_register_irda_check_func(IRDA_CHECK_FUNC func)
 {
-	func_irda_check = func;
+    func_irda_check = func;
 }
 
 void intc_unregister_irda_check_func()
 {
-	func_irda_check = NULL;
+    func_irda_check = NULL;
 }
 
 void intc_hdl_entry(UINT32 int_status)
@@ -73,6 +148,7 @@ void intc_hdl_entry(UINT32 int_status)
         if ((BIT(i) & status))
         {
             f->isr_func();
+            f->isr_cnt++;
             status &= ~(BIT(i));
         }
 
@@ -96,6 +172,7 @@ void intc_service_register(UINT8 int_num, UINT8 int_pri, FUNCPTR isr)
     cur_ptr->isr_func = isr;
     cur_ptr->int_num  = int_num;
     cur_ptr->pri      = int_pri;
+    cur_ptr->isr_cnt  = 0;
 
     INTC_PRT("reg_isr:%d:%d:%p\r\n", int_num, int_pri, isr);
 
@@ -231,7 +308,9 @@ void rf_ps_wakeup_isr_idle_int_cb()
 void intc_irq(void)
 {
     UINT32 irq_status;
-	
+
+    irq_ticks++;
+
     irq_status = icu_ctrl(CMD_GET_INTR_STATUS, 0);
     irq_status = irq_status & 0xFFFF;
 	if(0 == irq_status)
@@ -250,6 +329,7 @@ void intc_fiq(void)
 {
     UINT32 fiq_status;
 
+    fiq_ticks++;
 	/* bk_ir_check_timer*/
     if (func_irda_check && ((*func_irda_check)() == 0))
     {
