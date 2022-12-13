@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -249,6 +249,21 @@
 
               <li>
                 <a href="#TY_MAC_ADDR_LEN" class="nav-sub-label">TY_MAC_ADDR_LEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_IPPROTO_IP" class="nav-sub-label">TY_IPPROTO_IP</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_IP_ADD_MEMBERSHIP" class="nav-sub-label">TY_IP_ADD_MEMBERSHIP</a>
+              </li>
+      
+
+              <li>
+                <a href="#TY_IP_DROP_MEMBERSHIP" class="nav-sub-label">TY_IP_DROP_MEMBERSHIP</a>
               </li>
       
 
@@ -492,6 +507,11 @@
                 <a href="#NW_MAC_S;
 " class="nav-sub-label">NW_MAC_S;
 </a>
+              </li>
+      
+
+              <li>
+                <a href="#nw_in_addr_t" class="nav-sub-label">nw_in_addr_t</a>
               </li>
       
 
@@ -1112,6 +1132,21 @@
 </code></pre>
       <pre class="doc-comment">//the MAC addr len</pre>
 
+      <h4 id="TY_IPPROTO_IP">Marco <span>TY_IPPROTO_IP</span></h4>
+      <pre class="doc-declare"><code>#define TY_IPPROTO_IP     0
+</code></pre>
+      <pre class="doc-comment">/* tuya sdk multicast info */</pre>
+
+      <h4 id="TY_IP_ADD_MEMBERSHIP">Marco <span>TY_IP_ADD_MEMBERSHIP</span></h4>
+      <pre class="doc-declare"><code>#define TY_IP_ADD_MEMBERSHIP 3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="TY_IP_DROP_MEMBERSHIP">Marco <span>TY_IP_DROP_MEMBERSHIP</span></h4>
+      <pre class="doc-declare"><code>#define TY_IP_DROP_MEMBERSHIP 4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
       <h4 id="DEVICE_NAME_LEN">Marco <span>DEVICE_NAME_LEN</span></h4>
       <pre class="doc-declare"><code>#define DEVICE_NAME_LEN        16
 </code></pre>
@@ -1458,6 +1493,11 @@ typedef void* QUEUE_HANDLE;
 </code></pre>
       <pre class="doc-comment">/* tuya sdk definition of MAC info */</pre>
 
+      <h4 id="nw_in_addr_t">Typedef <span>nw_in_addr_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint32_t nw_in_addr_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
       <h4 id="TUYA_OS_NETWORK_INTF;
 ">Typedef <span>TUYA_OS_NETWORK_INTF;
 </span></h4>
@@ -1496,6 +1536,7 @@ typedef void* QUEUE_HANDLE;
    int          (*set_cloexec)  (const int fd);
    int          (*get_socket_ip) (int fd, UNW_IP_ADDR_T *addr);
    UNW_IP_ADDR_T (*addr)         (const char *cp);
+   int (*setsockopt)(int fd, int level, int optname, void *optval, int optlen);
 }TUYA_OS_NETWORK_INTF;
 </code></pre>
       <pre class="doc-comment">/* add begin: by sunkz, interface regist */</pre>
@@ -1978,6 +2019,7 @@ typedef UINT_T SYS_TICK_T;</code></pre>
    OPERATE_RET (*get_ability)(VOID_T);
    OPERATE_RET (*set_mac)(CONST NW_MAC_S *mac);
    OPERATE_RET (*get_mac)(NW_MAC_S *mac);
+   OPERATE_RET (*send_beacon)(tuya_ble_data_buf_t *adv, tuya_ble_data_buf_t *scan_resp, UINT16_T interval, UINT16_T timeout);
 
    OPERATE_RET (*central_init)(ty_ble_central_param_t *p);
    OPERATE_RET (*central_deinit)(VOID_T);

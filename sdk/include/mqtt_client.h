@@ -285,7 +285,7 @@ typedef VOID (*MQ_MSG_RECV_CB)(IN CONST CHAR_T *topic, IN BYTE_T *data,IN UINT_T
  * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */
 OPERATE_RET mqtt_subscribe_multi_topics(IN CONST MQ_HANDLE hand, IN CONST CHAR_T *topics[], 
-                                        IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb);
+                                        IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb, BOOL_T auto_resub);
 
 /**
  * @brief Unsubcribe multiple topics within one MQTT request

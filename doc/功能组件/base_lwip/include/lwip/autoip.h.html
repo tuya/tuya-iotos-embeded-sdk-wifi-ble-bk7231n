@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/netif.h" class="nav-sub-label">lwip/netif.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/etharp.h" class="nav-sub-label">lwip/etharp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_AUTOIP_H" class="nav-sub-label">LWIP_HDR_AUTOIP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#AUTOIP_TMR_INTERVAL" class="nav-sub-label">AUTOIP_TMR_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#AUTOIP_TICKS_PER_SECOND" class="nav-sub-label">AUTOIP_TICKS_PER_SECOND</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_remove_struct(netif)" class="nav-sub-label">autoip_remove_struct(netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif_autoip_data(netif)" class="nav-sub-label">netif_autoip_data(netif)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#autoip_set_struct" class="nav-sub-label">autoip_set_struct</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_start" class="nav-sub-label">autoip_start</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_stop" class="nav-sub-label">autoip_stop</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_arp_reply" class="nav-sub-label">autoip_arp_reply</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_tmr" class="nav-sub-label">autoip_tmr</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_network_changed" class="nav-sub-label">autoip_network_changed</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_supplied_address" class="nav-sub-label">autoip_supplied_address</a>
+              </li>
+      
+
+              <li>
+                <a href="#autoip_accept_packet" class="nav-sub-label">autoip_accept_packet</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/netif.h"><span>lwip/netif.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/netif.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/netif.h"
+</pre>
+
+      <h4 id="lwip/etharp.h"><span>lwip/etharp.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/etharp.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/etharp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_AUTOIP_H">Marco <span>LWIP_HDR_AUTOIP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_AUTOIP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="AUTOIP_TMR_INTERVAL">Marco <span>AUTOIP_TMR_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define AUTOIP_TMR_INTERVAL     100
+</code></pre>
+      <pre class="doc-comment">/** AutoIP Timing */</pre>
+
+      <h4 id="AUTOIP_TICKS_PER_SECOND">Marco <span>AUTOIP_TICKS_PER_SECOND</span></h4>
+      <pre class="doc-declare"><code>#define AUTOIP_TICKS_PER_SECOND (1000 / AUTOIP_TMR_INTERVAL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_remove_struct(netif)">Marco <span>autoip_remove_struct(netif)</span></h4>
+      <pre class="doc-declare"><code>#define autoip_remove_struct(netif) do { (netif)->autoip = NULL; } while (0)
+</code></pre>
+      <pre class="doc-comment">/** Remove a struct autoip previously set to the netif using autoip_set_struct() */</pre>
+
+      <h4 id="netif_autoip_data(netif)">Marco <span>netif_autoip_data(netif)</span></h4>
+      <pre class="doc-declare"><code>#define netif_autoip_data(netif) ((struct autoip*)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_AUTOIP))
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="autoip_set_struct">Func <span>autoip_set_struct</span></h4>
+      <pre class="doc-declare"><code>void autoip_set_struct(struct netif *netif, struct autoip *autoip);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_start">Func <span>autoip_start</span></h4>
+      <pre class="doc-declare"><code>err_t autoip_start(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_stop">Func <span>autoip_stop</span></h4>
+      <pre class="doc-declare"><code>err_t autoip_stop(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_arp_reply">Func <span>autoip_arp_reply</span></h4>
+      <pre class="doc-declare"><code>void autoip_arp_reply(struct netif *netif, struct etharp_hdr *hdr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_tmr">Func <span>autoip_tmr</span></h4>
+      <pre class="doc-declare"><code>void autoip_tmr(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_network_changed">Func <span>autoip_network_changed</span></h4>
+      <pre class="doc-declare"><code>void autoip_network_changed(struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_supplied_address">Func <span>autoip_supplied_address</span></h4>
+      <pre class="doc-declare"><code>u8_t autoip_supplied_address(const struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="autoip_accept_packet">Func <span>autoip_accept_packet</span></h4>
+      <pre class="doc-declare"><code>u8_t autoip_accept_packet(struct netif *netif, const ip4_addr_t *addr);</code></pre>
+      <pre class="doc-comment">/* for lwIP internal use by ip4.c */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

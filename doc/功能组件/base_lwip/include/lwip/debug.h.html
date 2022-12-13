@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/arch.h" class="nav-sub-label">lwip/arch.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_DEBUG_H" class="nav-sub-label">LWIP_HDR_DEBUG_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_LEVEL_ALL" class="nav-sub-label">LWIP_DBG_LEVEL_ALL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_LEVEL_WARNING" class="nav-sub-label">LWIP_DBG_LEVEL_WARNING</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_LEVEL_SERIOUS" class="nav-sub-label">LWIP_DBG_LEVEL_SERIOUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_LEVEL_SEVERE" class="nav-sub-label">LWIP_DBG_LEVEL_SEVERE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_MASK_LEVEL" class="nav-sub-label">LWIP_DBG_MASK_LEVEL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_LEVEL_OFF" class="nav-sub-label">LWIP_DBG_LEVEL_OFF</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_ON" class="nav-sub-label">LWIP_DBG_ON</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_OFF" class="nav-sub-label">LWIP_DBG_OFF</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_TRACE" class="nav-sub-label">LWIP_DBG_TRACE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_STATE" class="nav-sub-label">LWIP_DBG_STATE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_FRESH" class="nav-sub-label">LWIP_DBG_FRESH</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DBG_HALT" class="nav-sub-label">LWIP_DBG_HALT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NOASSERT" class="nav-sub-label">LWIP_NOASSERT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_ASSERT(message, assertion)" class="nav-sub-label">LWIP_ASSERT(message, assertion)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_ASSERT" class="nav-sub-label">LWIP_ASSERT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PLATFORM_ERROR(message)" class="nav-sub-label">LWIP_PLATFORM_ERROR(message)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PLATFORM_ERROR(message)" class="nav-sub-label">LWIP_PLATFORM_ERROR(message)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PLATFORM_ERROR" class="nav-sub-label">LWIP_PLATFORM_ERROR</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_ERROR(message, expression, handler)" class="nav-sub-label">LWIP_ERROR(message, expression, handler)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DEBUG" class="nav-sub-label">LWIP_DEBUG</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DEBUGF(debug, message)" class="nav-sub-label">LWIP_DEBUGF(debug, message)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DEBUGF" class="nav-sub-label">LWIP_DEBUGF</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/arch.h"><span>lwip/arch.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/arch.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/arch.h"
+</pre>
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_DEBUG_H">Marco <span>LWIP_HDR_DEBUG_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_DEBUG_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DBG_LEVEL_ALL">Marco <span>LWIP_DBG_LEVEL_ALL</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_LEVEL_ALL    0
+</code></pre>
+      <pre class="doc-comment">/** Debug level: ALL messages*/</pre>
+
+      <h4 id="LWIP_DBG_LEVEL_WARNING">Marco <span>LWIP_DBG_LEVEL_WARNING</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_LEVEL_WARNING 1
+</code></pre>
+      <pre class="doc-comment">/** Debug level: Warnings. bad checksums, dropped packets, ... */</pre>
+
+      <h4 id="LWIP_DBG_LEVEL_SERIOUS">Marco <span>LWIP_DBG_LEVEL_SERIOUS</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_LEVEL_SERIOUS 2
+</code></pre>
+      <pre class="doc-comment">/** Debug level: Serious. memory allocation failures, ... */</pre>
+
+      <h4 id="LWIP_DBG_LEVEL_SEVERE">Marco <span>LWIP_DBG_LEVEL_SEVERE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_LEVEL_SEVERE 3
+</code></pre>
+      <pre class="doc-comment">/** Debug level: Severe */</pre>
+
+      <h4 id="LWIP_DBG_MASK_LEVEL">Marco <span>LWIP_DBG_MASK_LEVEL</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_MASK_LEVEL   3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DBG_LEVEL_OFF">Marco <span>LWIP_DBG_LEVEL_OFF</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_LEVEL_OFF    LWIP_DBG_LEVEL_ALL
+</code></pre>
+      <pre class="doc-comment">/* compatibility define only */</pre>
+
+      <h4 id="LWIP_DBG_ON">Marco <span>LWIP_DBG_ON</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_ON           0x80U
+</code></pre>
+      <pre class="doc-comment">/** flag for LWIP_DEBUGF to enable that debug message */</pre>
+
+      <h4 id="LWIP_DBG_OFF">Marco <span>LWIP_DBG_OFF</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_OFF          0x00U
+</code></pre>
+      <pre class="doc-comment">/** flag for LWIP_DEBUGF to disable that debug message */</pre>
+
+      <h4 id="LWIP_DBG_TRACE">Marco <span>LWIP_DBG_TRACE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_TRACE        0x40U
+</code></pre>
+      <pre class="doc-comment">/** flag for LWIP_DEBUGF indicating a tracing message (to follow program flow) */</pre>
+
+      <h4 id="LWIP_DBG_STATE">Marco <span>LWIP_DBG_STATE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_STATE        0x20U
+</code></pre>
+      <pre class="doc-comment">/** flag for LWIP_DEBUGF indicating a state debug message (to follow module states) */</pre>
+
+      <h4 id="LWIP_DBG_FRESH">Marco <span>LWIP_DBG_FRESH</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_FRESH        0x10U
+</code></pre>
+      <pre class="doc-comment">/** flag for LWIP_DEBUGF indicating newly added code, not thoroughly tested yet */</pre>
+
+      <h4 id="LWIP_DBG_HALT">Marco <span>LWIP_DBG_HALT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DBG_HALT         0x08U
+</code></pre>
+      <pre class="doc-comment">/** flag for LWIP_DEBUGF to halt after printing this debug message */</pre>
+
+      <h4 id="LWIP_NOASSERT">Marco <span>LWIP_NOASSERT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NOASSERT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_ASSERT(message, assertion)">Marco <span>LWIP_ASSERT(message, assertion)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_ASSERT(message, assertion) do { if (!(assertion)) { \
+ LWIP_PLATFORM_ASSERT(message); }} while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_ASSERT">Marco <span>LWIP_ASSERT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_ASSERT(message, assertion)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PLATFORM_ERROR(message)">Marco <span>LWIP_PLATFORM_ERROR(message)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PLATFORM_ERROR(message) LWIP_PLATFORM_ASSERT(message)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PLATFORM_ERROR(message)">Marco <span>LWIP_PLATFORM_ERROR(message)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PLATFORM_ERROR(message) LWIP_PLATFORM_DIAG((message))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PLATFORM_ERROR">Marco <span>LWIP_PLATFORM_ERROR</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PLATFORM_ERROR(message)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_ERROR(message, expression, handler)">Marco <span>LWIP_ERROR(message, expression, handler)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_ERROR(message, expression, handler) do { if (!(expression)) { \
+ LWIP_PLATFORM_ERROR(message); handler;}} while(0)
+</code></pre>
+      <pre class="doc-comment">/* if "expression" isn't true, then print "message" and execute "handler" expression */</pre>
+
+      <h4 id="LWIP_DEBUG">Marco <span>LWIP_DEBUG</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DEBUG
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DEBUGF(debug, message)">Marco <span>LWIP_DEBUGF(debug, message)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DEBUGF(debug, message) do { \
+                              if ( \
+                                  ((debug) & LWIP_DBG_ON) && \
+                                  ((debug) & LWIP_DBG_TYPES_ON) && \
+                                  ((s16_t)((debug) & LWIP_DBG_MASK_LEVEL) >= LWIP_DBG_MIN_LEVEL)) { \
+                                LWIP_PLATFORM_DIAG(message); \
+                                if ((debug) & LWIP_DBG_HALT) { \
+                                  while(1); \
+                                } \
+                              } \
+                            } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DEBUGF">Marco <span>LWIP_DEBUGF</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DEBUGF(debug, message)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

@@ -171,6 +171,19 @@ typedef struct
     uint8_t mac[TY_MAC_ADDR_LEN]; /* mac address */
 }NW_MAC_S;
 
+/* tuya sdk multicast info */
+#define TY_IPPROTO_IP      0
+#define TY_IP_ADD_MEMBERSHIP  3
+#define TY_IP_DROP_MEMBERSHIP 4
+typedef uint32_t nw_in_addr_t;
+struct nw_in_addr {
+  nw_in_addr_t s_addr;
+};
+struct nw_ip_mreq {
+    struct nw_in_addr imr_multiaddr; /* IP multicast address of group */
+    struct nw_in_addr imr_interface; /* local IP address of interface */
+};
+
 /* add begin: by sunkz, interface regist */
 typedef struct {
     int           (*get_errno)     (void);
@@ -207,6 +220,7 @@ typedef struct {
     int           (*set_cloexec)   (const int fd);
     int           (*get_socket_ip) (int fd, UNW_IP_ADDR_T *addr);
     UNW_IP_ADDR_T (*addr)          (const char *cp);
+    int (*setsockopt)(int fd, int level, int optname, void *optval, int optlen);
 }TUYA_OS_NETWORK_INTF;
 
 
@@ -557,6 +571,7 @@ typedef struct {
     OPERATE_RET (*get_ability)(VOID_T);
     OPERATE_RET (*set_mac)(CONST NW_MAC_S *mac);
     OPERATE_RET (*get_mac)(NW_MAC_S *mac);
+    OPERATE_RET (*send_beacon)(tuya_ble_data_buf_t *adv, tuya_ble_data_buf_t *scan_resp, UINT16_T interval, UINT16_T timeout);
 
     OPERATE_RET (*central_init)(ty_ble_central_param_t *p);
     OPERATE_RET (*central_deinit)(VOID_T);

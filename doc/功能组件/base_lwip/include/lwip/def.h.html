@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/arch.h" class="nav-sub-label">lwip/arch.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#arch/perf.h" class="nav-sub-label">arch/perf.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_DEF_H" class="nav-sub-label">LWIP_HDR_DEF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#PERF_START" class="nav-sub-label">PERF_START</a>
+              </li>
+      
+
+              <li>
+                <a href="#PERF_STOP(x)" class="nav-sub-label">PERF_STOP(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MAX(x , y)" class="nav-sub-label">LWIP_MAX(x , y)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MIN(x , y)" class="nav-sub-label">LWIP_MIN(x , y)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_ARRAYSIZE(x)" class="nav-sub-label">LWIP_ARRAYSIZE(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MAKEU32(a,b,c,d)" class="nav-sub-label">LWIP_MAKEU32(a,b,c,d)</a>
+              </li>
+      
+
+              <li>
+                <a href="#NULL" class="nav-sub-label">NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#NULL" class="nav-sub-label">NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_htons(x)" class="nav-sub-label">lwip_htons(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_ntohs(x)" class="nav-sub-label">lwip_ntohs(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_htonl(x)" class="nav-sub-label">lwip_htonl(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_ntohl(x)" class="nav-sub-label">lwip_ntohl(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_HTONS(x)" class="nav-sub-label">PP_HTONS(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_NTOHS(x)" class="nav-sub-label">PP_NTOHS(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_HTONL(x)" class="nav-sub-label">PP_HTONL(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_NTOHL(x)" class="nav-sub-label">PP_NTOHL(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_ntohs(x)" class="nav-sub-label">lwip_ntohs(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_ntohl(x)" class="nav-sub-label">lwip_ntohl(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_HTONS(x)" class="nav-sub-label">PP_HTONS(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_NTOHS(x)" class="nav-sub-label">PP_NTOHS(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_HTONL(x)" class="nav-sub-label">PP_HTONL(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PP_NTOHL(x)" class="nav-sub-label">PP_NTOHL(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#htons(x)" class="nav-sub-label">htons(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ntohs(x)" class="nav-sub-label">ntohs(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#htonl(x)" class="nav-sub-label">htonl(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ntohl(x)" class="nav-sub-label">ntohl(x)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip_htons" class="nav-sub-label">lwip_htons</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_htonl" class="nav-sub-label">lwip_htonl</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_itoa" class="nav-sub-label">lwip_itoa</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_strnicmp" class="nav-sub-label">lwip_strnicmp</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_stricmp" class="nav-sub-label">lwip_stricmp</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/arch.h"><span>lwip/arch.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/arch.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/arch.h"
+</pre>
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="arch/perf.h"><span>arch/perf.h</span></h4>
+      <pre class="doc-declare"><code>#include "arch/perf.h"
+</code></pre>
+      <pre class="doc-comment">#include "arch/perf.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_DEF_H">Marco <span>LWIP_HDR_DEF_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_DEF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PERF_START">Marco <span>PERF_START</span></h4>
+      <pre class="doc-declare"><code>#define PERF_START   /* null definition */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PERF_STOP(x)">Marco <span>PERF_STOP(x)</span></h4>
+      <pre class="doc-declare"><code>#define PERF_STOP(x) /* null definition */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MAX(x , y)">Marco <span>LWIP_MAX(x , y)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MAX(x , y) (((x) > (y)) ? (x) : (y))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MIN(x , y)">Marco <span>LWIP_MIN(x , y)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MIN(x , y) (((x) < (y)) ? (x) : (y))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_ARRAYSIZE(x)">Marco <span>LWIP_ARRAYSIZE(x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_ARRAYSIZE(x) (sizeof(x)/sizeof((x)[0]))
+</code></pre>
+      <pre class="doc-comment">/* Get the number of entries in an array ('x' must NOT be a pointer!) */</pre>
+
+      <h4 id="LWIP_MAKEU32(a,b,c,d)">Marco <span>LWIP_MAKEU32(a,b,c,d)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MAKEU32(a,b,c,d) (((u32_t)((a) & 255) << 24) | \
+                              ((u32_t)((b) & 255) << 16) | \
+                              ((u32_t)((c) & 255) << 8) | \
+                               (u32_t)((d) & 255))
+</code></pre>
+      <pre class="doc-comment">/** Create u32_t value from bytes */</pre>
+
+      <h4 id="NULL">Marco <span>NULL</span></h4>
+      <pre class="doc-declare"><code>#define NULL 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="NULL">Marco <span>NULL</span></h4>
+      <pre class="doc-declare"><code>#define NULL ((void *)0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_htons(x)">Marco <span>lwip_htons(x)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_htons(x) ((u16_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_ntohs(x)">Marco <span>lwip_ntohs(x)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_ntohs(x) ((u16_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_htonl(x)">Marco <span>lwip_htonl(x)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_htonl(x) ((u32_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_ntohl(x)">Marco <span>lwip_ntohl(x)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_ntohl(x) ((u32_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_HTONS(x)">Marco <span>PP_HTONS(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_HTONS(x)  ((u16_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_NTOHS(x)">Marco <span>PP_NTOHS(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_NTOHS(x)  ((u16_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_HTONL(x)">Marco <span>PP_HTONL(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_HTONL(x)  ((u32_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_NTOHL(x)">Marco <span>PP_NTOHL(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_NTOHL(x)  ((u32_t)(x))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_ntohs(x)">Marco <span>lwip_ntohs(x)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_ntohs(x) lwip_htons(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_ntohl(x)">Marco <span>lwip_ntohl(x)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_ntohl(x) lwip_htonl(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_HTONS(x)">Marco <span>PP_HTONS(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_HTONS(x) ((u16_t)((((x) & (u16_t)0x00ffU) << 8) | (((x) & (u16_t)0xff00U) >> 8)))
+</code></pre>
+      <pre class="doc-comment">/* These macros should be calculated by the preprocessor and are used
+   with compile-time constants only (so that there is no little-endian
+   overhead at runtime). */</pre>
+
+      <h4 id="PP_NTOHS(x)">Marco <span>PP_NTOHS(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_NTOHS(x) PP_HTONS(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_HTONL(x)">Marco <span>PP_HTONL(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_HTONL(x) ((((x) & (u32_t)0x000000ffUL) << 24) | \
+                    (((x) & (u32_t)0x0000ff00UL) << 8) | \
+                    (((x) & (u32_t)0x00ff0000UL) >> 8) | \
+                    (((x) & (u32_t)0xff000000UL) >> 24))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PP_NTOHL(x)">Marco <span>PP_NTOHL(x)</span></h4>
+      <pre class="doc-declare"><code>#define PP_NTOHL(x) PP_HTONL(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="htons(x)">Marco <span>htons(x)</span></h4>
+      <pre class="doc-declare"><code>#define htons(x) lwip_htons(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ntohs(x)">Marco <span>ntohs(x)</span></h4>
+      <pre class="doc-declare"><code>#define ntohs(x) lwip_ntohs(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="htonl(x)">Marco <span>htonl(x)</span></h4>
+      <pre class="doc-declare"><code>#define htonl(x) lwip_htonl(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ntohl(x)">Marco <span>ntohl(x)</span></h4>
+      <pre class="doc-declare"><code>#define ntohl(x) lwip_ntohl(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="lwip_htons">Func <span>lwip_htons</span></h4>
+      <pre class="doc-declare"><code>u16_t lwip_htons(u16_t x);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_htonl">Func <span>lwip_htonl</span></h4>
+      <pre class="doc-declare"><code>u32_t lwip_htonl(u32_t x);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_itoa">Func <span>lwip_itoa</span></h4>
+      <pre class="doc-declare"><code>void lwip_itoa(char* result, size_t bufsize, int number);</code></pre>
+      <pre class="doc-comment">/* This can be #defined to itoa() or snprintf(result, bufsize, "%d", number) depending on your platform */</pre>
+
+      <h4 id="lwip_strnicmp">Func <span>lwip_strnicmp</span></h4>
+      <pre class="doc-declare"><code>int  lwip_strnicmp(const char* str1, const char* str2, size_t len);</code></pre>
+      <pre class="doc-comment">/* This can be #defined to strnicmp() or strncasecmp() depending on your platform */</pre>
+
+      <h4 id="lwip_stricmp">Func <span>lwip_stricmp</span></h4>
+      <pre class="doc-declare"><code>int  lwip_stricmp(const char* str1, const char* str2);</code></pre>
+      <pre class="doc-comment">/* This can be #defined to stricmp() or strcasecmp() depending on your platform */</pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char* lwip_strnstr(const char* buffer, const char* token, size_t n);</code></pre>
+      <pre class="doc-comment">/* This can be #defined to strnstr() depending on your platform */</pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

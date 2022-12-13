@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_DNS_H" class="nav-sub-label">LWIP_HDR_DNS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_TMR_INTERVAL" class="nav-sub-label">DNS_TMR_INTERVAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_IPV4" class="nav-sub-label">LWIP_DNS_ADDRTYPE_IPV4</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_IPV6" class="nav-sub-label">LWIP_DNS_ADDRTYPE_IPV6</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_IPV4_IPV6" class="nav-sub-label">LWIP_DNS_ADDRTYPE_IPV4_IPV6</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_IPV6_IPV4" class="nav-sub-label">LWIP_DNS_ADDRTYPE_IPV6_IPV4</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_DEFAULT" class="nav-sub-label">LWIP_DNS_ADDRTYPE_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_DEFAULT" class="nav-sub-label">LWIP_DNS_ADDRTYPE_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DNS_ADDRTYPE_DEFAULT" class="nav-sub-label">LWIP_DNS_ADDRTYPE_DEFAULT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_LOCAL_HOSTLIST_ELEM(name, addr_init)" class="nav-sub-label">DNS_LOCAL_HOSTLIST_ELEM(name, addr_init)</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_LOCAL_HOSTLIST_MAX_NAMELEN" class="nav-sub-label">DNS_LOCAL_HOSTLIST_MAX_NAMELEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#LOCALHOSTLIST_ELEM_SIZE" class="nav-sub-label">LOCALHOSTLIST_ELEM_SIZE</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#dns_init" class="nav-sub-label">dns_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_tmr" class="nav-sub-label">dns_tmr</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_setserver" class="nav-sub-label">dns_setserver</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_gethostbyname" class="nav-sub-label">dns_gethostbyname</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_gethostbyname_addrtype" class="nav-sub-label">dns_gethostbyname_addrtype</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_local_iterate" class="nav-sub-label">dns_local_iterate</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_local_lookup" class="nav-sub-label">dns_local_lookup</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_local_removehost" class="nav-sub-label">dns_local_removehost</a>
+              </li>
+      
+
+              <li>
+                <a href="#dns_local_addhost" class="nav-sub-label">dns_local_addhost</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="# " class="nav-sub-label"> </a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#dns_found_callback" class="nav-sub-label">dns_found_callback</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_DNS_H">Marco <span>LWIP_HDR_DNS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_DNS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_TMR_INTERVAL">Marco <span>DNS_TMR_INTERVAL</span></h4>
+      <pre class="doc-declare"><code>#define DNS_TMR_INTERVAL         1000
+</code></pre>
+      <pre class="doc-comment">/** DNS timer period */</pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_IPV4">Marco <span>LWIP_DNS_ADDRTYPE_IPV4</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_IPV4     0
+</code></pre>
+      <pre class="doc-comment">/* DNS resolve types: */</pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_IPV6">Marco <span>LWIP_DNS_ADDRTYPE_IPV6</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_IPV6     1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_IPV4_IPV6">Marco <span>LWIP_DNS_ADDRTYPE_IPV4_IPV6</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_IPV4_IPV6 2 /* try to resolve IPv4 first, try IPv6 if IPv4 fails only */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_IPV6_IPV4">Marco <span>LWIP_DNS_ADDRTYPE_IPV6_IPV4</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_IPV6_IPV4 3 /* try to resolve IPv6 first, try IPv4 if IPv6 fails only */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_DEFAULT">Marco <span>LWIP_DNS_ADDRTYPE_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_DEFAULT  LWIP_DNS_ADDRTYPE_IPV4_IPV6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_DEFAULT">Marco <span>LWIP_DNS_ADDRTYPE_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_DEFAULT  LWIP_DNS_ADDRTYPE_IPV4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DNS_ADDRTYPE_DEFAULT">Marco <span>LWIP_DNS_ADDRTYPE_DEFAULT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DNS_ADDRTYPE_DEFAULT  LWIP_DNS_ADDRTYPE_IPV6
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_LOCAL_HOSTLIST_ELEM(name, addr_init)">Marco <span>DNS_LOCAL_HOSTLIST_ELEM(name, addr_init)</span></h4>
+      <pre class="doc-declare"><code>#define DNS_LOCAL_HOSTLIST_ELEM(name, addr_init) {name, addr_init, NULL}
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_LOCAL_HOSTLIST_MAX_NAMELEN">Marco <span>DNS_LOCAL_HOSTLIST_MAX_NAMELEN</span></h4>
+      <pre class="doc-declare"><code>#define DNS_LOCAL_HOSTLIST_MAX_NAMELEN DNS_MAX_NAME_LENGTH
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LOCALHOSTLIST_ELEM_SIZE">Marco <span>LOCALHOSTLIST_ELEM_SIZE</span></h4>
+      <pre class="doc-declare"><code>#define LOCALHOSTLIST_ELEM_SIZE ((sizeof(struct local_hostlist_entry) + DNS_LOCAL_HOSTLIST_MAX_NAMELEN + 1))
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="dns_init">Func <span>dns_init</span></h4>
+      <pre class="doc-declare"><code>void            dns_init(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_tmr">Func <span>dns_tmr</span></h4>
+      <pre class="doc-declare"><code>void            dns_tmr(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_setserver">Func <span>dns_setserver</span></h4>
+      <pre class="doc-declare"><code>void            dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_gethostbyname">Func <span>dns_gethostbyname</span></h4>
+      <pre class="doc-declare"><code>err_t           dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+                                  dns_found_callback found, void *callback_arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_gethostbyname_addrtype">Func <span>dns_gethostbyname_addrtype</span></h4>
+      <pre class="doc-declare"><code>err_t           dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+                                  dns_found_callback found, void *callback_arg,
+                                  u8_t dns_addrtype);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_local_iterate">Func <span>dns_local_iterate</span></h4>
+      <pre class="doc-declare"><code>size_t        dns_local_iterate(dns_found_callback iterator_fn, void *iterator_arg);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_local_lookup">Func <span>dns_local_lookup</span></h4>
+      <pre class="doc-declare"><code>err_t         dns_local_lookup(const char *hostname, ip_addr_t *addr, u8_t dns_addrtype);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_local_removehost">Func <span>dns_local_removehost</span></h4>
+      <pre class="doc-declare"><code>int           dns_local_removehost(const char *hostname, const ip_addr_t *addr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="dns_local_addhost">Func <span>dns_local_addhost</span></h4>
+      <pre class="doc-declare"><code>err_t         dns_local_addhost(const char *hostname, const ip_addr_t *addr);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+
+      <h4 id=" ">Const <span> </span></h4>
+      <pre class="doc-declare"><code>const ip_addr_t* dns_getserver(u8_t numdns);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="dns_found_callback">Typedef <span>dns_found_callback</span></h4>
+      <pre class="doc-declare"><code>typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+</code></pre>
+      <pre class="doc-comment">/** Callback which is invoked when a hostname is found.
+ * A function of this type must be implemented by the application using the DNS resolver.
+ * @param name pointer to the name that was looked up.
+ * @param ipaddr pointer to an ip_addr_t containing the IP address of the hostname,
+ *        or NULL if the name could not be found (or on any other error).
+ * @param callback_arg a user-specified callback argument passed to dns_gethostbyname
+*/</pre>
+    </div>
+  </body>
+</html>
+            

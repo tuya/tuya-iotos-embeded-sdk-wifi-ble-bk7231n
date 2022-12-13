@@ -451,6 +451,21 @@ int tuya_hal_net_get_socket_ip(int fd, UNW_IP_ADDR_T *addr);
 UNW_IP_ADDR_T tuya_hal_net_addr(const char *ip);
 
 /**
+* @brief set sock option
+*
+* @param[in] fd: socket id
+* @param[in] level: level
+* @param[in] optname: optname
+* @param[in] optval: optval
+* @param[in] optlen: optlen
+*
+* @note This API is used for set sock option
+*
+* @return UNW_SUCCESS on success. Others on error, please refer to tuya_os_adapter_error_code.h
+*/
+int tuya_hal_net_setsockopt(int fd, int level, int optname, void *optval, int optlen);
+
+/**
  * @brief Network interface initialization
  *
  * @param VOID

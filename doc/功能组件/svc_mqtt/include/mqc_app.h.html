@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -421,6 +421,11 @@
                 <a href="#PRO_DEV_ALARM_UP" class="nav-sub-label">PRO_DEV_ALARM_UP</a>
               </li>
       
+
+              <li>
+                <a href="#mqc_subscribe_multi_topics(topics, cnt, msg_cb)" class="nav-sub-label">mqc_subscribe_multi_topics(topics, cnt, msg_cb)</a>
+              </li>
+      
             </ul>
             
           </li>
@@ -505,7 +510,7 @@
       
 
               <li>
-                <a href="#mqc_subscribe_multi_topics" class="nav-sub-label">mqc_subscribe_multi_topics</a>
+                <a href="#mqc_subscribe_multi_topics_ext" class="nav-sub-label">mqc_subscribe_multi_topics_ext</a>
               </li>
       
 
@@ -925,6 +930,21 @@
       <pre class="doc-declare"><code>#define PRO_DEV_ALARM_UP     		702 /* dev -> cloud */
 </code></pre>
       <pre class="doc-comment"></pre>
+
+      <h4 id="mqc_subscribe_multi_topics(topics, cnt, msg_cb)">Marco <span>mqc_subscribe_multi_topics(topics, cnt, msg_cb)</span></h4>
+      <pre class="doc-declare"><code>#define mqc_subscribe_multi_topics(topics, cnt, msg_cb) mqc_subscribe_multi_topics_ext(topics, cnt, msg_cb, TRUE)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Subcribe multiple topics within one MQTT request
+ * 
+ * @param[in] topics Array of topics to subscribe
+ * @param[in] cnt Count of topics to subscribe
+ * @param[in] msg_cb Callback when MQTT msgs recv. If msg_cb is NULL, 
+ * msgs will transfer to default recv_cb of MQTT client
+ * @param[in] auto_resub Re-subscribe when mqtt re-connect
+ *
+ * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
       <h3 id="functions">Functions</h3>
       
 
@@ -1076,18 +1096,9 @@
  * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */</pre>
 
-      <h4 id="mqc_subscribe_multi_topics">Func <span>mqc_subscribe_multi_topics</span></h4>
-      <pre class="doc-declare"><code>OPERATE_RET mqc_subscribe_multi_topics(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb);</code></pre>
-      <pre class="doc-comment">/**
- * @brief Subcribe multiple topics within one MQTT request
- * 
- * @param[in] topics Array of topics to subscribe
- * @param[in] cnt Count of topics to subscribe
- * @param[in] msg_cb Callback when MQTT msgs recv. If msg_cb is NULL, 
- * msgs will transfer to default recv_cb of MQTT client
- *
- * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
- */</pre>
+      <h4 id="mqc_subscribe_multi_topics_ext">Func <span>mqc_subscribe_multi_topics_ext</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET mqc_subscribe_multi_topics_ext(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb, BOOL_T auto_resub);</code></pre>
+      <pre class="doc-comment"></pre>
 
       <h4 id="mqc_unsubscribe_multi_topics">Func <span>mqc_unsubscribe_multi_topics</span></h4>
       <pre class="doc-declare"><code>OPERATE_RET mqc_unsubscribe_multi_topics(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt);</code></pre>

@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -303,7 +303,7 @@
       
 
               <li>
-                <a href="#err_t" class="nav-sub-label">err_t</a>
+                <a href="#httpc_headers_done_fn" class="nav-sub-label">httpc_headers_done_fn</a>
               </li>
       
 
@@ -461,7 +461,7 @@
  *            the source of the error but must not necessarily be != ERR_OK
  */</pre>
 
-      <h4 id="err_t">Typedef <span>err_t</span></h4>
+      <h4 id="httpc_headers_done_fn">Typedef <span>httpc_headers_done_fn</span></h4>
       <pre class="doc-declare"><code>typedef err_t (*httpc_headers_done_fn)(httpc_state_t *connection, void *arg, struct pbuf *hdr, u16_t hdr_len, u32_t content_len);
 </code></pre>
       <pre class="doc-comment">/**

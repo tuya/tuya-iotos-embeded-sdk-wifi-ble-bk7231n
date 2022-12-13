@@ -1,0 +1,959 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/err.h" class="nav-sub-label">lwip/err.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_PBUF_H" class="nav-sub-label">LWIP_HDR_PBUF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_SUPPORT_CUSTOM_PBUF" class="nav-sub-label">LWIP_SUPPORT_CUSTOM_PBUF</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_NEEDS_COPY(p)" class="nav-sub-label">PBUF_NEEDS_COPY(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TRANSPORT_HLEN" class="nav-sub-label">PBUF_TRANSPORT_HLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_IP_HLEN" class="nav-sub-label">PBUF_IP_HLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_IP_HLEN" class="nav-sub-label">PBUF_IP_HLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS" class="nav-sub-label">PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_FLAG_DATA_VOLATILE" class="nav-sub-label">PBUF_TYPE_FLAG_DATA_VOLATILE</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_ALLOC_SRC_MASK" class="nav-sub-label">PBUF_TYPE_ALLOC_SRC_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_ALLOC_FLAG_RX" class="nav-sub-label">PBUF_ALLOC_FLAG_RX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_ALLOC_FLAG_DATA_CONTIGUOUS" class="nav-sub-label">PBUF_ALLOC_FLAG_DATA_CONTIGUOUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_ALLOC_SRC_MASK_STD_HEAP" class="nav-sub-label">PBUF_TYPE_ALLOC_SRC_MASK_STD_HEAP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF" class="nav-sub-label">PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF_POOL" class="nav-sub-label">PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF_POOL</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_ALLOC_SRC_MASK_APP_MIN" class="nav-sub-label">PBUF_TYPE_ALLOC_SRC_MASK_APP_MIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_TYPE_ALLOC_SRC_MASK_APP_MAX" class="nav-sub-label">PBUF_TYPE_ALLOC_SRC_MASK_APP_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_FLAG_PUSH" class="nav-sub-label">PBUF_FLAG_PUSH</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_FLAG_IS_CUSTOM" class="nav-sub-label">PBUF_FLAG_IS_CUSTOM</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_FLAG_MCASTLOOP" class="nav-sub-label">PBUF_FLAG_MCASTLOOP</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_FLAG_LLBCAST" class="nav-sub-label">PBUF_FLAG_LLBCAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_FLAG_LLMCAST" class="nav-sub-label">PBUF_FLAG_LLMCAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_FLAG_TCP_FIN" class="nav-sub-label">PBUF_FLAG_TCP_FIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_POOL_FREE_OOSEQ" class="nav-sub-label">PBUF_POOL_FREE_OOSEQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_CHECK_FREE_OOSEQ()" class="nav-sub-label">PBUF_CHECK_FREE_OOSEQ()</a>
+              </li>
+      
+
+              <li>
+                <a href="#PBUF_CHECK_FREE_OOSEQ" class="nav-sub-label">PBUF_CHECK_FREE_OOSEQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_init" class="nav-sub-label">pbuf_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_get_allocsrc(p)" class="nav-sub-label">pbuf_get_allocsrc(p)</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_match_allocsrc(p, type)" class="nav-sub-label">pbuf_match_allocsrc(p, type)</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_match_type(p, type)" class="nav-sub-label">pbuf_match_type(p, type)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#pbuf_free_ooseq" class="nav-sub-label">pbuf_free_ooseq</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_realloc" class="nav-sub-label">pbuf_realloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_header" class="nav-sub-label">pbuf_header</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_header_force" class="nav-sub-label">pbuf_header_force</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_add_header" class="nav-sub-label">pbuf_add_header</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_add_header_force" class="nav-sub-label">pbuf_add_header_force</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_remove_header" class="nav-sub-label">pbuf_remove_header</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_ref" class="nav-sub-label">pbuf_ref</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_free" class="nav-sub-label">pbuf_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_clen" class="nav-sub-label">pbuf_clen</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_cat" class="nav-sub-label">pbuf_cat</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_chain" class="nav-sub-label">pbuf_chain</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_copy" class="nav-sub-label">pbuf_copy</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_copy_partial" class="nav-sub-label">pbuf_copy_partial</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_get_contiguous" class="nav-sub-label">pbuf_get_contiguous</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_take" class="nav-sub-label">pbuf_take</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_take_at" class="nav-sub-label">pbuf_take_at</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_fill_chksum" class="nav-sub-label">pbuf_fill_chksum</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_split_64k" class="nav-sub-label">pbuf_split_64k</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_get_at" class="nav-sub-label">pbuf_get_at</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_try_get_at" class="nav-sub-label">pbuf_try_get_at</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_put_at" class="nav-sub-label">pbuf_put_at</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_memcmp" class="nav-sub-label">pbuf_memcmp</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_memfind" class="nav-sub-label">pbuf_memfind</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_strstr" class="nav-sub-label">pbuf_strstr</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf" class="nav-sub-label">pbuf</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#pbuf_layer;
+" class="nav-sub-label">pbuf_layer;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_type;
+" class="nav-sub-label">pbuf_type;
+</a>
+              </li>
+      
+
+              <li>
+                <a href="#pbuf_free_custom_fn" class="nav-sub-label">pbuf_free_custom_fn</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/err.h"><span>lwip/err.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/err.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/err.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_PBUF_H">Marco <span>LWIP_HDR_PBUF_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_PBUF_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_SUPPORT_CUSTOM_PBUF">Marco <span>LWIP_SUPPORT_CUSTOM_PBUF</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_SUPPORT_CUSTOM_PBUF ((IP_FRAG && !LWIP_NETIF_TX_SINGLE_PBUF) || (LWIP_IPV6 && LWIP_IPV6_FRAG))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_NEEDS_COPY(p)">Marco <span>PBUF_NEEDS_COPY(p)</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_NEEDS_COPY(p) ((p)->type_internal & PBUF_TYPE_FLAG_DATA_VOLATILE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_TRANSPORT_HLEN">Marco <span>PBUF_TRANSPORT_HLEN</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TRANSPORT_HLEN 20
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_IP_HLEN">Marco <span>PBUF_IP_HLEN</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_IP_HLEN       40
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_IP_HLEN">Marco <span>PBUF_IP_HLEN</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_IP_HLEN       20
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS">Marco <span>PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS      128
+</code></pre>
+      <pre class="doc-comment">/** Indicates that the payload directly follows the struct pbuf.
+ *  This makes @ref pbuf_header work in both directions. */</pre>
+
+      <h4 id="PBUF_TYPE_FLAG_DATA_VOLATILE">Marco <span>PBUF_TYPE_FLAG_DATA_VOLATILE</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_FLAG_DATA_VOLATILE               64
+</code></pre>
+      <pre class="doc-comment">/** Indicates the data stored in this pbuf can change. If this pbuf needs
+ * to be queued, it must be copied/duplicated. */</pre>
+
+      <h4 id="PBUF_TYPE_ALLOC_SRC_MASK">Marco <span>PBUF_TYPE_ALLOC_SRC_MASK</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_ALLOC_SRC_MASK                   15
+</code></pre>
+      <pre class="doc-comment">/** 4 bits are reserved for 16 allocation sources (e.g. heap, pool1, pool2, etc)
+ * Internally, we use: 0=heap, 1=MEMP_PBUF, 2=MEMP_PBUF_POOL -> 13 types free*/</pre>
+
+      <h4 id="PBUF_ALLOC_FLAG_RX">Marco <span>PBUF_ALLOC_FLAG_RX</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_ALLOC_FLAG_RX                         256
+</code></pre>
+      <pre class="doc-comment">/** Indicates this pbuf is used for RX (if not set, indicates use for TX).
+ * This information can be used to keep some spare RX buffers e.g. for
+ * receiving TCP ACKs to unblock a connection) */</pre>
+
+      <h4 id="PBUF_ALLOC_FLAG_DATA_CONTIGUOUS">Marco <span>PBUF_ALLOC_FLAG_DATA_CONTIGUOUS</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_ALLOC_FLAG_DATA_CONTIGUOUS            512
+</code></pre>
+      <pre class="doc-comment">/** Indicates the application needs the pbuf payload to be in one piece */</pre>
+
+      <h4 id="PBUF_TYPE_ALLOC_SRC_MASK_STD_HEAP">Marco <span>PBUF_TYPE_ALLOC_SRC_MASK_STD_HEAP</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_ALLOC_SRC_MASK_STD_HEAP          0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF">Marco <span>PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF     1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF_POOL">Marco <span>PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF_POOL</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF_POOL 2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_TYPE_ALLOC_SRC_MASK_APP_MIN">Marco <span>PBUF_TYPE_ALLOC_SRC_MASK_APP_MIN</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_ALLOC_SRC_MASK_APP_MIN           3
+</code></pre>
+      <pre class="doc-comment">/** First pbuf allocation type for applications */</pre>
+
+      <h4 id="PBUF_TYPE_ALLOC_SRC_MASK_APP_MAX">Marco <span>PBUF_TYPE_ALLOC_SRC_MASK_APP_MAX</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_TYPE_ALLOC_SRC_MASK_APP_MAX           PBUF_TYPE_ALLOC_SRC_MASK
+</code></pre>
+      <pre class="doc-comment">/** Last pbuf allocation type for applications */</pre>
+
+      <h4 id="PBUF_FLAG_PUSH">Marco <span>PBUF_FLAG_PUSH</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_FLAG_PUSH     0x01U
+</code></pre>
+      <pre class="doc-comment">/** indicates this packet's data should be immediately passed to the application */</pre>
+
+      <h4 id="PBUF_FLAG_IS_CUSTOM">Marco <span>PBUF_FLAG_IS_CUSTOM</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_FLAG_IS_CUSTOM 0x02U
+</code></pre>
+      <pre class="doc-comment">/** indicates this is a custom pbuf: pbuf_free calls pbuf_custom->custom_free_function()
+    when the last reference is released (plus custom PBUF_RAM cannot be trimmed) */</pre>
+
+      <h4 id="PBUF_FLAG_MCASTLOOP">Marco <span>PBUF_FLAG_MCASTLOOP</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_FLAG_MCASTLOOP 0x04U
+</code></pre>
+      <pre class="doc-comment">/** indicates this pbuf is UDP multicast to be looped back */</pre>
+
+      <h4 id="PBUF_FLAG_LLBCAST">Marco <span>PBUF_FLAG_LLBCAST</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_FLAG_LLBCAST  0x08U
+</code></pre>
+      <pre class="doc-comment">/** indicates this pbuf was received as link-level broadcast */</pre>
+
+      <h4 id="PBUF_FLAG_LLMCAST">Marco <span>PBUF_FLAG_LLMCAST</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_FLAG_LLMCAST  0x10U
+</code></pre>
+      <pre class="doc-comment">/** indicates this pbuf was received as link-level multicast */</pre>
+
+      <h4 id="PBUF_FLAG_TCP_FIN">Marco <span>PBUF_FLAG_TCP_FIN</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_FLAG_TCP_FIN  0x20U
+</code></pre>
+      <pre class="doc-comment">/** indicates this pbuf includes a TCP FIN flag */</pre>
+
+      <h4 id="PBUF_POOL_FREE_OOSEQ">Marco <span>PBUF_POOL_FREE_OOSEQ</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_POOL_FREE_OOSEQ 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PBUF_CHECK_FREE_OOSEQ()">Marco <span>PBUF_CHECK_FREE_OOSEQ()</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_CHECK_FREE_OOSEQ() do { if(pbuf_free_ooseq_pending) { \
+ /* pbuf_alloc() reported PBUF_POOL to be empty -> try to free some \
+     ooseq queued pbufs now */ \
+ pbuf_free_ooseq(); }}while(0)
+</code></pre>
+      <pre class="doc-comment">/** When not using sys_check_timeouts(), call PBUF_CHECK_FREE_OOSEQ()
+    at regular intervals from main level to check if ooseq pbufs need to be
+    freed! */</pre>
+
+      <h4 id="PBUF_CHECK_FREE_OOSEQ">Marco <span>PBUF_CHECK_FREE_OOSEQ</span></h4>
+      <pre class="doc-declare"><code>#define PBUF_CHECK_FREE_OOSEQ()
+</code></pre>
+      <pre class="doc-comment">/* Otherwise declare an empty PBUF_CHECK_FREE_OOSEQ */</pre>
+
+      <h4 id="pbuf_init">Marco <span>pbuf_init</span></h4>
+      <pre class="doc-declare"><code>#define pbuf_init()
+</code></pre>
+      <pre class="doc-comment">/* Initializes the pbuf module. This call is empty for now, but may not be in future. */</pre>
+
+      <h4 id="pbuf_get_allocsrc(p)">Marco <span>pbuf_get_allocsrc(p)</span></h4>
+      <pre class="doc-declare"><code>#define pbuf_get_allocsrc(p)         ((p)->type_internal & PBUF_TYPE_ALLOC_SRC_MASK)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_match_allocsrc(p, type)">Marco <span>pbuf_match_allocsrc(p, type)</span></h4>
+      <pre class="doc-declare"><code>#define pbuf_match_allocsrc(p, type) (pbuf_get_allocsrc(p) == ((type) & PBUF_TYPE_ALLOC_SRC_MASK))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_match_type(p, type)">Marco <span>pbuf_match_type(p, type)</span></h4>
+      <pre class="doc-declare"><code>#define pbuf_match_type(p, type)     pbuf_match_allocsrc(p, type)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="pbuf_free_ooseq">Func <span>pbuf_free_ooseq</span></h4>
+      <pre class="doc-declare"><code>void pbuf_free_ooseq(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_realloc">Func <span>pbuf_realloc</span></h4>
+      <pre class="doc-declare"><code>void pbuf_realloc(struct pbuf *p, u16_t size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_header">Func <span>pbuf_header</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_header(struct pbuf *p, s16_t header_size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_header_force">Func <span>pbuf_header_force</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_header_force(struct pbuf *p, s16_t header_size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_add_header">Func <span>pbuf_add_header</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_add_header(struct pbuf *p, size_t header_size_increment);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_add_header_force">Func <span>pbuf_add_header_force</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_add_header_force(struct pbuf *p, size_t header_size_increment);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_remove_header">Func <span>pbuf_remove_header</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_remove_header(struct pbuf *p, size_t header_size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_ref">Func <span>pbuf_ref</span></h4>
+      <pre class="doc-declare"><code>void pbuf_ref(struct pbuf *p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_free">Func <span>pbuf_free</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_free(struct pbuf *p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_clen">Func <span>pbuf_clen</span></h4>
+      <pre class="doc-declare"><code>u16_t pbuf_clen(const struct pbuf *p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_cat">Func <span>pbuf_cat</span></h4>
+      <pre class="doc-declare"><code>void pbuf_cat(struct pbuf *head, struct pbuf *tail);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_chain">Func <span>pbuf_chain</span></h4>
+      <pre class="doc-declare"><code>void pbuf_chain(struct pbuf *head, struct pbuf *tail);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_copy">Func <span>pbuf_copy</span></h4>
+      <pre class="doc-declare"><code>err_t pbuf_copy(struct pbuf *p_to, const struct pbuf *p_from);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_copy_partial">Func <span>pbuf_copy_partial</span></h4>
+      <pre class="doc-declare"><code>u16_t pbuf_copy_partial(const struct pbuf *p, void *dataptr, u16_t len, u16_t offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_get_contiguous">Func <span>pbuf_get_contiguous</span></h4>
+      <pre class="doc-declare"><code>void *pbuf_get_contiguous(const struct pbuf *p, void *buffer, size_t bufsize, u16_t len, u16_t offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_take">Func <span>pbuf_take</span></h4>
+      <pre class="doc-declare"><code>err_t pbuf_take(struct pbuf *buf, const void *dataptr, u16_t len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_take_at">Func <span>pbuf_take_at</span></h4>
+      <pre class="doc-declare"><code>err_t pbuf_take_at(struct pbuf *buf, const void *dataptr, u16_t len, u16_t offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_fill_chksum">Func <span>pbuf_fill_chksum</span></h4>
+      <pre class="doc-declare"><code>err_t pbuf_fill_chksum(struct pbuf *p, u16_t start_offset, const void *dataptr,
+                      u16_t len, u16_t *chksum);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_split_64k">Func <span>pbuf_split_64k</span></h4>
+      <pre class="doc-declare"><code>void pbuf_split_64k(struct pbuf *p, struct pbuf **rest);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_get_at">Func <span>pbuf_get_at</span></h4>
+      <pre class="doc-declare"><code>u8_t pbuf_get_at(const struct pbuf* p, u16_t offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_try_get_at">Func <span>pbuf_try_get_at</span></h4>
+      <pre class="doc-declare"><code>int pbuf_try_get_at(const struct pbuf* p, u16_t offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_put_at">Func <span>pbuf_put_at</span></h4>
+      <pre class="doc-declare"><code>void pbuf_put_at(struct pbuf* p, u16_t offset, u8_t data);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_memcmp">Func <span>pbuf_memcmp</span></h4>
+      <pre class="doc-declare"><code>u16_t pbuf_memcmp(const struct pbuf* p, u16_t offset, const void* s2, u16_t n);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_memfind">Func <span>pbuf_memfind</span></h4>
+      <pre class="doc-declare"><code>u16_t pbuf_memfind(const struct pbuf* p, const void* mem, u16_t mem_len, u16_t start_offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf_strstr">Func <span>pbuf_strstr</span></h4>
+      <pre class="doc-declare"><code>u16_t pbuf_strstr(const struct pbuf* p, const char* substr);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_alloc(pbuf_layer l, u16_t length, pbuf_type type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_alloc_reference(void *payload, u16_t length, pbuf_type type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_alloced_custom(pbuf_layer l, u16_t length, pbuf_type type,
+                                struct pbuf_custom *p, void *payload_mem,
+                                u16_t payload_mem_len);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_free_header(struct pbuf *q, u16_t size);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_dechain(struct pbuf *p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_skip(struct pbuf* in, u16_t in_offset, u16_t* out_offset);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_coalesce(struct pbuf *p, pbuf_layer layer);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="pbuf">Variable <span>pbuf</span></h4>
+      <pre class="doc-declare"><code>struct pbuf *pbuf_clone(pbuf_layer l, pbuf_type type, struct pbuf *p);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="pbuf_layer;
+">Typedef <span>pbuf_layer;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ /** Includes spare room for transport layer header, e.g. UDP header.
+   * Use this if you intend to pass the pbuf to functions like udp_send().
+   */
+ PBUF_TRANSPORT = PBUF_LINK_ENCAPSULATION_HLEN + PBUF_LINK_HLEN + PBUF_IP_HLEN + PBUF_TRANSPORT_HLEN,
+ /** Includes spare room for IP header.
+   * Use this if you intend to pass the pbuf to functions like raw_send().
+   */
+ PBUF_IP = PBUF_LINK_ENCAPSULATION_HLEN + PBUF_LINK_HLEN + PBUF_IP_HLEN,
+ /** Includes spare room for link layer header (ethernet header).
+   * Use this if you intend to pass the pbuf to functions like ethernet_output().
+   * @see PBUF_LINK_HLEN
+   */
+ PBUF_LINK = PBUF_LINK_ENCAPSULATION_HLEN + PBUF_LINK_HLEN,
+ /** Includes spare room for additional encapsulation header before ethernet
+   * headers (e.g. 802.11).
+   * Use this if you intend to pass the pbuf to functions like netif->linkoutput().
+   * @see PBUF_LINK_ENCAPSULATION_HLEN
+   */
+ PBUF_RAW_TX = PBUF_LINK_ENCAPSULATION_HLEN,
+ /** Use this for input packets in a netif driver when calling netif->input()
+   * in the most common case - ethernet-layer netif driver. */
+ PBUF_RAW = 0
+} pbuf_layer;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup pbuf
+ * Enumeration of pbuf layers
+ */</pre>
+
+      <h4 id="pbuf_type;
+">Typedef <span>pbuf_type;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+ /** pbuf data is stored in RAM, used for TX mostly, struct pbuf and its payload
+      are allocated in one piece of contiguous memory (so the first payload byte
+      can be calculated from struct pbuf).
+      pbuf_alloc() allocates PBUF_RAM pbufs as unchained pbufs (although that might
+      change in future versions).
+      This should be used for all OUTGOING packets (TX).*/
+ PBUF_RAM = (PBUF_ALLOC_FLAG_DATA_CONTIGUOUS | PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS | PBUF_TYPE_ALLOC_SRC_MASK_STD_HEAP),
+ /** pbuf data is stored in ROM, i.e. struct pbuf and its payload are located in
+      totally different memory areas. Since it points to ROM, payload does not
+      have to be copied when queued for transmission. */
+ PBUF_ROM = PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF,
+ /** pbuf comes from the pbuf pool. Much like PBUF_ROM but payload might change
+      so it has to be duplicated when queued before transmitting, depending on
+      who has a 'ref' to it. */
+ PBUF_REF = (PBUF_TYPE_FLAG_DATA_VOLATILE | PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF),
+ /** pbuf payload refers to RAM. This one comes from a pool and should be used
+      for RX. Payload can be chained (scatter-gather RX) but like PBUF_RAM, struct
+      pbuf and its payload are allocated in one piece of contiguous memory (so
+      the first payload byte can be calculated from struct pbuf).
+      Don't use this for TX, if the pool becomes empty e.g. because of TCP queuing,
+      you are unable to receive TCP acks! */
+ PBUF_POOL = (PBUF_ALLOC_FLAG_RX | PBUF_TYPE_FLAG_STRUCT_DATA_CONTIGUOUS | PBUF_TYPE_ALLOC_SRC_MASK_STD_MEMP_PBUF_POOL)
+} pbuf_type;
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup pbuf
+ * Enumeration of pbuf types
+ */</pre>
+
+      <h4 id="pbuf_free_custom_fn">Typedef <span>pbuf_free_custom_fn</span></h4>
+      <pre class="doc-declare"><code>typedef void (*pbuf_free_custom_fn)(struct pbuf *p);
+</code></pre>
+      <pre class="doc-comment">/** Prototype for a function to free a custom pbuf */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#IPCP_H" class="nav-sub-label">IPCP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_ADDRS" class="nav-sub-label">CI_ADDRS</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_COMPRESSTYPE" class="nav-sub-label">CI_COMPRESSTYPE</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_ADDR" class="nav-sub-label">CI_ADDR</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MS_DNS1" class="nav-sub-label">CI_MS_DNS1</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MS_DNS2" class="nav-sub-label">CI_MS_DNS2</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MS_WINS1" class="nav-sub-label">CI_MS_WINS1</a>
+              </li>
+      
+
+              <li>
+                <a href="#CI_MS_WINS2" class="nav-sub-label">CI_MS_WINS2</a>
+              </li>
+      
+
+              <li>
+                <a href="#MAX_STATES" class="nav-sub-label">MAX_STATES</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPCP_VJMODE_OLD" class="nav-sub-label">IPCP_VJMODE_OLD</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPCP_VJMODE_RFC1172" class="nav-sub-label">IPCP_VJMODE_RFC1172</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPCP_VJMODE_RFC1332" class="nav-sub-label">IPCP_VJMODE_RFC1332</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPCP_VJ_COMP" class="nav-sub-label">IPCP_VJ_COMP</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPCP_VJ_COMP_OLD" class="nav-sub-label">IPCP_VJ_COMP_OLD</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ipcp_options;
+" class="nav-sub-label">ipcp_options;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="IPCP_H">Marco <span>IPCP_H</span></h4>
+      <pre class="doc-declare"><code>#define IPCP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_ADDRS">Marco <span>CI_ADDRS</span></h4>
+      <pre class="doc-declare"><code>#define CI_ADDRS 1 /* IP Addresses */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Options.
+ */</pre>
+
+      <h4 id="CI_COMPRESSTYPE">Marco <span>CI_COMPRESSTYPE</span></h4>
+      <pre class="doc-declare"><code>#define CI_COMPRESSTYPE 2 /* Compression Type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_ADDR">Marco <span>CI_ADDR</span></h4>
+      <pre class="doc-declare"><code>#define CI_ADDR	3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MS_DNS1">Marco <span>CI_MS_DNS1</span></h4>
+      <pre class="doc-declare"><code>#define CI_MS_DNS1     129 /* Primary DNS value */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MS_DNS2">Marco <span>CI_MS_DNS2</span></h4>
+      <pre class="doc-declare"><code>#define CI_MS_DNS2     131    /* Secondary DNS value */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MS_WINS1">Marco <span>CI_MS_WINS1</span></h4>
+      <pre class="doc-declare"><code>#define CI_MS_WINS1    130    /* Primary WINS value */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="CI_MS_WINS2">Marco <span>CI_MS_WINS2</span></h4>
+      <pre class="doc-declare"><code>#define CI_MS_WINS2    132 /* Secondary WINS value */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="MAX_STATES">Marco <span>MAX_STATES</span></h4>
+      <pre class="doc-declare"><code>#define MAX_STATES 16	/* from slcompress.h */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPCP_VJMODE_OLD">Marco <span>IPCP_VJMODE_OLD</span></h4>
+      <pre class="doc-declare"><code>#define IPCP_VJMODE_OLD 1 /* "old" mode (option # = 0x0037) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPCP_VJMODE_RFC1172">Marco <span>IPCP_VJMODE_RFC1172</span></h4>
+      <pre class="doc-declare"><code>#define IPCP_VJMODE_RFC1172 2 /* "old-rfc"mode (option # = 0x002d) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPCP_VJMODE_RFC1332">Marco <span>IPCP_VJMODE_RFC1332</span></h4>
+      <pre class="doc-declare"><code>#define IPCP_VJMODE_RFC1332 3 /* "new-rfc"mode (option # = 0x002d, */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPCP_VJ_COMP">Marco <span>IPCP_VJ_COMP</span></h4>
+      <pre class="doc-declare"><code>#define IPCP_VJ_COMP 2d /* current value for VJ compression option*/
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPCP_VJ_COMP_OLD">Marco <span>IPCP_VJ_COMP_OLD</span></h4>
+      <pre class="doc-declare"><code>#define IPCP_VJ_COMP_OLD 55 /* "old" (i.e, broken) value for VJ */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *ip_ntoa (u32_t);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="ipcp_options;
+">Typedef <span>ipcp_options;
+</span></h4>
+      <pre class="doc-declare"><code>typedef struct ipcp_options {
+   unsigned int neg_addr              :1; /* Negotiate IP Address? */
+   unsigned int old_addrs             :1; /* Use old (IP-Addresses) option? */
+   unsigned int req_addr              :1; /* Ask peer to send IP address? */
+#if 0 /* UNUSED */
+   unsigned int default_route         :1; /* Assign default route through interface? */
+   unsigned int replace_default_route :1; /* Replace default route through interface? */
+#endif /* UNUSED */
+#if 0 /* UNUSED - PROXY ARP */
+   unsigned int proxy_arp             :1; /* Make proxy ARP entry for peer? */
+#endif /* UNUSED - PROXY ARP */
+#if VJ_SUPPORT
+   unsigned int neg_vj                :1; /* Van Jacobson Compression? */
+   unsigned int old_vj                :1; /* use old (short) form of VJ option? */
+   unsigned int cflag                 :1;
+#endif /* VJ_SUPPORT */
+   unsigned int accept_local          :1; /* accept peer's value for ouraddr */
+   unsigned int accept_remote         :1; /* accept peer's value for hisaddr */
+#if LWIP_DNS
+   unsigned int req_dns1              :1; /* Ask peer to send primary DNS address? */
+   unsigned int req_dns2              :1; /* Ask peer to send secondary DNS address? */
+#endif /* LWIP_DNS */
+
+   u32_t ouraddr, hisaddr; /* Addresses in NETWORK BYTE ORDER */
+#if LWIP_DNS
+   u32_t dnsaddr[2]; /* Primary and secondary MS DNS entries */
+#endif /* LWIP_DNS */
+#if 0 /* UNUSED - WINS */
+   u32_t winsaddr[2]; /* Primary and secondary MS WINS entries */
+#endif /* UNUSED - WINS */
+
+#if VJ_SUPPORT
+   u16_t vj_protocol;	/* protocol value to use in VJ option */
+   u8_t maxslotindex;	/* values for RFC1332 VJ compression neg. */
+#endif /* VJ_SUPPORT */
+} ipcp_options;
+</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

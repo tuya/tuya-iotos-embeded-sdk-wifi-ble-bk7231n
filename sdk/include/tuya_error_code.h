@@ -1,7 +1,7 @@
 /*******************************************************************
 *  File: tuya_error_code.h
 *  Author: auto generate by tuya code gen system
-*  Date: 2022-03-02
+*  Date: 2022-12-13
 *  Description:this file defined the error code of tuya IOT 
 *  you can change it manully if needed
 *  Copyright(C),2018-2020, tuya inc, www.tuya.comm

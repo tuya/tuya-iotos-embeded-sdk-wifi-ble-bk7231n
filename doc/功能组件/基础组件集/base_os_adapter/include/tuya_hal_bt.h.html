@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -316,6 +316,11 @@
 
               <li>
                 <a href="#tuya_hal_bt_gattc_start_discovery" class="nav-sub-label">tuya_hal_bt_gattc_start_discovery</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_bt_send_beacon" class="nav-sub-label">tuya_hal_bt_send_beacon</a>
               </li>
       
 
@@ -598,6 +603,10 @@
 
       <h4 id="tuya_hal_bt_gattc_start_discovery">Func <span>tuya_hal_bt_gattc_start_discovery</span></h4>
       <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_gattc_start_discovery(UINT8_T mac[6], ty_bt_uuid_t *uuid);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="tuya_hal_bt_send_beacon">Func <span>tuya_hal_bt_send_beacon</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_hal_bt_send_beacon(tuya_ble_data_buf_t *adv, tuya_ble_data_buf_t *scan_resp, UINT16_T interval, UINT16_T timeout);</code></pre>
       <pre class="doc-comment"></pre>
 
       <h4 id="tuya_os_bt_intf_init">Func <span>tuya_os_bt_intf_init</span></h4>

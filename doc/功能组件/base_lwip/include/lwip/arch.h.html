@@ -1,0 +1,1011 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#arch/cc.h" class="nav-sub-label">arch/cc.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdio.h" class="nav-sub-label">stdio.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdio.h" class="nav-sub-label">stdio.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdlib.h" class="nav-sub-label">stdlib.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stddef.h" class="nav-sub-label">stddef.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#stdint.h" class="nav-sub-label">stdint.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#inttypes.h" class="nav-sub-label">inttypes.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#limits.h" class="nav-sub-label">limits.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#unistd.h" class="nav-sub-label">unistd.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ctype.h" class="nav-sub-label">ctype.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_ARCH_H" class="nav-sub-label">LWIP_HDR_ARCH_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LITTLE_ENDIAN" class="nav-sub-label">LITTLE_ENDIAN</a>
+              </li>
+      
+
+              <li>
+                <a href="#BIG_ENDIAN" class="nav-sub-label">BIG_ENDIAN</a>
+              </li>
+      
+
+              <li>
+                <a href="#BYTE_ORDER" class="nav-sub-label">BYTE_ORDER</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_RAND()" class="nav-sub-label">LWIP_RAND()</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PLATFORM_DIAG(x)" class="nav-sub-label">LWIP_PLATFORM_DIAG(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PLATFORM_ASSERT(x)" class="nav-sub-label">LWIP_PLATFORM_ASSERT(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NO_STDDEF_H" class="nav-sub-label">LWIP_NO_STDDEF_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NO_STDINT_H" class="nav-sub-label">LWIP_NO_STDINT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_HAVE_INT64" class="nav-sub-label">LWIP_HAVE_INT64</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NO_INTTYPES_H" class="nav-sub-label">LWIP_NO_INTTYPES_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#X8_F" class="nav-sub-label">X8_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#U16_F" class="nav-sub-label">U16_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#S16_F" class="nav-sub-label">S16_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#X16_F" class="nav-sub-label">X16_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#U32_F" class="nav-sub-label">U32_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#S32_F" class="nav-sub-label">S32_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#X32_F" class="nav-sub-label">X32_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#SZT_F" class="nav-sub-label">SZT_F</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NO_LIMITS_H" class="nav-sub-label">LWIP_NO_LIMITS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NO_UNISTD_H" class="nav-sub-label">LWIP_NO_UNISTD_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_UINT32_MAX" class="nav-sub-label">LWIP_UINT32_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_NO_CTYPE_H" class="nav-sub-label">LWIP_NO_CTYPE_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_in_range(c, lo, up)" class="nav-sub-label">lwip_in_range(c, lo, up)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isdigit(c)" class="nav-sub-label">lwip_isdigit(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isxdigit(c)" class="nav-sub-label">lwip_isxdigit(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_islower(c)" class="nav-sub-label">lwip_islower(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isspace(c)" class="nav-sub-label">lwip_isspace(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isupper(c)" class="nav-sub-label">lwip_isupper(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_tolower(c)" class="nav-sub-label">lwip_tolower(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_toupper(c)" class="nav-sub-label">lwip_toupper(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isdigit(c)" class="nav-sub-label">lwip_isdigit(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isxdigit(c)" class="nav-sub-label">lwip_isxdigit(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_islower(c)" class="nav-sub-label">lwip_islower(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isspace(c)" class="nav-sub-label">lwip_isspace(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_isupper(c)" class="nav-sub-label">lwip_isupper(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_tolower(c)" class="nav-sub-label">lwip_tolower(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_toupper(c)" class="nav-sub-label">lwip_toupper(c)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_CONST_CAST(target_type, val)" class="nav-sub-label">LWIP_CONST_CAST(target_type, val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_ALIGNMENT_CAST(target_type, val)" class="nav-sub-label">LWIP_ALIGNMENT_CAST(target_type, val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PTR_NUMERIC_CAST(target_type, val)" class="nav-sub-label">LWIP_PTR_NUMERIC_CAST(target_type, val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PACKED_CAST(target_type, val)" class="nav-sub-label">LWIP_PACKED_CAST(target_type, val)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_DECLARE_MEMORY_ALIGNED(variable_name, size)" class="nav-sub-label">LWIP_DECLARE_MEMORY_ALIGNED(variable_name, size)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEM_ALIGN_SIZE(size)" class="nav-sub-label">LWIP_MEM_ALIGN_SIZE(size)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEM_ALIGN_BUFFER(size)" class="nav-sub-label">LWIP_MEM_ALIGN_BUFFER(size)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEM_ALIGN(addr)" class="nav-sub-label">LWIP_MEM_ALIGN(addr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_BEGIN" class="nav-sub-label">PACK_STRUCT_BEGIN</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_END" class="nav-sub-label">PACK_STRUCT_END</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_STRUCT" class="nav-sub-label">PACK_STRUCT_STRUCT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_STRUCT" class="nav-sub-label">PACK_STRUCT_STRUCT</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_FIELD(x)" class="nav-sub-label">PACK_STRUCT_FIELD(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_FLD_8(x)" class="nav-sub-label">PACK_STRUCT_FLD_8(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_FLD_S(x)" class="nav-sub-label">PACK_STRUCT_FLD_S(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#PACK_STRUCT_USE_INCLUDES" class="nav-sub-label">PACK_STRUCT_USE_INCLUDES</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_UNUSED_ARG(x)" class="nav-sub-label">LWIP_UNUSED_ARG(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_PROVIDE_ERRNO" class="nav-sub-label">LWIP_PROVIDE_ERRNO</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#u8_t" class="nav-sub-label">u8_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#s8_t" class="nav-sub-label">s8_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#u16_t" class="nav-sub-label">u16_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#s16_t" class="nav-sub-label">s16_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#u32_t" class="nav-sub-label">u32_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#s64_t" class="nav-sub-label">s64_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#mem_ptr_t" class="nav-sub-label">mem_ptr_t</a>
+              </li>
+      
+
+              <li>
+                <a href="#ssize_t" class="nav-sub-label">ssize_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="arch/cc.h"><span>arch/cc.h</span></h4>
+      <pre class="doc-declare"><code>#include "arch/cc.h"
+</code></pre>
+      <pre class="doc-comment">#include "arch/cc.h"
+</pre>
+
+      <h4 id="stdio.h"><span>stdio.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdio.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdio.h>
+</pre>
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h>
+</pre>
+
+      <h4 id="stdio.h"><span>stdio.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdio.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdio.h>
+</pre>
+
+      <h4 id="stdlib.h"><span>stdlib.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdlib.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdlib.h>
+</pre>
+
+      <h4 id="stddef.h"><span>stddef.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stddef.h&gt; /* for size_t */
+</code></pre>
+      <pre class="doc-comment">#include <stddef.h> /* for size_t */
+</pre>
+
+      <h4 id="stdint.h"><span>stdint.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;stdint.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <stdint.h>
+</pre>
+
+      <h4 id="inttypes.h"><span>inttypes.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;inttypes.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <inttypes.h>
+</pre>
+
+      <h4 id="limits.h"><span>limits.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;limits.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <limits.h>
+</pre>
+
+      <h4 id="unistd.h"><span>unistd.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;unistd.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <unistd.h>
+</pre>
+
+      <h4 id="ctype.h"><span>ctype.h</span></h4>
+      <pre class="doc-declare"><code>#include &lt;ctype.h&gt;
+</code></pre>
+      <pre class="doc-comment">#include <ctype.h>
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_ARCH_H">Marco <span>LWIP_HDR_ARCH_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_ARCH_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LITTLE_ENDIAN">Marco <span>LITTLE_ENDIAN</span></h4>
+      <pre class="doc-declare"><code>#define LITTLE_ENDIAN 1234
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BIG_ENDIAN">Marco <span>BIG_ENDIAN</span></h4>
+      <pre class="doc-declare"><code>#define BIG_ENDIAN 4321
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="BYTE_ORDER">Marco <span>BYTE_ORDER</span></h4>
+      <pre class="doc-declare"><code>#define BYTE_ORDER LITTLE_ENDIAN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_RAND()">Marco <span>LWIP_RAND()</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_RAND() ((u32_t)rand())
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PLATFORM_DIAG(x)">Marco <span>LWIP_PLATFORM_DIAG(x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PLATFORM_DIAG(x) do {printf x;} while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PLATFORM_ASSERT(x)">Marco <span>LWIP_PLATFORM_ASSERT(x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PLATFORM_ASSERT(x) do {printf("Assertion \"%s\" failed at line %d in %s\n", \
+                                    x, __LINE__, __FILE__); fflush(NULL); abort();} while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_NO_STDDEF_H">Marco <span>LWIP_NO_STDDEF_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NO_STDDEF_H 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_NO_STDINT_H">Marco <span>LWIP_NO_STDINT_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NO_STDINT_H 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_HAVE_INT64">Marco <span>LWIP_HAVE_INT64</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HAVE_INT64 1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_NO_INTTYPES_H">Marco <span>LWIP_NO_INTTYPES_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NO_INTTYPES_H 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="X8_F">Marco <span>X8_F</span></h4>
+      <pre class="doc-declare"><code>#define X8_F "02" PRIx8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="U16_F">Marco <span>U16_F</span></h4>
+      <pre class="doc-declare"><code>#define U16_F PRIu16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="S16_F">Marco <span>S16_F</span></h4>
+      <pre class="doc-declare"><code>#define S16_F PRId16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="X16_F">Marco <span>X16_F</span></h4>
+      <pre class="doc-declare"><code>#define X16_F PRIx16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="U32_F">Marco <span>U32_F</span></h4>
+      <pre class="doc-declare"><code>#define U32_F PRIu32
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="S32_F">Marco <span>S32_F</span></h4>
+      <pre class="doc-declare"><code>#define S32_F PRId32
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="X32_F">Marco <span>X32_F</span></h4>
+      <pre class="doc-declare"><code>#define X32_F PRIx32
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="SZT_F">Marco <span>SZT_F</span></h4>
+      <pre class="doc-declare"><code>#define SZT_F PRIuPTR
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_NO_LIMITS_H">Marco <span>LWIP_NO_LIMITS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NO_LIMITS_H 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_NO_UNISTD_H">Marco <span>LWIP_NO_UNISTD_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NO_UNISTD_H 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_UINT32_MAX">Marco <span>LWIP_UINT32_MAX</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_UINT32_MAX 4294967295
+</code></pre>
+      <pre class="doc-comment">/* some maximum values needed in lwip code */</pre>
+
+      <h4 id="LWIP_NO_CTYPE_H">Marco <span>LWIP_NO_CTYPE_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_NO_CTYPE_H 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_in_range(c, lo, up)">Marco <span>lwip_in_range(c, lo, up)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_in_range(c, lo, up) ((u8_t)(c) >= (lo) && (u8_t)(c) <= (up))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isdigit(c)">Marco <span>lwip_isdigit(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isdigit(c)          lwip_in_range((c), '0', '9')
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isxdigit(c)">Marco <span>lwip_isxdigit(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isxdigit(c)         (lwip_isdigit(c) || lwip_in_range((c), 'a', 'f') || lwip_in_range((c), 'A', 'F'))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_islower(c)">Marco <span>lwip_islower(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_islower(c)          lwip_in_range((c), 'a', 'z')
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isspace(c)">Marco <span>lwip_isspace(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isspace(c)          ((c) == ' ' || (c) == '\f' || (c) == '\n' || (c) == '\r' || (c) == '\t' || (c) == '\v')
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isupper(c)">Marco <span>lwip_isupper(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isupper(c)          lwip_in_range((c), 'A', 'Z')
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_tolower(c)">Marco <span>lwip_tolower(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_tolower(c)          (lwip_isupper(c) ? (c) - 'A' + 'a' : c)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_toupper(c)">Marco <span>lwip_toupper(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_toupper(c)          (lwip_islower(c) ? (c) - 'a' + 'A' : c)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isdigit(c)">Marco <span>lwip_isdigit(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isdigit(c)          isdigit((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isxdigit(c)">Marco <span>lwip_isxdigit(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isxdigit(c)         isxdigit((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_islower(c)">Marco <span>lwip_islower(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_islower(c)          islower((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isspace(c)">Marco <span>lwip_isspace(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isspace(c)          isspace((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_isupper(c)">Marco <span>lwip_isupper(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_isupper(c)          isupper((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_tolower(c)">Marco <span>lwip_tolower(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_tolower(c)          tolower((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_toupper(c)">Marco <span>lwip_toupper(c)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_toupper(c)          toupper((unsigned char)(c))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_CONST_CAST(target_type, val)">Marco <span>LWIP_CONST_CAST(target_type, val)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_CONST_CAST(target_type, val) ((target_type)((ptrdiff_t)val))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_ALIGNMENT_CAST(target_type, val)">Marco <span>LWIP_ALIGNMENT_CAST(target_type, val)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_ALIGNMENT_CAST(target_type, val) LWIP_CONST_CAST(target_type, val)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PTR_NUMERIC_CAST(target_type, val)">Marco <span>LWIP_PTR_NUMERIC_CAST(target_type, val)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PTR_NUMERIC_CAST(target_type, val) LWIP_CONST_CAST(target_type, val)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PACKED_CAST(target_type, val)">Marco <span>LWIP_PACKED_CAST(target_type, val)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PACKED_CAST(target_type, val) LWIP_CONST_CAST(target_type, val)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_DECLARE_MEMORY_ALIGNED(variable_name, size)">Marco <span>LWIP_DECLARE_MEMORY_ALIGNED(variable_name, size)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_DECLARE_MEMORY_ALIGNED(variable_name, size) u8_t variable_name[LWIP_MEM_ALIGN_BUFFER(size)]
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEM_ALIGN_SIZE(size)">Marco <span>LWIP_MEM_ALIGN_SIZE(size)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEM_ALIGN_SIZE(size) (((size) + MEM_ALIGNMENT - 1U) & ~(MEM_ALIGNMENT-1U))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEM_ALIGN_BUFFER(size)">Marco <span>LWIP_MEM_ALIGN_BUFFER(size)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEM_ALIGN_BUFFER(size) (((size) + MEM_ALIGNMENT - 1U))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEM_ALIGN(addr)">Marco <span>LWIP_MEM_ALIGN(addr)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEM_ALIGN(addr) ((void *)(((mem_ptr_t)(addr) + MEM_ALIGNMENT - 1) & ~(mem_ptr_t)(MEM_ALIGNMENT-1)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_BEGIN">Marco <span>PACK_STRUCT_BEGIN</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_BEGIN
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_END">Marco <span>PACK_STRUCT_END</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_END
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_STRUCT">Marco <span>PACK_STRUCT_STRUCT</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_STRUCT __attribute__((packed))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_STRUCT">Marco <span>PACK_STRUCT_STRUCT</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_STRUCT
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_FIELD(x)">Marco <span>PACK_STRUCT_FIELD(x)</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_FIELD(x) x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_FLD_8(x)">Marco <span>PACK_STRUCT_FLD_8(x)</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_FLD_8(x) PACK_STRUCT_FIELD(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_FLD_S(x)">Marco <span>PACK_STRUCT_FLD_S(x)</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_FLD_S(x) PACK_STRUCT_FIELD(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="PACK_STRUCT_USE_INCLUDES">Marco <span>PACK_STRUCT_USE_INCLUDES</span></h4>
+      <pre class="doc-declare"><code>#define PACK_STRUCT_USE_INCLUDES
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_UNUSED_ARG(x)">Marco <span>LWIP_UNUSED_ARG(x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_UNUSED_ARG(x) (void)x
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_PROVIDE_ERRNO">Marco <span>LWIP_PROVIDE_ERRNO</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_PROVIDE_ERRNO
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="u8_t">Typedef <span>u8_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint8_t  u8_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="s8_t">Typedef <span>s8_t</span></h4>
+      <pre class="doc-declare"><code>typedef int8_t   s8_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="u16_t">Typedef <span>u16_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint16_t u16_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="s16_t">Typedef <span>s16_t</span></h4>
+      <pre class="doc-declare"><code>typedef int16_t  s16_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="u32_t">Typedef <span>u32_t</span></h4>
+      <pre class="doc-declare"><code>typedef uint32_t u32_t;
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="s64_t">Typedef <span>s64_t</span></h4>
+      <pre class="doc-declare"><code>typedef int32_t  s32_t;
+#if LWIP_HAVE_INT64
+typedef uint64_t u64_t;
+typedef int64_t  s64_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="mem_ptr_t">Typedef <span>mem_ptr_t</span></h4>
+      <pre class="doc-declare"><code>typedef uintptr_t mem_ptr_t;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ssize_t">Typedef <span>ssize_t</span></h4>
+      <pre class="doc-declare"><code>typedef int ssize_t;
+#define SSIZE_MAX INT_MAX</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

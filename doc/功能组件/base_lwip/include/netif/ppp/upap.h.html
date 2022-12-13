@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#ppp.h" class="nav-sub-label">ppp.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#UPAP_H" class="nav-sub-label">UPAP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAP_HEADERLEN" class="nav-sub-label">UPAP_HEADERLEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAP_AUTHREQ" class="nav-sub-label">UPAP_AUTHREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAP_AUTHACK" class="nav-sub-label">UPAP_AUTHACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAP_AUTHNAK" class="nav-sub-label">UPAP_AUTHNAK</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPCS_INITIAL" class="nav-sub-label">UPAPCS_INITIAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPCS_CLOSED" class="nav-sub-label">UPAPCS_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPCS_PENDING" class="nav-sub-label">UPAPCS_PENDING</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPCS_AUTHREQ" class="nav-sub-label">UPAPCS_AUTHREQ</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPCS_OPEN" class="nav-sub-label">UPAPCS_OPEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPCS_BADAUTH" class="nav-sub-label">UPAPCS_BADAUTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPSS_INITIAL" class="nav-sub-label">UPAPSS_INITIAL</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPSS_CLOSED" class="nav-sub-label">UPAPSS_CLOSED</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPSS_PENDING" class="nav-sub-label">UPAPSS_PENDING</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPSS_LISTEN" class="nav-sub-label">UPAPSS_LISTEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPSS_OPEN" class="nav-sub-label">UPAPSS_OPEN</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAPSS_BADAUTH" class="nav-sub-label">UPAPSS_BADAUTH</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAP_DEFTIMEOUT" class="nav-sub-label">UPAP_DEFTIMEOUT</a>
+              </li>
+      
+
+              <li>
+                <a href="#UPAP_DEFREQTIME" class="nav-sub-label">UPAP_DEFREQTIME</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#upap_authwithpeer" class="nav-sub-label">upap_authwithpeer</a>
+              </li>
+      
+
+              <li>
+                <a href="#upap_authpeer" class="nav-sub-label">upap_authpeer</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#upap_state;" class="nav-sub-label">upap_state;</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="ppp.h"><span>ppp.h</span></h4>
+      <pre class="doc-declare"><code>#include "ppp.h"
+</code></pre>
+      <pre class="doc-comment">#include "ppp.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="UPAP_H">Marco <span>UPAP_H</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAP_HEADERLEN">Marco <span>UPAP_HEADERLEN</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_HEADERLEN 4
+</code></pre>
+      <pre class="doc-comment">/*
+ * Packet header = Code, id, length.
+ */</pre>
+
+      <h4 id="UPAP_AUTHREQ">Marco <span>UPAP_AUTHREQ</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_AUTHREQ 1 /* Authenticate-Request */
+</code></pre>
+      <pre class="doc-comment">/*
+ * UPAP codes.
+ */</pre>
+
+      <h4 id="UPAP_AUTHACK">Marco <span>UPAP_AUTHACK</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_AUTHACK 2 /* Authenticate-Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAP_AUTHNAK">Marco <span>UPAP_AUTHNAK</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_AUTHNAK 3 /* Authenticate-Nak */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPCS_INITIAL">Marco <span>UPAPCS_INITIAL</span></h4>
+      <pre class="doc-declare"><code>#define UPAPCS_INITIAL 0 /* Connection down */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Client states.
+ */</pre>
+
+      <h4 id="UPAPCS_CLOSED">Marco <span>UPAPCS_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define UPAPCS_CLOSED 1 /* Connection up, haven't requested auth */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPCS_PENDING">Marco <span>UPAPCS_PENDING</span></h4>
+      <pre class="doc-declare"><code>#define UPAPCS_PENDING 2 /* Connection down, have requested auth */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPCS_AUTHREQ">Marco <span>UPAPCS_AUTHREQ</span></h4>
+      <pre class="doc-declare"><code>#define UPAPCS_AUTHREQ 3 /* We've sent an Authenticate-Request */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPCS_OPEN">Marco <span>UPAPCS_OPEN</span></h4>
+      <pre class="doc-declare"><code>#define UPAPCS_OPEN 4 /* We've received an Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPCS_BADAUTH">Marco <span>UPAPCS_BADAUTH</span></h4>
+      <pre class="doc-declare"><code>#define UPAPCS_BADAUTH 5 /* We've received a Nak */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPSS_INITIAL">Marco <span>UPAPSS_INITIAL</span></h4>
+      <pre class="doc-declare"><code>#define UPAPSS_INITIAL 0 /* Connection down */
+</code></pre>
+      <pre class="doc-comment">/*
+ * Server states.
+ */</pre>
+
+      <h4 id="UPAPSS_CLOSED">Marco <span>UPAPSS_CLOSED</span></h4>
+      <pre class="doc-declare"><code>#define UPAPSS_CLOSED 1 /* Connection up, haven't requested auth */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPSS_PENDING">Marco <span>UPAPSS_PENDING</span></h4>
+      <pre class="doc-declare"><code>#define UPAPSS_PENDING 2 /* Connection down, have requested auth */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPSS_LISTEN">Marco <span>UPAPSS_LISTEN</span></h4>
+      <pre class="doc-declare"><code>#define UPAPSS_LISTEN 3 /* Listening for an Authenticate */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPSS_OPEN">Marco <span>UPAPSS_OPEN</span></h4>
+      <pre class="doc-declare"><code>#define UPAPSS_OPEN 4 /* We've sent an Ack */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAPSS_BADAUTH">Marco <span>UPAPSS_BADAUTH</span></h4>
+      <pre class="doc-declare"><code>#define UPAPSS_BADAUTH 5 /* We've sent a Nak */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAP_DEFTIMEOUT">Marco <span>UPAP_DEFTIMEOUT</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_DEFTIMEOUT 3 /* Timeout (seconds) for retransmitting req */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="UPAP_DEFREQTIME">Marco <span>UPAP_DEFREQTIME</span></h4>
+      <pre class="doc-declare"><code>#define UPAP_DEFREQTIME 30 /* Time to wait for auth-req from peer */
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="upap_authwithpeer">Func <span>upap_authwithpeer</span></h4>
+      <pre class="doc-declare"><code>void upap_authwithpeer(ppp_pcb *pcb, const char *user, const char *password);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="upap_authpeer">Func <span>upap_authpeer</span></h4>
+      <pre class="doc-declare"><code>void upap_authpeer(ppp_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="upap_state;">Typedef <span>upap_state;</span></h4>
+      <pre class="doc-declare"><code>typedef struct upap_state {
+   const char *us_user; /* User */
+   u8_t us_userlen;	/* User length */
+   const char *us_passwd; /* Password */
+   u8_t us_passwdlen;	/* Password length */
+   u8_t us_clientstate; /* Client state */
+#if PPP_SERVER
+   u8_t us_serverstate; /* Server state */
+#endif /* PPP_SERVER */
+   u8_t us_id;	        /* Current id */
+   u8_t us_transmits;	/* Number of auth-reqs sent */
+} upap_state;</code></pre>
+      <pre class="doc-comment"></pre>
+    </div>
+  </body>
+</html>
+            

@@ -182,6 +182,7 @@ OPERATE_RET tuya_hal_bt_gattc_send_data(UINT8_T mac[6], UINT8_T *data, UINT_T le
 
 OPERATE_RET tuya_hal_bt_gattc_start_discovery(UINT8_T mac[6], ty_bt_uuid_t *uuid);
 
+OPERATE_RET tuya_hal_bt_send_beacon(tuya_ble_data_buf_t *adv, tuya_ble_data_buf_t *scan_resp, UINT16_T interval, UINT16_T timeout);
 
 /**
  * @brief Bluetooth interface initialization

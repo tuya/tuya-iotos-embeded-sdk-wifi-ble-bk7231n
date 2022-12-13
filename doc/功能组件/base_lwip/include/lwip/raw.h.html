@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/pbuf.h" class="nav-sub-label">lwip/pbuf.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/def.h" class="nav-sub-label">lwip/def.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip.h" class="nav-sub-label">lwip/ip.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip_addr.h" class="nav-sub-label">lwip/ip_addr.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/ip6_addr.h" class="nav-sub-label">lwip/ip6_addr.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_RAW_H" class="nav-sub-label">LWIP_HDR_RAW_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#RAW_FLAGS_CONNECTED" class="nav-sub-label">RAW_FLAGS_CONNECTED</a>
+              </li>
+      
+
+              <li>
+                <a href="#RAW_FLAGS_HDRINCL" class="nav-sub-label">RAW_FLAGS_HDRINCL</a>
+              </li>
+      
+
+              <li>
+                <a href="#RAW_FLAGS_MULTICAST_LOOP" class="nav-sub-label">RAW_FLAGS_MULTICAST_LOOP</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_flags(pcb)" class="nav-sub-label">raw_flags(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_setflags(pcb,f)" class="nav-sub-label">raw_setflags(pcb,f)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_set_flags(pcb, set_flags)" class="nav-sub-label">raw_set_flags(pcb, set_flags)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_clear_flags(pcb, clr_flags)" class="nav-sub-label">raw_clear_flags(pcb, clr_flags)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_is_flag_set(pcb, flag)" class="nav-sub-label">raw_is_flag_set(pcb, flag)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_init()" class="nav-sub-label">raw_init()</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_new_ip6(proto)" class="nav-sub-label">raw_new_ip6(proto)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_set_multicast_netif_index(pcb, idx)" class="nav-sub-label">raw_set_multicast_netif_index(pcb, idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_get_multicast_netif_index(pcb)" class="nav-sub-label">raw_get_multicast_netif_index(pcb)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_set_multicast_ttl(pcb, value)" class="nav-sub-label">raw_set_multicast_ttl(pcb, value)</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_get_multicast_ttl(pcb)" class="nav-sub-label">raw_get_multicast_ttl(pcb)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#raw_bind_netif" class="nav-sub-label">raw_bind_netif</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_disconnect" class="nav-sub-label">raw_disconnect</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_sendto_if_src" class="nav-sub-label">raw_sendto_if_src</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#raw_pcb" class="nav-sub-label">raw_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_pcb" class="nav-sub-label">raw_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_pcb" class="nav-sub-label">raw_pcb</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_remove" class="nav-sub-label">raw_remove</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_bind" class="nav-sub-label">raw_bind</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_connect" class="nav-sub-label">raw_connect</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_sendto" class="nav-sub-label">raw_sendto</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_send" class="nav-sub-label">raw_send</a>
+              </li>
+      
+
+              <li>
+                <a href="#raw_recv" class="nav-sub-label">raw_recv</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#raw_recv_fn" class="nav-sub-label">raw_recv_fn</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/pbuf.h"><span>lwip/pbuf.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/pbuf.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/pbuf.h"
+</pre>
+
+      <h4 id="lwip/def.h"><span>lwip/def.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/def.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/def.h"
+</pre>
+
+      <h4 id="lwip/ip.h"><span>lwip/ip.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip.h"
+</pre>
+
+      <h4 id="lwip/ip_addr.h"><span>lwip/ip_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip_addr.h"
+</pre>
+
+      <h4 id="lwip/ip6_addr.h"><span>lwip/ip6_addr.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/ip6_addr.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/ip6_addr.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_RAW_H">Marco <span>LWIP_HDR_RAW_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_RAW_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RAW_FLAGS_CONNECTED">Marco <span>RAW_FLAGS_CONNECTED</span></h4>
+      <pre class="doc-declare"><code>#define RAW_FLAGS_CONNECTED     0x01U
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RAW_FLAGS_HDRINCL">Marco <span>RAW_FLAGS_HDRINCL</span></h4>
+      <pre class="doc-declare"><code>#define RAW_FLAGS_HDRINCL       0x02U
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="RAW_FLAGS_MULTICAST_LOOP">Marco <span>RAW_FLAGS_MULTICAST_LOOP</span></h4>
+      <pre class="doc-declare"><code>#define RAW_FLAGS_MULTICAST_LOOP 0x04U
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_flags(pcb)">Marco <span>raw_flags(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define         raw_flags(pcb) ((pcb)->flags)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_setflags(pcb,f)">Marco <span>raw_setflags(pcb,f)</span></h4>
+      <pre class="doc-declare"><code>#define         raw_setflags(pcb,f) ((pcb)->flags = (f))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_set_flags(pcb, set_flags)">Marco <span>raw_set_flags(pcb, set_flags)</span></h4>
+      <pre class="doc-declare"><code>#define         raw_set_flags(pcb, set_flags)    do { (pcb)->flags = (u8_t)((pcb)->flags | (set_flags)); } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_clear_flags(pcb, clr_flags)">Marco <span>raw_clear_flags(pcb, clr_flags)</span></h4>
+      <pre class="doc-declare"><code>#define         raw_clear_flags(pcb, clr_flags)  do { (pcb)->flags = (u8_t)((pcb)->flags & (u8_t)(~(clr_flags) & 255)); } while(0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_is_flag_set(pcb, flag)">Marco <span>raw_is_flag_set(pcb, flag)</span></h4>
+      <pre class="doc-declare"><code>#define         raw_is_flag_set(pcb, flag)       (((pcb)->flags & (flag)) != 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_init()">Marco <span>raw_init()</span></h4>
+      <pre class="doc-declare"><code>#define raw_init() /* Compatibility define, no init needed. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_new_ip6(proto)">Marco <span>raw_new_ip6(proto)</span></h4>
+      <pre class="doc-declare"><code>#define raw_new_ip6(proto) raw_new_ip_type(IPADDR_TYPE_V6, proto)
+</code></pre>
+      <pre class="doc-comment">/* for compatibility with older implementation */</pre>
+
+      <h4 id="raw_set_multicast_netif_index(pcb, idx)">Marco <span>raw_set_multicast_netif_index(pcb, idx)</span></h4>
+      <pre class="doc-declare"><code>#define raw_set_multicast_netif_index(pcb, idx) ((pcb)->mcast_ifindex = (idx))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_get_multicast_netif_index(pcb)">Marco <span>raw_get_multicast_netif_index(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define raw_get_multicast_netif_index(pcb)     ((pcb)->mcast_ifindex)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_set_multicast_ttl(pcb, value)">Marco <span>raw_set_multicast_ttl(pcb, value)</span></h4>
+      <pre class="doc-declare"><code>#define raw_set_multicast_ttl(pcb, value)      ((pcb)->mcast_ttl = (value))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_get_multicast_ttl(pcb)">Marco <span>raw_get_multicast_ttl(pcb)</span></h4>
+      <pre class="doc-declare"><code>#define raw_get_multicast_ttl(pcb)             ((pcb)->mcast_ttl)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="raw_bind_netif">Func <span>raw_bind_netif</span></h4>
+      <pre class="doc-declare"><code>void            raw_bind_netif (struct raw_pcb *pcb, const struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_disconnect">Func <span>raw_disconnect</span></h4>
+      <pre class="doc-declare"><code>void            raw_disconnect (struct raw_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_sendto_if_src">Func <span>raw_sendto_if_src</span></h4>
+      <pre class="doc-declare"><code>err_t           raw_sendto_if_src(struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip, struct netif *netif, const ip_addr_t *src_ip);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="raw_pcb">Variable <span>raw_pcb</span></h4>
+      <pre class="doc-declare"><code>struct raw_pcb;</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_pcb">Variable <span>raw_pcb</span></h4>
+      <pre class="doc-declare"><code>struct raw_pcb * raw_new       (u8_t proto);</code></pre>
+      <pre class="doc-comment">/* The following functions is the application layer interface to the
+   RAW code. */</pre>
+
+      <h4 id="raw_pcb">Variable <span>raw_pcb</span></h4>
+      <pre class="doc-declare"><code>struct raw_pcb * raw_new_ip_type(u8_t type, u8_t proto);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_remove">Variable <span>raw_remove</span></h4>
+      <pre class="doc-declare"><code>void            raw_remove    (struct raw_pcb *pcb);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_bind">Variable <span>raw_bind</span></h4>
+      <pre class="doc-declare"><code>err_t           raw_bind      (struct raw_pcb *pcb, const ip_addr_t *ipaddr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_connect">Variable <span>raw_connect</span></h4>
+      <pre class="doc-declare"><code>err_t           raw_connect   (struct raw_pcb *pcb, const ip_addr_t *ipaddr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_sendto">Variable <span>raw_sendto</span></h4>
+      <pre class="doc-declare"><code>err_t           raw_sendto    (struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *ipaddr);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_send">Variable <span>raw_send</span></h4>
+      <pre class="doc-declare"><code>err_t           raw_send      (struct raw_pcb *pcb, struct pbuf *p);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="raw_recv">Variable <span>raw_recv</span></h4>
+      <pre class="doc-declare"><code>void            raw_recv      (struct raw_pcb *pcb, raw_recv_fn recv, void *recv_arg);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="raw_recv_fn">Typedef <span>raw_recv_fn</span></h4>
+      <pre class="doc-declare"><code>typedef u8_t (*raw_recv_fn)(void *arg, struct raw_pcb *pcb, struct pbuf *p,
+   const ip_addr_t *addr);
+</code></pre>
+      <pre class="doc-comment">/** Function prototype for raw pcb receive callback functions.
+ * @param arg user supplied argument (raw_pcb.recv_arg)
+ * @param pcb the raw_pcb which received data
+ * @param p the packet buffer that was received
+ * @param addr the remote IP address from which the packet was received
+ * @return 1 if the packet was 'eaten' (aka. deleted),
+ *         0 if the packet lives on
+ * If returning 1, the callback is responsible for freeing the pbuf
+ * if it's not used any more.
+ */</pre>
+    </div>
+  </body>
+</html>
+            

@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -601,7 +601,7 @@
 
       <h4 id="mqtt_subscribe_multi_topics">Func <span>mqtt_subscribe_multi_topics</span></h4>
       <pre class="doc-declare"><code>OPERATE_RET mqtt_subscribe_multi_topics(IN CONST MQ_HANDLE hand, IN CONST CHAR_T *topics[], 
-                                       IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb);</code></pre>
+                                       IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb, BOOL_T auto_resub);</code></pre>
       <pre class="doc-comment">/**
  * @brief Subcribe multiple topics within one MQTT request
  * 

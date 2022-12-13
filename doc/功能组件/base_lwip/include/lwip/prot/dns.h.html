@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/arch.h" class="nav-sub-label">lwip/arch.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_PROT_DNS_H" class="nav-sub-label">LWIP_HDR_PROT_DNS_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_SERVER_PORT" class="nav-sub-label">DNS_SERVER_PORT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_A" class="nav-sub-label">DNS_RRTYPE_A</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_NS" class="nav-sub-label">DNS_RRTYPE_NS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MD" class="nav-sub-label">DNS_RRTYPE_MD</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MF" class="nav-sub-label">DNS_RRTYPE_MF</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_CNAME" class="nav-sub-label">DNS_RRTYPE_CNAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_SOA" class="nav-sub-label">DNS_RRTYPE_SOA</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MB" class="nav-sub-label">DNS_RRTYPE_MB</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MG" class="nav-sub-label">DNS_RRTYPE_MG</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MR" class="nav-sub-label">DNS_RRTYPE_MR</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_NULL" class="nav-sub-label">DNS_RRTYPE_NULL</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_WKS" class="nav-sub-label">DNS_RRTYPE_WKS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_PTR" class="nav-sub-label">DNS_RRTYPE_PTR</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_HINFO" class="nav-sub-label">DNS_RRTYPE_HINFO</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MINFO" class="nav-sub-label">DNS_RRTYPE_MINFO</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_MX" class="nav-sub-label">DNS_RRTYPE_MX</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_TXT" class="nav-sub-label">DNS_RRTYPE_TXT</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_AAAA" class="nav-sub-label">DNS_RRTYPE_AAAA</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_SRV" class="nav-sub-label">DNS_RRTYPE_SRV</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRTYPE_ANY" class="nav-sub-label">DNS_RRTYPE_ANY</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRCLASS_IN" class="nav-sub-label">DNS_RRCLASS_IN</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRCLASS_CS" class="nav-sub-label">DNS_RRCLASS_CS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRCLASS_CH" class="nav-sub-label">DNS_RRCLASS_CH</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRCLASS_HS" class="nav-sub-label">DNS_RRCLASS_HS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRCLASS_ANY" class="nav-sub-label">DNS_RRCLASS_ANY</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_RRCLASS_FLUSH" class="nav-sub-label">DNS_RRCLASS_FLUSH</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_RESPONSE" class="nav-sub-label">DNS_FLAG1_RESPONSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_OPCODE_STATUS" class="nav-sub-label">DNS_FLAG1_OPCODE_STATUS</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_OPCODE_INVERSE" class="nav-sub-label">DNS_FLAG1_OPCODE_INVERSE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_OPCODE_STANDARD" class="nav-sub-label">DNS_FLAG1_OPCODE_STANDARD</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_AUTHORATIVE" class="nav-sub-label">DNS_FLAG1_AUTHORATIVE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_TRUNC" class="nav-sub-label">DNS_FLAG1_TRUNC</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG1_RD" class="nav-sub-label">DNS_FLAG1_RD</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG2_RA" class="nav-sub-label">DNS_FLAG2_RA</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG2_ERR_MASK" class="nav-sub-label">DNS_FLAG2_ERR_MASK</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG2_ERR_NONE" class="nav-sub-label">DNS_FLAG2_ERR_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_FLAG2_ERR_NAME" class="nav-sub-label">DNS_FLAG2_ERR_NAME</a>
+              </li>
+      
+
+              <li>
+                <a href="#DNS_HDR_GET_OPCODE(hdr)" class="nav-sub-label">DNS_HDR_GET_OPCODE(hdr)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/arch.h"><span>lwip/arch.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/arch.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/arch.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_PROT_DNS_H">Marco <span>LWIP_HDR_PROT_DNS_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_PROT_DNS_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_SERVER_PORT">Marco <span>DNS_SERVER_PORT</span></h4>
+      <pre class="doc-declare"><code>#define DNS_SERVER_PORT          53
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_A">Marco <span>DNS_RRTYPE_A</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_A             1    /* a host address */
+</code></pre>
+      <pre class="doc-comment">/* DNS field TYPE used for "Resource Records" */</pre>
+
+      <h4 id="DNS_RRTYPE_NS">Marco <span>DNS_RRTYPE_NS</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_NS            2    /* an authoritative name server */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MD">Marco <span>DNS_RRTYPE_MD</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MD            3    /* a mail destination (Obsolete - use MX) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MF">Marco <span>DNS_RRTYPE_MF</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MF            4    /* a mail forwarder (Obsolete - use MX) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_CNAME">Marco <span>DNS_RRTYPE_CNAME</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_CNAME         5    /* the canonical name for an alias */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_SOA">Marco <span>DNS_RRTYPE_SOA</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_SOA           6    /* marks the start of a zone of authority */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MB">Marco <span>DNS_RRTYPE_MB</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MB            7    /* a mailbox domain name (EXPERIMENTAL) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MG">Marco <span>DNS_RRTYPE_MG</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MG            8    /* a mail group member (EXPERIMENTAL) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MR">Marco <span>DNS_RRTYPE_MR</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MR            9    /* a mail rename domain name (EXPERIMENTAL) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_NULL">Marco <span>DNS_RRTYPE_NULL</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_NULL          10   /* a null RR (EXPERIMENTAL) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_WKS">Marco <span>DNS_RRTYPE_WKS</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_WKS           11   /* a well known service description */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_PTR">Marco <span>DNS_RRTYPE_PTR</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_PTR           12   /* a domain name pointer */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_HINFO">Marco <span>DNS_RRTYPE_HINFO</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_HINFO         13   /* host information */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MINFO">Marco <span>DNS_RRTYPE_MINFO</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MINFO         14   /* mailbox or mail list information */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_MX">Marco <span>DNS_RRTYPE_MX</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_MX            15   /* mail exchange */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_TXT">Marco <span>DNS_RRTYPE_TXT</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_TXT           16   /* text strings */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_AAAA">Marco <span>DNS_RRTYPE_AAAA</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_AAAA          28   /* IPv6 address */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_SRV">Marco <span>DNS_RRTYPE_SRV</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_SRV           33   /* service location */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRTYPE_ANY">Marco <span>DNS_RRTYPE_ANY</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRTYPE_ANY           255  /* any type */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRCLASS_IN">Marco <span>DNS_RRCLASS_IN</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRCLASS_IN           1    /* the Internet */
+</code></pre>
+      <pre class="doc-comment">/* DNS field CLASS used for "Resource Records" */</pre>
+
+      <h4 id="DNS_RRCLASS_CS">Marco <span>DNS_RRCLASS_CS</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRCLASS_CS           2    /* the CSNET class (Obsolete - used only for examples in some obsolete RFCs) */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRCLASS_CH">Marco <span>DNS_RRCLASS_CH</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRCLASS_CH           3    /* the CHAOS class */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRCLASS_HS">Marco <span>DNS_RRCLASS_HS</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRCLASS_HS           4    /* Hesiod [Dyer 87] */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRCLASS_ANY">Marco <span>DNS_RRCLASS_ANY</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRCLASS_ANY          255  /* any class */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_RRCLASS_FLUSH">Marco <span>DNS_RRCLASS_FLUSH</span></h4>
+      <pre class="doc-declare"><code>#define DNS_RRCLASS_FLUSH        2048 /* Flush bit */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG1_RESPONSE">Marco <span>DNS_FLAG1_RESPONSE</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_RESPONSE       128
+</code></pre>
+      <pre class="doc-comment">/* DNS protocol flags */</pre>
+
+      <h4 id="DNS_FLAG1_OPCODE_STATUS">Marco <span>DNS_FLAG1_OPCODE_STATUS</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_OPCODE_STATUS  16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG1_OPCODE_INVERSE">Marco <span>DNS_FLAG1_OPCODE_INVERSE</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_OPCODE_INVERSE 8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG1_OPCODE_STANDARD">Marco <span>DNS_FLAG1_OPCODE_STANDARD</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_OPCODE_STANDARD 0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG1_AUTHORATIVE">Marco <span>DNS_FLAG1_AUTHORATIVE</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_AUTHORATIVE    4
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG1_TRUNC">Marco <span>DNS_FLAG1_TRUNC</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_TRUNC          2
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG1_RD">Marco <span>DNS_FLAG1_RD</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG1_RD             1
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG2_RA">Marco <span>DNS_FLAG2_RA</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG2_RA             128
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG2_ERR_MASK">Marco <span>DNS_FLAG2_ERR_MASK</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG2_ERR_MASK       15
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG2_ERR_NONE">Marco <span>DNS_FLAG2_ERR_NONE</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG2_ERR_NONE       0
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_FLAG2_ERR_NAME">Marco <span>DNS_FLAG2_ERR_NAME</span></h4>
+      <pre class="doc-declare"><code>#define DNS_FLAG2_ERR_NAME       3
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="DNS_HDR_GET_OPCODE(hdr)">Marco <span>DNS_HDR_GET_OPCODE(hdr)</span></h4>
+      <pre class="doc-declare"><code>#define DNS_HDR_GET_OPCODE(hdr) ((((hdr)->flags1) >> 3) & 15)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

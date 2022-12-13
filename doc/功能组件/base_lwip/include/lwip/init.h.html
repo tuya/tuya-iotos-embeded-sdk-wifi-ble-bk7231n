@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_INIT_H" class="nav-sub-label">LWIP_HDR_INIT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_MAJOR" class="nav-sub-label">LWIP_VERSION_MAJOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_MINOR" class="nav-sub-label">LWIP_VERSION_MINOR</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_REVISION" class="nav-sub-label">LWIP_VERSION_REVISION</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_RC" class="nav-sub-label">LWIP_VERSION_RC</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_RC_RELEASE" class="nav-sub-label">LWIP_RC_RELEASE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_RC_DEVELOPMENT" class="nav-sub-label">LWIP_RC_DEVELOPMENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_IS_RELEASE" class="nav-sub-label">LWIP_VERSION_IS_RELEASE</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_IS_DEVELOPMENT" class="nav-sub-label">LWIP_VERSION_IS_DEVELOPMENT</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_IS_RC" class="nav-sub-label">LWIP_VERSION_IS_RC</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSTR2(x)" class="nav-sub-label">LWIP_VERSTR2(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSTR(x)" class="nav-sub-label">LWIP_VERSTR(x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_STRING_SUFFIX" class="nav-sub-label">LWIP_VERSION_STRING_SUFFIX</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_STRING_SUFFIX" class="nav-sub-label">LWIP_VERSION_STRING_SUFFIX</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_STRING_SUFFIX" class="nav-sub-label">LWIP_VERSION_STRING_SUFFIX</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION" class="nav-sub-label">LWIP_VERSION</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_VERSION_STRING" class="nav-sub-label">LWIP_VERSION_STRING</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip_init" class="nav-sub-label">lwip_init</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_INIT_H">Marco <span>LWIP_HDR_INIT_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_INIT_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION_MAJOR">Marco <span>LWIP_VERSION_MAJOR</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_MAJOR     2
+</code></pre>
+      <pre class="doc-comment">/** X.x.x: Major version of the stack */</pre>
+
+      <h4 id="LWIP_VERSION_MINOR">Marco <span>LWIP_VERSION_MINOR</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_MINOR     1
+</code></pre>
+      <pre class="doc-comment">/** x.X.x: Minor version of the stack */</pre>
+
+      <h4 id="LWIP_VERSION_REVISION">Marco <span>LWIP_VERSION_REVISION</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_REVISION  2
+</code></pre>
+      <pre class="doc-comment">/** x.x.X: Revision of the stack */</pre>
+
+      <h4 id="LWIP_VERSION_RC">Marco <span>LWIP_VERSION_RC</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_RC        LWIP_RC_RELEASE
+</code></pre>
+      <pre class="doc-comment">/** For release candidates, this is set to 1..254
+  * For official releases, this is set to 255 (LWIP_RC_RELEASE)
+  * For development versions (Git), this is set to 0 (LWIP_RC_DEVELOPMENT) */</pre>
+
+      <h4 id="LWIP_RC_RELEASE">Marco <span>LWIP_RC_RELEASE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_RC_RELEASE        255
+</code></pre>
+      <pre class="doc-comment">/** LWIP_VERSION_RC is set to LWIP_RC_RELEASE for official releases */</pre>
+
+      <h4 id="LWIP_RC_DEVELOPMENT">Marco <span>LWIP_RC_DEVELOPMENT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_RC_DEVELOPMENT    0
+</code></pre>
+      <pre class="doc-comment">/** LWIP_VERSION_RC is set to LWIP_RC_DEVELOPMENT for Git versions */</pre>
+
+      <h4 id="LWIP_VERSION_IS_RELEASE">Marco <span>LWIP_VERSION_IS_RELEASE</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_IS_RELEASE    (LWIP_VERSION_RC == LWIP_RC_RELEASE)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION_IS_DEVELOPMENT">Marco <span>LWIP_VERSION_IS_DEVELOPMENT</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_IS_DEVELOPMENT (LWIP_VERSION_RC == LWIP_RC_DEVELOPMENT)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION_IS_RC">Marco <span>LWIP_VERSION_IS_RC</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_IS_RC         ((LWIP_VERSION_RC != LWIP_RC_RELEASE) && (LWIP_VERSION_RC != LWIP_RC_DEVELOPMENT))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSTR2(x)">Marco <span>LWIP_VERSTR2(x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSTR2(x) #x
+</code></pre>
+      <pre class="doc-comment">/* Some helper defines to get a version string */</pre>
+
+      <h4 id="LWIP_VERSTR(x)">Marco <span>LWIP_VERSTR(x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSTR(x) LWIP_VERSTR2(x)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION_STRING_SUFFIX">Marco <span>LWIP_VERSION_STRING_SUFFIX</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_STRING_SUFFIX ""
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION_STRING_SUFFIX">Marco <span>LWIP_VERSION_STRING_SUFFIX</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_STRING_SUFFIX "d"
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION_STRING_SUFFIX">Marco <span>LWIP_VERSION_STRING_SUFFIX</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_STRING_SUFFIX "rc" LWIP_VERSTR(LWIP_VERSION_RC)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_VERSION">Marco <span>LWIP_VERSION</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION  ((LWIP_VERSION_MAJOR) << 24  | (LWIP_VERSION_MINOR) << 16 | \
+                       (LWIP_VERSION_REVISION) << 8 | (LWIP_VERSION_RC))
+</code></pre>
+      <pre class="doc-comment">/** Provides the version of the stack */</pre>
+
+      <h4 id="LWIP_VERSION_STRING">Marco <span>LWIP_VERSION_STRING</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_VERSION_STRING    LWIP_VERSTR(LWIP_VERSION_MAJOR) "." LWIP_VERSTR(LWIP_VERSION_MINOR) "." LWIP_VERSTR(LWIP_VERSION_REVISION) LWIP_VERSION_STRING_SUFFIX
+</code></pre>
+      <pre class="doc-comment">/** Provides the version of the stack as string */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="lwip_init">Func <span>lwip_init</span></h4>
+      <pre class="doc-declare"><code>void lwip_init(void);</code></pre>
+      <pre class="doc-comment">/* Modules initialization */</pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

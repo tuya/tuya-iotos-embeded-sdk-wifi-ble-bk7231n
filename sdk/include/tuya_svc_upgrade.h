@@ -79,6 +79,13 @@ typedef VOID (*dev_upgrade_pre_inform_cb)(BOOL_T *handled, const FW_UG_S *fw);
 typedef int (*subdev_upgrade_inform_cb)(const char *dev_id, const FW_UG_S *fw);
 
 /**
+ * @brief Handler of process inform for some upgrade type
+ * 
+ * @return OPRT_OK on had handled. Others should process by svc_upgrade
+ */
+typedef int (*dev_upgrade_mq15_inform_cb)(ty_cJSON *root_json);
+
+/**
  * @brief Definition of firmware upgrade handler
  */
 typedef struct {
@@ -121,6 +128,14 @@ OPERATE_RET tuya_svc_upgrade_detect_register(tuya_upgrade_detect_t *detect);
  * @param[in] pre_ug_cb The new handler
  */
 void tuya_svc_upgrade_register_pre_cb(dev_upgrade_pre_inform_cb pre_ug_cb);
+
+
+/**
+ * @brief Register process handler for some upgrade type
+ * 
+ * @param[in] mq15_cb The process handler
+ */
+void tuya_svc_upgrade_register_mq15_cb(dev_upgrade_mq15_inform_cb mq15_cb);
 
 /**
  * @brief Reset firmware upgrade check interval
@@ -181,6 +196,10 @@ int tuya_svc_upgrade_start(const CHAR_T *dev_id,
 * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
 */
 OPERATE_RET tuya_svc_upgrade_mqtt_notify(CHAR_T *dev_id, DEV_TYPE_T tp);
+
+
+OPERATE_RET tuya_svc_upgrade_ug_info_parse(ty_cJSON *result, UPGRADE_TYPE_T type, FW_UG_S *ug_info);
+
 
 #ifdef __cplusplus
 }

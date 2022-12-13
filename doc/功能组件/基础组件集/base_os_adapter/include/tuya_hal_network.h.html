@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -396,6 +396,11 @@
 
               <li>
                 <a href="#tuya_hal_net_addr" class="nav-sub-label">tuya_hal_net_addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_hal_net_setsockopt" class="nav-sub-label">tuya_hal_net_setsockopt</a>
               </li>
       
 
@@ -944,6 +949,22 @@
 * @note This API is used for getting ip address by ip string
 *
 * @return ip address
+*/</pre>
+
+      <h4 id="tuya_hal_net_setsockopt">Func <span>tuya_hal_net_setsockopt</span></h4>
+      <pre class="doc-declare"><code>int tuya_hal_net_setsockopt(int fd, int level, int optname, void *optval, int optlen);</code></pre>
+      <pre class="doc-comment">/**
+* @brief set sock option
+*
+* @param[in] fd: socket id
+* @param[in] level: level
+* @param[in] optname: optname
+* @param[in] optval: optval
+* @param[in] optlen: optlen
+*
+* @note This API is used for set sock option
+*
+* @return UNW_SUCCESS on success. Others on error, please refer to tuya_os_adapter_error_code.h
 */</pre>
 
       <h4 id="tuya_os_network_intf_init">Func <span>tuya_os_network_intf_init</span></h4>

@@ -1,0 +1,904 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif/ppp/ppp_opts.h" class="nav-sub-label">netif/ppp/ppp_opts.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/arch.h" class="nav-sub-label">lwip/arch.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif/ppp/polarssl/md4.h" class="nav-sub-label">netif/ppp/polarssl/md4.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif/ppp/polarssl/md5.h" class="nav-sub-label">netif/ppp/polarssl/md5.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif/ppp/polarssl/sha1.h" class="nav-sub-label">netif/ppp/polarssl/sha1.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif/ppp/polarssl/des.h" class="nav-sub-label">netif/ppp/polarssl/des.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#netif/ppp/polarssl/arc4.h" class="nav-sub-label">netif/ppp/polarssl/arc4.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#PPPCRYPT_H" class="nav-sub-label">PPPCRYPT_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_context" class="nav-sub-label">lwip_md4_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_init" class="nav-sub-label">lwip_md4_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_starts" class="nav-sub-label">lwip_md4_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_update" class="nav-sub-label">lwip_md4_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_finish" class="nav-sub-label">lwip_md4_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_free" class="nav-sub-label">lwip_md4_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_context" class="nav-sub-label">lwip_md5_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_init" class="nav-sub-label">lwip_md5_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_starts" class="nav-sub-label">lwip_md5_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_update" class="nav-sub-label">lwip_md5_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_finish" class="nav-sub-label">lwip_md5_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_free" class="nav-sub-label">lwip_md5_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_context" class="nav-sub-label">lwip_sha1_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_init" class="nav-sub-label">lwip_sha1_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_starts" class="nav-sub-label">lwip_sha1_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_update" class="nav-sub-label">lwip_sha1_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_finish" class="nav-sub-label">lwip_sha1_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_free" class="nav-sub-label">lwip_sha1_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_context" class="nav-sub-label">lwip_des_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_init" class="nav-sub-label">lwip_des_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_setkey_enc" class="nav-sub-label">lwip_des_setkey_enc</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_crypt_ecb" class="nav-sub-label">lwip_des_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_free" class="nav-sub-label">lwip_des_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_context" class="nav-sub-label">lwip_arc4_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_init" class="nav-sub-label">lwip_arc4_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_setup" class="nav-sub-label">lwip_arc4_setup</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_crypt" class="nav-sub-label">lwip_arc4_crypt</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_free" class="nav-sub-label">lwip_arc4_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_context" class="nav-sub-label">lwip_md4_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_init" class="nav-sub-label">lwip_md4_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_starts" class="nav-sub-label">lwip_md4_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_update" class="nav-sub-label">lwip_md4_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_finish" class="nav-sub-label">lwip_md4_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md4_free" class="nav-sub-label">lwip_md4_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_context" class="nav-sub-label">lwip_md5_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_init" class="nav-sub-label">lwip_md5_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_starts" class="nav-sub-label">lwip_md5_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_update" class="nav-sub-label">lwip_md5_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_finish" class="nav-sub-label">lwip_md5_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_md5_free" class="nav-sub-label">lwip_md5_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_context" class="nav-sub-label">lwip_sha1_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_init" class="nav-sub-label">lwip_sha1_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_starts" class="nav-sub-label">lwip_sha1_starts</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_update" class="nav-sub-label">lwip_sha1_update</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_finish" class="nav-sub-label">lwip_sha1_finish</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_sha1_free" class="nav-sub-label">lwip_sha1_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_context" class="nav-sub-label">lwip_des_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_init" class="nav-sub-label">lwip_des_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_setkey_enc" class="nav-sub-label">lwip_des_setkey_enc</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_crypt_ecb" class="nav-sub-label">lwip_des_crypt_ecb</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_des_free" class="nav-sub-label">lwip_des_free</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_context" class="nav-sub-label">lwip_arc4_context</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_init" class="nav-sub-label">lwip_arc4_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_setup" class="nav-sub-label">lwip_arc4_setup</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_crypt(context, buffer, length)" class="nav-sub-label">lwip_arc4_crypt(context, buffer, length)</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip_arc4_free" class="nav-sub-label">lwip_arc4_free</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#pppcrypt_56_to_64_bit_key" class="nav-sub-label">pppcrypt_56_to_64_bit_key</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="netif/ppp/ppp_opts.h"><span>netif/ppp/ppp_opts.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/ppp_opts.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/ppp_opts.h"
+</pre>
+
+      <h4 id="lwip/arch.h"><span>lwip/arch.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/arch.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/arch.h"
+</pre>
+
+      <h4 id="netif/ppp/polarssl/md4.h"><span>netif/ppp/polarssl/md4.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/polarssl/md4.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/polarssl/md4.h"
+</pre>
+
+      <h4 id="netif/ppp/polarssl/md5.h"><span>netif/ppp/polarssl/md5.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/polarssl/md5.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/polarssl/md5.h"
+</pre>
+
+      <h4 id="netif/ppp/polarssl/sha1.h"><span>netif/ppp/polarssl/sha1.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/polarssl/sha1.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/polarssl/sha1.h"
+</pre>
+
+      <h4 id="netif/ppp/polarssl/des.h"><span>netif/ppp/polarssl/des.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/polarssl/des.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/polarssl/des.h"
+</pre>
+
+      <h4 id="netif/ppp/polarssl/arc4.h"><span>netif/ppp/polarssl/arc4.h</span></h4>
+      <pre class="doc-declare"><code>#include "netif/ppp/polarssl/arc4.h"
+</code></pre>
+      <pre class="doc-comment">#include "netif/ppp/polarssl/arc4.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="PPPCRYPT_H">Marco <span>PPPCRYPT_H</span></h4>
+      <pre class="doc-declare"><code>#define PPPCRYPT_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_context">Marco <span>lwip_md4_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_context md4_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_init">Marco <span>lwip_md4_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_init(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_starts">Marco <span>lwip_md4_starts</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_starts md4_starts
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_update">Marco <span>lwip_md4_update</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_update md4_update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_finish">Marco <span>lwip_md4_finish</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_finish md4_finish
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_free">Marco <span>lwip_md4_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_free(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_context">Marco <span>lwip_md5_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_context md5_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_init">Marco <span>lwip_md5_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_init(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_starts">Marco <span>lwip_md5_starts</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_starts md5_starts
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_update">Marco <span>lwip_md5_update</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_update md5_update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_finish">Marco <span>lwip_md5_finish</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_finish md5_finish
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_free">Marco <span>lwip_md5_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_free(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_context">Marco <span>lwip_sha1_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_context sha1_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_init">Marco <span>lwip_sha1_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_init(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_starts">Marco <span>lwip_sha1_starts</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_starts sha1_starts
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_update">Marco <span>lwip_sha1_update</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_update sha1_update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_finish">Marco <span>lwip_sha1_finish</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_finish sha1_finish
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_free">Marco <span>lwip_sha1_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_free(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_context">Marco <span>lwip_des_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_context des_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_init">Marco <span>lwip_des_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_init(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_setkey_enc">Marco <span>lwip_des_setkey_enc</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_setkey_enc des_setkey_enc
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_crypt_ecb">Marco <span>lwip_des_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_crypt_ecb des_crypt_ecb
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_free">Marco <span>lwip_des_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_free(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_context">Marco <span>lwip_arc4_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_context arc4_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_init">Marco <span>lwip_arc4_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_init(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_setup">Marco <span>lwip_arc4_setup</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_setup arc4_setup
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_crypt">Marco <span>lwip_arc4_crypt</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_crypt arc4_crypt
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_free">Marco <span>lwip_arc4_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_free(context)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_context">Marco <span>lwip_md4_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_context mbedtls_md4_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_init">Marco <span>lwip_md4_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_init mbedtls_md4_init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_starts">Marco <span>lwip_md4_starts</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_starts mbedtls_md4_starts
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_update">Marco <span>lwip_md4_update</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_update mbedtls_md4_update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_finish">Marco <span>lwip_md4_finish</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_finish mbedtls_md4_finish
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md4_free">Marco <span>lwip_md4_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md4_free mbedtls_md4_free
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_context">Marco <span>lwip_md5_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_context mbedtls_md5_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_init">Marco <span>lwip_md5_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_init mbedtls_md5_init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_starts">Marco <span>lwip_md5_starts</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_starts mbedtls_md5_starts
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_update">Marco <span>lwip_md5_update</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_update mbedtls_md5_update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_finish">Marco <span>lwip_md5_finish</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_finish mbedtls_md5_finish
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_md5_free">Marco <span>lwip_md5_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_md5_free mbedtls_md5_free
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_context">Marco <span>lwip_sha1_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_context mbedtls_sha1_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_init">Marco <span>lwip_sha1_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_init mbedtls_sha1_init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_starts">Marco <span>lwip_sha1_starts</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_starts mbedtls_sha1_starts
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_update">Marco <span>lwip_sha1_update</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_update mbedtls_sha1_update
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_finish">Marco <span>lwip_sha1_finish</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_finish mbedtls_sha1_finish
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_sha1_free">Marco <span>lwip_sha1_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_sha1_free mbedtls_sha1_free
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_context">Marco <span>lwip_des_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_context mbedtls_des_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_init">Marco <span>lwip_des_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_init mbedtls_des_init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_setkey_enc">Marco <span>lwip_des_setkey_enc</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_setkey_enc mbedtls_des_setkey_enc
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_crypt_ecb">Marco <span>lwip_des_crypt_ecb</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_crypt_ecb mbedtls_des_crypt_ecb
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_des_free">Marco <span>lwip_des_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_des_free mbedtls_des_free
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_context">Marco <span>lwip_arc4_context</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_context mbedtls_arc4_context
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_init">Marco <span>lwip_arc4_init</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_init mbedtls_arc4_init
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_setup">Marco <span>lwip_arc4_setup</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_setup mbedtls_arc4_setup
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_crypt(context, buffer, length)">Marco <span>lwip_arc4_crypt(context, buffer, length)</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_crypt(context, buffer, length) mbedtls_arc4_crypt(context, length, buffer, buffer)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="lwip_arc4_free">Marco <span>lwip_arc4_free</span></h4>
+      <pre class="doc-declare"><code>#define lwip_arc4_free mbedtls_arc4_free
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="pppcrypt_56_to_64_bit_key">Func <span>pppcrypt_56_to_64_bit_key</span></h4>
+      <pre class="doc-declare"><code>void pppcrypt_56_to_64_bit_key(u_char *key, u_char *des_key);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+    </div>
+  </body>
+</html>
+            

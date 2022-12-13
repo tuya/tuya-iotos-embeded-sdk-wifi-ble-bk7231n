@@ -203,10 +203,12 @@ OPERATE_RET mqc_book_additional_topic(IN CHAR_T *topic);
  * @param[in] cnt Count of topics to subscribe
  * @param[in] msg_cb Callback when MQTT msgs recv. If msg_cb is NULL, 
  * msgs will transfer to default recv_cb of MQTT client
+ * @param[in] auto_resub Re-subscribe when mqtt re-connect
  *
  * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
  */
-OPERATE_RET mqc_subscribe_multi_topics(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb);
+#define mqc_subscribe_multi_topics(topics, cnt, msg_cb) mqc_subscribe_multi_topics_ext(topics, cnt, msg_cb, TRUE)
+OPERATE_RET mqc_subscribe_multi_topics_ext(IN CONST CHAR_T *topics[], IN CONST BYTE_T cnt, MQ_MSG_RECV_CB msg_cb, BOOL_T auto_resub);
 
 /**
  * @brief Unsubcribe multiple topics within one MQTT request

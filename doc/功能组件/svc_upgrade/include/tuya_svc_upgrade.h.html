@@ -116,7 +116,7 @@
     .container .doc-content {
       position: fixed;
       height: 100%;
-      width: calc(100% - 280px - 40px - 30px - 240px);
+      width: calc(100% - 80px - 40px - 30px - 240px);
       right: 0%;
       overflow-y: auto;
     }
@@ -295,6 +295,11 @@
       
 
               <li>
+                <a href="#tuya_svc_upgrade_register_mq15_cb" class="nav-sub-label">tuya_svc_upgrade_register_mq15_cb</a>
+              </li>
+      
+
+              <li>
                 <a href="#tuya_svc_upgrade_detect_reset" class="nav-sub-label">tuya_svc_upgrade_detect_reset</a>
               </li>
       
@@ -316,6 +321,11 @@
 
               <li>
                 <a href="#tuya_svc_upgrade_mqtt_notify" class="nav-sub-label">tuya_svc_upgrade_mqtt_notify</a>
+              </li>
+      
+
+              <li>
+                <a href="#tuya_svc_upgrade_ug_info_parse" class="nav-sub-label">tuya_svc_upgrade_ug_info_parse</a>
               </li>
       
             </ul>
@@ -374,6 +384,11 @@
 
               <li>
                 <a href="#subdev_upgrade_inform_cb" class="nav-sub-label">subdev_upgrade_inform_cb</a>
+              </li>
+      
+
+              <li>
+                <a href="#dev_upgrade_mq15_inform_cb" class="nav-sub-label">dev_upgrade_mq15_inform_cb</a>
               </li>
       
 
@@ -519,6 +534,14 @@
  * @param[in] pre_ug_cb The new handler
  */</pre>
 
+      <h4 id="tuya_svc_upgrade_register_mq15_cb">Func <span>tuya_svc_upgrade_register_mq15_cb</span></h4>
+      <pre class="doc-declare"><code>void tuya_svc_upgrade_register_mq15_cb(dev_upgrade_mq15_inform_cb mq15_cb);</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Register process handler for some upgrade type
+ * 
+ * @param[in] mq15_cb The process handler
+ */</pre>
+
       <h4 id="tuya_svc_upgrade_detect_reset">Func <span>tuya_svc_upgrade_detect_reset</span></h4>
       <pre class="doc-declare"><code>int tuya_svc_upgrade_detect_reset(const int upgrade_interval);</code></pre>
       <pre class="doc-comment">/**
@@ -583,6 +606,10 @@
 * @param[in] dev type to upgrade
 * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
 */</pre>
+
+      <h4 id="tuya_svc_upgrade_ug_info_parse">Func <span>tuya_svc_upgrade_ug_info_parse</span></h4>
+      <pre class="doc-declare"><code>OPERATE_RET tuya_svc_upgrade_ug_info_parse(ty_cJSON *result, UPGRADE_TYPE_T type, FW_UG_S *ug_info);</code></pre>
+      <pre class="doc-comment"></pre>
       <h3 id="vars">Vars</h3>
       
       <h3 id="consts">Consts</h3>
@@ -649,6 +676,15 @@
  * @brief Handler of sub-device upgrade inform
  * 
  * @return OPRT_OK on success. Others on error, please refer to tuya_error_code.h
+ */</pre>
+
+      <h4 id="dev_upgrade_mq15_inform_cb">Typedef <span>dev_upgrade_mq15_inform_cb</span></h4>
+      <pre class="doc-declare"><code>typedef int (*dev_upgrade_mq15_inform_cb)(ty_cJSON *root_json);
+</code></pre>
+      <pre class="doc-comment">/**
+ * @brief Handler of process inform for some upgrade type
+ * 
+ * @return OPRT_OK on had handled. Others should process by svc_upgrade
  */</pre>
 
       <h4 id="*tuya_upgrade_param_p;

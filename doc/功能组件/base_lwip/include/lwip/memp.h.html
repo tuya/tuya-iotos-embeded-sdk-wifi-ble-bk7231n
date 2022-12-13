@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/priv/memp_std.h" class="nav-sub-label">lwip/priv/memp_std.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/priv/memp_priv.h" class="nav-sub-label">lwip/priv/memp_priv.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/stats.h" class="nav-sub-label">lwip/stats.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_MEMP_H" class="nav-sub-label">LWIP_HDR_MEMP_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL" class="nav-sub-label">LWIP_MEMPOOL</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_PROTOTYPE(name)" class="nav-sub-label">LWIP_MEMPOOL_PROTOTYPE(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_DECLARE(name,num,size,desc)" class="nav-sub-label">LWIP_MEMPOOL_DECLARE(name,num,size,desc)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_DECLARE(name,num,size,desc)" class="nav-sub-label">LWIP_MEMPOOL_DECLARE(name,num,size,desc)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_INIT(name)" class="nav-sub-label">LWIP_MEMPOOL_INIT(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_ALLOC(name)" class="nav-sub-label">LWIP_MEMPOOL_ALLOC(name)</a>
+              </li>
+      
+
+              <li>
+                <a href="#LWIP_MEMPOOL_FREE(name, x)" class="nav-sub-label">LWIP_MEMPOOL_FREE(name, x)</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_malloc(t)" class="nav-sub-label">memp_malloc(t)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#memp_init" class="nav-sub-label">memp_init</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_malloc_fn" class="nav-sub-label">memp_malloc_fn</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_malloc" class="nav-sub-label">memp_malloc</a>
+              </li>
+      
+
+              <li>
+                <a href="#memp_free" class="nav-sub-label">memp_free</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#memp_t;
+" class="nav-sub-label">memp_t;
+</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/priv/memp_std.h"><span>lwip/priv/memp_std.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/priv/memp_std.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/priv/memp_std.h"
+</pre>
+
+      <h4 id="lwip/priv/memp_priv.h"><span>lwip/priv/memp_priv.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/priv/memp_priv.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/priv/memp_priv.h"
+</pre>
+
+      <h4 id="lwip/stats.h"><span>lwip/stats.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/stats.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/stats.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_MEMP_H">Marco <span>LWIP_HDR_MEMP_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_MEMP_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEMPOOL">Marco <span>LWIP_MEMPOOL</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL(name,num,size,desc)
+</code></pre>
+      <pre class="doc-comment">/* run once with empty definition to handle all custom includes in lwippools.h */</pre>
+
+      <h4 id="LWIP_MEMPOOL_PROTOTYPE(name)">Marco <span>LWIP_MEMPOOL_PROTOTYPE(name)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_PROTOTYPE(name) extern const struct memp_desc memp_ ## name
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mempool
+ * Declare prototype for private memory pool if it is used in multiple files
+ */</pre>
+
+      <h4 id="LWIP_MEMPOOL_DECLARE(name,num,size,desc)">Marco <span>LWIP_MEMPOOL_DECLARE(name,num,size,desc)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_DECLARE(name,num,size,desc) \
+ LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(memp_stats_ ## name) \
+ const struct memp_desc memp_ ## name = { \
+   DECLARE_LWIP_MEMPOOL_DESC(desc) \
+   LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(memp_stats_ ## name) \
+   LWIP_MEM_ALIGN_SIZE(size) \
+ };
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="LWIP_MEMPOOL_DECLARE(name,num,size,desc)">Marco <span>LWIP_MEMPOOL_DECLARE(name,num,size,desc)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_DECLARE(name,num,size,desc) \
+ LWIP_DECLARE_MEMORY_ALIGNED(memp_memory_ ## name ## _base, ((num) * (MEMP_SIZE + MEMP_ALIGN_SIZE(size)))); \
+   \
+ LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(memp_stats_ ## name) \
+   \
+ static struct memp *memp_tab_ ## name; \
+   \
+ const struct memp_desc memp_ ## name = { \
+   DECLARE_LWIP_MEMPOOL_DESC(desc) \
+   LWIP_MEMPOOL_DECLARE_STATS_REFERENCE(memp_stats_ ## name) \
+   LWIP_MEM_ALIGN_SIZE(size), \
+   (num), \
+   memp_memory_ ## name ## _base, \
+   &memp_tab_ ## name \
+ };
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mempool
+ * Declare a private memory pool
+ * Private mempools example:
+ * .h: only when pool is used in multiple .c files: LWIP_MEMPOOL_PROTOTYPE(my_private_pool);
+ * .c:
+ *   - in global variables section: LWIP_MEMPOOL_DECLARE(my_private_pool, 10, sizeof(foo), "Some description")
+ *   - call ONCE before using pool (e.g. in some init() function): LWIP_MEMPOOL_INIT(my_private_pool);
+ *   - allocate: void* my_new_mem = LWIP_MEMPOOL_ALLOC(my_private_pool);
+ *   - free: LWIP_MEMPOOL_FREE(my_private_pool, my_new_mem);
+ *
+ * To relocate a pool, declare it as extern in cc.h. Example for GCC:
+ *   extern u8_t \_\_attribute\_\_((section(".onchip_mem"))) memp_memory_my_private_pool_base[];
+ */</pre>
+
+      <h4 id="LWIP_MEMPOOL_INIT(name)">Marco <span>LWIP_MEMPOOL_INIT(name)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_INIT(name)   memp_init_pool(&memp_ ## name)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mempool
+ * Initialize a private memory pool
+ */</pre>
+
+      <h4 id="LWIP_MEMPOOL_ALLOC(name)">Marco <span>LWIP_MEMPOOL_ALLOC(name)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_ALLOC(name)  memp_malloc_pool(&memp_ ## name)
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mempool
+ * Allocate from a private memory pool
+ */</pre>
+
+      <h4 id="LWIP_MEMPOOL_FREE(name, x)">Marco <span>LWIP_MEMPOOL_FREE(name, x)</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_MEMPOOL_FREE(name, x) memp_free_pool(&memp_ ## name, (x))
+</code></pre>
+      <pre class="doc-comment">/**
+ * @ingroup mempool
+ * Free element from a private memory pool
+ */</pre>
+
+      <h4 id="memp_malloc(t)">Marco <span>memp_malloc(t)</span></h4>
+      <pre class="doc-declare"><code>#define memp_malloc(t) memp_malloc_fn((t), __FILE__, __LINE__)
+</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="memp_init">Func <span>memp_init</span></h4>
+      <pre class="doc-declare"><code>void memp_init(void);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_malloc_fn">Func <span>memp_malloc_fn</span></h4>
+      <pre class="doc-declare"><code>void *memp_malloc_fn(memp_t type, const char* file, const int line);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_malloc">Func <span>memp_malloc</span></h4>
+      <pre class="doc-declare"><code>void *memp_malloc(memp_t type);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="memp_free">Func <span>memp_free</span></h4>
+      <pre class="doc-declare"><code>void memp_free(memp_t type, void *mem);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="memp_t;
+">Typedef <span>memp_t;
+</span></h4>
+      <pre class="doc-declare"><code>typedef enum {
+#define LWIP_MEMPOOL(name,num,size,desc) MEMP_##name,
+#include "lwip/priv/memp_std.h"
+ MEMP_MAX
+} memp_t;
+</code></pre>
+      <pre class="doc-comment">/** Create the list of all memory pools managed by memp. MEMP_MAX represents a NULL pool at the end */</pre>
+    </div>
+  </body>
+</html>
+            

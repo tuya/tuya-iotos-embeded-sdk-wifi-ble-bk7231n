@@ -1,0 +1,1063 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+    /* base */
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    .container {
+      display: flex;
+      padding-top: 20px;
+    }
+
+    /* Nav */
+    .container .doc-nav {
+      position: fixed;
+      height: 100%;
+      margin: 0 30px 0 40px;
+      width: 280px;
+    }
+
+    .doc-nav .nav-header {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgb(240, 241, 242);
+      height: 40px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(62, 64, 66);
+      cursor: pointer;
+    }
+
+    .doc-nav .nav-content {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      color: rgb(32, 34, 36);
+    }
+
+    .doc-nav .nav-content .nav-list,
+    .doc-nav .nav-content .nav-sub-list {
+      line-height: 1.5rem;
+    }
+
+    .doc-nav .nav-content .nav-label {
+      display: inline-block;
+      position: relative;
+      padding: 2px 0 2px 20px;
+      margin-bottom: 4px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label {
+      position: relative;
+      padding: 2px 0 2px 40px;
+      font-size: 14px;
+    }
+
+    .doc-nav .nav-content .nav-sub-label:hover {
+      text-decoration: underline;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group::before {
+      border-bottom: 0.25rem solid transparent;
+      border-left: 0.25rem solid #6e7072;
+      border-right: 0;
+      border-top: 0.25rem solid transparent;
+      content: '';
+      display: block;
+      height: 0;
+      left: 0.5rem;
+      position: absolute;
+      top: 0.625rem;
+      transition: transform 0.1s linear;
+      width: 0;
+    }
+
+    .doc-nav .nav-content .nav-list .nav-label.group.active::before {
+      transform: rotate(90deg);
+    }
+
+    /* doc content */
+    .container .doc-content {
+      position: fixed;
+      height: 100%;
+      width: calc(100% - 80px - 40px - 30px - 240px);
+      right: 0%;
+      overflow-y: auto;
+    }
+
+    .doc-title {
+      border-bottom: 1px solid #dcdee0;
+      font-size: 22px;
+      margin: 8px 0 0;
+      padding-bottom: 16px;
+    }
+
+    .doc-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .doc-content h4 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 30px 0 8px;
+    }
+
+    .doc-content h4 span {
+      color: #007d9c;
+    }
+
+    .doc-content .doc-declare {
+      background-color: #fafafa;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      overflow-x: auto;
+      padding: 10px;
+      tab-size: 4;
+      line-height: 20px;
+    }
+
+    .doc-content .doc-comment {
+      font-size: 16px;
+      margin: 16px 0;
+      line-height: 24px;
+      word-break: break-word;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="doc-nav">
+      <a href="#Documentation" class="nav-header">Documentation</a>
+      <nav class="nav-content">
+        <ul class="nav-list">
+          <li>
+            <a href="#includes" class="nav-label">Includes</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#lwip/opt.h" class="nav-sub-label">lwip/opt.h</a>
+              </li>
+      
+
+              <li>
+                <a href="#lwip/def.h" class="nav-sub-label">lwip/def.h</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#macros" class="nav-label">Macros</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#LWIP_HDR_IP4_ADDR_H" class="nav-sub-label">LWIP_HDR_IP4_ADDR_H</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPADDR_NONE" class="nav-sub-label">IPADDR_NONE</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPADDR_LOOPBACK" class="nav-sub-label">IPADDR_LOOPBACK</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPADDR_ANY" class="nav-sub-label">IPADDR_ANY</a>
+              </li>
+      
+
+              <li>
+                <a href="#IPADDR_BROADCAST" class="nav-sub-label">IPADDR_BROADCAST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSA(a)" class="nav-sub-label">IP_CLASSA(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSA_NET" class="nav-sub-label">IP_CLASSA_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSA_NSHIFT" class="nav-sub-label">IP_CLASSA_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSA_HOST" class="nav-sub-label">IP_CLASSA_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSA_MAX" class="nav-sub-label">IP_CLASSA_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSB(a)" class="nav-sub-label">IP_CLASSB(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSB_NET" class="nav-sub-label">IP_CLASSB_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSB_NSHIFT" class="nav-sub-label">IP_CLASSB_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSB_HOST" class="nav-sub-label">IP_CLASSB_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSB_MAX" class="nav-sub-label">IP_CLASSB_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSC(a)" class="nav-sub-label">IP_CLASSC(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSC_NET" class="nav-sub-label">IP_CLASSC_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSC_NSHIFT" class="nav-sub-label">IP_CLASSC_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSC_HOST" class="nav-sub-label">IP_CLASSC_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSD(a)" class="nav-sub-label">IP_CLASSD(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSD_NET" class="nav-sub-label">IP_CLASSD_NET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSD_NSHIFT" class="nav-sub-label">IP_CLASSD_NSHIFT</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_CLASSD_HOST" class="nav-sub-label">IP_CLASSD_HOST</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_MULTICAST(a)" class="nav-sub-label">IP_MULTICAST(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_EXPERIMENTAL(a)" class="nav-sub-label">IP_EXPERIMENTAL(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_BADCLASS(a)" class="nav-sub-label">IP_BADCLASS(a)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP_LOOPBACKNET" class="nav-sub-label">IP_LOOPBACKNET</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP4_ADDR(ipaddr, a,b,c,d)" class="nav-sub-label">IP4_ADDR(ipaddr, a,b,c,d)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_copy(dest, src)" class="nav-sub-label">ip4_addr_copy(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_set(dest, src)" class="nav-sub-label">ip4_addr_set(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_set_zero(ipaddr)" class="nav-sub-label">ip4_addr_set_zero(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_set_any(ipaddr)" class="nav-sub-label">ip4_addr_set_any(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_set_loopback(ipaddr)" class="nav-sub-label">ip4_addr_set_loopback(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_isloopback(ipaddr)" class="nav-sub-label">ip4_addr_isloopback(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_set_hton(dest, src)" class="nav-sub-label">ip4_addr_set_hton(dest, src)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_set_u32(dest_ipaddr, src_u32)" class="nav-sub-label">ip4_addr_set_u32(dest_ipaddr, src_u32)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_get_u32(src_ipaddr)" class="nav-sub-label">ip4_addr_get_u32(src_ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_get_network(target, host, netmask)" class="nav-sub-label">ip4_addr_get_network(target, host, netmask)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_netcmp(addr1, addr2, mask)" class="nav-sub-label">ip4_addr_netcmp(addr1, addr2, mask)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_cmp(addr1, addr2)" class="nav-sub-label">ip4_addr_cmp(addr1, addr2)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_isany_val(addr1)" class="nav-sub-label">ip4_addr_isany_val(addr1)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_isany(addr1)" class="nav-sub-label">ip4_addr_isany(addr1)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_isbroadcast(addr1, netif)" class="nav-sub-label">ip4_addr_isbroadcast(addr1, netif)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_addr_netmask_valid(netmask)" class="nav-sub-label">ip_addr_netmask_valid(netmask)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_ismulticast(addr1)" class="nav-sub-label">ip4_addr_ismulticast(addr1)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_islinklocal(addr1)" class="nav-sub-label">ip4_addr_islinklocal(addr1)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_debug_print_parts(debug, a, b, c, d)" class="nav-sub-label">ip4_addr_debug_print_parts(debug, a, b, c, d)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_debug_print(debug, ipaddr)" class="nav-sub-label">ip4_addr_debug_print(debug, ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_debug_print_val(debug, ipaddr)" class="nav-sub-label">ip4_addr_debug_print_val(debug, ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_get_byte(ipaddr, idx)" class="nav-sub-label">ip4_addr_get_byte(ipaddr, idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr1(ipaddr)" class="nav-sub-label">ip4_addr1(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr2(ipaddr)" class="nav-sub-label">ip4_addr2(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr3(ipaddr)" class="nav-sub-label">ip4_addr3(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr4(ipaddr)" class="nav-sub-label">ip4_addr4(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_get_byte_val(ipaddr, idx)" class="nav-sub-label">ip4_addr_get_byte_val(ipaddr, idx)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr1_val(ipaddr)" class="nav-sub-label">ip4_addr1_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr2_val(ipaddr)" class="nav-sub-label">ip4_addr2_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr3_val(ipaddr)" class="nav-sub-label">ip4_addr3_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr4_val(ipaddr)" class="nav-sub-label">ip4_addr4_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr1_16(ipaddr)" class="nav-sub-label">ip4_addr1_16(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr2_16(ipaddr)" class="nav-sub-label">ip4_addr2_16(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr3_16(ipaddr)" class="nav-sub-label">ip4_addr3_16(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr4_16(ipaddr)" class="nav-sub-label">ip4_addr4_16(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr1_16_val(ipaddr)" class="nav-sub-label">ip4_addr1_16_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr2_16_val(ipaddr)" class="nav-sub-label">ip4_addr2_16_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr3_16_val(ipaddr)" class="nav-sub-label">ip4_addr3_16_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr4_16_val(ipaddr)" class="nav-sub-label">ip4_addr4_16_val(ipaddr)</a>
+              </li>
+      
+
+              <li>
+                <a href="#IP4ADDR_STRLEN_MAX" class="nav-sub-label">IP4ADDR_STRLEN_MAX</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip_ntoa(ipaddr)" class="nav-sub-label">ip_ntoa(ipaddr)</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#functions" class="nav-label">Functions</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ip4_addr_isbroadcast_u32" class="nav-sub-label">ip4_addr_isbroadcast_u32</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4_addr_netmask_valid" class="nav-sub-label">ip4_addr_netmask_valid</a>
+              </li>
+      
+
+              <li>
+                <a href="#ipaddr_addr" class="nav-sub-label">ipaddr_addr</a>
+              </li>
+      
+
+              <li>
+                <a href="#ip4addr_aton" class="nav-sub-label">ip4addr_aton</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#vars" class="nav-label">Vars</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#netif" class="nav-sub-label">netif</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+
+              <li>
+                <a href="#char" class="nav-sub-label">char</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#consts" class="nav-label">Consts</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#types" class="nav-label">Types</a>
+            
+            <ul class="nav-sub-list">
+            
+            </ul>
+            
+          </li>
+          <li>
+            <a href="#typedefs" class="nav-label">Typedefs</a>
+             
+            <ul class="nav-sub-list">
+
+              <li>
+                <a href="#ip4_addr_t" class="nav-sub-label">ip4_addr_t</a>
+              </li>
+      
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="doc-content">
+      <h2 id="Documentation" class="doc-title">Documentation</h2>
+      <h3 id="includes">Includes</h3>
+      
+
+      <h4 id="lwip/opt.h"><span>lwip/opt.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/opt.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/opt.h"
+</pre>
+
+      <h4 id="lwip/def.h"><span>lwip/def.h</span></h4>
+      <pre class="doc-declare"><code>#include "lwip/def.h"
+</code></pre>
+      <pre class="doc-comment">#include "lwip/def.h"
+</pre>
+      <h3 id="macros">Macros</h3>
+      
+
+      <h4 id="LWIP_HDR_IP4_ADDR_H">Marco <span>LWIP_HDR_IP4_ADDR_H</span></h4>
+      <pre class="doc-declare"><code>#define LWIP_HDR_IP4_ADDR_H
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IPADDR_NONE">Marco <span>IPADDR_NONE</span></h4>
+      <pre class="doc-declare"><code>#define IPADDR_NONE        ((u32_t)0xffffffffUL)
+</code></pre>
+      <pre class="doc-comment">/** 255.255.255.255 */</pre>
+
+      <h4 id="IPADDR_LOOPBACK">Marco <span>IPADDR_LOOPBACK</span></h4>
+      <pre class="doc-declare"><code>#define IPADDR_LOOPBACK    ((u32_t)0x7f000001UL)
+</code></pre>
+      <pre class="doc-comment">/** 127.0.0.1 */</pre>
+
+      <h4 id="IPADDR_ANY">Marco <span>IPADDR_ANY</span></h4>
+      <pre class="doc-declare"><code>#define IPADDR_ANY         ((u32_t)0x00000000UL)
+</code></pre>
+      <pre class="doc-comment">/** 0.0.0.0 */</pre>
+
+      <h4 id="IPADDR_BROADCAST">Marco <span>IPADDR_BROADCAST</span></h4>
+      <pre class="doc-declare"><code>#define IPADDR_BROADCAST   ((u32_t)0xffffffffUL)
+</code></pre>
+      <pre class="doc-comment">/** 255.255.255.255 */</pre>
+
+      <h4 id="IP_CLASSA(a)">Marco <span>IP_CLASSA(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSA(a)       ((((u32_t)(a)) & 0x80000000UL) == 0)
+</code></pre>
+      <pre class="doc-comment">/* Definitions of the bits in an Internet address integer.
+
+   On subnets, host and network parts are found according to
+   the subnet mask, not these masks.  */</pre>
+
+      <h4 id="IP_CLASSA_NET">Marco <span>IP_CLASSA_NET</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSA_NET      4278190080
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSA_NSHIFT">Marco <span>IP_CLASSA_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSA_NSHIFT   24
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSA_HOST">Marco <span>IP_CLASSA_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSA_HOST     (4294967295 & ~IP_CLASSA_NET)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSA_MAX">Marco <span>IP_CLASSA_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSA_MAX      128
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSB(a)">Marco <span>IP_CLASSB(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSB(a)       ((((u32_t)(a)) & 0xc0000000UL) == 0x80000000UL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSB_NET">Marco <span>IP_CLASSB_NET</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSB_NET      4294901760
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSB_NSHIFT">Marco <span>IP_CLASSB_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSB_NSHIFT   16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSB_HOST">Marco <span>IP_CLASSB_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSB_HOST     (4294967295 & ~IP_CLASSB_NET)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSB_MAX">Marco <span>IP_CLASSB_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSB_MAX      65536
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSC(a)">Marco <span>IP_CLASSC(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSC(a)       ((((u32_t)(a)) & 0xe0000000UL) == 0xc0000000UL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSC_NET">Marco <span>IP_CLASSC_NET</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSC_NET      4294967040
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSC_NSHIFT">Marco <span>IP_CLASSC_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSC_NSHIFT   8
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSC_HOST">Marco <span>IP_CLASSC_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSC_HOST     (4294967295 & ~IP_CLASSC_NET)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSD(a)">Marco <span>IP_CLASSD(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSD(a)       (((u32_t)(a) & 0xf0000000UL) == 0xe0000000UL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSD_NET">Marco <span>IP_CLASSD_NET</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSD_NET      4026531840         /* These ones aren't really */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSD_NSHIFT">Marco <span>IP_CLASSD_NSHIFT</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSD_NSHIFT   28                 /*   net and host fields, but */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_CLASSD_HOST">Marco <span>IP_CLASSD_HOST</span></h4>
+      <pre class="doc-declare"><code>#define IP_CLASSD_HOST     268435455         /*   routing needn't know. */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_MULTICAST(a)">Marco <span>IP_MULTICAST(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_MULTICAST(a)    IP_CLASSD(a)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_EXPERIMENTAL(a)">Marco <span>IP_EXPERIMENTAL(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_EXPERIMENTAL(a) (((u32_t)(a) & 0xf0000000UL) == 0xf0000000UL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_BADCLASS(a)">Marco <span>IP_BADCLASS(a)</span></h4>
+      <pre class="doc-declare"><code>#define IP_BADCLASS(a)     (((u32_t)(a) & 0xf0000000UL) == 0xf0000000UL)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP_LOOPBACKNET">Marco <span>IP_LOOPBACKNET</span></h4>
+      <pre class="doc-declare"><code>#define IP_LOOPBACKNET     127                /* official! */
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP4_ADDR(ipaddr, a,b,c,d)">Marco <span>IP4_ADDR(ipaddr, a,b,c,d)</span></h4>
+      <pre class="doc-declare"><code>#define IP4_ADDR(ipaddr, a,b,c,d) (ipaddr)->addr = PP_HTONL(LWIP_MAKEU32(a,b,c,d))
+</code></pre>
+      <pre class="doc-comment">/** Set an IP address given by the four byte-parts */</pre>
+
+      <h4 id="ip4_addr_copy(dest, src)">Marco <span>ip4_addr_copy(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_copy(dest, src) ((dest).addr = (src).addr)
+</code></pre>
+      <pre class="doc-comment">/** Copy IP address - faster than ip4_addr_set: no NULL check */</pre>
+
+      <h4 id="ip4_addr_set(dest, src)">Marco <span>ip4_addr_set(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_set(dest, src) ((dest)->addr = \
+                                   ((src) == NULL ? 0 : \
+                                   (src)->addr))
+</code></pre>
+      <pre class="doc-comment">/** Safely copy one IP address to another (src may be NULL) */</pre>
+
+      <h4 id="ip4_addr_set_zero(ipaddr)">Marco <span>ip4_addr_set_zero(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_set_zero(ipaddr)    ((ipaddr)->addr = 0)
+</code></pre>
+      <pre class="doc-comment">/** Set complete address to zero */</pre>
+
+      <h4 id="ip4_addr_set_any(ipaddr)">Marco <span>ip4_addr_set_any(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_set_any(ipaddr)     ((ipaddr)->addr = IPADDR_ANY)
+</code></pre>
+      <pre class="doc-comment">/** Set address to IPADDR_ANY (no need for lwip_htonl()) */</pre>
+
+      <h4 id="ip4_addr_set_loopback(ipaddr)">Marco <span>ip4_addr_set_loopback(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_set_loopback(ipaddr) ((ipaddr)->addr = PP_HTONL(IPADDR_LOOPBACK))
+</code></pre>
+      <pre class="doc-comment">/** Set address to loopback address */</pre>
+
+      <h4 id="ip4_addr_isloopback(ipaddr)">Marco <span>ip4_addr_isloopback(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_isloopback(ipaddr)   (((ipaddr)->addr & PP_HTONL(IP_CLASSA_NET)) == PP_HTONL(((u32_t)IP_LOOPBACKNET) << 24))
+</code></pre>
+      <pre class="doc-comment">/** Check if an address is in the loopback region */</pre>
+
+      <h4 id="ip4_addr_set_hton(dest, src)">Marco <span>ip4_addr_set_hton(dest, src)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_set_hton(dest, src) ((dest)->addr = \
+                              ((src) == NULL ? 0:\
+                              lwip_htonl((src)->addr)))
+</code></pre>
+      <pre class="doc-comment">/** Safely copy one IP address to another and change byte order
+ * from host- to network-order. */</pre>
+
+      <h4 id="ip4_addr_set_u32(dest_ipaddr, src_u32)">Marco <span>ip4_addr_set_u32(dest_ipaddr, src_u32)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_set_u32(dest_ipaddr, src_u32) ((dest_ipaddr)->addr = (src_u32))
+</code></pre>
+      <pre class="doc-comment">/** IPv4 only: set the IP address given as an u32_t */</pre>
+
+      <h4 id="ip4_addr_get_u32(src_ipaddr)">Marco <span>ip4_addr_get_u32(src_ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_get_u32(src_ipaddr) ((src_ipaddr)->addr)
+</code></pre>
+      <pre class="doc-comment">/** IPv4 only: get the IP address as an u32_t */</pre>
+
+      <h4 id="ip4_addr_get_network(target, host, netmask)">Marco <span>ip4_addr_get_network(target, host, netmask)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_get_network(target, host, netmask) do { ((target)->addr = ((host)->addr) & ((netmask)->addr)); } while(0)
+</code></pre>
+      <pre class="doc-comment">/** Get the network address by combining host address with netmask */</pre>
+
+      <h4 id="ip4_addr_netcmp(addr1, addr2, mask)">Marco <span>ip4_addr_netcmp(addr1, addr2, mask)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_netcmp(addr1, addr2, mask) (((addr1)->addr & \
+                                             (mask)->addr) == \
+                                            ((addr2)->addr & \
+                                             (mask)->addr))
+</code></pre>
+      <pre class="doc-comment">/**
+ * Determine if two address are on the same network.
+ *
+ * @arg addr1 IP address 1
+ * @arg addr2 IP address 2
+ * @arg mask network identifier mask
+ * @return !0 if the network identifiers of both address match
+ */</pre>
+
+      <h4 id="ip4_addr_cmp(addr1, addr2)">Marco <span>ip4_addr_cmp(addr1, addr2)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_cmp(addr1, addr2) ((addr1)->addr == (addr2)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_isany_val(addr1)">Marco <span>ip4_addr_isany_val(addr1)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_isany_val(addr1)  ((addr1).addr == IPADDR_ANY)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_isany(addr1)">Marco <span>ip4_addr_isany(addr1)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_isany(addr1) ((addr1) == NULL || ip4_addr_isany_val(*(addr1)))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_isbroadcast(addr1, netif)">Marco <span>ip4_addr_isbroadcast(addr1, netif)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_isbroadcast(addr1, netif) ip4_addr_isbroadcast_u32((addr1)->addr, netif)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_addr_netmask_valid(netmask)">Marco <span>ip_addr_netmask_valid(netmask)</span></h4>
+      <pre class="doc-declare"><code>#define ip_addr_netmask_valid(netmask) ip4_addr_netmask_valid((netmask)->addr)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_ismulticast(addr1)">Marco <span>ip4_addr_ismulticast(addr1)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_ismulticast(addr1) (((addr1)->addr & PP_HTONL(0xf0000000UL)) == PP_HTONL(0xe0000000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_islinklocal(addr1)">Marco <span>ip4_addr_islinklocal(addr1)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_islinklocal(addr1) (((addr1)->addr & PP_HTONL(0xffff0000UL)) == PP_HTONL(0xa9fe0000UL))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_debug_print_parts(debug, a, b, c, d)">Marco <span>ip4_addr_debug_print_parts(debug, a, b, c, d)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_debug_print_parts(debug, a, b, c, d) \
+ LWIP_DEBUGF(debug, ("%" U16_F ".%" U16_F ".%" U16_F ".%" U16_F, a, b, c, d))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_debug_print(debug, ipaddr)">Marco <span>ip4_addr_debug_print(debug, ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_debug_print(debug, ipaddr) \
+ ip4_addr_debug_print_parts(debug, \
+                     (u16_t)((ipaddr) != NULL ? ip4_addr1_16(ipaddr) : 0),      \
+                     (u16_t)((ipaddr) != NULL ? ip4_addr2_16(ipaddr) : 0),      \
+                     (u16_t)((ipaddr) != NULL ? ip4_addr3_16(ipaddr) : 0),      \
+                     (u16_t)((ipaddr) != NULL ? ip4_addr4_16(ipaddr) : 0))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_debug_print_val(debug, ipaddr)">Marco <span>ip4_addr_debug_print_val(debug, ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_debug_print_val(debug, ipaddr) \
+ ip4_addr_debug_print_parts(debug, \
+                     ip4_addr1_16_val(ipaddr),      \
+                     ip4_addr2_16_val(ipaddr),      \
+                     ip4_addr3_16_val(ipaddr),      \
+                     ip4_addr4_16_val(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_get_byte(ipaddr, idx)">Marco <span>ip4_addr_get_byte(ipaddr, idx)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_get_byte(ipaddr, idx) (((const u8_t*)(&(ipaddr)->addr))[idx])
+</code></pre>
+      <pre class="doc-comment">/* Get one byte from the 4-byte address */</pre>
+
+      <h4 id="ip4_addr1(ipaddr)">Marco <span>ip4_addr1(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr1(ipaddr) ip4_addr_get_byte(ipaddr, 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr2(ipaddr)">Marco <span>ip4_addr2(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr2(ipaddr) ip4_addr_get_byte(ipaddr, 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr3(ipaddr)">Marco <span>ip4_addr3(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr3(ipaddr) ip4_addr_get_byte(ipaddr, 2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr4(ipaddr)">Marco <span>ip4_addr4(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr4(ipaddr) ip4_addr_get_byte(ipaddr, 3)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_get_byte_val(ipaddr, idx)">Marco <span>ip4_addr_get_byte_val(ipaddr, idx)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr_get_byte_val(ipaddr, idx) ((u8_t)(((ipaddr).addr >> (idx * 8)) & 255))
+</code></pre>
+      <pre class="doc-comment">/* Get one byte from the 4-byte address, but argument is 'ip4_addr_t',
+ * not a pointer */</pre>
+
+      <h4 id="ip4_addr1_val(ipaddr)">Marco <span>ip4_addr1_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr1_val(ipaddr) ip4_addr_get_byte_val(ipaddr, 0)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr2_val(ipaddr)">Marco <span>ip4_addr2_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr2_val(ipaddr) ip4_addr_get_byte_val(ipaddr, 1)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr3_val(ipaddr)">Marco <span>ip4_addr3_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr3_val(ipaddr) ip4_addr_get_byte_val(ipaddr, 2)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr4_val(ipaddr)">Marco <span>ip4_addr4_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr4_val(ipaddr) ip4_addr_get_byte_val(ipaddr, 3)
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr1_16(ipaddr)">Marco <span>ip4_addr1_16(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr1_16(ipaddr) ((u16_t)ip4_addr1(ipaddr))
+</code></pre>
+      <pre class="doc-comment">/* These are cast to u16_t, with the intent that they are often arguments
+ * to printf using the U16_F format from cc.h. */</pre>
+
+      <h4 id="ip4_addr2_16(ipaddr)">Marco <span>ip4_addr2_16(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr2_16(ipaddr) ((u16_t)ip4_addr2(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr3_16(ipaddr)">Marco <span>ip4_addr3_16(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr3_16(ipaddr) ((u16_t)ip4_addr3(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr4_16(ipaddr)">Marco <span>ip4_addr4_16(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr4_16(ipaddr) ((u16_t)ip4_addr4(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr1_16_val(ipaddr)">Marco <span>ip4_addr1_16_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr1_16_val(ipaddr) ((u16_t)ip4_addr1_val(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr2_16_val(ipaddr)">Marco <span>ip4_addr2_16_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr2_16_val(ipaddr) ((u16_t)ip4_addr2_val(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr3_16_val(ipaddr)">Marco <span>ip4_addr3_16_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr3_16_val(ipaddr) ((u16_t)ip4_addr3_val(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr4_16_val(ipaddr)">Marco <span>ip4_addr4_16_val(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip4_addr4_16_val(ipaddr) ((u16_t)ip4_addr4_val(ipaddr))
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="IP4ADDR_STRLEN_MAX">Marco <span>IP4ADDR_STRLEN_MAX</span></h4>
+      <pre class="doc-declare"><code>#define IP4ADDR_STRLEN_MAX 16
+</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip_ntoa(ipaddr)">Marco <span>ip_ntoa(ipaddr)</span></h4>
+      <pre class="doc-declare"><code>#define ip_ntoa(ipaddr) ipaddr_ntoa(ipaddr)
+</code></pre>
+      <pre class="doc-comment">/** For backwards compatibility */</pre>
+      <h3 id="functions">Functions</h3>
+      
+
+      <h4 id="ip4_addr_isbroadcast_u32">Func <span>ip4_addr_isbroadcast_u32</span></h4>
+      <pre class="doc-declare"><code>u8_t ip4_addr_isbroadcast_u32(u32_t addr, const struct netif *netif);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4_addr_netmask_valid">Func <span>ip4_addr_netmask_valid</span></h4>
+      <pre class="doc-declare"><code>u8_t ip4_addr_netmask_valid(u32_t netmask);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ipaddr_addr">Func <span>ipaddr_addr</span></h4>
+      <pre class="doc-declare"><code>u32_t ipaddr_addr(const char *cp);</code></pre>
+      <pre class="doc-comment"></pre>
+
+      <h4 id="ip4addr_aton">Func <span>ip4addr_aton</span></h4>
+      <pre class="doc-declare"><code>int ip4addr_aton(const char *cp, ip4_addr_t *addr);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="vars">Vars</h3>
+      
+
+      <h4 id="netif">Variable <span>netif</span></h4>
+      <pre class="doc-declare"><code>struct netif;</code></pre>
+      <pre class="doc-comment">/* Forward declaration to not include netif.h */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *ip4addr_ntoa(const ip4_addr_t *addr);</code></pre>
+      <pre class="doc-comment">/** returns ptr to static buffer; not reentrant! */</pre>
+
+      <h4 id="char">Variable <span>char</span></h4>
+      <pre class="doc-declare"><code>char *ip4addr_ntoa_r(const ip4_addr_t *addr, char *buf, int buflen);</code></pre>
+      <pre class="doc-comment"></pre>
+      <h3 id="consts">Consts</h3>
+      
+      <h3 id="types">Types</h3>
+      
+      <h3 id="typedefs">Typedefs</h3>
+      
+
+      <h4 id="ip4_addr_t">Typedef <span>ip4_addr_t</span></h4>
+      <pre class="doc-declare"><code>typedef struct ip4_addr ip4_addr_t;
+</code></pre>
+      <pre class="doc-comment">/** ip4_addr_t uses a struct for convenience only, so that the same defines can
+ * operate both on ip4_addr_t as well as on ip4_addr_p_t. */</pre>
+    </div>
+  </body>
+</html>
+            
