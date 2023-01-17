@@ -5,7 +5,17 @@
 #include "sys_ctrl_pub.h"
 #include "target_util_pub.h"
 #include "start_type_pub.h"
+#include "sys_ctrl.h"
+#include "ps_debug_pub.h"
+#include "icu_pub.h"
+#include "pwm_pub.h"
+#include "BkDriverGpio.h"
+#include "phy_trident.h"
 
+void bk_wlan_ps_wakeup_with_timer(UINT32 sleep_time);
+void bk_wlan_ps_wakeup_with_peri(UINT8 uart2_wk, UINT32 gpio_index_map);
+void power_save_wakeup_with_peri(UINT8 uart2_wk, UINT32 gpio_index_map);
+void deep_sleep_wakeup_with_timer(UINT32 sleep_time);
 
 #if PS_SUPPORT_MANUAL_SLEEP
 /** @brief  Request power save,and wakeup some time later
@@ -14,7 +24,20 @@
  */
 void bk_wlan_ps_wakeup_with_timer(UINT32 sleep_time)
 {
-    deep_sleep_wakeup_with_timer(sleep_time);
+	PS_DEEP_CTRL_PARAM deep_sleep_param;
+
+	deep_sleep_param.sleep_time     		= sleep_time;
+	deep_sleep_param.wake_up_way     		= PS_DEEP_WAKEUP_RTC;
+	
+		os_printf("---deep sleep test param : 0x%0X 0x%0X 0x%0X 0x%0X %d %d\r\n", 
+					deep_sleep_param.gpio_index_map, 
+					deep_sleep_param.gpio_edge_map,
+					deep_sleep_param.gpio_last_index_map, 
+					deep_sleep_param.gpio_last_edge_map,
+					deep_sleep_param.sleep_time,
+					deep_sleep_param.wake_up_way);
+		
+    bk_enter_deep_sleep_mode(&deep_sleep_param);
 }
 
 /** @brief  Request power save,and wakeup by uart if uart2_wk=1,nd wakeup by gpio from bitmap of gpio_index_map.
@@ -107,10 +130,10 @@ void power_save_timer1_init()
     param.channel         = PWM1;
     param.cfg.bits.en     = PWM_DISABLE;
     param.cfg.bits.int_en = PWM_INT_EN;
-    param.cfg.bits.mode   = PMODE_TIMER;
+    param.cfg.bits.mode   = PWM_TIMER_MODE;
     param.cfg.bits.clk    = PWM_CLK_32K;
     param.p_Int_Handler   = power_save_timer1_isr;
-    param.duty_cycle      = 0x10;
+    param.duty_cycle1      = 0x10;
     param.end_value       = 3276;
     ret = sddev_control(PWM_DEV_NAME, CMD_PWM_INIT_PARAM, &param);
     ASSERT(PWM_SUCCESS == ret);
@@ -146,7 +169,7 @@ void power_save_wakeup_with_timer(UINT32 sleep_time)
             wakeup_timer = 32;
 
         delay(5);
-        power_save_pwm1_enable(wakeup_timer);
+//        power_save_pwm1_enable(wakeup_timer);
     }
     else
     {
@@ -168,7 +191,7 @@ void power_save_wakeup_with_timer(UINT32 sleep_time)
     phy_init_after_wakeup();
     GLOBAL_INT_RESTORE();
     power_save_ps_mode_set(PS_NO_PS_MODE);
-    power_save_pwm1_disable();
+//   power_save_pwm1_disable();
     os_printf("exit pwm ps\r\n");
 }
 
@@ -209,6 +232,7 @@ void power_save_wakeup_with_gpio(UINT32 gpio_index)
 #endif
 
 #if CFG_USE_DEEP_PS
+
 void bk_enter_deep_sleep_mode ( PS_DEEP_CTRL_PARAM *deep_param )
 {
 	UINT32 param;

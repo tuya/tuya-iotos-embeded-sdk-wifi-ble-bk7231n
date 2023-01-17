@@ -48,7 +48,7 @@ typedef struct  ps_deep_ctrl {
 	UINT32 lpo_32k_src;
 } PS_DEEP_CTRL_PARAM;
 
-#define     PS_SUPPORT_MANUAL_SLEEP     0
+#define     PS_SUPPORT_MANUAL_SLEEP     1
 
 #endif
 
