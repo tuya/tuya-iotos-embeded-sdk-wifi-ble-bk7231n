@@ -39,6 +39,25 @@ void bk_wlan_ps_wakeup_with_timer(UINT32 sleep_time)
 		
     bk_enter_deep_sleep_mode(&deep_sleep_param);
 }
+void bk_enter_deep_sleep(UINT32 g_gpio_index_map, UINT32 g_gpio_edge_map)
+{
+	PS_DEEP_CTRL_PARAM deep_sleep_param;
+
+	deep_sleep_param.wake_up_way     		= PS_DEEP_WAKEUP_GPIO;
+        deep_sleep_param.gpio_index_map = g_gpio_index_map;
+	deep_sleep_param.gpio_edge_map = g_gpio_edge_map;
+	
+		os_printf("---deep sleep test param : 0x%0X 0x%0X 0x%0X 0x%0X %d %d\r\n", 
+					deep_sleep_param.gpio_index_map, 
+					deep_sleep_param.gpio_edge_map,
+					deep_sleep_param.gpio_last_index_map, 
+					deep_sleep_param.gpio_last_edge_map,
+					deep_sleep_param.sleep_time,
+					deep_sleep_param.wake_up_way);
+		
+    bk_enter_deep_sleep_mode(&deep_sleep_param);
+}
+
 
 /** @brief  Request power save,and wakeup by uart if uart2_wk=1,nd wakeup by gpio from bitmap of gpio_index_map.
  */
@@ -281,32 +300,5 @@ void bk_enter_deep_sleep_mode ( PS_DEEP_CTRL_PARAM *deep_param )
 	(void)param;
 }
 
-#if 0
-void test_deep_ps()
-{
-	PS_DEEP_CTRL_PARAM deep_sleep_param;
-
-	deep_sleep_param.wake_up_way			= 0;
-	
-	deep_sleep_param.gpio_index_map      	= 0xc00;
-	deep_sleep_param.gpio_edge_map       	= 0x800;	
-	deep_sleep_param.gpio_last_index_map 	= 0;
-	deep_sleep_param.gpio_last_edge_map  	= 0;
-	deep_sleep_param.sleep_time     		= 50;
-	deep_sleep_param.wake_up_way     		= 3;
-	deep_sleep_param.gpio_stay_lo_map 	    = 0;
-	deep_sleep_param.gpio_stay_hi_map  	    = 0;
-	
-		os_printf("---deep sleep test param : 0x%0X 0x%0X 0x%0X 0x%0X %d %d\r\n", 
-					deep_sleep_param.gpio_index_map, 
-					deep_sleep_param.gpio_edge_map,
-					deep_sleep_param.gpio_last_index_map, 
-					deep_sleep_param.gpio_last_edge_map,
-					deep_sleep_param.sleep_time,
-					deep_sleep_param.wake_up_way);
-		
-		bk_enter_deep_sleep_mode(&deep_sleep_param);
-}
-#endif
 #endif
 
