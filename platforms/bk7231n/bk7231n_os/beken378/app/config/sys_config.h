@@ -189,7 +189,4 @@
 
 #define CFG_RWNX_QOS_MSDU						   1
 
-#define  CFG_USE_SPI_DMA						   1
-#define  CFG_USE_SPI_MASTER						   1
-#define  CFG_USE_SPI_SLAVE						   1
 #endif // _SYS_CONFIG_H_
