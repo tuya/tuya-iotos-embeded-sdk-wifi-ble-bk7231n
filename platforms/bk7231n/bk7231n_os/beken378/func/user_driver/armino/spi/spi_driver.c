@@ -119,13 +119,14 @@ typedef struct {
 	bk_gpio_pull_up(SPI##id##_LL_SCK_PIN);\
 } while(0)
 
-static spi_driver_t s_spi[SOC_SPI_UNIT_NUM] = {0};
+// Additional brackets to avoid warnings due to GCC bug 53119
+static spi_driver_t s_spi[SOC_SPI_UNIT_NUM] = {{{0}}}; // {0}
 static bool s_spi_driver_is_init = false;
 static volatile spi_id_t s_current_spi_dma_wr_id;
 static volatile spi_id_t s_current_spi_dma_rd_id;
-static spi_callback_t s_spi_rx_isr[SOC_SPI_UNIT_NUM] = {NULL};
-static spi_callback_t s_spi_tx_finish_isr[SOC_SPI_UNIT_NUM] = {NULL};
-static spi_callback_t s_spi_rx_finish_isr[SOC_SPI_UNIT_NUM] = {NULL};
+static spi_callback_t s_spi_rx_isr[SOC_SPI_UNIT_NUM] = {{NULL}};
+static spi_callback_t s_spi_tx_finish_isr[SOC_SPI_UNIT_NUM] = {{NULL}};
+static spi_callback_t s_spi_rx_finish_isr[SOC_SPI_UNIT_NUM] = {{NULL}};
 
 static void spi_isr(void);
 #if (SOC_SPI_UNIT_NUM > 1)
@@ -398,7 +399,7 @@ bk_err_t bk_spi_driver_deinit(void)
 	if (!s_spi_driver_is_init) {
 		return BK_OK;
 	}
-	spi_int_config_t int_cfg_table[] = SPI_INT_CONFIG_TABLE;
+	//spi_int_config_t int_cfg_table[] = SPI_INT_CONFIG_TABLE;
 	for (int id = SPI_ID_0; id < SPI_ID_MAX; id++) {
 		spi_id_deinit_common(id);
 		bk_int_isr_unregister(int_cfg_table[id].int_src);
@@ -502,7 +503,7 @@ bk_err_t bk_spi_set_bit_order(spi_id_t id, spi_bit_order_t bit_order)
 bk_err_t bk_spi_register_rx_isr(spi_id_t id, spi_isr_t isr, void *param)
 {
 	SPI_RETURN_ON_INVALID_ID(id);
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi_rx_isr[id].callback = isr;
 	s_spi_rx_isr[id].param = param;
 	rtos_enable_int(int_level);
@@ -512,7 +513,7 @@ bk_err_t bk_spi_register_rx_isr(spi_id_t id, spi_isr_t isr, void *param)
 bk_err_t bk_spi_register_rx_finish_isr(spi_id_t id, spi_isr_t isr, void *param)
 {
 	SPI_RETURN_ON_INVALID_ID(id);
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi_rx_finish_isr[id].callback = isr;
 	s_spi_rx_finish_isr[id].param = param;
 	rtos_enable_int(int_level);
@@ -523,7 +524,7 @@ bk_err_t bk_spi_register_rx_finish_isr(spi_id_t id, spi_isr_t isr, void *param)
 bk_err_t bk_spi_register_tx_finish_isr(spi_id_t id, spi_isr_t isr, void *param)
 {
 	SPI_RETURN_ON_INVALID_ID(id);
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi_tx_finish_isr[id].callback = isr;
 	s_spi_tx_finish_isr[id].param = param;
 	rtos_enable_int(int_level);
@@ -533,7 +534,7 @@ bk_err_t bk_spi_register_tx_finish_isr(spi_id_t id, spi_isr_t isr, void *param)
 bk_err_t bk_spi_unregister_rx_isr(spi_id_t id)
 {
 	SPI_RETURN_ON_INVALID_ID(id);
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi_rx_isr[id].callback = NULL;
 	s_spi_rx_isr[id].param = NULL;
 	rtos_enable_int(int_level);
@@ -543,7 +544,7 @@ bk_err_t bk_spi_unregister_rx_isr(spi_id_t id)
 bk_err_t bk_spi_unregister_rx_finish_isr(spi_id_t id)
 {
 	SPI_RETURN_ON_INVALID_ID(id);
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi_rx_finish_isr[id].callback = NULL;
 	s_spi_rx_finish_isr[id].param = NULL;
 	rtos_enable_int(int_level);
@@ -554,7 +555,7 @@ bk_err_t bk_spi_unregister_rx_finish_isr(spi_id_t id)
 bk_err_t bk_spi_unregister_tx_finish_isr(spi_id_t id)
 {
 	SPI_RETURN_ON_INVALID_ID(id);
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi_tx_finish_isr[id].callback = NULL;
 	s_spi_tx_finish_isr[id].param = NULL;
 	rtos_enable_int(int_level);
@@ -569,7 +570,7 @@ bk_err_t bk_spi_write_bytes(spi_id_t id, const void *data, uint32_t size)
 	SPI_RETURN_ON_ID_NOT_INIT(id);
 	BK_RETURN_ON_NULL(data);
 
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi[id].tx_buf = (uint8_t *)data;
 	s_spi[id].tx_size = size;
 	s_spi[id].is_sw_tx_finished = false;
@@ -593,7 +594,7 @@ bk_err_t bk_spi_write_bytes(spi_id_t id, const void *data, uint32_t size)
 
 	rtos_get_semaphore(&s_spi[id].tx_sema, BEKEN_NEVER_TIMEOUT);
 
-	int_level = rtos_disable_int();
+	/*int_level = */rtos_disable_int();
 	spi_hal_disable_tx_fifo_int(&s_spi[id].hal);
 	spi_hal_disable_tx(&s_spi[id].hal);
 	rtos_enable_int(int_level);
@@ -608,7 +609,7 @@ bk_err_t bk_spi_read_bytes(spi_id_t id, void *data, uint32_t size)
 	SPI_RETURN_ON_ID_NOT_INIT(id);
 	BK_RETURN_ON_NULL(data);
 
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi[id].rx_size = size;
 	s_spi[id].rx_buf = (uint8_t *)data;
 	s_spi[id].rx_offset = 0;
@@ -626,7 +627,7 @@ bk_err_t bk_spi_read_bytes(spi_id_t id, void *data, uint32_t size)
 
 	rtos_get_semaphore(&(s_spi[id].rx_sema), BEKEN_NEVER_TIMEOUT);
 
-	int_level = rtos_disable_int();
+	/*int_level = */rtos_disable_int();
 	spi_hal_disable_rx(&s_spi[id].hal);
 	spi_hal_disable_tx_fifo_int(&s_spi[id].hal);
 	spi_hal_disable_rx_fifo_int(&s_spi[id].hal);
@@ -681,7 +682,7 @@ bk_err_t bk_spi_write_bytes_async(spi_id_t id, const void *data, uint32_t size)
 	SPI_RETURN_ON_ID_NOT_INIT(id);
 	BK_RETURN_ON_NULL(data);
 
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi[id].tx_buf = (uint8_t *)data;
 	s_spi[id].tx_size = size;
 	s_spi[id].is_sw_tx_finished = false;
@@ -713,7 +714,7 @@ bk_err_t bk_spi_read_bytes_async(spi_id_t id, void *data, uint32_t size)
 	SPI_RETURN_ON_ID_NOT_INIT(id);
 	BK_RETURN_ON_NULL(data);
 	
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi[id].rx_size = size;
 	s_spi[id].rx_buf = (uint8_t *)data;
 	s_spi[id].rx_offset = 0;
@@ -741,7 +742,7 @@ bk_err_t bk_spi_dma_write_bytes(spi_id_t id, const void *data, uint32_t size)
 	SPI_RETURN_ON_INVALID_ID(id);
 	SPI_RETURN_ON_ID_NOT_INIT(id);
 
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_spi[id].is_tx_blocked = true;
 	s_current_spi_dma_wr_id = id;
 	spi_hal_set_tx_trans_len(&s_spi[id].hal, size);
@@ -764,7 +765,7 @@ bk_err_t bk_spi_dma_read_bytes(spi_id_t id, void *data, uint32_t size)
 	SPI_RETURN_ON_ID_NOT_INIT(id);
 	BK_RETURN_ON_NULL(data);
 
-	uint32_t int_level = rtos_disable_int();
+	/*uint32_t int_level = */rtos_disable_int();
 	s_current_spi_dma_rd_id = id;
 	s_spi[id].is_rx_blocked = true;
 	spi_hal_set_rx_trans_len(&s_spi[id].hal, size);

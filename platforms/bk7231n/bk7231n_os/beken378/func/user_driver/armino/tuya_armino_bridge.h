@@ -63,7 +63,6 @@
 #endif
 
 #define rtos_disable_int() \
-    0; \
     { \
     GLOBAL_INT_DECLARATION(); \
     GLOBAL_INT_DISABLE();
