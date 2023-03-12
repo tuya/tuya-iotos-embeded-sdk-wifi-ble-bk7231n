@@ -487,6 +487,8 @@ SECTIONS
 			*command_line.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
 			*command_table.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
 			*udebug.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
+			*spi_driver.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
+			*spi_hal.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
 			*BkDriverFlash.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
 			*BkDriverGpio.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
 			*BkDriverPwm.o(.bss .bss.* .scommon .sbss .dynbss COMMON)
