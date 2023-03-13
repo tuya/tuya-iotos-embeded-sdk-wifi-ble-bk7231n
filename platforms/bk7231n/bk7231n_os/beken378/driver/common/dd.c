@@ -97,7 +97,7 @@ static DD_INIT_S dd_init_tbl[] =
 #if (CFG_SOC_NAME != SOC_BK7231)
     {TIMER_DEV_NAME,        bk_timer_init,              bk_timer_exit},
 #endif
-    {SPI_DEV_NAME,          spi_init,                   spi_exit},
+    // {SPI_DEV_NAME,          spi_init,                   spi_exit},
 
 #if (CFG_SOC_NAME != SOC_BK7231N)
     {FFT_DEV_NAME,          fft_init,                   fft_exit},
