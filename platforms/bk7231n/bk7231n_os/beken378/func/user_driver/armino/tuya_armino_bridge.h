@@ -7,7 +7,7 @@
 #include "../../../driver/include/intc_pub.h"
 #include "../../../driver/entry/arch.h"
 #include "../../../os/FreeRTOSv9.0.0/FreeRTOS/Source/portable/Keil/ARM968es/portmacro.h"
-#include "../../../../../apps/OpenBK7231N_App/src/logging/logging.h"
+//#include "../../../../../apps/OpenBK7231N_App/src/logging/logging.h"
 
 #define clk_set_spi_clk_26m(id) \
     UINT32 param = PCLK_POSI_SPI; \
