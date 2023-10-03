@@ -1,6 +1,6 @@
 #include "include.h"
 
-#if CFG_ENABLE_ATE_FEATURE
+#if 1
 #include "mem_pub.h"
 #include "drv_model_pub.h"
 #include "net_param_pub.h"
