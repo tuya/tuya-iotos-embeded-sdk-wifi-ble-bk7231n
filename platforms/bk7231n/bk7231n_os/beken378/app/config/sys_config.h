@@ -177,7 +177,7 @@
 
 #define CFG_USE_BLE_PS                             1
 
-#define CFG_ENABLE_ATE_FEATURE                     1
+#define CFG_ENABLE_ATE_FEATURE                     0
 
 #define CFG_XTAL_FREQUENCE_40M                     40000000 //40MHz
 #define CFG_XTAL_FREQUENCE_26M                     26000000 //26MHz
