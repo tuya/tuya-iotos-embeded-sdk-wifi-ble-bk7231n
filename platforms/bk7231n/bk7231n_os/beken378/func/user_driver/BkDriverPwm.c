@@ -216,8 +216,8 @@ OSStatus bk_pwm_group_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency
     param.cfg.bits.mode   = PWM_PWM_MODE;
     param.cfg.bits.clk    = PWM_CLK_26M;
     param.p_Int_Handler   = 0;
-    param.duty_cycle1     = frequency -duty_cycle1-dead_band;
-	param.duty_cycle2     = frequency  - dead_band;
+    param.duty_cycle1     = duty_cycle1 + dead_band + duty_cycle2;
+	param.duty_cycle2     = duty_cycle1 + dead_band;
 	param.duty_cycle3     = 0;
     param.end_value       = frequency;  
 
@@ -231,7 +231,7 @@ OSStatus bk_pwm_group_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency
     param.cfg.bits.clk    = PWM_CLK_26M;
     param.p_Int_Handler   = 0;
     param.duty_cycle1     = duty_cycle1;
-	param.duty_cycle2     = frequency;
+	param.duty_cycle2     = duty_cycle1;
 	param.duty_cycle3     = 0;
     param.end_value       = frequency;  
 
