@@ -216,9 +216,16 @@ OSStatus bk_pwm_group_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency
     param.cfg.bits.mode   = PWM_PWM_MODE;
     param.cfg.bits.clk    = PWM_CLK_26M;
     param.p_Int_Handler   = 0;
-    param.duty_cycle1     = duty_cycle1 + dead_band + duty_cycle2;
-	param.duty_cycle2     = duty_cycle1 + dead_band;
-	param.duty_cycle3     = 0;
+	if (duty_cycle2) {
+		param.duty_cycle1 = duty_cycle1 + dead_band + duty_cycle2;
+		param.duty_cycle2 = duty_cycle1 + dead_band;
+		param.duty_cycle3 = 0;
+	}
+	else {
+		param.duty_cycle1 = 0;
+		param.duty_cycle2 = 0;
+		param.duty_cycle3 = 0;
+	}
     param.end_value       = frequency;  
 
 	init_pwm_param(&param, 1);
@@ -230,13 +237,25 @@ OSStatus bk_pwm_group_initialize(bk_pwm_t pwm1, bk_pwm_t pwm2,uint32_t frequency
     param.cfg.bits.mode   = PWM_PWM_MODE;
     param.cfg.bits.clk    = PWM_CLK_26M;
     param.p_Int_Handler   = 0;
-    param.duty_cycle1     = duty_cycle1;
-	param.duty_cycle2     = duty_cycle1;
-	param.duty_cycle3     = 0;
+	if (duty_cycle1) {
+		param.duty_cycle1 = duty_cycle1;
+		param.duty_cycle2 = duty_cycle1;
+		param.duty_cycle3 = 0;
+	}
+	else {
+		param.duty_cycle1 = 0;
+		param.duty_cycle2 = 0;
+		param.duty_cycle3 = 0;
+	}
     param.end_value       = frequency;  
 
 	init_pwm_param(&param, 1);
-	pwm_init_levl_set_high(pwm2);
+	if (duty_cycle1) {
+		pwm_init_levl_set_high(pwm2);
+	}
+	else {
+		pwm_init_levl_set_low(pwm2);
+	}
 	 
 	if((pwm1+1) == pwm2)
 	{
