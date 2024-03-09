@@ -16,46 +16,61 @@ void bk_wlan_ps_wakeup_with_timer(UINT32 sleep_time);
 void bk_wlan_ps_wakeup_with_peri(UINT8 uart2_wk, UINT32 gpio_index_map);
 void power_save_wakeup_with_peri(UINT8 uart2_wk, UINT32 gpio_index_map);
 void deep_sleep_wakeup_with_timer(UINT32 sleep_time);
+void deep_sleep_wakeup(const UINT32* g_gpio_index_map,
+    const UINT32* g_gpio_edge_map, const UINT32* sleep_time);
 
 #if PS_SUPPORT_MANUAL_SLEEP
+
+/** @brief  Configure the deep sleep to wakeup in both GPIO interrupt and timer
+ *  expiration.
+ *  @param  g_gpio_index_map: Reference to the GPIO Index Map. If NULL, GPIO
+ * 	deep sleep is not configured.
+ *  @param  g_gpio_edge_map: Reference to the GPIO Edge Map. If NULL, GPIO
+ * 	deep sleep is not configured.
+ *  @param  sleep_time: Reference to the GPIO Sleep Time (in seconds). If NULL,
+ * 	Timer deep sleep is not configured.
+ */
+void deep_sleep_wakeup(const UINT32* g_gpio_index_map,
+    const UINT32* g_gpio_edge_map, const UINT32* sleep_time) {
+
+    PS_DEEP_CTRL_PARAM deep_sleep_param;
+    deep_sleep_param.wake_up_way = 0;
+
+    if (g_gpio_index_map != NULL && g_gpio_edge_map != NULL) {
+        deep_sleep_param.wake_up_way |= PS_DEEP_WAKEUP_GPIO;
+        deep_sleep_param.gpio_index_map = *g_gpio_index_map;
+        deep_sleep_param.gpio_edge_map = *g_gpio_edge_map;
+    }
+
+    if (sleep_time != NULL) {
+        deep_sleep_param.wake_up_way |= PS_DEEP_WAKEUP_RTC;
+        deep_sleep_param.sleep_time = *sleep_time;
+    }
+
+    os_printf("---deep sleep test param : 0x%0X 0x%0X 0x%0X 0x%0X %d %d\r\n",
+        deep_sleep_param.gpio_index_map,
+        deep_sleep_param.gpio_edge_map,
+        deep_sleep_param.gpio_last_index_map,
+        deep_sleep_param.gpio_last_edge_map,
+        deep_sleep_param.sleep_time,
+        deep_sleep_param.wake_up_way);
+
+    bk_enter_deep_sleep_mode(&deep_sleep_param);
+}
+
 /** @brief  Request power save,and wakeup some time later
  *  @param  sleep_time: Sleep time with milliseconds.
  *              if 0xffffffff not wakeup
  */
 void bk_wlan_ps_wakeup_with_timer(UINT32 sleep_time)
 {
-	PS_DEEP_CTRL_PARAM deep_sleep_param;
-
-	deep_sleep_param.sleep_time     		= sleep_time;
-	deep_sleep_param.wake_up_way     		= PS_DEEP_WAKEUP_RTC;
-	
-		os_printf("---deep sleep test param : 0x%0X 0x%0X 0x%0X 0x%0X %d %d\r\n", 
-					deep_sleep_param.gpio_index_map, 
-					deep_sleep_param.gpio_edge_map,
-					deep_sleep_param.gpio_last_index_map, 
-					deep_sleep_param.gpio_last_edge_map,
-					deep_sleep_param.sleep_time,
-					deep_sleep_param.wake_up_way);
-		
-    bk_enter_deep_sleep_mode(&deep_sleep_param);
+    // Wakeup after the time expired
+    deep_sleep_wakeup(NULL, NULL, &sleep_time);
 }
 void bk_enter_deep_sleep(UINT32 g_gpio_index_map, UINT32 g_gpio_edge_map)
 {
-	PS_DEEP_CTRL_PARAM deep_sleep_param;
-
-	deep_sleep_param.wake_up_way     		= PS_DEEP_WAKEUP_GPIO;
-        deep_sleep_param.gpio_index_map = g_gpio_index_map;
-	deep_sleep_param.gpio_edge_map = g_gpio_edge_map;
-	
-		os_printf("---deep sleep test param : 0x%0X 0x%0X 0x%0X 0x%0X %d %d\r\n", 
-					deep_sleep_param.gpio_index_map, 
-					deep_sleep_param.gpio_edge_map,
-					deep_sleep_param.gpio_last_index_map, 
-					deep_sleep_param.gpio_last_edge_map,
-					deep_sleep_param.sleep_time,
-					deep_sleep_param.wake_up_way);
-		
-    bk_enter_deep_sleep_mode(&deep_sleep_param);
+    // Wakeup when there's a GPIO interrupt
+    deep_sleep_wakeup(&g_gpio_index_map, &g_gpio_edge_map, NULL);
 }
 
 
